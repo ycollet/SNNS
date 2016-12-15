@@ -1,0 +1,403 @@
+\begin{theindex}
+
+  \item act, 7, 16, 21, 22, 53
+  \item actfunc, 7, 16
+  \item Aktivierung, 1, 2, 16, 21
+  \item Aktivierungsfunktion, 2, 19
+  \item and, 7
+  \item Anweisung
+    \subitem bedingte, 40
+  \item arctan, 7
+  \item array, 7, 8, 10, 12, 30
+    \subitem einer Struktur, 30
+  \item at, 7, 31, 52
+  \item Ausdruck
+    \subitem einfacher Datentyp, 8
+    \subitem regularer, 4
+    \subitem zur Konstantendefinition, 8
+  \item Auto-Assoziator-Netz, 2
+
+  \indexspace
+
+  \item backward, 7
+    \subitem Verbindung
+      \subsubitem Richtung einer, 7, 24
+  \item begin, 36
+  \item Bereich
+    \subitem Definition
+      \subsubitem Feld, 11
+      \subsubitem Obergrenze, 11
+      \subsubitem Relation, 13
+      \subsubitem Untergrenze, 11
+    \subitem von Feldelementen, 22
+  \item Bezeichner, 4, 7, 17, 18, 29, 37
+    \subitem mehrere fur eine Struktur, 18
+  \item bidirectional, 25, 37
+    \subitem Verbindung
+      \subsubitem Richtung einer, 24
+  \item Bindung, 4
+  \item Buchstabe
+    \subitem als Zeichenkette, 9
+  \item Buchstaben, 7
+    \subitem aus Datei, 10
+    \subitem lexikalische Reihenfolge, 9
+  \item by, 7, 24--27, 51
+
+  \indexspace
+
+  \item center, 7, 26, 51
+  \item chain, 7, 23--25, 51
+  \item clique, 7, 23, 25, 51
+  \item cluster, 7, 20, 21, 50
+  \item cons, 8, 48
+  \item const, 7, 8
+  \item cos, 7, 53
+
+  \indexspace
+
+  \item Datei, 9
+    \subitem als Relation, 10, 12, 13
+    \subitem als Teilnetz, 28
+    \subitem Eingabesymbole, 10
+    \subitem explizite Parameterwerte, 22
+    \subitem logischer Name, 8, 9
+    \subitem physischer Name
+      \subsubitem als Programmparameter, 43, 44
+    \subitem Typ, 9
+      \subsubitem float, 9
+      \subsubitem int, 9
+      \subsubitem map, 9
+      \subsubitem subnet, 9
+    \subitem Typ string, 10
+    \subitem Verwendung, 10
+  \item Dateiname
+    \subitem physischer, 9
+  \item Datentyp
+    \subitem Bindung an Objekt, 7
+    \subitem einfacher, 8
+  \item div, 7, 52
+  \item do, 7, 38, 39, 54, 55
+
+  \indexspace
+
+  \item EBNF, 3, 4
+  \item ellipse, 7, 31, 52
+  \item else, 7, 40, 55
+  \item elseif, 7, 40, 55
+  \item end, 7, 36, 38, 40, 54, 55
+  \item exp, 7, 53
+
+  \indexspace
+
+  \item Feld, 8, 10, 11, 18, 20--23, 26, 37, 39
+    \subitem aus Datei, 11
+    \subitem Behandlung mit foreach, 38
+    \subitem einer Struktur, 20
+    \subitem einfaches
+      \subsubitem von Zellen, 20
+    \subitem interne Definition, 11
+    \subitem Lange, 20
+  \item Feld einer Struktur, 20
+  \item Feldelement
+    \subitem Definition durch Bereichsangabe, 11
+    \subitem explizite Definition, 11
+  \item file, 7, 10, 11, 48
+  \item float, 7--10, 16, 24, 44, 48
+  \item for, 7, 39, 54
+  \item foreach, 7, 38--40, 54, 55
+  \item forward
+    \subitem Verbindung
+      \subsubitem Richtung einer, 24
+  \item from, 7, 12, 22, 49, 51
+  \item Funktion
+    \subitem arctan, 53
+    \subitem concat, 53
+    \subitem cos, 53
+    \subitem exp, 53
+    \subitem ln, 53
+    \subitem max, 53
+    \subitem min, 53
+    \subitem sin, 53
+    \subitem sqr, 53
+    \subitem sqrt, 53
+
+  \indexspace
+
+  \item get, 7, 12, 21, 22, 49, 50
+  \item graphische Darstellung
+    \subitem einer Struktur, 18, 20, 30, 31
+  \item Gros- und Kleinschreibung, 7
+
+  \indexspace
+
+  \item hidden, 7, 16, 50
+
+  \indexspace
+
+  \item if, 7, 40, 55
+  \item in, 7, 53
+  \item input, 7, 16, 50
+  \item int, 7, 8, 10, 11, 20, 22, 26, 39, 44, 48
+  \item iotype, 7
+  \item irregular, 7, 27, 51
+  \item Iteration, 38, 39
+    \subitem for, 39
+    \subitem foreach, 39, 40
+    \subitem while, 38
+
+  \indexspace
+
+  \item Klammerung
+    \subitem eines Kommentars, 8
+    \subitem in regularen Ausdrucken, 4
+  \item Kommentar, 8
+  \item konnektionistische Netzwerke, 2
+  \item Konstante, 8
+    \subitem als Feldlange, 20
+    \subitem als Programmparameter, 44
+    \subitem als Zentrum einer Struktur, 26
+    \subitem Datei, 11
+    \subitem Datentyp wenn Programmparameter, 45
+    \subitem Definition, 5
+    \subitem einfacher Datentyp, 8
+    \subitem Feld, 12
+      \subsubitem aus Datei, 11
+    \subitem ganzzahlige, 10
+    \subitem numerische, 8
+    \subitem Relation, 11
+      \subsubitem als irregular-Topologie, 26
+      \subsubitem aus Datei, 13
+      \subsubitem Kopfzeile, 13
+      \subsubitem Verfeinerung, 13
+    \subitem Teilnetzdatei, 28
+  \item Konstantendefinition, 8
+    \subitem Syntax, 8, 48
+  \item Koordinaten, 31
+    \subitem Ursprung, 32
+    \subitem vs. Pixels, 32
+  \item Kopfzeile, 43
+    \subitem des Programms, 28, 43, 45, 46
+    \subitem einer {\bf map}-Konstanten, 13
+    \subitem eines Programms, 43
+
+  \indexspace
+
+  \item Lange
+    \subitem eines Felds, 11, 20, 22
+  \item lexikalische Reihenfolge, 9, 11
+  \item Literal, 8
+    \subitem ganzzahliges, 4, 52, 55
+    \subitem rationales, 4, 52, 55
+    \subitem Zeichenkette, 4, 52, 55
+  \item ln, 7, 53
+
+  \indexspace
+
+  \item map, 7, 8, 10, 12, 13, 22, 26, 27, 43, 46, 48, 49, 51
+  \item matrix, 7, 31, 52
+  \item max, 7, 53
+  \item min, 7, 53
+  \item mod, 7, 52
+
+  \indexspace
+
+  \item name, 7, 15, 21, 22, 49, 51, 53
+  \item network, 7, 43, 44, 55
+  \item Netzwerkmodell, 1
+  \item not, 7, 53
+
+  \indexspace
+
+  \item of, 7, 10, 12, 19, 30, 48--50, 52
+  \item or, 7, 53
+  \item outfunc, 7, 16, 50
+  \item output, 7, 16, 50
+
+  \indexspace
+
+  \item P3-Simulator, 3
+  \item param, 28, 52
+  \item Parameter, 28
+    \subitem des Programms, 43
+      \subsubitem Datentypen, 44, 45
+      \subsubitem Definition, 44, 55
+      \subsubitem Definition zur Ubersetzungszeit, 44
+    \subitem einer Site, 15
+    \subitem einer Zelle, 15, 16, 19
+      \subsubitem in Struktur, 19
+      \subsubitem konstante, 16
+      \subsubitem mit {\bf get}, 21
+      \subsubitem mit {\bf with}, 21
+      \subsubitem mit {\pbf get}, 22
+      \subsubitem obligatorische, 16
+      \subsubitem Standardwerte, 19
+      \subsubitem variable, 17, 19
+    \subitem Ubergabe an Teilnetz, 28, 29
+  \item plane, 7, 31, 52
+  \item Position, 19
+    \subitem einer Struktur, 31, 32, 50--52
+  \item Potential, 2
+  \item Programm
+    \subitem Aufbau, 5
+    \subitem Kopfzeile, 43
+    \subitem Ubersetzung, 38, 44, 45
+  \item Programmparameter, 43
+    \subitem Datentypen, 44, 45
+    \subitem Definition zur Ubersetzungszeit, 44
+
+  \indexspace
+
+  \item random, 7, 16, 24--27, 37, 50
+  \item RCS (Rochester Connectionist Simulator), 2
+  \item Reihenfolge
+    \subitem lexikalische, 9, 11
+  \item Relation, 8, 11--13
+    \subitem Abfrage, 53
+    \subitem als Verbindungsmuster, 26
+    \subitem Definition, 48, 49
+    \subitem in Topologiedefinition, 22
+    \subitem interne Definition, 49
+    \subitem Semantik, 12
+    \subitem Trennsymbol in Datei, 13
+    \subitem Trennzeichen in externer, 13
+    \subitem Verfeinerung, 13
+    \subitem Verwendung, 53
+    \subitem zeilenweise Definition, 12
+  \item ring, 7, 23--25, 51
+
+  \indexspace
+
+  \item Schleife, 38
+    \subitem for, 38, 39
+    \subitem foreach, 38--40
+    \subitem while, 38
+  \item Schleifenvariable, 38
+    \subitem Anfangswert, 39
+    \subitem Datentyp, 39
+    \subitem Endwert, 39
+    \subitem in {\bf foreach}, 39
+      \subsubitem Inkrementierung, 40
+      \subsubitem Wertekombination, 40
+    \subitem Veranderung, 39
+  \item Schlusselwort
+    \subitem vs.  Bezeichner, 7
+  \item Schlusselworte, 7
+  \item sin, 7, 53
+  \item Site, 2, 14, 15, 19, 20, 24, 25, 37
+  \item site, 7, 15, 16, 49
+  \item sitefunc, 7, 15, 49
+  \item sites, 17, 50
+  \item SNNS, 1, 2, 9
+  \item sqr, 7, 53
+  \item sqrt, 7, 53
+  \item Standardwert
+    \subitem fur Programmparameter, 43
+  \item star, 7, 23, 25, 26, 51
+  \item string, 7--11, 13, 39, 44, 48
+  \item struct, 18, 50
+  \item structure, 7
+  \item Struktur, 18, 31
+    \subitem Definition, 50
+    \subitem Definitionsblock, 18
+    \subitem eindimensionale, 20
+    \subitem eines Programms, 5
+    \subitem einzelne Zelle, 19
+    \subitem Erganzung, 36
+    \subitem explizite Parameter, 22
+    \subitem graphische Darstellung, 18, 30, 31
+      \subsubitem Position, 31
+    \subitem graphische Form, 30
+    \subitem lineare, 20
+    \subitem star, 26
+    \subitem Teilnetz, 28
+    \subitem Typen, 18
+    \subitem zweidimensionale, 29
+  \item subnet, 7, 10, 28, 48, 51
+
+  \indexspace
+
+  \item Teilnetz, 5, 10, 15, 20, 27, 28
+    \subitem Sites, 15, 20
+  \item Teilrelation, 13
+  \item Terminierung, 38
+  \item then, 7, 40, 55
+  \item through, 7, 24, 51
+  \item to, 7, 12, 39, 49, 54
+  \item Topologie, 1, 6, 18
+    \subitem Beginn des Definitionsblocks, 36
+  \item Topologieform
+    \subitem chain, 22, 24
+    \subitem clique, 22, 25
+    \subitem irregular, 26
+    \subitem ring, 22, 24
+    \subitem star, 22, 25
+    \subitem subnet, 27
+  \item Trennzeichen
+    \subitem externe Relation, 13
+    \subitem in Datei, 10
+  \item type, 16, 50
+  \item typedef, 7, 15, 49
+
+  \indexspace
+
+  \item unit, 7, 16, 19, 50, 54
+
+  \indexspace
+
+  \item var, 7, 54
+  \item Variable, 6, 7, 22, 54
+  \item Verbindung, 1, 2, 5, 20, 22--26, 36, 37
+    \subitem Abfrage, 36
+    \subitem bidirektional, 51
+    \subitem Definition, 37
+    \subitem implizite, 20
+      \subsubitem chain, 22, 24, 25
+      \subsubitem clique, 22, 25
+      \subsubitem Definition durch Relation, 11
+      \subsubitem Gewicht, 20
+      \subsubitem irregular, 26, 27
+      \subsubitem Parameter, 20
+      \subsubitem Richtung, 20
+      \subsubitem ring, 22, 24, 25
+      \subsubitem star, 22, 25, 26
+      \subsubitem vordefinierte Topologie, 22
+      \subsubitem Zielsite, 20
+    \subitem Quellzelle, 37
+    \subitem Richtung, 37
+    \subitem ruckwarts, 51
+    \subitem vorwarts, 51
+    \subitem Zielzelle, 37
+  \item Verzweigungsanweisung, 40
+  \item Vorrang, 4
+
+  \indexspace
+
+  \item Wertebereich
+    \subitem numerische Konstante, 8
+    \subitem rationale Zahl, 2
+  \item while, 7, 38, 54
+  \item Wiederholungsanweisung, 38, 39
+    \subitem while, 38
+  \item with, 7, 16, 49
+
+  \indexspace
+
+  \item Zahl
+    \subitem Format in Datei, 10
+    \subitem ganze, 4, 8
+      \subsubitem als Programmparameter, 45
+    \subitem rationale, 2, 4, 8, 45, 46
+      \subsubitem Genauigkeit, 8
+    \subitem zufallige, 16
+  \item Zahlschleife, 38, 39
+  \item Zeichenkette, 4, 8, 9
+    \subitem als Programmparameter, 45
+    \subitem als Schleifenvariable, 39
+    \subitem aus Datei, 11
+    \subitem Bereichsdefinition, 11
+    \subitem Format in Datei, 10
+    \subitem leere, 9
+    \subitem Sonderzeichen, 9
+  \item Zufallszahl, 16
+
+\end{theindex}

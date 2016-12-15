@@ -1,0 +1,26 @@
+\begin{moduledoc}{Load standard SNNS pattern sets}
+                 {loadSNNSPat}
+  \item[\KeyWord{learnpattern} \optParam{ x } ]~\\
+    This string contains the filename for the learning patterns.\\ 
+    Default: - 
+  \item[\KeyWord{testpattern} \optParam{ x } ]~\\
+    This string contains the filename for the test patterns.
+    The test patterns are used to determine the fitness of the networks for the
+    genetic algorithm.\\ 
+    Default: -
+  \item[\KeyWord{crosspattern} \optParam{ x } ]~\\
+    This string contains the filename for the validation patterns.
+    The validation patterns are used to determine the efficiency of networks.
+    These patterns should not be used in the learning phase or to determine
+    the fitness of the networks.\\ 
+    Default: -
+\end{moduledoc}
+The module {\it loadSNNSPat} loads the three pattern sets with the
+original SNNS-function.
+The filename must contain the extension {\tt .pat} for the 
+SNNS pattern files.
+The number of pattern sets to be managed is restricted to 3.
+To use more sets you have to increase the maximum number defined in
+the population manager.
+
+

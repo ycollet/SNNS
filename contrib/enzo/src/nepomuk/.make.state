@@ -1,0 +1,314 @@
+.MAKE_VERSION:	VERSION-1.0
+nepomuk.a(../sources/kr_inversion.o):
+	true
+../sources/kr_inversion.o:	/tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/stdio.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/stdarg.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/va-sparc.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/math.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/floatingpoint.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/sys/ieeefp.h
+../sources/kr_inversion.o:	/tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/values.h ../sources/kr_typ.h ../sources/glob_typ.h ../sources/ext_typ.h ../sources/kr_const.h ../sources/kernel.h ../sources/kr_def.h ../sources/kr_mac.h ../sources/kr_inversion.ph 
+	gcc -g -I../sources -I../ilkd_sources  -target sun4 -c -o ../sources/kr_inversion.o ../sources/kr_inversion.c
+../sources/cc_rcc_topo.o:	/tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/stdio.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/stdarg.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/va-sparc.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/math.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/floatingpoint.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/sys/ieeefp.h
+../sources/cc_rcc_topo.o:	/tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/time.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/sys/stdtypes.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/memory.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/malloc.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/values.h ../sources/kr_typ.h ../sources/glob_typ.h ../sources/ext_typ.h ../sources/kr_const.h
+../sources/cc_rcc_topo.o:	../sources/kr_def.h ../sources/kr_mac.h ../sources/kernel.h ../sources/cc_mac.h ../sources/cc_rcc.h ../sources/cc_rcc_topo.ph 
+	gcc -g -I../sources -I../ilkd_sources  -target sun4 -c -o ../sources/cc_rcc_topo.o ../sources/cc_rcc_topo.c
+nepomuk.a(../sources/cc_rcc_topo.o):
+	true
+nepomuk.a(../sources/cc_rcc.o):
+	true
+.BUILT_LAST_MAKE_RUN:
+nepomuk.o:	/tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/string.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/sys/stdtypes.h ../../../SNNSv4.1/kernel/sources/glob_typ.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/stdio.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/stdarg.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/va-sparc.h ../../../SNNSv4.1/kernel/sources/kr_typ.h
+.BUILT_LAST_MAKE_RUN:
+nepomuk.o:	../../../SNNSv4.1/kernel/sources/ext_typ.h ../../../SNNSv4.1/kernel/sources/kernel.h ../../../SNNSv4.1/kernel/sources/kr_const.h ../../../SNNSv4.1/kernel/sources/kr_def.h ../../../SNNSv4.1/kernel/sources/kr_mac.h ../../../SNNSv4.1/kernel/sources/enzo_mem_typ.h kr_shell.h nepomuk.h 
+	gcc -D__ENZO__ -I../../../SNNSv4.1/kernel/sources -O4  -target sun4 -c -o nepomuk.o nepomuk.c
+.BUILT_LAST_MAKE_RUN:
+nepomuk.a:
+	ar src  nepomuk.a nepomuk.o kr_shell.o
+../ilkd_sources/mylearn_f.o:	/tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/stdio.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/stdarg.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/va-sparc.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/math.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/floatingpoint.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/sys/ieeefp.h
+../ilkd_sources/mylearn_f.o:	/tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/values.h ../sources/kr_typ.h ../sources/glob_typ.h ../sources/ext_typ.h ../sources/kr_const.h ../sources/kr_def.h ../sources/kernel.h ../sources/kr_mac.h 
+	gcc -g -I../sources -I../ilkd_sources  -target sun4 -c -o ../ilkd_sources/mylearn_f.o ../ilkd_sources/mylearn_f.c
+../ilkd_sources/ilkd_learn_f.o:	/tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/stdio.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/stdarg.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/va-sparc.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/math.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/floatingpoint.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/sys/ieeefp.h
+../ilkd_sources/ilkd_learn_f.o:	/tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/values.h ../sources/kr_typ.h ../sources/glob_typ.h ../sources/ext_typ.h ../sources/kr_const.h ../sources/kr_def.h ../sources/kernel.h ../sources/kr_mac.h 
+	gcc -g -I../sources -I../ilkd_sources  -target sun4 -c -o ../ilkd_sources/ilkd_learn_f.o ../ilkd_sources/ilkd_learn_f.c
+nepomuk.a(kernel_shell.o):
+	true
+nepomuk.a(../ilkd_sources/kernel_shell.o):
+	true
+test_kpm:
+	gcc  test_kpm.o nepomuk.a -lm -lc -o test_kpm
+nepomuk.a(../sources/matrix.o):
+	true
+nepomuk.a(../../sources/matrix.o):
+	true
+.BUILT_LAST_MAKE_RUN:
+nepomuk.a(nepomuk.o):
+	true
+nepomuk.a(../sources/learn_f.o):
+	true
+nepomuk.a(../../sources/learn_f.o):
+	true
+nepomuk.a(../ilkd_sources/mylearn_f.o):
+	true
+nepomuk.a(../ilkd_sources/my_learn_f.o):
+	true
+nepomuk.a(../ilkd_sources/ilkd_learn_f.o):
+	true
+nepomuk.a(../ilkd_sources/ilkd_fct_tbl.o):
+	true
+nepomuk.a(../sources/kr_art.o):
+	true
+../sources/kr_amap.o:	/tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/stdlib.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/sys/stdtypes.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/stdio.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/stdarg.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/va-sparc.h ../sources/kr_const.h ../sources/kr_mac.h ../sources/kr_def.h ../sources/kr_typ.h
+../sources/kr_amap.o:	../sources/glob_typ.h ../sources/ext_typ.h ../sources/kr_funcs.h ../sources/kernel.h ../sources/kr_art.h ../sources/krart_df.h ../sources/kr_amap.ph 
+	gcc -g -I../sources -I../ilkd_sources  -target sun4 -c -o ../sources/kr_amap.o ../sources/kr_amap.c
+../sources/kr_art2.o:	/tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/stdlib.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/sys/stdtypes.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/stdio.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/stdarg.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/va-sparc.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/math.h
+../sources/kr_art2.o:	/tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/floatingpoint.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/sys/ieeefp.h ../sources/kr_const.h ../sources/kr_mac.h ../sources/kr_def.h ../sources/kr_typ.h ../sources/glob_typ.h ../sources/ext_typ.h ../sources/kr_funcs.h ../sources/kernel.h ../sources/kr_art.h ../sources/krart_df.h ../sources/kr_art2.ph 
+	gcc -g -I../sources -I../ilkd_sources  -target sun4 -c -o ../sources/kr_art2.o ../sources/kr_art2.c
+../sources/kr_art1.o:	/tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/stdlib.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/sys/stdtypes.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/stdio.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/stdarg.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/va-sparc.h ../sources/kr_const.h ../sources/kr_mac.h ../sources/kr_def.h ../sources/kr_typ.h
+../sources/kr_art1.o:	../sources/glob_typ.h ../sources/ext_typ.h ../sources/kr_funcs.h ../sources/kernel.h ../sources/kr_art.h ../sources/krart_df.h ../sources/kr_art1.ph 
+	gcc -g -I../sources -I../ilkd_sources  -target sun4 -c -o ../sources/kr_art1.o ../sources/kr_art1.c
+nepomuk.a(../sources/init_f.o):
+	true
+nepomuk.a(../../sources/init_f.o):
+	true
+../sources/tbl_func.o:	/tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/stdio.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/stdarg.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/va-sparc.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/math.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/floatingpoint.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/sys/ieeefp.h
+../sources/tbl_func.o:	../sources/kr_typ.h ../sources/glob_typ.h ../sources/ext_typ.h ../sources/kr_const.h ../sources/func_mac.h ../sources/tbl_func.ph ../sources/sigmoid.tbl 
+	gcc -g -I../sources -I../ilkd_sources  -target sun4 -c -o ../sources/tbl_func.o ../sources/tbl_func.c
+../../sources/tbl_func.o:	/tools/apps/gcc-2.4.5/lib/gcc-lib/sparc-sun-sunos4.1/2.4.5/include/stdio.h /tools/apps/gcc-2.4.5/lib/gcc-lib/sparc-sun-sunos4.1/2.4.5/include/stdarg.h /tools/apps/gcc-2.4.5/lib/gcc-lib/sparc-sun-sunos4.1/2.4.5/include/va-sparc.h /tools/apps/gcc-2.4.5/lib/gcc-lib/sparc-sun-sunos4.1/2.4.5/include/math.h /usr/include/floatingpoint.h /tools/apps/gcc-2.4.5/lib/gcc-lib/sparc-sun-sunos4.1/2.4.5/include/sys/ieeefp.h ../../sources/kr_typ.h ../../sources/glob_typ.h
+../../sources/tbl_func.o:	../../sources/ext_typ.h ../../sources/kr_const.h ../../sources/func_mac.h ../../sources/tbl_func.ph ../../sources/sigmoid.tbl 
+	gcc -g -I../../sources -I../../ilkd_sources  -target sun4 -c -o ../../sources/tbl_func.o ../../sources/tbl_func.c
+../ilkd_sources/mytrans_f.o:	/tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/stdio.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/stdarg.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/va-sparc.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/math.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/floatingpoint.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/sys/ieeefp.h
+../ilkd_sources/mytrans_f.o:	/tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/string.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/sys/stdtypes.h ../sources/kr_typ.h ../sources/glob_typ.h ../sources/ext_typ.h ../sources/kr_const.h ../sources/func_mac.h ../sources/kr_mac.h ../sources/cc_mac.h ../sources/trans_f.h 
+	gcc -g -I../sources -I../ilkd_sources  -target sun4 -c -o ../ilkd_sources/mytrans_f.o ../ilkd_sources/mytrans_f.c
+../ilkd_sources/ilkd_trans_f.o:	/tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/stdio.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/stdarg.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/va-sparc.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/math.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/floatingpoint.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/sys/ieeefp.h
+../ilkd_sources/ilkd_trans_f.o:	/tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/string.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/sys/stdtypes.h ../sources/kr_typ.h ../sources/glob_typ.h ../sources/ext_typ.h ../sources/kr_const.h ../sources/func_mac.h 
+	gcc -g -I../sources -I../ilkd_sources  -target sun4 -c -o ../ilkd_sources/ilkd_trans_f.o ../ilkd_sources/ilkd_trans_f.c
+../sources/kr_ui.o:	/tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/stdio.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/stdarg.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/va-sparc.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/stdlib.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/sys/stdtypes.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/time.h
+../sources/kr_ui.o:	/tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/string.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/memory.h ../sources/random.h ../sources/kr_typ.h ../sources/glob_typ.h ../sources/ext_typ.h ../sources/kr_const.h ../sources/kr_def.h ../sources/kr_io.h ../sources/kr_funcs.h ../sources/kernel.h ../sources/kr_mem.h ../sources/kr_ui.ph ../sources/krui_typ.h ../sources/version.h ../sources/kr_mac.h 
+	gcc -g -I../sources -I../ilkd_sources  -target sun4 -c -o ../sources/kr_ui.o ../sources/kr_ui.c
+.BUILT_LAST_MAKE_RUN:
+kr_shell.o:	/tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/stdio.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/stdarg.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/va-sparc.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/stdlib.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/sys/stdtypes.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/string.h
+.BUILT_LAST_MAKE_RUN:
+kr_shell.o:	/tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/ctype.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/time.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/sys/param.h /usr/include/machine/param.h /usr/include/machine/devaddr.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/sys/signal.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/vm/faultcode.h
+.BUILT_LAST_MAKE_RUN:
+kr_shell.o:	/tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/sys/types.h /usr/include/sys/sysmacros.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/sys/times.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/sys/utsname.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/math.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/floatingpoint.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/sys/ieeefp.h
+.BUILT_LAST_MAKE_RUN:
+kr_shell.o:	/tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/malloc.h ../../../SNNSv4.1/kernel/sources/glob_typ.h ../../../SNNSv4.1/kernel/sources/kr_ui.h ../../../SNNSv4.1/kernel/sources/krui_typ.h ../../../SNNSv4.1/kernel/sources/kr_typ.h ../../../SNNSv4.1/kernel/sources/ext_typ.h ../../../SNNSv4.1/kernel/sources/kr_const.h ../../../SNNSv4.1/kernel/sources/kr_def.h ../../../SNNSv4.1/kernel/sources/kernel.h ../../../SNNSv4.1/kernel/sources/kr_mac.h
+.BUILT_LAST_MAKE_RUN:
+kr_shell.o:	../../../SNNSv4.1/kernel/sources/enzo_mem_typ.h kr_shell.h 
+	gcc -D__ENZO__ -I../../../SNNSv4.1/kernel/sources -O4  -target sun4 -c -o kr_shell.o kr_shell.c
+../sources/kr_td.o:	/tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/stdio.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/stdarg.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/va-sparc.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/math.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/floatingpoint.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/sys/ieeefp.h
+../sources/kr_td.o:	/tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/values.h ../sources/kr_typ.h ../sources/glob_typ.h ../sources/ext_typ.h ../sources/kr_const.h ../sources/kr_def.h ../sources/kernel.h ../sources/kr_mac.h ../sources/kr_td.ph 
+	gcc -g -I../sources -I../ilkd_sources  -target sun4 -c -o ../sources/kr_td.o ../sources/kr_td.c
+../../sources/kr_td.o:	/tools/apps/gcc-2.4.5/lib/gcc-lib/sparc-sun-sunos4.1/2.4.5/include/stdio.h /tools/apps/gcc-2.4.5/lib/gcc-lib/sparc-sun-sunos4.1/2.4.5/include/stdarg.h /tools/apps/gcc-2.4.5/lib/gcc-lib/sparc-sun-sunos4.1/2.4.5/include/va-sparc.h /tools/apps/gcc-2.4.5/lib/gcc-lib/sparc-sun-sunos4.1/2.4.5/include/math.h /usr/include/floatingpoint.h /tools/apps/gcc-2.4.5/lib/gcc-lib/sparc-sun-sunos4.1/2.4.5/include/sys/ieeefp.h /tools/apps/gcc-2.4.5/lib/gcc-lib/sparc-sun-sunos4.1/2.4.5/include/values.h
+../../sources/kr_td.o:	../../sources/kr_typ.h ../../sources/glob_typ.h ../../sources/ext_typ.h ../../sources/kr_const.h ../../sources/kr_def.h ../../sources/kernel.h ../../sources/kr_mac.h ../../sources/kr_td.ph 
+	gcc -g -I../../sources -I../../ilkd_sources  -target sun4 -c -o ../../sources/kr_td.o ../../sources/kr_td.c
+../ilkd_sources/myfunc_tbl.o:	/tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/stdio.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/stdarg.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/va-sparc.h ../sources/kr_typ.h ../sources/glob_typ.h ../sources/ext_typ.h ../sources/kr_const.h ../sources/learn_f.h ../sources/init_f.h ../sources/trans_f.h ../sources/update_f.h ../sources/arttr_f.h ../sources/tbl_func.h ../sources/kr_td.h
+../ilkd_sources/myfunc_tbl.o:	../sources/cc_learn.h ../sources/rcc_learn.h ../sources/dlvq_learn.h ../sources/func_tbl.ph ../ilkd_sources/ilkd_learn_f.h ../ilkd_sources/ilkd_init_f.h ../ilkd_sources/ilkd_trans_f.h ../ilkd_sources/ilkd_update_f.h ../ilkd_sources/ilkd_obs.h 
+	gcc -g -I../sources -I../ilkd_sources  -target sun4 -c -o ../ilkd_sources/myfunc_tbl.o ../ilkd_sources/myfunc_tbl.c
+../ilkd_sources/ilkd_kr_mem.o:	/tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/stdio.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/stdarg.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/va-sparc.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/stdlib.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/sys/stdtypes.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/string.h
+../ilkd_sources/ilkd_kr_mem.o:	/tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/memory.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/values.h ../sources/kr_typ.h ../sources/glob_typ.h ../sources/ext_typ.h ../sources/kernel.h ../sources/kr_const.h ../sources/kr_def.h ../sources/kr_mem.ph ../sources/kr_mac.h ../ilkd_sources/ilkd_mem_ext.h ../sources/kr_ui.h ../sources/krui_typ.h ../ilkd_sources/ilkd_mem_ext.c 
+	gcc -g -I../sources -I../ilkd_sources  -target sun4 -c -o ../ilkd_sources/ilkd_kr_mem.o ../ilkd_sources/ilkd_kr_mem.c
+../sources/kr_io.o:	/tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/stdio.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/stdarg.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/va-sparc.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/stdlib.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/sys/stdtypes.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/time.h
+../sources/kr_io.o:	/tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/string.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/ctype.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/memory.h ../sources/kr_typ.h ../sources/glob_typ.h ../sources/ext_typ.h ../sources/kr_const.h ../sources/kr_def.h ../sources/kr_ui.h ../sources/krui_typ.h ../sources/kernel.h ../sources/kr_mac.h ../sources/version.h ../sources/dlvq_learn.h
+../sources/kr_io.o:	../sources/kr_io.ph 
+	gcc -g -I../sources -I../ilkd_sources  -target sun4 -c -o ../sources/kr_io.o ../sources/kr_io.c
+nepomuk.a(../sources/kernel.o):
+	true
+nepomuk.a(../sources/update_f.o):
+	true
+nepomuk.a(../../sources/update_f.o):
+	true
+../ilkd_sources/ilkd_init_f.o:	/tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/math.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/floatingpoint.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/sys/ieeefp.h ../sources/kr_typ.h ../sources/glob_typ.h ../sources/ext_typ.h ../sources/kr_const.h ../sources/kr_def.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/stdio.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/stdarg.h
+../ilkd_sources/ilkd_init_f.o:	/tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/va-sparc.h ../sources/random.h ../sources/kr_mac.h 
+	gcc -g -I../sources -I../ilkd_sources  -target sun4 -c -o ../ilkd_sources/ilkd_init_f.o ../ilkd_sources/ilkd_init_f.c
+nepomuk.a(../sources/kr_amap.o):
+	true
+../ilkd_sources/ilkd_obslern.o:	/tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/stdio.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/stdarg.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/va-sparc.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/math.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/floatingpoint.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/sys/ieeefp.h
+../ilkd_sources/ilkd_obslern.o:	/tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/values.h ../sources/kr_typ.h ../sources/glob_typ.h ../sources/ext_typ.h ../sources/kr_const.h ../sources/kr_def.h ../sources/kernel.h ../sources/kr_mac.h 
+	gcc -g -I../sources -I../ilkd_sources  -target sun4 -c -o ../ilkd_sources/ilkd_obslern.o ../ilkd_sources/ilkd_obslern.c
+../../ilkd_sources/ilkd_obslern.o:	/tools/apps/gcc-2.4.5/lib/gcc-lib/sparc-sun-sunos4.1/2.4.5/include/stdio.h /tools/apps/gcc-2.4.5/lib/gcc-lib/sparc-sun-sunos4.1/2.4.5/include/stdarg.h /tools/apps/gcc-2.4.5/lib/gcc-lib/sparc-sun-sunos4.1/2.4.5/include/va-sparc.h /tools/apps/gcc-2.4.5/lib/gcc-lib/sparc-sun-sunos4.1/2.4.5/include/math.h /usr/include/floatingpoint.h /tools/apps/gcc-2.4.5/lib/gcc-lib/sparc-sun-sunos4.1/2.4.5/include/sys/ieeefp.h /tools/apps/gcc-2.4.5/lib/gcc-lib/sparc-sun-sunos4.1/2.4.5/include/values.h
+../../ilkd_sources/ilkd_obslern.o:	../../sources/kr_typ.h ../../sources/glob_typ.h ../../sources/ext_typ.h ../../sources/kr_const.h ../../sources/kr_def.h ../../sources/kernel.h ../../sources/kr_mac.h 
+	gcc -g -I../../sources -I../../ilkd_sources  -target sun4 -c -o ../../ilkd_sources/ilkd_obslern.o ../../ilkd_sources/ilkd_obslern.c
+nepomuk.a(../sources/strdup.o):
+	true
+nepomuk.a(../sources/kr_art2.o):
+	true
+nepomuk.a(../sources/kr_art1.o):
+	true
+nepomuk.a(../ilkd_sources/myilkd_init_f.o):	/tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/math.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/floatingpoint.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/sys/ieeefp.h ../sources/kr_typ.h ../sources/glob_typ.h ../sources/ext_typ.h ../sources/kr_const.h ../sources/kr_def.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/stdio.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/stdarg.h
+nepomuk.a(../ilkd_sources/myilkd_init_f.o):	/tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/va-sparc.h ../sources/random.h ../sources/kr_mac.h 
+	gcc -g -I../sources -I../ilkd_sources  -target sun4 -c -o ../ilkd_sources/myilkd_init_f.o ../ilkd_sources/myilkd_init_f.c
+	ar src nepomuk.a ../ilkd_sources/myilkd_init_f.o
+	rm -f ../ilkd_sources/myilkd_init_f.o
+../ilkd_sources/ilkd_fastobs.o:	/tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/stdio.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/stdarg.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/va-sparc.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/math.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/floatingpoint.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/sys/ieeefp.h
+../ilkd_sources/ilkd_fastobs.o:	/tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/values.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/sys/times.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/sys/types.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/sys/stdtypes.h /usr/include/sys/sysmacros.h ../sources/kr_typ.h ../sources/glob_typ.h ../sources/ext_typ.h ../sources/kr_const.h ../sources/kr_def.h ../sources/kernel.h
+../ilkd_sources/ilkd_fastobs.o:	../sources/kr_mac.h ../ilkd_sources/ilkd_fastmat.h 
+	gcc -g -I../sources -I../ilkd_sources  -target sun4 -c -o ../ilkd_sources/ilkd_fastobs.o ../ilkd_sources/ilkd_fastobs.c
+../../ilkd_sources/ilkd_fastobs.o:	/tools/apps/gcc-2.4.5/lib/gcc-lib/sparc-sun-sunos4.1/2.4.5/include/stdio.h /tools/apps/gcc-2.4.5/lib/gcc-lib/sparc-sun-sunos4.1/2.4.5/include/stdarg.h /tools/apps/gcc-2.4.5/lib/gcc-lib/sparc-sun-sunos4.1/2.4.5/include/va-sparc.h /tools/apps/gcc-2.4.5/lib/gcc-lib/sparc-sun-sunos4.1/2.4.5/include/math.h /usr/include/floatingpoint.h /tools/apps/gcc-2.4.5/lib/gcc-lib/sparc-sun-sunos4.1/2.4.5/include/sys/ieeefp.h /tools/apps/gcc-2.4.5/lib/gcc-lib/sparc-sun-sunos4.1/2.4.5/include/values.h
+../../ilkd_sources/ilkd_fastobs.o:	/usr/include/sys/times.h /tools/apps/gcc-2.4.5/lib/gcc-lib/sparc-sun-sunos4.1/2.4.5/include/sys/types.h /tools/apps/gcc-2.4.5/lib/gcc-lib/sparc-sun-sunos4.1/2.4.5/include/sys/stdtypes.h /usr/include/sys/sysmacros.h ../../sources/kr_typ.h ../../sources/glob_typ.h ../../sources/ext_typ.h ../../sources/kr_const.h ../../sources/kr_def.h ../../sources/kernel.h ../../sources/kr_mac.h ../../ilkd_sources/ilkd_fastmat.h 
+	gcc -g -I../../sources -I../../ilkd_sources  -target sun4 -c -o ../../ilkd_sources/ilkd_fastobs.o ../../ilkd_sources/ilkd_fastobs.c
+clean:
+	rm -f *~  *.a *.o 
+../sources/rcc_learn.o:	/tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/stdio.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/stdarg.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/va-sparc.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/math.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/floatingpoint.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/sys/ieeefp.h
+../sources/rcc_learn.o:	/tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/time.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/sys/stdtypes.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/memory.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/malloc.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/values.h ../sources/kr_typ.h ../sources/glob_typ.h ../sources/ext_typ.h ../sources/kr_const.h
+../sources/rcc_learn.o:	../sources/kr_def.h ../sources/kernel.h ../sources/kr_mac.h ../sources/random.h ../sources/kr_ui.h ../sources/krui_typ.h ../sources/cc_type.h ../sources/cc_mac.h ../sources/rcc_learn.ph ../sources/cc_rcc.h 
+	gcc -g -I../sources -I../ilkd_sources  -target sun4 -c -o ../sources/rcc_learn.o ../sources/rcc_learn.c
+../ilkd_sources/ilkd_fastmat.o:	/tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/stdio.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/stdarg.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/va-sparc.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/stdlib.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/sys/stdtypes.h ../ilkd_sources/ilkd_fastmat.h 
+	gcc -g -I../sources -I../ilkd_sources  -target sun4 -c -o ../ilkd_sources/ilkd_fastmat.o ../ilkd_sources/ilkd_fastmat.c
+../../ilkd_sources/ilkd_fastmat.o:	/tools/apps/gcc-2.4.5/lib/gcc-lib/sparc-sun-sunos4.1/2.4.5/include/stdio.h /tools/apps/gcc-2.4.5/lib/gcc-lib/sparc-sun-sunos4.1/2.4.5/include/stdarg.h /tools/apps/gcc-2.4.5/lib/gcc-lib/sparc-sun-sunos4.1/2.4.5/include/va-sparc.h /tools/apps/gcc-2.4.5/lib/gcc-lib/sparc-sun-sunos4.1/2.4.5/include/stdlib.h /tools/apps/gcc-2.4.5/lib/gcc-lib/sparc-sun-sunos4.1/2.4.5/include/sys/stdtypes.h ../../ilkd_sources/ilkd_fastmat.h 
+	gcc -g -I../../sources -I../../ilkd_sources  -target sun4 -c -o ../../ilkd_sources/ilkd_fastmat.o ../../ilkd_sources/ilkd_fastmat.c
+test_kpm.o:	/tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/stdio.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/stdarg.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/va-sparc.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/time.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/sys/stdtypes.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/sys/times.h
+test_kpm.o:	/tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/sys/types.h /usr/include/sys/sysmacros.h ../ilkd_sources/kernel_shell.h ../sources/glob_typ.h ../sources/kr_ui.h ../sources/krui_typ.h nepomuk.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/string.h ../ilkd_sources/ilkd_mem_ext.h ../sources/kr_typ.h ../sources/ext_typ.h ../sources/kernel.h ../sources/kr_const.h ../sources/kr_def.h ../sources/kr_mac.h 
+	gcc -g -I../sources -I../ilkd_sources  -target sun4 -c -o test_kpm.o test_kpm.c
+../sources/arttr_f.o:	/tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/math.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/floatingpoint.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/sys/ieeefp.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/string.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/sys/stdtypes.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/values.h
+../sources/arttr_f.o:	../sources/kr_typ.h ../sources/glob_typ.h ../sources/ext_typ.h ../sources/kr_def.h ../sources/kr_const.h ../sources/func_mac.h ../sources/kr_art.h ../sources/kr_art1.h ../sources/kr_art2.h ../sources/kr_amap.h ../sources/krart_df.h ../sources/arttr_f.ph 
+	gcc -g -I../sources -I../ilkd_sources  -target sun4 -c -o ../sources/arttr_f.o ../sources/arttr_f.c
+../sources/cc_rcc.o:	/tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/stdio.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/stdarg.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/va-sparc.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/math.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/floatingpoint.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/sys/ieeefp.h
+../sources/cc_rcc.o:	/tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/time.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/sys/stdtypes.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/memory.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/malloc.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/values.h ../sources/kr_typ.h ../sources/glob_typ.h ../sources/ext_typ.h ../sources/kr_const.h
+../sources/cc_rcc.o:	../sources/kr_def.h ../sources/random.h ../sources/kr_mac.h ../sources/kernel.h ../sources/kr_ui.h ../sources/krui_typ.h ../sources/cc_mac.h ../sources/cc_type.h ../sources/cc_rcc.ph 
+	gcc -g -I../sources -I../ilkd_sources  -target sun4 -c -o ../sources/cc_rcc.o ../sources/cc_rcc.c
+kernel_shell.o:	/tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/stdio.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/stdarg.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/va-sparc.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/stdlib.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/sys/stdtypes.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/string.h
+kernel_shell.o:	/tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/ctype.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/time.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/sys/param.h /usr/include/machine/param.h /usr/include/machine/devaddr.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/sys/signal.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/vm/faultcode.h
+kernel_shell.o:	/tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/sys/types.h /usr/include/sys/sysmacros.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/sys/times.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/sys/utsname.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/math.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/floatingpoint.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/sys/ieeefp.h
+kernel_shell.o:	/tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/malloc.h ../sources/glob_typ.h ../sources/kr_ui.h ../sources/krui_typ.h ../sources/kr_typ.h ../sources/ext_typ.h ../sources/kr_const.h ../sources/kr_def.h ../sources/kernel.h ../sources/kr_mac.h kernel_shell.h 
+	gcc -g -D__KNETE__ -I../sources  -target sun4 -c -o kernel_shell.o kernel_shell.c
+../ilkd_sources/kernel_shell.o:	/tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/stdio.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/stdarg.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/va-sparc.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/stdlib.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/sys/stdtypes.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/string.h
+../ilkd_sources/kernel_shell.o:	/tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/ctype.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/time.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/sys/param.h /usr/include/machine/param.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/sys/signal.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/vm/faultcode.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/sys/types.h
+../ilkd_sources/kernel_shell.o:	/usr/include/sys/sysmacros.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/sys/times.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/sys/utsname.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/math.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/floatingpoint.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/sys/ieeefp.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/malloc.h
+../ilkd_sources/kernel_shell.o:	../sources/glob_typ.h ../sources/kr_ui.h ../sources/krui_typ.h ../sources/kr_typ.h ../sources/ext_typ.h ../sources/kr_const.h ../sources/kr_def.h ../sources/kernel.h ../sources/kr_mac.h 
+nepomuk.a(../sources/tbl_func.o):
+	true
+nepomuk.a(../../sources/tbl_func.o):
+	true
+../sources/matrix.o:	/tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/malloc.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/stdio.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/stdarg.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/va-sparc.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/math.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/floatingpoint.h
+../sources/matrix.o:	/tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/sys/ieeefp.h ../sources/matrix.ph ../sources/glob_typ.h 
+	gcc -g -I../sources -I../ilkd_sources  -target sun4 -c -o ../sources/matrix.o ../sources/matrix.c
+../../sources/matrix.o:	/tools/apps/gcc-2.4.5/lib/gcc-lib/sparc-sun-sunos4.1/2.4.5/include/malloc.h /tools/apps/gcc-2.4.5/lib/gcc-lib/sparc-sun-sunos4.1/2.4.5/include/stdio.h /tools/apps/gcc-2.4.5/lib/gcc-lib/sparc-sun-sunos4.1/2.4.5/include/stdarg.h /tools/apps/gcc-2.4.5/lib/gcc-lib/sparc-sun-sunos4.1/2.4.5/include/va-sparc.h /tools/apps/gcc-2.4.5/lib/gcc-lib/sparc-sun-sunos4.1/2.4.5/include/math.h /usr/include/floatingpoint.h /tools/apps/gcc-2.4.5/lib/gcc-lib/sparc-sun-sunos4.1/2.4.5/include/sys/ieeefp.h
+../../sources/matrix.o:	../../sources/matrix.ph ../../sources/glob_typ.h 
+	gcc -g -I../../sources -I../../ilkd_sources  -target sun4 -c -o ../../sources/matrix.o ../../sources/matrix.c
+nepomuk.a(../sources/trans_f.o):
+	true
+nepomuk.a(../../sources/trans_f.o):
+	true
+nepomuk.a(../ilkd_sources/mytrans_f.o):
+	true
+nepomuk.a(../ilkd_sources/ilkd_trans_f.o):
+	true
+../sources/learn_f.o:	/tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/stdio.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/stdarg.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/va-sparc.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/math.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/floatingpoint.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/sys/ieeefp.h
+../sources/learn_f.o:	/tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/values.h ../sources/kr_typ.h ../sources/glob_typ.h ../sources/ext_typ.h ../sources/kr_const.h ../sources/kr_def.h ../sources/kernel.h ../sources/kr_mac.h ../sources/kr_art.h ../sources/kr_art1.h ../sources/kr_art2.h ../sources/kr_amap.h ../sources/krart_df.h ../sources/learn_f.ph 
+	gcc -g -I../sources -I../ilkd_sources  -target sun4 -c -o ../sources/learn_f.o ../sources/learn_f.c
+../../sources/learn_f.o:	/tools/apps/gcc-2.4.5/lib/gcc-lib/sparc-sun-sunos4.1/2.4.5/include/stdio.h /tools/apps/gcc-2.4.5/lib/gcc-lib/sparc-sun-sunos4.1/2.4.5/include/stdarg.h /tools/apps/gcc-2.4.5/lib/gcc-lib/sparc-sun-sunos4.1/2.4.5/include/va-sparc.h /tools/apps/gcc-2.4.5/lib/gcc-lib/sparc-sun-sunos4.1/2.4.5/include/math.h /usr/include/floatingpoint.h /tools/apps/gcc-2.4.5/lib/gcc-lib/sparc-sun-sunos4.1/2.4.5/include/sys/ieeefp.h /tools/apps/gcc-2.4.5/lib/gcc-lib/sparc-sun-sunos4.1/2.4.5/include/values.h
+../../sources/learn_f.o:	../../sources/kr_typ.h ../../sources/glob_typ.h ../../sources/ext_typ.h ../../sources/kr_const.h ../../sources/kr_def.h ../../sources/kernel.h ../../sources/kr_mac.h ../../sources/kr_art.h ../../sources/kr_art1.h ../../sources/kr_art2.h ../../sources/kr_amap.h ../../sources/krart_df.h ../../sources/learn_f.ph 
+	gcc -g -I../../sources -I../../ilkd_sources  -target sun4 -c -o ../../sources/learn_f.o ../../sources/learn_f.c
+../ilkd_sources/my_learn_f.o:	/tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/stdio.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/stdarg.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/va-sparc.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/math.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/floatingpoint.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/sys/ieeefp.h
+../ilkd_sources/my_learn_f.o:	/tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/values.h ../sources/kr_typ.h ../sources/glob_typ.h ../sources/ext_typ.h ../sources/kr_const.h ../sources/kr_def.h ../sources/kernel.h ../sources/kr_mac.h 
+	gcc -g -I../sources -I../ilkd_sources  -target sun4 -c -o ../ilkd_sources/my_learn_f.o ../ilkd_sources/my_learn_f.c
+nepomuk.a(../sources/kr_ui.o):
+	true
+../ilkd_sources/ilkd_fct_tbl.o:	/tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/stdio.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/stdarg.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/va-sparc.h ../sources/kr_typ.h ../sources/glob_typ.h ../sources/ext_typ.h ../sources/kr_const.h ../sources/learn_f.h ../sources/init_f.h ../sources/trans_f.h ../sources/update_f.h ../sources/arttr_f.h ../sources/tbl_func.h ../sources/kr_td.h
+../ilkd_sources/ilkd_fct_tbl.o:	../sources/cc_learn.h ../sources/rcc_learn.h ../sources/dlvq_learn.h ../sources/func_tbl.ph ../ilkd_sources/ilkd_learn_f.h ../ilkd_sources/ilkd_init_f.h ../ilkd_sources/ilkd_trans_f.h ../ilkd_sources/ilkd_update_f.h ../ilkd_sources/ilkd_obs.h 
+	gcc -g -I../sources -I../ilkd_sources  -target sun4 -c -o ../ilkd_sources/ilkd_fct_tbl.o ../ilkd_sources/ilkd_fct_tbl.c
+../sources/kr_art.o:	/tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/stdlib.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/sys/stdtypes.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/stdio.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/stdarg.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/va-sparc.h ../sources/krart_df.h ../sources/kr_const.h ../sources/kr_mac.h
+../sources/kr_art.o:	../sources/kr_def.h ../sources/kr_typ.h ../sources/glob_typ.h ../sources/ext_typ.h ../sources/kr_funcs.h ../sources/kernel.h ../sources/kr_art.ph 
+	gcc -g -I../sources -I../ilkd_sources  -target sun4 -c -o ../sources/kr_art.o ../sources/kr_art.c
+.BUILT_LAST_MAKE_RUN:
+nepomuk.a(kr_shell.o):
+	true
+nepomuk.a(../sources/kr_td.o):
+	true
+nepomuk.a(../../sources/kr_td.o):
+	true
+nepomuk.a(../ilkd_sources/myfunc_tbl.o):
+	true
+nepomuk.a(../ilkd_sources/ilkd_kr_mem.o):
+	true
+nepomuk.a(ilkd_mem_ext.o):
+	true
+../sources/init_f.o:	/tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/math.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/floatingpoint.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/sys/ieeefp.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/stdio.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/stdarg.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/va-sparc.h
+../sources/init_f.o:	../sources/kr_typ.h ../sources/glob_typ.h ../sources/ext_typ.h ../sources/kr_const.h ../sources/kr_def.h ../sources/kernel.h ../sources/random.h ../sources/kr_mac.h ../sources/kr_art.h ../sources/kr_art1.h ../sources/kr_art2.h ../sources/kr_amap.h ../sources/krart_df.h ../sources/kr_ui.h ../sources/krui_typ.h ../sources/cc_rcc.h ../sources/matrix.h ../sources/init_f.ph 
+	gcc -g -I../sources -I../ilkd_sources  -target sun4 -c -o ../sources/init_f.o ../sources/init_f.c
+../../sources/init_f.o:	/tools/apps/gcc-2.4.5/lib/gcc-lib/sparc-sun-sunos4.1/2.4.5/include/math.h /usr/include/floatingpoint.h /tools/apps/gcc-2.4.5/lib/gcc-lib/sparc-sun-sunos4.1/2.4.5/include/sys/ieeefp.h /tools/apps/gcc-2.4.5/lib/gcc-lib/sparc-sun-sunos4.1/2.4.5/include/stdio.h /tools/apps/gcc-2.4.5/lib/gcc-lib/sparc-sun-sunos4.1/2.4.5/include/stdarg.h /tools/apps/gcc-2.4.5/lib/gcc-lib/sparc-sun-sunos4.1/2.4.5/include/va-sparc.h ../../sources/kr_typ.h ../../sources/glob_typ.h
+../../sources/init_f.o:	../../sources/ext_typ.h ../../sources/kr_const.h ../../sources/kr_def.h ../../sources/kernel.h ../../sources/random.h ../../sources/kr_mac.h ../../sources/kr_art.h ../../sources/kr_art1.h ../../sources/kr_art2.h ../../sources/kr_amap.h ../../sources/krart_df.h ../../sources/kr_ui.h ../../sources/krui_typ.h ../../sources/cc_rcc.h ../../sources/matrix.h ../../sources/init_f.ph 
+	gcc -g -I../../sources -I../../ilkd_sources  -target sun4 -c -o ../../sources/init_f.o ../../sources/init_f.c
+nepomuk.a(../sources/kr_io.o):
+	true
+../sources/kernel.o:	/tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/stdlib.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/sys/stdtypes.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/stdio.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/stdarg.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/va-sparc.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/ctype.h
+../sources/kernel.o:	/tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/memory.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/math.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/floatingpoint.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/sys/ieeefp.h ../sources/kr_typ.h ../sources/glob_typ.h ../sources/ext_typ.h ../sources/kr_const.h ../sources/kr_def.h ../sources/random.h ../sources/kernel.ph
+../sources/kernel.o:	../sources/kr_mem.h ../sources/kr_funcs.h ../sources/kr_mac.h ../sources/cc_rcc_topo.h ../sources/kr_art.h ../sources/kr_art1.h ../sources/kr_art2.h ../sources/kr_amap.h 
+	gcc -g -I../sources -I../ilkd_sources  -target sun4 -c -o ../sources/kernel.o ../sources/kernel.c
+../sources/update_f.o:	/tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/stdio.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/stdarg.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/va-sparc.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/math.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/floatingpoint.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/sys/ieeefp.h
+../sources/update_f.o:	/tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/values.h ../sources/kr_typ.h ../sources/glob_typ.h ../sources/ext_typ.h ../sources/kr_const.h ../sources/kr_def.h ../sources/kernel.h ../sources/kr_ui.h ../sources/krui_typ.h ../sources/kr_mem.h ../sources/random.h ../sources/kr_mac.h ../sources/krart_df.h ../sources/kr_art1.h ../sources/kr_art2.h ../sources/kr_amap.h ../sources/kr_art.h ../sources/kr_td.h ../sources/rcc_learn.h ../sources/cc_rcc.h
+../sources/update_f.o:	../sources/cc_mac.h ../sources/dlvq_learn.h ../sources/update_f.ph 
+	gcc -g -I../sources -I../ilkd_sources  -target sun4 -c -o ../sources/update_f.o ../sources/update_f.c
+../../sources/update_f.o:	/tools/apps/gcc-2.4.5/lib/gcc-lib/sparc-sun-sunos4.1/2.4.5/include/stdio.h /tools/apps/gcc-2.4.5/lib/gcc-lib/sparc-sun-sunos4.1/2.4.5/include/stdarg.h /tools/apps/gcc-2.4.5/lib/gcc-lib/sparc-sun-sunos4.1/2.4.5/include/va-sparc.h /tools/apps/gcc-2.4.5/lib/gcc-lib/sparc-sun-sunos4.1/2.4.5/include/math.h /usr/include/floatingpoint.h /tools/apps/gcc-2.4.5/lib/gcc-lib/sparc-sun-sunos4.1/2.4.5/include/sys/ieeefp.h /tools/apps/gcc-2.4.5/lib/gcc-lib/sparc-sun-sunos4.1/2.4.5/include/values.h
+../../sources/update_f.o:	../../sources/kr_typ.h ../../sources/glob_typ.h ../../sources/ext_typ.h ../../sources/kr_const.h ../../sources/kr_def.h ../../sources/kernel.h ../../sources/kr_ui.h ../../sources/krui_typ.h ../../sources/kr_mem.h ../../sources/random.h ../../sources/kr_mac.h ../../sources/krart_df.h ../../sources/kr_art1.h ../../sources/kr_art2.h ../../sources/kr_amap.h ../../sources/kr_art.h ../../sources/kr_td.h ../../sources/rcc_learn.h ../../sources/cc_rcc.h ../../sources/cc_mac.h
+../../sources/update_f.o:	../../sources/dlvq_learn.h ../../sources/update_f.ph 
+	gcc -g -I../../sources -I../../ilkd_sources  -target sun4 -c -o ../../sources/update_f.o ../../sources/update_f.c
+../sources/strdup.o:	/tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/stdlib.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/sys/stdtypes.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/string.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/memory.h 
+	gcc -g -I../sources -I../ilkd_sources  -target sun4 -c -o ../sources/strdup.o ../sources/strdup.c
+nepomuk.a(../ilkd_sources/myinit_f.o):
+	true
+nepomuk.a(../ilkd_sources/ilkd_init_f.o):
+	true
+../sources/trans_f.o:	/tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/stdio.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/stdarg.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/va-sparc.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/math.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/floatingpoint.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/sys/ieeefp.h
+../sources/trans_f.o:	/tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/string.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/sys/stdtypes.h ../sources/kr_typ.h ../sources/glob_typ.h ../sources/ext_typ.h ../sources/kr_const.h ../sources/func_mac.h ../sources/kr_mac.h ../sources/cc_mac.h ../sources/trans_f.h 
+	gcc -g -I../sources -I../ilkd_sources  -target sun4 -c -o ../sources/trans_f.o ../sources/trans_f.c
+../../sources/trans_f.o:	/tools/apps/gcc-2.4.5/lib/gcc-lib/sparc-sun-sunos4.1/2.4.5/include/stdio.h /tools/apps/gcc-2.4.5/lib/gcc-lib/sparc-sun-sunos4.1/2.4.5/include/stdarg.h /tools/apps/gcc-2.4.5/lib/gcc-lib/sparc-sun-sunos4.1/2.4.5/include/va-sparc.h /tools/apps/gcc-2.4.5/lib/gcc-lib/sparc-sun-sunos4.1/2.4.5/include/math.h /usr/include/floatingpoint.h /tools/apps/gcc-2.4.5/lib/gcc-lib/sparc-sun-sunos4.1/2.4.5/include/sys/ieeefp.h /tools/apps/gcc-2.4.5/lib/gcc-lib/sparc-sun-sunos4.1/2.4.5/include/string.h
+../../sources/trans_f.o:	/tools/apps/gcc-2.4.5/lib/gcc-lib/sparc-sun-sunos4.1/2.4.5/include/sys/stdtypes.h ../../sources/kr_typ.h ../../sources/glob_typ.h ../../sources/ext_typ.h ../../sources/kr_const.h ../../sources/func_mac.h ../../sources/kr_mac.h ../../sources/cc_mac.h ../../sources/trans_f.h 
+	gcc -g -I../../sources -I../../ilkd_sources  -target sun4 -c -o ../../sources/trans_f.o ../../sources/trans_f.c
+nepomuk.a(../ilkd_sources/ilkd_obslern.o):
+	true
+nepomuk.a(../../ilkd_sources/ilkd_obslern.o):
+	true
+ilkd_mem_ext.o:	/tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/stdio.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/stdarg.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/va-sparc.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/stdlib.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/sys/stdtypes.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/string.h
+ilkd_mem_ext.o:	/tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/memory.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/values.h ../sources/glob_typ.h ../sources/kr_typ.h ../sources/ext_typ.h ../sources/kernel.h ../sources/kr_const.h ../sources/kr_def.h ../sources/kr_ui.h ../sources/krui_typ.h ../sources/kr_mem.ph ../sources/kr_mac.h 
+nepomuk.a(../sources/art_ui.o):
+	true
+nepomuk.a(../ilkd_sources/mytdnn.o):
+	true
+nepomuk.a(../ilkd_sources/ilkd_upd_f.o):
+	true
+nepomuk.a(../ilkd_sources/ilkd_fastobs.o):
+	true
+nepomuk.a(../../ilkd_sources/ilkd_fastobs.o):
+	true
+nepomuk.a(../ilkd_sources/myilkd_i_f.o):
+	true
+../ilkd_sources/myinit_f.o:	/tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/math.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/floatingpoint.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/sys/ieeefp.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/stdio.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/stdarg.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/va-sparc.h
+../ilkd_sources/myinit_f.o:	../sources/kr_typ.h ../sources/glob_typ.h ../sources/ext_typ.h ../sources/kr_const.h ../sources/kr_def.h ../sources/kernel.h ../sources/random.h ../sources/kr_mac.h ../sources/kr_art.h ../sources/kr_art1.h ../sources/kr_art2.h ../sources/kr_amap.h ../sources/krart_df.h ../sources/kr_ui.h ../sources/krui_typ.h ../sources/cc_rcc.h ../sources/matrix.h ../sources/init_f.ph 
+	gcc -g -I../sources -I../ilkd_sources  -target sun4 -c -o ../ilkd_sources/myinit_f.o ../ilkd_sources/myinit_f.c
+nepomuk.a(../sources/cc_learn.o):
+	true
+nepomuk.a(../sources/rcc_learn.o):
+	true
+nepomuk.a(../sources/dlvq_learn.o):
+	true
+nepomuk.a(../ilkd_sources/ilkd_fastmat.o):
+	true
+nepomuk.a(../../ilkd_sources/ilkd_fastmat.o):
+	true
+../sources/art_ui.o:	../sources/kr_typ.h ../sources/glob_typ.h ../sources/ext_typ.h ../sources/kr_ui.h ../sources/krui_typ.h ../sources/kr_const.h ../sources/kernel.h ../sources/art_typ.h ../sources/kr_art.h ../sources/kr_art1.h ../sources/kr_art2.h ../sources/kr_amap.h ../sources/krart_df.h ../sources/art_ui.h 
+	gcc -g -I../sources -I../ilkd_sources  -target sun4 -c -o ../sources/art_ui.o ../sources/art_ui.c
+nepomuk.a(../sources/kr_funcs.o):
+	true
+nepomuk.a(../../sources/kr_funcs.o):
+	true
+../ilkd_sources/mytdnn.o:	/tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/stdio.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/stdarg.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/va-sparc.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/math.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/floatingpoint.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/sys/ieeefp.h
+../ilkd_sources/mytdnn.o:	/tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/values.h ../sources/kr_typ.h ../sources/glob_typ.h ../sources/ext_typ.h ../sources/kr_const.h ../sources/kr_def.h ../sources/kernel.h ../sources/kr_mac.h ../sources/kr_td.ph 
+	gcc -g -I../sources -I../ilkd_sources  -target sun4 -c -o ../ilkd_sources/mytdnn.o ../ilkd_sources/mytdnn.c
+../ilkd_sources/ilkd_upd_f.o:	/tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/math.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/floatingpoint.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/sys/ieeefp.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/values.h ../sources/kr_typ.h ../sources/glob_typ.h ../sources/ext_typ.h ../sources/kr_const.h ../sources/kr_def.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/stdio.h
+../ilkd_sources/ilkd_upd_f.o:	/tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/stdarg.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/va-sparc.h ../sources/kernel.h ../sources/kr_mac.h ../sources/kr_mem.h ../sources/random.h 
+	gcc -g -I../sources -I../ilkd_sources  -target sun4 -c -o ../ilkd_sources/ilkd_upd_f.o ../ilkd_sources/ilkd_upd_f.c
+../ilkd_sources/myilkd_i_f.o:	/tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/math.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/floatingpoint.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/sys/ieeefp.h ../sources/kr_typ.h ../sources/glob_typ.h ../sources/ext_typ.h ../sources/kr_const.h ../sources/kr_def.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/stdio.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/stdarg.h
+../ilkd_sources/myilkd_i_f.o:	/tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/va-sparc.h ../sources/random.h ../sources/kr_mac.h 
+	gcc -g -I../sources -I../ilkd_sources  -target sun4 -c -o ../ilkd_sources/myilkd_i_f.o ../ilkd_sources/myilkd_i_f.c
+../sources/cc_learn.o:	/tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/stdio.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/stdarg.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/va-sparc.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/math.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/floatingpoint.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/sys/ieeefp.h
+../sources/cc_learn.o:	/tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/time.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/sys/stdtypes.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/memory.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/malloc.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/values.h ../sources/kr_typ.h ../sources/glob_typ.h ../sources/ext_typ.h ../sources/kr_const.h
+../sources/cc_learn.o:	../sources/kr_def.h ../sources/kernel.h ../sources/kr_mac.h ../sources/kr_ui.h ../sources/krui_typ.h ../sources/cc_type.h ../sources/cc_mac.h ../sources/cc_learn.ph ../sources/cc_rcc.h 
+	gcc -g -I../sources -I../ilkd_sources  -target sun4 -c -o ../sources/cc_learn.o ../sources/cc_learn.c
+../sources/dlvq_learn.o:	/tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/stdio.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/stdarg.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/va-sparc.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/math.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/floatingpoint.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/sys/ieeefp.h
+../sources/dlvq_learn.o:	/tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/time.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/sys/stdtypes.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/memory.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/malloc.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/values.h ../sources/kr_typ.h ../sources/glob_typ.h ../sources/ext_typ.h ../sources/kr_const.h
+../sources/dlvq_learn.o:	../sources/kr_def.h ../sources/kernel.h ../sources/kr_ui.h ../sources/krui_typ.h ../sources/kr_mac.h ../sources/cc_mac.h ../sources/cc_rcc.h ../sources/dlvq_type.h ../sources/dlvq_learn.ph 
+	gcc -g -I../sources -I../ilkd_sources  -target sun4 -c -o ../sources/dlvq_learn.o ../sources/dlvq_learn.c
+../sources/kr_funcs.o:	/tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/string.h /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/include/sys/stdtypes.h ../sources/kr_typ.h ../sources/glob_typ.h ../sources/ext_typ.h ../sources/kr_const.h ../sources/kr_def.h ../sources/kr_funcs.ph ../sources/kernel.h ../sources/func_tbl.h 
+	gcc -g -I../sources -I../ilkd_sources  -target sun4 -c -o ../sources/kr_funcs.o ../sources/kr_funcs.c
+../../sources/kr_funcs.o:	/tools/apps/gcc-2.4.5/lib/gcc-lib/sparc-sun-sunos4.1/2.4.5/include/string.h /tools/apps/gcc-2.4.5/lib/gcc-lib/sparc-sun-sunos4.1/2.4.5/include/sys/stdtypes.h ../../sources/kr_typ.h ../../sources/glob_typ.h ../../sources/ext_typ.h ../../sources/kr_const.h ../../sources/kr_def.h ../../sources/kr_funcs.ph ../../sources/kernel.h ../../sources/func_tbl.h 
+	gcc -g -I../../sources -I../../ilkd_sources  -target sun4 -c -o ../../sources/kr_funcs.o ../../sources/kr_funcs.c
+nepomuk.a(../sources/arttr_f.o):
+	true

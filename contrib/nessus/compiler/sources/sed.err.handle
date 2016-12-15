@@ -1,0 +1,7 @@
+   if((yyn = yypact[yystate]) > YYFLAG && yyn  < YYLAST)
+{ register int x;
+  for(x = yyn>0? yyn: 0; x < YYLAST;  ++x)
+    if(yychk[yyact[x]] == x - yyn && x - yyn != YYERRCODE)
+      yyNewerror(0, yydisplay(x-yyn));
+}
+yyNewerror(0,0);

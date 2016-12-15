@@ -1,0 +1,42 @@
+#!/bin/csh
+
+# ****************************************************************************
+#  FILE     : build
+#  SHORTNAME: build
+
+#  PURPOSE  : Shell scipt to call make 
+#	      compiler in compiler/source
+
+#  AUTHOR   : Tilman Sommer, Niels Mache, Thomas Korb
+#  DATE     : 22.05.91 (A. Zell)
+
+#  MODIFICATIONS:
+#  22.05.91: cosmetic changes
+
+#      Copyright (c) 1990-1993  SNNS Group, IPVR, Univ. Stuttgart, FRG
+# ****************************************************************************
+
+
+
+echo "************************************************"
+echo "*                                              *"
+echo "*              SNNS  -  Nessus                 *"
+echo "*                                              *"
+echo "*         building Nessus version 2.1 ...      *"
+echo "*                                              *"
+echo "************************************************"
+echo ""
+set rootdir = `echo $cwd`
+
+echo "Building compiler ... "
+cd compiler/sources 
+echo "Compiling ..."
+make all
+echo "Installing ..."
+make install
+cd ../.. 
+echo "Done."
+echo ""
+
+
+

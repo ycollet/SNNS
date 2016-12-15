@@ -1,0 +1,44 @@
+\begin{moduledoc}{Learning during the pre-evolution}{initTrain}
+  \item[\KeyWord{initLearnfct} \optParam{ x } ]~\\
+    This string contains the name of the SNNS learning function.\\
+    Default: Rprop
+  \item[\KeyWord{initLearnparam} \optParam{ x } ]~\\
+    These 5 parameters contains the values of the parameters for the 
+    learning function.
+    For further informations see the SNNS manual.
+    Default: 0.0 0.0 0.0 0.0 0.0
+  \item[\KeyWord{initMaxepochs} \optParam{ x } ]~\\
+    This parameter $x$ contains the maximum number of periods for the learning 
+    algorithm. After this maximum the module {\it initTrain} will automatically stop the 
+    learning function.\\
+    Default: 50
+  \item[\KeyWord{initMaxtss} \optParam{ x } ]~\\
+    This parameter indicates the maximal tolerable learning error.
+    The error is normalized by the number of learning patterns and the number of output units.
+    The module {\it initTrain} will terminate the learning function if the learning error
+    is less than this threshold.\\
+    Default: 0.5
+  \item[\KeyWord{initShuffle} \optParam{ x } ]~\\
+    This switch indicates whether the sequence of the learning patterns is changed after
+    each learning period or not.
+    If the switch is turned on, then the module {\it initTrain} will use the
+    SNNS function {\it shuffle}\\
+    Default: yes
+\end{moduledoc}
+
+The module {\it initTrain} is an alternative version to the standard learning 
+module {\it learnSNNS}. It is possible to use different learning functions and 
+parameters in the pre-evolution phase than in the optimization phase.
+In the sense of lamarckism, where offsprings get the strength of their 
+weights directly from their parents, it is useful to have this opportunity.
+This leads to less learning epochs for offsprings in comparison to networks
+of the starting population, i.e., randomly initialized networks.
+
+\algo{11cm}{initTrain}{
+{\bf for} (each net) {\bf do}\\
+\taba Set the actual SNNS-learning function {\it initLearnFct};\\
+\taba {\bf while} (Epochs $<$ {\it initMaxEpochs}) {\bf and} (tss $>$ {\it initMaxTss})
+{\bf do}\\
+\tabb Learn one epoch with {\it initLearnParam};\\
+}
+

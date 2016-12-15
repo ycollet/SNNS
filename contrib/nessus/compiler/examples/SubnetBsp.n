@@ -1,0 +1,11 @@
+network main();
+
+const
+  graphNetz = file "graphNetz.n" of subnet;
+
+structure
+  subnet graphNetz at(0, 0) var [8, "Baden-Wuertt.dat", "Baden-Wuertt.map"] : BW_graph;
+  subnet graphNetz at(3, 0) var [6, "Bayern.dat", "Bayern.map"] : Bayern_graph;
+
+begin
+end.

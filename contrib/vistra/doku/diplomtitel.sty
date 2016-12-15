@@ -1,0 +1,209 @@
+% diplomtitel.sty
+%
+% Erste Version:      28-Feb-90 (br)
+% Letzte "Anderung:   12-Jul-90 (br)
+%
+% Titelseite + Versicherung fuer Diplom/Studienarbeiten
+% 
+% angepa"st f"ur Blattgr"o"se DIN A4 und Einbanddeckel des IfI Stgt.
+% (ein Verwendungsbeispiel findet sich in `diplomtitel-template.tex')
+
+\typeout{Document Style `diplomtitel' 1.1 <12 Jul 90> (br)}
+
+% Dies ist ein Style und nicht nur eine Option, also sollte man die
+% Standardoptionen `11pt', `12pt', `twoside' und `draft' angeben
+% k"onnen, au"serdem bin ich so freundlich und erlaube auch `10pt'.
+%
+\def\@ptsize{0}
+\@namedef{ds@10pt}{}     % falls jemand `10pt' angeben will
+\@namedef{ds@11pt}{\def\@ptsize{1}}
+\@namedef{ds@12pt}{\def\@ptsize{2}}
+\let\ds@twoside=\relax   % ignoriere "twoside" substyle
+\def\ds@draft{\overfullrule 5pt \umrandet}
+
+% Werte jetzt alle angegebenen Optionen aus
+%
+\@options
+
+% font size Beschreibungen kommen vom `report' style ...
+\input rep1\@ptsize.sty\relax
+% ... und noch den deutschen Substyle, falls noch nicht geladen
+\input german.sty
+
+
+% DESCRIPTION environment
+%
+%  \maketitle ben"utzt eine ge"anderte `description' Umgebung
+%
+\def\descriptionlabel#1{\bf #1\hfil}
+\def\description{\list{}{\labelwidth 45mm \leftmargin 70mm % alt: 35/60 mm
+ \rightmargin 20mm \let\makelabel\descriptionlabel}}
+\let\enddescription\endlist
+
+
+% LaTeX ben"otigt f"ur das \onecolumn command noch einige counter und
+% Definitionen, also tun wir ihm den Gefallen ...
+%
+\setcounter{topnumber}{2}\def\topfraction{.7}
+\setcounter{bottomnumber}{1}\def\bottomfraction{.3}
+\setcounter{totalnumber}{3}
+\def\textfraction{.2}\def\floatpagefraction{.5}
+\setcounter{dbltopnumber}{2}
+\def\dbltopfraction{.7}\def\dblfloatpagefraction{.5}
+
+
+% MAKETITLE
+%
+%  Dieses command erzeugt die Titelseite und die Seite mit der
+%  Versicherung. Damit dieser Style nicht f"ur andere Zwecke verwendet
+%  wird, kommt das ganze automatisch in eine `document' Umgebung.
+%
+\def\maketitle{\begin{document}
+%%%%%%%%%% die Titelseite:
+  \newpage\thispagestyle{empty}\@normalsize
+  \null \vskip 40mm %%%%% ==> 40 mm von oben
+  \vbox to 45mm{
+    \begin{description}
+      \item[Pr"ufer:]\@pruefer \item[Betreuer:]\@betreuer
+    \end{description}
+    \vfill}
+  \vbox to 70mm{%%%%% ==> 85 mm von oben
+    \begin{description}
+      \item[begonnen am:]\@begonnen \item[beendet am:]\@beendet
+      \ifx\@crk\relax \else
+          \vskip 1.5\baselineskip\item[CR-Klassifikation:]\@crk
+      \fi
+    \end{description}
+    \vfill}
+  \vskip -4mm
+  %%%%% ==> 155mm (Titel: 165mm/Autor: 195mm) von oben
+  %%% Die Box kann max. 100mm breit und 60mmm hoch sein,
+  %%% au"serdem wird noch ein Rand von mind. 2.5mm gelassen
+  \centerline{\fboxsep=0pt
+    \@umrandet{\hbox to 100mm{\hfil
+    \vbox to 60mm{\hsize=95mm
+      \vskip 10mm plus 30mm minus 7.5mm
+      \begin{center}\LARGE\bf \@titel \end{center}
+      \vskip 10mm plus 15mm minus 10mm
+      \begin{center}
+        \large \@autor\\ \@art{}arbeit Nr.~\@nummer
+      \end{center}
+      \vskip 10mm plus 30mm minus 7.5mm}\hfil}}}
+  \vskip 20mm %%%%% ==> 235mm von oben
+  \begin{center}\@institut \end{center}
+  \newpage
+%%%%%%%%%% noch die Versicherung:
+  \newpage\thispagestyle{empty}%
+  \null
+%  \vskip 12cm
+%  \@versicherung
+  \vskip 5cm
+  \hbox{\kern 2cm \vbox{
+    \hbox{\large\bf Erkl"arung}\vskip 1cm
+    \hbox{\large \@versicherung}
+    \vskip 4cm
+  \hrule width 7cm \vskip .4\baselineskip
+  \hbox{\large\ (\@autor)}}}
+  \newpage
+%%%%%%%%%% ... und f"uhre den Benutzer nicht in Versuchung ...
+  \end{document}
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Noch ein paar Definitionen, die verwendet und ver"andert
+% werden k"onnen:
+%
+\def\einbearbeiter{\vbox{\hbox{Hiermit versichere ich, diese Arbeit}
+    \hbox{selbst"andig verfa"st und nur die}
+    \hbox{angegebenen Quellen benutzt zu haben.}}}
+
+\def\zweibearbeiter{\vbox{\hbox{Hiermit versichern wir, diese Arbeit}
+    \hbox{selbst"andig verfa"st und nur die}
+    \hbox{angegebenen Quellen benutzt zu haben.}}}
+
+\def\ifi{Institut f"ur Informatik\\
+  Universit"at Stuttgart\\
+  Breitwiesenstra"se 20--22\\
+  70565 Stuttgart}
+
+\def\ipvr{Fakult"at Informatik\\
+  Institut f"ur Parallele und\\
+  Verteilte H"ochstleistungsrechner\\
+  Universit"at Stuttgart\\
+  Breitwiesenstra"se 20--22\\
+  70565 Stuttgart}
+%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Die Schnittstelle zum Benutzer ...
+%
+\def\pruefer#1{\gdef\@pruefer{#1}}
+\def\betreuer#1{\gdef\@betreuer{#1}}
+\def\begonnen#1{\gdef\@begonnen{#1}}
+\def\beendet#1{\gdef\@beendet{#1}}
+\def\crk#1{\ifx\@crk\relax \gdef\@crk{#1}\else
+   \xdef\@crk{\@crk\relax,\penalty 10000 \hskip .3em plus 10cm
+              \penalty 0 \hskip 0pt plus -10cm\relax #1}\fi}
+\def\titel#1{\gdef\@titel{#1}}
+\def\autor#1{\ifx\@autor\relax \gdef\@autor{#1}\else
+   \xdef\@autor{\@autor\relax \hskip 2em\relax #1}%
+   \let\@versicherung=\zweibearbeiter \fi}
+\def\art#1{\gdef\@art{#1}}
+\def\nummer#1{\gdef\@nummer{#1}}
+\def\institut#1{\gdef\@institut{#1}}
+\def\umrandet{\global\let\@umrandet=\fbox}
+
+% ... und die Default-Werte daf"ur.
+%
+\let\@pruefer\relax
+\let\@betreuer\relax
+\let\@begonnen\relax
+\let\@beendet\relax
+\let\@crk\relax
+\let\@titel\relax
+\let\@autor\relax
+\let\@versicherung=\einbearbeiter
+\def\@art{Diplom}
+\let\@nummer\relax
+\let\@institut\ifi
+\let\@umrandet\relax
+
+% Setze alle `pagestyles' auf `empty'.
+% (Ob dies eine gute Idee ist ?)
+%
+\let\ps@headings=\ps@empty
+\let\ps@myheadings=\ps@empty
+
+
+% DIN A4
+%
+%  Damit \maketitle richtig funktioniert mu"s der Ursprung auf die
+%  tats"achliche linke obere Ecke des Blattes gelegt werden (ohne den
+%  bekannten 1in Offset also).
+%  Ausserdem werden die beiden Seitenr"ander auf 28mm gesetzt, die
+%  Seitenh"ohe auf DIN A4-H"ohe.
+%
+\oddsidemargin 2.6mm             %% linker Rand = 28mm
+\advance\oddsidemargin by 4.5mm  %% plus 4.5mm f"ur den Falz
+\evensidemargin=\oddsidemargin
+\textwidth 154mm                 %% DIN A4: 210mm - 2*28mm
+\topmargin -1in
+\headheight 0pt \headsep 0pt
+\textheight 295mm
+
+\parindent=0pt
+
+
+% Einige weitere Default-Initialisierungen:
+%
+\germanTeX
+\ps@empty               % keine Seitennummern, ...
+\pagenumbering{arabic}  % falls doch, dann ...
+\onecolumn
+\frenchspacing          % besser, da viele Abk. (<- da ist schon eine)
+\raggedbottom
+
+\endinput
+

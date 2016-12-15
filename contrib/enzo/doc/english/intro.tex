@@ -1,0 +1,471 @@
+%********* Please insert now the abstract.                 ******************
+\subsection*{Summary}
+The construction of a neural network to a given problem specification
+is a difficult optimization problem: Which topology (number of layers,
+number of units per layer, connectivity of units) and which values for
+the network coefficients (weights, threshold) gains the optimal
+performance?  Our evolutionary network optimizing system (\ENZO) uses
+the paradigm of evolution for optimizing the topology and the paradigm
+of learning for optimizing the coefficients.  Particularly, \ENZO
+evolves a population of networks by generating offsprings thru
+mutating the topology of the parent network and by optimizing the
+coefficients with our fast gradient descent algorithm RPROP.  For
+measuring the performance (resp. the fitness) we can use different
+criteria: learning error (error on learning set), generalization
+capability (error on the test set), hardware complexity (number of
+units and weights), runtime (number of layers), etc.  Using several
+heuristics for speeding up the training time of the offsprings \ENZO
+can efficiently optimize even large networks with 5 000 weights and 50
+000 training patterns.  
+ 
+
+\subsection{Introduction }                                        
+
+The basic principles of evolution as a search heuristic may be
+summarized as follows. The search points or candidate solutions are
+interpreted as individuals. Since there is a population of
+individuals, evolution is a multi-point search. The optimization
+criterion has to be one-dimensional and is called the fitness of the
+individual. Constraints can be embedded in the fitness function as
+additional penalty terms. New candidate solutions, called offsprings,
+are created using current members of the population, called parents.
+The two most used operators are mutation and recombination
+(crossover). Mutation means that the offspring has the same properties
+as its single parent but small variations. Whereas recombination
+(crossover) means that the offspring's properties are mixed from two
+parents. The selection of the parents is randomly but biased,
+preferring the fitter ones, i.e. fitter individuals produce more
+offsprings. For each new inserted offspring another population member
+has to be removed in order to maintain a constant population
+size. This selection can be done randomly or according the fitness of
+each member. Particularly, that means in the first case that the
+expected lifetime is equal for all members, whereas in the second case
+the fitter will live longer, i.e. the fittest may even survive for
+ever.
+
+The design of neural networks incorporates two optimization
+problems. First of all the topology, i.e. number of hidden units and
+their interconnection structure, and second the tuning of the net work
+parameters i.e. weights. Therefore, we have to solve a mixed
+optimization problem, discrete for the topology and continous for the
+network parameters. The standard approach is to use the intuition of
+the designer for defining the topology and to use a learning
+algorithms (e.g. gradient descent) for adjusting the free parameter.
+
+The published results for using evolutionary algorithms for the
+parameter optimization instead of gradient descent like
+backpropagation suggest, that this is only efficient, when gradient
+descent is not possible (e.g. activation function of neurons is not
+differentiable or the interconnection structure is not feed forward
+but contains cycles) or unsuccessful for sparse topologies, since
+gradient descent is much faster.
+
+On the other hand, optimization of the topology incorporates
+optimization of the parameters, since evaluating the fitness of a
+topology means evaluation of the network behavior for which we need an
+optimal instantiation of the according network parameters (training).
+Meanwhile, there are some published approaches which use evolution for
+the discrete topology optimization and use gradient descent just for
+the fitness evaluation of the topology. Since training rsp. gradient
+descent of a neural network is even for middle sized networks a time
+consuming task, these investigations are limited to small
+networks. In the following we describe an hybrid approach combining
+evolution and gradient descent such that even large networks with over
+5000 conne ctions and training sets with over 50 000 patterns (ca. 3
+Mbyte) can be efficiently handled.
+
+
+
+%###########################################################################
+
+\subsection{\ENZO, - Our Evolutionary Approach}
+
+%###########################################################################
+
+
+Every heuristic for searching the global optimum of difficult
+optimization problems has to handle the dilemma between exploration
+and exploitation.  Priorizing the exploitation (as hill-climbing
+strategies do) bears the danger of getting stuck in a poor local
+optimum. On the other hand, full explorative search which guarantees
+to find the global optimum, uses vast computing power.  Evolutionary
+algorithms avoid getting stuck in a local optimum by parallelizing the
+search using a population of search points (individuals) and by
+stochastic search steps, i.e. stochastic selection of the parents and
+stochastic generation of the offsprings (mutation, crossover). On the
+other hand, this explorative search is biased towards exploitation by
+biasing the selection of the parents preferring the fitter ones.
+
+This approach has proven to be a very efficient tool for solving many
+difficult combinatorial optimization problems \cite{goldberg89,reeves93,schwefel95}.
+A big advantage of this approach is
+its general applicability. There are only two problem dependent
+issues: The representation of the candidate solutions as a string
+(genstring = chromosome) and the computation of the fitness.  Even
+though the choice of an adequate representation seems to be crucial
+for the efficiency of the evolutionary algorithm, it is obvious that
+in principle both conditions are fulfilled for every computable
+optimization problem.
+
+On the other hand, this problem independence neglects problem
+dependent knowledge as e.g. gradient information. Therefore the pure
+use of evolutionary algorithms may have only modest results in
+comparison to other heuristics, which can exploit the additional
+information. For the problem of optimizing feedforward neural networks
+we can easily compute the gradient by backpropagation. Using a
+gradient descent algorithm we can tremendously diminish the search
+space by restricting the search to the set of local optima.
+
+This hybrid approach uses two time scales. Each coarse step of the
+evolutionary algorithm is intertwined with a period of fine steps for
+the local optimization of the offspring. For this approach there seems
+to be biological evidence, since at least for higher animals nature
+uses the very same strategy: Before evaluating the fitness for mating,
+the offsprings undergo a longer period of fine tuning called learning.
+Since the evolutionary algorithm uses the fine tuning heuristic as a
+subtask, we can call it a meta-heuristic. Obviously, this
+meta-heuristic is at least as successful as the underlying fine tuning
+heuristic, because the offsprings are optimized by that. Our
+experimental investigations will show, that the results of this
+meta-heuristic are not only as good but impressively superior to the
+underlying heuristic. 
+
+In the natural paradigm the genotype is an algorithmic description for
+developing the phenotype, which seems not to be an invertible process,
+i.e. it is not possible to use the improvements stemming from learning
+(fine tuning) for improving the genotype as Lamarck erroneously
+believed. In our application however, there is no difference between
+genotype and phenotype, because the matrix of weights, which determines the
+neural network, can be linearly noted and interpreted as a chromosome
+(genstring). In this case Lamarck's idea is fruitful, because the whole
+knowledge gained by learning in the fine tuning period can be
+transferred to the offsprings (Lamarckism). 
+
+The strengths of our approach stem mainly from this effect in two
+ways: Firstly, since the topology of the offsprings is very similar to
+the topology of the parents transferring the weights from the parents
+to the offsprings diminishes impressively the learning time by 1-2
+orders of magnitude (in comparison to learning from the scratch with
+random starting weights).  This also implies, that we can generate 1-2
+orders of magnitude more offsprings in the same computation time.
+Secondly, the average fitness of these offsprings is much higher: the
+fitness distribution for the training of a network topology with
+random initial weights will be more or less Gaussian distributed with
+a modest average fitness value whereas starting near the parental
+weights (remind the topology of the offspring is similar but not the
+same as that of its parents) will result in a network with a fitness
+near the parental fitness (may be worse or better). That means,
+whenever the parental fitness is well above the average fitness
+(respectively its topology) then the same may be expected for its
+offspring (in case using the parental weights). Moreover, our
+experiments have shown for the highly evolved 'sparse' topologies that
+with random starting weights the gradient descent heuristic did not
+find an acceptable local optimum (solving the learning task), but only
+by inheriting the parental knowledge and initializing the weights near
+the parental weights.
+\label{ENZO}
+%###########################################################################
+
+\begin{figure}[thb]
+\centerline{\begin{minipage}[t]{7.5cm}
+\epsfxsize=7.5cm
+\epsfysize=5.cm
+\epsffile{../bilder/ablauf.eps}
+\caption{Evolution cycle of \ENZO}
+\label{ablauf}
+\end{minipage}}
+\end{figure}
+
+Summarizing, our algorithm briefly works as follows (cf. fig.
+\ref{ablauf}). Taking into account the user's specifications \ENZO
+generates a population of different networks with a given connection
+density. Then the evolution cycle starts by selecting a parent,
+preferring the ones with a high fitness ranking in the current
+population and by generating an offspring as a mutated duplication of
+this parent.  If crossover is chosen, one or few hidden features
+(=hidden units) of a second parent may be randomly added. Each
+offspring is trained by the best available efficient gradient descent
+heuristic (RPROP, see \cite {riedmiller93}) using weight decay methods for better
+generalization. By removing negligible weights, trained offsprings may
+be pruned and then re-trained.  Being evaluated an offspring is
+inserted into the sorted population according to its determined
+fitness value, thereby removing the last population element. Fitness
+values may incorporate any design criterion considered important for
+the given problem domain.
+
+
+
+%===========================================================================
+\subsection {Mutation}
+%===========================================================================
+
+Besides of the widely used link mutation we also realized unit
+mutation which is well suited to significantly change the network
+topology, allowing the evolutionary algorithm to explore the search
+space faster and more exhaustive. Our experiments show that unit
+mutation efficiently and reliably directs the search towards small
+architectures.
+
+Within link mutation every connection can be changed
+by chance. The probability for deleting a link should be correlated
+with the probability, that this deletion doesn't decrease the
+performance significantly.  For that, we prefer links with small
+weights for deletion, whereas the probability of adding is equal for
+all links:
+
+{\em Weighted Link mutation}: For each link the probability to be
+  deleted is $p_{del}*N_\sigma(0,w)$ where $p_{del}$ and $\sigma$ are
+  set by the user, $N_\sigma(0,w)$ means a normal distributed value
+  with mean $0$ and variance $\sigma$ und $w$ denotes the absolute
+  weight value  of the considered link. The probability for
+  adding a link is $p_{add}$ constantly.
+
+We may call this soft pruning, since not only the weights below the
+threshold $\sigma$ are pruned, but very small weights ($|w|<<\sigma$)
+with probability about $p_{del}$, big weights ($|w|>>\sigma$) with
+probability about 0 and a soft interpolation in between. By the factor $N_\sigma(0,w)$ we intent
+to approximate the probability that the deletion of a link effects no
+significant deterioration of the performance.  If we choose $p_{del}$
+such that only a few links are deleted by each weight mutation we get
+the following heuristic:
+
+{\em Soft pruning}: Test a few weights for pruning preferring small
+    weights.  Whenever this pruning effects no significant
+    deterioration, this variant will survive and will be subject to
+    more pruning, - else this offspring is classified as failure and
+    therefore not inserted in the population.
+
+Therefore it is not necessary to estimate the effects of the deletion
+of a weight as is done by other heuristics (e.g.  optimal brain
+damage, optimal brain surgeon)---just try and test it.
+
+In contrast to link mutation, unit mutation has a strong impact on the
+network's performance.  To improve our evolutionary algorithm we
+developed two heuristics which support unit mutation: the
+prefer-weak-units (PWU) strategy and the bypass algorithm.  The idea
+behind the PWU-heuristic is to rank all hidden units of a network
+according to their relative connectivity ($\frac{act.
+connections}{max. connections}$) and to delete sparsely connected
+units with a higher probability than strongly connected ones. This
+strategy successfully complements other optimization techniques, like
+soft pruning, implemented in \ENZO.
+
+\begin{figure}[thb]
+\centerline{\begin{minipage}[t]{7.5cm}
+\epsfxsize=7.5cm
+\epsfysize=5.0cm
+\epsffile{../bilder/bypass_mot.epsf}
+\caption{Bypass algorithm: a) original network b) after deletion of the middle unit
+c) with added bypass connections}
+\label{bypass}
+\end{minipage}}
+\end{figure}
+
+
+
+
+The bypass algorithm is the second heuristic we realized.  Other than
+adding a unit, deletion of a unit can result in a network which is not
+able to learn the given training patterns. This can happen because
+there are too few hidden units to store the information available in
+the training set. But even if there are enough hidden units, deleting
+a unit can destroy important data paths within the network
+(fig. \ref{bypass}a and b).  For that reason we restore deleted data
+paths before training by inserting bypass connections
+(fig. \ref{bypass}c). By that, the nonlinear function computed by the
+subpart of the neural network, which was connected to the deleted unit
+formerly, is now approximated by a linear function using shortcuts
+(bypass connections).  The application of the bypass algorithm
+significantly increases the proportion of successful generated by unit
+mutation.  Both the number of networks with devastated topologies
+decreases and the generated nets need less epochs to learn the
+training set, because they are not forced to simulate missing bypass
+connections by readjusting the weights of the remaining hidden units.
+
+
+%===========================================================================
+\subsection{Benchmarks}
+%===========================================================================
+
+Some benchmark problems are distributed with \ENZO, three simple
+benchmarks with only a few minutes computing time necessary
+(TC-Problem,Encoder,XOR)
+and two larger benchmarks (Spirals,Recogintion of digits). 
+Some benchmarks are also described in the following.
+Before using \ENZO for larger problems, it is worth investigating some
+time in parameter tuning of benchmark problems to get an impression
+on the influence of single parameters and the dependencies between parameters.
+
+
+
+%---------------------------------------------------------------------------
+\subsubsection{\bf TC problem}
+%---------------------------------------------------------------------------
+The task is to correctly classify Ts and Cs given a $4x4$ pixel input matrix
+(figure \ref{tc}, see also \cite{McDonnell&Waagen93}). The pattern set contains
+all possible Ts and Cs, that is they
+can be translated and rotated. In total there are 17 Ts and 23 Cs.
+A straightforward network uses the pixel representation as input units, has some
+hidden units and one output unit, that classifies Ts with 1 and Cs with 0.
+The topology of the network is than $16-16-1$ with full connection, i.e., 288 weights.
+Obviously the input layer contains redundant information.
+The task for the genetic algorithm is to eliminate redundant input units
+and furthermore the topology of the network, without any loss of classification
+performance.
+
+\begin{figure}[htb]
+\centerline{\psfig{figure=../bilder/tc.eps,width=7cm,height=9cm} }
+
+\caption[The TC - Problem ]{\label{tc}
+{\small The figure shows Ts and Cs represented with a
+	$4x4$ pixel matrix. In the bottom row, several
+	input units were cut off (gray color). The network
+	is still able to distinguish every T from every C.
+	Can you ?
+}}
+\end{figure}
+
+
+ The neural network that originally
+had nearly 300 links was already impressively reduced to a 10-2-1 net
+with 27 links  left by
+\ENZO and in a second approach to 8-2-1
+with only 18 links.
+
+\begin{table}[htb]
+\centerline{\begin{minipage}[t]{6.5cm}
+    \begin{tabular}{|l|c|c|} \hline
+      Reference          & topology & \#links \\ \hline \hline
+      Original net       & 16-16-1  & 288          \\ \hline
+      McDonnell          & 15-7-1   &  60          \\ \hline
+      \ENZO94		 & 10-2-1   &  27          \\ \hline
+      \ENZO95        	 & 8-2-1    &  18          \\ \hline
+    \end{tabular}
+    \caption{\sl TC-Problem. Note the decreased number
+             of input units due to input-unit-mutation.  \label{tab:tc}}
+\end{minipage}}
+\end{table}
+
+
+
+\subsubsection{\bf Nine Men's Morris}
+
+
+With \ENZO we investigated networks learning a control strategy for the
+endgame of {\bf Nine Men's Morris}.  The table \ref{tab:muehle} shows
+the performance of three nets: the first network was the best
+hand-crafted network developed just by using backpropagation
+(SOKRATES,\cite{braun91b}), a second network was generated by \ENZO
+\cite{braun93} and a third network we got by \ENZO additionally rating
+the network size in the fitness function \cite{braun94}. Networks
+optimized by \ENZO show a significantly better performance than the
+original Sokrates net. Further, that superior performance is achieved
+with smaller nets.  \ENZO was able to minimize the network to a
+14-2-2-1 architecture deleting not only hidden units but also the
+majority of the input neurons.
+
+\begin{table}[htb]
+\centerline{\begin{minipage}[t]{9.5cm}
+ \begin{tabular}{|l|c|r|c|} \hline
+System    & topology      & \#weights & performormance\\ \hline \hline
+Sokrates & 120-60-20-2-1 &   4222    & 0.826 \\ \hline
+\ENZO-1     & 120-60-20-2-1 &   2533    & 1.218 \\ \hline
+\ENZO-2  & {\bf 14-2-2-1}&{\bf 24}   & 1.040 \\ \hline
+\end{tabular} \hfill 
+ \caption{\sl Socrates was the best handcrafted network, the fitness
+criteria for \ENZO-1 was performance and for \ENZO-2 additionally network size.
+\label{tab:muehle}}
+\end{minipage}}
+\end{table}
+
+
+\subsubsection{ Thyroid gland}
+
+Thyroid gland diagnostic is a real-world benchmark we used to
+test our algorithm [\ref{Schiffmann 93}]. This task requires a very
+good classification, because 92\% of the patterns belong to one
+class. So a useful network must classify much better than 92\%. A
+further challenge is the large number of training patterns (nearly
+3800) which exceeds the size of toy problem's training sets by
+far. The evolved network had the same performance as in
+[\ref{Schiffmann 93}], but 4 input units less and only 20\% of the
+weights.
+\begin{table}[htb]
+\centerline{\begin{minipage}[t]{8.5cm}
+ \begin{tabular}{|c|c|c|c|} \hline
+            & topology & \#weights & performance\\ \hline \hline
+  Schiffmann& 21-10-3  & 303       & 98.4\%  \\ \hline
+  \ENZO   & 17-1-3   &  66       & 98.4\% \\ \hline
+\end{tabular}\hfill 
+\caption{\sl Thyroid gland diagnostic, - decreasing network size and 
+removing redundant input units without deteriorating performance
+\label{tab:thyroid}}
+\end{minipage}}
+\end{table}
+
+
+%###########################################################
+\subsubsection{ Classification of handwritten digits}
+%##########################################################
+
+{ Classification of handwritten digits} was the largest problem we
+tackled with \ENZO \cite{schaefer95}. We compared the classification performance of our
+evolved neural networks with that of a commercially used polynomial
+classifier of degree two.  Trained on the same 50,000 pattern subset
+of the NIST data base using the same features as the neural net the
+polynomial classifier achieves a classification rate of 99.06\%\
+correct.  The results in table \ref{tab:nets} shows that both
+classification approaches perform equally well. The major difference
+is in the number of free parameters: while a $2^{\mbox{\tiny nd}}$
+degree polynomial classifier uses 8.610 coefficients our nets range
+from less than 1,600 to 3,300 links. As a consequence the
+classification time in practical application is reduced to 20\% of
+time needed by a PC.  Another advantage is the possibility to obtain a
+specialized net for a given time-accuracy tradeoff.  By means of the
+fitness-function the user can support the evolution of either nets
+with few links, risking a small drop in performance, or more powerful
+nets with some links more.
+
+\begin{table}[htb]
+\centerline{\begin{minipage}[t]{7.5cm}
+\begin{tabular}{|c|c|r@{ : }l|} \hline links & correct &
+    \#weights & misclassified \\ \hline\hline 892 & 98.05 & 1 & 2 \\
+    \hline 1,648 & 98.71 & 1 & 5 \\ \hline 3,295 & 99.16 & 1 & 1500 \\
+    \hline \end{tabular} 
+{\caption{\sl Classification of handwritten
+    digits, - evolved networks for different ratings of network size
+    (\#weights) versus performance (miscl.) in the fitness function}
+    \label{tab:nets}}
+\end{minipage}}
+\end{table}
+
+
+
+%###########################################################################
+
+\subsection{Conclusion}
+
+%###########################################################################
+
+
+\ENZO combines two successful search techniques:
+gradient descent for an efficient local weight optimization and
+evolution for a global topology optimization.  By that it takes full
+advantage of the efficiently computable gradient information without
+being trapped by local minima. Through the knowledge transfer by
+inheriting the parental weights both learning is speeded up by 1-2
+orders of magnitude and the expected fitness of the offspring is far
+above the average for its topology. Moreover, \ENZO impressively
+thins out the topology by the cooperation of the discrete mutation
+operator and the continuous weight decay method. For this the
+knowledge transfer is again crucial, because the evolved topologies
+are mostly too sparse to be trained with random initial weights.
+Additionally, \ENZO tries also to cut off the connections to
+eventually redundant input units: For the Nine Men's Morris problem
+\ENZO found a network with better performance but only 12\% of the
+input units originally used.  Therefore \ENZO not only supports the
+user in the network design but also determines the salient
+input components.
+
+
+

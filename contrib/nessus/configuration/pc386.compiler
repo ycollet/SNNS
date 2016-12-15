@@ -1,0 +1,27 @@
+
+
+# Rules
+
+.KEEP_STATE:
+
+default: $(PROGRAM)
+
+all: $(PROGRAM) 
+
+install:
+		cp $(PROGRAM) $(COMPILERBINDIR)
+
+
+# because of checking of timestamps this is neccessary!!!	
+
+list:	$(SOURCES)
+	cat $(SOURCES) >  compilersource.c
+
+clean:
+	rm -f $(COMPOBJECTS) $(PROGRAM) co_scanner.c co_parser.c co_pFuncs.h
+
+
+$(PROGRAM): $(COMPOBJECTS)
+	$(CC) -o $(PROGRAM) $(COMPOBJECTS) $(LDOPTIONS)
+
+

@@ -1,0 +1,26 @@
+\begin{moduledoc}{Evaluation through a cross validation set}{tssEval}
+
+\item[\KeyWord{crossPattern} \optParam{name}]~\\
+Name of the file which contains the set of cross validation patterns.\\
+Default: -
+
+\item[\KeyWord{crossTssRating} \optParam{ x } ]~\\
+    factor for multiplying the mean error per pattern on the cross validation set.
+    Default: 0.0
+
+  \item[\KeyWord{crossHamRating} \optParam{ x } ]~\\
+    Value to add for each wrong classified pattern.
+    Default: 0.0
+
+  \item[\KeyWord{crossHamThresh} \optParam{ x } ]~\\
+    possible distance, that is allowed for the output from the target.
+    A pattern is wrong classified, if at least the output of
+    one output neuron differs from its target by	
+    more than \optParam{x}.
+    Default: 0.0
+\end{moduledoc}
+
+This module computes a simple fitness term on a cross validation set.
+The mean error per pattern as well as the classification performance
+can be evaluated.
+

@@ -1,0 +1,30 @@
+The TC-Problem
+
+The task is to correctly classify Ts and Cs given a 4x4 pixel input matrix
+(see User Manual or McDonnell&Waagen93). The pattern set contains
+all possible Ts and Cs, that is they can be translated and rotated. In total there
+are 17 Ts and 23 Cs.
+
+A straightforward network uses the pixel representation as input units, has some
+hidden units and one output unit, that classifies Ts with 1 and Cs with 0.
+The topology of the network is than 16-16-1 with full connection, i.e., 288 weights.
+Obviously the input layer contains redundant information. 
+The task for the genetic algorithm is to eliminate redundant input units
+and furthermore the topology of the network, without any loss of classification
+performance.  
+
+The best solutions found by ENZO  are:
+	8-2-1, with 18 weights, i.e. speedup 16 .
+	9-1-1, with 18 weights, i.e. speedup ca. 15 .
+
+Note that input units are not removed totally from the network,
+but rather all their connection are cut off. They get the unit name  <xxx>.
+If you analyze the network with the graphical user interface of SNNS,
+select in the display setup <show name> to easily identify removed input units.
+
+If you want to use the X-history output window, use for all benchmarks
+the command file with an additional <x> as prefix.
+
+Start the  benchmark with:
+
+	enzo tc.cmd    or    enzo xtc.cmd 

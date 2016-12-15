@@ -1,0 +1,24 @@
+Spirals - Problem
+
+The task is to classify points of two helix-like regions in a 2-dimensional space.
+It's a highly non-linear task to classify the two spirals correctly.
+A training  and test set of points is given.
+The starting topology is  2-5-5-5-1 with 122 connections is given,
+a resulting topology (without parameter tuning) is 2-3-3-3-1 with 31 connections.
+
+
+Note that input units are not removed totally from the network,
+but rather all their connection are cut off. They get the unit name  <xxx>.
+If you analyze the network with the graphical user interface of SNNS,
+select in the display setup <show name> to easily identify removed input units.
+
+If you want to use the X-history output window, use for all benchmarks
+the command file with an additional <x> as prefix.
+
+Start the  benchmark with:
+
+	enzo spi.cmd    or    enzo xspi.cmd 
+
+
+
+

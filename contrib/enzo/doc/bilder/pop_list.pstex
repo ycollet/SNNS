@@ -1,0 +1,152 @@
+%!
+%%Title: /tmp/xfig-fig023388
+%%Creator: fig2dev
+%%CreationDate: Sat Jan 22 14:59:24 1994
+%%For: schaefr@springbank (Johannes Schaefer)
+%%BoundingBox: 0 0 384 336
+%%Pages: 0
+%%EndComments
+/$F2psDict 6400 dict def 
+$F2psDict begin
+$F2psDict /mtrx matrix put
+/l {lineto} bind def
+/m {moveto} bind def
+/s {stroke} bind def
+/n {newpath} bind def
+/gs {gsave} bind def
+/gr {grestore} bind def
+/clp {closepath} bind def
+/graycol {dup dup currentrgbcolor 4 -2 roll mul 4 -2 roll mul
+4 -2 roll mul setrgbcolor} bind def
+/col-1 {} def
+/col0 {0 0 0 setrgbcolor} bind def
+/col1 {0 0 1 setrgbcolor} bind def
+/col2 {0 1 0 setrgbcolor} bind def
+/col3 {0 1 1 setrgbcolor} bind def
+/col4 {1 0 0 setrgbcolor} bind def
+/col5 {1 0 1 setrgbcolor} bind def
+/col6 {1 1 0 setrgbcolor} bind def
+/col7 {1 1 1 setrgbcolor} bind def
+	end
+	/$F2psBegin {$F2psDict begin /$F2psEnteredState save def} def
+	/$F2psEnd {$F2psEnteredState restore end} def
+	%%EndProlog
+
+$F2psBegin
+0 setlinecap 0 setlinejoin
+-48 28 translate
+0.0 336.0 translate 0.900 -0.900 scale
+0.500 setlinewidth
+% Polyline
+n 284 254 m 464 149 l  419 284 l gs 1.00 setgray fill gr
+gs col-1 s gr
+% Polyline
+n 419 404 m 419 254 l  179 254 l  179 404 l 
+ clp gs 1.00 setgray fill gr
+gs col-1 s gr
+% Polyline
+n 389 164 m 389 134 l  359 134 l  359 164 l 
+ clp gs col-1 s gr
+% Polyline
+n 449 164 m 449 134 l  419 134 l  419 164 l 
+ clp gs col-1 s gr
+% Polyline
+n 479 164 m 479 134 l  449 134 l  449 164 l 
+ clp gs col-1 s gr
+% Polyline
+n 419 164 m 419 134 l  389 134 l  389 164 l 
+ clp gs 0.50 setgray fill gr
+gs col-1 s gr
+% Polyline
+n 254 164 m 254 134 l  224 134 l  224 164 l 
+ clp gs col-1 s gr
+% Polyline
+n 164 164 m 164 134 l  134 134 l  134 164 l 
+ clp gs 0.50 setgray fill gr
+gs col-1 s gr
+% Polyline
+n 194 164 m 194 134 l  164 134 l  164 164 l 
+ clp gs 0.50 setgray fill gr
+gs col-1 s gr
+% Polyline
+n 224 164 m 224 134 l  194 134 l  194 164 l 
+ clp gs 0.50 setgray fill gr
+gs col-1 s gr
+% Polyline
+n 284 164 m 284 134 l  254 134 l  254 164 l 
+ clp gs 0.50 setgray fill gr
+gs col-1 s gr
+% Interpolated spline
+n 314 119 m
+	339.341 115.517 350.591 115.517 359 119 curveto
+	362.964 120.642 366.714 124.392 374 134 curveto
+gs col-1 s gr
+n 370.760 126.417 m 374.000 134.000 l 367.572 128.834 l gs 2 setlinejoin col-1 s gr
+% Interpolated spline
+n 374 134 m
+	384.125 111.500 391.625 104.000 404 104 curveto
+	416.375 104.000 423.875 111.500 434 134 curveto
+gs col-1 s gr
+n 432.541 125.884 m 434.000 134.000 l 428.893 127.525 l gs 2 setlinejoin col-1 s gr
+% Interpolated spline
+n 434 134 m
+	439.063 122.750 442.813 119.000 449 119 curveto
+	455.187 119.000 458.937 122.750 464 134 curveto
+gs col-1 s gr
+n 462.541 125.884 m 464.000 134.000 l 458.893 127.526 l gs 2 setlinejoin col-1 s gr
+n 351.653 182.071 m 344.000 179.000 l 352.198 178.108 l gs 2 setlinejoin col-1 s gr
+% Interpolated spline
+n 344 179 m
+	369.341 182.483 380.591 182.483 389 179 curveto
+	392.964 177.358 396.714 173.608 404 164 curveto
+gs col-1 s gr
+n 397.572 169.166 m 404.000 164.000 l 400.760 171.583 l gs 2 setlinejoin col-1 s gr
+% Interpolated spline
+n 74 44 m
+	78.964 70.502 82.714 81.752 89 89 curveto
+	94.927 95.833 112.928 97.928 119 104 curveto
+	123.554 108.554 127.304 116.054 134 134 curveto
+gs col-1 s gr
+n 133.077 125.806 m 134.000 134.000 l 129.330 127.204 l gs 2 setlinejoin col-1 s gr
+% Interpolated spline
+n 164 44 m
+	168.964 70.502 172.714 81.752 179 89 curveto
+	184.927 95.833 202.928 97.928 209 104 curveto
+	213.554 108.554 217.304 116.054 224 134 curveto
+gs col-1 s gr
+n 223.077 125.806 m 224.000 134.000 l 219.330 127.204 l gs 2 setlinejoin col-1 s gr
+% Interpolated spline
+n 239 134 m
+	246.286 124.392 250.036 120.642 254 119 curveto
+	262.409 115.517 273.659 115.517 299 119 curveto
+gs col-1 s gr
+n 291.347 115.929 m 299.000 119.000 l 290.802 119.892 l gs 2 setlinejoin col-1 s gr
+n 150.459 172.116 m 149.000 164.000 l 154.107 170.474 l gs 2 setlinejoin col-1 s gr
+% Interpolated spline
+n 149 164 m
+	154.063 175.250 157.813 179.000 164 179 curveto
+	170.187 179.000 173.937 175.250 179 164 curveto
+gs col-1 s gr
+n 173.893 170.474 m 179.000 164.000 l 177.541 172.116 l gs 2 setlinejoin col-1 s gr
+n 180.459 172.116 m 179.000 164.000 l 184.107 170.474 l gs 2 setlinejoin col-1 s gr
+% Interpolated spline
+n 179 164 m
+	184.063 175.250 187.813 179.000 194 179 curveto
+	200.187 179.000 203.937 175.250 209 164 curveto
+gs col-1 s gr
+n 203.893 170.474 m 209.000 164.000 l 207.541 172.116 l gs 2 setlinejoin col-1 s gr
+n 272.240 171.583 m 269.000 164.000 l 275.428 169.166 l gs 2 setlinejoin col-1 s gr
+% Interpolated spline
+n 269 164 m
+	276.286 173.608 280.036 177.358 284 179 curveto
+	292.409 182.483 303.659 182.483 329 179 curveto
+gs col-1 s gr
+n 320.802 178.108 m 329.000 179.000 l 321.347 182.071 l gs 2 setlinejoin col-1 s gr
+n 210.459 172.116 m 209.000 164.000 l 214.107 170.475 l gs 2 setlinejoin col-1 s gr
+% Interpolated spline
+n 209 164 m
+	219.125 186.500 226.625 194.000 239 194 curveto
+	251.375 194.000 258.875 186.500 269 164 curveto
+gs col-1 s gr
+n 263.893 170.475 m 269.000 164.000 l 267.541 172.116 l gs 2 setlinejoin col-1 s gr
+$F2psEnd

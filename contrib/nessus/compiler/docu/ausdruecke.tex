@@ -1,0 +1,609 @@
+\chapter{Ausdr"ucke und Variablendeklarationen}
+\label{EinfacheAusdruecke}
+\label{LogischeAusdruecke}
+
+
+Ausdr"ucke sind in {\bf Nessus} streng typgebunden und bestimmte
+Operatoren sind auf einzelne Datentypen beschr"ankt.
+Syntaxregel~\ref{syexpression} zeigt die Syntax eines Ausdrucks.
+
+\section{Vorzeichen und bin"are Operatoren}
+\label{numExpr}
+
+\begin{center}
+\fbox{
+\begin{minipage}{\textwidth}
+{\footnotesize
+\begin{center}
+\begin{eqnarray}
+  \mbox{expression} & ::= & \mbox{num\_expression} \nonumber\\
+          &  |  & \mbox{string\_expression} \label{syexpression}\\[.3 cm]
+  \mbox{num\_expression} & ::= & \mbox{num\_expression \verb&+& term} \nonumber\\
+          &  |  &  \mbox{num\_expression $-$ term} \nonumber\\
+          &  |  &  \mbox{term} \label{synumexpression}\\[.3 cm]
+  \mbox{term} & ::= & \mbox{term \verb&*& factor} \nonumber\\
+          &  |  &  \mbox{term $/$ factor} \nonumber\\
+          &  |  &  \mbox{term {\bf div}\index{div} factor} \nonumber\\
+          &  |  &  \mbox{term {\bf mod}\index{mod} factor} \nonumber\\
+          &  |  &  \mbox{factor} \label{syterm}\\  \nonumber
+\end{eqnarray}
+\end{center}
+}
+\index{Addition} \index{Subtraktion} \index{Multiplikation} \index{Division!ganzzahlige} \index{Division!rationale} 
+\index{Vorzeichen} \index{Modulo}
+\end{minipage}
+}
+\end{center}
+
+
+Dabei binden $+$ und $-$ \index{Bindung}\index{Vorrang} weniger stark
+als $*$, $/$, {\bf div}\index{div} oder {\bf mod}. Ausdr"ucke mit
+mehrerern Operatoren gleicher Bindung werden von links nach rechts
+ausgewertet (linksassoziativ).
+
+\index{Ausdr"ucke!einfache} \index{Addition} \index{Subtraktion}
+\index{Multiplikation} \index{Division!ganzzahlige}
+\index{Division!rationale} \index{Vorzeichen} \index{Modulo}
+
+\index{Ausdr"ucke!einfache} \index{Ausdruck!numerischer} In {\bf
+Nessus} wird strikt zwischen der Division ganzzahliger und der
+Division rationaler Zahlen\index{Zahl!rationale!Division}
+unterschieden.  \index{Addition} \index{Subtraktion}
+\index{Multiplikation} \index{Division!ganzzahlige}
+\index{Division!rationale} \index{Vorzeichen} \index{Modulo}
+
+\begin{itemize}
+  \item In einem Ausdruck ``x {\bf div}\index{div} y'' m"ussen x und y ganze
+Zahlen\index{Zahl!ganze!Division} sein. Das Ergebnis ist 
+	ebenfalls ganzzahlig.  \index{Ausdruck!numerischer}
+  \item In ``x $/$ y'' d"urfen x und y ganzzahlig oder rational sein, aber das Ergebnis
+wird immer - 
+	unabh"angig vom Typ der Operanden - rational sein. 
+\end{itemize}
+
+Die Operanden des Modulo-Operators {\bf mod}\index{mod} m"ussen
+ebenfalls ganze Zahlen sein. Das Ergebnis ist immer eine ganze
+Zahl.\index{Zahl!ganze!Modulo-Operator} ``x {\bf mod}\index{mod} y''
+hat x bez"uglich der Restklasse y zum Ergebnis.
+\index{Ausdruck!numerischer} \index{Addition} \index{Subtraktion}
+\index{Multiplikation} \index{Division!ganzzahlige}
+\index{Division!rationale} \index{Vorzeichen} \index{Modulo}
+
+F"ur die Operatoren $+$, $-$ und $*$ gilt die Regel, da"s das Ergebnis
+eine ganze Zahl ist, wenn beide Operanden ganze Zahlen sind. Ist einer
+der Operanden eine rationale Zahl,\index{Zahl!rationale} ist auch das
+Ergebnis rational.  \index{Ausdruck!numerischer}
+
+\begin{center}
+\fbox{
+\begin{minipage}{\textwidth}
+{\footnotesize
+\begin{center}
+\begin{eqnarray}
+  \mbox{factor} & ::= & \mbox{{\bf (} expression {\bf )}} \nonumber\\
+          &  |  & \mbox{sign factor}  \nonumber\\
+          &  |  & \mbox{function\_expression}  \nonumber\\
+          &  |  & \mbox{variable} \label{syfactor}\\[.3 cm]
+  \mbox{sign} & ::= & +\;\;|\;\; - \label{sysign}\\[.3 cm]
+  \mbox{variable} & ::= & \mbox{simple\_constant} \nonumber\\
+          &  |  & \mbox{identifier} \nonumber\\
+          &  |  & \mbox{variable {\bf ~.~} selection\_field} \nonumber\\
+          &  |  & \mbox{variable\index{Variable} field\_index} \label{syvariable}\\[.3cm]
+  \mbox{simple\_constant} & ::= & \mbox{intliteral}\index{Literal!ganzzahliges} \\
+          & | & \mbox{floatliteral}\index{Literal!rationales} \\
+          & | & \mbox{stringliteral}\index{Literal!Zeichenkette}
+			\label{syunsignedconstant} \\[.3cm]
+  \mbox{string\_expression} & ::= & \mbox{string\_expression ``$|$'' variable} \nonumber\\
+          &  |  & \mbox{variable} \label{systringexpression}\\ \nonumber
+\end{eqnarray}
+\end{center}
+}
+\end{minipage}
+}
+\end{center}
+
+Sind die Operanden Zeichenketten, so liefert x $|$ y die
+Konkatenation\index{Konkatenation} von x und y. So ist zum Beispiel
+
+	\centerline{``nessus'' $|$ ``programm'' $=$ ``nessusprogramm''.}
+
+
+
+\section{Variablen}
+
+\subsection{Zugriff auf einzelne Elemente eines Felds}\index{Feld}
+
+Die Angabe des Feldelements\index{Feld!Zugriff auf Feld} erfolgt wie
+in Syntaxregel~\ref{syfieldindex} in eckigen Klammern. Dabei mu"s man
+aber beachten, da"s
+
+\begin{itemize}
+  \item der Datentyp des Feldindexes\index{Feld!Index} {\bf int}\index{int} sein mu"s und
+  \item der erste Index eines Felds\index{Feld!erstes Element} immer Null und nicht Eins ist.
+\end{itemize}
+
+Der zweite Punkt f"uhrt dazu, da"s zum Beispiel auf das letzte Element
+eines als {\bf ``cluster}$[$100$]$ : unitSet'' vereinbarten Felds mit
+dem Ausdruck ``unitSet$[$99$]$'' zugegriffen werden mu"s und
+``unitset$[$100$]$'' gar nicht definiert ist.
+\index{Ausdruck!Feldelement}
+
+\begin{center}
+\fbox{
+\begin{minipage}{\textwidth}
+{\footnotesize
+\begin{center}
+\begin{eqnarray}
+  \mbox{field\_index} & ::= & \mbox{``${\bf [}$'' expression ``${\bf
+]}$''} \label{syfieldindex} \\ \nonumber 
+\end{eqnarray}
+\end{center}
+}
+\end{minipage}
+}
+\end{center}
+
+
+\subsection{Selektion}
+\label{Selektion}
+
+\subsubsection{Selektion von Komponenten von Zellen}
+
+Die Selektion\index{Selektion} dient dazu, um auf
+
+\begin{itemize} \index{Ausdruck!Selektion}
+  \item eine Komponente einer Zelle oder
+  \item einen Bezeichner\index{Bezeichner} eines Teilnetzes\index{Teilnetz!Zugriff auf Komponenten} 
+\end{itemize}
+
+zuzugreifen. Damit kann zum Beispiel der Name einer Zelle in einem
+Ausdruck von Zeichenketten verwendet werden.
+
+Der Zugriff auf die Komponente einer Zelle erfolgt dadurch, da"s man
+nach dem Selektionsoperator das entsprechende Schl"usselwort angibt.
+Es kann jedoch auf alle diejenigen Komponenten nicht zugegriffen
+werden, die "uber Bezeichner\index{Bezeichner} angegeben werden und
+die nicht von einem der einfachen Datentypen sind. Dies sind {\bf
+actfunc} und {\bf outfunc}.
+
+Man beachte aber:
+\begin{quote}
+  Wenn der Aktivierungswert einer Zelle "uber das Schl"usselwort {\bf
+random} definiert wurde, \index{random}\index{Aktivierungswert}
+ist er im restlichen {\bf Nessus}-Programm nicht verf"ugbar, das
+hei"st die Selektion\index{Selektion} dieses Aktivierungswerts liefert
+``undefiniert''.
+\end{quote}
+
+Nur bei der Angabe der Zielsite einer Verbindung wird hinter dem
+Ausdruck, der die Zelle spezifiziert mit dem Selektionsoperator der
+Typname der Zielsite angegeben. Der Ausdruck
+
+\centerline{unit\_specification~{\bf .}~site\_type\_name} \index{Ausdruck!Selektion}
+
+definiert die Site, f"ur die der Typ ``site\_type\_name'' eingef"uhrt
+wurde, der durch ``unit\_specification'' angegebenen Zelle als Ziel
+einer Verbindung.  Man beachte, da"s nur in Zusammenhang mit
+Verbindungsdefinitionen auf einen Sitetyp einer Zelle zugegriffen
+werden kann. Es ist nicht m"oglich, auf diesen Sitetyp andere
+Operatoren anzuwenden.
+
+\begin{center}
+\fbox{
+\begin{minipage}{\textwidth}
+{\footnotesize
+\begin{center}
+\begin{eqnarray}
+  \mbox{selection\_field} & ::= & \mbox{{\bf name}\index{name} $|$ {\bf act}} \nonumber \\
+          &  |  & \mbox{{\bf identifier}} \label{syselectionfield}\\ \nonumber
+\end{eqnarray}
+\end{center}
+}
+\end{minipage}
+}
+\end{center}
+
+
+\subsubsection{Selektion von Komponenten eines Teilnetzes}
+
+Soll auf eine Komponente eines Teilnetzes \index{Teilnetz}
+\index{Teilnetz!Zugriff auf Komponenten} zugegriffen werden, so
+schreibt man nach dem \index{Ausdruck!Selektion} Selektionsoperator
+\index{Selektion} den Bezeichner dieser Komponente im {\bf
+Nessus}-Programm, das das betreffende Teilnetz\index{Teilnetz}
+definiert. Vor dem Selektionsoperator mu"s der Bezeichner
+\index{Bezeichner} stehen, der f"ur das Teilnetz \index{Teilnetz}
+eingef"uhrt wurde (Bezeichner der Struktur vom Typ {\bf subnet}).
+\index{Ausdruck!Selektion}
+
+Die Namen in externen {\bf Nessus}-Programmen, die als
+Teilnetze\index{Teilnetz} eingebunden werden, und die
+Bezeichner\index{Bezeichner} des Netzdefinitionsprogramms sind
+voneinander v"ollig unabh"angig und d"urfen gleich sein. Die
+dazugeh"origen Objekte sind durch den vorangestellten Bezeichner des
+Teilnetzes\index{Teilnetz} eindeutig festgelegt. Wo dieser
+vorangestellte Bezeichner fehlt, ist ebenso eindeutig, da"s ein
+Bezeichner des Netzdefinitionsprogramms gemeint ist.
+
+Abbildung~\ref{SelektionBsp}\index{Selektion} zeigt an einem Beispiel
+die Anwendung des Selektionsoperators. \index{Ausdruck!Selektion}
+ 
+\begin{figure}[htbp]
+  \begin{center}
+    \mbox{
+      \begin{minipage}{\textwidth}
+           \begin{tabbing}\=nn\=\kill
+	   \input{b_sel.tex}
+           \end{tabbing}
+      \end{minipage}
+    }
+    \caption{\label{SelektionBsp} Beispiel: Zugriff auf Objekte eines Teilnetzes}
+  \end{center}
+\end{figure}
+
+In diesem Beispiel soll der Name einer Zelle einer {\bf
+string}-Variablen\index{string} zugewiesen werden. Die Datei
+``SubNet.n'' enth"alt ein {\bf Nessus}-Programm, das ein Netz
+definiert. Dieses Netz wird als Teilnetz in ``selectionBsp'' eingebaut
+und erh"alt den logischen Namen ``subId''.
+
+Damit der Selektionsausdruck\index{Selektion} in dem Beispiel
+semantisch korrekt ist, mu"s ``subId'' folgende Bedingungen erf"ullen:
+\begin{itemize}
+  \item In ``subId'' gibt es eine Struktur\index{Struktur!in Teilnetz} von Zellen, die in dem Programm, das ``subId'' definiert,
+	mit ``unitSet'' bezeichnet wird.
+  \item Diese Struktur\index{Struktur!in Teilnetz} ``unitSet'' besteht aus mindestens 84 Zellen.
+\end{itemize}
+
+Das Beispiel zeigt auch, da"s Selektion\index{Selektion} und die
+Auswahl eines Feldelements\index{Feldelement!Auswahl} gleich stark
+binden.\index{Bindung}\index{Vorrang} Gemischte Ausdr"ucke wie der des
+Beispiels werden strikt von links nach rechts bewertet.
+
+
+
+\subsubsection{Sites von Teilnetzen}\index{Teilnetz!Sites}
+\label{subnetsites}
+
+Die Unabh"angigkeit der Bezeichner\index{Bezeichner} verschiedener
+{\bf Nessus}-Programme endet da, wo die Namen auch f"ur die
+Simulation durch SNNS eine Rolle spielen. SNNS sieht -- im Gegensatz
+zu {\bf Nessus} nicht den Typ einer Site, sondern nur den Namen dieser
+Site.  Das f"uhrt zu der folgenden Konsequenz: Auch "uber verschiedene
+{\bf Nessus}-Programme hinweg mu"s -- sobald die Netze verkn"upft
+werden -- die Zuordnung ``Sitename'' auf ``Sitefunktion'' eindeutig
+sein. Es ist also genauso wie in einem einzelnen Programm nicht
+erlaubt, zwei Sitetypen mit demselben Sitenamen aber mit verschiedenen
+Sitefunktionen zu definieren.
+
+{\bf Verboten} ist demnach 
+  \begin{center}
+    \mbox{
+      \begin{minipage}{\textwidth}
+           \begin{tabbing}\=nn\=\kill
+	   {\bf network} mainNet{\bf ();} \\
+	   {\bf ~~typedef} \\
+	   ~~~~{\bf site with name} "`uniqueSite"`{\bf,~sitefunc}~mainFunc{\bf~:~}mainSite{\bf ;} \\
+	   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~{\bf \ldots} \\[.5cm]
+	   {\bf network} subNet{\bf ();} \\
+	   {\bf ~~typedef} \\
+	   ~~~~{\bf site with name} "`uniqueSite"'{\bf ,~sitefunc}~newSiteFunc{\bf ~:~}subNetSite{\bf ;}
+	   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~{\bf \ldots} \\
+           \end{tabbing}
+      \end{minipage}
+    }
+  \end{center}
+
+
+
+
+\section{Numerische Funktionen}
+
+Die in {\bf Nessus} verf"ugbaren Funktionen eines Arguments sind alle
+numerisch, die einer Argumentliste bilden eine Liste von Argumenten
+auf ein Ergebnis des Typs ``simple\_type'' ab.
+\index{Ausdruck!Funktion}
+
+\begin{center}
+\fbox{
+\begin{minipage}{\textwidth}
+{\footnotesize
+\begin{center}
+\begin{eqnarray}
+  \mbox{function\_expression} & ::= & \mbox{simple\_function} \nonumber\\
+          &  |  &  \mbox{list\_function} \label{syfunctionexpression}\\[.3 cm]
+  \mbox{simple\_function} & ::= & \mbox{simple\_func\_key {\bf (} expression {\bf )}}
+		\label{sysimplefunction}\\[.3 cm] 
+  \mbox{simple\_func\_key} & ::= & \mbox{{\bf sin}\index{sin} $|$ {\bf cos}\index{cos} $|$
+		{\bf arctan}}\index{arctan} \nonumber\\ 
+          &  |  & \mbox{{\bf exp}\index{exp} $|$ {\bf ln}\index{ln} $|$ {\bf
+		sqr}\index{sqr} $|$ {\bf sqrt}}\index{sqrt} \label{sysimplefunckey}\\
+		\nonumber\index{Funktion!sin} \index{Funktion!cos}\index{Funktion!arctan}  
+\end{eqnarray}
+\end{center}
+}
+\end{minipage}
+}
+\end{center}
+
+Die verf"ugbaren trigonometrischen Funktionen sind {\bf sin}, {\bf
+cos} und {\bf arctan}.  Das Argument dieser Funktionen kann
+ganzzahlig\index{Zahl!ganze!als Funktionsargument} oder rational sein.
+Der Ergebnistyp dieser Funktionen \index{Ausdruck!Funktion} ist immer
+{\bf float}.\index{float}
+
+Au"serdem gibt es noch die transzendenten Funktionen {\bf exp}, {\bf
+ln}, {\bf sqr} und {\bf sqrt}. Auch die Argumente dieser Funktionen
+k"onnen ganzzahlig oder rational sein.  Der Ergebnistyp von {\bf exp},
+{\bf ln}\index{ln} und {\bf sqrt}\index{sqrt} ist immer vom Typ {\bf
+float}.\index{float} Der Ergebnistyp der Quadratfunktion {\bf
+sqr}\index{sqr} ist der Typ des Arguments.
+
+
+\section{Listenfunktionen}
+
+Es gibt in {\bf Nessus} zwei  Listenfunktionen, die aus einer Liste
+mehrerer Argumente eines ausw"ahlen und als Ergebnis liefern. Dies sind
+
+\begin{itemize}
+  \item die Minimumfunktion und
+  \item die Maximumfunktion.
+\end{itemize}  \index{Ausdruck!Funktion}
+Regel~\ref{sylistfunction} zeigt die Syntax dieser Listenfunktionen.
+
+\begin{center}
+\fbox{
+\begin{minipage}{\textwidth}
+{\footnotesize
+\begin{center}
+\begin{eqnarray}
+  \mbox{list\_function} & ::= & \mbox{list\_func\_key {\bf (} expression\_list {\bf )}} \label{sylistfunction}\\[.3 cm]
+  \mbox{list\_func\_key} & ::= & \mbox{{\bf min}\index{min} $|$ {\bf max}\index{max}} \label{sylistfunckey} \\ \nonumber\index{Funktion!exp} \index{Funktion!ln} \index{Funktion!sqr} \index{Funktion!sqrt}
+		\index{Funktion!sin} \index{Funktion!cos}\index{Funktion!arctan} \index{Funktion!min} \index{Funktion!max}
+\end{eqnarray}
+\end{center}
+}
+\end{minipage}
+}
+\end{center}
+
+Die Syntax von ``expression\_list'' wurde schon in
+Regel~\ref{syexprlist} beschrieben. Es gelten f"ur die Liste der
+Argumente die folgenden semantischen Bedingungen:
+
+\begin{itemize}
+  \item Die Argumente der Funktionen {\bf min} oder {\bf max} m"ussen von einem Datentyp sein, auf
+	dem eine Ordnung definiert ist. Dies ist auf den Typen
+	\begin{itemize}
+	  \item {\bf int},
+	  \item {\bf float} und \index{Funktion!min} \index{Funktion!max}
+	  \item der in Abschnitt~\ref{Zeichenketten}\index{Zeichenkette!Funktion concat} definierten Untermenge von {\bf string}
+	\end{itemize}
+	der Fall.
+  \item Diese Funktionen k"onnen auch auf ein Feld eines  ad"aquaten Datentyps
+	angewendet werden. In diesem Fall enth"alt ``expression\_list'' genau ein Argument, n"amlich
+	den Bezeichner\index{Bezeichner} des Felds.   \index{Ausdruck!Funktion}
+\end{itemize}
+
+
+Boolesch-wertige Ausdr"ucke erh"alt man durch den Vergleich einfacher
+Ausdr"ucke, wie sie in Kapitel~\ref{EinfacheAusdruecke} beschrieben
+worden sind. Diese Ausdr"ucke k"onnen dann untereinander wieder mit
+logischen Operatoren verkn"upft werden. Au"serdem gibt es zwei
+logische Funktionen, die eine Liste logischer Ausdr"ucke evaluieren.
+\index{Ausdruck!logischer}
+
+Syntaxregel~\ref{sylogicalexpr} zeigt den Aufbau eines logischen
+Ausdrucks. ``boolean\_expr'' bezeichnet boolesch-wertige
+Vergleichsausdr"ucke. Die Syntaxregeln spiegeln auch die
+unterschiedliche Bindung der logischen Operatoren wieder. Operatoren
+gleicher Bindung sind linksassoziativ.
+
+\begin{center}
+\fbox{
+\begin{minipage}{\textwidth}
+{\small
+\begin{center}
+\begin{eqnarray}
+  \mbox{logical\_expr} & ::= & \mbox{logical\_expr {\bf or}\index{or} logical\_term} \nonumber\\
+                       &  |  & \mbox{logical\_term} \label{sylogicalexpr}\\[.3 cm]
+  \mbox{logical\_term} & ::= & \mbox{logical\_term {\bf and}\index{and} logical\_factor} \nonumber\\
+                       &  |  & \mbox{logical\_factor} \label{sylogicalterm}\\[.3 cm]
+  \mbox{logical\_factor} & ::= & \mbox{{\bf not}\index{not} logical\_factor} \nonumber\\
+                       &  |  & \mbox{logical\_function} \nonumber\\
+                       &  |  & \mbox{{\bf (} logical\_expr {\bf )}} \nonumber\\
+                       &  |  & \mbox{boolean\_expr} \label{sylogicalvar}\\ \nonumber
+\end{eqnarray}
+\end{center}  \index{Ausdruck!logischer}
+}
+\end{minipage}
+}
+\end{center}
+
+Ein boolesch-wertiger Ausdruck ist ein Vergleich zweier einfacher
+Ausdr"ucke. Die Vergleichsoperatoren sind nicht assoziativ. Das geht
+auch aus Syntaxregel~\ref{sybooleanexpr} hervor.
+\index{Ausdruck!boolesch-wertiger}
+
+\begin{center}
+\fbox{
+\begin{minipage}{\textwidth}
+{\small
+\begin{center}
+\begin{eqnarray}
+  \mbox{boolean\_expr} & ::= & \mbox{comparison\_expression} \nonumber\\
+          &  |  &  \mbox{inclusion\_expression}  \nonumber\\
+          &  |  &  \mbox{relation\_expression} 	\label{sybooleanexpr}\\[.3cm]
+  \mbox{comparison\_expression} & ::= & \mbox{expression relational\_oper expression} \label{sycomparisonexpression}\\[.3cm]
+  \mbox{relational\_oper} & ::= & \mbox{$>$} \; \; | \; \;  \mbox{$>=$} \nonumber \\
+          &  |  &  \mbox{$<$} \; \; |  \; \; \mbox{$<=$} \nonumber\\
+          &  |  &  \mbox{$=$} \; \; | \; \; \mbox{$<>$} \label{syrelationaloper} \\ \nonumber
+\end{eqnarray}
+\end{center}
+}
+\end{minipage}
+}
+\end{center}
+
+Dabei bedeutet
+\begin{itemize} \index{Ausdruck!boolesch-wertiger}
+  \item ``comparison\_expression'' den  Vergleich zweier einfacher Ausdr"ucke,
+  \item ``inclusion\_expression''  die Abfrage, ob der Wert eines einfachen Ausdrucks Element eines
+	Felds ist, und 
+  \item ``relation\_expression''\index{Relation!Abfrage} die Abfrage, ob durch eine {\bf map}-Konstante\index{Konstante!Relation!Verwendung}\index{Konstante!Relation!in logischem Ausdruck} eine Relation\index{Relation!in logischem Ausdruck} zwischen
+	den Werten zweier einfacher Ausdr"ucke definiert wird.
+\end{itemize}
+Die Syntax von ``expression'' wurde in Kapitel~\ref{EinfacheAusdruecke}
+(Syntaxregel~\ref{syexpression}) beschrieben. 
+ \index{Ausdruck!boolesch-wertiger}
+
+
+\section{Vergleich}
+
+Die Ausdr"ucke, die miteinander verglichen werden sollen, m"ussen vom
+gleichen Datentyp sein. Das gilt auch f"ur numerische Ausdr"ucke. Ein
+Vergleich von Ausdr"ucken des Typs {\bf int}\index{int} mit solchen
+des Typs {\bf float}\index{float} ist nicht zul"assig.
+
+Au"ser numerischen Ausdr"ucken k"onnen noch
+Zeichenketten\index{Zeichenkette!Vergleich} miteinander verglichen
+werden, die nur aus Zeichen bestehen, auf denen die
+lexikalische\index{Reihenfolge!lexikalische}\index{lexikalische
+Reihenfolge} Reihenfolge aus Abschnitt~\ref{Zeichenketten} definiert
+ist.
+
+Ausdr"ucke anderer Datentypen, zum Beispiel Zellen, d"urfen nicht
+miteinander verglichen werden, da auf diesen Typen keine Ordnung
+definiert ist. \index{Ausdruck!boolesch-wertiger}
+\index{Ausdruck!Vergleich}
+
+
+
+
+
+\section{Mengeninklusion}
+\index{Inklusion}
+
+
+
+\begin{center}
+\fbox{
+\begin{minipage}{\textwidth}
+{\small
+\begin{center}
+\begin{eqnarray}
+  \mbox{inclusion\_expression}   & ::= &  \mbox{expression {\bf in}\index{in} element\_group} 
+							\label{syinclusionexpression}\\ \nonumber
+\end{eqnarray}
+\end{center}
+}
+\end{minipage}
+}
+\end{center}
+
+Ein Ausdruck ``expr$_{1}$'' {\bf in}\index{in} ``expr$_{2}$'' ist
+genau dann wahr, wenn ``expr$_{1}$'' Element der Elementliste bzw. des
+Felds ``expr$_{2}$'' ist. Die Syntax von ``element\_group'' ist in
+Regel~\ref{syelementgroup} dargestellt.
+
+Man beachte aber, da"s ``expr$_{1}$'' auf jeden Fall vom
+Basisdatentyp, das hei"st, vom Typ der Elemente von ``expr$_{2}$''
+sein mu"s -- sonst liefert der Ausdruck nicht etwa ``falsch'' sondern
+einen Typfehler.  \index{Ausdruck!boolesch-wertiger}
+\index{Ausdruck!Inklusion}
+
+
+\section{Relation}
+
+
+\begin{center}
+\fbox{
+\begin{minipage}{\textwidth}
+{\small
+\begin{center}
+\begin{eqnarray}
+  \mbox{relation\_expression} & ::= & \mbox{{\bf (} expression, expression {\bf )} {\bf in}\index{in} element\_group} 
+          						 \label{syrelationexpression}\\ \nonumber
+\end{eqnarray}
+\end{center} \index{Ausdruck!boolesch-wertiger} \index{Ausdruck!Relation} 
+}
+\end{minipage}
+}
+\end{center}
+
+\label{mapcond} Die Regel~\ref{syrelationexpression} definiert die
+Syntax einer Abfrage, ob die durch eine {\bf map}-Konstante
+\index{map} \index{Konstante!Relation!Verwendung}
+\index{Konstante!Relation!in logischem Ausdruck}
+\index{Relation!Verwendung} \index{Relation!Abfrage} definierte
+Relation f"ur ein Paar von Werten einfacher Ausdr"ucke existiert oder
+nicht. Es ist
+
+\centerline{{\bf (} expr$_{1}$, expr$_{2}$ {\bf )} {\bf in}\index{in} mapExpr $\Longleftrightarrow$ expr$_{1}$ mapExpr
+expr$_{2}$ gilt.} \index{Ausdruck!boolesch-wertiger}
+
+``element\_group'' mu"s in diesem Fall 
+
+\begin{itemize}
+  \item entweder der Bezeichner\index{Bezeichner} einer {\bf map}-Konstanten\index{map} oder
+  \item ein Bereich von Zeilen einer {\bf map}-Konstanten\index{map} sein.
+\end{itemize}
+
+Ein Bereich\index{Bereich!von Zeilen einer Relation} von Zeilen einer
+{\bf map}-Konstanten \index{map}
+\index{Konstante!Relation!Zeilenbereich} wird nach der
+Syntaxregel~\ref{syfieldrange} angegeben, das hei"st, nach dem
+Bezeichner der {\bf map}-Konstanten\index{map} gibt man in eckigen
+Klammern den Bereich der Zeilen an, auf die die
+Relation\index{Relation} eingeschr"ankt werden soll.
+\index{Ausdruck!Relation}
+
+
+\section{Variablendeklarationen}
+\label{Variablendeklaration}
+\label{Variablendeklarationen}
+
+Variablen\index{Variable} m"ussen in {\bf Nessus} deklariert werden.
+Dies geschieht in einem Block von Deklarationen, der auf den
+Strukturdefinitionsblock\index{Struktur!vs. Variable} folgt, aber auch
+entfallen kann.  Syntaxregel~\ref{syvarblock} zeigt den Aufbau des
+Deklarationsteils.
+
+\begin{center}
+\fbox{
+\begin{minipage}{\textwidth}
+{\footnotesize
+\begin{center}
+\begin{eqnarray}
+  \mbox{var\_block} & ::= & \mbox{{\bf var}\index{var} variable\_declaration\index{Variable}}  \nonumber\\
+                        &     & \mbox{\{ variable\_declaration \}} \label{syvarblock}\\[.3 cm]
+  \mbox{variable\_declaration}\index{Variable} & ::= & \mbox{variable\_type {\bf ~:~} identifier\_list {\bf ~;} }
+                                       \label{syvariabledeclaration}\\[.3 cm]
+  \mbox{variable\_type}\index{Variable} & ::= & \mbox{singular\_type } \nonumber\\
+                        &  |  & \mbox{{\bf array of} array\_var\_type } \label{syvariabletype}\\[.3 cm]
+  \mbox{array\_var\_type}\index{Variable} & ::= & \mbox{{\bf structure}\index{unit} } \nonumber\\
+                        &  |  & \mbox{singular\_type} \label{syarrayvartype}\\[.3 cm]
+  \mbox{singular\_type}\index{Variable} & ::=  & \mbox{{\bf unit}\index{unit} } \nonumber\\
+                        &  |  & \mbox{simple\_type} \label{sysingulartype}\\ \nonumber
+\end{eqnarray}
+\end{center}
+}
+\end{minipage}
+}
+\end{center}
+
+Wird eine Variable vom Typ {\bf unit}, {\bf array of unit} oder {\bf
+array of structure} deklariert, so entstehen dadurch keine
+eigenst"andigen Zellen, die in das Netz "ubernommen werden. Solche
+Zellen k"onnen nur bereits definierte Strukturen oder Zellen als Wert
+annehmen.
+
+Hinter ``simple\_type'' verbergen sich (siehe
+Syntaxregel~\ref{sysimpletype}) die einfachen Datentypen
+	\begin{itemize}
+	  \item {\bf int},\index{int}
+	  \item {\bf float}\index{float} und
+	  \item {\bf string}.\index{string}
+	\end{itemize}
+
+

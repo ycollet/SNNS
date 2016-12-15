@@ -1,0 +1,45 @@
+% Dies ist ein Template f"ur den Style `diplomtitel'.
+%
+% erzeugt das Titelblatt und die Versicherung f"ur Diplom- oder
+% Studienarbeiten,
+% l"adt automatisch die Style Options `german' und `DIN A4'
+%
+\documentstyle[11pt]{diplomtitel}
+
+% Die folgenden neun Angaben, au"ser \art und \institut, m"ussen immer
+% angegeben werden.  Mehrere Zeilen werden mit \\ getrennt.
+%
+\pruefer{Prof.~P.~Levi}
+\betreuer{Dipl.~Inf.~H.~Bayer}
+
+\begonnen{4.~Januar~1993}
+\beendet{18.~Juli~1993}
+
+\titel{\Large Entwurf und Implementierung eines Visualisierungs-,
+Konvertierungs- und Manipulationsprogramms f"ur Trainings- und 
+Testdaten Neuronaler Netze}
+\autor{R.~Schmelzle}
+%\autor{C.~O.~Autor}  % bei zwei Autoren
+
+\art{Studien}   %% Default ist \art{Diplom}, also eine Diplomarbeit
+\nummer{1241}  % Nummer der Studienarbeit
+
+\institut\ipvr %% Default ist \institut\ifi
+          %% Andere Institutsnamen werden direkt mit \institut{ ... }
+          %% angegeben, Zeilen werden mittels \\ getrennt.
+
+%% Mehrere CR-Klassifikationen einfach mit \crt{..} aufzaehlen
+%% (optional).
+%
+\crk{I.5.m}%\crk{D.3.4}\crk{E.2.0}\crk{A.3.4}
+
+%% F"ur Leute mit asugefallenem Geschmack kann der Titel/Autor-Kasten
+%% eingerahmt werden. Default ist keine Umrandung.
+%
+%\umrandet
+
+
+%% `maketitle' erzeugt automatisch die beiden Bl"atter und enth"alt
+%% schon \begin{document} und \end{document}
+%
+\maketitle

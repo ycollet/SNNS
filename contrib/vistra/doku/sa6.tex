@@ -1,0 +1,524 @@
+\section{Hinzuf"ugen neuer ASCII-Formate f"ur Vektordateien}
+\label{fdl}
+
+Vistra kann um benutzerdefinierte ASCII-Formate f"ur 
+Trainingsvektor-Dateien erweitert werden.
+Dazu sind folgende drei Schritte notwendig:
+
+\begin{enumerate}
+\item Erzeugen einer ASCII-Datei, die das neue Format in der 
+Formatbeschreibungssprache FDL definiert.
+Der Name dieser Datei mu"s auf {\tt .fmt} enden.
+\item Kopieren der FDL-Datei in das Verzeichnis, das durch die 
+Environment-Variable VISTRAFORMATS gegeben ist.
+\item Neustarten von Vistra, um das neue Format einzubinden.
+\end{enumerate}
+
+\subsection{Die Formatbeschreibungssprache FDL}
+
+Die Beschreibung eines Formats in FDL "ahnelt von der Struktur her 
+einer Auspr"agung dieses Formats.
+
+Der erste Unterschied besteht jedoch darin, da"s in der FDL-Beschreibung Angaben
+"uber Dimensionen, die Anzahl der Vektoren etc. durch bestimmte
+Steuersymbole, den sogenannten {\it Deskriptoren}, ersetzt werden.
+Auch f"ur Klassensymbole, Eingabe- und Ausgabevektoren existieren
+entsprechende Deskriptoren. \\ 
+Der zweite Unterschied ist, da"s Wiederholungen (z.B.~eine Aufz"ahlung
+aller Eingabevektoren) durch Schleifenkonstrukte dargestellt werden.
+
+Zur Veranschaulichung soll eine FDL-Beschreibung des LVQ-Formats dienen.
+Vistra be\-n"o\-tigt zwar keine FDL-Beschreibung dieses Standard-Formats, da
+Lese- und Schreibroutinen festcodiert vorliegen.
+Als einf"uhrendes Beispiel f"ur FDL ist sie jedoch sehr geeignet.   
+
+\subsubsection*{Beispiel~1: FDL-Spezifikation des LVQ-Formats}
+\begin{samepage} Eine FDL-Beschreibung des LVQ-Formats lautet:
+\begin{verbatim}
+%e <
+{ %i %c < }
+\end{verbatim}  
+\end{samepage}
+Die erste Zeile enth"alt zwei Deskriptoren.
+{\tt \%e} gibt an, da"s an dieser Stelle die Dimensionalit"at der 
+Eingabevektoren erscheint.
+Der zweite Deskriptor {\tt <} bedeutet "`new-line"', d.h. "uberall wo
+dieser Deskriptor auftaucht mu"s in der Vektor-Datei eine neue Zeile
+beginnen.
+
+Die zweite Zeile der obigen FDL-Beschreibung enth"alt eine 
+{\it repetition}-Schleife.
+Anfang bzw. Ende der Schleife sind durch {\tt \{} bzw. {\tt \}} markiert.
+Der Rumpf besteht aus einer Liste von einem oder mehreren Deskriptoren,
+in diesem Fall aus den Deskriptoren {\tt \%i}, {\tt \%c} und {\tt <}.  
+Das {\it repetition}-Konstrukt repr"asentiert eine null- oder mehrmalige
+Wiederholung der Deskriptoren innerhalb des Rumpfs.
+Im Beispiel bedeutet dies, da"s in der Vektor-Datei zun"achst der
+erste Eingabevektor gefolgt vom zugeh"origen Klassensymbol erscheint,
+anschlie"send der zweite Eingabevektor mit zugeh"origem Klassensymbol
+usw. 
+Nach jedem Klassensymbol mu"s eine neue Zeile begonnen werden.
+
+Neben Deskriptoren und {\it repetition}-Schleifen gibt es als letztes
+FDL-Sprachmittel noch die sogenannten {\it matchOne}-Schleifen.
+Eine {\it matchOne}-Schleife steht f"ur das null- oder mehrmalige
+Ausw"ahlen einer Alternative.
+Sie wird durch die Zeichen {\tt [} und {\tt ]} begrenzt und enth"alt im 
+Rumpf eine oder mehrere Listen von Deskriptoren, die die
+verschiedenen Alternativen darstellen und durch {\tt |} getrennt sind.
+Die {\it matchOne}-Schleife wird verst"andlicher, wenn man sich ein
+Beispiel ansieht.
+
+\subsubsection*{Beispiel~2:}
+Folgendes Format f"ur eine Vektor-Datei w"are denkbar:
+\begin{itemize}
+\item jede Zeile enth"alt einen Eingabevektor, einen Ausgabevektor oder
+einfach einen Kommentar
+\item eine Zeile, die einen Eingabevektor enth"alt, beginnt mit {\tt input:}
+und wird gefolgt von den Vektorelementen
+\item bei Ausgabevektoren beginnt die Zeile mit {\tt output:}
+\item es spielt keine Rolle, ob zuerst die Eingabevektoren oder die
+Ausgabevektoren erscheinen. 
+Ein- und Ausgabevektoren d"urfen auch beliebig abwechseln.
+\end{itemize}  
+\begin{samepage}
+Das Format w"urde in FDL wie folgt aussehen:
+\begin{verbatim}
+[ input:  %i < | 
+  output: %o < | 
+  * 
+]
+\end{verbatim}
+\end{samepage}
+Der {\tt *} ist ein Deskriptor, der f"ur einen beliebigen String bis
+einschlie"slich dem
+n"achsten {\it new-line}-Zeichen steht und im Beispiel~2 somit die
+Kommentar-Zeilen repr"asentiert. \\
+{\tt \%o} repr"asentiert einen Ausgabevektor. 
+
+Folgende Vektor-Dateien des xor-Problems w"aren zul"assige
+Auspr"agungen des Bei\-spiel-Formats~2:
+
+\nopagebreak
+\parbox[t]{6cm}{
+{\sl Auspr"agung~1} \\[1ex]
+{\tt Ausgabe-Muster \\
+output: 0 \\
+output: 1 \\
+output: 1 \\
+output: 0.0 \\ 
+\\
+Eingabe-Muster \\
+input: 0.0 0.0 \\
+input: 0 1 \\
+input: 1.0 0 \\
+und noch eins... \\
+input: 1 1 }} 
+\parbox[t]{6cm}{{\sl Auspr"agung~2} \\[1ex] 
+{\tt die ersten 2 abwechselnd \\
+input:   0  0 \\
+output:  0 \\
+input:   0  1 \\
+output:  1 \\
+die letzten 2 getrennt \\
+input:   1  0 \\
+input:   1  1 \\
+output:  1 \\
+output:  0 }
+}
+
+Bei der {\it matchOne}-Schleife ist zu beachten, da"s Vistra beim
+Einlesen die Alternativen des Rumpfs in der Reihenfolge durchprobiert,
+in der sie angegeben sind.
+Ein {\tt *}, der eine Kommentarzeile repr"asentiert, sollte daher
+stets die letzte Alternative darstellen, da dieser Deskriptor auf
+jede Zeile der Vektordatei pa"st.
+Im obigen Beispiel w"urden folglich auch die Zeilen mit den Vektoren
+als Kommentarzeilen betrachtet und einfach "uberlesen werden.
+
+\subsubsection*{Beispiel~3: das PAT-Format}
+
+Als weiteres Beispiel dient ein Format, das vom SNNS (Stuttgarter
+Neuronale Netze Simulator) der Universit"at Stuttgart f"ur die 
+Trainingsvektoren verwendet wird. \\
+Das PAT-Format kann textuell folgenderma"sen beschrieben werden:
+
+\nopagebreak
+\begin{itemize}
+\item die Datei gliedert sich in einen Kopf und einen Rumpf
+\item die ersten zwei Zeilen des Kopfs k"onnten wie folgt aussehen:
+\begin{verbatim}
+SNNS pattern definition file V1.4 
+generated at Mon May 13 10:22:34 1993 
+\end{verbatim}
+Die erste Zeile enth"alt eine SNNS-Kennung plus Versionsnummer.
+Die zweite Zeile gibt Datum und Uhrzeit an, zu der die Vektordatei
+erzeugt wurde. 
+\item Anschlie"send kann der Kopf folgende drei Muster enthalten:
+\begin{itemize}
+\item {\tt No. of patterns :} {\it numberOfPatterns}
+\item {\tt No. of input units :} {\it inputDimension}
+\item {\tt No. of output units :} {\it outputDimension}
+\end{itemize} 
+Dabei stehen die kursiv gedruckten W"orter f"ur Zahlen der 
+entsprechenden Bedeutung.
+\item der Rumpf besteht aus {\it numberOfPatterns} Bl"ocken der 
+folgenden Form:
+\begin{itemize}
+\item ein Kommentar, der mit {\tt \#} beginnt
+\item eine Zeile mit {\it inputDimension} Werten, die die Elemente
+eines Eingabevektors darstellen 
+\item eine Zeile mit {\it outputDimension} Werten, die die Elemente
+des zugeh"origen Ausgabevektors darstellen 
+\end{itemize}
+\end{itemize}
+
+Das xor-Problem k"onnte im PAT-Format wie folgt aussehen:
+
+\nopagebreak
+\begin{verbatim}
+SNNS pattern definition file V1.4 
+generated at Mon May 13 10:22:34 1993 
+
+No. of patterns : 4
+No. of input units : 2
+No. of output units : 1
+#1
+0 0
+0
+#2
+0 1
+1
+#3
+1.0 0.0
+1.0
+#4
+1 1
+0
+\end{verbatim}
+
+Folgende Beschreibung in FDL w"are m"oglich:
+
+\nopagebreak
+\begin{verbatim}
+SNNS pattern definition file V1.4 * 
+generated at * \
+[ No. of patterns : %n \ |
+  No. of input units : %e \ |
+  No. of output units : %a \ |
+  *
+]
+{ #* 
+  %i %o <
+}
+\end{verbatim}
+
+Obige Beschreibung l"a"st durch den Deskriptor {\tt *} zu, da"s hinter
+der Versionsnummer in der ersten Zeile noch weitere Zeichen stehen d"urfen.
+Der {\tt *} in der zweiten Zeile ersetzt das Datum und die Uhrzeit.
+Dabei wurde der Umstand ausgen"utzt, da"s der SNNS die Uhrzeit 
+beim Einlesen von PAT-Dateien einfach ignoriert.
+Eine Vektordatei, die durch Vistra mithilfe der obigen FDL-Spezifikation
+geschrieben wird, kann aus diesem Grund auch ohne Zeitangabe vom SNNS
+korrekt eingelesen werden.  
+
+Desweiteren enth"alt obige FDL-Beschreibung von PAT zwei Deskriptoren, die
+noch nicht erl"autert wurden.
+{\tt \%n} repr"asentiert eine ganze Zahl $\geq 1$, die die Anzahl der 
+Trainingsvektoren angibt, die in der Vektor-Datei enthalten sind.
+
+Zur Erl"auterung des Deskriptors {\tt $\backslash$}, 
+mu"s man mehr
+"uber die Verwendung der FDL-Be\-schreib\-ungen durch Vistra wissen. \\
+Vistra benutzt die FDL-Spezifikationen von Formaten sowohl zum Lesen
+als auch zum Schreiben von Vektor-Dateien im betreffenden Format.
+Dabei wird jeder Deskriptor bzw. jede Schleife als Anweisung f"ur
+einen Interpreter betrachtet.
+Es existiert jeweils ein Interpreter f"ur das Schreiben und f"ur das Lesen.
+Je nach Deskriptor f"uhren die Interpreter unterschiedliche Aktionen 
+auf der zu lesenden bzw. zu schreibenden Vektor-Datei aus.
+
+Der Deskriptor {\tt $\backslash$} wird beim Lesen von Vektor-Dateien ignoriert.
+Er stellt lediglich beim Schreiben eine Anweisung f"ur den Interpreter
+dar.
+Sie lautet: "`beginne eine neue Zeile"'.
+Der Deskriptor {\tt <} hat beim Schreiben einer Datei genau die gleiche
+Wirkung, im Gegensatz zu {\tt $\backslash$} jedoch auch beim Lesen 
+eine Bedeutung, 
+die wie folgt lautet: "`teste, ob das n"achste Wort in einer neuen Zeile
+beginnt; falls nicht, erzeuge einen Fehler"'.
+
+\subsection{Die Syntax von FDL}
+
+Die Syntax von FDL kann in BNF-Notation wie folgt beschrieben werden:
+
+\begin{tabular}[t]{lll}
+{\it fdl\_description} & ::= & {\it stmt\_list} \\
+{\it stmt\_list} & ::= & {\it fdl\_stmt stmt\_list} $|$ {\it fdl\_stmt} \\
+{\it fdl\_stmt} & ::= & {\it descriptor\_list $|$ matchOne\_loop $|$
+repetition\_loop} \\
+{\it repetition\_loop} & ::= & {\bf '\{'} {\it descriptor\_list} {\bf '\}'} \\
+{\it matchOne\_loop} & ::= & {\bf '['} {\it alternatives} {\bf ']'} \\
+{\it alternatives} & ::= & {\it descriptor\_list} {\bf '$|$'} 
+            {\it alternatives} $|$ {\it descriptor\_list} \\
+{\it descriptor\_list} & ::= & {\it descriptor descriptor\_list} $|$
+            {\it descriptor} \\
+{\it descriptor} & ::= & {\it any\_string} $|$ {\bf '?'} $|$ {\bf '*'} $|$
+            {\bf '$<$'} $|$ {\bf '$\backslash$'} $|$ \\ 
+& &         {\bf '\%e'} $|$ {\bf '\%E'} $|$ {\bf '\%a'} $|$ {\bf '\%A'} $|$ \\
+& &         {\bf '\%i'} $|$ {\bf '\%I'} $|$ {\bf '\%o'} $|$ {\bf '\%O'} $|$ \\
+& &         {\bf '\%c'} $|$ {\bf '\%C'} $|$ {\bf '\%n'} $|$ {\bf '\%N'}
+\end{tabular}
+       
+Die Terminale dieser Grammatik sind fettgedruckt.
+Um sie besser von den Nichtterminalen in obiger Grammatik zu unterscheiden,
+wurden sie zus"atzlich in einfache Anf"uhrungszeichen eingeschlossen, die
+jedoch in einer FDL-Beschreibung wegzulassen sind.
+
+\begin{sloppypar}
+Eine FDL-Beschreibung besteht aus einer Liste von Deskriptoren, 
+{\it repetition-} und {\it matchOne-}Schleifen, wobei die Schleifen
+nicht geschachtelt werden d"urfen.
+Die Terminale der Grammatik k"onnen durch null oder mehrere Blanks, 
+Tabulatoren oder Newlines getrennt sein.
+\end{sloppypar}
+
+Das Nichtterminal {\it any\_string} steht f"ur einen beliebigen String,
+der kein Terminal enth"alt.
+Soll ein String ein Zeichen enthalten, das ein Terminal der Grammatik
+ist, so mu"s diesem ein {\tt \%}-Zeichen vorangestellt werden, damit es nicht
+als Grammatik-Symbol fehlinterpretiert wird.
+
+\begin{samepage} Hier die Liste aller Zeichenkombinationen, 
+die die Terminale der Grammatik als einfaches Textzeichen repr"asentieren:
+\begin{verbatim}
+%{ = {   %} = }   %[ = [   %| = |   %] = ] 
+%? = ?   %* = *   %< = <   %\ = \   %% = % 
+\end{verbatim}    
+\end{samepage}
+
+\subsection{Zusammenfassung der Deskriptoren}
+
+Tabelle~\ref{descriptors} enth"alt eine vollst"andige Liste aller 
+FDL-Deskriptoren.
+
+\begin{table}[thb]
+\begin{tabular}{l|p{5.8cm}|p{5.8cm}}
+{\bf Deskriptor} & {\bf steht f"ur\ldots} & {\bf geschrieben wird\ldots} \\
+\hline
+{\it any\_string} & {\it any\_string} & {\it any\_string} \\
+{\tt ?} & ein beliebiges Wort &
+'? ' \\
+{\tt *} & alle Zeichen bis einschlie"slich dem n"achsten Zeilenende & 
+'$\backslash$n' \\
+{\tt <} & ein Zeilenende & '$\backslash$n' \\
+{\tt $\backslash$} & --- (der Deskriptor {\tt $\backslash$} wird beim
+Einlesen ignoriert und hat nur f"ur das Schreiben von 
+Trai\-nings\-vek\-tor-Dateien eine Bedeutung) & '$\backslash$n' \\
+{\tt \%e}, {\tt \%E} & eine ganze Zahl $\geq 1$, die die Dimensionalit"at der
+Ein\-gabe\-vek\-toren spezifiziert & die Dimensionalit"at der 
+Ein\-gabe\-vektoren \\
+{\tt \%a}, {\tt \%A} & eine ganze Zahl $\geq 0$, die die Dimensionalit"at der
+Ausgabevektoren spezifiziert. 0 bedeutet, da"s keine Ausgabevektoren
+existieren. & die Dimensionalit"at der Ausgabevektoren oder '0', falls 
+keine vorhanden \\
+{\tt \%i}, {\tt \%I} & einen Eingabevektor. Die Vektorelemente m"ussen durch
+ein oder mehrere Newlines, Tabulatoren oder Blanks getrennt sein. 
+& ein Eingabevektor \\
+{\tt \%o}, {\tt \%O} & einen Ausgabevektor. Die Vektorelemente m"ussen durch
+ein oder mehrere Newlines, Tabulatoren oder Blanks getrennt sein.
+  & ein Ausgabevektor, falls einer 
+existiert, sonst eine Klassennummer. \\
+{\tt \%c}, {\tt \%C} & ein Wort, das ein Klassensymbol darstellt. &
+ein Klassensymbol, falls eines existiert, sonst eine Klassennummer. \\
+{\tt \%n}, {\tt \%N} & eine ganze Zahl $\geq 1$, die die 
+Anzahl der Trainingsvektoren
+spezifiziert. & die Anzahl der Trainingsvektoren     
+\end{tabular}  
+\caption{\label{descriptors} Die FDL-Deskriptoren}
+\end{table}
+
+Die zweite Spalte der Tabelle gibt an, was durch die jeweiligen Deskriptoren
+repr"asentiert wird.
+Trifft der Interpreter beim Einlesen einer Trainingsvektor-Datei auf
+einen Deskriptor, so wird "uberpr"uft, ob die dem aktuellen Dateizeiger 
+folgenden Zeichen der Vektor-Datei zum Deskriptor passen oder nicht.
+Passen sie, werden diese Zeichen eingelesen und in
+internen Programmvariablen gespeichert (f"ur {\tt \%n} wird z.B. eine
+positive ganze Zahl eingelesen, die die Anzahl der Trainingsvektoren
+spezifiziert und die die weiteren Aktionen des Interpreters beeinflu"st)
+oder die Zeichen werden einfach "uberlesen (z.B. bei {\tt *}).   
+Pa"st der Inhalt der Vektor-Datei nicht zum Deskriptor, so wird
+eine Fehlermeldung generiert, die die darauf hinweist, da"s die einzulesende
+Vektor-Datei ein falsches Format besitzt und die Trainingsvektoren
+nicht eingelesen werden k"onnen.
+
+Die dritte Spalte beschreibt, was beim Schreiben einer Trainingsvektor-Datei
+anstelle eines Deskriptors ausgegeben wird.
+
+Die beiden n"achsten Abschnitte stellen die Vorgehensweise der
+FDL-Interpreter beim Lesen bzw. Schreiben von Trainingsvektor-Dateien
+detailliert dar. 
+
+\newpage
+\subsection{Der Lese-Interpreter}
+
+Wie bereits erw"ahnt, besteht eine FDL-Beschreibung aus einer 
+Folge von {\it Deskriptoren, repetition-}Schleifen und 
+{\it matchOne-}Schleifen.
+Diese FDL-Konstrukte sind als Anweisungen f"ur einen Interpreter 
+zu verstehen, der das Einlesen von Trainingsvektor-Dateien 
+steuert, die in einem benutzerdefinierten Format vorliegen. 
+Abbildung~\ref{lesen} zeigt ein Programmschema, das die Arbeitsweise 
+des Lese-Interpreters vereinfacht darstellt. 
+
+\begin{figure}[ht]
+\centerline{\fbox{\parbox{15cm}{
+{\bf for each} $fdl\_stmt$ {\bf do} \\
+\hspace*{0.5cm} {\bf switch(}$fdl\_stmt${\bf )} \\
+\hspace*{1cm} $fdl\_stmt = desc$: \\
+\hspace*{2cm} {\bf if} Deskriptor $desc$ pa"st auf den 
+Vektordatei-Inhalt {\bf then} \\ 
+\hspace*{2.5cm} lese alle Zeichen ein, die durch den Deskriptor abgedeckt 
+werden \\
+\hspace*{3cm} (siehe Spalte~2 der Tabelle~\ref{descriptors}); \\
+\hspace*{2.5cm} speichere dabei gelesene Vektoren, Dimensionsangaben etc.; \\
+\hspace*{2.5cm} "uberpr"ufe die Konsistenz der Angaben und erzeuge ggf. \\
+\hspace*{3cm} eine Fehlermeldung; \\
+\hspace*{2cm} {\bf else} Fehler \\
+\hspace*{1cm} $fdl\_stmt = \{\ desc_{1}\ desc_{2}\ \ldots\ desc_{n}\ \}$: \\ 
+\hspace*{2cm} $exitLoop$ := FALSE; \\
+\hspace*{2cm} {\bf while not} $exitLoop$ {\bf do} \\
+\hspace*{2.5cm} {\bf if} $desc_{1}$ pa"st auf den Vektordatei-Inhalt
+{\bf then} \\ 
+\hspace*{3cm} lese $desc_{1}, \ldots , desc_{n}$ ein; \\
+\hspace*{3cm} {\bf if} alle Vektoren, Dimensionsangaben oder Klassen 
+eingelesen {\bf then} \\
+\hspace*{3.5cm} $exitLoop$ := TRUE; \\  
+\hspace*{2.5cm} {\bf else} $exitLoop$ := TRUE; \\
+\hspace*{2cm} {\bf endwhile} \\ 
+\hspace*{1cm} $fdl\_stmt = [\ alt_{1}\ |\ alt_{2}\ |\ \ldots\ |\ alt_{n}\ ]$: \\ 
+\hspace*{2cm} {\bf while} der erste Deskriptor hinter der Schleife 
+(also nach '$]$') nicht \\
+\hspace*{2cm} zum Vektordatei-Inhalt pa"st {\bf do} \\
+%\hspace*{2.5cm} $altMatched$ := FALSE; \\
+%\hspace*{2.5cm} $i$ := 1; \\
+%\hspace*{2.5cm} {\bf while not} $altMatched$ {\bf and} $i \leq n$ {\bf do} \\
+\hspace*{2.5cm} vergleiche zuerst $alt_1$, dann $alt_2$ etc. mit dem 
+Vektordatei-Inhalt; \\ 
+\hspace*{2.5cm} lese erste Deskriptor-Liste $alt_i$ ein, die pa"st; \\ 
+\hspace*{2.5cm} {\bf if} keine Alternative pa"st {\bf then} Fehler; \\
+\hspace*{2cm} {\bf endwhile} \\ 
+\hspace*{0.5cm} {\bf endswitch} \\    
+{\bf endfor} \\
+"uberpr"ufe, ob \\
+\hspace*{0.5cm} -- die Vektor-Datei vollst"andig gelesen wurde \\
+\hspace*{0.5cm} -- mindestens ein Eingabevektor gelesen wurde \\
+\hspace*{0.5cm} -- die Angabe "uber die Anzahl der Trainingsvektoren (\%n) mit
+der \\
+\hspace*{1cm} Anzahl gelesener Eingabevektoren "ubereinstimmt \\
+\hspace*{0.5cm} -- Klassensymbole oder Ausgabevektoren gelesen wurden \\
+\hspace*{0.5cm} -- die Anzahl gelesener Klassensymbole bzw. Ausgabevektoren
+mit der Anzahl von \\ 
+\hspace*{1cm} Eingabevektoren "ubereinstimmt 
+(sofern Klassen bzw. Ausgabevektoren vorhanden) \\
+Trifft einer dieser Punkte nicht zu, so erzeuge einen Fehler 
+}}}
+\caption{\label{lesen} Die Arbeitsweise des Lese-Interpreters}
+\end{figure}
+
+Konsistenzpr"ufungen finden nicht nur zum Schlu"s statt, sondern 
+auch w"ahrend des Interpretierens von Deskriptoren, die mit {\tt \%} beginnen.
+Diese Deskriptoren repr"asentieren Daten, die von Vistra intern gespeichert
+werden.
+Wird eine Konsistenzbedingung verletzt, so wird der Lesevorgang abgebrochen
+und eine Fehlermeldung erzeugt, die die Art der Konsistenzverletzung
+spezifiziert und die Zeile in der Trainingsvektor-Datei angibt, in der
+der Fehler festgestellt wurde. 
+
+Beim Interpretieren von {\tt \%e} bzw. {\tt \%a} wird "uberpr"uft, ob die
+Angaben "uber die Dimensionalit"at der Eingabevektoren bzw. der Ausgabevektoren
+mit fr"uher gelesenen Werten f"ur {\tt \%e} bzw. {\tt \%a} "ubereinstimmen.
+Au"serdem werden die Angaben auch noch mit der Dimensionalit"at bereits
+gelesener Eingabe- bzw. Ausgabevektoren verglichen.
+
+Wird "uber {\tt \%n} die Anzahl der Trainingsvektoren eingelesen, so
+wird dieser Wert mit evtl. vorher gemachten Angaben verglichen.
+Au"serdem wird sichergestellt, da"s die Anzahl bisher gelesener 
+Vektoren oder Klassen diesen Wert nicht "ubersteigt.
+
+Beim Einlesen von Vektoren "uber die Deskriptoren {\tt \%i} oder {\tt \%o}
+sind zwei F"alle zu unterscheiden.
+Ist die Dimensionalit"at $d$ der Vektoren bereits bekannt (weil 
+bereits ein entsprechender Vektor gelesen wurde oder bereits eine
+{\tt \%e}- bzw. {\tt \%a}-Angabe gemacht wurde), so werden die n"achsten $d$
+durch Whitespace getrennte Zahlen gelesen.
+Ist die Dimensionalit"at unbekannt, so werden alle aufeinanderfolgenden
+Zahlen der Vektor-Datei gelesen bis eine Zeichenfolge angetroffen wird,
+die keine Zahl darstellt.  
+
+%\newpage
+\subsection{Der Schreib-Interpreter} 
+
+Wie f"ur das Einlesen existiert auch f"ur das Schreiben von Trainingsvektoren
+ein FDL-Interpreter.
+
+Sehr einfach beschrieben, arbeitet der Interpreter wie folgt:
+
+\nopagebreak
+\begin{itemize}
+\item F"ur einen {\it Deskriptor} wird eine Folge von Zeichen in die
+Ausgabedatei geschrieben (siehe dritte Spalte der Tabelle~\ref{descriptors}).
+\item Eine {\it repetition-}Schleife wird solange wiederholt, bis
+kein Deskriptor des Schleifenrumpfs neue Daten mehr liefert.
+Unter neuen Daten sind dabei bisher noch nicht geschriebene Eingabevektoren
+({\tt \%i}), Ausgabevektoren ({\tt \%o}) oder Klassen ({\tt \%c}) zu verstehen 
+bzw. bisher noch nicht 
+geschriebene Angaben "uber die Anzahl von Trainingsvektoren ({\tt \%n}),
+Eingabe-Dimensionen ({\tt \%e}) oder Ausgabe-Dimensionen ({\tt \%a}). 
+\item Eine {\it matchOne-}Schleife wird solange wiederholt, 
+bis in einem Schleifendurchlauf keine Alternative mehr geschrieben wurde.
+Dabei werden die Alternativen (Deskriptor-Listen) in der Reihenfolge, in 
+der sie aufgef"uhrt sind, geschrieben, sofern sie neue Daten liefern.       
+\end{itemize}
+
+Abbildung~\ref{schreiben} enth"alt eine vereinfachte Darstellung der
+Arbeitsweise des Schreib-Inter\-pre\-ters in Form eines Programmschemas.
+
+\begin{figure}[ht]
+\centerline{\fbox{\parbox{15cm}{
+{\bf for each} $fdl\_stmt$ {\bf do} \\
+\hspace*{0.5cm} {\bf switch(}$fdl\_stmt${\bf )} \\
+\hspace*{1cm} $fdl\_stmt = desc$: \\
+\hspace*{2cm} schreibe Deskriptor $desc$ gem"a"s Spalte~3 der
+Tabelle~\ref{descriptors}; \\
+\hspace*{1cm} $fdl\_stmt = \{ desc_{1}\ desc_{2}\ \ldots\ desc_{n}\ \}$: \\
+\hspace*{2cm} {\bf while} Liste $desc_{1} \ldots desc_{n}$ neue Daten
+liefert {\bf do} \\
+\hspace*{2.5cm} schreibe $desc_{1} \ldots desc_{n}$ gem"a"s Spalte~3 der
+Tabelle~\ref{descriptors}; \\
+\hspace*{2cm} {\bf endwhile} \\ 
+\hspace*{1cm} $fdl\_stmt = [\ alt_{1}\ |\ alt_{2}\ |\ \ldots\ |\ alt_{n}\ ]$: \\ 
+\hspace*{2cm} {\bf do} \\
+\hspace*{2.5cm} $descriptor\_written =$ FALSE; \\
+\hspace*{2.5cm} {\bf for} $alt := alt_{1}$ {\bf to} $alt_{n}$ {\bf do} \\
+\hspace*{3cm} {\bf if} $alt$ liefert neue Daten {\bf then} \\
+\hspace*{3.5cm} schreibe die Deskriptoren von $alt$ gem"a"s Spalte~3 der
+Tabelle~\ref{descriptors}; \\
+\hspace*{3.5cm} $descriptor\_written$ := TRUE; \\
+\hspace*{3cm} {\bf endif} \\ 
+\hspace*{2.5cm} {\bf endfor} \\
+\hspace*{2cm} {\bf while} $descriptor\_written$ = TRUE; \\
+\hspace*{0.5cm} {\bf endswitch} \\    
+{\bf endfor} \\
+"Uberpr"ufe, ob alle Eingabevektoren, Ausgabevektoren und Klassen geschrieben
+wurden; \\
+gebe ggf. eine entsprechende Warnung aus \\
+}}}
+\caption{\label{schreiben} Die Arbeitsweise des Schreib-Interpreters}
+\end{figure}
+
+
+
+
+

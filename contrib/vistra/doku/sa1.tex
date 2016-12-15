@@ -1,0 +1,83 @@
+\section{Einf"uhrung}
+\label{einf}
+
+%Neuronale Netze stellen eine Alternative zu "`klassischen"' symbolischen
+%oder numerischen Verfahren dar, die f"ur geeignete Aufgabenstellungen
+%einfachere und bessere Ergebnisse liefern kann.
+%Einsatzbereiche sind z.B. die Mustererkennung oder das Verstehen und
+%Verarbeiten von Bildern.
+%Charakteristisch f"ur neuronale Netze ist, da"s die L"osung eines Problems
+%nicht {\sl programmiert}, sondern anhand von Daten {\sl gelernt} wird.
+
+%Jedes neuronale Netz besteht aus einer Menge von Neuronen bzw. Zellen,
+%die untereinander durch ein gewichtetes Netzwerk verbunden sind.
+%Jedes Neuron nimmt dabei zu jedem Zeitpunkt einen bestimmten 
+%Aktivierungszustand an und besitzt einen Ausgabewert, der sich aus
+%dem Aktivierungszustand durch Anwendung einer zum Neuron geh"orenden
+%Ausgabefunktion berechnet. 
+
+%Neuronen k"onnen in Eingabezellen, Ausgabezellen und "`versteckte"'
+%Zellen eingeteilt werden.  
+%Das neuronale Netz wird {\sl trainiert}, indem Eingabemuster 
+%an die Eingabezellen
+%angelegt werden (d.h. die Aktivierungen der Eingabezellen gesetzt werden)
+%und in mehreren Schritten die Aktivierungen aller Zellen aus 
+%den Ausgabewerten ihrer Vorg"anger sowie der 
+%Gewichte der zugeh"origen Verbindungen neu berechnet werden.
+%Anschlie"send werden die Werte der Ausgabezellen mit den gew"unschten
+%Werten verglichen und die Gewichte der Verbindungen gem"a"s einer
+%Lernregel in Abh"angigkeit von den beobachteten Abweichungen modifiziert.
+%Das neuronale Netz {\sl lernt}.
+
+Aufgabe der Studienarbeit war der Entwurf und die Implementierung eines
+Programms, mit dem Eingabe- und Ausgabemuster f"ur neuronale Netze
+transformiert und visualisiert werden k"onnen.
+Als Eingabemuster ist hierbei ein Vektor zu verstehen, dessen Elemente
+die Aktivierungen der Eingabezellen des neuronalen Netzes repr"asentieren.
+Analog ist ein Ausgabemuster ein Vektor der Ausgabewerte der 
+Ausgabezellen.
+Trainings- bzw. Testdaten eines Netzes sind also
+eine Menge von Eingabevektoren mit den zugeh"origen Ausgabevektoren.
+Zur Spezifikation der Ausgabe werden zus"atzlich zu oder anstelle von den
+Ausgabevektoren Klassen eingesetzt, die durch Nummern oder Klassensymbole
+repr"asentiert werden.
+
+Bevor Trainings- oder Testdaten in einem Simulator f"ur neuronale
+Netze (wie z.B. KNet oder SNNS -- Stuttgarter Neuronale Netze Simulator --
+der Universit"at Stuttgart) benutzt werden, ist es h"aufig w"unschenswert,
+sich die Daten zun"achst graphisch oder textuell anzusehen und 
+ggf.~einen oder mehrere Vorverarbeitungsschritte auf sie anzuwenden.
+Desweiteren ben"otigen Simulatoren f"ur neuronale Netze zum Teil
+sehr unterschiedliche Dateiformate f"ur die einzulesenden bzw.
+zu schreibenden Trainingsvektoren.
+
+Im Rahmen dieser Studienarbeit wurde das Programm "`Vistra"' entwickelt, das
+\begin{itemize}
+\item Trainingsdaten unterschiedlicher Formate lesen und schreiben
+kann (Konvertierungsfunktion),
+\item Trainingsdaten textuell und graphisch darstellen kann
+(Visualisierungsfunktion),
+\item Trainingsdaten transformieren und statistisch
+auswerten kann (Manipulationsfunktion) sowie
+\item um neue ASCII-Formate f"ur Trainingsvektor-Dateien erweitert werden 
+kann mittels Vistra's Format-Beschreibungssprache FDL.
+\end{itemize}
+Durch die Konvertierungsfunktion ist Vistra vollkommen unabh"angig 
+vom verwendeten Simulator f"ur neuronale Netze. 
+Das Programm kann ganz allgemein zur Visualisierung und Manipulation von
+Trainingsvektoren verwendet werden.
+
+Auch eine Trennung von Trainings- und Testdaten wird unterst"utzt,
+indem alle Transformationen, die auf einer Menge von Vektoren
+ausgef"uhrt werden, in einer LOG-Datei festgehalten werden k"onnen.
+Zu einem sp"ateren Zeitpunkt k"onnen die gleichen Transformationen 
+dann mit einer anderen Menge von Trainingsvektoren wiederholt werden.
+Zu diesem Zweck besitzt Vistra neben der interaktiven Benutzeroberfl"ache
+auch noch einen Batch-Modus, in dem die in der LOG-Datei registrierten
+Transformationen ausgef"uhrt werden k"onnen. 
+
+Vistra wurde mit dem Gnu-C-Compiler (GCC) implementiert und verwendet
+X-Windows (X11 Release 5) sowie das Athena Widget Set zur Realisierung
+der graphischen Benutzer\-oberfl"ache. 
+Vistra kann auf UNIX-Workstations der Fabrikate SUN und DEC compiliert
+werden.

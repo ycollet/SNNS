@@ -1,0 +1,345 @@
+\begin{theindex}
+
+  \setcounter{page}{61}
+
+  \item adapPrune
+    \subitem aveThreshold, 23
+    \subitem deltaThreshold, 23
+    \subitem threshold, 23
+  \item ancestry
+    \subitem ancestryPS, 30
+    \subitem historyFile, 30
+
+  \indexspace
+
+  \item bestGuessHigh
+    \subitem hitDistance, 27
+    \subitem hitRating, 27
+    \subitem hitThreshold, 27
+    \subitem missRating, 27
+    \subitem noneRating, 27
+    \subitem testPattern, 27
+  \item bestGuessLow
+    \subitem hitDistance, 28
+    \subitem hitRating, 27
+    \subitem hitThreshold, 28
+    \subitem missRating, 27
+    \subitem noneRating, 28
+    \subitem testPattern, 27
+
+  \indexspace
+
+  \item classes
+    \subitem decisionThreshold, 26
+    \subitem highDesc, 26
+    \subitem hitRating, 26
+    \subitem lowDesc, 26
+    \subitem missRating, 26
+    \subitem noneRating, 26
+    \subitem testPattern, 26
+  \item cleanup
+    \subitem no parameters, 24
+
+  \indexspace
+
+  \item fittestSurvive
+    \subitem NoOfOffsprings, 31
+
+  \indexspace
+
+  \item genpopNepo
+    \subitem gensize, 8
+    \subitem popsize, 8
+
+  \indexspace
+
+  \item histFitness
+    \subitem historyFile, 29
+  \item histInputs
+    \subitem historyFile, 31
+  \item histTest
+    \subitem historyFile, 29
+  \item histWeight
+    \subitem historyFile, 29
+
+  \indexspace
+
+  \item implant
+    \subitem implantProb, 14
+  \item initPop
+    \subitem gensize, 6
+    \subitem initFct, 6
+    \subitem initParam, 7
+    \subitem network, 6
+    \subitem popsize, 6
+  \item initTrain
+    \subitem initLearnfct, 8
+    \subitem initLearnparam, 8
+    \subitem initMaxepochs, 9
+    \subitem initMaxtss, 9
+    \subitem initShuffle, 9
+  \item inputInit
+    \subitem maxNoInput, 9
+    \subitem minNoInput, 9
+
+  \indexspace
+
+  \item jogWeights
+    \subitem jogLimit, 24
+
+  \indexspace
+
+  \item learnCuPit
+    \subitem learnparam, 21
+    \subitem maxepochs, 21
+    \subitem maxtss, 22
+  \item learnCV
+    \subitem CVepochs, 20
+    \subitem learnfct, 20
+    \subitem learnparam, 20
+    \subitem maxepochs, 20
+    \subitem maxtss, 21
+    \subitem shuffle, 21
+  \item learnRating
+    \subitem epochRating, 25
+    \subitem maxtss, 26
+    \subitem noLearnRating, 25
+    \subitem tssRating, 25
+  \item learnSNNS
+    \subitem learnfct, 19
+    \subitem learnparam, 19
+    \subitem maxepochs, 19
+    \subitem maxtss, 19
+    \subitem shuffle, 20
+  \item linCross
+    \subitem probCross, 14
+  \item loadPop
+    \subitem network, 7
+    \subitem popsize, 7
+  \item loadSNNSPat
+    \subitem crosspattern, 8
+    \subitem learnpattern, 8
+    \subitem testpattern, 8
+
+  \indexspace
+
+  \item mutInputs
+    \subitem initRange, 18
+    \subitem probMutInputs, 18
+    \subitem probMutInputsSplit, 18
+  \item mutLinks
+    \subitem initRange, 16
+    \subitem probadd, 16
+    \subitem probdel, 16
+    \subitem probdelEndGen, 16
+    \subitem probdelStart, 16
+    \subitem sigmadel, 16
+  \item mutUnits
+    \subitem bypass, 17
+    \subitem initRange, 17
+    \subitem probMutUnits, 17
+    \subitem probMutUnitsSplit, 17
+    \subitem PWU, 17
+  \item mymodule
+    \subitem exit, 32
+    \subitem initialize, 32
+    \subitem myParam, 32
+
+  \indexspace
+
+  \item nullWeg
+    \subitem no parameter, 24
+
+  \indexspace
+
+  \item optInitPop
+    \subitem learnModul, 10
+    \subitem maxtss, 10
+
+  \indexspace
+
+  \item Parameter
+    \subitem ancestryPS (ancestry), 30
+    \subitem aveThreshold (adapPrune), 23
+    \subitem bypass (mutUnits), 17
+    \subitem crosspattern (loadSNNSPat), 8
+    \subitem CVepochs (learnCV), 20
+    \subitem decisionThreshold (classes), 26
+    \subitem deltaThreshold (adapPrune), 23
+    \subitem epochRating (learnRating), 25
+    \subitem exit (mymodule), 32
+    \subitem gensize (genpopNepo), 8
+    \subitem gensize (initPop), 6
+    \subitem gensize (preferSel), 13
+    \subitem highDesc (classes), 26
+    \subitem historyFile (ancestry), 30
+    \subitem historyFile (histFitness), 29
+    \subitem historyFile (histInputs), 31
+    \subitem historyFile (histTest), 29
+    \subitem historyFile (histWeight), 29
+    \subitem historyFile (simpleHist), 28
+    \subitem hitDistance (bestGuessHigh), 27
+    \subitem hitDistance (bestGuessLow), 28
+    \subitem hitRating (bestGuessHigh), 27
+    \subitem hitRating (bestGuessLow), 27
+    \subitem hitRating (classes), 26
+    \subitem hitThreshold (bestGuessHigh), 27
+    \subitem hitThreshold (bestGuessLow), 28
+    \subitem implantProb (implant), 14
+    \subitem initFct (initPop), 6
+    \subitem initFct (startPop), 11
+    \subitem initialize (mymodule), 32
+    \subitem initLearnfct (initTrain), 8
+    \subitem initLearnparam (initTrain), 8
+    \subitem initMaxepochs (initTrain), 9
+    \subitem initMaxtss (initTrain), 9
+    \subitem initParam (initPop), 7
+    \subitem initParam (startPop), 12
+    \subitem initRange (mutInputs), 18
+    \subitem initRange (mutLinks), 16
+    \subitem initRange (mutUnits), 17
+    \subitem initRange (simpleMut), 15
+    \subitem initShuffle (initTrain), 9
+    \subitem inputRating (topologyRating), 25
+    \subitem jogLimit (jogWeights), 24
+    \subitem learnfct (learnCV), 20
+    \subitem learnfct (learnSNNS), 19
+    \subitem learnModul (optInitPop), 10
+    \subitem learnparam (learnCuPit), 21
+    \subitem learnparam (learnCV), 20
+    \subitem learnparam (learnSNNS), 19
+    \subitem learnpattern (loadSNNSPat), 8
+    \subitem lowDesc (classes), 26
+    \subitem maxepochs (learnCuPit), 21
+    \subitem maxepochs (learnCV), 20
+    \subitem maxepochs (learnSNNS), 19
+    \subitem maxGenerations (stopIt), 13
+    \subitem maxNoInput (inputInit), 9
+    \subitem maxtss (learnCuPit), 22
+    \subitem maxtss (learnCV), 21
+    \subitem maxtss (learnRating), 26
+    \subitem maxtss (learnSNNS), 19
+    \subitem maxtss (optInitPop), 10
+    \subitem minNoInput (inputInit), 9
+    \subitem missRating (bestGuessHigh), 27
+    \subitem missRating (bestGuessLow), 27
+    \subitem missRating (classes), 26
+    \subitem myParam (mymodule), 32
+    \subitem netDestName (saveAll), 31
+    \subitem network (initPop), 6
+    \subitem network (loadPop), 7
+    \subitem network (startPop), 11
+    \subitem no parameter (nullWeg), 24
+    \subitem no parameter (stopErr), 13
+    \subitem no parameters (cleanup), 24
+    \subitem noLearnRating (learnRating), 25
+    \subitem noneRating (bestGuessHigh), 27
+    \subitem noneRating (bestGuessLow), 28
+    \subitem noneRating (classes), 26
+    \subitem NoOfOffsprings (fittestSurvive), 31
+    \subitem NoOfOffsprings (unifSel), 13
+    \subitem popsize (genpopNepo), 8
+    \subitem popsize (initPop), 6
+    \subitem popsize (loadPop), 7
+    \subitem popsize (startPop), 11
+    \subitem preferfactor (preferSel), 13
+    \subitem probadd (mutLinks), 16
+    \subitem probadd (simpleMut), 15
+    \subitem probCross (linCross), 14
+    \subitem probdel (mutLinks), 16
+    \subitem probdel (simpleMut), 15
+    \subitem probdelEndGen (mutLinks), 16
+    \subitem probdelStart (mutLinks), 16
+    \subitem probMutInputs (mutInputs), 18
+    \subitem probMutInputsSplit (mutInputs), 18
+    \subitem probMutUnits (mutUnits), 17
+    \subitem probMutUnitsSplit (mutUnits), 17
+    \subitem pruneEndGen (prune), 22
+    \subitem PWU (mutUnits), 17
+    \subitem relearnfactor (relearn), 24
+    \subitem saveNetsCnt (saveAll), 31
+    \subitem selProb (unifSel), 13
+    \subitem shuffle (learnCV), 21
+    \subitem shuffle (learnSNNS), 20
+    \subitem sigmadel (mutLinks), 16
+    \subitem startnet (startPop), 11
+    \subitem testHamRating (tssEval), 28
+    \subitem testHamThresh (tssEval), 28
+    \subitem testPattern (bestGuessHigh), 27
+    \subitem testPattern (bestGuessLow), 27
+    \subitem testPattern (classes), 26
+    \subitem testpattern (loadSNNSPat), 8
+    \subitem testTssRating (tssEval), 28
+    \subitem threshold (adapPrune), 23
+    \subitem threshold (prune), 22
+    \subitem thresholdStart (prune), 22
+    \subitem tssRating (learnRating), 25
+    \subitem unitRating (topologyRating), 25
+    \subitem weightProb (weightInit), 12
+    \subitem weightRating (topologyRating), 25
+    \subitem Xcoord (Xhist), 30
+    \subitem Xgeometry (Xhist), 30
+  \item preferSel
+    \subitem gensize, 13
+    \subitem preferfactor, 13
+  \item prune
+    \subitem pruneEndGen, 22
+    \subitem threshold, 22
+    \subitem thresholdStart, 22
+
+  \indexspace
+
+  \item relearn
+    \subitem relearnfactor, 24
+
+  \indexspace
+
+  \item saveAll
+    \subitem netDestName, 31
+    \subitem saveNetsCnt, 31
+  \item simpleHist
+    \subitem historyFile, 28
+  \item simpleMut
+    \subitem initRange, 15
+    \subitem probadd, 15
+    \subitem probdel, 15
+  \item startPop
+    \subitem initFct, 11
+    \subitem initParam, 12
+    \subitem network, 11
+    \subitem popsize, 11
+    \subitem startnet, 11
+  \item stopErr
+    \subitem no parameter, 13
+  \item stopIt
+    \subitem maxGenerations, 13
+
+  \indexspace
+
+  \item topologyRating
+    \subitem inputRating, 25
+    \subitem unitRating, 25
+    \subitem weightRating, 25
+  \item tssEval
+    \subitem testHamRating, 28
+    \subitem testHamThresh, 28
+    \subitem testTssRating, 28
+
+  \indexspace
+
+  \item unifSel
+    \subitem NoOfOffsprings, 13
+    \subitem selProb, 13
+
+  \indexspace
+
+  \item weightInit
+    \subitem weightProb, 12
+
+  \indexspace
+
+  \item Xhist
+    \subitem Xcoord, 30
+    \subitem Xgeometry, 30
+
+\end{theindex}

@@ -1,0 +1,232 @@
+\chapter{Parameter"ubergabe in der Kopfzeile}
+\label{Parameter}
+
+
+Es gibt in {\bf Nessus} die M"oglichkeit, ein Programm mit Parametern
+zu versehen, deren Wert erst zur "Ubersetzungszeit festgelegt werden
+mu"s. Diese Parameter sind dann innerhalb des Programms als Variablen
+verf"ugbar. \index{Parameter!des Programms} \index{Programmparameter}
+
+Diese zur "Ubersetzungszeit festgelegten Parameter erm"oglichen es in
+Verbindung mit dem Einlesen von Dateikonstanten,
+\index{Datei!physischer Name!als Programmparameter} {\bf
+Nessus}-Programme zu schreiben, die eine ganze Reihe von Netzen
+erzeugen k"onnen. Das ist dann sinnvoll, wenn
+
+\begin{itemize}
+  \item die Netze sich haupts"achlich durch die Anzahl von Zellen bzw. topologischer Strukturen
+	unterscheiden, 
+  \item die Verbindungsmuster gleichartig sind und f"ur die verschiedenen Netze mit den gleichen
+	Sprachmitteln definiert werden k"onnen, oder wenn
+  \item die Verbindungen "uber eine {\bf map}-Konstante\index{map} definiert werden, die dann aus einer Datei
+	eingelesen werden kann.
+\end{itemize}
+
+\section{Kopfzeile eines {\bf Nessus}-Programms}
+\label{Kopfzeile}
+
+Die Parameter werden in der Kopfzeile\index{Kopfzeile} des Programms
+deklariert. F"ur diese Parameter k"onnen auch
+Standardwerte\index{Standardwert!f"ur Programmparameter} vordefiniert
+werden.  Syntaxregel~\ref{syprogramheader} zeigt die Form des
+Programmkopfes.\index{Programm!Kopfzeile}\index{Kopfzeile!eines
+Programms}
+
+Die Kopfzeile\index{Programm!Kopfzeile}\index{Kopfzeile!des Programms}
+besteht aus dem Schl"usselwort {\bf network}\index{network} gefolgt
+von dem Namen des Netzes. Danach wird in Klammern die Liste der
+Parameter des Programms \index{Parameter!des Programms} angegeben, die
+
+\begin{itemize}
+  \item entweder leer ist, oder
+  \item nur aus einer Liste von Parametern {\it ohne\/} Standardwerte, oder
+  \item nur aus einer Liste von Parametern {\it mit\/} vordefinierten Standardwerten besteht.
+\end{itemize}
+
+Man beachte, da"s es sich dabei um Positions- und nicht um
+Schl"usselparameter handelt.  Deshalb ist es nicht erlaubt, in der
+Parameterliste Parameter ohne und solche mit Standardwerten zu
+mischen, bei der Parameter"ubergabe die Reihenfolge der Parameter bei
+der "Ubersetzung zu vertauschen, oder Parameter auszulassen.  Die
+Angabe einer Liste von Parametern ohne Standardwerte erfolgt gem"a"s
+Syntaxregel~\ref{syidlist}.  Standardwerte f"ur Parameter werden mit
+dem Zuweisungsoperator (siehe Syntaxregel~\ref{sysimpleassignment})
+definiert.
+
+\begin{center}
+\fbox{
+\begin{minipage}{\textwidth}
+{\small
+\begin{center}
+\begin{eqnarray}
+  \mbox{program\_header} & ::= & \mbox{{\bf network\index{network} identifier} {\bf (} $[$parameter\_list$]$ {\bf )~;}} 
+								\label{syprogramheader}\\[.3 cm]
+  \mbox{parameter\_list} & ::= & \mbox{identifier\_list} \nonumber\\ \index{Parameter!des Programms!Definition}
+          &  |  &  \mbox{default\_param\_list} \label{syparameterlist}\\[.3 cm]
+  \mbox{default\_param\_list} & ::= & \mbox{default\_parameter \{{\bf ~,~}default\_parameter \}} 
+								\label{sydefaultparamlist}\\[.3 cm]
+  \mbox{default\_parameter} & ::= & \mbox{simple\_assignment} \label{sydefaultparameter}\\ \nonumber
+\end{eqnarray}
+\end{center}
+}
+\end{minipage}
+}
+\end{center}
+
+Die Datentypen der Programmparameter
+\index{Programmparameter!Datentypen} \index{Parameter!des
+Programms!Datentypen} sind auf die einfachen Typen
+
+\begin{itemize}
+  \item {\bf int},\index{int}
+  \item {\bf float}\index{float} und
+  \item {\bf string}\index{string}
+\end{itemize}
+
+beschr"ankt. Allerdings kann ein Parameter des Typs {\bf
+string}\index{string} ohne weiteres der (physische) Name einer
+Datei\index{Datei!physischer Name!als Programmparameter} sein. So kann
+sich hinter einem solchen Parameter also auch eine Feld- oder {\bf
+map}-Konstante\index{Konstante!als Programmparameter} verbergen.
+
+\begin{quote}
+  An Parameter mit vordefinierten Standardwerten k"onnen zur "Ubersetzungszeit neue Werte zugewiesen
+  werden. In diesem Fall m"ussen die Datentypen der neuen Werte mit denen der Standardwerte "ubereinstimmen! 
+\end{quote}
+
+
+\section{Definition von Parametern zur "Ubersetzungszeit}
+\label{runtimeparameter}
+
+Die Werte der Parameter eines {\bf Nessus}-Programms k"onnen zur
+"Ubersetzungszeit festgelegt werden. Dadurch werden dann vordefinierte
+Standardwerte dieser Parameter "uberschrieben. Da es sich um
+Positionsparameter handelt, m"ussen aber dann die Werte f"ur alle
+Parameter angegeben werden.
+
+Die Parameterwerte werden zur "Ubersetzungszeit folgenderma"sen definiert:
+\index{Parameter!des Programms!Definition zur "Ubersetzungszeit}
+\index{Programmparameter!Definition zur "Ubersetzungszeit}
+
+\begin{quote}
+  Beim Aufruf des {\bf Nessus}-Compilers (siehe
+Kapitel~\ref{CompilerAufruf})\index{Programm!"Ubersetzung} wird nach der Option 
+  {\bf -d} die Liste der aktuellen Parameterwerte angegeben. Die
+einzelnen Parameterwerte werden durch Leerzeichen getrennt. 
+\end{quote}
+
+Die Zuordnung der aktuellen Werte zu den Parametern in der
+Kopfzeile\index{Kopfzeile!des Programms} des Programms erfolgt allein
+durch ihre Reihenfolge. Darin liegt der Grund daf"ur, da"s weder die
+Parameterwerte in vertauschter Reihenfolge angegeben noch irgendwelche
+Parameterwerte ausgelassen werden d"urfen.
+
+\begin{figure}[htbp]
+  \begin{center}
+    \mbox{
+      \begin{minipage}{\textwidth}
+           \begin{tabbing}\=nn\=\kill
+	   \input{b_param.tex}
+           \end{tabbing}
+      \end{minipage}
+    }
+    \caption{\label{ParameterBsp} Beispiel: Parameterdefinition in der Kopfzeile}
+  \end{center}
+\end{figure}
+
+Der Datentyp der Programmparameter \index{Parameter!des
+Programms!Datentypen} \index{Programmparameter!Datentypen} wird als
+Zeichenkette\index{Zeichenkette!als Programmparameter} eingelesen. Der
+Wert und der Datentyp, den der Parameter dann erh"alt, wird daraus
+nach folgenden Regeln ermittelt:
+
+\begin{itemize}
+  \item Enth"alt die Zeichenkette nur Ziffern (mit oder ohne
+Vorzeichen), wird sie in eine ganze Zahl\index{Zahl!ganze!als
+Programmparameter} ({\bf int}) umgewandelt.  
+  \item Entspricht die Zeichenkette der Darstellung einer rationalen
+Zahl\index{Zahl!rationale} in {\bf Nessus}, so wird sie in eine solche umgewandelt.
+  \item Sonst wird die Zeichenkette als {\bf
+string}-Konstante\index{Konstante!Datentyp wenn Programmparameter} aufgefa"st. 
+\end{itemize}
+
+Enthalten Zeichenketten Leer- oder Sonderzeichen, so m"ussen sie in
+``~'' eingeschlossen werden. Das gilt insbesondere auch f"ur solche
+Symbole, die von UNIX als Sonderzeichen aufgefa"st werden.
+
+Abbildung~\ref{ParameterBsp} zeigt eine Kopfzeile\index{Kopfzeile!des
+Programms} mit drei Standardwertdefinitionen f"ur Parameter.  Man
+beachte, da"s der Datentyp eines jeden dieser Parameter dadurch
+verbindlich festgelegt ist und auch durch eine "Uberschreibung des
+Parameterwerts zur "Ubersetzungszeit nicht mehr ge"andert werden darf.
+
+Dieses Programm stehe in einer Datei ``parameterBsp.n''. Dann
+"uberschreibt ein Compiler-Aufruf\index{Programm!"Ubersetzung}
+ 
+\centerline{{\bf nessus} parameterBsp.n {\bf -d} 229 -0.34 neueDatei.dat} 
+
+die Standardwerte der Parameter. Bei der Auswertung des Programms
+gelten dann die neuen Werte. Insbesondere liest das Programm jetzt
+statt der vordefinierten Datei ``stdfile.dat'' die Datei
+``neueDatei.dat'' ein.
+
+
+\section{Beispiel: F"arbung von  Karten}
+
+Die Parameter"ubergabe an ein {\bf Nessus}-Programm zur
+"Ubersetzungszeit soll nun am Beispiel des Problems ``F"arbung einer
+Karte mit vier Farben'' demonstriert werden.
+
+Eine Karte soll mit vier Farben so gef"arbt werden, da"s keine zwei
+benachbarten Regionen dieselbe Farbe haben.
+
+Es soll nun ein neuronales Netz definiert werden, das dieses Problem
+-- zuerst einmal f"ur eine gegebene Karte -- l"ost. In \cite{rcs86}
+wird ein Netz folgender Struktur vorgeschlagen:
+
+\begin{itemize}
+  \item F"ur jede Region der Karte werden vier Zellen angelegt - eine f"ur jede der Farben
+``rot'', 
+	``blau'', ``gr"un'' und ``wei"s''.
+  \item Die Zellen einer Region werden miteinander verbunden. Da sich die vier Farben
+gegenseitig 
+	ausschlie"sen sollen, ist das Gewicht dieser Verbindungen $-1.0$.
+  \item Bei benachbarten Regionen werden die Zellen, die derselben Farbe entsprechen,
+miteinander 
+	verbunden. Das Gewicht dieser Verbindungen ist $-0.1$.
+\end{itemize}
+
+Dieses Netz f"uhrt zu einem einfachen {\bf Nessus}-Programm, in dem
+die vier Zellen einer Region als Cliquen und die
+Nachbarschaftsbeziehungen der Regionen mit einer {\bf
+map}-Konstanten\index{map} dargestellt werden.
+
+Damit erh"alt man ein Programm, das f"ur eine bestimmte Karte das
+entsprechende Netz definiert. Will man ein Programm schreiben, das
+statt des Netzes f"ur eine Karte die Struktur der Netze f"ur dieses
+Problem definiert, mu"s man nur zwei "Anderungen vornehmen:
+
+\begin{enumerate}
+  \item Die Konstante, die die Anzahl\index{Zahl!rationale} der
+Regionen angibt, wird zur "Ubersetzungszeit definiert 
+	(Parameter in der Kopfzeile\index{Kopfzeile!des Programms} des Programms).
+  \item Die {\bf map}-Konstante,\index{map} die die
+Nachbarschaftsbeziehungen abbildet, wird aus einer Datei 
+	eingelesen.  Der physische Name dieser Datei wird ebenfalls
+zur "Ubersetzungszeit definiert. 
+\end{enumerate} 
+
+Dadurch entsteht das Programm, das Abbildung~\ref{ColorMapProg} zeigt.
+
+\begin{figure}[htbp]
+  \begin{center}
+    \mbox{
+      \begin{minipage}{\textwidth}
+           \begin{tabbing}\=nn\=\kill
+	   \input{b_colmap.tex}
+           \end{tabbing}
+      \end{minipage}
+    }
+    \caption{\label{ColorMapProg} Beispiel: Vier-F"arbung von Karten}
+  \end{center}
+\end{figure}

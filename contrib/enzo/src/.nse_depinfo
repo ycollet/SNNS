@@ -1,0 +1,13 @@
+knete-LD: /tools/SC1.0/libm.a /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/libgcc.a
+dpsa1-LD: /tools/SC1.0/libm.a /tools/apps/gcc-2.5.8/lib/gcc-lib/sparc-sun-sunos4.1/2.5.8/libgcc.a
+post/libpost.a: .RECURSIVE post opt makefile
+selection/libselection.a: .RECURSIVE selection opt makefile
+crossover/libcrossover.a: .RECURSIVE crossover opt makefile
+survival/libsurvival.a: .RECURSIVE survival opt makefile
+stop/libstop.a: .RECURSIVE stop opt makefile
+eval/libeval.a: .RECURSIVE eval opt makefile
+mutation/libmutation.a: .RECURSIVE mutation opt makefile
+pre/libpre.a: .RECURSIVE pre opt makefile
+nepomuk/nepomuk.a: .RECURSIVE nepomuk opt makefile
+opt/libopt.a: .RECURSIVE opt opt makefile
+history/libhistory.a: .RECURSIVE history opt makefile

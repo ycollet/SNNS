@@ -1,0 +1,1163 @@
+%!PS-Adobe-2.0 EPSF-1.2
+%%Title: bypass_mot.epsf
+%%Creator: Canvas 3.0
+%%For: saffran
+%%CreationDate: Die, 2. Nov 1993 15:43 Uhr
+%%BoundingBox:55 64 514 329
+%%DocumentProcSets: CanvasDict
+%%DocumentSuppliedProcSets: CanvasDict
+%%Copyright ©1988-91 Deneba Systems, Inc. - All Rights Reserved Worldwide
+%%DocumentFonts: Helvetica
+%%DocumentNeededFonts: Helvetica
+%%EndComments
+%%BeginProcSet:CanvasDict
+/CanvasDict where not{/CanvasDict 250 dict def}{pop}ifelse
+CanvasDict begin
+systemdict/setpacking known{/origpack currentpacking def true setpacking}if
+/bdf{bind def}bind def
+/xdf{exch bind def}bdf
+/min{2 copy gt{exch}if pop}bdf
+/edf{exch def}bdf
+/max{2 copy lt{exch}if pop}bdf
+/cvmtx matrix def
+/tpmx matrix def
+/currot 0 def
+/rotmtx matrix def
+/origmtx matrix def
+/cvangle{360 exch sub 90 add 360 mod}bdf
+/setrot{/currot edf rotmtx currentmatrix pop 2 copy translate currot rotate neg exch neg exch translate}bdf
+/endrot{rotmtx setmatrix}bdf
+/i systemdict/image get def/T true def/F false def/dbg F def
+/ncolors 0 def/st0 ()def/st1 ()def/proc0 {}def
+/penh 1 def/penv 1 def/penv2 0 def/penh2 0 def/samplesize 0 def/width 0 def/height 0 def
+/setcmykcolor where not{/setcmykcolor{/b edf 3{b add 1.0 exch sub 0.0 max 1.0 min 3 1 roll}repeat systemdict begin setrgbcolor end}bdf}{pop}ifelse
+/doeoclip{closepath{eoclip}stopped{currentflat dup 2 mul setflat eoclip setflat}if}bdf
+/SpaceExtra 0 def/LetterSpace 0 def/StringLength 0 def/NumSpaces 0 def/JustOffset 0 def
+/f0/fill load def
+/s0{1 setlinewidth cvmtx currentmatrix pop penh penv scale stroke cvmtx setmatrix}bdf
+/f1{_bp _fp impat}def
+/s1{cvmtx currentmatrix pop 1 setlinewidth penh penv scale
+{strokepath}stopped{currentflat dup 2 mul setflat strokepath setflat}if 
+_bp
+cvmtx setmatrix _fp impat}def
+/filltype 0 def
+/stroketype 0 def
+/f{filltype 0 eq{f0}{f1}ifelse}bdf
+/s{stroketype 0 eq{s0}{s1}ifelse}bdf
+/_fp{}def
+/_bp{}def
+/_fg 1 def
+/_pg 0 def
+/_bkg 1 def
+/_frg 0 def
+/_frgb 3 array def
+/_frrgb [0 0 0] def
+/_fcmyk 4 array def
+/_frcmyk [0 0 0 1] def
+/_prgb 3 array def
+/_pcmyk 4 array def
+/_bkrgb [1 1 1] def
+/_bkcmyk [0 0 0 0] def
+/fg{/_fg exch def /filltype 0 def/fills{_fg setgray}def}def
+/frgb{_frgb astore pop /filltype 0 def/fills{_frgb aload pop setrgbcolor}def}def
+/fcmyk{_fcmyk astore pop /filltype 0 def/fills{_fcmyk aload pop setcmykcolor}def}def
+/pg{/_pg exch def /stroketype 0 def/pens{_pg setgray}def}def
+/prgb{_prgb astore pop /stroketype 0 def/pens{_prgb aload pop setrgbcolor}def}def
+/pcmyk{_pcmyk astore pop /stroketype 0 def/pens{_pcmyk aload pop setcmykcolor}def}def
+/fpat{/fstr edf/filltype 1 def/fills{/patstr fstr def}bdf}bdf
+/ppat{/sstr edf/stroketype 1 def/pens{/patstr sstr def}bdf}bdf
+/bkg{ /_bkg exch def /_bp{gsave _bkg setgray fill grestore}def}def
+/bkrgb{_bkrgb astore pop/_bp{gsave _bkrgb aload pop setrgbcolor fill grestore}def}def
+/bkcmyk{_bkcmyk astore pop/_bp{gsave _bkcmyk aload pop setcmykcolor fill grestore}def}def
+/frg{ /_frg exch def /_fp{_frg setgray}def}def
+/frrgb{_frrgb astore pop/_fp{_frrgb aload pop setrgbcolor}def}def
+/frcmyk{_frcmyk astore pop/_fp{_frcmyk aload pop setcmykcolor}def}def
+/icomp{/ncolors edf
+ncolors 1 gt{/proc0 edf
+dup dup 0 get ncolors div cvi exch 0 3 -1 roll put
+4 -1 roll ncolors div cvi 4 1 roll{proc0 dup/st0 edf
+0 exch ncolors exch length
+dup ncolors sub exch ncolors div cvi string/st1 edf
+{dup 0 exch dup 1 exch
+2 add{st0 exch get add}bind for
+3 div ncolors 4 eq{exch dup 3 1 roll 3 add st0 exch get add 255 exch sub dup 0 lt{pop 0}if}if cvi
+dup 255 gt{pop 255}if
+exch ncolors div cvi exch
+st1 3 1 roll put}bind for
+st1}}if i}bdf
+/ci
+{/colorimage where
+{pop false exch colorimage}
+{icomp}
+ifelse}bdf
+/impat
+{/cnt 0 def
+/MySave save def
+currot 0 ne{currot neg rotate}if
+clip
+flattenpath
+pathbbox
+3 -1 roll
+8 div floor 8 mul dup/starty edf
+sub abs 8 div ceiling 8 mul cvi/height edf
+exch 8 div floor 8 mul dup/startx edf
+sub abs 8 div ceiling 8 mul cvi/width edf
+startx starty translate
+width height scale
+/height height 8 mul def
+/st0 width string def
+width height T [width 0 0 height neg 0 height]
+{patstr
+cnt 8 mod
+get/st1 edf
+0 1
+st0 length 1 sub dup 0 le{pop 1}if
+{st0 exch
+st1
+put}bind for/cnt cnt 1 add def
+st0}bind
+imagemask
+MySave restore
+newpath}bdf
+/cm{/ncolors edf
+translate
+scale/height edf/colorimage where
+{pop}
+{ncolors mul}ifelse/width edf
+/tbitstr width string def
+width height 8 [width 0 0 height neg 0 height]
+{currentfile tbitstr readhexstring pop}bind
+ncolors
+dup 3 eq {ci}{icomp}ifelse}bdf
+/im{translate
+scale
+/height edf
+/width edf
+/tbitstr width 7 add 8 div cvi string def
+width height 1 [width 0 0 height neg 0 height]
+{currentfile tbitstr readhexstring pop}bind
+i}bdf
+/imk{/invFlag edf
+translate
+scale
+/height edf
+/width edf
+/tbitstr width 7 add 8 div cvi string def
+width height invFlag [width 0 0 height neg 0 height]
+{currentfile tbitstr readhexstring pop}bind
+imagemask}bdf
+/BeginEPSF
+{/MySave save def
+/dict_count countdictstack def
+/op_count count 1 sub def
+userdict begin
+/showpage {} def
+0 setgray 0 setlinecap
+1 setlinewidth 0 setlinejoin
+10 setmiterlimit [] 0 setdash newpath
+/languagelevel where
+{pop languagelevel 1 ne{false setstrokeadjust false setoverprint}if}if
+}bdf
+/EndEPSF
+{count op_count sub {pop}repeat
+countdictstack dict_count sub {end}repeat
+MySave restore}bdf
+/rectpath {/cv_r edf/cv_b edf/cv_l edf/cv_t edf
+cv_l cv_t moveto cv_r cv_t lineto cv_r cv_b lineto cv_l cv_b lineto cv_l cv_t lineto closepath}bdf
+/setpen{/penh edf/penv edf/penv2 penv 2 div def/penh2 penh 2 div def}bdf
+/dostroke{not 1 currentgray ne or {pens s}if}bdf
+/dodashfill{not 1 currentgray ne or
+{fills gsave f grestore gsave [] 0 setdash 
+stroketype/stroketype filltype def
+s/stroketype edf grestore}if}bdf
+/dofill{not 1 currentgray ne or {fills f}if}bdf
+/dofillsave{not 1 currentgray ne or {gsave fills f grestore}if}bdf
+/doline{not 1 currentgray ne or {pens filltype/filltype stroketype def f/filltype edf}if}bdf
+/spx{SpaceExtra 0 32 4 -1 roll widthshow}bdf
+/lsx{SpaceExtra 0 32 LetterSpace 0 6 -1 roll awidthshow}bdf
+/Rjust{stringwidth pop JustOffset exch sub /JustOffset edf}bdf
+/Cjust{stringwidth pop 2 div JustOffset exch sub /JustOffset edf}bdf
+/adjfit{stringwidth pop LetterSpace StringLength 1 sub mul add SpaceExtra NumSpaces mul add dup /pw edf JustOffset exch 
+sub dup /wdif edf StringLength div LetterSpace add /LetterSpace edf}bdf
+/ulb{currentpoint pop /underlinpt edf}bdf
+/ule{gsave currentpoint newpath moveto currentfont dup /ft1 known{dup /ft1 get begin /FontMatrix get FontMatrix tpmx concatmatrix pop}
+{begin FontMatrix tpmx copy pop}ifelse FontInfo begin UnderlinePosition UnderlineThickness end end dup tpmx
+dtransform pop setlinewidth dup tpmx dtransform pop 0 exch rmoveto underlinpt currentpoint pop sub 0 rlineto stroke grestore}bdf
+/fittext{ /SpaceExtra edf /LetterSpace edf /StringLength edf /NumSpaces edf /JustOffset edf not 1 currentgray ne or
+{dup {ulb}if exch
+dup adjfit
+lsx {ule}if}{pop pop}ifelse}bdf
+/cvRecFont{/encod edf FontDirectory 2 index known{cleartomark}{findfont dup length 1 add dict begin
+{1 index/FID ne{def}{pop pop}ifelse}forall encod{/Encoding CVvec def}if
+currentdict end definefont cleartomark}ifelse}bdf
+/wrk1 ( ) def/wdict 16 dict def
+/Work75 75 string def /Nmk{Work75 cvs dup}bdf /Npt{put cvn}bdf /dhOdh{Nmk 2 79 Npt}bdf /dhodh{Nmk 2 111 Npt}bdf	/dhSdh{Nmk 2 83 Npt}bdf
+/sfWidth{gsave 0 0 moveto 0 0 lineto 0 0 lineto 0 0 lineto closepath clip stringwidth grestore}bdf
+/MakOF{dup dhodh FontDirectory 1 index known{exch pop}{exch findfont dup length 1 add dict begin
+{1 index/FID ne 2 index /UniqueID ne and{def}{pop pop}ifelse}forall
+/PaintType 2 def
+/StrokeWidth .24 1000 mul ftSize div dup 12 lt{pop 12}if def
+dup currentdict end definefont pop}ifelse}bdf
+/fts{dup/ftSize edf}def
+/mkFT{/tempFT 11 dict def tempFT begin
+/FontMatrix [1 0 0 1 0 0] def/FontType 3 def
+FontDirectory 3 index get /Encoding get/Encoding exch def
+/proc2 edf/ft2 exch findfont def/ft1 exch findfont def/FontBBox [0 0 1 1] def
+/BuildChar{wdict begin/chr edf/ftdt edf/chrst wrk1 dup 0 chr put def ftdt/proc2 get exec end}def
+end tempFT definefont pop}bdf
+/OLFt{dup dhOdh FontDirectory 1 index known{exch pop}
+{dup 3 -1 roll dup MakOF {outproc} mkFT}ifelse}bdf
+/mshw{moveto show}bdf
+/outproc{ftdt/ft1 get setfont gsave chrst sfWidth grestore setcharwidth dblsh}bdf
+/dblsh{currentgray 1 setgray chrst 0 0 mshw setgray ftdt/ft2 get setfont chrst 0 0 mshw}bdf
+/ShadChar{ftdt/ft1 get setfont gsave chrst sfWidth 1 index 0 ne{exch .05 add exch}if grestore setcharwidth
+chrst .06 0 mshw 0 .05 translate dblsh}bdf
+/ShFt{dup dhSdh FontDirectory 1 index known{exch pop}
+{dup 3 -1 roll dup MakOF {ShadChar} mkFT}ifelse}bdf
+/LswUnits{72 75 div dup scale}bdf
+/erasefill{_bp}def
+/CVvec 256 array def
+/NUL/SOH/STX/ETX/EOT/ENQ/ACK/BEL/BS/HT/LF/VT/FF/CR/SO/SI/DLE/DC1/DC2/DC3/DC4/NAK/SYN/ETB/CAN/EM/SUB/ESC/FS/GS/RS/US
+CVvec 0 32 getinterval astore pop
+CVvec 32/Times-Roman findfont/Encoding get
+32 96 getinterval putinterval CVvec dup 39/quotesingle put 96/grave put
+/Adieresis/Aring/Ccedilla/Eacute/Ntilde/Odieresis/Udieresis/aacute
+/agrave/acircumflex/adieresis/atilde/aring/ccedilla/eacute/egrave
+/ecircumflex/edieresis/iacute/igrave/icircumflex/idieresis/ntilde/oacute
+/ograve/ocircumflex/odieresis/otilde/uacute/ugrave/ucircumflex/udieresis
+/dagger/degree/cent/sterling/section/bullet/paragraph/germandbls
+/registered/copyright/trademark/acute/dieresis/notequal/AE/Oslash
+/infinity/plusminus/lessequal/greaterequal/yen/mu/partialdiff/summation
+/product/pi/integral/ordfeminine/ordmasculine/Omega/ae/oslash
+/questiondown/exclamdown/logicalnot/radical/florin/approxequal/Delta/guillemotleft
+/guillemotright/ellipsis/blank/Agrave/Atilde/Otilde/OE/oe
+/endash/emdash/quotedblleft/quotedblright/quoteleft/quoteright/divide/lozenge
+/ydieresis/Ydieresis/fraction/currency/guilsinglleft/guilsinglright/fi/fl
+/daggerdbl/periodcentered/quotesinglbase/quotedblbase/perthousand/Acircumflex/Ecircumflex/Aacute
+/Edieresis/Egrave/Iacute/Icircumflex/Idieresis/Igrave/Oacute/Ocircumflex
+/apple/Ograve/Uacute/Ucircumflex/Ugrave/dotlessi/circumflex/tilde
+/macron/breve/dotaccent/ring/cedilla/hungarumlaut/ogonek/caron
+CVvec 128 128 getinterval astore pop
+end
+%%EndProcSet
+%%BeginSetup
+CanvasDict begin
+0 setlinecap
+0 setlinejoin
+4 setmiterlimit
+/currot 0 def
+origmtx currentmatrix pop
+[] 0 setdash
+1 1 setpen
+1 fg
+0 pg
+0 frg
+1 bkg
+newpath
+/dbg F def
+LswUnits
+%%EndSetup
+% ---- Object #1:46 Obj Type: 99
+% ---- Object #2:45 Obj Type: 99
+% ---- Object #3:5 Obj Type: 99
+% ---- Object #4:4 Obj Type: 6
+2 2 setpen
+110.7283 165.2823 moveto
+110.7283 161.2330 107.3957 157.9004 103.3465 157.9004 curveto
+99.2972 157.9004 95.9646 161.2330 95.9646 165.2823 curveto
+95.9646 169.3315 99.2972 172.6641 103.3465 172.6641 curveto
+107.3957 172.6641 110.7283 169.3315 110.7283 165.2823 curveto
+closepath
+F dofillsave
+F dostroke
+% ---- Object #5:8 Obj Type: 6
+155.0197 165.2823 moveto
+155.0197 161.2330 151.6870 157.9004 147.6378 157.9004 curveto
+143.5885 157.9004 140.2559 161.2330 140.2559 165.2823 curveto
+140.2559 169.3315 143.5885 172.6641 147.6378 172.6641 curveto
+151.6870 172.6641 155.0197 169.3315 155.0197 165.2823 curveto
+closepath
+F dofillsave
+F dostroke
+% ---- Object #6:7 Obj Type: 6
+199.3110 165.2823 moveto
+199.3110 161.2330 195.9784 157.9004 191.9291 157.9004 curveto
+187.8799 157.9004 184.5472 161.2330 184.5472 165.2823 curveto
+184.5472 169.3315 187.8799 172.6641 191.9291 172.6641 curveto
+195.9784 172.6641 199.3110 169.3315 199.3110 165.2823 curveto
+closepath
+F dofillsave
+F dostroke
+% ---- Object #7:9 Obj Type: 6
+[5.2000 2.0800] 0 setdash
+155.0197 224.3374 moveto
+155.0197 220.2881 151.6870 216.9555 147.6378 216.9555 curveto
+143.5885 216.9555 140.2559 220.2881 140.2559 224.3374 curveto
+140.2559 228.3866 143.5885 231.7193 147.6378 231.7193 curveto
+151.6870 231.7193 155.0197 228.3866 155.0197 224.3374 curveto
+closepath
+F dodashfill
+F dostroke
+% ---- Object #8:10 Obj Type: 6
+[] 0 setdash
+155.0197 283.3925 moveto
+155.0197 279.3432 151.6870 276.0106 147.6378 276.0106 curveto
+143.5885 276.0106 140.2559 279.3432 140.2559 283.3925 curveto
+140.2559 287.4417 143.5885 290.7744 147.6378 290.7744 curveto
+151.6870 290.7744 155.0197 287.4417 155.0197 283.3925 curveto
+closepath
+F dofillsave
+F dostroke
+% ---- Object #9:6 Obj Type: 3
+1 1 setpen
+gsave
+newpath
+142.5664 206.0798 moveto
+142.3775 206.1699 lineto
+142.0045 206.3600 lineto
+141.6380 206.5630 lineto
+141.2791 206.7787 lineto
+140.9275 207.0070 lineto
+140.5845 207.2472 lineto
+140.2500 207.4992 lineto
+139.9246 207.7628 lineto
+139.6086 208.0375 lineto
+139.3023 208.3230 lineto
+139.0057 208.6196 lineto
+138.7201 208.9258 lineto
+138.4454 209.2419 lineto
+138.1819 209.5673 lineto
+137.9299 209.9017 lineto
+137.6897 210.2447 lineto
+137.4613 210.5963 lineto
+137.2456 210.9553 lineto
+137.0426 211.3215 lineto
+136.8525 211.6946 lineto
+136.7623 211.8836 lineto
+147.6378 216.9555 lineto
+142.5664 206.0798 lineto
+closepath
+F doline
+grestore
+gsave
+newpath
+103.3465 172.6641 moveto
+139.3293 208.6470 lineto
+F dostroke
+grestore
+% ---- Object #10:11 Obj Type: 3
+gsave
+newpath
+151.7422 205.6792 moveto
+151.5449 205.6094 lineto
+151.1466 205.4799 lineto
+150.7439 205.3645 lineto
+150.3376 205.2631 lineto
+149.9275 205.1760 lineto
+149.5151 205.1032 lineto
+149.1005 205.0450 lineto
+148.6840 205.0012 lineto
+148.2663 204.9720 lineto
+147.8478 204.9573 lineto
+147.4283 204.9573 lineto
+147.0099 204.9719 lineto
+146.5921 205.0011 lineto
+146.1757 205.0449 lineto
+145.7610 205.1032 lineto
+145.3486 205.1759 lineto
+144.9385 205.2630 lineto
+144.5322 205.3643 lineto
+144.1297 205.4797 lineto
+143.7314 205.6091 lineto
+143.5340 205.6790 lineto
+147.6378 216.9555 lineto
+151.7422 205.6792 lineto
+closepath
+F doline
+grestore
+gsave
+newpath
+147.6378 172.6641 moveto
+147.6378 205.2055 lineto
+F dostroke
+grestore
+% ---- Object #11:18 Obj Type: 3
+gsave
+newpath
+151.7422 264.7343 moveto
+151.5449 264.6645 lineto
+151.1466 264.5351 lineto
+150.7439 264.4196 lineto
+150.3376 264.3183 lineto
+149.9275 264.2311 lineto
+149.5151 264.1584 lineto
+149.1005 264.1001 lineto
+148.6840 264.0563 lineto
+148.2663 264.0271 lineto
+147.8478 264.0124 lineto
+147.4283 264.0124 lineto
+147.0099 264.0270 lineto
+146.5921 264.0562 lineto
+146.1757 264.1000 lineto
+145.7610 264.1583 lineto
+145.3486 264.2310 lineto
+144.9385 264.3181 lineto
+144.5322 264.4194 lineto
+144.1297 264.5348 lineto
+143.7314 264.6642 lineto
+143.5340 264.7341 lineto
+147.6378 276.0106 lineto
+151.7422 264.7343 lineto
+closepath
+F doline
+grestore
+gsave
+newpath
+147.6378 231.7193 moveto
+147.6378 264.2606 lineto
+F dostroke
+grestore
+% ---- Object #12:22 Obj Type: 3
+gsave
+newpath
+155.8219 267.2344 moveto
+155.6674 267.0929 lineto
+155.3514 266.8182 lineto
+155.0260 266.5547 lineto
+154.6916 266.3027 lineto
+154.3486 266.0625 lineto
+153.9970 265.8341 lineto
+153.6380 265.6184 lineto
+153.2718 265.4154 lineto
+152.8987 265.2253 lineto
+152.5190 265.0482 lineto
+152.1331 264.8844 lineto
+151.7422 264.7343 lineto
+151.3462 264.5980 lineto
+150.9458 264.4756 lineto
+150.5413 264.3672 lineto
+150.1333 264.2729 lineto
+149.7217 264.1929 lineto
+149.3079 264.1274 lineto
+148.8923 264.0764 lineto
+148.4752 264.0399 lineto
+148.2663 264.0271 lineto
+147.6378 276.0106 lineto
+155.8219 267.2344 lineto
+closepath
+F doline
+grestore
+gsave
+newpath
+191.9291 172.6641 moveto
+152.2664 265.2106 lineto
+F dostroke
+grestore
+% ---- Object #13:32 Obj Type: 3
+gsave
+newpath
+151.7421 146.6241 moveto
+151.5449 146.5542 lineto
+151.1466 146.4248 lineto
+150.7439 146.3093 lineto
+150.3376 146.2080 lineto
+149.9275 146.1208 lineto
+149.5151 146.0481 lineto
+149.1004 145.9898 lineto
+148.6840 145.9461 lineto
+148.2663 145.9168 lineto
+147.8478 145.9022 lineto
+147.4283 145.9022 lineto
+147.0098 145.9168 lineto
+146.5921 145.9460 lineto
+146.1757 145.9898 lineto
+145.7610 146.0480 lineto
+145.3486 146.1207 lineto
+144.9385 146.2079 lineto
+144.5322 146.3092 lineto
+144.1297 146.4246 lineto
+143.7314 146.5540 lineto
+143.5339 146.6239 lineto
+147.6378 157.9004 lineto
+151.7421 146.6241 lineto
+closepath
+F doline
+grestore
+gsave
+newpath
+147.6378 135.7547 moveto
+147.6378 146.1504 lineto
+F dostroke
+grestore
+% ---- Object #14:33 Obj Type: 3
+gsave
+newpath
+196.0335 146.6241 moveto
+195.8362 146.5542 lineto
+195.4379 146.4248 lineto
+195.0352 146.3093 lineto
+194.6289 146.2080 lineto
+194.2188 146.1208 lineto
+193.8064 146.0481 lineto
+193.3918 145.9898 lineto
+192.9753 145.9461 lineto
+192.5576 145.9168 lineto
+192.1391 145.9022 lineto
+191.7197 145.9022 lineto
+191.3012 145.9168 lineto
+190.8834 145.9460 lineto
+190.4670 145.9898 lineto
+190.0523 146.0480 lineto
+189.6400 146.1207 lineto
+189.2298 146.2079 lineto
+188.8235 146.3092 lineto
+188.4210 146.4246 lineto
+188.0227 146.5540 lineto
+187.8253 146.6239 lineto
+191.9291 157.9004 lineto
+196.0335 146.6241 lineto
+closepath
+F doline
+grestore
+gsave
+newpath
+191.9291 135.7547 moveto
+191.9291 146.1504 lineto
+F dostroke
+grestore
+% ---- Object #15:35 Obj Type: 3
+gsave
+newpath
+107.4508 146.6241 moveto
+107.2535 146.5542 lineto
+106.8553 146.4248 lineto
+106.4526 146.3093 lineto
+106.0463 146.2080 lineto
+105.6361 146.1208 lineto
+105.2238 146.0481 lineto
+104.8091 145.9898 lineto
+104.3927 145.9461 lineto
+103.9749 145.9168 lineto
+103.5565 145.9022 lineto
+103.1370 145.9022 lineto
+102.7185 145.9168 lineto
+102.3008 145.9460 lineto
+101.8843 145.9898 lineto
+101.4697 146.0480 lineto
+101.0573 146.1207 lineto
+100.6472 146.2079 lineto
+100.2409 146.3092 lineto
+99.8383 146.4246 lineto
+99.4401 146.5540 lineto
+99.2426 146.6239 lineto
+103.3464 157.9004 lineto
+107.4508 146.6241 lineto
+closepath
+F doline
+grestore
+gsave
+newpath
+103.3464 135.7547 moveto
+103.3464 146.1504 lineto
+F dostroke
+grestore
+% ---- Object #16:39 Obj Type: 3
+gsave
+newpath
+151.7421 301.6438 moveto
+151.5449 301.5739 lineto
+151.1466 301.4445 lineto
+150.7439 301.3290 lineto
+150.3376 301.2277 lineto
+149.9275 301.1405 lineto
+149.5151 301.0678 lineto
+149.1004 301.0095 lineto
+148.6840 300.9657 lineto
+148.2663 300.9365 lineto
+147.8478 300.9219 lineto
+147.4283 300.9219 lineto
+147.0098 300.9365 lineto
+146.5921 300.9657 lineto
+146.1757 301.0094 lineto
+145.7610 301.0677 lineto
+145.3486 301.1404 lineto
+144.9385 301.2276 lineto
+144.5322 301.3289 lineto
+144.1297 301.4443 lineto
+143.7314 301.5737 lineto
+143.5339 301.6436 lineto
+147.6378 312.9200 lineto
+151.7421 301.6438 lineto
+closepath
+F doline
+grestore
+gsave
+newpath
+147.6378 290.7744 moveto
+147.6378 301.1700 lineto
+F dostroke
+grestore
+% ---- Object #17:27 Obj Type: 99
+% ---- Object #18:12 Obj Type: 6
+2 2 setpen
+[5.2000 2.0800] 0 setdash
+258.3661 163.6602 moveto
+258.3661 159.6110 255.0335 156.2783 250.9842 156.2783 curveto
+246.9350 156.2783 243.6024 159.6110 243.6024 163.6602 curveto
+243.6024 167.7095 246.9350 171.0421 250.9842 171.0421 curveto
+255.0335 171.0421 258.3661 167.7095 258.3661 163.6602 curveto
+closepath
+F dodashfill
+F dostroke
+% ---- Object #19:13 Obj Type: 6
+[5.2000 2.0800] 0 setdash
+302.6575 163.6602 moveto
+302.6575 159.6110 299.3248 156.2783 295.2756 156.2783 curveto
+291.2263 156.2783 287.8937 159.6110 287.8937 163.6602 curveto
+287.8937 167.7095 291.2263 171.0421 295.2756 171.0421 curveto
+299.3248 171.0421 302.6575 167.7095 302.6575 163.6602 curveto
+closepath
+F dodashfill
+F dostroke
+% ---- Object #20:14 Obj Type: 6
+[] 0 setdash
+346.9488 163.6602 moveto
+346.9488 159.6110 343.6162 156.2783 339.5669 156.2783 curveto
+335.5177 156.2783 332.1850 159.6110 332.1850 163.6602 curveto
+332.1850 167.7095 335.5177 171.0421 339.5669 171.0421 curveto
+343.6162 171.0421 346.9488 167.7095 346.9488 163.6602 curveto
+closepath
+F dofillsave
+F dostroke
+% ---- Object #21:15 Obj Type: 6
+1 1 setpen
+[10.3999 4.1600] 0 setdash
+302.6575 222.7154 moveto
+302.6575 218.6661 299.3248 215.3335 295.2756 215.3335 curveto
+291.2263 215.3335 287.8937 218.6661 287.8937 222.7154 curveto
+287.8937 226.7646 291.2263 230.0972 295.2756 230.0972 curveto
+299.3248 230.0972 302.6575 226.7646 302.6575 222.7154 curveto
+closepath
+F dodashfill
+F dostroke
+% ---- Object #22:16 Obj Type: 6
+2 2 setpen
+[] 0 setdash
+302.6575 281.7705 moveto
+302.6575 277.7212 299.3248 274.3886 295.2756 274.3886 curveto
+291.2263 274.3886 287.8937 277.7212 287.8937 281.7705 curveto
+287.8937 285.8197 291.2263 289.1524 295.2756 289.1524 curveto
+299.3248 289.1524 302.6575 285.8197 302.6575 281.7705 curveto
+closepath
+F dofillsave
+F dostroke
+% ---- Object #23:25 Obj Type: 3
+1 1 setpen
+gsave
+newpath
+303.4597 265.6124 moveto
+303.3052 265.4709 lineto
+302.9892 265.1962 lineto
+302.6638 264.9327 lineto
+302.3294 264.6806 lineto
+301.9864 264.4405 lineto
+301.6347 264.2121 lineto
+301.2758 263.9964 lineto
+300.9096 263.7934 lineto
+300.5365 263.6033 lineto
+300.1568 263.4262 lineto
+299.7709 263.2624 lineto
+299.3799 263.1123 lineto
+298.9840 262.9760 lineto
+298.5836 262.8535 lineto
+298.1791 262.7451 lineto
+297.7711 262.6509 lineto
+297.3595 262.5709 lineto
+296.9457 262.5054 lineto
+296.5301 262.4543 lineto
+296.1130 262.4178 lineto
+295.9041 262.4050 lineto
+295.2756 274.3886 lineto
+303.4597 265.6124 lineto
+closepath
+F doline
+grestore
+gsave
+newpath
+339.5669 171.0421 moveto
+299.9041 263.5886 lineto
+F dostroke
+grestore
+% ---- Object #24:34 Obj Type: 3
+gsave
+newpath
+343.6713 145.0021 moveto
+343.4740 144.9322 lineto
+343.0757 144.8028 lineto
+342.6730 144.6873 lineto
+342.2667 144.5860 lineto
+341.8566 144.4988 lineto
+341.4442 144.4261 lineto
+341.0296 144.3678 lineto
+340.6131 144.3240 lineto
+340.1954 144.2948 lineto
+339.7769 144.2802 lineto
+339.3575 144.2802 lineto
+338.9390 144.2948 lineto
+338.5213 144.3240 lineto
+338.1048 144.3677 lineto
+337.6901 144.4260 lineto
+337.2778 144.4987 lineto
+336.8676 144.5859 lineto
+336.4613 144.6872 lineto
+336.0588 144.8026 lineto
+335.6605 144.9320 lineto
+335.4631 145.0019 lineto
+339.5669 156.2783 lineto
+343.6713 145.0021 lineto
+closepath
+F doline
+grestore
+gsave
+newpath
+339.5669 134.1327 moveto
+339.5669 144.5283 lineto
+F dostroke
+grestore
+% ---- Object #25:40 Obj Type: 3
+gsave
+newpath
+299.3799 300.0217 moveto
+299.1827 299.9519 lineto
+298.7844 299.8225 lineto
+298.3817 299.7070 lineto
+297.9754 299.6057 lineto
+297.5653 299.5185 lineto
+297.1529 299.4458 lineto
+296.7382 299.3875 lineto
+296.3218 299.3437 lineto
+295.9041 299.3145 lineto
+295.4856 299.2998 lineto
+295.0661 299.2998 lineto
+294.6476 299.3144 lineto
+294.2299 299.3437 lineto
+293.8135 299.3874 lineto
+293.3988 299.4457 lineto
+292.9864 299.5184 lineto
+292.5763 299.6055 lineto
+292.1700 299.7068 lineto
+291.7675 299.8223 lineto
+291.3692 299.9516 lineto
+291.1717 300.0216 lineto
+295.2756 311.2980 lineto
+299.3799 300.0217 lineto
+closepath
+F doline
+grestore
+gsave
+newpath
+295.2756 289.1523 moveto
+295.2756 299.5480 lineto
+F dostroke
+grestore
+% ---- Object #26:42 Obj Type: 3
+gsave
+newpath
+299.3799 145.0021 moveto
+299.1827 144.9322 lineto
+298.7844 144.8028 lineto
+298.3817 144.6873 lineto
+297.9754 144.5860 lineto
+297.5653 144.4988 lineto
+297.1529 144.4261 lineto
+296.7382 144.3678 lineto
+296.3218 144.3240 lineto
+295.9041 144.2948 lineto
+295.4856 144.2802 lineto
+295.0661 144.2802 lineto
+294.6476 144.2948 lineto
+294.2299 144.3240 lineto
+293.8135 144.3677 lineto
+293.3988 144.4260 lineto
+292.9864 144.4987 lineto
+292.5763 144.5859 lineto
+292.1700 144.6872 lineto
+291.7675 144.8026 lineto
+291.3692 144.9320 lineto
+291.1717 145.0019 lineto
+295.2756 156.2783 lineto
+299.3799 145.0021 lineto
+closepath
+F doline
+grestore
+gsave
+newpath
+295.2756 134.1327 moveto
+295.2756 144.5283 lineto
+F dostroke
+grestore
+% ---- Object #27:43 Obj Type: 3
+gsave
+newpath
+255.0886 145.0021 moveto
+254.8913 144.9322 lineto
+254.4931 144.8028 lineto
+254.0904 144.6873 lineto
+253.6841 144.5860 lineto
+253.2740 144.4988 lineto
+252.8616 144.4261 lineto
+252.4469 144.3678 lineto
+252.0305 144.3240 lineto
+251.6127 144.2948 lineto
+251.1943 144.2802 lineto
+250.7748 144.2802 lineto
+250.3563 144.2948 lineto
+249.9386 144.3240 lineto
+249.5221 144.3677 lineto
+249.1075 144.4260 lineto
+248.6951 144.4987 lineto
+248.2850 144.5859 lineto
+247.8787 144.6872 lineto
+247.4761 144.8026 lineto
+247.0779 144.9320 lineto
+246.8804 145.0019 lineto
+250.9842 156.2783 lineto
+255.0886 145.0021 lineto
+closepath
+F doline
+grestore
+gsave
+newpath
+250.9842 134.1327 moveto
+250.9842 144.5283 lineto
+F dostroke
+grestore
+% ---- Object #28:28 Obj Type: 99
+% ---- Object #29:19 Obj Type: 6
+2 2 setpen
+406.0039 165.2823 moveto
+406.0039 161.2330 402.6713 157.9004 398.6220 157.9004 curveto
+394.5728 157.9004 391.2401 161.2330 391.2401 165.2823 curveto
+391.2401 169.3315 394.5728 172.6641 398.6220 172.6641 curveto
+402.6713 172.6641 406.0039 169.3315 406.0039 165.2823 curveto
+closepath
+F dofillsave
+F dostroke
+% ---- Object #30:20 Obj Type: 6
+450.2953 165.2823 moveto
+450.2953 161.2330 446.9626 157.9004 442.9134 157.9004 curveto
+438.8641 157.9004 435.5315 161.2330 435.5315 165.2823 curveto
+435.5315 169.3315 438.8641 172.6641 442.9134 172.6641 curveto
+446.9626 172.6641 450.2953 169.3315 450.2953 165.2823 curveto
+closepath
+F dofillsave
+F dostroke
+% ---- Object #31:21 Obj Type: 6
+494.5866 165.2823 moveto
+494.5866 161.2330 491.2539 157.9004 487.2047 157.9004 curveto
+483.1555 157.9004 479.8228 161.2330 479.8228 165.2823 curveto
+479.8228 169.3315 483.1555 172.6641 487.2047 172.6641 curveto
+491.2539 172.6641 494.5866 169.3315 494.5866 165.2823 curveto
+closepath
+F dofillsave
+F dostroke
+% ---- Object #32:23 Obj Type: 6
+450.2953 283.3925 moveto
+450.2953 279.3432 446.9626 276.0106 442.9134 276.0106 curveto
+438.8641 276.0106 435.5315 279.3432 435.5315 283.3925 curveto
+435.5315 287.4417 438.8641 290.7744 442.9134 290.7744 curveto
+446.9626 290.7744 450.2953 287.4417 450.2953 283.3925 curveto
+closepath
+F dofillsave
+F dostroke
+% ---- Object #33:17 Obj Type: 3
+1 1 setpen
+gsave
+newpath
+442.2854 264.0270 moveto
+442.0765 264.0398 lineto
+441.6594 264.0763 lineto
+441.2438 264.1273 lineto
+440.8302 264.1928 lineto
+440.4184 264.2728 lineto
+440.0104 264.3670 lineto
+439.6059 264.4754 lineto
+439.2055 264.5978 lineto
+438.8095 264.7341 lineto
+438.4186 264.8842 lineto
+438.0326 265.0480 lineto
+437.6531 265.2250 lineto
+437.2800 265.4151 lineto
+436.9136 265.6182 lineto
+436.5547 265.8338 lineto
+436.2030 266.0622 lineto
+435.8600 266.3023 lineto
+435.5256 266.5543 lineto
+435.2002 266.8179 lineto
+434.8841 267.0926 lineto
+434.7297 267.2341 lineto
+442.9134 276.0106 lineto
+442.2854 264.0270 lineto
+closepath
+F doline
+grestore
+gsave
+newpath
+398.6220 172.6641 moveto
+438.2848 265.2106 lineto
+F dostroke
+grestore
+% ---- Object #34:24 Obj Type: 3
+gsave
+newpath
+447.0177 264.7343 moveto
+446.8204 264.6645 lineto
+446.4222 264.5351 lineto
+446.0195 264.4196 lineto
+445.6132 264.3183 lineto
+445.2031 264.2311 lineto
+444.7907 264.1584 lineto
+444.3760 264.1001 lineto
+443.9596 264.0563 lineto
+443.5419 264.0271 lineto
+443.1234 264.0124 lineto
+442.7039 264.0124 lineto
+442.2854 264.0270 lineto
+441.8677 264.0562 lineto
+441.4513 264.1000 lineto
+441.0366 264.1583 lineto
+440.6242 264.2310 lineto
+440.2141 264.3181 lineto
+439.8078 264.4194 lineto
+439.4053 264.5348 lineto
+439.0070 264.6642 lineto
+438.8095 264.7341 lineto
+442.9134 276.0106 lineto
+447.0177 264.7343 lineto
+closepath
+F doline
+grestore
+gsave
+newpath
+442.9134 172.6641 moveto
+442.9134 264.2606 lineto
+F dostroke
+grestore
+% ---- Object #35:26 Obj Type: 3
+gsave
+newpath
+451.0975 267.2344 moveto
+450.9430 267.0929 lineto
+450.6270 266.8182 lineto
+450.3016 266.5547 lineto
+449.9672 266.3027 lineto
+449.6242 266.0625 lineto
+449.2725 265.8341 lineto
+448.9136 265.6184 lineto
+448.5474 265.4154 lineto
+448.1743 265.2253 lineto
+447.7946 265.0482 lineto
+447.4087 264.8844 lineto
+447.0177 264.7343 lineto
+446.6218 264.5980 lineto
+446.2214 264.4756 lineto
+445.8169 264.3672 lineto
+445.4089 264.2729 lineto
+444.9973 264.1929 lineto
+444.5835 264.1274 lineto
+444.1679 264.0764 lineto
+443.7508 264.0399 lineto
+443.5419 264.0271 lineto
+442.9134 276.0106 lineto
+451.0975 267.2344 lineto
+closepath
+F doline
+grestore
+gsave
+newpath
+487.2047 172.6641 moveto
+447.5419 265.2106 lineto
+F dostroke
+grestore
+% ---- Object #36:36 Obj Type: 3
+gsave
+newpath
+402.7264 146.6241 moveto
+402.5291 146.5542 lineto
+402.1308 146.4248 lineto
+401.7281 146.3093 lineto
+401.3218 146.2080 lineto
+400.9117 146.1208 lineto
+400.4993 146.0481 lineto
+400.0847 145.9898 lineto
+399.6682 145.9461 lineto
+399.2505 145.9168 lineto
+398.8320 145.9022 lineto
+398.4126 145.9022 lineto
+397.9941 145.9168 lineto
+397.5764 145.9460 lineto
+397.1599 145.9898 lineto
+396.7452 146.0480 lineto
+396.3329 146.1207 lineto
+395.9227 146.2079 lineto
+395.5164 146.3092 lineto
+395.1139 146.4246 lineto
+394.7156 146.5540 lineto
+394.5182 146.6239 lineto
+398.6220 157.9004 lineto
+402.7264 146.6241 lineto
+closepath
+F doline
+grestore
+gsave
+newpath
+398.6220 135.7547 moveto
+398.6220 146.1504 lineto
+F dostroke
+grestore
+% ---- Object #37:37 Obj Type: 3
+gsave
+newpath
+447.0177 146.6241 moveto
+446.8204 146.5542 lineto
+446.4222 146.4248 lineto
+446.0195 146.3093 lineto
+445.6132 146.2080 lineto
+445.2031 146.1208 lineto
+444.7907 146.0481 lineto
+444.3760 145.9898 lineto
+443.9596 145.9461 lineto
+443.5419 145.9168 lineto
+443.1234 145.9022 lineto
+442.7039 145.9022 lineto
+442.2854 145.9168 lineto
+441.8677 145.9460 lineto
+441.4512 145.9898 lineto
+441.0366 146.0480 lineto
+440.6242 146.1207 lineto
+440.2141 146.2079 lineto
+439.8078 146.3092 lineto
+439.4052 146.4246 lineto
+439.0070 146.5540 lineto
+438.8095 146.6239 lineto
+442.9134 157.9004 lineto
+447.0177 146.6241 lineto
+closepath
+F doline
+grestore
+gsave
+newpath
+442.9134 135.7547 moveto
+442.9134 146.1504 lineto
+F dostroke
+grestore
+% ---- Object #38:38 Obj Type: 3
+gsave
+newpath
+491.3090 146.6241 moveto
+491.1118 146.5542 lineto
+490.7135 146.4248 lineto
+490.3108 146.3093 lineto
+489.9045 146.2080 lineto
+489.4944 146.1208 lineto
+489.0820 146.0481 lineto
+488.6674 145.9898 lineto
+488.2509 145.9461 lineto
+487.8332 145.9168 lineto
+487.4147 145.9022 lineto
+486.9952 145.9022 lineto
+486.5767 145.9168 lineto
+486.1590 145.9460 lineto
+485.7426 145.9898 lineto
+485.3279 146.0480 lineto
+484.9155 146.1207 lineto
+484.5054 146.2079 lineto
+484.0991 146.3092 lineto
+483.6966 146.4246 lineto
+483.2983 146.5540 lineto
+483.1009 146.6239 lineto
+487.2047 157.9004 lineto
+491.3090 146.6241 lineto
+closepath
+F doline
+grestore
+gsave
+newpath
+487.2047 135.7547 moveto
+487.2047 146.1504 lineto
+F dostroke
+grestore
+% ---- Object #39:41 Obj Type: 3
+gsave
+newpath
+447.0177 301.6438 moveto
+446.8204 301.5739 lineto
+446.4222 301.4445 lineto
+446.0195 301.3290 lineto
+445.6132 301.2277 lineto
+445.2031 301.1405 lineto
+444.7907 301.0678 lineto
+444.3760 301.0095 lineto
+443.9596 300.9657 lineto
+443.5419 300.9365 lineto
+443.1234 300.9219 lineto
+442.7039 300.9219 lineto
+442.2854 300.9365 lineto
+441.8677 300.9657 lineto
+441.4512 301.0094 lineto
+441.0366 301.0677 lineto
+440.6242 301.1404 lineto
+440.2141 301.2276 lineto
+439.8078 301.3289 lineto
+439.4052 301.4443 lineto
+439.0070 301.5737 lineto
+438.8095 301.6436 lineto
+442.9134 312.9200 lineto
+447.0177 301.6438 lineto
+closepath
+F doline
+grestore
+gsave
+newpath
+442.9134 290.7744 moveto
+442.9134 301.1700 lineto
+F dostroke
+grestore
+% ---- Object #40:30 Obj Type: 2
+save
+0 setgray
+mark /|___Helvetica /Helvetica T cvRecFont
+12 fts /|___Helvetica findfont exch scalefont setfont
+0 setgray
+142 105 moveto
+(a\))
+F F 12 0 2 0 0 fittext
+restore
+% ---- Object #41:31 Obj Type: 2
+save
+0 setgray
+mark /|___Helvetica /Helvetica T cvRecFont
+12 fts /|___Helvetica findfont exch scalefont setfont
+0 setgray
+290 104 moveto
+(b\))
+F F 12 0 2 0 0 fittext
+restore
+% ---- Object #42:44 Obj Type: 2
+save
+0 setgray
+mark /|___Helvetica /Helvetica T cvRecFont
+12 fts /|___Helvetica findfont exch scalefont setfont
+0 setgray
+437 104 moveto
+(c\))
+F F 12 0 2 0 0 fittext
+restore
+% ---- Object #43:29 Obj Type: 4
+2 2 setpen
+339.9449 59.0551 74.1969 531.4960 rectpath
+F dostroke
+origmtx setmatrix
+systemdict /setpacking known {origpack setpacking} if end
+showpage
+%%EndDocument:

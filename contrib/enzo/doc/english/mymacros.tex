@@ -1,0 +1,49 @@
+% %W%	%G%
+
+% some useful macros           --- js, 10.2.94 ---
+
+\def\rem#1{\relax}
+\newcommand{\nepomuk}{{\sc Nepomuk }}
+\newcommand{\knete}{{\sc Enzo }}
+\newcommand{\ENZO}{{\sc Enzo }}
+\newcommand{\CuPit}{{\sc CuPit }}
+\newcommand{\noch}[1]{{\dots\sf #1 \dots}}
+\newcommand{\taba} {{\hspace*{0.5cm} }}
+\newcommand{\tabb} {{\hspace*{1.00cm} }}
+
+
+\newcommand{\msk}[1]{$\mit #1$}
+ 
+\newcommand{\algo}[3]{
+{
+\begin{center}
+\fbox{
+\parbox{#1}{
+	\vspace*{0.3cm}
+	\centerline{\fbox{ {\bf Algorithm }{\it #2}: }}
+	\vspace*{0.5cm}
+	#3
+	\vspace*{0.3cm}
+
+}}
+\end{center}
+}
+}
+
+\newenvironment{moduledoc}[2]%
+{\subsubsection{#1}
+ key word: {\bf #2} % \index{Module!#2}
+ \begin{list}{???}%
+ {\renewcommand{\makelabel}[1]{##1\hfill}
+  \newcommand{\KeyWord}[1]{ {\tt ##1}
+                            \index{Parameter!##1 (#2)}
+                            \index{#2!##1}
+                          }
+  \newcommand{\optParam}[1]{[{\em ##1\/}]}
+  \newcommand{\Param}[1]{{\em ##1\/}}
+  }
+ }{\end{list}}
+
+
+ 
+

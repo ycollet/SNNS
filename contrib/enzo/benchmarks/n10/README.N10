@@ -1,0 +1,26 @@
+Encoder-Decoder problem
+
+The encoder-decoder network has the same input dimension as output dimension.
+The task is to reproduce the same output vector  as the given input vector.
+Input patterns have one active unit, i.e. 1-out-of-n coding.
+The hidden layer is a bottle neck, with less unit than the input layer.
+It has to  use a different coding, to represent all patterns.
+Shortcut connections are not allowed !
+The size of the original network is 10-5-10, with 100 connections.
+The genetic algorithm provides with no effort of parameter tuning
+the  topology 10-3-10 with 32 connections or if using input unit mutation
+the  topology 9-4-10 with 42 connections.
+
+
+Note that input units are not removed totally from the network,
+but rather all their connection are cut off. They get the unit name  <xxx>.
+If you analyze the network with the graphical user interface of SNNS,
+select in the display setup <show name> to easily identify removed input units.
+
+If you want to use the X-history output window, use for all benchmarks
+the command file with an additional <x> as prefix.
+
+Start the  benchmark with:
+
+	enzo n10.cmd    or        enzo xn10.cmd  or
+       enzo  n10i.cmd   or        enzo xn10i.cmd  

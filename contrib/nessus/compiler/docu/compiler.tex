@@ -1,0 +1,238 @@
+\chapter{Der {\bf Nessus}-Compiler}
+\label{Compiler}
+\label{Umgebung}
+
+\section{Aufruf des Compilers} 
+\label{Aufruf}\label{CompilerAufruf}
+
+
+Der {\bf Nessus}-Compiler wird mit
+
+\centerline{  {\bf nessus} source\_file $[$options$]$}
+
+aufgerufen. Dabei steht
+
+\begin{itemize}
+  \item ``source\_file'' steht f"ur den Namen der Datei,\index{Quellprogramm} die das {\bf Nessus}-Programm
+	enth"alt\footnote{Vorschlag: {\bf Nessus}-Quelldateien immer mit Extension {\bf '.n'}
+	bezeichnen.} und\index{Dateiname!Quelle}
+  \item ``options'' f"ur die Optionen. Diese Angabe darf entfallen,  kann aber auch eine oder
+	mehrere der in den n"achsten Abschnitten beschriebenen  Optionen sein.
+\end{itemize}
+
+Die Reihenfolge, in der die in den n"achsten Abschnitten beschriebenen
+Optionen angegeben werden, ist beliebig.
+
+
+\subsection{Spezifikation der Ausgabedatei}
+	 
+Die Option 
+
+\centerline{{\bf -o} target\_output\_file}
+
+spezifiziert die Datei,\index{Datei!Ausgabe} in die der vom Compiler
+erzeugten Code geschrieben werden soll.	 Existiert diese Datei
+bereits, wird sie "uberschrieben, und zwar {\it ohne vorherige
+R"uckfrage\/}. Wird diese Option nicht 	angegeben oder kann der
+Compiler die Ausgabedatei nicht erzeugen\footnote{Ursache davon ist
+normalerweise ein Fehler bei der Pfadangabe.}, wird die Ausgabe in
+eine Datei ``source\_file{\bf .snns}'' geschrieben.
+\index{Dateiname!Ausgabe} 	\addtocounter{footnote}{-1}
+
+
+\subsection{Definition aktueller Parameterwerte}
+
+Die Werte der Parameter eines {\bf Nessus}-Programms k"onnen -- wie
+schon in Abschnitt~\ref{runtimeparameter} beschrieben -- zur
+"Ubersetzungszeit festgelegt werden.  Wenn Parametern, f"ur die kein
+Standardwert vereinbart wurde, auch zur "Ubersetzungszeit kein Wert
+zugewiesen wird, sind sie undefiniert. Jede Verwendung dieser
+Parameter im Programm f"uhrt dann zu einer Fehlermeldung. Die Option
+
+\centerline{{\bf -d} constant \{ constant \}}
+
+"ubergibt aktuelle  Werte an die Parameter des Programms. Die Anzahl
+der Werte und der Parameter des Programms mu"s genau "ubereinstimmen.
+
+Die Werte ``constant'' m"ussen als einfache Literale\index{Literal!als
+Parameterwert} angegeben werden. Ausdr"ucke wie zum Beispiel ``3 + 5''
+sind nicht erlaubt. Die Literale m"ussen von einem der Datentypen
+
+\begin{itemize}
+  \item ganze Zahlen ({\bf int}),\index{int}
+  \item rationale Zahlen\index{Zahl!rationale} ({\bf float})\index{float} oder
+  \item Zeichenketten\index{Zeichenkette!als Programmparameter} ({\bf string})\index{string} 
+\end{itemize}
+
+sein. Zeichenketten d"urfen ohne ``~''  geschrieben werden, wenn sie
+keine Sonderzeichen enthalten. Die Hochkommas werden bei der
+Parameter"ubergabe von UNIX entfernt. 
+
+
+
+\subsection{Auflisten des Quellprogramms}
+
+Die Option 
+
+\centerline{{\bf -l} $[$listing\_output\_file$]$}
+
+spezifiziert die Datei,\index{Datei!Compiler-Listing} in die die vom
+Compiler erzeugte Auflistung des Quellprogramms geschrieben werden
+soll. In diese Auflistung werden auch die Fehlermeldungen des
+Compilers eingetragen.
+
+Wird der Dateiname\index{Datei!Listing} in dieser Option nicht
+angegeben oder kann der Compiler die Ausgabedatei nicht erzeugen,
+erscheint die 	Auflistung auf dem Bildschirm ({\it standard
+output\/}). Sie kann auch durch geeignete Betriebssystemkommandos in
+eine andere Datei umgelenkt werden (etwa ``$>$'' unter Unix oder
+``assign'' unter anderen Betriebssystemen). Fehlt diese Option ganz,
+wird das Quellprogramm nicht aufgelistet.
+
+
+\subsection{Auflisten des Quellprogramms in \TeX-Format}
+
+Die Option 
+
+\centerline{{\bf -t}}
+
+legt fest, da"s der Compiler das Quellprogramm in
+\TeX-Format\index{TeX@\TeX}\index{LaTeX@\LaTeX}
+(siehe~\cite{knu84,lam86}) auflisten soll.  	Diese Option war
+zun"achst nur f"ur diese Dokumentation gedacht, bleibt jetzt aber
+implementiert, um {\bf Nessus}-Programmierern die Dokumentation {\it
+ihrer\/} Programme zu 	erleichtern. Bei der Verwendung dieser Option
+m"ussen folgende Punkte beachtet werden:
+
+\begin{itemize}
+	  \item Die Option ``{\bf -t}'' sollte nur gemeinsam mit der Option ``{\bf -l}'' angegeben
+		werden. Sonst wird das Quellprogramm gar nicht aufgelistet und die \TeX-Option\index{TeX@\TeX}\index{LaTeX@\LaTeX}
+		bleibt wirkungslos.
+	  \item Fehlermeldungen, die ja auch in der Auflistung des Quellprogramms eingetragen
+		werden, erscheinen nicht in \TeX-Format.\index{TeX@\TeX}\index{LaTeX@\LaTeX} Das hei"st,  mit \LaTeX~\index{TeX@\TeX}\index{LaTeX@\LaTeX} k"onnen nur
+		korrekte Programme formatiert werden. 
+	  \item Die Auflistung des Quellprogramms wird durch  die \TeX-Option\index{TeX@\TeX}\index{LaTeX@\LaTeX} im einzelnen
+		folgenderma"sen beeinflu"st:
+		\begin{itemize}
+		  \item Die Zeilen des Quellprogramms werden nicht numeriert,
+		  \item Schl"usselworte werden fett gedruckt und
+		  \item Kommentare\index{Kommentar!in \TeX-Format} werden in kleiner Schrift gedruckt.
+		\end{itemize}
+		Die Auflistung des Quellprogramms sieht dann nach der Formatierung mit \LaTeX~\index{TeX@\TeX}\index{LaTeX@\LaTeX} so
+		aus, wie die Beispiele in dieser Dokumentation. 
+	  \item Das Format des Quellprogramm, also Einr"ucken von geschachtelten Anweisungen und
+		"Ahnliches, bleibt erhalten. Allerdings 
+		\begin{itemize}
+		  \item werden mit Tabulator-Stops formatierte Eingaben nicht korrekt einger"uckt,
+			ein ``$\backslash$t'' wird in ein Leerzeichen umgewandelt,
+		  \item sollten Kommentare nicht "uber mehrere Zeilen gehen, sie erscheinen sonst in
+			der Auflistung in einer Zeile und werden dadurch normalerweise zu lang,
+		  \item d"urfen Kommentare und Zeichenketten nicht das Symbol {\bf \&}
+			enthalten\footnote{Kommentare und Zeichenketten werden in {\bf
+			$\backslash$verb\&\dots\&} eingeschlossen.},
+		  \item k"onnen sich durch Leerzeichen untereinander geschriebene Texte durch den
+			\LaTeX-Blocksatz\index{TeX@\TeX}\index{LaTeX@\LaTeX} verschieben, wenn davor unterschiedlicher Text kommt -- das
+			kann zum Beispiel bei rechtsb"undig geschriebenen Kommentaren\index{Kommentar!in \TeX-Format} am Ende von
+			{\bf Nessus}-Anweisungen der Fall sein\footnote{Zur Anschauung dienen auch
+			hier die Beispiele dieser Dokumentation: die Kommentare in den
+			Quellprogrammen {\it waren\/} alle b"undig geschrieben.},
+		  \item newline-Symbole werden in {\bf $\backslash\backslash$} "ubersetzt. Mehrere
+			solcher Symbole hintereinander sind jedoch in \TeX~\index{TeX@\TeX}\index{LaTeX@\LaTeX} nicht zul"assig. Deshalb
+			mu"s  die \TeX-Ausgabe\index{TeX@\TeX}\index{LaTeX@\LaTeX} eines Quellprogramms, das Leerzeilen enth"alt,
+			nachtr"aglich bearbeitet werden.
+		\end{itemize}
+	\end{itemize}
+
+
+\clearpage
+
+
+\section{Fehlermeldungen}
+
+Es gibt drei Klassen von Fehlern, die der {\bf Nessus}-Compiler in
+einem Programm entdecken kann:
+
+\begin{description}
+  \item[{\bf fatal error}:]  So werden Syntaxfehler bezeichnet, die so gravierend sind, da"s der Parser
+		Schwierigkeiten haben kann, die Programmerkennung fortzusetzen. Ein solcher Fehler
+		\begin{itemize}
+		  \item kann zu Folgefehlern f"uhren, insbesondere wenn er ein wichtiges Satzzeichen
+			oder Schl"usselsymbol betrifft,
+		  \item verhindert alle  weiteren semantischen Aktionen (Typ"uberpr"ufung,
+			Netzwerkerzeugung) und
+		  \item kann im schlimmsten Fall sogar die "Ubersetzung sofort abbrechen.
+		\end{itemize}
+  \item[{\bf serious error}:]  Das ist die Bezeichnung f"ur semantische Fehler, die 
+		\begin{itemize}
+		  \item verhindern, da"s das Netzwerk erzeugt wird, aber doch noch weitere
+			semantische Aktionen wie Typ"uberpr"ufung oder Auswertung von Ausdr"ucken
+			zulassen,
+		  \item normalerweise weitere semantische Fehler zur Folge haben, weil
+			Ausdr"ucke nicht ausgewertet werden konnten, aber
+		  \item die "Ubersetzung nicht unterbrechen.
+		\end{itemize}
+  \item[{\bf warning}:] So werden Meldungen bezeichnet, die der Compiler ausgibt, sobald er eine
+		Anomalie entdeckt, die er selber korrigieren zu k"onnen glaubt. Das k"onnen 
+		\begin{itemize}
+		  \item behebbare Typfehler, etwa {\bf float}\index{float} statt {\bf int},\index{int}
+		  \item Mehrfachdefinitionen von Konstanten\index{Konstante!als Programmparameter!Neudefinition} (alter Wert wird "uberschrieben) oder
+			Verbindungen\index{Verbindung!mehrfach definierte} (schon definierte Verbindung wird vorher entfernt)
+		\end{itemize}
+		und "ahnliche Fehler sein. Diese Fehler haben auf die  "Ubersetzung keinen Einflu"s,
+		das Netz wird erzeugt. Allerdings k"onnen sie ein Indiz f"ur semantische Fehler des
+		Programms sein. In einem solchen Fall sollte man genau pr"ufen, ob auch
+		wirklich das beabsichtigte Netz erzeugt wurde.
+\end{description}
+
+Au"serdem gibt es noch durch die Umgebung verursachte Fehler. Diese
+Fehler sind "ublicherweise
+
+\begin{itemize}
+  \item Warnungen, etwa, da"s keine Auflistung des Quellprogramms erzeugt werden kann, oder
+  \item katastrophale Fehler, wie nicht gefundenes Quellprogramm oder Platzmangel.
+\end{itemize} 
+
+Bei katastrophalen Fehlern wird die "Ubersetzung sofort abgebrochen.
+Die Warnungen dagegen sind normalerweise nur Sch"onheitsfehler bei der
+"Ubersetzung, die auf das erzeugte Netz keinen Einflu"s haben.
+
+
+
+\section{Zusammenspiel mit Emacs}
+
+Unter vielen Unix-Systemen ist der Emacs\footnotemark-Editor
+verf"ugbar.  \footnotetext{Copyright (C) 1988 Free Software
+Foundation, Inc.} Dieser Editor verf"ugt "uber einen eingebauten
+Parser, der in der Lage ist, Fehlermeldungen, die er von einem anderen
+Proze"s empf"angt, zu analysieren. Au"serdem ist es m"oglich,
+"Ubersetzungsprozesse in Emacs-Fenstern zu aktivieren. Damit entsteht
+eine sehr komfortable Programmierumgebung:
+
+\begin{enumerate}
+  \item Starte {\bf emacs} source\_file.
+  \item Ediere die Datei.
+  \item Erzeuge ein neues Fenster im Editor mit {\bf ESC-x compile}.
+Emacs fragt jetzt nach dem "Ubersetzungskommando. 
+  \item Gib das "Ubersetzungskommando ein, wie sonst auch (siehe Kapitel~\ref{Aufruf}).
+  \item Mit {\bf $<$ctrl$>$-x-`} wird der Parser aufgerufen, der die
+Fehlermeldungen analysiert. Emacs springt 
+        automatisch zu der Zeile, in der der erste Fehler gefunden wurde.
+  \item Mit {\bf $<$ctrl$>$-x-`} sucht Emacs dann den jeweils n"achsten Fehler.
+  \item Der "Ubersetzungsproze"s l"auft parallel zur Fehlerkorrektur weiter.
+\end{enumerate}
+
+Besonders wenn ein Netz aus verschiedenen {\bf Nessus}-Programmen
+besteht ist diese Programmierumgebung sehr hilfreich, da Emacs einer
+Fehlermeldung des {\bf Nessus}-Compilers auch den jeweiligen
+Dateinamen einer Teilnetzdefinition entnehmen kann. Auch falls der
+{\bf Nessus}-Compiler Fehler in einer Teilnetzdefinition entdeckt,
+kann man mit {\bf $<$ctrl$>$-x-`} zu den Fehlerstellen springen, da
+Emacs die entsprechende Datei l"adt, in der der Fehler gefunden wurde.
+
+Dieser Mechanismus ist auch f"ur die Dateien implementiert, die in
+{\bf Nessus}-Programmen eingelesen werden. Wenn etwa in einer {\bf
+map}-Konstanten, die aus einer Datei eingelesen wird, ein Fehler
+auftritt, kann Emacs die betreffende Datei laden und an die genaue
+Fehlerposition springen.
+
+

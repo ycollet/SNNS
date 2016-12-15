@@ -1,0 +1,2 @@
+Real FUNCTION sigmoid (Real CONST x)       IS EXTERNAL;
+Real FUNCTION sigmoidPrime (Real CONST x)  IS EXTERNAL;

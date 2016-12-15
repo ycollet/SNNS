@@ -1,0 +1,140 @@
+% Document Type: LaTeX
+% Master File: nessus.tex
+% 
+% Date: %G
+% File: %W
+
+\documentstyle[a4,11pt,parskip,twoside,german,epsf]{report}
+
+\makeindex
+
+\pagestyle{headings}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% MACRO \screendump
+% =================
+\newcommand{\screendump}[2]{%
+  \begingroup                % keep redefinition of \epsfsize local
+    \def\epsfsize##1##2{#1##1}% scale to #1% of natural size
+    \epsfbox{#2}%            % read image
+  \endgroup
+}
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% MARGIN - Values
+% ===============
+\evensidemargin0cm
+\oddsidemargin0.6cm
+\setlength{\textwidth}{15cm}
+%\sloppy
+    
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% COUNTER - VALUES
+% =================
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+
+
+
+\hyphenation{
+	An-schlies-send
+	 An-wei-sungen
+	 Ausgabe-puf-fe-rung
+	Datei-format
+	 Daten-typ
+	 Daten-typen
+	 da-zu
+	 Defi-nition
+	 Defi-nitions-aus-druck
+	 des-halb
+	 Design-fehler
+	 de-ter-mi-ni-sti-schen
+	 dient
+	ent-hal-ten
+	 er-leich-tert
+	Feh-ler-mel-dun-gen
+	 Funktions-definitionen
+	gleich
+	 glei-cher
+	 Gram-matik-symbol
+	Im-ple-men-tie-rung
+	 ini-tia-li-siert
+	 Ini-tia-li-sie-rungs-rou-ti-ne
+	je-weils
+	kon-nek-tio-ni-sti-sch
+	 kon-nek-tio-ni-sti-sche
+	Leer-zeichen
+	 lo-gi-sche
+	Netz-werk-aus-gabe
+	 Netz-wer-ke
+	 Netz-werk-ein-gabe
+	Opera-tor
+	Pa-ra-me-ter-Value-Type
+	 Para-meter-werte-kombi-na-tionen
+	schlecht
+	 selbst-defi-nier-ten
+	 Sortier-kri-te-riums
+	 Struk-tur
+	 Struktur-defi-nitions-block
+	 Struk-tur-gleich-heit
+	tabel-len-ge-steuer-ten
+	 Teil-netz-defi-nitionen
+	 typi-sche
+	Zeichen-ketten-operationen
+	 Zuweisungs-operator
+	 Zuweisungs-operators
+}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% D O C U M E N T
+% ===============
+\begin{document}
+
+%\bibliographystyle{alpha}
+
+%\nocite{som89,bron73,rum861,rum862,rum863,rum88,lin88,car88,gal88,fel01,fel02,kem88,hec88,joh75,les75,hop79,ker781,aho86,pag81,sch85,god87,zip86,kor89,jen75,ker84,zel89,bay89,wil88,bis86,felx,griex,sam69,ten81,bor79,prat84,wel77,ber83,wir82,hah81,abe85,hin89,bal86,kor89b,wal85,rum85,alm90,koe88,rcs86,f1}
+%\nocite{kor89b,zel89,bay89,ros59,lam86,god88,god89,aho86,hop79,ker781}
+%\nocite{som89,rum861,rum862,rum863,sco1,sco2,sco3,sco4,sco5,burd89,coff88}
+%\nocite{wolf90,hill86,gab86,hil85,rit90}
+
+
+\include{titel}
+
+\clearpage
+\pagenumbering{roman}
+
+\renewcommand{\baselinestretch}{0.6}\small\normalsize
+\tableofcontents
+\thispagestyle{empty}
+\renewcommand{\baselinestretch}{1.0}\small\normalsize
+
+\clearpage
+\pagenumbering{arabic}
+
+\include{einleitung}
+\include{aufbau}
+\include{konstanten}
+\include{struktur}
+\include{ausdruecke}
+\include{topologie}
+\include{parameter}
+\include{compiler}
+
+\appendix
+
+\include{syntax}
+
+\bibliography{nessus}
+\input{nessus.ind}
+
+\end{document}
+
+

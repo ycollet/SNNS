@@ -1,0 +1,38 @@
+#
+#	ENZO Version 1.0 README file
+#
+
+
+The ENZO directory consists of the following files and directories: 
+
+# Files
+
+README		this file 
+makefile        the makfile to compile the executables knete and xgraf
+		type <make>       to compile knete
+		type <make xgraf> to compile xgraf
+		xgraf if necessary for x-window history.
+		
+
+#directories
+
+src	contains all the sources, each operator library is located
+	in a own subdirectory. 
+
+doc     contains the documentation. Note that the LaTeX-description of
+	the operators' modules is located in the specific subdirectory
+	in thesrc directory.
+
+benchmarks  contains several subdirectories with benchmarks. See the
+	    documentation for the description of the benchmarks.
+		
+
+NOTE:  ENZO is implemented in ANSI-C, but was only tested extensivly
+	on SUN-Workstations (SunOS). It was also used under Solaris
+	as well as Linux. If problems occur send a message
+	to enzo-request@ira.uka.de
+	or the public mailing list enzo@ira.uka.de.
+
+
+
+# EOF

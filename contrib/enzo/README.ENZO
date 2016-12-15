@@ -1,0 +1,145 @@
+#
+#	ENZO Version 1.0 README file
+#
+
+ENZO  is the implementation of a  genetic algorithm  (or evolutionary
+strategy).  It  is  tailored  to  neural  network  optimization, e.g.,
+optimize the topology as well as the performance.
+
+ENZO  was  designed  and  implemented  at  the  Institute  for Logic,
+Complexity and Deduction Systems at the University of Karlsruhe.
+This version  of  ENZO uses the  SNNSv4.0 as neural network simulator
+and supports learning using a CuPit program. 
+Each archive  (ENZO.tar.Z or ENZO.tar.gz) contains all sources of the
+program and documentation.
+You  should locate  ENZO  (resp. the tar-file) on the same  directory
+level as  SNNSv4.0.  See the  README  file for more information after
+extraction.
+
+ENZO is available at the same site as SNNSv4.0. Since it uses SNNSv4.0
+we share their ideas of license agreement.		
+
+
+
+**********************************************************************
+	ENZO License Agreement for ENZO version 1.0
+**********************************************************************
+
+ENZO  is (Copyright) 1994-95  University of Karlsruhe,  Institute  for
+Logic, Complexity  and  Deduction Systems (ILKD),  Am Fasanengarten 5,
+D-76131 Karlsruhe, Fed.  Rep.  of Germany.
+
+ENZO is distributed by the University of Karlsruhe  as `Free Software'
+in a licensing agreement similar in some  aspects  to  the GNU General
+Public License.  There are a number of important differences, however,
+regarding  modifications and distribution of  ENZO to  third  parties.
+Note also that ENZO is not part of the  GNU software nor is any of its
+authors connected with the Free  Software  Foundation. We  only  share
+some common beliefs about  software distribution.  Note  further  that
+ENZO is NOT PUBLIC DOMAIN.
+
+The ENZO License is designed to make sure that you have the freedom to
+give away verbatim copies of ENZO, that you receive source code or can
+get it if  you want  it and that you  can change the software for your
+personal use; and that you know you can do these things.
+
+We  protect  your  and  our rights  with  two steps: (1) copyright the
+software,  and  (2) offer  you this  license  which  gives  you  legal
+permission to copy and distribute the unmodified software or modify it
+for your own purpose.
+
+In contrast to the GNU license we do not allow  modified copies of our
+software  to  be  distributed.  You  may,  however,   distribute  your
+modifications  as separate  files (e.g. patch files)  along  with  our
+unmodified ENZO  software. We  encourage users  to  send  changes  and
+improvements  which would  benefit many other users to us  so that all
+users   may  receive  these  improvements  in  a  later  version.  The
+restriction  not  to distribute  modified  copies  is  also useful  to
+prevent bug reports from someone else's modifications.
+
+Also,  for  our  protection,  we  want to make  certain  that everyone
+understands  that  there  is  NO  WARRANTY  OF ANY KIND  for the  ENZO
+software.
+
+
+**********************************************************************
+	ENZO License Agreement
+**********************************************************************
+
+1.  This  License  Agreement  applies  to  the ENZO  program  and  all
+accompanying  programs and  files that are  distributed with  a notice
+placed by the copyright holder  saying it may be distributed under the
+terms of  the ENZO  License.  ``ENZO'',  below,  refers  to  any  such
+program or work, and a ``work based on ENZO'' means either ENZO or any
+work containing ENZO  or a  portion  of it,  either  verbatim or  with
+modifications.  Each licensee is addressed as ``you''.
+
+2.  You may copy and distribute verbatim copies  of ENZO's source code
+as you receive it,  in any medium, provided that you conspicuously and
+appropriately publish on each copy an appropriate copyright notice and
+disclaimer of warranty; keep intact all the notices that refer to this
+License  and  to  the absence  of  any  warranty; and  give any  other
+recipients of ENZO a copy of this license along with ENZO.
+
+3. You  may modify  your copy or copies of  ENZO or  any portion of it
+only for your own use. You  may not distribute modified copies of ENZO
+You may,  however, distribute your modifications as separate files (e.
+patch  files)  along  with  the  unmodified  ENZO  software.  We  also
+encourage users to  send changes  and improvements which would benefit
+many  other  users  to  us  so  that   all  users  may  receive  these
+improvements  in a later  version. The restriction not  to  distribute
+modified copies is also  useful  to prevent bug  reports from  someone
+else's modifications.
+
+4. If you distribute copies of ENZO you may not charge anything except
+the cost for the media and  a fair estimate  of the  costs of computer
+time or network time directly attributable to the copying.
+
+5. You may not  copy, modify,  sublicense, distribute or transfer ENZO
+except  as  expressly  provided  under  this   License.   Any  attempt
+otherwise to copy,  modify, sublicense, distribute or transfer ENZO is
+void, and will automatically terminate your rights to  use  ENZO under
+this License.  However, parties who have received copies, or rights to
+use  copies, from you  under this License will not have their licenses
+terminated so long as such parties remain in full compliance.
+
+6.  By copying, distributing or modifying ENZO (or any  work based  on
+ENZO) you indicate your  acceptance of this license to do  so, and all
+its terms and conditions.
+
+7. Each time you redistribute ENZO (or any  work based  on  ENZO), the
+recipient automatically receives a license from the  original licensor
+to  copy,  distribute  or  modify ENZO  subject  to  these  terms  and
+conditions.   You may not  impose  any  further  restrictions  on  the
+recipients' exercise of the rights granted herein.
+
+8.  Incorporation of  ENZO  or  parts of  it  in  commercial  programs
+requires a special  agreement  between the  copyright holder  and  the
+Licensee in writing and ususally involves the payment of license fees.
+If  you want to incorporate ENZO or parts of it in commercial programs
+write to the author about further details.
+
+9. Because ENZO is licensed free of charge, there is  no warranty  for
+ENZO, to the extent permitted by applicable law. The copyright holders
+and/or other parties  provide  ENZO ``as  is'' without warranty of any
+kind, either expressed or implied,  including, but not limited to, the
+implied warranties of  merchantability and  fitness  for a  particular
+purpose. The entire risk as to  the quality and performance of ENZO is
+with you. Should the program prove  defective, you assume the cost  of
+all necessary servicing, repair or correction.
+
+10. In  no event will any copyright holder, or any other party who may
+redistribute ENZO as permitted  above, be  liable to you for  damages,
+including  any  general, special,  incidental or consequential damages
+arising out of the use or inability  to  use  ENZO (including  but not
+limited to  loss of data or  data being rendered inaccurate  or losses
+sustained by you or third parties or a failure of ENZO to operate with
+any other  programs),  even  if such holder or  other  party has  been
+advised of the possibility of such damages.
+
+
+
+
+
+
+# EOF

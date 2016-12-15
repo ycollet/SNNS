@@ -1,0 +1,19 @@
+1. Installation des Compilers:
+	- cd sources
+	- make nessus
+	--> compiler steht jetzt unter bin/nessus
+
+2. Benutzerhandbuch bitte anfordern bei
+	SNNS-Group
+	c/o Dr. Andreas Zell
+	Institut f"ur parallele und verteilte H"ochstleistungsrechner
+	Universit"at Stuttgart
+	Breitwiesenstr 20-22
+	7000 Stuttgart 80
+	(Das Manual wird z.Z. nicht verlegt, es sind aber noch einige Exemplare
+	vorraetig.
+   oder ausdrucken, die latex Quelldateien stehen im Unterverzeichnis docu.
+
+
+
+

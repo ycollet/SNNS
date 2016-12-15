@@ -1,0 +1,48 @@
+\begin{moduledoc}{Look for the optimal number of hidden units.}{optInitPop}
+  \item[\KeyWord{maxtss} \optParam{ x } ]~\\
+    This parameter sets the value for the stop criterion of the learning module.
+    In this module it is used to decide if a net can learn the patterns or not.\\
+    Default: 0.5
+  \item[\KeyWord{learnModul} \optParam{ x } ]~\\
+    This string sets the name of the module, which
+    contains the learning function during the optimization phase.\\
+    Default: {\tt learnSNNS}
+ \end{moduledoc}
+The module {\it optInitPop} tries to find the minimum number of hidden units,
+which are required to learn the given problem properly.
+This number of hidden units is computed with a binary search.
+When this minimum topology is found, the rest of the networks will be randomly 
+created with a number of hidden units between the found number and the maximum number 
+of hidden units.
+The purpose of this module is to reduce the network size of the parent networks
+to a sensible size to speed up the evolution process.
+
+
+\algo{13cm}{optInitPop}{
+Load the reference net;\\
+Name the hidden units in the reference net;\\
+{\it lowerBound} = 0;\\
+{\it upperBound} = \# hidden units;\\
+{\it learned}= 0;\\
+{\bf repeat} \\
+\hspace*{0.5cm}{\it learned}++;\\
+\hspace*{0.5cm}{\it hiddenUnits} = ({\it lowerBound} + {\it upperBound}) 
+               {\bf div} 2;\\
+\hspace*{0.5cm}copy the reference net;\\
+\hspace*{0.5cm}delete (\#hidden units in reference net  - {\it hiddenUnits}) 
+               from the offspring;\\
+\hspace*{0.5cm}train the offspring with {\it learnModul};\\
+\hspace*{0.5cm}{\bf if} (offspring is trained well) {\bf then}\\
+\hspace*{1.0cm}{\it upperBound} = {\it hiddenUnits};\\
+\hspace*{0.5cm}{\bf else}\\
+\hspace*{1.0cm}{\it lowerBound} = {\it hiddenUnits} + 1;\\
+{\bf until} ({\it upperBound} $\le$ {\it lowerBound}) {\bf or}
+({\it learned} = {\it popsize})\\
+
+{\bf for} (i = {\it learned} + 1 {\bf to} {\it popsize}) {\bf do}\\
+\hspace*{0.5cm}copy the reference net;\\
+\hspace*{0.5cm}{\it hiddenUnits} = Rand({\it lowerBound}, \#hidden units);\\
+\hspace*{0.5cm}delete (\#hidden units - {\it hiddenUnits}) from the offspring;\\
+}
+
+

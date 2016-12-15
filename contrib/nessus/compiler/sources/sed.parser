@@ -1,0 +1,2 @@
+/.*case 0.*$/r sed.err.handle
+/.*yyerror.*syntax error.*.*$/d

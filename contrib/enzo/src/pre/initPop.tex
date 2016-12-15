@@ -1,0 +1,42 @@
+\begin{moduledoc}{Create an initial population}{initPop}
+  \item[\KeyWord{gensize} \optParam{ x } ]~\\
+    This parameter sets the maximal number of networks in the parent population.\\
+    Default: {\tt POP\_SIZE\_VALUE} (30)
+  \item[\KeyWord{popsize} \optParam{ x } ]~\\
+    This parameter sets the number of  offsprings to create each generation.\\
+    Default: {\tt OFF\_SIZE\_VALUE} (10)
+  
+  \item[\KeyWord{network} \optParam{ x } ]~\\
+    This string contains the filename of the reference net.
+    Each created net in the population gets the same topology structure
+    as the reference net.\\
+    Default:  enzo.net
+  
+  \item[\KeyWord{initFct} \optParam{ x } ]~\\
+    This string contains the name of the SNNS init-function.
+    The starting values of the weights and biases will be set by this function.\\
+    Default: Randomize\_Weights
+  \item[\KeyWord{initParam} \optParam{ x } ]~\\
+    These 5 parameters contains the parameters for the init-function.
+    For the meaning of these parameters please see the SNNS manual.\\
+    Default: -1.0 1.0 0.0 0.0 0.0
+\end{moduledoc}
+
+The module {\it initPop} loads the reference net (via SNNS) and copies this
+net to all members of the parent population. After that all networks of the population
+are initialized with the SNNS initial function.
+
+\algo{9cm}{initPop}
+{
+Load the reference net;\\
+Set the names of all units in the reference net;\\
+{\bf forall} (members of the starting population) {\bf do}\\
+\hspace*{0.5cm}Copy the reference net to the new net;\\
+\hspace*{0.5cm}Initialize the net with {\it initFct} and {\it initParam};\\
+\hspace*{0.5cm}Set the {\it initFct} of the net to {\it ENZO\_noinit};\\
+}
+
+
+
+
+

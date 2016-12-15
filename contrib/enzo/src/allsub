@@ -1,0 +1,19 @@
+#!/bin/csh
+
+if( $#argv != 1 ) then
+  echo "usage: allsub <command>"
+else
+
+
+foreach i (. opt stop eval post examples pre\
+             mutation survival history selection)
+ pushd .
+ cd $i
+ pwd
+ $1
+ popd
+end
+
+endif
+
+#eof

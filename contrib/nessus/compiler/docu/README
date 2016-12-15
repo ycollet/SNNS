@@ -1,0 +1,28 @@
+% file:  README
+% Stand: 23.04.93
+%
+% Guenter Mamier
+%
+
+Bedeutung der Dateinamen fuer das Nessus-Benutzerhandbuch:
+
+nessus.tex: latex master file
+nessus.bbl: mit bibtex verarbeitete Literaturangaben, 
+	    Die bibtex-Eingabe ist nicht in diesem Verzeichnis enthalten.
+nessus.bst: enthaelt bibliography style
+
+Alle anderen nessus.xxx files sind nicht unbedingt notwendig, da sie von
+latex erzeugt werden.
+
+n_xxx.tex : latex-Quelldateien, eine Datei entspricht meist einem Kapitel. 
+titel.tex : enthaelt die Titelseite des Handbuchs.
+f_xxx.tex : latex-Quelldateien, die aus Bildern (mit fig und fig2latex) 
+            erzeugt wurden. Die .fig - Versionen dieser Bilder stehen nicht
+	    in diesem Verzeichnis und sollten auch nicht verwendet werden,
+	    da einige der latex-Dateien nachtraeglich veraendert wurden.
+b_xxx.tex : latex-Quelldateien mit Nessus-Programm(stueck)en. Auch diese
+	    Dateien wurden zum grossen Teil nachtraeglich veraendert. Die 
+	    Nessus-Sources stehen unter ../examples und heissen xxx.n.
+
+Zur Uebersetzung des Handbuchs muss BIGLATEX verwendet werden, da die
+Kapazitaet von latex nicht ausreicht.

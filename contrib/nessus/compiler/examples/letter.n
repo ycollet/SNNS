@@ -1,0 +1,34 @@
+network recogLetter();
+     {This network recognizes a letter displayed by a 5x7 input matrix.}
+
+const 
+  Letters = ["A".."Z"];         { output units are named "A", "B", ...}
+
+typedef
+  unit with actfunc Act_Logistic, outfunc Out_Threshold05, act random: stdUnit;
+                                {unit type without sites - same for all units}
+
+structure
+  cluster[35] of stdUnit with iotype input matrix (5,7) at (2,7) : inLayer;     
+                                {matrix 5x7 to display letters}
+  clique[10] of stdUnit plane | at (8,7) : hidLayer;   
+                                {hidden layer of ten units, type hidden is default}
+  clique[26] of stdUnit with iotype output  get name from Letters
+                                  matrix(2,13) at (13,7) by -1.0 : outLayer;
+                                {wta-net, one unit p/ letter}
+
+var
+  unit : x, y; 
+
+begin                           {define connections between layers}
+  foreach x in inLayer do
+    foreach y in  hidLayer do
+      x -> y : 1.0    
+    end
+  end;
+  foreach x in hidLayer do
+    foreach y in outLayer do
+      x -> y : 1.0         {connect input to hidden and then hidden to output layer}
+    end
+  end
+end.

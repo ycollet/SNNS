@@ -1,0 +1,44 @@
+\begin{moduledoc}{Learning stopped by periods or cross validation error}{learnCV}
+  \item[\KeyWord{learnfct} \optParam{ x } ]~\\
+    This parameter $x$  contains the name of the SNNS-learning function.\\
+    Default: Rprop
+  \item[\KeyWord{learnparam} \optParam{ x } ]~\\
+    This array of parameters indicates the parameter for the SNNS learning function.
+    The meaning of the parameters can differ from learning function to learning function.
+    For details please see the SNNS manual.\\
+    Default: 0.0 0.0 0.0 5.0 0.0
+  \item[\KeyWord{maxepochs} \optParam{ x } ]~\\
+    This parameter $x$ contains the maximum number of periods for the learning 
+    algorithm. After this maximum the module {\it leranSNNS} will automatically stop the 
+    learning function.\\
+    Default: 50
+  \item[\KeyWord{CVepochs} \optParam{ x } ]~\\
+    This parameter $x$ sets after how often  the error on the cross validation set for
+cross validation is computed.\\
+    Default: 2
+  \item[\KeyWord{shuffle} \optParam{ x } ]~\\
+    This switch indicates whether the sequence of the learning patterns is changed after
+    each learning period or not.
+    If the switch is turned on, then the module {\it learnCV} will use the
+    SNNS-function {\it shuffle}\\
+    Default: yes
+\end{moduledoc}
+
+
+The module {\it learnCV} uses the error an a cross validation pattern set to stop learning.
+If it increases again learning is stopped. 
+The module stops the learning of an offspring network if the error on a cross vailidation set starts
+increasing again  or it reaches the maximum number of learning periods. This is done
+by computing the error each {\it CVepochs}. If the current error is larger than the average
+of the last four values, learning is stopped.
+
+
+\algo{12cm}{learnCV}{
+Set the SNNS learn function {\it learnFct};\\
+{\bf for all} (networks of the offspring population) {\bf do}\\ 
+\hspace*{0.5cm}{\bf while} (Epochs $<$ {\it maxEpochs}) {\bf and} 
+               ( $ tss(t) < \sum_{k=t-4}^{k=t-1} tss(k) $) {\bf do}\\
+\hspace*{1.0cm}Train one period with {\it learnParam};\\
+
+}
+

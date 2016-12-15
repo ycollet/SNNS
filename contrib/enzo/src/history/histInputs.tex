@@ -1,0 +1,14 @@
+\begin{moduledoc}{Used input units}{histInputs}
+  \item[\KeyWord{historyFile} \optParam{ x } ]~\\
+    This string contains the prefix of the filename of the output file.\\
+    Default: {\tt enzo}
+\end{moduledoc}
+The modul {\it histInputs} writes for each input unit of a net whether it is
+active or not.  The file for the output is named by the prefix
+{\it historyFile} and the extension {\it .inputs} .
+
+The information for each network consist of one row, where all the informations are
+written down. A {\it D} means that this input unit is absent in the net, a
+{\it X} means that the input unit is active.
+
+

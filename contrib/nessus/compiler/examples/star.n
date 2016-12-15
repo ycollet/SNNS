@@ -1,0 +1,6 @@
+network arrayStar();
+
+structure
+  array[5] of star[6] with act 0.7 ellipse(3,4) at(2,2) -> : netUnits;
+begin
+end.

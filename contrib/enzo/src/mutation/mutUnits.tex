@@ -1,0 +1,59 @@
+\begin{moduledoc}{Mutation of hidden neurons}{mutUnits}
+  \item[\KeyWord{probMutUnits} \optParam{ x } ]~\\
+    The parameter $x$ indicates the probability $p_{mut}$ a mutation takes 
+    place.\\
+    Default: 0.5
+  \item[\KeyWord{probMutUnitsSplit} \optParam{ x } ]~\\
+    The parameter $x$ describes the relationship between inserting and deleting
+    hidden units.
+    Default: 0.5
+  \item[\KeyWord{PWU} \optParam{ x } ]~\\
+    This switch activates the  {\it Prefer Weak Units} strategy in the case of deleting 
+    hidden units.\\
+    Default: yes
+  \item[\KeyWord{bypass} \optParam{ x } ]~\\
+    This switch turns on the {\it bypass} function while deleting a hidden unit.\\
+    Default: yes
+  \item[\KeyWord{initRange} \optParam{ x } ]~\\
+    This parameter $x$ describes the interval [-initRange,initRange] where 
+    inserted weights are randomly selected from.
+    Default: 0.5
+\end{moduledoc}
+
+The module {\it mutUnits} executes a mutation of the hidden units.
+The maximum number of deleted or inserted hidden units is limited by one.
+All other mutation and optimization modules can only delete units, they can
+never insert weights to a deleted hidden unit.
+In this case of deleting an activated hidden unit, all weights will be deleted.
+In the case of inserting a hidden unit, all possible weights will be inserted.
+The number of weights and hidden units which can be inserted is limited by the 
+topological structure of the reference net.
+The modules uses {\it bypass}-function and the {\it Prefer Weak Unit} strategy.
+The {\it bypass}-function is illustrated in figure \ref{bypass}. The idea is to
+linearly approximate a non-linear relationship, i.e., approximate the function
+computed by a hidden
+unit by a linear function. This is done by using shortcut (direct) connections.
+The  {\it Prefer Weak Unit} strategy is to check the connectivity of a unit, i.e.,
+count its incoming and outgoing weights, and prefer those for deleting which are weaker
+connected. This is called soft unit pruning. 
+
+\algo{12cm}{mutUnits}{
+{{\bf if} ( RAND(0,1) $> p_{mut}$ ) {\bf then}\\
+\hspace*{0.5cm}{\bf if} ( RAND(0,1) $> p_{split}$ ) {\bf then}\\
+\hspace*{1.0cm}search a unit in the reference net which does not exist in offspring;\\
+\hspace*{1.0cm}insert this unit in the offspring;\\ 
+\hspace*{1.0cm}insert all possible weights of the unit;\\
+\hspace*{0.5cm}{\bf else}\\
+\hspace*{1.0cm}{\bf if} ( PWU set ) {\bf then}\\
+\hspace*{1.5cm}select the {\it weakest} hidden unit of the offspring;\\
+\hspace*{1.0cm}{\bf else }\\
+\hspace*{1.5cm}select accidental a hidden unit of the offspring;\\
+\hspace*{1.0cm}{\bf if} ( bypass activated ) {\bf then}\\
+\hspace*{1.5cm}delete the selected unit with the bypass function;\\
+\hspace*{1.0cm}{\bf else}\\
+\hspace*{1.5cm}delete the unit and all its weights;\\
+}
+}
+
+
+

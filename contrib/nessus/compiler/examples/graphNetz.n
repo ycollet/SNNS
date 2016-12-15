@@ -1,0 +1,19 @@
+network mapBsp(size, cities, sMap);
+  {Beispielnetz: bestimmte Zugverbindungen in Bayern und BW, 
+   aus Nessus-Benutzerhandbuch}
+  {Dieses Programm definiert das Teilnetz fuer eines der Laender} 
+
+const
+  cityNames = file cities of string;
+  cityList = [cityNames];
+  stateMap = file sMap of map;
+
+  graph = map int to int:
+          get ("to", "\n") from stateMap;
+
+structure
+  irregular[size] with act 0.6935 get name from cityList
+    ellipse(4,4) at(4,4) -> by 0.5 map graph : net;
+
+begin
+end.

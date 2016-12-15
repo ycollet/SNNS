@@ -1,0 +1,35 @@
+Dieses Verzeichnis enthaelt die Dateien, die zur Erstellung der Dokumentation
+(Studienarbeit 1241 von R.Schmelzle) benoetigt werden. 
+Folgende Dateien muessen existieren:
+
+DATEI            INHALT
+
+- sa.tex         LATEX-Hauptfile
+- sa1.tex        LATEX-Inputfile des Kapitels 1
+- sa2.tex        LATEX-Inputfile des Kapitels 2
+- sa3.tex        LATEX-Inputfile des Kapitels 3
+- sa4.tex        LATEX-Inputfile des Kapitels 4
+- sa5.tex        LATEX-Inputfile des Kapitels 5
+- sa6.tex        LATEX-Inputfile des Kapitels 6
+- lit.tex        LATEX-Inputfile des Literaturverzeichnisses
+- main.ps        POSTSCRIPT-File der Abbildung 2
+- gray.ps        POSTSCRIPT-File der Abbildung 3
+- fillup.ps      POSTSCRIPT-File der Abbildung 4
+- histo.ps       POSTSCRIPT-File der Abbildung 5
+- poly.ps        POSTSCRIPT-File der Abbildung 6
+- proj2D.ps      POSTSCRIPT-File der Abbildung 7
+- stat.ps        POSTSCRIPT-File der Abbildung 8
+- cov.ps         POSTSCRIPT-File der Abbildung 9
+- readsh.ps      POSTSCRIPT-File der Abbildung 10
+- sa1241.ps      komplettes POSTSCRIPT-File der Studienarbeit Nr. 1241
+- title.tex      LATEX-Source fuer Titelseite und letzte Seite der Stud.arbeit
+- diplomtitel.sty LATEX-Style fuer Titelseite und letzte Seite
+
+AUFRUF
+
+latex sa
+                 
+Durch diesen Aufruf wird das File 'sa.dvi' erzeugt, welches wiederum in
+das PostScript-File sa.ps mithilfe des Befehls 'dvips' umgewandelt 
+werden muss, damit die Abbildungen eingebunden werden koennen.
+

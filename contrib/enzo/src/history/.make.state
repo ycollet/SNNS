@@ -1,0 +1,114 @@
+.MAKE_VERSION:	VERSION-1.0
+.BUILT_LAST_MAKE_RUN:
+Xhist.o:	../enzo.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/stdlib.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/sys/stdtypes.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/stdio.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/stdarg.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/va-sparc.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/string.h
+.BUILT_LAST_MAKE_RUN:
+Xhist.o:	/tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/math.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/floatingpoint.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/sys/ieeefp.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/time.h ../proto.h ../../../SNNSv4.1/kernel/sources/glob_typ.h ../../../SNNSv4.1/kernel/sources/kr_typ.h ../../../SNNSv4.1/kernel/sources/ext_typ.h
+.BUILT_LAST_MAKE_RUN:
+Xhist.o:	../../../SNNSv4.1/kernel/sources/enzo_mem_typ.h ../nepomuk/kr_shell.h ../nepomuk/nepomuk.h ../history/histUtils.h ../networkData.h ../subUtils.h Xgraf/graf.h Xhist.h 
+	gcc -I.. -I../../../SNNSv4.1/kernel/sources -I../nepomuk -O4 -o Xhist.o -c Xhist.c 
+.BUILT_LAST_MAKE_RUN:
+histUtils.o:	histUtils.h 
+	gcc -I.. -I../../../SNNSv4.1/kernel/sources -I../nepomuk -O4 -o histUtils.o -c histUtils.c 
+.BUILT_LAST_MAKE_RUN:
+libhistory.a(histUtils.o):
+	true
+.BUILT_LAST_MAKE_RUN:
+ancestry.o:	../enzo.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/stdlib.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/sys/stdtypes.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/stdio.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/stdarg.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/va-sparc.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/string.h
+.BUILT_LAST_MAKE_RUN:
+ancestry.o:	/tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/math.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/floatingpoint.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/sys/ieeefp.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/time.h ../proto.h ../../../SNNSv4.1/kernel/sources/glob_typ.h ../../../SNNSv4.1/kernel/sources/kr_typ.h ../../../SNNSv4.1/kernel/sources/ext_typ.h
+.BUILT_LAST_MAKE_RUN:
+ancestry.o:	../../../SNNSv4.1/kernel/sources/enzo_mem_typ.h ../nepomuk/kr_shell.h ../nepomuk/nepomuk.h ../history/histUtils.h ../networkData.h ../subUtils.h ancestry.h 
+	gcc -I.. -I../../../SNNSv4.1/kernel/sources -I../nepomuk -O4 -o ancestry.o -c ancestry.c 
+histTest.o:	../enzo.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/stdlib.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/sys/stdtypes.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/stdio.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/stdarg.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/va-sparc.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/string.h
+histTest.o:	/tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/math.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/floatingpoint.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/sys/ieeefp.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/time.h ../proto.h ../../../SNNSv4.1/kernel/sources/glob_typ.h ../../../SNNSv4.1/kernel/sources/kr_typ.h ../../../SNNSv4.1/kernel/sources/ext_typ.h
+histTest.o:	../../../SNNSv4.1/kernel/sources/enzo_mem_typ.h ../nepomuk/kr_shell.h ../nepomuk/nepomuk.h ../history/histUtils.h ../networkData.h ../subUtils.h histTest.h 
+	gcc -I.. -I../../../SNNSv4.1/kernel/sources -I../nepomuk -O4 -o histTest.o -c histTest.c 
+.BUILT_LAST_MAKE_RUN:
+libhistory.a(histCross.o):
+	true
+libhistory.a(Committee.o):
+	true
+.BUILT_LAST_MAKE_RUN:
+histFitness.o:	../enzo.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/stdlib.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/sys/stdtypes.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/stdio.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/stdarg.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/va-sparc.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/string.h
+.BUILT_LAST_MAKE_RUN:
+histFitness.o:	/tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/math.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/floatingpoint.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/sys/ieeefp.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/time.h ../proto.h ../../../SNNSv4.1/kernel/sources/glob_typ.h ../../../SNNSv4.1/kernel/sources/kr_typ.h ../../../SNNSv4.1/kernel/sources/ext_typ.h
+.BUILT_LAST_MAKE_RUN:
+histFitness.o:	../../../SNNSv4.1/kernel/sources/enzo_mem_typ.h ../nepomuk/kr_shell.h ../nepomuk/nepomuk.h ../history/histUtils.h ../networkData.h ../subUtils.h histFitness.h 
+	gcc -I.. -I../../../SNNSv4.1/kernel/sources -I../nepomuk -O4 -o histFitness.o -c histFitness.c 
+.BUILT_LAST_MAKE_RUN:
+libhistory.a(ancestry.o):
+	true
+libhistory.a(histTest.o):
+	true
+.BUILT_LAST_MAKE_RUN:
+libhistory.a:
+	ar rc libhistory.a histUtils.o histSimple.o histWeights.o histFitness.o histCross.o ancestry.o histInputs.o saveThem.o Xhist.o Xgraf/graf.o
+libhistory.a(CrossTS.o):
+	true
+.BUILT_LAST_MAKE_RUN:
+histSimple.o:	../enzo.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/stdlib.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/sys/stdtypes.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/stdio.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/stdarg.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/va-sparc.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/string.h
+.BUILT_LAST_MAKE_RUN:
+histSimple.o:	/tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/math.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/floatingpoint.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/sys/ieeefp.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/time.h ../proto.h ../../../SNNSv4.1/kernel/sources/glob_typ.h ../../../SNNSv4.1/kernel/sources/kr_typ.h ../../../SNNSv4.1/kernel/sources/ext_typ.h
+.BUILT_LAST_MAKE_RUN:
+histSimple.o:	../../../SNNSv4.1/kernel/sources/enzo_mem_typ.h ../nepomuk/kr_shell.h ../nepomuk/nepomuk.h ../history/histUtils.h ../networkData.h ../subUtils.h histSimple.h 
+	gcc -I.. -I../../../SNNSv4.1/kernel/sources -I../nepomuk -O4 -o histSimple.o -c histSimple.c 
+.BUILT_LAST_MAKE_RUN:
+libhistory.a(saveThem.o):
+	true
+.BUILT_LAST_MAKE_RUN:
+libhistory.a(histFitness.o):
+	true
+.BUILT_LAST_MAKE_RUN:
+libhistory.a(histInputs.o):
+	true
+.BUILT_LAST_MAKE_RUN:
+histCross.o:	../enzo.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/stdlib.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/sys/stdtypes.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/stdio.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/stdarg.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/va-sparc.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/string.h
+.BUILT_LAST_MAKE_RUN:
+histCross.o:	/tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/math.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/floatingpoint.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/sys/ieeefp.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/time.h ../proto.h ../../../SNNSv4.1/kernel/sources/glob_typ.h ../../../SNNSv4.1/kernel/sources/kr_typ.h ../../../SNNSv4.1/kernel/sources/ext_typ.h
+.BUILT_LAST_MAKE_RUN:
+histCross.o:	../../../SNNSv4.1/kernel/sources/enzo_mem_typ.h ../nepomuk/kr_shell.h ../nepomuk/nepomuk.h ../history/histUtils.h ../networkData.h ../subUtils.h histCross.h 
+	gcc -I.. -I../../../SNNSv4.1/kernel/sources -I../nepomuk -O4 -o histCross.o -c histCross.c 
+Committee.o:	../knete.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/stdlib.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/sys/stdtypes.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/stdio.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/stdarg.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/va-sparc.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/string.h
+Committee.o:	/tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/math.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/floatingpoint.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/sys/ieeefp.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/time.h ../proto.h ../../../SNNSv4.0/kernel/sources/glob_typ.h ../../../SNNSv4.0/kernel/sources/kr_typ.h ../../../SNNSv4.0/kernel/sources/ext_typ.h
+Committee.o:	../../../SNNSv4.0/kernel/sources/ilkd_mem_typ.h ../nepomuk/kr_shell.h ../nepomuk/nepomuk.h ../history/histUtils.h ../networkData.h ../subUtils.h Committee.h 
+	gcc -I.. -I../../../SNNSv4.0/kernel/sources -I../nepomuk -O4  -target sun4 -c  Committee.c
+.BUILT_LAST_MAKE_RUN:
+libhistory.a(histWeights.o):
+	true
+.BUILT_LAST_MAKE_RUN:
+libhistory.a(Xgraf/graf.o):
+	true
+CrossTS.o:	../knete.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/stdlib.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/sys/stdtypes.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/stdio.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/stdarg.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/va-sparc.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/string.h
+CrossTS.o:	/tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/math.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/floatingpoint.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/sys/ieeefp.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/time.h ../proto.h ../../../SNNSv4.0/kernel/sources/glob_typ.h ../../../SNNSv4.0/kernel/sources/kr_typ.h ../../../SNNSv4.0/kernel/sources/ext_typ.h
+CrossTS.o:	../../../SNNSv4.0/kernel/sources/ilkd_mem_typ.h ../nepomuk/kr_shell.h ../nepomuk/nepomuk.h ../history/histUtils.h ../networkData.h ../subUtils.h CrossTS.h 
+	gcc -I.. -I../../../SNNSv4.0/kernel/sources -I../nepomuk -O4  -target sun4 -c  CrossTS.c
+.BUILT_LAST_MAKE_RUN:
+saveThem.o:	../enzo.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/stdlib.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/sys/stdtypes.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/stdio.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/stdarg.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/va-sparc.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/string.h
+.BUILT_LAST_MAKE_RUN:
+saveThem.o:	/tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/math.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/floatingpoint.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/sys/ieeefp.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/time.h ../proto.h ../../../SNNSv4.1/kernel/sources/glob_typ.h ../../../SNNSv4.1/kernel/sources/kr_typ.h ../../../SNNSv4.1/kernel/sources/ext_typ.h
+.BUILT_LAST_MAKE_RUN:
+saveThem.o:	../../../SNNSv4.1/kernel/sources/enzo_mem_typ.h ../nepomuk/kr_shell.h ../nepomuk/nepomuk.h ../history/histUtils.h ../networkData.h ../subUtils.h saveThem.h 
+	gcc -I.. -I../../../SNNSv4.1/kernel/sources -I../nepomuk -O4 -o saveThem.o -c saveThem.c 
+.BUILT_LAST_MAKE_RUN:
+libhistory.a(Xhist.o):
+	true
+.BUILT_LAST_MAKE_RUN:
+histInputs.o:	../enzo.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/stdlib.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/sys/stdtypes.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/stdio.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/stdarg.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/va-sparc.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/string.h
+.BUILT_LAST_MAKE_RUN:
+histInputs.o:	/tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/math.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/floatingpoint.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/sys/ieeefp.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/time.h ../proto.h ../../../SNNSv4.1/kernel/sources/glob_typ.h ../../../SNNSv4.1/kernel/sources/kr_typ.h ../../../SNNSv4.1/kernel/sources/ext_typ.h
+.BUILT_LAST_MAKE_RUN:
+histInputs.o:	../../../SNNSv4.1/kernel/sources/enzo_mem_typ.h ../nepomuk/kr_shell.h ../nepomuk/nepomuk.h ../history/histUtils.h ../networkData.h ../subUtils.h histInputs.h 
+	gcc -I.. -I../../../SNNSv4.1/kernel/sources -I../nepomuk -O4 -o histInputs.o -c histInputs.c 
+.BUILT_LAST_MAKE_RUN:
+histWeights.o:	../enzo.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/stdlib.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/sys/stdtypes.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/stdio.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/stdarg.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/va-sparc.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/string.h
+.BUILT_LAST_MAKE_RUN:
+histWeights.o:	/tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/math.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/floatingpoint.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/sys/ieeefp.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/time.h ../proto.h ../../../SNNSv4.1/kernel/sources/glob_typ.h ../../../SNNSv4.1/kernel/sources/kr_typ.h ../../../SNNSv4.1/kernel/sources/ext_typ.h
+.BUILT_LAST_MAKE_RUN:
+histWeights.o:	../../../SNNSv4.1/kernel/sources/enzo_mem_typ.h ../nepomuk/kr_shell.h ../nepomuk/nepomuk.h ../history/histUtils.h ../networkData.h ../subUtils.h histWeights.h 
+	gcc -I.. -I../../../SNNSv4.1/kernel/sources -I../nepomuk -O4 -o histWeights.o -c histWeights.c 
+Xgraf/graf.o:	/tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/stdlib.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/sys/stdtypes.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/stdio.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/stdarg.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/va-sparc.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/math.h
+Xgraf/graf.o:	/tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/floatingpoint.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/sys/ieeefp.h Xgraf/graf.h 
+	gcc -I.. -I../../../SNNSv4.1/kernel/sources -I../nepomuk -O4 -o Xgraf/graf.o -c Xgraf/graf.c 
+.BUILT_LAST_MAKE_RUN:
+libhistory.a(histSimple.o):
+	true

@@ -1,0 +1,11 @@
+\begin{moduledoc}{Random selection of hidden units}{hiddenInitPop}
+  \item[\KeyWord{minNoHidden} \optParam{ x } ]~\\
+    This parameter sets the lower bound of the number of hidden units.\\
+    
+    Default: 0 
+\end{moduledoc}
+
+The module {\it hiddenInit} random selects between {\it minNoHidden} and
+the actual number of hidden units for the net of the starting generation.
+The purpose of this module is to increase the diversity of the starting population
+by having different topologies.

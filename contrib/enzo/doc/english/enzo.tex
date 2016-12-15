@@ -1,0 +1,87 @@
+% %W%	%G%
+
+
+
+\documentstyle[11pt,a4wide,epsf,psfig,twoside,flong2]{article}
+
+
+\sloppy
+\frenchspacing
+%\flushbottom
+
+\parindent0pt
+\parskip1.5ex plus0.5ex minus0.5ex
+
+
+\pagestyle{headings}
+
+\makeindex
+
+\input{mymacros}
+
+
+
+%\includeonly{userman,devman}
+\renewcommand{\textfraction}{0.0}
+\renewcommand{\topfraction}{1.0}
+\renewcommand{\floatpagefraction}{1.0}
+\renewcommand{\bottomfraction}{1.0}
+
+
+\begin{document} % ============================================================
+
+
+
+\pagenumbering{roman}
+\thispagestyle{empty}
+
+\centerline{\psfig{figure=../bilder/logo.ps,width=7cm}}
+
+\vspace{1cm}
+
+\begin{center}
+{ {\Huge  \bf ENZO \\}
+\vspace*{0.5cm}
+ {\large      Evolution of Neural Networks\\
+\vspace*{0.2cm}
+by\\
+\vspace*{0.2cm}
+ Heinrich Braun and Thomas Ragg
+}\\
+\vspace*{0.2cm}
+{\Large \sc University of Karlsruhe\\}
+\vspace*{0.2cm}
+	{\large \sc Institute for Logic, Complexity and Deduction Systems\\}
+
+\vspace*{1cm}
+
+
+       {\LARGE  User Manual and Implementation Guide, Version 1.0}}
+\end{center}
+
+\clearpage
+{\parskip0ex \tableofcontents}
+\vfill
+\pagebreak
+\pagenumbering{arabic}
+
+
+
+\include{userman}
+\include{devman}
+
+
+
+\begin{appendix}
+  
+\input{command}
+\input{enzo.index}
+
+
+\end{appendix}
+
+\bibliographystyle{flong2}
+\bibliography{enzo}
+
+
+\end{document}

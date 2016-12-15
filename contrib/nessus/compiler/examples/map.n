@@ -1,0 +1,17 @@
+network mapBsp();
+  {Beispielnetz: Verbindungsdefinition durch map-Konstante BW, 
+   aus Nessus-Benutzerhandbuch}
+
+const
+  graph = map int to int:
+          0 to [1, 2, 3, 7],
+          [1,7] to 5,
+          7 to [5, 6],
+          [2, 3, 5, 6, 7] to 4;
+
+structure
+  irregular[8] with act random 
+    ellipse(4,4) at(4,4) -> by 0.5 map graph : net;
+
+begin
+end.

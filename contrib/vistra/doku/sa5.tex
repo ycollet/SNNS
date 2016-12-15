@@ -1,0 +1,128 @@
+\section{Datei-Formate}
+\label{formate}
+
+Dieses Kapitel beschreibt, welche Formate die LVQ-, N01- und 
+Symboltabellen-Dateien haben bzw. haben
+m"ussen, wenn sie von Vistra geschrieben bzw. gelesen werden
+(siehe auch \cite{bayer}).
+Das Format der LOG-Dateien wurde bereits in Kapitel~\ref{log} erl"autert.
+Formatbeschreibungs-Dateien sind Thema des Kapitels~\ref{fdl}, 
+in der die Syntax von FDL (Format Description Language) beschrieben
+wird und einige Beispiele f"ur benutzerdefinierte ASCII-Dateiformate
+gegeben werden.
+
+\subsection{Das LVQ-Format}
+\label{lvq}
+
+Das LVQ-Format ist ein sehr einfaches Trainingsvektor-Format, das eine Menge von
+Eingabevektoren enth"alt und jedem dieser Vektoren ein Klassensymbol
+zuordnet.
+
+Das LVQ-Format setzt sich aus einem Kopf und einem Rumpf zusammen.
+Der Kopf besteht lediglich aus einer Zeile, die die Dimensionalit"at der
+Eingabevektoren enth"alt.
+Der Rumpf besitzt pro Eingabevektor eine Zeile, in der die Elemente
+des jeweiligen Vektors gefolgt von seinem Klassensymbol aufgef"uhrt sind.
+
+Folgendes Beispiel zeigt ein LVQ-File, das zweidimensionale
+Trainingsvektoren enth"alt, die das xor-Problem definieren:
+
+\nopagebreak
+\begin{verbatim}
+2
+0 0 NULL
+0 1 EINS
+1.0 0.0 EINS
+1 1.0 NULL
+\end{verbatim}
+   
+\subsection{Das N01-Format}
+\label{n01}
+Das N01-Format ist ein bin"ares Format, das geschaffen wurde, um das
+Einlesen bzw. Schreiben von Trainingsvektor-Dateien zu beschleunigen.
+Bei sehr gro"sen Vektor-Dateien ist es daher empfehlenswert, 
+anstelle eines ASCII-Formats dieses Format zu verwenden.
+
+Die ersten 32 Bytes stellen den Kopf des N01-Formats dar.
+Er hat folgende Gestalt:
+
+\nopagebreak
+\begin{tabular}[t]{l|l|l}
+{\bf Bytes} & {\bf C-Typ} & {\bf Inhalt} \\ \hline
+0~--~3 & char[4] & String ''N01'' mit abschlie"sender '$\backslash0$' \\
+4~--~7 & unsigned int & Dimensionalit"at der Eingabevektoren \\
+8~--~11 & unsigned int & Dimensionalit"at der Ausgabevektoren \\
+12~--~15 & unsigned int & Anzahl der Trainingsvektoren \\
+16~--~19 & unsigned int & Offset der Eingabedaten \\
+20~--~23 & unsigned int & Offset der Ausgabedaten \\
+24~--~27 & unsigned int & Offset der Klassennummern \\
+28~--~31 & unsigned int & Anzahl unterschiedl.~Klassen 
+\end{tabular}  
+
+Die Offsets geben die File-Positionen innerhalb der N01-Datei an, an denen
+die Eingabevektoren, Ausgabevektoren oder Klassennummern beginnen.
+Die Eingabe- bzw. Ausgabevektoren sind als Felder von aufeinanderfolgenden
+Flie"skommazahlen von jeweils 4 Bytes (C-Typ: {\tt float}) gespeichert.
+In diesen Feldern erscheinen zun"achst alle Elemente des ersten 
+Eingabe- bzw. Ausgabevektors, gefolgt von den Elementen des zweiten etc.
+Die Klassennummern sind in einem Feld aufeinanderfolgender
+Integer von jeweils 4 Bytes L"ange untergebracht (C-Typ: {\tt unsigned int}).
+Die L"ange des Felds entspricht der Anzahl der Trainingsvektoren.
+
+Das N01-Format wurde urspr"unglich f"ur DEC Workstations eingef"uhrt,
+weshalb deren Maschinencodierung von {\tt float} bzw. {\tt unsigned} Typen
+verwendet wird.
+Hierbei erscheint das niederwertigste Byte als erstes,
+das h"oherwertigste als letztes Byte innerhalb der Datei.
+
+Vistra kann N01-Formate jedoch in jedem Fall lesen und schreiben
+(unabh"angig davon, ob es auf einer SUN oder einer DEC l"auft).
+Das Programm stellt fest, ob die Maschinencodierung des Rechners, auf dem
+es l"auft, mit der DEC-Codierung "ubereinstimmt.
+Ist dies nicht der Fall (wie bei den Maschinen der Marke SUN), so
+werden alle Daten nach dem Einlesen bzw. vor dem Schreiben der N01-Datei
+in geeigneter Weise konvertiert. 
+    
+\subsection{Das Format der Symboltabellen}
+\label{symtab}
+
+Symboltabellen-Dateien haben eine Zeilenstruktur.
+Jede Zeile enth"alt genau ein Symbol, wobei 
+die $i$-te Zeile der Datei das Klassensymbol zur Klassennummer $i$ enth"alt.
+
+Abh"angig davon, ob die geladenen Trainingsvektoren explizite
+Klassensymbole besitzen (die durch Strings repr"asentiert werden) oder nicht,
+ist der Inhalt der einzelnen Zeilen verschieden.
+
+Existieren explizite Klassensymbole, so werden diese als 
+Zeileninhalte verwendet.
+Wurde z.B.~ein LVQ-File wie das aus Kapitel~\ref{lvq} geladen, so existieren
+solche Klassensymbole. \\ 
+\begin{samepage} Die Symboltabellen-Datei s"ahe wie folgt aus:
+\begin{verbatim}
+NULL
+EINS
+\end{verbatim}
+\end{samepage}
+
+Existieren keine expliziten Klassensymbole, so werden die Ausgabevektoren
+als solche betrachtet.
+Identische Vektoren stellen dasselbe Klassensymbol dar.
+Eine Zeile der Sym\-bol\-tabel\-len-Datei besteht dann gerade aus den Elementen
+eines Ausgabevektors und die
+Anzahl der Zeilen der Symboltabelle entspricht genau der Anzahl der
+unterschiedlichen Ausgabevektoren.
+Die Ausgabevektoren werden in der Reihenfolge ausgegeben, in der sie 
+zum ersten Mal in den Trainingsvektoren auftauchen.
+
+\begin{samepage}
+Eine Symboltabelle f"ur Trainingsvektoren mit zweidimensionalen 
+Ausgabevektoren, die keine expliziten Klassensymbole besitzen, k"onnte
+wie folgt aussehen:
+\begin{verbatim}
+0.1 0.9
+0.9 0.9
+0.9 0.1
+0.1 0.1
+\end{verbatim}
+\end{samepage}

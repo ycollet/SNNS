@@ -1,0 +1,53 @@
+
+------------------------------------------------------------------------
+	     Hinweise zur Installation von Nessus Version 2.1
+
+      Copyright (c) 1990-1993  SNNS Group, IPVR, Univ. Stuttgart, FRG
+------------------------------------------------------------------------
+
+
+Bei einer Installation geht man wie folgt vor:
+---------------------------------------------
+
+
+1) Wechseln in das NESSUS Verzeichnis
+
+2) (Zur Sicherheit) Loeschen aller Object-Files
+	./cleanup all
+
+3) Konfigurationsprogramm starten
+	./configure
+
+   Beantworten Sie die Fragen entsprechend. Dieses Programm generiert dann
+   automatisch alle benoetigten Makefiles. In Netzwerken mit mehreren
+   unterschiedlichen Maschinen kann das gleiche Directory benuetzt werden,
+   da die erzeugten Programme und Libraries fuer jede Maschine getrennt 
+   aufbewahrt werden. Damit aber die Installation fuer jede Maschine gelingt
+   sind unbedingt nach erfolgter Compilierung mit dem Kommando 
+
+	./cleanup
+
+   alle erzeugten Object-Files wieder zu loeschen. Sie muessen also fuer
+   jede Maschine die gesamte hier geschilderte Prozedur wiederholen.
+
+4) Compilieren mit
+
+	./build
+
+
+Alle ausfuehrbaren Programm und Libraries befinden sich in
+
+        NESSUS-directory/compiler/bin/<machine>
+
+	wobei:
+		<machine>	sun4, sun3, dec, pc386 oder other
+
+Lesen Sie auch alle Readme bzw. README Files in den Directories
+
+Das Manual befindet sich als LaTex-Sources  im Directory 
+
+	compiler/doku  (Nessus-Handbuch)
+
+
+
+

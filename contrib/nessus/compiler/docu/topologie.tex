@@ -1,0 +1,450 @@
+\chapter{Erg"anzung der Topologie}
+\label{Topologie}
+
+
+Die Strukturen mit vordefinierten Verbindungen,\index{Verbindung} die
+im Strukturdefinitionsteil eines {\bf Nessus}-Programms definiert
+werden k"onnen, nehmen dem Programmierer viele der n"otigen
+Verbindungsdefinitionen ab. Diese Strukturen
+\index{Struktur!Erg"anzung} m"ussen aber noch
+ 
+\begin{itemize}
+  \item untereinander verbunden und eventuell
+  \item erg"anzt
+\end{itemize}
+
+werden. Die Definition der dazu notwendigen
+Verbindungen\index{Verbindung}\index{Verbindung!Abfrage} erfolgt in
+einem Block von Anweisungen, der in {\bf begin} und {\bf
+end}\index{end} eingeschlossen wird.
+
+\begin{center}
+\fbox{
+\begin{minipage}{\textwidth}
+{\footnotesize
+\begin{center}
+\begin{eqnarray}
+  \mbox{modification\_block} & ::= & \mbox{{\bf begin}\index{begin}\index{Topologie!Beginn des Definitionsblocks} statement\_list {\bf end}\index{end} } \label{symodificationblock}\\[.3 cm]
+  \mbox{statement\_list} & ::= & \mbox{statement \{ {\bf ;} statement \} } \label{systatementlist}\\[.3 cm]
+  \mbox{statement} & ::= & \mbox{assignment\_stmt}        \nonumber \\
+                   &  |  & \mbox{connection\_definition}  \nonumber \\
+                   &  |  & \mbox{control\_stmt}  \nonumber \\
+                   &  |  & \mbox{empty}  \label{systatement} \\ \nonumber
+\end{eqnarray}
+\end{center}
+}
+\end{minipage}
+}
+\end{center}
+
+Regel~\ref{symodificationblock} zeigt die Syntax dieses
+Anweisungsblocks. Die einzelnen Anweisungen werden jeweils durch ein
+Semikolon getrennt und strikt sequentiell in ihrer textuellen
+Reihenfolge ausgef"uhrt.
+
+\section{Zuweisungsanweisung}
+\label{assignmentstatement}
+
+\begin{center}
+\fbox{
+\begin{minipage}{\textwidth}
+{\footnotesize
+\begin{center}
+\begin{eqnarray}
+  \mbox{assignment\_stmt} & ::= & \mbox{variable {\bf :=} expression}  \nonumber\\
+   & | & \mbox{variable {\bf .~iotype} {\bf :=} topology\_key} \label{syassignmentstmt} \\ \nonumber
+\end{eqnarray}
+\end{center}
+}
+\end{minipage}
+}
+\end{center}
+
+Den Elementen eines Felds\index{Feld} von Zellen ({\bf array of unit})
+oder Strukturen darf kein neuer Wert zugewiesen werden, es d"urfen
+aber die Komponenten {\bf act}, {\bf iotype} und {\bf name} dieser
+Zellen ver"andert werden, soweit sie keine Typparameter sind.
+
+
+
+\section{Verbindungsdefinition}
+\label{Verbindungsdefinition}
+
+Eine Verbindung\index{Verbindung}\index{Verbindung!Definition} in {\bf
+Nessus} geht immer von einer Quellzelle
+
+\begin{itemize}
+  \item zu einer Site einer\index{Site} Zielzelle oder
+  \item direkt zur Zielzelle, falls diese keine Sites\index{Site} besitzt.
+\end{itemize}
+
+Au"ser der Quelle und dem Ziel einer Verbindung \index{Verbindung}
+\index{Verbindung!Quellzelle} mu"s ihre Richtung (vorw"arts oder
+bidirektional)\index{bidirectional} und ihr Gewicht angegeben werden.
+Diese Angaben sind dieselben, die auch gemacht werden m"ussen, um die
+interne Verbindung\index{Verbindung!Richtung} einer Struktur zu
+spezifizieren, allerdings gibt es hier keine R"uckw"artsverbindungen.
+\index{Verbindung!Definition} Syntaxregel~\ref{syconnectiondefinition}
+zeigt den Aufbau einer Verbindungsdefinition.\index{Verbindung}
+
+\begin{center}
+\fbox{
+\begin{minipage}{\textwidth}
+{\footnotesize
+\begin{center}
+\begin{eqnarray}
+  \mbox{connection\_definition} & ::= & \mbox{variable conn\_operator variable}  \nonumber \\
+          &     & \mbox{$[$ {\bf ~:~}expression\_or\_random \index{random} $]$} \label{syconnectiondefinition}\\[.3 cm]
+  \mbox{conn\_operator} & ::= & \mbox{{\bf \verb&->&}} \nonumber\\
+          &  |  & \mbox{{\bf \verb&<->&}} \label{syconnnoperator} \\ \nonumber
+\end{eqnarray}
+\end{center}
+}
+\end{minipage}
+}
+\end{center}
+
+Der Operator zur Definition einer neuen Verbindung \index{Verbindung}
+\index{Verbindung!Definition} legt auch die Richtung der Verbindung
+\index{Verbindung!Richtung} fest:
+
+\begin{itemize}
+  \item {\bf \verb&->&}~~definiert eine unidirektionale Verbindung in Vorw"artsrichtung  (Richtung
+	des Pfeils).  \item {\bf \verb&<->&}~definiert eine
+bidirektionale\index{bidirectional} Verbindung.\index{Verbindung}
+\end{itemize}
+
+Die Quelle einer einfachen vorw"artsgerichteten
+Verbindung\index{Verbindung!Quellzelle} ist immer eine Zelle. Das Ziel
+der Verbindung besteht nur aus der Angabe der Zielzelle, falls diese
+keine Sites\index{Site} hat. Besitzt die Zielzelle Sites,\index{Site}
+so wird das Ziel der Verbindung\index{Verbindung!Zielzelle} in der
+Form \\ 	 
+\centerline{unit\_specification{\bf ~.~}site\_type\_name} angegeben.
+Dabei ist ``site\_type\_name'' der {\it Bezeichner \index{Bezeichner}
+des Typs\/}, der f"ur die Site eingef"uhrt wurde, nicht etwa der Name
+der Site.
+
+Bei der Definition bidirektionaler Verbindungen sind beide Operatoren
+von {\bf \verb&<->&} Zielzellen. Das hei"st, in diesem Fall m"ussen
+f"ur beide Zellen die Sites angegeben werden, falls sie welche
+besitzen.
+
+Die Angabe des Gewichts der Verbindung (``{\bf ~:~}
+expression\_or\_random'') ist optional. Wird das Gewicht nicht
+angegeben, wird bei der "Ubersetzung der daf"ur vorgesehene
+Standardwert 0.0 eingesetzt.
+
+
+\section{Kontrollstrukturen}
+\label{controlstatements}
+
+In {\bf Nessus} kann die Abarbeitung des Anweisungsblocks durch
+Wiederholungsanweisungen\index{Iteration}\index{Wiederholungsanweisung}
+und bedingte Anweisungen beeiflu"st  werden.
+
+\begin{center}
+\fbox{
+\begin{minipage}{\textwidth}
+{\footnotesize
+\begin{center}
+\begin{eqnarray}
+  \mbox{control\_stmt} & ::= & \mbox{loop\_stmt} \nonumber\\
+          &  |  & \mbox{conditional\_stmt} \label{sycontrolstmt}\\[.3cm]
+  \mbox{loop\_stmt} & ::= & \mbox{loop\_header statement\_list {\bf end}}
+		\index{end} \label{syloopstatement} \\[.3cm] 
+  \mbox{loop\_header} & ::= & \mbox{while\_header} \nonumber \\
+                      &  |  & \mbox{for\_header} \nonumber \\
+                      &  |  & \mbox{foreach\_header}\index{foreach} \label{syloopheader} \\ \nonumber
+\end{eqnarray}
+\end{center}
+}
+\end{minipage}
+}
+\end{center}
+
+Diese Kontrollstrukturen d"urfen geschachtelt werden. Eine
+Wiederholungsanweisung (Schleife)\index{Schleife} darf bedingte
+Anweisungen (Verzweigungen) enthalten, die wiederum andere
+Wiederholungsanweisungen\index{Iteration}\index{Wiederholungsanweisung}
+enthalten d"urfen.
+
+
+\subsection{Wiederholungsanweisungen}
+\label{loopstatements}
+
+Wie Syntaxregel~\ref{syloopheader} zeigt, gibt es drei Arten von
+Wiederholungsanweisungen:\index{Iteration}\index{Wiederholungsanweisung} 
+
+\begin{enumerate}
+  \item Die abweisende Schleife:\index{Schleife!while} die Anweisungen des Rumpfes werden solange
+	ausgef"uhrt, wie eine beliebig formulierte Bedingung wahr ist.
+  \item Die Z"ahlschleife:\index{Z"ahlschleife}\index{Schleife!for} die Anweisungen des Rumpfes werden f"ur eine vorgegebene Reihenfolge von
+	Werten einer Schleifenvariablen\index{Schleifenvariable} ausgef"uhrt.
+  \item Die Abbarbeitung eines Felds:\index{Feld!Behandlung mit foreach} die Anweisungen des Rumpfes werden f"ur die Werte einer
+	Schleifenvariablen\index{Schleifenvariable}\index{Schleife!foreach} durchgef"uhrt, die nacheinander die Werte aller Elemente eines Felds
+	annimmt. 
+\end{enumerate}
+
+
+\subsubsection{{\bf while}-Schleife}
+\label{whileloop}
+
+\index{Iteration!while}\index{Wiederholungsanweisung!while}\index{Schleife!while} 
+\begin{center}
+\fbox{
+\begin{minipage}{\textwidth}
+{\footnotesize
+\begin{center}
+\begin{eqnarray}
+  \mbox{while\_header} & ::= & \mbox{{\bf while}\index{while} logical\_expr {\bf do}}\index{do} \label{sywhileheader} \\ \nonumber
+\end{eqnarray}
+\end{center}
+}
+\end{minipage}
+}
+\end{center}
+
+Die Anweisungen im Rumpf der {\bf while}-Schleife werden solange
+iteriert, wie der logische Ausdruck im Kopf der Schleife wahr ist. Ist
+der Kopf schon vor der ersten Iteration \index{Iteration}
+\index{Wiederholungsanweisung} falsch, werden die Anweisungen des
+Rumpfes gar nicht ausgef"uhrt.
+
+Bei der Verwendung einer {\bf while}-Schleife\index{while} sollte
+immer genau gepr"uft werden, ob die Schleife auch terminiert. Sonst
+ger"at der {\bf Nessus}-Compiler\index{Programm!"Ubersetzung} beim
+"Ubersetztungsvorgang in eine Endlosschleife, da er keine M"oglickeit
+hat, die Terminierung\index{Terminierung} einer solchen Schleife zu
+pr"ufen.
+\index{Iteration!while}\index{Wiederholungsanweisung!while}\index{Schleife!while}
+
+\subsubsection{{\bf for}-Schleife}
+\label{forloop}
+
+\index{Iteration!for}\index{Wiederholungsanweisung!!for}
+\begin{center}
+\fbox{
+\begin{minipage}{\textwidth}
+{\footnotesize
+\begin{center}
+\begin{eqnarray}
+  \mbox{for\_header} & ::= & \mbox{{\bf for}\index{for} simple\_assignment {\bf to}\index{to} expression {\bf do}}\index{do}
+			     \label{syforheader} \\[.3cm] 
+  \mbox{simple\_assignment} & ::= & \mbox{identifier~{\bf :=~} expression}
+			     \label{sysimpleassignment} \\ \nonumber
+\end{eqnarray}
+\end{center}
+}
+\end{minipage}
+}
+\end{center}
+\index{Iteration!for}\index{Wiederholungsanweisung!!for}\index{Schleife!for} 
+
+Als Schleifenvariable\index{Schleifenvariable!Datentyp} sind nicht
+Variable aller Datentypen zul"assig, sondern nur derjenigen, die auch
+in einer Bereichsdefinition verwendet werden d"urfen. Dies sind
+
+\begin{itemize}
+\index{Iteration!for}\index{Wiederholungsanweisung!!for}\index{Schleife!for} 
+  \item ganze Zahlen ({\bf int})\index{int} und
+  \item Zeichenketten\index{Zeichenkette!als Schleifenvariable} ({\bf
+	string}),\index{string} die aus genau einem der f"ur Bereichsdefinitionen zul"assigen 
+	Zeichen bestehen (siehe Abschnitte~\ref{Zeichenketten} und~\ref{internarraydef}).
+\end{itemize}
+
+Der Wert der Schleifenvariablen\index{Schleifenvariable!Ver"anderung}
+darf innerhalb der Schleife {\it nicht\/} ver"andert werden. Eine
+Variable, die Bestandteil des Ausdrucks ``final\_expr'' ist, darf zwar
+ver"andert werden, das hat aber auf die Schleife keinen Einflu"s:
+
+\begin{quote}
+  Bei der Abarbeitung der Z"ahlschleife\index{Z"ahlschleife} wird zu Beginn aus dem Anfangs- und dem Endwert der
+  Schleifenvariablen\index{Schleifenvariable!Anfangswert} die Anzahl
+der Iterationen\index{Iteration}\index{Wiederholungsanweisung} bestimmt. 
+\end{quote}
+
+Der Wert der Schleifenvariablen\index{Schleifenvariable!Endwert}
+bleibt nach der Abarbeitung der Schleife erhalten.
+\index{Iteration!for} \index{Wiederholungsanweisung!!for}
+\index{Schleife!for}
+
+
+
+\subsubsection{{\bf foreach}-Schleife}
+\label{foreachloop}
+
+\index{Iteration!foreach} \index{Wiederholungsanweisung!!foreach}
+\index{Schleife!foreach} Die {\bf foreach}-Schleife\index{foreach}
+dient dazu, alle Elemente eines Felds\index{Feld} oder mehrerer Felder
+auf gleiche Art und Weise zu behandeln. Regel~\ref{syforeachheader}
+zeigt die Syntax dieser Schleife.
+
+\begin{center}
+\fbox{
+\begin{minipage}{\textwidth}
+{\footnotesize
+\begin{center}
+\begin{eqnarray}
+  \mbox{foreach\_header} & ::= & \mbox{{\bf foreach}\index{foreach} loop\_variable\_list {\bf do}}\index{do} 
+					\label{syforeachheader} \\[.3 cm]
+  \mbox{loop\_variable\_list} & ::= & \mbox{loop\_variable \{{\bf ~,~}loop\_variable\}} 
+					\label{syloopvariablelist} \\[.3 cm]
+  \mbox{loop\_variable} & ::= & \mbox{identifier {\bf in} element\_group}  \label{syloopvariable} \\ \nonumber
+\end{eqnarray}
+\end{center}
+}
+\end{minipage}
+}
+\end{center}
+\index{Iteration!foreach}
+\index{Wiederholungsanweisung!!foreach}
+\index{Schleife!foreach} 
+
+Die Besonderheit der {\bf foreach}-Schleife besteht darin, da"s
+mehrere Schleifenvariablen synchron inkrementiert werden. Dazu mu"s
+``loop\_variable\_list'' folgenden Bedingungen gen"ugen:
+
+\begin{itemize}
+  \item In jeder ``loop\_variable''-Definition mu"s die Variable vom Basistyp des Felds\index{Feld}
+	sein, wie in ``inclusion\_expression'' (siehe Syntaxregel~\ref{syinclusionexpression}) auch.
+  \item Besteht ``loop\_variable\_list'' aus mehreren solcher ``loop\_variable''-Definitionen,
+	m"ussen die Felder, die die Wertemengen der
+	Schleifenvariablen\index{Schleifenvariable!in {\bf foreach}}
+	initialisieren, alle gleich lang sein.\footnote{In der
+jetzigen Implementierung werden unterschiedlich gro"se Wertemengen der
+Schleifenvariablen jedoch toleriert. Bei der "Ubersetzung wird eine
+Warnung ausgegeben und die Schleife beendet, sobald die {\it erste\/}
+Schleifenvariable alle ihre vorgesehenen Werte erreicht hat.}
+\end{itemize}
+\index{Iteration!foreach}\index{Wiederholungsanweisung!!foreach}\index{Schleife!foreach} 
+
+Eine {\bf foreach}-Schleife\index{foreach} wird folgenderma"sen ausgef"uhrt:
+\begin{enumerate}
+  \item Alle Schleifenvariablen,\index{Schleifenvariable!in {\bf
+foreach}!Inkrementierung} die in der ``loop\_variable\_list'' definiert wurden, werden 
+	mit dem ersten Element ihrer jeweiligen Wertemenge initialisiert. 
+  \item Der Anweisungsblock im Rumpf der {\bf
+foreach}-Schleife\index{foreach} wird f"ur diese Wertekombination der 
+	Schleifenvariablen\index{Schleifenvariable!in {\bf foreach}!Wertekombination} ausgef"uhrt.
+  \item Es wird gepr"uft, ob die  Schleifenvariablen schon alle Werte ihrer jeweiligen
+	Wertemenge angenommen haben:
+	\begin{itemize}
+	  \item Wenn sie noch nicht alle Werte angenommen haben, erhalten jetzt {\it alle
+		Schleifenvariablen\/} den n"achsten Wert ihrer jeweiligen Wertemenge. Die
+		Abarbeitung wird mit 2. fortgesetzt.
+	  \item Wenn die Schleifenvariablen schon alle ihre vorgesehenen Werte angenommen haben, ist
+		die Ausf"uhrung der Schleife beendet.
+	\end{itemize}
+\end{enumerate}
+\index{Iteration!foreach}\index{Wiederholungsanweisung!!foreach}\index{Schleife!foreach} 
+
+
+\subsection{Bedingte Anweisungen}
+\label{condstatement}
+
+\begin{center}
+\fbox{
+\begin{minipage}{\textwidth}
+{\footnotesize
+\begin{center}
+\begin{eqnarray}
+  \mbox{conditional\_stmt} & ::= & \mbox{{\bf if}\index{if} logical\_expr {\bf then}\index{then} statement\_list} \nonumber\\
+                           &     & \mbox{$[$else\_if\_part$]$ $[$else\_stmt$]$\index{else} {\bf end}}\index{end} 
+					\label{syconditionalstatement}\\[.3 cm]
+  \mbox{else\_if\_part} & ::= & \mbox{else\_if\_stmt \{else\_if\_stmt\}} \label{syelseifpart} \\[.3 cm]
+  \mbox{else\_if\_stmt} & ::= & \mbox{{\bf elseif}\index{elseif} logical\_expr {\bf then}\index{then} statement\_list}  \label{syelseifstmt} \\[.3 cm]
+  \mbox{else\_stmt}     & ::= & \mbox{{\bf else}\index{else}  statement\_list} \label{syelsestmt}\\ \nonumber
+\end{eqnarray}
+\end{center}
+}
+\end{minipage}
+}
+\end{center}
+\index{Anweisung!bedingte}\index{Verzweigungsanweisung}
+
+Die bedingte Anweisung wird folgenderma"sen  abgearbeitet:
+\begin{enumerate}
+  \item Es werden nacheinander die Bedingungen ``logical\_expr'' ausgewertet, bis die erste davon
+	wahr ist.
+  \item Wurde eine solche wahre Bedingung gefunden, wird die Liste der Anweisungen, die dem
+	dazugeh"origen {\bf then}\index{then} folgt, ausgef"uhrt. Dann ist die bedingte Anweisung beendet,
+	alle nachfolgenden Bedingungen und Anweisungen werden ignoriert.
+  \item Wurde keine wahre Bedingung gefunden, werden die Anweisungen hinter dem {\bf else}\index{else}
+	ausgef"uhrt. 
+\end{enumerate}
+
+Es wird in einer bedingten Anweisung also h"ochstens einer der
+Anweisungsbl"ocke nach einer Bedingung ausgef"uhrt. Ist keine der
+Bedingungen wahr und kein {\bf else}-Teil vorhanden, so bewirkt die
+bedingte Anweisung nichts.
+
+
+
+
+
+\section{Beispiel: Necker-W"urfel}
+\label{NeckerBsp}
+
+Hier soll ein {\bf Nessus}-Programm gezeigt werden, das ein Netz, das
+ein bekanntes Vexierbild - den Necker-W"urfel - darstellt, definiert.
+Die perspektivische Darstellung des W"urfels wie in
+Abbildung~\ref{WuerfelBild} l"a"st zwei verschiedene Deutungen zu:
+
+\begin{enumerate}
+  \item Man sieht den W"urfel von vorn, das hei"st, die vertikale Kante B-C ist dem Betrachter zugewandt.
+  \item Man sieht den W"urfel schr"ag von unten, das hei"st, die untere Kante H-G ist dem Betrachter zugewandt.
+\end{enumerate}
+
+\begin{figure}[htb]
+  \begin{center}
+%    \mbox{
+      \begin{minipage}{\textwidth}
+%        \vspace{6cm}
+	\screendump{0.7}{necker.ps}
+      \end{minipage}
+%    }
+    \caption{\label{WuerfelBild} Netzwerk zur Darstellung des Necker-W"urfels}
+  \end{center}
+\end{figure}
+
+Bei solchen Vexierbildern springt normalerweise der menschliche
+Betrachter von einer Deutung zur anderen. In \cite{fel01,fel02} wird
+ein Netzwerk f"ur den Necker-W"urfel vorgestellt, das als Ergebnis die
+Entscheidung f"ur eine der beiden Betrachtungsweisen liefert.
+
+Dieses Netz besteht aus zwei miteinander konkurrierenden Strukturen.
+Jede dieser Strukturen stellt eine der Betrachtungsweisen des W"urfels
+dar und besteht aus dreizehn Zellen:
+
+\begin{itemize}
+  \item Acht Zellen, die den Ecken des W"urfels entsprechen. Diese Ecken werden mit ``A'' \verb&..&
+	``H'' bezeichnet. 
+  \item Vier Zellen, die angeben, welche Ecken des W"urfels dem Betrachter zugewandt sind. 
+  \item Eine Zelle, die das Ergebnis liefert. Sie ist aktiviert, wenn
+	sich das Netz f"ur die Betrachtungsweise entscheidet, die von derjenigen der beiden 
+	Strukturen, zu der sie geh"ort, dargestellt wird.  
+\end{itemize}
+
+Abbildung~\ref{WuerfelBild}  zeigt dieses Netz in der Darstellung von SNNS.
+
+In diesem Fall bietet es sich an, das Teilnetz, das f"ur jede der
+Betrachtungsweisen ja gleich ist, in einem eigenen Programm zu
+definieren und dann diese beiden Teilnetze miteinander zu verbinden.
+Abbildung~\ref{NeckerProg} zeigt die Programme, die das Netz
+definieren.
+
+\begin{figure}[htbp]
+  \begin{center}
+    \mbox{
+      \begin{minipage}{\textwidth}
+	   \small
+           \begin{tabbing}\=nn\=\kill
+	   \input{b_necker.tex}
+           \end{tabbing}
+      \end{minipage}
+    }
+    \caption{\label{NeckerProg} Beispielprogramm: Necker-W"urfel}
+  \end{center}
+\end{figure}
+

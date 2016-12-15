@@ -1,0 +1,14 @@
+The XOR-Problem
+
+The XOR-Problem  is solvable by a multi-layer perceptron with
+one hidden layer. The minimal topology found also by \ENZO is
+2-1-1, with 4 weights using shortcut connections.
+
+
+
+If you want to use the X-history output window, use for all benchmarks
+the command file with an additional <x> as prefix.
+
+Start the  benchmark with:
+
+	enzo xor.cmd    or    enzo xxor.cmd 

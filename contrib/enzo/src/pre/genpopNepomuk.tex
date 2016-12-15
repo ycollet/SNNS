@@ -1,0 +1,16 @@
+\begin{moduledoc}{Creating a population using the nepomuk library}{genpopNepo}
+  \item[\KeyWord{popsize} \optParam{ x } ]~\\
+    This parameter sets the maximal number of networks in the parent population.\\
+    Default: {\tt POP\_SIZE\_VALUE} (30)
+  \item[\KeyWord{gensize} \optParam{ x } ]~\\
+    This parameter sets the number of  offsprings to create each generation.\\
+    Default: {\tt OFF\_SIZE\_VALUE} (10)
+\end{moduledoc}
+
+The module creates a population of networks using the nepomuk library.
+Three parts of the population are distinguished: the reference net, the parent
+population and the offspring population.
+Note that only memory for {\it popsize} + {\it gensize} + 1 networks is allocated,
+but no networks are created at that time.
+
+

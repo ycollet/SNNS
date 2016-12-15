@@ -1,0 +1,23 @@
+\begin{moduledoc}{Adaptive pruning}{adapPrune}
+  \item[\KeyWord{threshold} \optParam{ x } ]~\\
+    This value gives the threshold used to initialize the parents.\\	
+    Default: 0.0
+  \item[\KeyWord{deltaThreshold} \optParam{ x } ]~\\
+    This value gives the maximal factor the threshold of the offsprings
+    is allowed to differ from the parents.\\	
+    Default: 0.2
+  \item[\KeyWord{aveThreshold} \optParam{ x } ]~\\
+    For every network the mean value of the absolute value of the weights
+    is computed and the threshold is individually set to this value times
+    \Param{aveThreshold}.\\
+    Default: 0.0
+\end{moduledoc}
+The module {\it adapPrune} is an adaptive variation of standard pruning.
+Weights which are smaller than the threshold are deleted.
+The threshold is set individually for every network, depending on the mean value
+of its weights. If the factor {\it aveThreshold} is not set the value {\it threshold}
+is used. The distribution of possible changes is realized with a Gaussian
+distribution $g(x)$ and a maximal factor: \\
+\\
+\centerline{($\Delta_{threshold} =   g(x) *  $ {\it deltaThreshold}).}
+

@@ -1,0 +1,302 @@
+%  %W%	%G%
+
+
+\part{\ENZO User Manual} % ==================================================
+
+
+\section{General Introduction}
+
+\input{intro}
+
+\section{Who should use \ENZO}
+
+\subsection{History and purpose of \ENZO}
+
+\ENZO was designed to optimize the topology of neural networks as well
+as their performance. So far this version supports the optimization of
+multilayer perceptrons. Elman networks, TDNNs and RBF networks are currently
+under investigation. 
+
+
+This version of \ENZO uses the Stuttgarter Neural Network Simulator (SNNSv4.1,
+kernel and function library)
+for manipulating neural networks. All simulators can be supported as long
+as they offer a functional interface to manipulate networks.
+
+\ENZO should be a powerfool tool for everybody who uses neural networks
+and who is interested in faster, smaller and better networks. 
+It is not necessary to have any knowledge about genetic algorithms,
+but it makes the system easier to comprehend. See \cite{goldberg89,reeves93,schwefel95} for an
+introduction.
+
+The flexible design of \ENZO provides a tool that is usable for many tasks, when
+dealing with neural networks. That is, instead of optimizing topologies, one can use
+it as well as a batch program to train several networks just  by changing the
+command file
+in an appropriate way. Adding your own modules allows you to tailor the program
+to your desire.
+
+\subsection{Where to get \ENZO}
+
+\ENZO is available via anonymous ftp at the same site as the
+SNNS simulator. The host is\\
+\\
+\centerline {\verb+ftp.informatik.uni-stuttgart.de (129.69.211.2)+}
+\\
+in the directory\\
+\\
+\centerline {\verb+/pub/SNNS+.}\\
+\\
+Check there for further information (Readme.ENZO)
+and the  file ENZO.tar.Z or ENZO.tar.gz!
+Before extracting the tar-files note that there is no installation script
+by now. You should have no problems if
+\ENZO (resp. the tar-files) are  located on the same directory level
+as SNNSv4.1.
+Uncompress the tar-file and extract ENZO with\\
+\\
+\centerline {\verb+tar -xvf ENZO.tar+}
+\\
+in the current directory.
+
+The directory ENZO contains a makefile to compile the program.
+The subdirectory ENZO/src contains all sources.
+The subdirectory ENZO/benchmarks contains some benchmarks.
+See also section \ref{bench}.
+The subdirectory ENZO/doc contains the documentation (with \LaTeX\  sources). 
+
+\subsection{Mailing list}
+
+There exists a mailing list for \ENZO. If you want to be added to the list,
+send a message to\\
+\\
+\centerline{\verb+enzo-request@ira.uka.de+.}
+
+\vspace*{0.5cm}
+
+Post your messages, questions, comments etc. to\\
+\\
+\centerline{\verb+enzo@ira.uka.de+.}
+
+
+
+
+\section{Design and Interface of \ENZO}
+
+\begin{figure}[htb]
+\psfig{figure=../bilder/system3.eps,width=15cm,height=8cm} 
+
+\caption[Design and Interfaces of \ENZO\ ]{\label{design}
+{\small The figure shows the main parts of
+\ENZO\ and the interface
+to the neural network simulator, e.g., the SNNS simulator. The Interface
+contains about 100 functions to perform several network operations.}}
+\end{figure}
+
+The design of  \ENZO\ provides a great flexibility.  The specialized knowledge
+of how to perform a certain evolution step is located in the modules (right lower corner
+of the \ENZO block in figure \ref{design}. They are combinable like toy blocks
+and easily extensible. A population manager takes care of handling the individuals
+as well as the pattern sets. The neural network simulator is hidden behind a
+functional interface. \ENZO also offers the possibility to use the network description
+language \CuPit. If one is familiar with \CuPit and interested  in using it
+with \ENZO please send an email to \verb+enzo-request@ira.uka.de+.
+For more information about \CuPit see \verb+http://wwwipd.ira.uka.de/~hopp/cupit.html+.
+
+
+\section{Installing and running \ENZO }
+
+\subsection{Installation}
+
+Unfortunately, for this first published version of \ENZO no installation
+script exists. You don't have to change any makefiles as
+long as \ENZO is located on the same directory level as
+the SNNS simulator. (Expected name is SNNSv4.1).
+If this is not the  case, use symbolic links or adapt the makefiles.
+
+To install \ENZO do the following:
+\begin{itemize}
+\item[1.]{Make sure \ENZO is at the same directory level as SNNSv4.1}
+
+\item[2.]{Type \verb+cd ENZO+ and than \verb+make+. That should compile all libraries
+	as well as the executable \verb+enzo+. The executable is located in the directory
+	\verb+ENZO+ }
+
+\item[3.]{If you want to use the X-history window, type \verb+make xgraf+.
+	You may need to adapt the library and include path in the makefile
+	in \verb+ENZO/src/history/Xgraf+.}
+
+\end{itemize}
+
+
+
+\subsection{Running \ENZO }
+
+\ENZO\  is run as a background (UNIX-) process. For small problems,
+a simple X-Window visualization of the fitness function is usable.
+The networks can be analyzed using the graphical user interface of SNNS.
+In near future, some tools will be provided with each standard history
+module, to visualize the results.
+
+To run \ENZO\  one simply types:\\
+
+	\centerline{\tt enzo \em cmd\_file [logfile [seed]]}
+
+If no {\em log file} is given, the output is written to {\em stderr}.
+
+\begin{figure}[htb]
+\centerline{\psfig{figure=../bilder/algo.eps,width=12cm,height=7.2cm} }
+{\small {\caption[Evolutionary algorithm ]{
+\label{algo}
+ The figure shows the main loop of \ENZO.
+The evolutionary operators are called in the shown sequence.
+}}}
+\end{figure}
+
+
+\ENZO\  starts by reading the {\em command file}. A sample command file is given in
+chapter \ref{bspcmd}. Via the  command file modules
+ can be activated through a key word
+and their parameters can be set. 
+The genetic operators are called sequentially as  shown in figure \ref{algo}.
+Each operator  can consist of several  modules (or be empty).
+The modules are combined by specifying their key words in the command file.
+They are called in the sequence of the appearance of the key words.
+Note that  one module can appear several times in this sequence.
+Figure \ref{operator} illustrates the relationship between modules and operators.
+
+
+\begin{figure}[htb]
+\psfig{figure=../bilder/operator.eps,width=15cm,height=6cm} 
+\caption[Relationship between modules and operators]{ \label{operator}
+{\small {The figure shows the relationship between modules and operators.
+The user can specify the key words of the modules in the command file,
+which will activate the modules,e.g., the interpreter adds them to a module
+list which forms the evolutionary operator.}
+}}
+\end{figure}
+
+
+
+
+\subsection{The command file \label{steuerdatei}}
+
+All possible key words are defined by the modules. For details see
+the description of the modules in chapter \ref{modules}.
+A dispatcher passes the key words and possible parameters to
+all modules. Each module picks the information it is interested in
+and performs necessary actions.
+The sequence of key words is only  important in the way
+that the functionality of the resulting operator depends on
+the order of the keywords, e.g., the optimization operator
+in figure \ref{operator} has another functionality if prune would
+be called before learnSNNS.
+
+Still it is good style to keep certain entries in different parts: 
+
+\begin{description}
+
+\item[1. Files:]
+	You should specify the file names of the networks and patterns in this part.
+        Also the prefix for output files should be given.
+	This has the advantage that one sees immediately, what task is optimized
+     	and which files are involved.
+
+\item[2. Modules:]
+	You should specify which modules form the evolutionary operators.
+	Every module defines a key word for its activation.
+	The key words should be in the typical order, e.g.,
+	pre-evolution before selection before crossover etc.
+        This part says which modules are to use.
+  
+\item[3. Parameters:]
+	All parameters of all used modules should be set here.
+	The order of key words should be the same as for modules.
+	If a parameter is set several times the last appearance is used.
+	This part  decides how the evolution is done in detail.
+
+\end{description}
+
+A sample command file is shown in chapter \ref{bspcmd}.
+
+
+\section{Module description\label{modules}}
+
+The following sections describe the modules which are currently available
+for \ENZO. Each section corresponds to an operator, each subsection corresponds
+to a module. Firstly the key word of the module is given, followed by the description
+of its parameters.
+Optional parameters are given in brackets.
+All modules have sensible default values for their parameters.
+Some notes on important parameters can be found in chapter \ref{parameter}.
+Each section is closed by a functional description of the module and a sketch
+of the algorithm, if necessary.
+
+
+\subsection{Pre-evolution}       \input{pre_evolution}
+\subsection{Stopping condition}  \input{stop_evolution}
+\subsection{Selection}           \input{selection}
+\subsection{Mutation}            \input{mutation}
+\subsection{Crossover}           \input{crossover}
+\subsection{Optimization}         \input{opt}
+\subsection{Evaluation}           \input{evaluation}
+\subsection{History}           \input{history}
+\subsection{Survival}        \input{survival}
+\subsection{Post-evolution}       \input{post_evolution}
+\subsection{Sample module}      \input{examples}
+
+
+\section{Adjusting parameters  \label{parameter}}
+
+You should not be worried about the amount of adjustable parameters.
+Most of same are easy to handle, in a way that they have sensible
+default values and modifications have little influence on the result.
+Still for some problems it might be useful to have the opportunity to
+tailor the algorithm in a certain way.
+
+Some parameters need to be set in an intelligent way, i.e., you should
+take time and use your knowledge about the problem to adjust them.
+
+Firstly, the parameters of the local optimization  depend heavily on the
+problem. That is the mean error {\it maxTss} and the number of epochs
+{\it maxEpochs} should be set to values that provide a good solution.
+Note that since (in case of our mutation operators) offsprings have some knowledge of their parents,
+they need to be trained significantly less\footnote{Since the networks usually are smaller and due to the knowledge transformation they possible speedup is in the range from 10 to 50.}.
+If weight decay is used, it should be adjusted ina a way that no overfitting occurs. 
+
+Secondly, the design of the fitness function is important, because
+that's our optimization criteria. You should compute all fitness terms
+for your reference net (the maximal topology)  and give those higher weights,
+that you care about. Be aware that some constraints are maintained, e.g.,
+if a network can't learn the training patterns, its fitness should reflect this
+clearly. 
+
+The size of the population, the number of offsprings and the number
+of generations should be  in a sensible range.
+The more generations the better the result (with respect to your fitness function !).
+The bigger the population and the higher the number of offsprings created in each
+generation, the wider the exploration.
+For a given amount of time, you need always to decide the relation of
+exploration to exploitation, e.g. creating many offspring each generation vs. creating fewer offsprings but   use more generations.
+
+Sensible values are, if possible, at least 30 generations,
+30 networks in the parent population and creating 10 offsprings
+each generation.
+
+The probabilities of mutation should be set in a way that at the most $1\%$ to $10\%$
+of the links resp. units are mutated. Otherwise the offsprings will loose most of
+the knowledge of the parents. 
+
+\subsection*{Acknowledgements}
+
+Several students made valuable contributions to the development of 
+ENZO by studiing the evolution of neural networks in their master
+thesis \cite{weisbrod92,zagorski94,schaefer94,schubert95}. 
+This implementation of \ENZO\ goes back to
+the work of \cite{schaefer94,schubert95}.
+
+
+
+
+
+

@@ -1,0 +1,140 @@
+.MAKE_VERSION:	VERSION-1.0
+.BUILT_LAST_MAKE_RUN:
+prune.o:	../enzo.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/stdlib.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/sys/stdtypes.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/stdio.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/stdarg.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/va-sparc.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/string.h
+.BUILT_LAST_MAKE_RUN:
+prune.o:	/tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/math.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/floatingpoint.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/sys/ieeefp.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/time.h ../proto.h ../../../SNNSv4.1/kernel/sources/glob_typ.h ../../../SNNSv4.1/kernel/sources/kr_typ.h ../../../SNNSv4.1/kernel/sources/ext_typ.h
+.BUILT_LAST_MAKE_RUN:
+prune.o:	../../../SNNSv4.1/kernel/sources/enzo_mem_typ.h ../nepomuk/kr_shell.h ../nepomuk/nepomuk.h ../history/histUtils.h ../networkData.h ../subUtils.h prune.h 
+	gcc -I..  -I../nepomuk -I../../../SNNSv4.1/kernel/sources -O4  -target sun4 -c  prune.c
+.BUILT_LAST_MAKE_RUN:
+jogWeights.o:	../enzo.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/stdlib.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/sys/stdtypes.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/stdio.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/stdarg.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/va-sparc.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/string.h
+.BUILT_LAST_MAKE_RUN:
+jogWeights.o:	/tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/math.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/floatingpoint.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/sys/ieeefp.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/time.h ../proto.h ../../../SNNSv4.1/kernel/sources/glob_typ.h ../../../SNNSv4.1/kernel/sources/kr_typ.h ../../../SNNSv4.1/kernel/sources/ext_typ.h
+.BUILT_LAST_MAKE_RUN:
+jogWeights.o:	../../../SNNSv4.1/kernel/sources/enzo_mem_typ.h ../nepomuk/kr_shell.h ../nepomuk/nepomuk.h ../history/histUtils.h ../networkData.h ../subUtils.h jogWeights.h 
+	gcc -I..  -I../nepomuk -I../../../SNNSv4.1/kernel/sources -O4  -target sun4 -c  jogWeights.c
+.BUILT_LAST_MAKE_RUN:
+libopt.a(cleanup.o):
+	true
+.BUILT_LAST_MAKE_RUN:
+libopt.a(jogWeights.o):
+	true
+.BUILT_LAST_MAKE_RUN:
+libopt.a(learnSNNS.o):
+	true
+libopt.a(learnCupit.o):
+	true
+libopt.a(learnSELECT.o):
+	true
+libopt.a(learn_SNNS.o):
+	true
+.BUILT_LAST_MAKE_RUN:
+adapPrune.o:	../enzo.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/stdlib.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/sys/stdtypes.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/stdio.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/stdarg.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/va-sparc.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/string.h
+.BUILT_LAST_MAKE_RUN:
+adapPrune.o:	/tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/math.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/floatingpoint.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/sys/ieeefp.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/time.h ../proto.h ../../../SNNSv4.1/kernel/sources/glob_typ.h ../../../SNNSv4.1/kernel/sources/kr_typ.h ../../../SNNSv4.1/kernel/sources/ext_typ.h
+.BUILT_LAST_MAKE_RUN:
+adapPrune.o:	../../../SNNSv4.1/kernel/sources/enzo_mem_typ.h ../nepomuk/kr_shell.h ../nepomuk/nepomuk.h ../history/histUtils.h ../networkData.h ../subUtils.h adapPrune.h 
+	gcc -I..  -I../nepomuk -I../../../SNNSv4.1/kernel/sources -O4  -target sun4 -c  adapPrune.c
+callCupit.o:	/tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/stdio.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/stdarg.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/va-sparc.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/stdlib.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/sys/stdtypes.h 
+	gcc -Wall  -I.. -I../../../kernel/sources -I../../../../CuPit/sparc-sunos/lib -I../../../kernel/nepomuk -ggdb  -target sun4 -c  callCupit.c
+libopt.a(learnISEL.o):
+	true
+.BUILT_LAST_MAKE_RUN:
+nullWeg.o:	../enzo.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/stdlib.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/sys/stdtypes.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/stdio.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/stdarg.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/va-sparc.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/string.h
+.BUILT_LAST_MAKE_RUN:
+nullWeg.o:	/tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/math.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/floatingpoint.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/sys/ieeefp.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/time.h ../proto.h ../../../SNNSv4.1/kernel/sources/glob_typ.h ../../../SNNSv4.1/kernel/sources/kr_typ.h ../../../SNNSv4.1/kernel/sources/ext_typ.h
+.BUILT_LAST_MAKE_RUN:
+nullWeg.o:	../../../SNNSv4.1/kernel/sources/enzo_mem_typ.h ../nepomuk/kr_shell.h ../nepomuk/nepomuk.h ../history/histUtils.h ../networkData.h ../subUtils.h nullWeg.h 
+	gcc -I..  -I../nepomuk -I../../../SNNSv4.1/kernel/sources -O4  -target sun4 -c  nullWeg.c
+.BUILT_LAST_MAKE_RUN:
+libopt.a(learnINIT.o):
+	true
+nn3.o:
+	gcc -Wall  -I.. -I../../../kernel/sources -I../../../../CuPit/sparc-sunos/lib -I../../../kernel/nepomuk -ggdb  -target sun4 -c  nn3.c
+.BUILT_LAST_MAKE_RUN:
+cleanup.o:	../enzo.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/stdlib.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/sys/stdtypes.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/stdio.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/stdarg.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/va-sparc.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/string.h
+.BUILT_LAST_MAKE_RUN:
+cleanup.o:	/tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/math.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/floatingpoint.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/sys/ieeefp.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/time.h ../proto.h ../../../SNNSv4.1/kernel/sources/glob_typ.h ../../../SNNSv4.1/kernel/sources/kr_typ.h ../../../SNNSv4.1/kernel/sources/ext_typ.h
+.BUILT_LAST_MAKE_RUN:
+cleanup.o:	../../../SNNSv4.1/kernel/sources/enzo_mem_typ.h ../nepomuk/kr_shell.h ../nepomuk/nepomuk.h ../history/histUtils.h ../networkData.h ../subUtils.h cleanup.h 
+	gcc -I..  -I../nepomuk -I../../../SNNSv4.1/kernel/sources -O4  -target sun4 -c  cleanup.c
+.BUILT_LAST_MAKE_RUN:
+learnSNNS.o:	../enzo.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/stdlib.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/sys/stdtypes.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/stdio.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/stdarg.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/va-sparc.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/string.h
+.BUILT_LAST_MAKE_RUN:
+learnSNNS.o:	/tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/math.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/floatingpoint.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/sys/ieeefp.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/time.h ../proto.h ../../../SNNSv4.1/kernel/sources/glob_typ.h ../../../SNNSv4.1/kernel/sources/kr_typ.h ../../../SNNSv4.1/kernel/sources/ext_typ.h
+.BUILT_LAST_MAKE_RUN:
+learnSNNS.o:	../../../SNNSv4.1/kernel/sources/enzo_mem_typ.h ../nepomuk/kr_shell.h ../nepomuk/nepomuk.h ../history/histUtils.h ../networkData.h ../subUtils.h learnSNNS.h 
+	gcc -I..  -I../nepomuk -I../../../SNNSv4.1/kernel/sources -O4  -target sun4 -c  learnSNNS.c
+learnCupit.o:	../enzo.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/stdlib.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/sys/stdtypes.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/stdio.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/stdarg.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/va-sparc.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/string.h
+learnCupit.o:	/tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/math.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/floatingpoint.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/sys/ieeefp.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/time.h ../proto.h ../../../SNNSv4.1/kernel/sources/glob_typ.h ../../../SNNSv4.1/kernel/sources/kr_typ.h ../../../SNNSv4.1/kernel/sources/ext_typ.h
+learnCupit.o:	../../../SNNSv4.1/kernel/sources/enzo_mem_typ.h ../nepomuk/kr_shell.h ../nepomuk/nepomuk.h ../history/histUtils.h ../networkData.h ../subUtils.h 
+	gcc -I..  -I../nepomuk -I../../../SNNSv4.1/kernel/sources -O4  -target sun4 -c  learnCupit.c
+learnSELECT.o:	learnSELECT.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/string.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/sys/stdtypes.h ../knete.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/stdlib.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/stdio.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/stdarg.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/va-sparc.h
+learnSELECT.o:	/tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/math.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/floatingpoint.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/sys/ieeefp.h ../../headers/kernel_shell.h ../../headers/nepomuk.h ../../headers/glob_typ.h ../../headers/kr_ui.h ../../headers/krui_typ.h ../../headers/ilkd_mem_ext.h ../../headers/kr_typ.h ../../headers/ext_typ.h ../../headers/kernel.h
+learnSELECT.o:	../../headers/kr_const.h ../../headers/kr_def.h ../../headers/kr_mac.h ../networkData.h ../history/histUtils.h ../subUtils.h 
+	gcc -Wall -ansi -I.. -I../../headers -ggdb  -target sun4 -c  learnSELECT.c
+learn_SNNS.o:	learn_SNNS.h ../knete.h /tools/apps/gcc-2.4.5/lib/gcc-lib/sparc-sun-sunos4.1/2.4.5/include/stdlib.h /tools/apps/gcc-2.4.5/lib/gcc-lib/sparc-sun-sunos4.1/2.4.5/include/sys/stdtypes.h /tools/apps/gcc-2.4.5/lib/gcc-lib/sparc-sun-sunos4.1/2.4.5/include/stdio.h /tools/apps/gcc-2.4.5/lib/gcc-lib/sparc-sun-sunos4.1/2.4.5/include/stdarg.h /tools/apps/gcc-2.4.5/lib/gcc-lib/sparc-sun-sunos4.1/2.4.5/include/va-sparc.h /tools/apps/gcc-2.4.5/lib/gcc-lib/sparc-sun-sunos4.1/2.4.5/include/string.h
+learn_SNNS.o:	../../headers/nepomuk.h ../../headers/glob_typ.h ../../headers/kr_ui.h ../../headers/krui_typ.h ../../headers/ilkd_mem_ext.h ../../headers/kr_typ.h ../../headers/ext_typ.h ../../headers/kernel.h ../../headers/kr_const.h ../../headers/kr_def.h ../../headers/kr_mac.h ../networkData.h ../history/histUtils.h 
+learnISEL.o:	learnISEL.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/string.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/sys/stdtypes.h ../knete.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/stdlib.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/stdio.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/stdarg.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/va-sparc.h
+learnISEL.o:	/tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/math.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/floatingpoint.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/sys/ieeefp.h ../../headers/kernel_shell.h ../../headers/nepomuk.h ../../headers/glob_typ.h ../../headers/kr_ui.h ../../headers/krui_typ.h ../../headers/ilkd_mem_ext.h ../../headers/kr_typ.h ../../headers/ext_typ.h ../../headers/kernel.h
+learnISEL.o:	../../headers/kr_const.h ../../headers/kr_def.h ../../headers/kr_mac.h ../networkData.h ../history/histUtils.h ../subUtils.h 
+	gcc -Wall -ansi -I.. -I../../headers -ggdb  -target sun4 -c  learnISEL.c
+.BUILT_LAST_MAKE_RUN:
+learnINIT.o:	../enzo.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/stdlib.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/sys/stdtypes.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/stdio.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/stdarg.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/va-sparc.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/string.h
+.BUILT_LAST_MAKE_RUN:
+learnINIT.o:	/tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/math.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/floatingpoint.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/sys/ieeefp.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/time.h ../proto.h ../../../SNNSv4.1/kernel/sources/glob_typ.h ../../../SNNSv4.1/kernel/sources/kr_typ.h ../../../SNNSv4.1/kernel/sources/ext_typ.h
+.BUILT_LAST_MAKE_RUN:
+learnINIT.o:	../../../SNNSv4.1/kernel/sources/enzo_mem_typ.h ../nepomuk/kr_shell.h ../nepomuk/nepomuk.h ../history/histUtils.h ../networkData.h ../subUtils.h learnINIT.h 
+	gcc -I..  -I../nepomuk -I../../../SNNSv4.1/kernel/sources -O4  -target sun4 -c  learnINIT.c
+libopt.a(externals.o):
+	true
+.BUILT_LAST_MAKE_RUN:
+libopt.a:
+	ar rc libopt.a prune.o relearn.o cleanup.o nullWeg.o adapPrune.o jogWeights.o learnSNNS.o learnCV.o learnINIT.o
+libopt.a(learnLAN.o):
+	true
+.BUILT_LAST_MAKE_RUN:
+libopt.a(prune.o):
+	true
+.BUILT_LAST_MAKE_RUN:
+libopt.a(adapPrune.o):
+	true
+externals.o:	/tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/stdio.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/stdarg.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/va-sparc.h ../../../../CuPit/sparc-sunos/lib/cupittypes.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/math.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/floatingpoint.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/sys/ieeefp.h
+externals.o:	/usr/include/errno.h /usr/include/sys/errno.h 
+	gcc -Wall  -I.. -I../../../kernel/sources -I../../../../CuPit/sparc-sunos/lib -I../../../kernel/nepomuk -ggdb  -target sun4 -c  externals.c
+.BUILT_LAST_MAKE_RUN:
+libopt.a(relearn.o):
+	true
+libopt.a(callCupit.o):
+	true
+libopt.a(cupit_main.o):
+	true
+learnLAN.o:	../knete.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/stdlib.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/sys/stdtypes.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/stdio.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/stdarg.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/va-sparc.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/string.h
+learnLAN.o:	/tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/math.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/floatingpoint.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/sys/ieeefp.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/time.h ../proto.h ../../../kernel/sources/glob_typ.h ../../../kernel/sources/kr_typ.h ../../../kernel/sources/ext_typ.h ../../../kernel/sources/ilkd_mem_typ.h
+learnLAN.o:	../../../kernel/nepomuk/kr_shell.h ../../../kernel/nepomuk/nepomuk.h ../history/histUtils.h ../networkData.h ../subUtils.h learnLAN.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/sys/types.h /usr/include/sys/sysmacros.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/sys/time.h /usr/include/errno.h /usr/include/sys/errno.h /usr/include/fcntl.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/sys/fcntlcom.h
+learnLAN.o:	/tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/sys/stat.h 
+	gcc -Wall  -I.. -I../../../kernel/sources -I../../../../CuPit/sparc-sunos/lib -I../../../kernel/nepomuk -ggdb  -target sun4 -c  learnLAN.c
+libopt.a(nn3.o):
+	true
+.BUILT_LAST_MAKE_RUN:
+libopt.a(learnCV.o):
+	true
+.BUILT_LAST_MAKE_RUN:
+relearn.o:	../enzo.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/stdlib.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/sys/stdtypes.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/stdio.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/stdarg.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/va-sparc.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/string.h
+.BUILT_LAST_MAKE_RUN:
+relearn.o:	/tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/math.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/floatingpoint.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/sys/ieeefp.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/time.h ../proto.h ../../../SNNSv4.1/kernel/sources/glob_typ.h ../../../SNNSv4.1/kernel/sources/kr_typ.h ../../../SNNSv4.1/kernel/sources/ext_typ.h
+.BUILT_LAST_MAKE_RUN:
+relearn.o:	../../../SNNSv4.1/kernel/sources/enzo_mem_typ.h ../nepomuk/kr_shell.h ../nepomuk/nepomuk.h ../history/histUtils.h ../networkData.h ../subUtils.h ../../../SNNSv4.1/kernel/sources/kernel.h ../../../SNNSv4.1/kernel/sources/kr_mac.h relearn.h 
+	gcc -I..  -I../nepomuk -I../../../SNNSv4.1/kernel/sources -O4  -target sun4 -c  relearn.c
+cupit_main.o:	/tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/stdio.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/stdarg.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/va-sparc.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/stdlib.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/sys/stdtypes.h 
+	gcc -Wall  -I.. -I../../../kernel/sources -I../../../../CuPit/sparc-sunos/lib -I../../../kernel/nepomuk -ggdb  -target sun4 -c  cupit_main.c
+.BUILT_LAST_MAKE_RUN:
+libopt.a(nullWeg.o):
+	true
+.BUILT_LAST_MAKE_RUN:
+learnCV.o:	../enzo.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/stdlib.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/sys/stdtypes.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/stdio.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/stdarg.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/va-sparc.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/string.h
+.BUILT_LAST_MAKE_RUN:
+learnCV.o:	/tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/math.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/floatingpoint.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/sys/ieeefp.h /tools/apps/gcc-2.6.3/lib/gcc-lib/sparc-sun-sunos4.1.2/2.6.3/include/time.h ../proto.h ../../../SNNSv4.1/kernel/sources/glob_typ.h ../../../SNNSv4.1/kernel/sources/kr_typ.h ../../../SNNSv4.1/kernel/sources/ext_typ.h
+.BUILT_LAST_MAKE_RUN:
+learnCV.o:	../../../SNNSv4.1/kernel/sources/enzo_mem_typ.h ../nepomuk/kr_shell.h ../nepomuk/nepomuk.h ../history/histUtils.h ../networkData.h ../subUtils.h learnCV.h 
+	gcc -I..  -I../nepomuk -I../../../SNNSv4.1/kernel/sources -O4  -target sun4 -c  learnCV.c

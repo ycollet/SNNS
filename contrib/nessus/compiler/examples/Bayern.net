@@ -1,0 +1,94 @@
+SNNS network definition file V2.1-3D
+generated at Wed Jan 27 13:43:45 1993
+network name : colorMap
+source files : colmap.n
+no. of units : 24
+no. of connections : 60
+no. of unit types : 1
+no. of site types : 1
+
+
+learning function : Std_Backpropagation
+update function : Topological_Order
+
+
+
+site definition section :
+
+ site name | site function
+-----------|---------------
+inhibitory | Site_Pi
+-----------|---------------
+
+
+
+type definition section :
+
+     name |     act func |     out func | sites
+----------|--------------|--------------|--------
+colorType | Act_Logistic | Out_Identity | inhibitory
+----------|--------------|--------------|--------
+
+
+
+unit definition section :
+
+   no. |  typeName |         unitName |    act   |   bias   | st |      position |     act func |     out func | sites
+-------|-----------|------------------|----------|----------|----|---------------|--------------|--------------|--------
+     1 | colorType |     Muenchen_red |  1.00000 |          | h  |    1,   8,  0 |              |              | 
+     2 | colorType |   Muenchen_green |  1.00000 |          | h  |    1,   9,  0 |              |              | 
+     3 | colorType |    Muenchen_blue |  1.00000 |          | h  |    1,  10,  0 |              |              | 
+     4 | colorType |   Muenchen_white |  1.00000 |          | h  |    1,  11,  0 |              |              | 
+     5 | colorType |     Augsburg_red |  1.00000 |          | h  |    3,   8,  0 |              |              | 
+     6 | colorType |   Augsburg_green |  1.00000 |          | h  |    3,   9,  0 |              |              | 
+     7 | colorType |    Augsburg_blue |  1.00000 |          | h  |    3,  10,  0 |              |              | 
+     8 | colorType |   Augsburg_white |  1.00000 |          | h  |    3,  11,  0 |              |              | 
+     9 | colorType |       Passau_red |  1.00000 |          | h  |    5,   8,  0 |              |              | 
+    10 | colorType |     Passau_green |  1.00000 |          | h  |    5,   9,  0 |              |              | 
+    11 | colorType |      Passau_blue |  1.00000 |          | h  |    5,  10,  0 |              |              | 
+    12 | colorType |     Passau_white |  1.00000 |          | h  |    5,  11,  0 |              |              | 
+    13 | colorType |   Regensburg_red |  1.00000 |          | h  |    7,   8,  0 |              |              | 
+    14 | colorType | Regensburg_green |  1.00000 |          | h  |    7,   9,  0 |              |              | 
+    15 | colorType |  Regensburg_blue |  1.00000 |          | h  |    7,  10,  0 |              |              | 
+    16 | colorType | Regensburg_white |  1.00000 |          | h  |    7,  11,  0 |              |              | 
+    17 | colorType |    Nuernberg_red |  1.00000 |          | h  |    9,   8,  0 |              |              | 
+    18 | colorType |  Nuernberg_green |  1.00000 |          | h  |    9,   9,  0 |              |              | 
+    19 | colorType |   Nuernberg_blue |  1.00000 |          | h  |    9,  10,  0 |              |              | 
+    20 | colorType |  Nuernberg_white |  1.00000 |          | h  |    9,  11,  0 |              |              | 
+    21 | colorType |    Wuerzburg_red |  1.00000 |          | h  |   11,   8,  0 |              |              | 
+    22 | colorType |  Wuerzburg_green |  1.00000 |          | h  |   11,   9,  0 |              |              | 
+    23 | colorType |   Wuerzburg_blue |  1.00000 |          | h  |   11,  10,  0 |              |              | 
+    24 | colorType |  Wuerzburg_white |  1.00000 |          | h  |   11,  11,  0 |              |              | 
+-------|-----------|------------------|----------|----------|----|---------------|--------------|--------------|--------
+
+
+
+connection definition section :
+
+target |       site | source:weight
+-------|------------|--------
+     1 | inhibitory |      2:-1.00000,      3:-1.00000,      4:-1.00000
+     2 | inhibitory |      1:-1.00000,      3:-1.00000,      4:-1.00000
+     3 | inhibitory |      1:-1.00000,      2:-1.00000,      4:-1.00000
+     4 | inhibitory |      1:-1.00000,      2:-1.00000,      3:-1.00000
+     5 | inhibitory |      6:-1.00000,      7:-1.00000,      8:-1.00000
+     6 | inhibitory |      5:-1.00000,      7:-1.00000,      8:-1.00000
+     7 | inhibitory |      5:-1.00000,      6:-1.00000,      8:-1.00000
+     8 | inhibitory |      5:-1.00000,      6:-1.00000,      7:-1.00000
+     9 | inhibitory |     10:-1.00000,     11:-1.00000,     12:-1.00000
+    10 | inhibitory |      9:-1.00000,     11:-1.00000,     12:-1.00000
+    11 | inhibitory |      9:-1.00000,     10:-1.00000,     12:-1.00000
+    12 | inhibitory |      9:-1.00000,     10:-1.00000,     11:-1.00000
+    13 | inhibitory |     14:-1.00000,     15:-1.00000,     16:-1.00000
+    14 | inhibitory |     13:-1.00000,     15:-1.00000,     16:-1.00000
+    15 | inhibitory |     13:-1.00000,     14:-1.00000,     16:-1.00000
+    16 | inhibitory |     13:-1.00000,     14:-1.00000,     15:-1.00000
+    17 | inhibitory |     18:-1.00000,     19:-1.00000,     20:-1.00000
+    18 | inhibitory |     17:-1.00000,     19:-1.00000,     20:-1.00000
+    19 | inhibitory |     17:-1.00000,     18:-1.00000,     20:-1.00000
+    20 | inhibitory |     17:-1.00000,     18:-1.00000,     19:-1.00000
+    21 | inhibitory |     22:-1.00000,     23:-1.00000,     24:-1.00000
+    22 | inhibitory |     21:-1.00000,     23:-1.00000,     24:-1.00000
+    23 | inhibitory |     21:-1.00000,     22:-1.00000,     24:-1.00000
+    24 | inhibitory |     21:-1.00000,     22:-1.00000,     23:-1.00000
+-------|------------|--------

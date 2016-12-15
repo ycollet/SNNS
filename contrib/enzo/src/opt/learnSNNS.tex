@@ -1,0 +1,43 @@
+\begin{moduledoc}{Learning stopped by periods or learning error}{learnSNNS}
+  \item[\KeyWord{learnfct} \optParam{ x } ]~\\
+    This parameter $x$  contains the name of the SNNS-learning function.\\
+    Default: Rprop
+  \item[\KeyWord{learnparam} \optParam{ x } ]~\\
+    This array of parameters indicates the parameter for the SNNS learning function.
+    The meaning of the parameters can differ from learning function to learning function.
+    For details please see the SNNS manual.\\
+    Default: 0.0 0.0 0.0 5.0 0.0
+  \item[\KeyWord{maxepochs} \optParam{ x } ]~\\
+    This parameter $x$ contains the maximum number of periods for the learning 
+    algorithm. After this maximum the module {\it learnSNNS} will automatically stop the 
+    learning function.\\
+    Default: 50
+  \item[\KeyWord{maxtss} \optParam{ x } ]~\\
+    This parameter indicates the maximal tolerable learning error of the network.
+    The error is normalized by the number of learning patterns and the number of output units.
+    The module {\it learnSNNS} will terminate the learning function if the learning error
+    is less then this threshold.\\
+    Default: 0.5
+  \item[\KeyWord{shuffle} \optParam{ x } ]~\\
+    This switch indicates whether the sequence of the learning patterns is changed after
+    each learning period or not.
+    If the switch is turned on, then the module {\it learnSNNS} will use the
+    SNNS-function {\it shuffle}\\
+    Default: yes
+\end{moduledoc}
+
+
+The module {\it learnSNNS} is the standard-learn module during the optimization.
+The module stops the learning of an offspring network if the learning error is below an 
+upper bound or it reaches the maximum number of learning periods.
+
+
+\algo{10cm}{learnSNNS}{
+Set the SNNS learn function {\it learnFct};\\
+{\bf for all} (networks of the offspring population) {\bf do}\\ 
+\hspace*{0.5cm}{\bf while} (Epochs $<$ {\it maxEpochs}) {\bf and} 
+               (tss $>$ {\it maxTss}) {\bf do}\\
+\hspace*{1.0cm}Train one period with {\it learnParam};\\
+
+}
+

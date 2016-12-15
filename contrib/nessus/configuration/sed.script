@@ -1,0 +1,1 @@
+s/install:/install:	cp $(PROGRAM) $bindir/g

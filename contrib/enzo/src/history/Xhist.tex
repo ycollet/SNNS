@@ -1,0 +1,22 @@
+\begin{moduledoc}{Simple X-Window history}{Xhist}
+
+  \item[\KeyWord{Xgeometry}
+        \optParam{x} \optParam{y} \optParam{width} \optParam{height} ]~\\
+    Specifies the size and position of 	the window on the terminal.
+    The top left corner is given by  \optParam{(x,y)}. the width and height
+by \optParam{width} and \optParam{height}.\\
+    Default: 10 10 600 300
+  \item[\KeyWord{Xcoord}
+        \optParam{xll} \optParam{yll} \optParam{xur} \optParam{yur} ]~\\
+	Defines the coordinate system for the graphical representation
+	of the fitness values.\\
+	The left lower corner is specified by \optParam{(xll, yll)}
+        and the right upper corner by optParam{(xur, yur)}.\\
+    Default: 0.0 0.0 30 1000.0
+
+\end{moduledoc}
+
+A X-Window with a coordinate system is shown. The best, average and worst
+fitness values are plotted vs. generation number. The size of the window
+and the coordinates are adjustable by the user.
+This module uses the \verb+xgraf+ program, located in the directory \verb+ENZO/src/history/Xgraf+. To compile xgraf type \verb+ make xgraf + in the \verb+ENZO+ directory.

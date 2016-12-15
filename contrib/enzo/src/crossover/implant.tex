@@ -1,0 +1,26 @@
+\begin{moduledoc}{Implant a feature from the fittest  net in an offspring}{implant}
+
+\item[\KeyWord{implantProb} \optParam{ x } ]~\\
+    Probability of selecting a hidden unit of the first hidden layer
+	from the best parent network
+	and  implanting it in one offspring network.\\
+    Default: 0.2 
+\end{moduledoc}
+
+
+This module selects a hidden unit from the first hidden layer
+in the fittest parent network
+and implants it in an offspring network. The hidden units are
+marked with their name to prevent implantation of a feature
+twice.
+
+\algo{12cm}{implant}{
+{\bf repeat}\\
+\hspace*{0.5cm} get hidden unit of the first layer in the fittest network;\\
+\hspace*{0.5cm}{\bf if} (hidden unit does not exist in offspring net) {\bf then}\\
+\hspace*{1cm} implant (add) unit to offspring net;\\
+\hspace*{1cm} {\bf forall} (connections in parent network) {\bf do}\\
+\hspace*{1.5cm} {\bf if} (source unit does exist in offspring net) {\bf then}\\
+\hspace*{2cm} insert connection with the same weight in offspring net;\\
+{\bf until} (a hidden unit was implanted or all hidden units failed)
+}

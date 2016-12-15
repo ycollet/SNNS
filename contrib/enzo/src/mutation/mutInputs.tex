@@ -1,0 +1,38 @@
+\begin{moduledoc}{Mutation of the input units}{mutInputs}
+  \item[\KeyWord{probMutInputs} \optParam{ x } ]~\\
+    The parameter $x$ indicates the probability $p_{mut}$ that  
+    a mutation takes place.\\
+    Default: 0.5
+  \item[\KeyWord{probMutInputsSplit} \optParam{ x } ]~\\
+    The parameter $x$ indicates 
+    the relationship $p_{split}$ between inserting and deleting of 
+    input units.\\
+    Default: 0.5 
+  \item[\KeyWord{initRange} \optParam{ x } ]~\\
+    The parameter $x$ determines the interval  [-range, range] where
+    inserted weights are randomly selected from.\\
+    Default: 0.5
+\end{moduledoc}
+The module {\it mutInputs} executes a mutation only of the input units.
+The maximum number of deleted or inserted input units is limited by one.
+All other mutation and optimization modules can only delete units, they can
+never insert weights to a dead input unit.
+
+The internal structure of SNNS does not allow to delete the input units like
+the hidden units, so the input units are just deactivated.
+In this case instead of deleting an activated input unit, all weights will be deleted.
+They are marked with the unit name \verb+xxx+. 
+If you analyze the network with the graphical user interface of SNNS,
+select in the display setup \verb+show name+ to easily identify removed input units.
+In the case of inserting a deactivated input unit, all possible weights will be inserted.
+
+
+\algo{10cm}{mutInputs}{
+{\bf if} ( RAND(0,1) $> p_{mut}$ ) {\bf then}\\
+\hspace*{0.5cm}{\bf if} ( RAND(0,1) $> p_{split}$ ) {\bf then}\\
+\hspace*{1.0cm}insert all possible weights of the deactivated input unit\\
+\hspace*{0.5cm}{\bf else}\\
+\hspace*{1.0cm}delete all weights of the activated input unit\\
+}
+
+

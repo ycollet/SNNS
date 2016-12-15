@@ -1,0 +1,255 @@
+\chapter{Einleitung}
+
+Das vorliegenden Benutzerhandbuch ist eine Einf"uhrung in die
+Programmierung mit der Sprache {\bf Nessus} ({\underline {Ne}}tzwerk -
+{\underline S}pezifikations - {\underline S}prache der {\underline
+U}niversit"at {\underline S}tuttgart). {\bf Nessus} dient dazu, die
+Topologie neuronaler Netze auf einem hohen Abstraktionsniveau
+beschreiben. Der zugeh"orige Compiler erzeugt aus Programmen der
+Sprache eine Repr"asentation der Netze, die als Eingabe f"ur den
+Simulator-Kern von SNNS\index{SNNS} dient. SNNS (\underline{S}tuttgart
+\underline{N}eural \underline{N}etwork \underline{S}imulator) ist ein
+Simulator f"ur konnektionistische Netzwerke, der am Institut f"ur
+Parallele und Verteilte H"ochstleistungsrechner (IPVR) der
+Universit"at Stuttgart entwickelt wurde.
+
+Konnektionistische Modelle sind Modelle f"ur informationsverarbeitende
+Systeme, die sich aus vielen einfachen, parallel arbeitenden Einheiten
+zusammensetzen. Diese tauschen Information in Form ihrer
+Aktivierung\index{Aktivierung} "uber ein Netz von Verbindungen aus.
+Diese Modelle sind anderen Ans"atzen der KI "uberlegen in Bezug auf
+Lernf"ahigkeit und Parallelit"at.
+
+Eine ausf"uhrliche Darstellung der Grundlagen und Konzepte neuronaler
+Netze kann in \cite{rum861} nachgelesen werden.  Eine Kurzfassung
+steht in~\cite{kem88}.
+
+Neuronale Netze k"onnen unter zwei Aspekten betrachtet werden. Der
+{\em statische}\/ Aspekt besteht aus der Topologie der Netzwerks und
+seinen Elementen, der {\em dynamische}\/ Aspekt aus den Funktionen,
+die die Informationsverarbeitung in einer zeitlichen Abfolge
+bestimmen.
+
+Ein {\bf Nessus}-Programm dient dazu, die Topologie eines
+konnektionistischen Netzes zu definieren und seine dynamischen
+Eigenschaften durch die Angabe der Zellfunktionen festzulegen. Diese
+Funktionen allerdings k"onnen in der vorliegenden Version von {\bf
+Nessus} noch nicht in der Sprache selbst definiert werden.  Solche
+Funktionen m"ussen in C (siehe~\cite{ker781}) definiert und zu SNNS
+dazugebunden werden. Dieser Vorgang wird in~\cite{SNNSDoku}
+ausf"uhrlich erkl"art.
+
+\paragraph{Das Netzwerkmodell von {\bf Nessus}} ~~\\ Die
+Topologie\index{Topologie} eines Netzes besteht aus einer Menge von
+Zellen und Verbindungen\index{Verbindung} zwischen diesen Zellen. Das
+Netzwerkmodell,\index{Netzwerkmodell} das SNNS\index{SNNS} und {\bf
+Nessus} zugrunde liegt, hat folgende Eigenschaften:
+
+\begin{itemize}
+  \item Eine Zelle kann beliebig viele benannte Eing"ange besitzen.
+        Diese werden im folgenden als Sites\index{Site} bezeichnet.
+  \item Die Verbindungen\index{Verbindung} gehen immer von einer Zelle
+	zu einer Site ihrer\index{Site} Nachfolgerzelle  
+        (wenn diese mehrere Eing"ange hat). Dadurch ist es m"oglich,
+	da"s zwischen zwei Zellen des Netzes mehrere Verbindungen 
+	unterschiedlicher Bedeutung existieren.
+  \item Es k"onnen nicht mehrere Verbindungen von einer Zelle zum
+	selben Eingang derselben Nachfolgerzelle definiert werden.
+  \item Die Zellen k"onnen topologisch in
+	\begin{itemize}
+          \item Eingabezellen,
+          \item Ausgabezellen oder
+          \item interne Zellen
+        \end{itemize}
+	unterteilt werden. Es ist aber auch erlaubt, da"s Zellen
+	Eingabe- und Ausgabezellen gleichzeitig sind, wie es zum 
+	Beispiel in Auto-Assoziator-Netzen\index{Auto-Assoziator-Netz} 
+        notwendig ist.
+  \item Zellen besitzen bei SNNS\index{SNNS} und {\bf Nessus}
+	au"serdem folgende Merkmale:
+	\begin{itemize}
+          \item Jede Zelle hat einen Namen, der aber entfallen darf
+		und auch nicht eindeutig sein mu"s.
+          \item Zu jeder Zelle geh"ort ein Aktivierungswert\index{Aktivierung}
+(Potential),\index{Potential} der bei SNNS\index{SNNS} eine 
+                rationale Zahl\index{Zahl!rationale} aus dem Intervall $[-1.0,1.0]$ sein
+mu"s. SNNS\index{SNNS} arbeitet mit  
+                einer Genauigkeit von f"unf Dezimalstellen. 
+          \item Denselben Wertebereich\index{Wertebereich!rationale Zahl} hat auch die Ausgabe einer Zelle.
+        \end{itemize}  
+  \item Der Aktivierungswert\index{Aktivierung} einer Zelle wird aus ihrer bisherigen
+Aktivierung\index{Aktivierung} und 
+                den Werten, die an ihren Eing"angen anliegen, von der
+Aktivierungsfunktion\index{Aktivierungsfunktion}   
+                berechnet.
+  \item Aus diesem Aktivierungswert\index{Aktivierung} berechnet die Ausgabefunktion den Ausgabewert
+                der Zelle.
+  \item Die Werte, die an den Eing"angen einer Zelle anliegen, sind das Ergebnis
+                der Eingangsfunktion (site function). Diese Funktion bestimmt den aktuellen
+                Wert des Eingangs aus den gewichteten Ausgabewerten aller Vorg"angerzellen
+                des Eingangs.
+\end{itemize}
+
+
+\paragraph{Das Sprachkonzept von {\bf Nessus}}
+~~\\
+Mit SNNS\index{SNNS} sollen vor allem kleine bis mittelgro"se Netze
+simuliert werden.  Schon die mittelgro"sen Netzwerke k"onnen aus mehr
+als tausend Zellen und oft mehr als zehntausend Verbindungen bestehen.
+Solche Netzwerke k"onnen ohne m"achtige Hilfsmittel nicht mehr
+definiert, dargestellt oder ver"andert werden. Um mit
+konnektionistischen Netzwerken\index{konnektionistische Netzwerke} zu
+experimentieren, ist es deshalb hilfreich, mittels einer auf diesen
+Zweck zugeschnittenen Sprache Netze definieren zu k"onnen. Daf"ur gibt
+es verschiedene Ans"atze:
+
+\begin{itemize}
+  
+\item  Beim weitverbreiteten {\bf Rochester Connectionist Simulator}
+(RCS)\index{RCS (Rochester Connectionist Simulator)} (siehe
+\cite{fel01,fel02,god87}) werden dem Benutzer in C eingebettete
+Funktionen zur Verf"ugung gestellt, mit denen weitgehend
+daten\-unab\-h"angig Zellen und Verbindungen definiert werden k"onnen.
+
+\item Beim Simulator {\bf P3}\index{P3-Simulator} wurde eine Sprache
+definiert, die speziell auf diesen Zweck zugeschnitten ist (siehe
+\cite{zip86}).
+
+\item Verschiedene kleinere Simulatoren bieten nur sehr beschr"ankte
+Hilfsmittel (zum Beispiel in \cite{rum863}).
+
+\item An der Universit"at Z"urich-Irchel wurde die prozedurale
+Sprache {\bf Condela-3} (siehe 	auch~\cite{alm90,koe88}) entworfen,
+mit der nicht nur die Topologie, sondern auch das 	Verhalten
+neuronaler Netze definiert werden kann. Das System ist so
+implementiert, da"s ein 	"Ubersetzer aus den
+Condela-3-Programmen C-Programme erzeugt, die die Netzwerktopologie
+erzeugen und das Verhalten des Netzes simulieren.
+\end{itemize}
+
+Wir sind der Meinung, da"s die Methode, neuronale Netze in einer
+allgemeinen Programmiersprache mittels einfacher Funktionen, die nur
+die Datenstrukturen des Simulator-Kerns verbergen, zu definieren, sehr
+m"uhsam und fehleranf"allig ist.  Aus diesem Gedanken heraus ist {\bf
+Nessus} entstanden.
+
+In {\bf Nessus} wurde der Versuch unternommen, Sprachmittel
+bereitzustellen, die der Aufgabe des Programms, n"amlich topologische
+Strukturen zu definieren, m"oglichst nahe kommen. Dazu geh"oren unter
+anderem
+
+\begin{itemize}
+  \item Typdefinitionen f"ur Zellen und Sites,
+  \item Strukturen mit impliziten Verbindungen nach vordefinierten 
+	oder explizit definierbaren Verbindungstopologien, sowie
+  \item ein Teilnetzkonzept, das es erlaubt, Netze aus verschiedenen {\bf
+	Nessus}-Programmen zusammenzusetzen.
+\end{itemize}
+
+Dadurch kann man in {\bf Nessus} die Verbindungstopologie eines Netzes
+sehr effizient und sicher definieren. Zus"atzlich kann man f"ur die
+Strukturen und Teilnetze die graphische Topologie in der Darstellung
+der graphischen Benutzeroberf"ache von SNNS definieren. Der {\bf
+Nessus}-Compiler erzeugt dann daraus das Layout des Netzes.
+
+\paragraph{Gliederung}
+~~\\
+Dieses Benutzerhandbuch ist wie folgt gegliedert: 
+In den Kapiteln~\ref{Programmaufbau}~-~\ref{Parameter} wird die
+Programmiersprache {\bf Nessus} vorgestellt.
+
+In Kapitel~\ref{Umgebung} folgt die Beschreibung der
+Programmierumgebung unter UNIX und des Aufrufs des {\bf
+Nessus}-Compilers.
+
+Anhang~\ref{Syntax} enth"alt die vollst"andige Syntax von {\bf Nessus}
+in EBNF.\index{EBNF}
+
+Es wurde darauf verzichtet, in diesem Handbuch die Definition der
+Schnittstelle zwischen dem {\bf Nessus}-Compiler und SNNS
+wiederzugeben. Sie ist in~\cite{SNNSDoku} ausf"uhrlich beschrieben.
+
+
+\paragraph{Konventionen}
+~~\\
+In einigen Kapiteln der Dokumentation wird die erweiterte BNF
+(EBNF)\index{EBNF} verwendet, um die Syntax von {\bf Nessus}
+darzustellen. Dabei bedeutet
+
+\begin{itemize}
+  \item ${\bf |}$ Alternativen,
+  \item in  ${\bf []}$ werden Optionen (gar nicht oder einmal auftretende Teile)
+        eingeschlossen
+  \item in ${\bf \{\}}$ werden Optionen, die auch mehrfach auftreten k"onnen, eingeschlossen.
+\end{itemize}
+
+Diese Sonderzeichen sind also nicht Bestandteile der Sprache selbst.
+Wo diese Symbole Zeichen von {\bf Nessus} bezeichnen, werden sie in
+``~'' geschrieben.  Terminalsymbole sind fett gedruckt. Au"ser
+Schl"usselw"ortern, Operatoren und Sonderzeichen sind
+
+\begin{itemize}
+  
+\item Bezeichner\index{Bezeichner} ({\bf identifier}),
+  
+\item ganzzahlige\index{Zahl!ganze}\index{Zahl!rationale}
+Literale\index{Literal!ganzzahliges} ({\bf intliteral}), 
+
+  
+\item rationale Literale\index{Literal!rationales} ({\bf
+floatliteral}) und
+
+\item Zeichenketten\index{Zeichenkette} ({\bf stringliteral})
+\index{Literal!Zeichenkette}
+
+\end{itemize}
+Terminalsymbole. 
+
+Die Terminalsymbole werden durch regul"are Ausdr"ucke
+\index{Ausdruck!regul"arer} im Stil einer Lex-Eingabe
+(siehe~\cite{les75,sch85}) beschrieben. Dabei haben folgende Zeichen
+eine spezielle Bedeutung:
+
+\begin{itemize}
+  
+\item ${\bf |}$ trennt Alternativen.
+  
+\item In  ${\bf []}$ werden Klassen von Zeichen eingeschlossen. Das
+Minuszeichen zwischen zwei Zeichen bezeichnet innerhalb einer solchen
+Klasse einen Bereich einschlie"slich der beiden Zeichen. ${\bf [A-Z]}$
+steht also f"ur alle Gro"sbuchstaben, ${\bf [0-9]}$ f"ur alle Ziffern.
+  
+\item Beginnt eine Klasse von Zeichen mit {\bf \verb&^&}, so
+bezeichnet die Klasse jedes einzelne Zeichen, das {\it nicht} durch
+den nachfolgenden regul"aren Ausdruck repr"asentiert wird. So
+bezeichnet zum Beispiel {\bf \verb&[^"}"]&} die Klasse aller Zeichen
+au"ser {\bf \verb&"}"&}.
+  
+\item Ein ${\bf *}$, das einem regul"aren Ausdruck folgt, bedeutet,
+da"s die entsprechenden Zeichen beliebig oft oder auch gar nicht
+auftreten d"urfen.
+  
+\item Ein ${\bf +}$, das einem regul"aren Ausdruck folgt, bedeutet,
+da"s die entsprechenden Zeichen beliebig oft (aber mindestens einmal)
+vorkommen k"onnen.
+  
+\item {\bf \{n\}} nach einem regul"aren Ausdruck bedeutet, da"s die
+dadurch definierte Zeichenkette genau n-mal vorkommen mu"s.
+  
+\item Runde Klammern\index{Klammerung!in regul"aren Ausdr"ucken} {\bf
+()} dienen der Gruppierung regul"arer
+Ausdr"ucke.\index{Ausdruck!regul"arer} So definiert zum Beispiel ${\bf
+(a|b)*}$ alle Zeichenketten einschlie"slich der leeren, die nur aus
+den Zeichen {\bf a} oder {\bf b} in beliebiger Reihenfolge bestehen.
+Da {\bf *}, {\bf +} und {\bf \{n\}} st"arker
+binden\index{Bindung}\index{Vorrang} als ${\bf |}$, mu"s geklammert
+werden: im Gegensatz dazu definiert ${\bf a|b*}$ alle Zeichenketten,
+die entweder nur aus dem Zeichen ${\bf a}$ oder aus beliebig vielen
+${\bf b}$, einschlie"slich der leeren Zeichenkette, bestehen.
+  
+\item Treten diese Sonderzeichen innerhalb von Mustern auf, werden sie
+ in ``~'' eingeschlossen.
+
+\end{itemize}
+
+

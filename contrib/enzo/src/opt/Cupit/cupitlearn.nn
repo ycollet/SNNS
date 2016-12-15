@@ -1,0 +1,369 @@
+(*
+  CuPit - implementation of the Rprop - learning algoritm (by M. Riedmiller & H. Braun,
+  ILKD, Uni Karlsruhe) for networks and patterns in SNNS - format. 
+  September  1995 , Thomas Ragg, ILKD, uni Karslruhe 
+*)
+
+Real CONST initialEta     :=   0.01,  (* initial learning step *)
+           etaPlus        :=   1.2,   (* learning step increase step *)
+           etaMinus       :=   0.5,   (* learning step decrease step *)
+           errBitThreshold:=   0.3;   (* max. difference for correct outputs *)
+
+Real VAR   maxEta         :=   50.0,  (* maximum learning step *)
+           minEta         :=   1.0e-6; (* minimum learning step *)
+
+String     VAR dummystring;
+
+Int  VAR   inputs,
+	   maxepochs      :=   2,
+           outputs,
+           retvalue;
+
+Real IO    x1, x2;  (* I/O-areas, allocated and managed by external program *)
+
+#include "stdlib.cph"
+(* IMPORT absReal, signReal, minReal, maxReal, maxInt,
+	  pInt, pReal, pString, getArg, getName  *)
+
+#include "fileinout.cph"
+(* IMPORT openDatafile, initIOareaR, getExamplesxRxR *)
+
+#include "snnsinout.cph"
+(* IMPORT IOSTYLE snns *)
+
+#include "actfunc.cph"
+(* IMPORT sigmoid, sigmoidPrime *)
+
+#include "externals.cph"
+(* IMPORT  protocolError, openOutput, closeOutput, openInput,
+           closeInput, fpInt, fpReal, fpString, fgInt, fgReal *)
+
+
+Real REDUCTION sum IS   
+  RETURN (ME + YOU);
+END REDUCTION;
+
+Int REDUCTION sumInt IS
+  RETURN (ME + YOU);
+END REDUCTION;
+
+IOSPEC write  IS STYLE snns KIND output     END;
+IOSPEC fwrite IS STYLE snns KIND fileoutput END;
+IOSPEC read   IS STYLE snns KIND input      END;
+IOSPEC fread  IS STYLE snns KIND fileinput  END;
+
+TYPE Weight IS CONNECTION
+  Real     in      := 0.0,
+           out     := 0.0,
+           weight  :=  RANDOM (-0.5...0.5),
+           olddelta:= 0.0,
+           eta     := initialEta,
+           delta   := 0.0;
+  Int number := -1;
+
+  IOSPEC write  IS ME.weight; END;
+  IOSPEC fwrite IS ME.weight; END;
+  IOSPEC read   IS ME.weight; END;
+  IOSPEC fread  IS
+     ME.weight;
+  END;
+
+  PROCEDURE transport (Real CONST val) IS
+    ME.in  := val;
+    ME.out := val*ME.weight;
+  END PROCEDURE;
+  
+  
+  PROCEDURE btransport (Real CONST errval) IS
+    ME.out   := errval;
+    ME.delta -= errval*ME.in;
+    ME.in    := errval*ME.weight;
+  END PROCEDURE;
+  
+  
+  PROCEDURE adapt () IS
+    (* adapt weight *)
+
+  Real VAR newstep,
+           deltaproduct := ME.olddelta * ME.delta,
+           deltasign := signReal (ME.delta);
+  IF deltaproduct > 0.0
+    THEN
+	ME.eta     := minReal (ME.eta * etaPlus, maxEta);
+	newstep     := - deltasign * ME.eta;
+(*        WRITE( "\n( >> ) Weight " , ME.number, " Delta " ,ME.delta," Weight " , ME.weight, " Add ", newstep);*)
+        ME.weight   += newstep;
+        ME.olddelta := ME.delta;
+
+  ELSIF deltaproduct < 0.0
+    THEN
+	ME.eta      := maxReal (ME.eta * etaMinus, minEta);
+        ME.olddelta := 0.0;
+(*        WRITE( "\n( < ) Weight " ,ME.number," Delta " , ME.delta, " Add  0.0");*)
+
+  ELSE
+	newstep     := - deltasign * ME.eta;
+(*        WRITE( "\n( = ) Weight " ,ME.number," Delta " , ME.delta," Weight " , ME.weight, " Add ", " Add ", newstep);*)
+       ME.weight   += newstep;
+        ME.olddelta := ME.delta;
+
+
+	
+  END;
+ME.delta := 0.0; (* reset *)
+  END PROCEDURE;
+  
+  
+  MERGE IS
+    ME.delta += YOU.delta;
+  END MERGE;
+  
+END TYPE;
+
+
+TYPE SigmoidNode IS NODE
+  Real        inData;     (* forward:  net input,
+                             backward: delta *)
+  Real        outData;    (* forward:  sigmoid(in),
+                             backward: sum(deltas*weights) or teachinput *)
+  IN Weight   in;
+  OUT Weight  out;
+  Real        bias   := 0.0;  (* bias of this unit *)
+  Real         act   := 0.0; (* act holds the activation *)
+  Real        cumErr := 0.0;  (* cumulated error (output units only) *)
+  Int         errN  := 0;     (* number of error bits (output units only) *)
+  Int	      x:=0,y:=0;      (* coordinates for SNNS output *)
+  String      unitName,actfunc;
+  Real        olddelta    := 0.0,
+              eta     := initialEta,
+              delta   := 0.0;
+  Real        dummyReal;
+  Int         dummyInt;
+  Int         number := -1;
+
+  IOSPEC write IS
+    ME.in; ME.out;"";""; ME.act; ME.bias; ME.x; ME.y ; 0;
+  END;
+
+  IOSPEC fwrite IS
+    ME.in; ME.out;"";ME.unitName; ME.act; ME.bias; ME.x; ME.y; 0;
+  END;
+
+  IOSPEC read IS
+    ME.in; ME.out; dummystring;dummystring; ME.act;
+    ME.bias; ME.x; ME.y; ME.dummyInt;
+  END;
+
+  IOSPEC fread IS
+    ME.in; ME.out; dummystring; ME.unitName; ME.act;
+    ME.bias; ME.x; ME.y; ME.dummyInt;
+  END;
+  
+  PROCEDURE setCoordinates (Int CONST x, yoffset) IS
+    ME.x := x;
+    ME.y := 2 * INDEX + yoffset;
+  END PROCEDURE (* setCoordinates *) ;
+
+  PROCEDURE forwardinput () IS
+      ME.act := ME.inData;
+      ME.outData := ME.act;
+      ME.out[].transport(ME.outData);
+      ME.bias := 0.0;  
+  END PROCEDURE;
+  
+  PROCEDURE forwardhidden( ) IS
+      ME.inData := 0.0; (* in case there are no incoming connections *)
+      REDUCTION ME.in[].out:sum INTO ME.inData;
+      ME.act := sigmoid(ME.inData + ME.bias);
+      ME.outData := ME.act;
+      ME.out[].transport(ME.outData);
+WRITE("\nHidden unit" ,ME.unitName);
+  END PROCEDURE;
+  
+  PROCEDURE forwardoutput( ) IS
+      ME.inData := 0.0; (* in case there are no incoming connections *)
+      REDUCTION ME.in[].out:sum INTO ME.inData;
+      ME.act := sigmoid(ME.inData + ME.bias);
+
+  END PROCEDURE;
+  
+  PROCEDURE backward (Bool CONST doIn, doOut) IS
+    (* (for output nodes, out is the teaching input)
+       for all nodes, set  in := delta of the node
+       for all nodes that are not input nodes, back-transport the delta
+    *)
+    Real VAR diff;
+    IF doIn  (* i.e. is not an output node *)
+    THEN REDUCTION ME.out[].in:sum INTO ME.outData;
+         ME.inData := ME.outData * sigmoidPrime(ME.act);
+    ELSE (* output node: *)
+         (* error function:  E (target, actual) = (target-actual)**2  *)
+	 diff := ME.outData - ME.act;
+         ME.inData := diff * sigmoidPrime(ME.act);
+
+         ME.cumErr += diff * diff;
+         IF absReal (diff) > errBitThreshold THEN ME.errN += 1;  END;
+    END;
+    ME.delta -=  ME.inData;  (* bias error *)
+    IF doOut (* i.e. is not an input node *)
+    THEN ME.in[].btransport (ME.inData);  END;
+  END PROCEDURE;
+
+  
+  PROCEDURE adapt () IS
+    (* adapt bias *) 
+    Real VAR newstep,
+             deltaproduct := ME.olddelta * ME.delta,
+             deltasign := signReal (ME.delta);
+    IF deltaproduct > 0.0
+    THEN
+	ME.eta     := minReal (ME.eta * etaPlus, maxEta);
+	newstep    :=  - deltasign * ME.eta ;
+(*        WRITE( "\n( >> ) Unit " , INDEX, " Delta " ,ME.delta," Bias " , ME.bias, " Add ", newstep);*)
+        ME.bias    += newstep;
+        ME.olddelta := ME.delta;
+    ELSIF deltaproduct < 0.0
+    THEN
+	ME.eta     := maxReal (ME.eta * etaMinus, minEta);
+        ME.olddelta := 0.0;
+    ELSE
+	newstep     :=  - deltasign * ME.eta;
+(*        WRITE( "\n( = ) Unit " , INDEX, " Delta " ,ME.delta," Bias " , ME.bias, " Add ", newstep);*)
+        ME.bias   += newstep;
+        ME.olddelta := ME.delta;
+	
+    END;
+
+    (* adapt incoming weights *)
+    ME.in[].adapt ();
+    ME.delta := 0.0; (* reset *)
+  END PROCEDURE;
+  
+  
+  MERGE IS
+    ME.cumErr += YOU.cumErr;
+    ME.errN   += YOU.errN;
+  END MERGE;
+  
+  
+  PROCEDURE resetErrors () IS
+    ME.cumErr := 0.0;
+    ME.errN   := 0;
+  END PROCEDURE;
+  
+  
+END TYPE;
+
+
+TYPE Layer  IS GROUP OF SigmoidNode END;
+
+
+TYPE Mlp IS NETWORK
+  Layer   in, hid, out;
+  Real    totError,dummy;
+  Int     errorsN;
+  String netname, learnFunc, updateFunc;
+
+  IOSPEC write  IS ME.in; ME.hid; ME.out; END;
+  IOSPEC fwrite IS ME.in; ME.hid; ME.out; END;
+  IOSPEC read   IS ME.in; ME.hid; ME.out; END;
+  IOSPEC fread  IS ME.in; ME.hid; ME.out; END;
+
+  
+  PROCEDURE  example () IS
+
+    ME.in[].forwardinput   ();
+    ME.hid[].forwardhidden  ();
+    ME.out[].forwardoutput  ();
+    ME.out[].backward (false, true);
+    ME.hid[].backward (true,  true);
+  END PROCEDURE;
+  
+
+ 
+ PROCEDURE adapt () IS
+    ME.out[].adapt ();
+    ME.hid[].adapt ();
+  END PROCEDURE;
+  
+  
+  PROCEDURE computeTotalError () IS
+    REDUCTION ME.out[].cumErr:sum INTO ME.totError;
+    REDUCTION ME.out[].errN:sumInt INTO ME.errorsN;
+    ME.out[].resetErrors();
+  END PROCEDURE;
+  
+END TYPE;
+
+
+Mlp  VAR   net;     (* THE NETWORK *)
+
+
+PROCEDURE program () IS
+  Int  VAR i,epochNr:=0,nrOfExamples,dummy1,dummy2,examplesDone :=0;
+  Real VAR error, oldError, stoperror := 0.01;
+
+  minEta := getArg(1,minEta);
+  maxEta := getArg(2,maxEta);
+  maxepochs:= Int(getArg(3,Real(maxepochs)));
+
+  (* pattern lesen *)	
+  openSnnsPatternFile (getName(2,""), dummy1, inputs, dummy2, outputs,
+		       nrOfExamples, false, false);
+
+  (* netz einlesen, wird gleich angelegt *)
+  net[].fread  (getName(1,""), net[0].netname, net[0].learnFunc, net[0].updateFunc);
+
+  (*REPLICATE net INTO 1...nrOfExamples;  (* better: INTO 1...nrOfExamples *)*)
+
+  (* IO vorbereiten *)
+  initIOareaR (x1, maxInt(MAXINDEX(net.in)+1,MAXINDEX(net.hid)+1), MAXINDEX (net) + 1);
+  initIOareaR (x2, MAXINDEX(net.out)+1 , MAXINDEX (net) + 1);
+
+  IF (inputs <> (MAXINDEX(net.in)+1) OR outputs <> (MAXINDEX(net.out)+1))
+  THEN  
+      WRITE("\nERROR: Patterns do not match network description\n");
+  END;
+(*  WRITE("\nStart Learning: ", timestr());*)
+  (* Lernen *)
+  REPEAT
+    epochNr += 1;
+    i := 0;
+    
+    REPEAT
+      getExamplesxRxR (x1, x2, MAXINDEX (net) + 1, 0, nrOfExamples, i);
+      net.in[].inData   <-- x1;
+      net.out[].outData <-- x2;
+      net[].example();
+      examplesDone += MAXINDEX (net) + 1;
+    UNTIL examplesDone >= nrOfExamples END REPEAT;
+
+    examplesDone %= nrOfExamples;
+    MERGE net;  (* collect and redistribute results *)
+    net[].adapt();
+    net[].computeTotalError ();
+    error := net[0].totError;
+    
+ UNTIL epochNr > maxepochs OR error <= stoperror  END REPEAT;
+(*  WRITE("\nEnd Learning: ", timestr());*)
+   retvalue := epochNr; (* set global return value, used from ENZO *) 
+
+  (* aufraeumen und Netz ausgeben *)
+(*  REPLICATE net INTO 1; (* remove replicates *)*)
+  net[].fwrite (getName(3,""), net[0].netname,
+	        net[0].learnFunc, net[0].updateFunc);
+
+END PROCEDURE;
+
+
+
+
+
+
+
+
+
+
+
+
+

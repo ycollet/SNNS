@@ -1,0 +1,27 @@
+\begin{moduledoc}{Selection of  parents preferring the better networks}
+                 {preferSel}
+  \item[\KeyWord{gensize} \optParam{ gen } ]~\\
+  This parameter sets the number of networks in the offspring population.\\
+   Default: 10
+  \item[\KeyWord{preferfactor} \optParam{ x } ]~\\
+  This parameter $x$ sets the bias for selecting fitter networks.
+  A value $x \ge 1$ means that the better networks will be preferred,   
+  a value $0 \le x\le 1$ means that the poor networks.
+  A value $x = 2$ means that the first quarter of the population is as
+  often selected as the rest of the population.
+  A value $x = 3$ means that the first 12.5\% of the population is as
+  often selected as the rest of the population.
+
+    Default: 3.0 
+\end{moduledoc}
+
+This  module selects the given number of  parents for the reproduction process
+(mutation and crossover).
+Better networks are selected with a higher probability. 
+
+\algo{10cm}{preferSel}{
+n = number of networks in the parent population;\\
+p = preferfactor;\\
+$parentNo = (rand(0,1)^{p}) * n$\\
+Select the network with  number {\it parentNo};
+}

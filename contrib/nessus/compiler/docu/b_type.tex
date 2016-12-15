@@ -1,0 +1,10 @@
+{\bf typedef}\\
+~~{\bf site}~{\bf with}~{\bf name}~{\bf \verb&"inhibit"&}{\bf \verb&,&}~{\bf sitefunc}~{\bf \verb&Identity&}~{\bf \verb&:&}~{\bf \verb&inSiteType&}{\bf \verb&;&}\\
+~~{\bf site}~{\bf with}~{\bf name}~{\bf \verb&"excite"&}{\bf \verb&,&}~{\bf sitefunc}~{\bf \verb&WeightedSum&}~{\bf \verb&:&}~{\bf \verb&exSiteType&}{\bf \verb&;&}\\[.3cm]
+~~{\bf unit}~{\bf with}~{\bf name}~{\bf \verb&"in_Unit"&}{\bf \verb&,&}~{\bf actfunc}~{\bf \verb&Logistic&}{\bf \verb&,&}~~{\bf outfunc}~{\bf \verb&Identity&}{\bf \verb&,&}~\\
+~~~~~~~~~~~~{\bf act}~{\bf random}{\bf \verb&,&}~{\bf iotype}~{\bf input}~~{\bf \verb&:&}~{\bf \verb&inUnitType&}{\bf \verb&;&}\\
+~~~~~~~~~~~~{\small \{\verb{Zelltyp fuer Eingabezellen, bei dem alle Merkmale definiert wurden.{\}}\\
+~~~~~~~~~~~~{\small \{\verb{Zellen dieses Typs haben keine Sites.{\}}\\[.3cm]
+~~{\bf unit}~{\bf with}~{\bf actfunc}~{\bf \verb&Logistic&}{\bf \verb&,&}~~{\bf outfunc}~{\bf \verb&Identity&}{\bf \verb&,&}~{\bf site}~{\bf \verb&[&}{\bf \verb&inSite&}{\bf \verb&,&}~{\bf \verb&exSite&}{\bf \verb&]&}{\bf \verb&,&}\\
+~~~~~~~~~~~~{\bf iotype}~{\bf output}~~{\bf \verb&:&}~{\bf \verb&outUnitType&}{\bf \verb&;&}\\
+~~~~~~~~~~~~{\small \{\verb{Zelltyp fuer Ausgabezellen mit zwei Sites.{\}}\\

@@ -1,0 +1,26 @@
+% citespacebreak.sty
+\typeout{Space added between multiple cites and line breaks allowed between}
+\typeout{Set parantheses around citations instead of brackets}
+\makeatletter
+% 
+% Set () around citations instead of []
+%
+\def\@cite#1#2{({#1\if@tempswa , #2\fi})}
+%
+% flong.sty (unmodified)
+%
+\def\@citex[#1]#2{\if@filesw\immediate\write\@auxout{\string\citation{#2}}\fi
+\def\@citea{}\@cite{\@for\@citeb:=#2\do
+{\@citea\def\@citea{,\space\allowbreak{}}\@ifundefined
+{b@\@citeb}{{\bf ?}\@warning
+{Citation `\@citeb' on page \thepage \space undefined}}%
+{\csname b@\@citeb\endcsname}}}{#1}}
+%was: \hbox{\csname b@\@citeb\endcsname}}}{#1}}
+\let\@internalcite\cite
+\def\cite{\def\citename##1{##1}\@internalcite}
+\def\shortcite{\def\citename##1{}\@internalcite}
+\def\@biblabel#1{\def\citename##1{##1}}
+\makeatother
+\def\flongsep{0pt}
+\def\flongindent{-0.4cm}
+\def\flongmargin{0.4cm}

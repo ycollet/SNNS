@@ -1,0 +1,281 @@
+#!/bin/csh
+
+# ****************************************************************************
+#  FILE     : configure
+#  SHORTNAME: config
+
+#  PURPOSE  : Shell scipt to create three make files
+#	      compiler in compiler/source
+
+#  AUTHOR   : Tilman Sommer, Niels Mache
+#  DATE     : 22.05.1991
+
+#  MODIFICATIONS : 
+#	01.02.91 lines 222-225, 241-256 inserted. (Thomas Korb)
+#	22.05.91 some cosmetic changes (A. Zell)
+#       25.06.91 line 165 -DSYSTEMV (-> compiler, setbuffer())
+
+#      Copyright (c) 1990-1993  SNNS Group, IPVR, Univ. Stuttgart, FRG
+# ****************************************************************************
+
+
+
+echo "************************************************"
+echo "*                                              *"
+echo "*                SNNS  -  Nessus               *"
+echo "*                                              *"
+echo "*          Installation of Version 2.1         *"
+echo "*                                              *"
+echo "************************************************"
+echo ""
+echo " - on Sun 3, Sun 4 and Sun SPARCstations, DecStations, 386-PC and" 
+echo "   (hopefully) other machines"
+echo " - It is possible to install SNNS-Nessus for different types of"
+echo "   machines in the same directory."
+echo ""
+echo -n "Do you really want to create new makefiles? (y/n) [return] > "
+set confirm=$<
+switch ($confirm)
+case y:
+	breaksw
+default:
+	echo "EXIT: nessus.make not changed."
+	exit 0
+endsw
+echo ""
+echo ""
+
+if ( -e ./compiler/sources/makefile) then
+	echo -n "compiler: Copying current makefile to makefile.bak ... "
+	cp ./compiler/sources/makefile ./compiler/sources/makefile.bak
+	echo "Done."
+endif
+
+
+cat ./configuration/header >! ./nessus.make.tmp
+echo "# Created by `logname` at `date`" >> ./nessus.make.tmp
+echo "" >> ./nessus.make.tmp
+echo "# -- NESSUS  Installation  Directories  &  Libraries --" >> ./nessus.make.tmp
+echo "" 
+echo ""
+echo "Current directory:"
+echo "        " $cwd
+echo -n "Is this really your current directory (y/n) [return] > "
+set confirm=$<
+switch ($confirm)
+case n:
+	echo ""
+	echo "Please enter the FULL path of your current directory"
+	echo "but without auto-mount prefix."
+	echo -n "> "
+	set rootdir=$<
+	breaksw
+default:
+	set rootdir = `echo $cwd`
+	breaksw
+endsw
+
+echo "NESSUSDIR = $rootdir" >> ./nessus.make.tmp
+
+
+echo ""
+echo "Installation directory:"
+echo -n "        " $rootdir
+echo "/compiler/bin/<dec,sun3,sun4>"
+echo -n "Do you want to change the installation directory? (y/n) [return] > "
+set confirm=$<
+switch ($confirm)
+case y:
+	echo ""
+	echo "Please enter the FULL path of your new installation directory"
+	echo "but without auto-mount prefix."
+	echo -n "> "
+	set InstallDir=$<
+	breaksw
+default:
+	set InstallDir
+	breaksw
+endsw
+
+
+
+# machine #############################################
+
+echo ""
+echo ""
+echo "Select your machine"
+echo "  [1] Sun 4 Series and SPARCstations"
+echo "  [2] Sun 3 "
+echo "  [3] Decstation"
+echo "  [4] UNIX System V/386 and SCO XENIX/386"
+echo "  [5] Other"
+echo -n "Enter number 1-5 > "
+set machine=$<
+
+switch ($machine)
+case 1:
+	echo "MACHINE = sun4" >> ./nessus.make.tmp
+	echo "CCFLAGS = -O4" >> ./nessus.make.tmp
+	echo "FPOPTIONS = -fsingle" >> ./nessus.make.tmp
+	set thismachine = "sun4"
+	set machinename = "Sun 4 Series"
+	breaksw
+case 2:
+	echo "MACHINE = sun3" >> ./nessus.make.tmp
+	echo "CCFLAGS = -O4" >> ./nessus.make.tmp
+	set machinename = "Sun 3 Series"
+	set thismachine = "sun3"
+	echo ""
+	echo "Does your Sun 3 have a 68881 fpu ?"
+	echo -n "(y/n) [return] > "
+	set fpu=$<
+	switch ($fpu)
+	case n:
+		echo "FPOPTIONS = -fsingle" >> ./nessus.make.tmp
+		breaksw
+	default:
+		echo "FPOPTIONS = -fsingle -f68881" >> ./nessus.make.tmp
+		breaksw
+	endsw
+	breaksw
+case 3:
+	echo "MACHINE = mips" >> ./nessus.make.tmp
+	echo "CCFLAGS = -f -O2 -DULTRIX32" >> ./nessus.make.tmp
+	set machinename = "Digital DecStation"
+	set thismachine = "dec"
+	breaksw
+case 4:
+	echo "MACHINE = 386" >> ./nessus.make.tmp
+	echo "CCFLAGS = -O -DSYSTEMV" >> ./nessus.make.tmp
+	set machinename = "System V/386"
+	set thismachine = "pc386"
+	breaksw
+default:
+	echo "MACHINE = other" >> ./nessus.make.tmp
+	set machinename = "Unknown"
+	set thismachine = "other"
+	breaksw
+endsw
+
+echo "MACHINENAME= $thismachine" >> ./nessus.make.tmp
+
+echo ""
+echo ""
+
+echo ""
+echo ""
+echo "************************************************"
+echo "*                                              *"
+echo "*  SNNS  -  Nessus                             *"
+echo "*                                              *"
+echo "*             selected configuration           *"
+echo "*                                              *"
+echo "************************************************"
+echo ""
+echo "Machine: " $machinename
+echo ""
+echo "SNNS-Nessus sources in " 
+#echo "  1)  $rootdir/kernel/sources"
+#echo "  2)  $rootdir/xgui/sources"
+echo "  3)  $rootdir/compiler/sources"
+echo ""
+echo ""
+echo -n "Is this correct ? (y/n) [return] > "
+set confirm=$<
+switch ($confirm)
+case n:
+	echo "EXIT: nessus.make unchanged."
+	rm -f ./nessus.make.tmp
+	exit 0
+default:
+	echo ""
+	echo -n "Building makefiles ..."
+
+
+# Compiler
+	set COMPILERROOTDIR = $rootdir/compiler/sources
+        cp ./nessus.make.tmp $rootdir/compiler/sources/makefile
+        cat $rootdir/configuration/compilerstuff >> $COMPILERROOTDIR/makefile
+	cat $rootdir/configuration/$thismachine.compiler >> $COMPILERROOTDIR/makefile
+	cat $rootdir/configuration/depend.compiler >> $COMPILERROOTDIR/makefile
+
+	if ($thismachine == "sun4") then
+          cat $COMPILERROOTDIR/makefile | sed -f $rootdir/configuration/sed.sparc.makefile > $COMPILERROOTDIR/sed.tmp.makefile
+          mv $COMPILERROOTDIR/sed.tmp.makefile $COMPILERROOTDIR/makefile
+        endif 
+
+        if (! -d $rootdir/compiler/bin/$thismachine) then
+	  mkdir $rootdir/compiler/bin/$thismachine
+	endif
+	if ( $InstallDir != "") then
+	  set bindir = $InstallDir
+	  if (! -d $bindir)  then
+	    mkdir $bindir
+	  endif
+	else
+    	  set bindir = $rootdir/compiler/bin/$thismachine
+	endif
+	echo "s&____&$bindir&g" > $rootdir/configuration/Temp
+	sed -f $rootdir/configuration/Temp $COMPILERROOTDIR/makefile > $COMPILERROOTDIR/m.new
+	mv  $COMPILERROOTDIR/m.new $COMPILERROOTDIR/makefile
+	/bin/rm $rootdir/configuration/Temp
+	chmod 744 $COMPILERROOTDIR/makefile
+
+
+# END
+	rm -f ./nessus.make.tmp 
+	echo "Done."
+
+
+	echo ""
+	echo ""
+	echo "************************************************"
+	echo "*                                              *"
+	echo "*  SNNS  - Stuttgart Neural Network Simulator  *"
+	echo "*                                              *"
+	echo "************************************************"
+	echo ""
+	echo "If you start to build SNNS-Nessus the first time for a new type"
+	echo "of machine then first delete all object files with the"
+	echo "command:"
+	echo "                ./cleanup"
+	echo ""
+	echo "Then type:"
+	echo ""
+	echo "./build  - to build the Nessus compiler"
+	echo ""
+	if ( $InstallDir != "" ) then
+  	  echo "NESSUS will be placed in:"
+	  echo "$InstallDir"
+	  echo ""
+	  echo "All libraries will be placed in:"
+	else
+	  echo "All the relevant binaries will be placed in:"
+	endif
+	echo "$rootdir/compiler/bin"
+	echo ""
+	echo "All examples will be found in:"
+	echo "$rootdir/compiler/examples"
+	echo ""
+	echo ""
+
+	breaksw
+endsw
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

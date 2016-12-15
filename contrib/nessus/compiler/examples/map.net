@@ -1,0 +1,44 @@
+SNNS network definition file V2.1-3D
+generated at Wed Jan 27 13:46:03 1993
+network name : mapBsp
+source files : map.n
+no. of units : 8
+no. of connections : 12
+no. of unit types : 0
+no. of site types : 0
+
+
+learning function : Std_Backpropagation
+update function : Topological_Order
+
+
+
+unit definition section :
+
+   no. | typeName | unitName |    act   |   bias   | st |      position | act func | out func | sites
+-------|----------|----------|----------|----------|----|---------------|----------|----------|--------
+     1 |          |          | -0.95973 |          | h  |    6,   4,  0 |          |          | 
+     2 |          |          |  0.61176 |          | h  |    5,   5,  0 |          |          | 
+     3 |          |          |  0.09905 |          | h  |    4,   6,  0 |          |          | 
+     4 |          |          |  0.20733 |          | h  |    2,   5,  0 |          |          | 
+     5 |          |          | -0.86759 |          | h  |    2,   4,  0 |          |          | 
+     6 |          |          |  0.78243 |          | h  |    2,   2,  0 |          |          | 
+     7 |          |          |  0.79421 |          | h  |    4,   2,  0 |          |          | 
+     8 |          |          |  0.10328 |          | h  |    5,   2,  0 |          |          | 
+-------|----------|----------|----------|----------|----|---------------|----------|----------|--------
+
+
+
+connection definition section :
+
+target |      site | source:weight
+-------|-----------|--------
+     2 |           |      1: 0.50000
+     3 |           |      1: 0.50000
+     4 |           |      1: 0.50000
+     5 |           |      3: 0.50000,      4: 0.50000,      6: 0.50000,      7: 0.50000,
+                           8: 0.50000
+     6 |           |      2: 0.50000,      8: 0.50000
+     7 |           |      8: 0.50000
+     8 |           |      1: 0.50000
+-------|-----------|--------

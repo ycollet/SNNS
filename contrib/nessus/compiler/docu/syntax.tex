@@ -1,0 +1,440 @@
+\chapter{EBNF-Syntax von {\bf Nessus}}
+\label{Syntax}
+ 
+\small
+
+                     
+\begin{tabular}{lclr}
+  && Syntaxregel & ~~~(Nr.)\\
+  \hline\\
+\multicolumn{4}{l}{\large ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~} \\ 
+& & & \\ 
+& & & \\
+\multicolumn{4}{l}{\large {\bf Programmstruktur}}  \\
+& & & \\
+  program  & ::= & program\_header $[$const\_block$]$ $[$type\_block$]$\\
+          &    & $[$structure\_block$]$ $[$var\_block$]$ topology\_modif\_block  & (\ref{sytopology}) \\ 
+& & & \\
+& & & \\
+& & & \\
+\multicolumn{4}{l}{\large {\bf Konstantendefinitionen}}\index{Konstantendefinition!Syntax}  \\
+& & & \\
+  const\_block  & ::= & {\bf const}\index{cons} constant\_def \{constant\_def\} & (\ref{syConsBl}) \\
+& & & \\
+  constant\_def  & ::= & identifier {\bf \verb&=&} constant {\bf \verb&;&} & (\ref{syConsDef})\\
+& & & \\
+  constant  & ::= & expression \\
+                         & $|$ & file\_ constant \\
+                         & $|$ & array\_ constant \\
+                         & $|$ & map\_ constant& (\ref{syConstant})\\  \index{Relation!Definition}
+& & & \\
+& & & \\
+  file\_constant  & ::= & {\bf file}\index{file} expression {\bf of}\index{of} file\_type& (\ref{syfile})\\
+& & & \\
+  file\_type  & ::= & simple\_type\\
+                        &$|$& {\bf map}\index{map} \\
+                        &$|$& {\bf subnet}&\index{subnet} (\ref{syfiletype})\\
+
+& & & \\
+  simple\_type  & ::= & {\bf int}\\\index{int}
+		        &$|$& {\bf float}\\\index{float}
+	    	        &$|$& {\bf string}&\index{string} (\ref{sysimpletype})\\ 
+\end{tabular}
+
+\begin{tabular}{lclr}
+  && Syntaxregel & ~~~(Nr.)\\
+  \hline\\
+\multicolumn{4}{l}{\large
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~} \\ 
+& & & \\
+  array\_constant  & ::= & ``$[$''array\_elements``$]$'' & (\ref{syarray}) \\
+& & & \\
+  array\_elements  & ::= & range\_definition\\
+                         & $|$ & expression\_list& (\ref{syarrayelements}) \\
+& & & \\
+  expression\_list  & ::= & expression $\{$ {\bf ,} expression $\}$& (\ref{syexprlist}) \\
+& & & \\
+  range\_definition  & ::= & expression {\bf \verb&..&} expression& (\ref{syrange})\\ 
+& & & \\
+  map\_constant  & ::= & {\bf map}\index{map} {\bf of}\index{of} simple\_type {\bf to}\index{to} simple\_type {\bf :}\\
+                       &     & map\_def {\bf ;}  & (\ref{symap})  \\  \index{Relation!Definition}\index{Relation!interne Definition}
+& & & \\
+  map\_def  & ::= & map\_file \\
+            & $|$ & map\_block  & (\ref{symapdef}) \\
+& & & \\
+  map\_file  & ::= &  {\bf get}\index{get}~``$($''expression $[$,~expression$]$``$$''~{\bf from}\index{from} 
+			identifier & (\ref{symapfile}) \\
+& & & \\
+  map\_block  & ::= & map\_line {\bf \{ ,} map\_line {\bf \}}& (\ref{symapblock}) \\
+& & & \\
+  map\_line  & ::= & map\_domain {\bf to}\index{to} map\_domain& (\ref{symapline}) \\
+& & & \\
+  map\_domain  & ::= & array\_constant~~~$|$~~~expression  & (\ref{symapdomain})\\ 
+& & & \\
+& & & \\ 
+\multicolumn{4}{l}{\large {\bf Typdefinitionen}}  \\
+& & & \\
+  type\_block  & ::= & {\bf typedef}\index{typedef} type\_definition \{type\_definition\} & (\ref{sytypeblock}) \\
+& & & \\
+  type\_definition  & ::= & type\_expression {\bf :}~ identifier {\bf ;}& (\ref{sytypedef}) \\
+& & & \\
+  type\_expression  & ::= & site\_type\\
+          & $|$ & unit\_type& (\ref{sytypeexpr})\\ 
+& & & \\
+  site\_type  & ::= & {\bf site\index{site} with}\index{with} name\_definition {\bf ~,~} site\_function& (\ref{sysitetype}) \\
+& & & \\
+  name\_definition  & ::=  & {\bf name}\index{name} expression& (\ref{synamedef}) \\
+& & & \\
+  site\_function  & ::=  & {\bf sitefunc}\index{sitefunc} identifier & (\ref{sysitefunc})\index{sitefunc} \\ 
+ & & & \\
+  unit\_parameter  & ::= & name\_definition\\
+          & $|$ & initial\_act \\
+          & $|$ & topology\_type \\
+          & $|$ & act\_function \\
+          & $|$ & out\_function \\
+          & $|$ & sites\_definition& (\ref{syunitparam})\\
+& & & \\
+  initial\_act  & ::= & {\bf act} expression\_or\_random& (\ref{syactinit})\\
+& & & \\
+  act\_function  & ::= & {\bf actfunc} identifier& (\ref{syactfunc})\\
+\end{tabular}
+
+\begin{tabular}{lclr}
+  && Syntaxregel & ~~~(Nr.)\\
+  \hline\\
+\multicolumn{4}{l}{\large
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~} \\
+& & & \\
+  out\_function  & ::= & {\bf outfunc}\index{outfunc} identifier& (\ref{syoutfunc})\\
+& & & \\
+  sites\_definition  & ::= & {\bf site}\index{sites} sites\_list& (\ref{sysitesdef})\\
+& & & \\
+  sites\_list  & ::= & identifier  \\
+                     & $|$ &  ``$[$'' identifier \{ {\bf ~,~} identifier \} ``$]$'' & (\ref{sysiteslist})\\
+& & & \\
+  expression\_or\_random  & ::= & expression  \\
+                    & $|$ & {\bf random}&\index{random} (\ref{syrandomexpression})\\
+& & & \\
+& & & \\
+  topology\_type  & ::= & {\bf type}\index{type} topology\_key& (\ref{syrtopologytype})\\
+& & & \\
+  topology\_key  & ::= & {\bf hidden}\index{hidden}   \\
+          & $|$ & {\bf input}\index{input} $[${\bf output}$]$\index{output}  \\
+          & $|$ & {\bf output}\index{output} $[${\bf input}$]$\index{input} & (\ref{sytopologykey})\\ 
+& & & \\
+& & & \\
+\multicolumn{4}{l}{\large {\bf Strukturdefinitionen}}\index{Struktur!Definition}  \\
+& & & \\
+  structure\_block  & ::= & {\bf structure}\index{struct} structure\_definition \{ structure\_definition \} & (\ref{systructure}) \\
+& & & \\
+  structure\_definition  & ::= & struct\_specification {\bf ~:~} identifier\_list {\bf ~;~}& (\ref{systructdef}) \\
+& & & \\
+  struct\_specification   & ::= & matrix\_struct\\
+  	  & $|$ & linear\_struct\\
+          & $|$ & single\_unit& (\ref{systructspec}) \\
+& & & \\
+  identifier\_list  & ::= & identifier \{ {\bf ~,~} identifier \} & (\ref{syidlist})\\ 
+& & & \\
+  single\_unit  & ::= & {\bf unit}\index{unit} $[$struct\_unit\_type$]$ $[$unit\_param\_list$]$ \\
+                &     & $[$unit\_param\_list$]$  position\_specification\index{Position!einer Struktur} & (\ref{sysingleunit}) \\
+& & & \\ 
+  struct\_unit\_type  & ::= & {\bf of}\index{of} identifier& (\ref{systructunittype})\\ 
+
+& & & \\
+  linear\_struct  & ::= & cluster\_struct\\\index{cluster}
+ 	  & $|$ & connected\_struct\\
+          & $|$ & subnet\_struct& (\ref{sylinearstruct})\\ 
+& & & \\
+  cluster\_struct  & ::= & {\bf cluster}\index{cluster} array\_size $[$unit\_specification$]$ \\
+                             &     &  topology\_specification & (\ref{syclusterstruct}) \\
+& & & \\
+  array\_size  & ::= & ``$[$'' expression ``$]$''& (\ref{syarraysize}) \\
+& & & \\ 
+  unit\_specification  & ::= & struct\_unit\_type $[$unit\_param\_list$]$ \\
+                             &     & $[$var\_param\_list$]$
+& (\ref{syunitspecification}) \\ 
+& & & \\
+    var\_param\_list  & ::= & {\bf get}\index{get} var\_parameter \{ {\bf ~,~} var\_parameter \}& (\ref{syvarparamlist})\\
+\end{tabular}
+
+\begin{tabular}{lclc}
+  && Syntaxregel & ~~~(Nr.)\\
+  \hline\\
+\multicolumn{4}{l}{\large ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~} \\ 
+& & & \\
+  var\_parameter  & ::= &  parameter\_key {\bf from}\index{from} element\_group& (\ref{syvarparameter})\\
+& & & \\
+  parameter\_key  & ::= &  {\bf act} $|$ {\bf name}\index{name}  & (\ref{syparameterkey})\\
+& & & \\
+  element\_group  & ::= & array\_constant \\
+                        & $|$ & identifier \\
+                        & $|$ & field\_range& (\ref{syelementgroup})\\
+& & & \\ 
+  field\_range  & ::= & variable\\
+                        & $|$ & variable ``$[$'' expression {\bf \verb&..&} expression ``$]$'' &  (\ref{syfieldrange}) \\ 
+& & & \\
+  connected\_struct  & ::= & chained\_struct\\\index{chain}
+          & $|$ & clique\_struct\\\index{clique}
+          & $|$ & star\_struct\\
+          & $|$ & map\_struct& (\ref{syconnectedstruct})\\ 
+& & & \\
+  chained\_struct & ::= & connection\_key array\_size $[$unit\_specification$]$  \\
+                         &     & topology\_specification $[$direction$]$ \\
+                         &     & $[${\bf by}\index{by} expression\_or\_random$]$  $[$site\_specification$]$ & (\ref{sychainedstruct})\\
+& & & \\
+  site\_specification & ::= & {\bf through}\index{through} identifier & (\ref{sysitespecification}) \\
+& & & \\
+  direction & ::= & {\bf \verb&->&}\index{Verbindung!vorw"arts} \\
+                   &  $|$  & {\bf \verb&<-&}\index{Verbindung!r"uckw"arts} \\
+                   &  $|$  & {\bf \verb&<->&}\index{Verbindung!bidirektional}  & (\ref{sydirection})\\
+& & & \\
+  {connection\_key} & ::= & {{\bf chain}} \index{chain} \\
+                   & $|$ & {{\bf ring}}\index{ring} & (\ref{syconnectionkey}) \\ 
+& & & \\
+  clique\_struct & ::= & {\bf clique}\index{clique} array\_size $[$unit\_specification$]$   \\
+                 &     & topology\_specification $[${\bf by}\index{by} expression\_or\_random$]$ \\
+                 &     & $[$site\_specification$]$  & (\ref{sycliquestruct}) \\
+& & & \\
+   star\_struct & ::= & {\bf star}\index{star} array\_size $[$unit\_specification$]$  topology\_specification \\
+                         &     & $[$direction$]$ $[${\bf by}\index{by} expression\_or\_random$]$ $[$site\_specification$]$ \\
+                         &     & $[$star\_center$]$\index{center}  & (\ref{systarstruct})\\
+& & & \\
+  star\_center\index{center} & ::= & {\bf center}\index{center} expression  & (\ref{systarcenter}) \\
+& & & \\
+  {map\_struct} & ::= & {{\bf irregular}\index{irregular} array\_size $[$unit\_specification$]$ }  \\
+                         &     & { topology\_specification direction} \\
+                         &     &  $[${\bf by}\index{by} expression\_or\_random$]$ $[$site\_specification$]$ \\
+                         &     & {$[$map\_specification$]$}   & (\ref{symapstruct}) \\
+& & & \\
+  {map\_specification} & ::= & {{\bf map}\index{map} identifier}   & (\ref{symapspec}) \\
+& & & \\ 
+  subnet\_struct & ::= & {\bf subnet}\index{subnet} identifier position\_specification\index{Position!einer Struktur} \\
+                 &     & $[$parameter\_specification$]$  & (\ref{sysubnetstruct})\\
+\end{tabular}
+
+\begin{tabular}{lclc}
+  && Syntaxregel & ~~~(Nr.)\\
+  \hline\\
+\multicolumn{4}{l}{\large ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~} \\ 
+& & & \\
+  parameter\_specification & ::= & {\bf var}\index{param} parameter\_value   & (\ref{syparamspec}) \\
+& & & \\
+  parameter\_value & ::= & ``$[$''~expression \{ {\bf ~,~} expression \}~``$]$''   & (\ref{syparamval})\\
+& & & \\
+  matrix\_struct & ::= & {\bf array} array\_size {\bf of}\index{of} linear\_struct   & (\ref{symatrixstruct}) \\
+& & & \\
+  {topology\_specification} & ::= & {area\_specification position\_specification}\index{Position!einer Struktur}   & (\ref{sytopologyspecification}) \\
+& & & \\
+  {area\_specification} & ::= & {{\bf plane}\index{plane} orientation}  \\
+                             & $|$ & { area\_key coordinates}   & (\ref{syareaspecification}) \\
+& & & \\
+  {orientation} & ::= & {$-$} ~~~$|$~~~ {{\bf ``$|$''}}   & (\ref{syorientation}) \\
+& & & \\
+  {area\_key} & ::= & {{\bf matrix}}\index{matrix} \\
+	      & $|$ & {{\bf ellipse}}\index{ellipse}   & (\ref{syareakey}) \\
+& & & \\
+  {position\_specification}\index{Position!einer Struktur} & ::= & {{\bf at}\index{at} coordinates}   & (\ref{sypositionspecification}) \\
+& & & \\
+  {coordinates} & ::= & {{\bf (} expression{\bf ~,~}expression{\bf )}}   & (\ref{sycoordinates}) \\  
+& & & \\ 
+& & & \\
+\multicolumn{4}{l}{\large {\bf Einfache Ausdr"ucke}} \\
+& & & \\
+  expression & ::= & num\_expression \\
+          & $|$ & string\_expression   & (\ref{syexpression}) \\
+& & & \\
+  num\_expression & ::= & num\_expression $+$ term \\
+          & $|$ &  num\_expression $-$ term \\
+          & $|$ &  term   & (\ref{synumexpression}) \\
+& & & \\
+  term & ::= & term $*$ factor \\
+          & $|$ &  term $/$ factor \\
+          & $|$ &  term {\bf div}\index{div} factor \\
+          & $|$ &  term {\bf mod}\index{mod} factor \\
+          & $|$ &  factor   & (\ref{synumexpression}) \\
+& & & \\
+  factor & ::= & {{\bf (} expression {\bf )}} \\
+          & $|$ & {sign factor} \\
+          & $|$ & function\_expression  \\
+          & $|$ & {variable}   & (\ref{syfactor}) \\
+& & & \\
+  sign & ::= & +~~~$|$~~~ -   & (\ref{sysign}) \\
+& & & \\
+  variable & ::= & simple\_constant \\
+          & $|$ & identifier \\
+          & $|$ & variable {\bf ~.~} selection\_field \\
+          & $|$ & variable field\_index   & (\ref{syvariable}) \\ 
+& & & \\  
+  simple\_constant & ::= & intliteral\index{Literal!ganzzahliges} \\
+          & $|$ & floatliteral\index{Literal!rationales} \\
+          & $|$ & stringliteral\index{Literal!Zeichenkette}   & (\ref{syunsignedconstant}) \\ 
+\end{tabular}
+
+\begin{tabular}{lclc}
+  && Syntaxregel & ~~~(Nr.)\\
+  \hline\\
+\multicolumn{4}{l}{\large ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~} \\ 
+& & & \\
+  string\_expression & ::= & {string\_expression ``$|$'' variable} \\
+          &  $|$  & {variable} & (\ref{systringexpression})\\
+& & & \\
+  field\_index & ::= & ``$[$'' expression ``$]$''   & (\ref{syfieldindex}) \\
+& & & \\
+  selection\_field & ::= & {\bf name}\index{name} $|$ {\bf act} \index{act} \\
+	  & $|$ & identifier  & (\ref{syselectionfield}) \\
+& & & \\
+  {function\_expression} & ::= & {simple\_function} \\
+          &  $|$  &  list\_function & (\ref{syfunctionexpression}) \\
+& & & \\
+  {simple\_function} & ::= & {simple\_func\_key {\bf (} expression {\bf )}}   & (\ref{sysimplefunction}) \\
+& & & \\ \index{Funktion!cos}\index{Funktion!arctan} \index{Funktion!sin} \index{Funktion!exp} \index{Funktion!ln}
+	 \index{Funktion!sqr} \index{Funktion!sqrt} \index{Funktion!min} \index{Funktion!max} \index{Funktion!concat}
+  {simple\_func\_key} & ::= & {{\bf sin}\index{sin} $|$ {\bf cos}\index{cos} $|$ {\bf arctan}} \\
+          & $|$ & {{\bf exp}\index{exp} $|$ {\bf ln}\index{ln} $|$ {\bf sqr}\index{sqr} $|$ {\bf sqrt}}\index{sqrt}   & (\ref{sysimplefunckey}) \\
+& & & \\
+  {list\_function} & ::= & {list\_func\_key {\bf (} expression\_list {\bf )}}   & (\ref{sylistfunction}) \\
+& & & \\
+  {list\_func\_key} & ::= & {\bf min}\index{min} $|$ {\bf max}\index{max}  & (\ref{sylistfunckey}) \\
+& & & \\
+& & & \\
+\multicolumn{4}{l}{\large {\bf Logische Ausdr"ucke}} \\
+& & & \\
+  {logical\_expr} & ::= & {logical\_expr {\bf or}\index{or} logical\_term} \\
+                       & $|$ & {logical\_term}  & (\ref{sylogicalexpr}) \\
+& & & \\
+  {logical\_term} & ::= & {logical\_term {\bf and} logical\_factor} \\
+                       & $|$ & {logical\_factor}  & (\ref{sylogicalterm}) \\
+& & & \\
+  {logical\_factor} & ::= & {{\bf not}\index{not} logical\_factor} \\
+                       & $|$ & {boolean\_expr} \\
+& & & \\
+  {boolean\_expr} & ::= & {comparison\_expression} \\
+          & $|$ &  {inclusion\_expression}  \\
+          & $|$ &  {relation\_expression}\index{Relation!Verwendung} 	& (\ref{sybooleanexpr}) \\
+& & & \\
+  {comparison\_expression} & ::= & {expression relational\_oper expression} & (\ref{sycomparisonexpression}) \\
+& & & \\
+  {relational\_oper}\index{Relation!Abfrage} & ::= & 
+	{$>$}~~~$|$~~~{$>=$}~~~$|$~~~{$<$}~~~$|$~~~{$<=$} \\
+          & $|$ &  {$=$}~~~$|$~~~{$<>$} & (\ref{syrelationaloper})  \\
+& & & \\
+  {inclusion\_expression}   & ::= &  {expression {\bf in}\index{in} element\_group} 
+							& (\ref{syinclusionexpression}) \\
+& & & \\
+  {relation\_expression} & ::= & {{\bf (} expression, expression {\bf )} {\bf in}\index{in} element\_group} 
+          						 & (\ref{syrelationexpression}) \\
+\end{tabular}
+
+\begin{tabular}{lclc}
+  && Syntaxregel & ~~~(Nr.)\\
+  \hline\\
+\multicolumn{4}{l}{\large ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~} \\ 
+& & & \\
+\multicolumn{4}{l}{\large {\bf Variablendeklarationen}}  \\
+& & & \\
+  {var\_block} & ::= & {{\bf var}\index{var} variable\_declaration\index{Variable} \{ variable\_declaration \}} 
+				 (\ref{syvarblock})\\
+& & & \\
+   {variable\_declaration}\index{Variable} & ::= & {variable\_type {\bf ~:~} identifier\_list {\bf ~;} }
+                                       (\ref{syvariabledeclaration})\\
+& & & \\
+  {variable\_type}\index{Variable} & ::= & {singular\_type } \nonumber\\
+                        & $|$ & {{\bf array of} array\_var\_type } (\ref{syvariabletype})\\
+& & & \\
+  {array\_var\_type}\index{Variable} & ::=  &{{\bf structure}\index{unit} } \nonumber\\
+                        & $|$ & {singular\_type} & (\ref{syarrayvartype})\\
+& & & \\
+  {singular\_type}\index{Variable} & ::= & {{\bf unit}\index{unit} } \nonumber\\
+                        & $|$ & {simple\_type} & (\ref{sysingulartype})\\ \nonumber
+& & & \\
+& & & \\
+\multicolumn{4}{l}{\large {\bf Topologiemodifikation}} \\
+& & & \\
+  {topology\_modif\_block} & ::= & {{\bf begin} statement\_list {\bf end}\index{end} } & (\ref{symodificationblock}) \\
+& & & \\
+  {statement\_list} & ::= & {statement \{ {\bf ;} statement \} } & (\ref{systatementlist}) \\
+& & & \\
+  {statement} & ::= & {assignment\_stmt}         \\
+                   & $|$ & {connection\_definition}   \\
+                   & $|$ & {control\_stmt}   \\
+                   & $|$ & {empty}  & (\ref{systatement}) \\ 
+& & & \\
+& & & \\ 
+  {assignment\_stmt} & ::= & {variable {\bf :=} expression}  \\
+   & $|$ & \mbox{variable {\bf .~iotype} {\bf :=} topology\_key} & (\ref{syassignmentstmt}) \\ 
+& & & \\ 
+  connection\_definition & ::= & variable conn\_operator variable   \\
+                         &     & $[${\bf ~:~} expression\_or\_random$]$  & (\ref{syconnectiondefinition}) \\
+& & & \\
+  conn\_operator & ::= & {\bf \verb&->&}~~~$|$~~~{\bf \verb&<->&}  & (\ref{syconnnoperator}) \\
+& & & \\
+  {loop\_stmt} & ::= & {loop\_header statement\_list {\bf end}}\index{end} & (\ref{syloopstatement}) \\
+& & & \\
+  {loop\_header} & ::= & {while\_header}  \\
+                      & $|$ & {for\_header}  \\
+                      & $|$ & {foreach\_header}\index{foreach} & (\ref{syloopheader}) \\ 
+& & & \\
+  {while\_header} & ::= & {{\bf while}\index{while} logical\_expr {\bf do}\index{do}} & (\ref{sywhileheader}) \\
+& & & \\
+  {for\_header} & ::= & {{\bf for}\index{for} simple\_assignment {\bf to}\index{to} expression {\bf do}\index{do}}
+			     & (\ref{syforheader}) \\
+& & & \\
+  {simple\_assignment} & ::= & {identifier~{\bf :=~} expression} & (\ref{sysimpleassignment}) \\
+
+\end{tabular}
+
+\begin{tabular}{lclc}
+  && Syntaxregel & ~~~(Nr.)\\
+  \hline\\
+\multicolumn{4}{l}{\large ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~} \\ 
+& & & \\
+  {foreach\_header} & ::= & {{\bf foreach}\index{foreach} loop\_variable\_list {\bf do}\index{do}}  & (\ref{syforeachheader}) \\
+& & & \\
+  {loop\_variable\_list} & ::= & {loop\_variable \{{\bf ~,~}loop\_variable\}}  & (\ref{syloopvariablelist}) \\
+& & & \\
+  {loop\_variable} & ::= & {identifier {\bf in} field\_range}   & (\ref{syloopvariable}) \\
+& & & \\
+  {conditional\_stmt} & ::= & {{\bf if}\index{if} logical\_expr {\bf then}\index{then} statement\_list} \\
+                           &     & {$[$else\_if\_part$]$ $[$else\_stmt$]$ {\bf end}}\index{end} 
+					 & (\ref{syconditionalstatement}) \\
+& & & \\
+  {else\_if\_part} & ::= & {else\_if\_stmt \{else\_if\_stmt\}}  & (\ref{syelseifpart}) \\
+& & & \\
+  {else\_if\_stmt} & ::= & {{\bf elseif}\index{elseif} logical\_expr {\bf then}\index{then} statement\_list}   & (\ref{syelseifstmt}) \\
+& & & \\
+  {else\_stmt}     & ::= & {{\bf else}\index{else}  statement\_list}  & (\ref{syelsestmt})\index{else} \\
+& & & \\
+& & & \\ 
+\multicolumn{4}{l}{\large {\bf Programmkopf}} \\
+& & & \\
+ {program\_header} & ::= & {{\bf network\index{network} identifier} {\bf (} $[$parameter\_list$]$ {\bf )~;}}   & (\ref{syprogramheader}) \\
+& & & \\
+  {parameter\_list} & ::= & {identifier\_list} \\ \index{Parameter!des Programms!Definition}
+          & $|$ &  {default\_param\_list}  & (\ref{syparameterlist}) \\
+& & & \\
+  {default\_param\_list} & ::= & {default\_parameter \{{\bf ~,~}default\_parameter \}} & (\ref{sydefaultparamlist}) \\
+& & & \\
+  {default\_parameter} & ::= & {simple\_assignment}   & (\ref{sydefaultparameter}) \\ 
+& & & \\
+& & & \\ 
+& & & \\
+\multicolumn{4}{l}{\large {\bf Regul"are Ausdr"ucke f"ur Terminalsymbole}} \\
+& & & \\ 
+  identifier & : & ${\bf [a-zA-Z]}$ ${\bf [a-zA-Z0-9\_]^*}$ & \\
+& & & \\
+  intliteral\index{Literal!ganzzahliges} & :   & ${\bf [0-9]^+}$  & \\
+& & & \\
+  floatliteral\index{Literal!rationales} & :   & ${\bf ([0-9]^*\:.\:[0-9]^+\:|\:[0-9]^+\:.\:[0-9]^*) \; ([Ee]\:[+-]?\:[0-9]+)?}$   & \\
+		     & $|$ & ${\bf [0-9]+\;[Ee]\:[+-]?\:[0-9]^+}$ & \\
+& & & \\
+  stringliteral\index{Literal!Zeichenkette} & : & {\bf $ \verb&"& \,(\, [\: \widehat{} \: \verb&"&\, ] \: | \: \backslash \verb&"&\,)\,^+\,\verb&"&$} & \\
+& & & \\
+& & & \\
+\end{tabular}
+
+
+
+
+\normalsize
+
+

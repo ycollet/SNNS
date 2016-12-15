@@ -1,0 +1,15 @@
+{\bf network}~\verb&clusterStructBsp&\verb&(&\verb&)&\verb&;&\\[.3cm]
+{\bf const}\\[.15cm]
+~~\verb&actFile&~\verb&=&~{\bf file}~\verb&"../input/ActivationList.dat"&~{\bf of}~{\bf float}\verb&;&\\[.15cm]
+~~\verb&nameFile&~\verb&=&~{\bf file}~\verb&"../input/NameList.dat"&~{\bf of}~{\bf string}\verb&;&\\[.15cm]
+~~\verb&nameList&~\verb&=&~\verb&[&\verb&nameFile&\verb&]&\verb&;&\\[.3cm]
+{\bf typedef}\\[.15cm]
+~~{\bf unit}~{\bf with}~{\bf actfunc}~\verb&Logistic&\verb&,&~~{\bf
+outfunc}~\verb&Identity&\verb&,&~~{\bf iotype}~{\bf output}~~\verb&:&~\verb&outType&\verb&;&\\[.3cm]
+{\bf structure}\\[.15cm]
+~~{\bf cluster}\verb&[&100\verb&]&~{\bf of}~\verb&outType&~~{\bf get}~{\bf act}~{\bf from}~\verb&[&\verb&actFile&\verb&]&\verb&,&~\\[.15cm]
+~~~~~~~~{\bf name}~{\bf from}~\verb&nameList&\verb&[&17\verb&..&116\verb&]&~{\bf plane}~{\bf at}~\verb&(&1\verb&,&50\verb&)&~\verb&:&~\verb&out1&~\verb&,&~\verb&out2&~\verb&,&~\verb&out3&~\verb&,&~\verb&out4&\verb&;&\\[.15cm]
+~~{\bf cluster}\verb&[&50\verb&]&~{\bf with}~{\bf iotype}~{\bf input}\verb&,&~{\bf act}~\verb&-&$.25$\verb&,&~{\bf actfunc}~\verb&Logistic&\verb&,&~\\[.15cm]
+~~~~~~~~{\bf outfunc}~\verb&Identity&~{\bf plane}~{\bf at}~\verb&(&20\verb&,&50\verb&)&~\verb&:&~\verb&in1&\verb&,&~\verb&in2&\verb&,&~\verb&in3&\verb&,&~\verb&in4&\verb&;&\\[.3cm]
+{\bf begin}\\[.15cm]
+{\bf end}\verb&.&

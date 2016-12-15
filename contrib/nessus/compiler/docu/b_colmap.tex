@@ -1,0 +1,43 @@
+{\bf network}~\verb&colorMap&\verb&(&\verb&size&\verb&,&~\verb&regionFile&\verb&,&~\verb&borderFile&\verb&,&~~\verb&mSep&\verb&,&~\verb&lSep&\verb&)&\verb&;&\\
+~~~~~~~~~~{\small \{\verb{size = no. of regions, regionFile = file of region names{\}}\\
+~~~~~~~~~~{\small \{\verb{borderFile = file of borders (map){\}}\\[.15cm]
+{\bf const}\\
+~~\verb&colors&~\verb&=&~\verb&[&\verb&"red"&\verb&,&~\verb&"green"&\verb&,&~\verb&"blue"&\verb&,&~\verb&"white"&\verb&]&\verb&;&\\
+~~\verb&regions&~\verb&=&~{\bf file}~\verb&regionFile&~{\bf of}~{\bf string}\verb&;&\\
+~~\verb&regionNames&~\verb&=&~\verb&[&\verb&regions&\verb&]&\verb&;&~~~~~\\
+~~~~~~~~~~{\small \{\verb{build array of region names{\}}\\
+~~\verb&borders&~\verb&=&~{\bf file}~\verb&borderFile&~{\bf of}~{\bf map}\verb&;&\\
+~~~~~~~~~~{\small \{\verb{logical file name for map of regions{\}}\\
+~~\verb&borderMap&~\verb&=&~{\bf map}~{\bf string}~{\bf to}~{\bf string}\verb&:&\\
+~~~~~~{\bf get}~\verb&(&\verb&mSep&\verb&,&~\verb&lSep&\verb&)&~{\bf from}~\verb&borders&\verb&;&\\
+~~~~~~~~~~{\small \{\verb{domain and range are region names{\}}\\[.15cm]
+{\bf typedef}\\
+~~{\bf site}~{\bf with}~{\bf name}~\verb&"inhibitory"&\verb&,&~{\bf sitefunc}~\verb&Site_Pi&~\verb&:&~\verb&inhibSite&\verb&;&\\
+~~{\bf unit}~{\bf with}~{\bf actfunc}~\verb&Act_Logistic&\verb&,&~{\bf outfunc}~\verb&Out_Identity&\verb&,&~{\bf act}~$1.0$\verb&,&~\\
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~{\bf site}~\verb&inhibSite&\verb&:&~\verb&colorType&\verb&;&\\
+~{\small \{\verb{actfunc should be a special function (UFColor){\}}\\[.15cm]
+{\bf structure}\\
+~~{\bf array}\verb&[&\verb&size&\verb&]&~{\bf of}~{\bf clique}\verb&[&4\verb&]&~{\bf of}~\verb&colorType&~~\\
+~~~~~~{\bf get}~{\bf name}~{\bf from}~\verb&colors&~{\bf matrix}~\verb&(&2\verb&,&2\verb&)&~{\bf at}~\verb&(&1\verb&,&~10\verb&)&\\
+~~~~~~{\bf by}~\verb&-&$1.0$~{\bf through}~\verb&inhibSite&~~\verb&:&~\verb&mapUnits&\verb&;&\\[.15cm]
+{\bf var}\\
+~~{\bf int}~~\verb&:&~\verb&region1No&\verb&,&~\verb&region2No&\verb&;&\\
+~~{\bf unit}~\verb&:&~\verb&color1&\verb&,&~\verb&color2&\verb&;&\\[.15cm] 
+{\bf begin}\\
+~~~~~~~~~~{\small \{\verb{look for adjacent regions{\}}\\
+~~{\bf for}~\verb&region1No&~\verb&:=&~0~{\bf to}~\verb&size&\verb&-&1~{\bf do}\\
+~~~~{\bf for}~\verb&region2No&~\verb&:=&~0~{\bf to}~\verb&size&\verb&-&1~{\bf do}\\
+~~~~~~~~~~{\small \{\verb{foreach pair of regions{\}}\\
+~~~~~~{\bf if}~\verb&(&\verb&regionNames&\verb&[&\verb&region1No&\verb&]&\verb&,&~\verb&regionNames&\verb&[&\verb&region2No&\verb&]&\verb&)&~{\bf in}~\verb&borderMap&~\\
+~~~~~~~~~~~~~~~~~{\bf and}~~\verb&region1No&~\verb&<>&~\verb&region2No&~{\bf then}\\
+~~~~~~~~~~{\small \{\verb{adjacent regions: connect correspondent colors{\}}\\
+~~~~~~~~{\bf foreach}~\verb&color1&~{\bf in}~\verb&mapUnits&\verb&[&\verb&region1No&\verb&]&\verb&,&~\verb&color2&~{\bf in}~\verb&mapUnits&\verb&[&\verb&region2No&\verb&]&~{\bf do}\\
+~~~~~~~~~~\verb&color1&\verb&.&\verb&inhibSite&~\verb&<->&~\verb&color2&\verb&.&\verb&inhibSite&~\verb&:&~1\\
+~~~~~~~~{\bf end}\\
+~~~~~~{\bf end}\\
+~~~~{\bf end}\verb&;&\\
+~~~~{\bf foreach}~\verb&color1&~{\bf in}~\verb&mapUnits&\verb&[&\verb&region1No&\verb&]&~{\bf do}\\
+~~~~~~\verb&color1&\verb&.&{\bf name}~\verb&:=&~\verb&regionNames&\verb&[&\verb&region1No&\verb&]&~\verb&|&~\verb&"_"&~\verb&|&~\verb&color1&\verb&.&{\bf name}\\
+~~~~{\bf end}\\
+~~{\bf end}\\
+{\bf end}\verb&.&\\

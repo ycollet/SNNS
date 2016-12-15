@@ -1,0 +1,45 @@
+network tcProblem(xInSize, yInSize, xOrder, yOrder);
+		{this network is a generalization of the net to solve the TC  problem -}
+		{it decides wether an input pattern displays a T or a C not depending on}
+		{rotation or translation, for TC-problem: xOrder = yOrder = 3.}
+		{xInSize, yInSize: extensions of input matrix in x and y directions}
+		{xOrder, yOrder: extensions of each receptive field of input units}
+const
+  noReceptors = (xInSize - xOrder + 1) * (yInSize - yOrder + 1); {no. of receptive fields}	
+  xInPos = (xInSize + 1) div 2 + 1;                       { x position for input  matrix }
+  xMidSize = xInSize - xOrder + 1;                   {size of hidden layer in x extension}
+  yMidSize = yInSize - yOrder + 1;                   {size of hidden layer in y extension}
+  xMidPos = 2 * xInPos + 3 + (xMidSize + 1) div 2;    {x position for matrix of receptors}
+  xOutPos = xMidPos + (xMidSize + 1) div 2 + 3;             {x position for decision unit}
+  yPos = (yInSize + 1) div 2 + 2;                         { y position for all structures}
+
+structure
+		{matrix of input units - display to be interpreted}
+  cluster[xInSize*yInSize] with actfunc Act_Signum, outfunc Out_Identity,
+	  act random, iotype input matrix(xInSize, yInSize) at(xInPos, yPos) : inputs;
+ 		{matrix of hidden units - one unit per receptive field}
+  clique[noReceptors] with actfunc Act_Logistic, outfunc Out_Identity,
+             act random matrix(xMidSize, yMidSize) at(xMidPos, yPos) by 0.05 : receptors;
+		{single output unit: actvated <==> T has been recognized}
+  unit with actfunc Act_Perceptron, outfunc Out_Threshold05, iotype output,
+ 					           act 1.0 at(xOutPos, yPos) : decision;
+
+var
+  int : rNo, 	{no. of receptive field (= index of hidden unit)}
+	line,    {current line in input matrix}
+	upLeft, {index of upper left unit for receptive field rNo}
+	colInc, lineInc;	{scan other units of receptive field with corner upLeft}
+
+begin
+  for rNo := 0 to noReceptors - 1 do;		    {scan receptive fields (hidden units)}
+    receptors[rNo] -> decision : random;            {random weight  connections to output}
+    line := rNo div xMidSize;
+    upLeft := rNo mod xMidSize + xInSize * line;    {index of unit at upper  left corner}
+    for lineInc := 0 to yOrder - 1 do               {scan lines of receptive fields}
+      for colInc := 0 to xOrder - 1 do              {scan lines of receptive fields}
+	        {connect each  unit of receptive field to its corresponding receptor unit}
+        inputs[upLeft + xInSize * lineInc + colInc] -> receptors[rNo] : 0.4
+      end
+    end
+  end
+end.

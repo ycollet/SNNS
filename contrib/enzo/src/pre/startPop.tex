@@ -1,0 +1,45 @@
+\begin{moduledoc}{Create a population of networks from one special network}
+       {startPop}
+  \item[\KeyWord{popsize} \optParam{ x } ]~\\
+    This parameter sets the number of elements in the population.\\ 
+    Default: {\tt POP\_SIZE\_VALUE} (30)
+  \item[\KeyWord{network} \optParam{ x } ]~\\
+    This string contains the filename of the reference network.\\
+    Default:  {}              
+  \item[\KeyWord{startnet} \optParam{ x } ]~\\
+    This string contains the filename of the master network, which
+    structure is copied to all the other networks.\\
+    Default: {}
+  \item[\KeyWord{initFct} \optParam{ x } ]~\\
+    This string contains the name of the SNNS init-function.
+    This function is used to initialized all created networks.\\
+    Default: {\tt ENZO\_noinit} 
+  \item[\KeyWord{initParam} \optParam{ x } ]~\\
+    This five parameters contains the values for the function parameters of the 
+    SNNS init-function {\it initFct}. 
+    For the meaning of the parameters please see the SNNS manual.\\
+    Default: -1.0 1.0 1.0 0.0 0.0
+\end{moduledoc}
+
+The module {\it startPop} loads the reference network and a special master network.
+The topology of the master network is copied to all the other networks in the start-population.
+Afterwards all weights and biases of the networks will be initialized with the
+{\it initFct}. 
+The idea is to take a good network to initialize the genetic search.
+Another possibility is to overcome the limitation of the maximal topology by
+using a much bigger reference network than master network, with the master network
+maybe untrained. If the master network is already locally optimized, one should use
+the initialization function {\it ENZO\_noinit}.  
+
+\algo{11cm}{startPop}{
+Load the reference and the master net;\\
+{\bf forall} (Elements in the start-population) {\bf do}\\
+\hspace*{0.5cm}Copy the master network to the network;\\
+\hspace*{0.5cm}Initialize the networks randomly with {\it initFct} and {\it initParam};\\
+\hspace*{0.5cm}Set {\it initFct} to {\it ENZO\_noinit};
+}
+
+
+
+
+

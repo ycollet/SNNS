@@ -1,0 +1,36 @@
+#!/bin/csh
+
+# ****************************************************************************
+#  FILE     : cleanup
+#  SHORTNAME: cleanup
+
+#  PURPOSE  : Shell scipt to call "make clean" in
+#	      compiler in compiler/source
+
+#  AUTHOR   : Tilman Sommer, Niels Mache, Thomas Korb
+#  VERSION  : 1.2
+#  DATE     : 1.1.1991
+
+#      Copyright (c) 1990-1993  SNNS Group, IPVR, Univ. Stuttgart, FRG
+# ****************************************************************************
+
+
+
+echo "************************************************"
+echo "*                                              *"
+echo "*                 SNNS  - Nessus               *"
+echo "*                                              *"
+echo "*         cleaning Nessus version 2.1 ...      *"
+echo "*                                              *"
+echo "************************************************"
+echo ""
+echo ""
+set rootdir = `echo $cwd`
+
+echo "Cleaning compiler ... "
+cd compiler/sources 
+echo "Deleting all object files, co_scanner.c, co_parser.c, co_pFuncs.h ..."
+make clean
+cd ../.. 
+echo "Done."
+echo ""

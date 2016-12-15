@@ -1,0 +1,273 @@
+\newcommand{\etalchar}[1]{$^{#1}$}
+\begin{thebibliography}{AI}
+
+\bibitem[Abelson~et~al.~85]{abe85}
+H.~Abelson, G.~Sussman and J.~Sussman.
+\newblock {\em Structure and Interpretation of Computer Programs}.
+\newblock MIT Press, 1985.
+
+\bibitem[Aho~et~al.~86]{aho86}
+A.~Aho, R.~Sethi and J.~Ullman.
+\newblock {\em Compilers - Principles, Techniques, and Tools}.
+\newblock Addison-Wesley, 86.
+
+\bibitem[Almassy~90]{alm90}
+N.~Almassy.
+\newblock A Compiler for {C}ondela-III.
+\newblock Master's thesis, Universit"at Z"urich-Irchel, April 1990.
+
+\bibitem[Ballard~87]{bal86}
+D.~Ballard.
+\newblock Modular Learning in Neural Networks.
+\newblock In {\em Proceedings AAAI-87}, pp. 279--284, 1987.
+
+\bibitem[Bayer~89]{bay89}
+R.~Bayer.
+\newblock Entwurf und {Realisierung} eines {Simulatorkerns} f"ur
+  konnektionistische {Modelle}.
+\newblock Studienarbeit 753, Inst. f. Informatik, Univ. Stuttgart, September
+  1989.
+
+\bibitem[BerztissThatte~83]{ber83}
+A.~Berztiss and S.~Thatte.
+\newblock Specification and Implementation of Abstract Data Types.
+\newblock {\em Advances in Computers}, 22, 1983.
+
+\bibitem[Bishop~86]{bis86}
+J.~Bishop.
+\newblock {\em Data Abstraction in Programming Languages}.
+\newblock Addison-Wesley, 1986.
+
+\bibitem[Bornat~79]{bor79}
+R.~Bornat.
+\newblock {\em Understanding and Writing Compilers}.
+\newblock MacMillan, 1979.
+
+\bibitem[BronsteinSemendjajew~73]{bron73}
+I.~Bronstein and K.~Semendjajew.
+\newblock {\em Taschenbuch der Mathematik}.
+\newblock Verlag Harri Deutsch, 1973.
+
+\bibitem[CarpenterGrossberg~88]{car88}
+G.~Carpenter and S.~Grossberg.
+\newblock The Art of Adaptive Pattern Recognition by a Self-Organizing Neural
+  Network.
+\newblock In {\em IEEE Spectrum}, 1988.
+
+\bibitem[Feldman~et~al.~88a]{fel01}
+J.~Feldman, M.~Fanty and N.~Goddard.
+\newblock Computing with Structured Neural Networks.
+\newblock In {\em IEEE Spectrum}, 1988.
+
+\bibitem[Feldman~et~al.~88b]{f1}
+J.~Feldman, M.~Fanty and N.~Goddard.
+\newblock Computing with Structured Neural Networks.
+\newblock In {\em Computer}, pp. 91--103, 1988.
+
+\bibitem[Feldman~et~al.~88c]{fel02}
+J.~Feldman, M.~Fanty, N.~Goddard and K.~Lynne.
+\newblock Computing with Structured Neural Networks.
+\newblock In {\em Communications of the ACM, Volume 31}, 1988.
+
+\bibitem[Feldman~ 6]{felx}
+J.~Feldman.
+\newblock High Level Programming for Distributed Computing.
+\newblock {\em Communications of the ACM}, pp. 353--368, 22 (6).
+
+\bibitem[Gallant~88]{gal88}
+S.~Gallant.
+\newblock Connectionist Expert Systems.
+\newblock In {\em Communications of the ACM, Volume 31}, 1988.
+
+\bibitem[Goddard~et~al.~86]{rcs86}
+N.~Goddard, M.~Fanty and K.~Lynne.
+\newblock The {R}ochester {C}onnectionist {S}imulator.
+\newblock Technical Report 189, Computer Science Department, Univ. of
+  Rochester, June 1986.
+
+\bibitem[Goddard~87]{god87}
+N.~Goddard.
+\newblock {\em The Rochester Connectionist Simulator: User Manual}.
+\newblock Univ. of Rochester, NY, 1987.
+
+\bibitem[GriesGehani~ 6]{griex}
+D.~Gries and N.~Gehani.
+\newblock Some Ideas on Data Types in High-level Languages.
+\newblock {\em Communications of the ACM}, pp. 414--420, 20 (6).
+
+\bibitem[Hahn~81]{hah81}
+R.~Hahn.
+\newblock {\em {H"ohere} {Programmiersprachen} im {Vergleich}}.
+\newblock Akademische Verlagsgesellschaft, 1981.
+
+\bibitem[HechtNielsen~88]{hec88}
+R.~Hecht-Nielsen.
+\newblock Neurocomputing: Picking the Human Brain.
+\newblock In {\em IEEE Spectrum}, pp. 36--41, March 1988.
+
+\bibitem[Hinton~89]{hin89}
+G.~Hinton.
+\newblock Connectionist Learning Procedures.
+\newblock In {\em AI 40}, pp. 185--234, 1989.
+
+\bibitem[HopcroftUllman~79]{hop79}
+J.~Hopcroft and J.~Ullman.
+\newblock {\em Introduction to Automata Theory, Languages, and Computation}.
+\newblock Addison-Wesley, 1979.
+
+\bibitem[JensenWirth~75]{jen75}
+K.~Jensen and N.~Wirth.
+\newblock {\em Pascal User Manual and Report}.
+\newblock Springer-Verlag, New York, 1975.
+
+\bibitem[Johnson~75]{joh75}
+S.~Johnson.
+\newblock YACC: Yet Another Compiler Compiler.
+\newblock Computing Science Technical Report~32, AT\&T Bell Laboratories, 1975.
+
+\bibitem[Kemke~88]{kem88}
+C.~Kemke.
+\newblock Der Neuere {Konnektionismus}: Ein {"Uberblick}.
+\newblock In {\em Informatik-Spektrum}, pp. 143--162, November 1988.
+
+\bibitem[KernighanPike~84]{ker84}
+B.~Kernighan and R.~Pike.
+\newblock {\em The Unix Programming Environment}.
+\newblock Prentice-Hall, 1984.
+
+\bibitem[KernighanRichie~78]{ker781}
+B.~Kernighan and D.~Richie.
+\newblock {\em The C Programming Language}.
+\newblock Prentice-Hall, 1978.
+
+\bibitem[Knuth~84]{knu84}
+D.~Knuth.
+\newblock {\em The {\TeX}book}.
+\newblock Addison-Wesley, 1984.
+
+\bibitem[KoehleSch"onbauer~88]{koe88}
+M.~Koehle and F.~Sch"onbauer.
+\newblock {CONDELA} - A Language for Neural Networks.
+\newblock In {\em Proceedings of the nEuro}, 1988.
+
+\bibitem[Korb~89]{kor89b}
+T.~Korb.
+\newblock {Entwurf} und {Implementierung} einer deklarativen {Sprache} zur
+  {Beschreibung} neuronaler {Netze}.
+\newblock Studienarbeit 789, Universit"at Stuttgart, 1989.
+
+\bibitem[KorbZell~89]{kor89}
+T.~Korb and A.~Zell.
+\newblock A Declarative Neural Network Description Language.
+\newblock In {\em Microprocessing and Microprogramming}. North-Holland, August
+  1989.
+
+\bibitem[Lamport~86]{lam86}
+L.~Lamport.
+\newblock {\em \LaTeX: A Document Preparation System}.
+\newblock Addison-Wesley, 1986.
+
+\bibitem[LeskSchmidt~75]{les75}
+M.~Lesk and E.~Schmidt.
+\newblock LEX: A Lexical Analyzer Generator.
+\newblock Computing Science Technical Report~39, AT\&T Bell Laboratories, 1975.
+
+\bibitem[Linsker~88]{lin88}
+R.~Linsker.
+\newblock Self Organisation in a Perceptual Network.
+\newblock In {\em IEEE Spectrum}, 1988.
+
+\bibitem[Pagan~81]{pag81}
+F.~Pagan.
+\newblock {\em Formal Specification of Programming Languages}.
+\newblock Prentice-Hall, 1981.
+
+\bibitem[Pratt~84]{prat84}
+T.~Pratt.
+\newblock {\em Programming Languages: Design and Implementation}.
+\newblock Prentice-Hall, 1984.
+
+\bibitem[RumelhartHinton~88]{rum88}
+D.~Rumelhart and G.~Hinton.
+\newblock Neural Network Architecture for Artificial Intelligence.
+\newblock In {\em Proceedings of the Seventh National Conference on AI}, 1988.
+
+\bibitem[RumelhartMcClelland~86a]{rum861}
+D.~Rumelhart and J.~McClelland.
+\newblock {\em Parallel Distributed Processing}, Volume~1.
+\newblock MIT Press, 1986.
+
+\bibitem[RumelhartMcClelland~86b]{rum862}
+D.~Rumelhart and J.~McClelland.
+\newblock {\em Parallel Distributed Processing}, Volume~2.
+\newblock MIT Press, 1986.
+
+\bibitem[RumelhartMcClelland~86c]{rum863}
+D.~Rumelhart and J.~McClelland.
+\newblock {\em Parallel Distributed Processing}, Volume~3.
+\newblock MIT Press, 1986.
+
+\bibitem[RumelhartZipser~85]{rum85}
+D.~Rumelhart and D.~Zipser.
+\newblock Feature Discovery by Competitive Learning.
+\newblock {\em Cognitive Science}, pp. 75--112, 1985.
+
+\bibitem[Sammet~69]{sam69}
+J.~Sammet.
+\newblock {\em Programming Languages: History and Fundamentals}.
+\newblock Prentice-Hall, 1969.
+
+\bibitem[SchreinerFriedman~85]{sch85}
+A.~Schreiner and G.~Friedman.
+\newblock {\em Introduction to Compiler Construction with UNIX}.
+\newblock Prentice-Hall, 1985.
+
+\bibitem[Sommer~89]{som89}
+T.~Sommer.
+\newblock {Entwurf} und {Realisierung} einer graphischen {Benutzeroberfl"ache}
+  f"ur einen {Simulator} konnektionistischer {Netzwerke}.
+\newblock Studienarbeit 746, Inst. f. Informatik, Univ. Stuttgart, 1989.
+
+\bibitem[Tennent~81]{ten81}
+R.~Tennent.
+\newblock {\em Principles of Programming Languages}.
+\newblock Prentice-Hall, 1981.
+
+\bibitem[WaltzPollack~85]{wal85}
+D.~Waltz and J.~Pollack.
+\newblock Massively Parallel Parsing.
+\newblock {\em Cognitive Science}, (9):51--74, 1985.
+
+\bibitem[Welsh~et~al.~77]{wel77}
+J.~Welsh, M.~Sneeringer and C.~Hoare.
+\newblock Ambiguities and Insecurities in Pascal.
+\newblock {\em Software Practice and Experience}, 7, 1977.
+
+\bibitem[WilsonClark~88]{wil88}
+L.~Wilson and R.~Clark.
+\newblock {\em Comparative Programming Languages}.
+\newblock Addison-Wesley, 1988.
+
+\bibitem[Wirth~82]{wir82}
+N.~Wirth.
+\newblock {\em Programming in Modula-2}.
+\newblock Springer-Verlag, 1982.
+
+\bibitem[Zell~et~al.~89]{zel89}
+A.~Zell, T.~Korb, T.~Sommer and R.~Bayer.
+\newblock NetSim: Ein {Simulator} f"ur neuronale {Netze}.
+\newblock In {\em GWAI-89}. Springer-Verlag (Informatik-Fachberichte), 1989.
+
+\bibitem[Zell~et~al.~90]{SNNSDoku}
+A.~Zell, T.~Korb, N.~Mache and T.~Sommer.
+\newblock {\em {SNNS} {Benutzerhandbuch}}.
+\newblock {Institut} f"ur {Parallele} und {Verteilte} {H"ochstleistungsrechner}
+  {(IPVR)}, {Universit"at} {Stuttgart}, 1990.
+
+\bibitem[ZipserRabin~86]{zip86}
+D.~Zipser and D.~Rabin.
+\newblock {\em P3: A Parallel Network Simulation System}, Chapter~13, pp.
+  488--507.
+\newblock in \cite{rum861,rum862}, 1986.
+
+\end{thebibliography}

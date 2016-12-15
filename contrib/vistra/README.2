@@ -1,0 +1,99 @@
+STUDIENARBEIT NR. 1241
+=======================
+(4.1.93 bis 18.7.93)
+
+Pruefer:    P. Levi
+Betreuer:   H. Bayer
+Autor:      R. Schmelzle
+
+Es existieren zwei Unterverzeichnisse:
+
+  - formats:    enthaelt die FDL-Dateien der ASCII-Formate.
+  - doku:       enthaelt die Dokumentation der Studienarbeit im 
+                PostScript-Format, sowie alle PostScript- bzw.
+                LaTeX-Dateien, die zur Generierung dieser Datei noetig
+                sind. Dieses Verzeichnis besitzt ein eigenes README-
+                File zur genaueren Beschreibung des Inhalts.
+
+Das Programm-Source Verzeichnis 
+--------------------------------
+
+DATEI           BESCHREIBUNG
+
+vistra          ausfuehrbares Vistra fuer SUN-Workstations.
+vistra.dec      ausfuehrbares Vistra fuer DEC-Workstations.
+makefile        Das Make-File zum Compilieren und Linken von 'vistra'.
+vistra.c        C-MODUL: Callbacks der graphischen Benutzeroberflaeche.
+                Include von:
+                  crtwdgts.c, gw.c, init.c, int2.c, ssw.c, strdlg.c, uif.c
+                  def.h
+xvis.h          C-Include: muss von allen C-Modulen included werden
+                  (globale Makros, Datentypen und Fkt.koepfe der public
+                   functions der einzelnen Module).
+def.h           C-Include: Makros fuer die graph.Benutzeroberflaeche.
+crtwdgts.c      C-Include. Routinen, die Widgets kreieren 
+                (z.B. createAllWidgets()).
+                Include von:
+                  hook, up, down, left
+hook            BITMAP-Includefile: Haken des 'Format'-Menues.
+up              BITMAP-Includefile: Pfeil nach oben.
+down            BITMAP-Includefile: Pfeil nach unten.
+left            BITMAP-Includefile: Pfeil nach links.
+gw.c            C-Include. Routinen des Graphik-Fensters.
+                Include von: draw.c
+draw.c          C-Include: Zeichen-Routinen fuer Inhalt des Graphik-
+                           Fensters.
+init.c          C-Include. Initialisierungs-Routinen.
+int2.c          C-Include. Routinen der Dialogbox, in der zwei Integer
+                eingegeben werden.
+ssw.c           C-Include. Routinen des Vektoren-Fensters (Austausch-
+                Fenster fuer Eingabe- oder Ausgabevektoren).
+strdlg.c        C-Source. Routinen der Dialogbox, in der nach einem String
+                gefragt wird.
+uif.c           C-Include. Sonstige Routinen der graph.Benutzeroberflaeche.
+batch.c         C-MODUL: Routinen des Batch Modus.
+coll.c          C-MODUL: abstrakter Datentyp 'Collection' 
+                         (doppelt verkettete Liste; wird fuer die
+                          verschiedensten Dinge in Vistra benutzt)
+eh.c            C-MODUL: Vistra's Error Handler.
+format.c        C-MODUL: abstrakter Datentyp einer ASCII-Format-
+                         Beschreibung (in FDL).
+globals.c       C-MODUL: globale Variablen.
+patterns.c      C-MODUL: abstrakter Datentyp der Trainingsvektor-Daten.
+                Include von: fin.c fout.c lvq.c n01.c 
+fin.c           C-Include: der FDL-Leseinterpreter.
+fout.c          C-Include: der FDL-Schreibinterpreter. 
+lvq.c           C-Include: Routinen zum Lesen und Schreiben des 
+                           LVQ-Formats.
+n01.c           C-Include: Routinen zum Lesen und Schreiben des
+                           N01-Formats.
+symtab.c        C-MODUL: abstrakter Datentyp der Symboltabelle fuer die
+                         Klassensymbole der Trainingsvektoren.
+vector.c        C-MODUL: abstrakter Datentyp eines Vektors.
+veccoll.c       C-MODUL: abstrakter Datentyp einer Collection von
+                         Vektoren.
+misc.c          C-MODUL: sonstige Funktionen (Miscellaneous).
+           
+
+Uebersetzen und Binden von Vistra:
+
+  make 
+
+Vistra benutzt die Bibliothek libfwf.a, die die Routinen fuer das
+File Selector Widget von FWF (Free Widget Foundation) enthaelt.
+Diese Bibliothek wiederum greift auf Routinen der libDir.a Bibliothek
+zurueck. Das Verzeichnis, in dem sich diese Bibliotheken befinden, ist
+im Makefile dem Symbol LIBDIRS zuzuweisen.
+Ueblicherweise existieren fuer jede Maschinenarchitektur (so auch fuer
+SUNs und DECs) separate Verzeichnisse, sodass fuers Compilieren auf
+unterschiedl. Workstations die Variable LIBDIRS neu gesetzt werden muss.
+
+Falls der FWF File Selector nicht verwendet werden soll (weil z.B. keine
+Bibliothek oder nur eine inkompatible Version zur Verfuegung steht),
+ist im Makefile fuer das Modul vistra.o folgende GCC-Option zu entfernen:
+  
+  -DXFWF_FILE_SELECTION
+
+
+
+

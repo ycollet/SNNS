@@ -1,0 +1,55 @@
+\begin{moduledoc}{Evaluation using the highest output}{bestGuessHigh}
+
+
+\item[\KeyWord{crossPattern} \optParam{name}]~\\
+Name of the file which contains the set of cross validation patterns.\\
+Default: -
+
+
+\item[\KeyWord{hitRating} \optParam{f}]~\\
+Value that is added to the fitness term, in case the network classifies a
+pattern correctly.\\
+Default: 0.0
+
+\item[\KeyWord{missRating} \optParam{f}]~\\  
+Value that is added to the fitness term, in case the network classifies a
+pattern wrong.\\
+Default: 10.0
+
+\item[\KeyWord{noneRating} \optParam{f}]~\\ 
+Value that is added to the fitness term, in case the network doesn't classify a
+pattern.\\
+Default: 10.0
+
+\item[\KeyWord{hitThreshold} \optParam{f}]~\\ 
+The value gives the threshold that needs to be reached, before classifying takes place\\
+Default: 0.3
+
+\item[\KeyWord{hitDistance} \optParam{f}]~\\ 
+The value gives the distance between the output of two neurons, before a classification
+counts as valid.
+Default: 0.2
+
+
+\end{moduledoc}
+
+
+The module  {\it bestGuessHigh} tests the generalization performance of a network
+and increases the fitness. It is useful for a Winner-takes-all output (1 out of n)
+properties. The neuron with the highest activity is selected as winner. If its activity
+distance to the next highest activated neuron is smaller than {\it hitDistance} 
+the pattern is  treated as not classified.
+
+
+
+
+
+
+
+
+
+
+
+
+
+

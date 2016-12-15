@@ -1,0 +1,26 @@
+%    @(#)prune.tex      1.1  2/25/94
+
+\begin{moduledoc}{Delete all weights below a threshold}{prune}
+  
+\item[\KeyWord{threshold} \optParam{t}]~\\
+  The parameter \Param{t} indicates the threshold, underneath all weights of 
+  the net will be deleted.\\
+  Default: 0.0
+
+\item[\KeyWord{thresholdStart} \optParam{f}]~\\
+  The parameter $x$ indicates the start-threshold for the pruning module.\\
+  Default: 0.0
+
+\item[\KeyWord{pruneEndGen} \optParam{i}]~\\
+  The parameter $i$ indicates th number of the generation until the 
+  pruning module will take the origin {\it threshold}
+  .\\
+  Default: 0
+\end{moduledoc}
+  
+All weights of the net with an abolute strength under the threshold will be deleted.
+
+\vspace*{0.5cm}
+
+% eof
+

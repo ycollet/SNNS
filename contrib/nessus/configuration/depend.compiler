@@ -1,0 +1,59 @@
+
+# dependencies for compiler 
+
+co_main.o: co_constants.h co_types.h co_prototypes.h co_include.h co_main.c
+
+co_parser.o: co_constants.h co_types.h co_prototypes.h co_include.h co_parser.c
+
+co_pFuncs.o: co_pFuncs.c co_pFuncs.h
+
+co_pFuncs.h: co_constants.h co_types.h co_prototypes.h co_include.h co_parser.c co_pfBody.h co_scanner.c
+		fgrep '#define YYMAXDEPTH' co_parser.c >  temp1
+		fgrep '# define YYLMAX' co_scanner.c >  temp2
+		cat co_pfBody.h temp1 temp2 > co_pFuncs.h
+		/bin/rm temp1 temp2
+
+co_scanner.o: co_constants.h co_types.h co_prototypes.h co_include.h co_scanner.c
+
+co_scanner.c: Tokens.l co_scanner.h
+		lex Tokens.l 
+		mv lex.yy.c co_scanner.c
+
+#parser built by yacc, y.tab.c is modified to achieve a better error handling
+#modifications are described in 
+#		Schreiner, Friedman: Compiler bauen mit UNIX
+#		Hanser Verlag, 1985, pp. 236-239.
+co_parser.c: Syntax.y
+		yacc -d Syntax.y
+		cat y.tab.c | sed -f sed.parser > co_parser.c
+		rm y.tab.c
+
+co_symTab.o: co_constants.h co_types.h co_prototypes.h co_include.h co_symTab.c
+
+co_error.o: co_constants.h co_types.h co_prototypes.h co_include.h co_error.c
+
+co_output.o: co_constants.h co_types.h co_prototypes.h co_include.h co_output.c
+
+co_cFuncs.o: co_constants.h co_types.h co_prototypes.h co_include.h co_cFuncs.c
+
+co_conns.o: co_constants.h co_types.h co_prototypes.h co_include.h co_conns.c
+
+co_strings.o: co_constants.h co_types.h co_prototypes.h co_include.h co_strings.c co_tokPrint.h
+
+co_mem.o: co_constants.h co_types.h co_prototypes.h co_include.h co_mem.c
+
+co_expr.o: co_constants.h co_types.h co_prototypes.h co_include.h co_expr.c
+
+co_stmt.o: co_constants.h co_types.h co_prototypes.h co_include.h co_stmt.c
+
+co_struct.o: co_constants.h co_types.h co_prototypes.h co_include.h co_struct.c
+
+co_sites.o: co_constants.h co_types.h co_prototypes.h co_include.h co_sites.c
+
+co_io.o: co_constants.h co_types.h co_prototypes.h co_include.h co_io.c
+
+co_logical.o: co_constants.h co_types.h co_prototypes.h co_include.h co_logical.c
+
+co_params.o: co_constants.h co_types.h co_prototypes.h co_include.h co_params.c
+
+co_loop.o: co_constants.h co_types.h co_prototypes.h co_include.h co_loop.c

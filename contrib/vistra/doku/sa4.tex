@@ -1,0 +1,319 @@
+\section{Batch-Modus und LOG-Dateien}
+\label{log}
+
+Der Aufruf von Vistra im Batch-Modus wurde bereits in Abschnitt~\ref{call}
+behandelt.
+Dieses Kapitel beschreibt, wie LOG-Dateien zur Spezifikation eines 
+durchzuf"uhrenden Jobs zu verwenden sind.
+
+Eine LOG-Datei stellt eine Liste von Kommandos zur Transformation
+von Trainingsvektoren dar.
+Alle Transformationen, die interaktiv durchgef"uhrt werden, k"onnen 
+mithilfe von LOG-Dateien auch im Stapelbetrieb durchgef"uhrt werden.
+F"ur jede Transformation steht daf"ur ein entsprechendes Batch-Kommando
+zur Verf"ugung.
+Der Batch-Modus von Vistra erh"alt als Eingabe eine Trainingsvektor-Datei
+und eine LOG-Datei, arbeitet die Befehle der LOG-Datei der Reihe nach
+ab und schreibt die transformierten Trainingsvektoren wieder in eine
+Ausgabe-Datei.  
+
+Dem Batch-Modus fallen zwei Aufgaben zu:
+\begin{itemize}
+\item Transformationen k"onnen sowohl interaktiv "uber die X-Windows 
+Oberfl"ache als auch als Job im Stapelbetrieb durchgef"uhrt werden.
+Dazu ist eine LOG-Datei von Hand zu erstellen.
+\item Der Batch-Modus erm"oglicht eine Trennung in
+Trainings- und Testdaten oder ganz allgemein eine Aufteilung von
+Trainingsvektoren in separate Dateien.
+Die Transformationen, die interaktiv auf einen Satz der Trainingsvektoren 
+angewandt werden, k"onnen in einer LOG-Datei festgehalten
+werden, indem das Flag "`Write to log file"' des "`File"'-Men"us
+gesetzt wird.
+Sp"ater k"onnen die anderen Dateien durch Angabe dieser LOG-Datei 
+im Batch-Modus auf die gleiche Weise umgewandelt werden.
+\end{itemize}  
+   
+\subsection{Das Format von LOG-Dateien}
+
+LOG-Dateien besitzen eine Zeilenstruktur.
+Jede Zeile enth"alt eine Anweisung bzw. eine durchzuf"uhrende 
+Transformation und besteht
+aus ein oder mehreren W"ortern bzw. Zahlen, die
+durch Blanks oder Tabulatoren getrennt sind.
+Die Syntax einer Befehlszeile ist:
+
+{\tt ('i'|'I'|'o'|'O') <command> [ <arg1> <arg2> ... ]}  
+
+oder
+
+{\tt \% <comment>}
+
+Das erste Wort einer Zeile mu"s also immer ein einzelnes Zeichen sein.
+Ein {\tt i} bzw. {\tt I} bedeutet, da"s die Anweisung auf die Eingabevektoren
+anzuwenden ist, ein {\tt o} bzw. {\tt O}, da"s sie sich auf die
+Ausgabevektoren bezieht. 
+Generell wird in LOG-Dateien nicht zwischen Gro"s- und
+Kleinschreibung unterschieden. \\  
+{\tt \%} leitet eine Kommentarzeile ein. 
+Alle Zeichen dieser Zeile werden von Vistra ignoriert.   
+
+{\tt <command>} steht f"ur ein Schl"usselwort, das angibt, welche
+Aktion bzw. Transformation durchzuf"uhren ist.
+
+Manche Anweisungen ben"otigen zur genaueren Spezifikation einen oder
+mehrere Parameter, die in obiger Syntax durch die Liste 
+{\tt <arg1> <arg2> ...} repr"asentiert werden. 
+Parameter k"onnen sowohl Strings als auch Zahlen sein.
+ 
+F"ur jede Aktion, die im interaktiven Modus
+Trainingsvektoren ver"andert, steht ein entsprechendes Batch-Kommando
+zur Verf"ugung.
+Neben Kommandos f"ur die Transformationen des "`Transform"'-Men"us und
+des "`Remove"'-Men"us"' existieren auch f"ur das Laden der vertikalen
+und horizontalen Skalarfelder (also f"ur jeden Men"upunkt des "`Load"'-Men"us)
+sowie f"ur die Vektor--Skalar Operationen ("`add"', "`subtract"', "`multiply"',
+"`divide"' und "`replace\ldots"') entsprechende Batch-Anweisungen.
+W"ahrend eine LOG-Datei abgearbeitet wird, merkt sich Vistra neben den
+aktuellen Werten der Trainingsvektoren auch die Inhalte der vertikalen
+und horizontalen Skalarfelder zu den verschiedenen Zeitpunkten.
+
+{\bf Beispiel:} \\
+Mithilfe einer LOG-Datei sollen die Elemente der Trainingsvektoren auf
+den Wertebereich [-1,1] skaliert werden.
+Anschlie"send ist von jedem Vektorelement der statistische Mittelwert
+der zugeh"origen Dimension abzuziehen. 
+Zum Schlu"s soll noch eine Hauptachsentransformation (PCA) durchgef"uhrt
+werden. 
+
+\begin{samepage}
+Diese Transformationen k"onnten im Batch-Modus durch folgende LOG-Datei
+vollzogen werden:
+\begin{verbatim}
+i scale -1 1
+% Mittelwerte der Dimensionen sollen 0 sein
+i loadHoriz avg
+i subtract horiz
+% zum Schluss: Hauptachsentransformation
+i pca
+\end{verbatim}  
+\end{samepage}
+ 
+Tabelle~\ref{batchcommands} zeigt alle Batch-Anweisungen plus zugeh"orige
+Parameter.
+
+\begin{table}
+\begin{tabular}{c|c|p{7.5cm}}
+{\tt <command>} & {\tt <arg1> <arg2> ...} & {\bf Aktion} \\ \hline
+{\tt pca} & & Hauptachsentransformation \\
+{\tt fft} & & 1-dimensionale diskrete Fourier Trans\-for\-ma\-tion \\
+{\tt hlog} & & halblogarithmische Transformation \\
+{\tt scale} & {\it min\quad max} & skaliere aufs Intervall 
+[{\it min}, {\it max}] \\
+{\tt normalize} & & normalisiere auf L"ange 1 \\
+{\tt randomize} & & mische die Vektoren willk"urlich \\
+{\tt classExpand} & & erweitere mit Klassenvektor \\
+{\tt outputExpand} & & erweitere mit Ausgabevektor \\
+{\tt refreshClasses} & & berechne die Klassen aus den
+Aus\-ga\-be\-vek\-toren \\
+{\tt rmDimRange} & {\it from\quad to} & entferne die Dimensionen {\it from} 
+bis {\it to} \\
+{\tt rmConstDims} & & entferne alle konstanten Dimensionen \\
+{\tt rmDims} & $dim_1 \ldots dim_n$ & entferne die Dimensionen 
+$dim_1, \ldots, dim_n$ \\ 
+{\tt loadVert} & {\it loadparams} & lade die vertikalen Skalarfelder 
+je nach {\it loadparams} mit bestimmten Werten (siehe unten) \\
+{\tt loadHoriz} & {\it loadparams} & lade die horizontalen Skalarfelder 
+je nach {\it loadparams} mit bestimmen Werten (siehe unten) \\
+{\tt add} & {\it direction} & addiere die vertikalen 
+({\it direction} = {\tt vert})
+bzw. die horizontalen ({\it direction} = {\tt horiz}) Skalare zu den 
+zugeh"origen Vektoren bzw. Dimensionen \\
+{\tt subtract} & {\it direction} & subtrahiere die vertikalen 
+({\it direction} = {\tt vert}) bzw. die horizontalen 
+({\it direction} = {\tt horiz}) 
+Skalare von den zugeh"origen Vektoren bzw. Dimensionen \\
+{\tt multiply} & {\it direction} & multipliziere die vertikalen 
+({\it direction} = {\tt vert}) bzw. die horizontalen 
+({\it direction} = {\tt horiz}) 
+Skalare mit den zugeh"origen Vektoren bzw. Dimensionen \\
+{\tt divide} & {\it direction} & dividiere die Vektoren 
+({\it direction} = {\tt vert})
+bzw. die Dimensionen ({\it direction} = {\tt horiz}) durch die zugeh"origen 
+vertikalen bzw. horizontalen Skalare \\
+{\tt replace} & {\it direction\quad nr} & ersetze den Vektor Nummer~{\it nr} 
+({\it direction} = {\tt horiz}) bzw. die Dimension~{\it nr} 
+({\it direction} = {\tt vert}) durch die horizontalen 
+bzw. vertikalen Skalare \\
+{\tt addConst} & {\it num} & addiere {\it num} zu jedem Vektorelement \\
+{\tt subConst} & {\it num} & subtrahiere {\it num} von jedem Vektorelement \\
+{\tt multConst} & {\it num} & multipliziere jedes Vektorelement mit 
+{\it num} \\
+{\tt divConst} & {\it num} & dividiere jedes Vektorelement durch {\it num} \\ 
+\end{tabular}
+\caption{\label{batchcommands} Die Batch-Anweisungen}
+\end{table}
+  
+Durch die Batch-Anweisungen {\tt loadVert} und {\tt loadHoriz} k"onnen
+die vertikalen bzw. horizontalen Skalarfelder mit Werten geladen werden.
+Unter anderem stehen alle Funktionen zur Verf"ugung, die auch interaktiv "uber
+das "`Load"'-Men"u aufgerufen werden k"onnen. 
+
+{\it loadparams} aus Tabelle~\ref{batchcommands} kann folgende Werte
+annehmen: 
+
+\nopagebreak
+\begin{tabular}{c|c}
+{\it loadparams} & {\bf entspricht "`Load"'-Men"upunkt\ldots} \\ \hline
+{\tt min} & "`minimum"' \\
+{\tt max} & "`maximum"' \\
+{\tt avg} & "`average"' \\
+{\tt length} & "`length"' \\
+{\tt sum} & "`sum"' \\
+{\tt stddev} & "`standard deviation"' \\
+{\tt pattern} {\it nr} & "`pattern\ldots"' \\
+{\tt overallMin} & "`overall minimum"' \\
+{\tt overallMax} & "`overall maximum"' \\
+{\tt overallAvg} & "`overall average"' \\
+{\tt overallStddev} & "`overall std dev"' \\
+{\tt const} {\it number} & "`const\ldots"' \\
+{\tt values} $val_1 \ldots val_n$ & --- \\
+{\tt dim} \enspace $nr$ \enspace $value$ & --- \\  
+\end{tabular} 
+
+F"ur die Anweisung {\tt const} gibt {\it number} die zu ladende Konstante an.
+Die Anweisung {\tt pattern} l"adt den Vektor Nummer {\it nr}
+in die horizontalen Skalarfelder ({\tt <command> = loadHoriz})
+bzw. die {\it nr}-te Dimension in die vertikalen Felder 
+({\tt <command> = loadVert}). \\
+Durch {\tt values} k"onnen die Werte, mit denen die vertikalen bzw.
+horizontalen Skalarfelder geladen werden sollen, direkt angegeben werden.
+Diese Werte wurden in obiger Tabelle mit $val_1 \ldots val_n$ bezeichnet.
+$n$ mu"s dabei genau der Anzahl der betreffenden Skalarfelder
+entsprechen. \\
+Wie f"ur {\tt values} gibt es auch f"ur die Anweisung {\tt dim} keine
+Entsprechung im "`Load"'-Men"u.
+Mit {\tt dim} wird das $nr$-te vertikale ({\tt <command> = loadVert})
+bzw. das $nr$-te horizontale Skalarfeld ({\tt <command> = loadHoriz})
+auf den Wert $value$ gesetzt.
+{\tt dim} entspricht im interaktiven Modus somit einer "Anderung 
+eines Skalarfeldes von Hand.
+F"ur jedes ge"anderte Feld wird eine {\tt dim}-Anweisung in die LOG-Datei
+geschrieben.   
+ 
+\subsubsection*{Fehlerbehandlung im Batch-Modus}
+
+Trifft Vistra in der LOG-Datei auf eine Zeile mit fehlerhafter Syntax,
+so wird eine Warnung auf stdout ausgegeben und mit der 
+n"achsten Zeile fortgefahren.
+Gleiches gilt f"ur Anweisungen, die aus anderen Gr"unden 
+nicht ausgef"uhrt werden k"onnen.
+Eine halblogarithmische Transformation ben"otigt beispielsweise Vektoren
+mit einer quadratischen Anzahl von Dimensionen.
+Ein weiteres Beispiel ist die {\tt loadVert values}-Anweisung, die
+eine Warnung erzeugt, wenn die Anzahl der Werte nicht der Anzahl
+der Trainingsvektoren entspricht. 
+
+\subsection{LOG-Anweisungen der interaktiven Aktionen}
+
+Dieser Abschnitt besch"aftigt sich mit der Frage, welche LOG-Anweisungen
+f"ur die Aktionen, die interaktiv im Hauptfenster von Vistra 
+durchgef"uhrt werden, in die LOG-Datei geschrieben werden, solange 
+"`Write to log file"' gesetzt ist.
+Dabei ist zu beachten, da"s eine Trennung von Trainingsvektoren nur
+dann sinnvoll unterst"utzt wird, wenn ein und derselbe Vektor durch
+Ausf"uhrung der LOG-Datei in genau der gleichen Weise ver"andert wird wie 
+durch die interaktiv durchgef"uhrten Transformationen.
+
+Vektor-Transformationen, deren Ergebnisse nur vom jeweiligen Vektor 
+abh"angen, bereiten unter diesem Gesichtspunkt keine Probleme
+(z.B. liefert eine Fourier Transformation auf den gleichen Vektor angewandt
+immer das gleiche Resultat).
+Schwierigkeiten machen jedoch Aktionen, die von {\it allen} geladenen
+Vektoren abh"angen.
+Darunter f"allt beispielsweise das Entfernen konstanter Dimensionen.
+Eine Dimension, die f"ur eine Menge von Vektoren konstant ist, mu"s
+nicht auch f"ur andere Vektormengen konstant sein.
+W"urde in diesem Fall einfach nur {\tt rmConstDims} in die LOG-Datei
+geschrieben, so k"onnten den Vektoren einer Datei evtl. ganz andere Dimensionen
+entfernt werden als den Trainingsvektoren einer anderen Datei. 
+Abhilfe kann nur geschaffen werden, wenn die LOG-Datei  
+die tats"achlich entfernten Dimensionen explizit enth"alt (mithilfe
+von {\tt rmDims}).      
+
+"Ahnlich verh"alt es sich, wenn z.B. die horizontalen Skalarfelder 
+mit den Minima der einzelnen Dimensionen geladen werden sollen.
+Die Minima k"onnen je nach Vektormenge anders ausfallen, weshalb auch
+hier anstelle von {\tt loadHoriz min} 
+das Minimum jeder Dimension explizit in die LOG-Datei geschrieben wird.
+
+Folgende Tabelle enth"alt in der linken Spalte die 
+interaktiven Aktionen und in der rechten die daf"ur geschriebenen 
+LOG-Anweisungen:
+
+\begin{tabular}{l|l}
+{\bf Men"upunkt/Button} & {\bf geschriebene LOG-Anweisung(en)} \\ \hline
+"`HLOG"' & {\tt hlog} \\
+"`FFT"' & {\tt fft} \\
+"`PCA"' & {\tt pca} \\
+"`Normalize"' & {\tt normalize} \\
+"`Scale"' & {\tt multConst} {\it stretch} \\
+& {\tt addConst} {\it shift} \\
+"`Randomize"' & {\tt randomize} \\
+"`Expand with class vector"' & {\tt classExpand} \\
+"`Expand with output vector"' & {\tt outputExpand} \\
+"`Refresh class numbers"' & {\tt refreshClasses} \\
+"`Remove dimensions"' & {\tt rmDimRange} {\it from to} \\
+"`Remove constant dims"' & {\tt rmDims} $dim_1 \ldots dim_n$ \\
+"`add"' & {\tt add} {\it direction} \\
+"`subtract"' & {\tt subtract} {\it direction} \\
+"`multiply"' & {\tt multiply} {\it direction} \\
+"`divide"' & {\tt divide} {\it direction} \\
+"`replace"' & {\tt replace} {\it nr} \\
+\end{tabular}
+
+Eine Skalierung eines Wertebereichs auf einen anderen kann auf
+eine Multiplikation und eine Addition zur"uckgef"uhrt werden.
+Der betreffende Faktor bzw. Summand ist oben als {\it stretch} bzw.
+{\it shift} bezeichnet. \\
+{\it direction} steht entweder f"ur {\tt vert} oder f"ur {\tt horiz}.
+
+In obiger Tabelle fehlen die Aktionen des "`Load"'-Men"us.
+Bei ihnen h"angen die geschriebenen LOG-Anweisungen davon ab, ob die vertikalen
+oder die horizontalen Skalarfelder geladen wurden:
+
+\begin{tabular}{l|l|l}
+{\bf "`Load"'-Men"upunkt} & {\bf vertikal} & {\bf horizontal} \\ \hline
+"`minimum"' & {\tt loadVert min} & {\tt loadHoriz values} {\it valueList} \\
+"`maximum"' & {\tt loadVert max} & {\tt loadHoriz values} {\it valueList} \\
+"`average"' & {\tt loadVert avg} & {\tt loadHoriz values} {\it valueList} \\
+"`length"' & {\tt loadVert length} & {\tt loadHoriz values} {\it valueList} \\
+"`standard deviation"' & {\tt loadVert stddev} & {\tt loadHoriz values} 
+{\it valueList} \\
+"`sum"' & {\tt loadVert sum} & {\tt loadHoriz values} {\it valueList} \\
+"`pattern"' & {\tt loadVert values} {\it valueList} &
+{\tt loadHoriz values} {\it valueList} \\
+"`overall minimum"' & {\tt loadVert const} {\it value} &
+{\tt loadHoriz const} {\it value} \\   
+"`overall maximum"' & {\tt loadVert const} {\it value} &
+{\tt loadHoriz const} {\it value} \\   
+"`overall average"' & {\tt loadVert const} {\it value} &
+{\tt loadHoriz const} {\it value} \\   
+"`overall std dev"' & {\tt loadVert const} {\it value} &
+{\tt loadHoriz const} {\it value} \\   
+"`const"' & {\tt loadVert const} {\it value} & 
+{\tt loadHoriz const} {\it value} \\ 
+\end{tabular}
+
+{\it valueList} repr"asentiert hierbei eine Liste von Zahlen, die jeweils 
+durch ein Blank voneinander getrennt sind.
+Eine letzte M"oglichkeit zur Manipulation der Skalarfelder ist 
+das direkte "Andern eines Feldinhalts von Hand mithilfe der Tastatur.
+In diesem Fall wird einer der folgenden beiden Anweisungen in die
+LOG-Datei geschrieben (je nachdem, ob es sich um ein vertikales oder
+ein horizontales Skalarfeld handelt):
+
+{\tt loadVert dim} \enspace $nr$ \enspace $value$ \qquad oder \\
+{\tt loadHoriz dim} \enspace $nr$ \enspace $value$  
+
+Das $nr$-te vertikale bzw. horizontale Skalarfeld wird hierdurch auf
+den Wert $value$ gesetzt.

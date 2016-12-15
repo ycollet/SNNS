@@ -1,0 +1,316 @@
+\section[Funktionalit"at, Installation und Aufruf]{Funktionalit"at, 
+Installation und Aufruf von Vistra}
+\label{funk}
+
+Dieses Kapitel gibt einen "Uberblick "uber die Funktionalit"at
+von Vistra. 
+Die Funktionen werden an dieser Stelle jedoch nur aufgelistet.
+Eine detaillierte Bedienungsanleitung des Programms ist 
+Gegenstand der n"achsten Kapitel.
+Anschlie"send wird beschrieben, wie Vistra installiert wird und
+wie die Syntax des Programmaufrufs mit seinen Optionen lautet.
+ 
+\subsection{Funktionalit"at}
+Die Funktionen von Vistra k"onnen in die drei Kategorien
+{\sl Datei-Funktionen (Konvertierung), Transformationen} und
+{\sl Visualisierungen} eingeteilt werden.
+
+\subsubsection*{Datei-Funktionen (Konvertierung)}
+
+Abbildung~\ref{flow} zeigt alle Arten von Dateien, die von Vistra
+gelesen bzw.~geschrieben werden:
+
+\begin{figure}[ht]
+\hspace*{0.3cm}
+\begin{picture}(14.4,6)
+\put(0,4.8){\framebox(4,1.2){\parbox{4cm}
+         {\begin{center} Trainingsvektor- \\ dateien \end{center}}}}
+\put(0,3.2){\framebox(4,1.2){\parbox{4cm}
+         {\begin{center} LOG-Dateien \end{center}}}}
+\put(0,1.6){\framebox(4,1.2){\parbox{4cm}
+         {\begin{center} Symboltabellen- \\ dateien \end{center}}}}
+\put(0,0){\framebox(4,1.2){\parbox{4cm}
+         {\begin{center} Formatbeschreibungs- \\ dateien \end{center}}}}
+\put(5.2,2){\framebox(4,2){\parbox{4cm}
+         {\begin{center} {\Large {\bf Vistra}} \end{center}}}}
+\put(10.4,4){\framebox(4,1.2){\parbox{4cm}
+         {\begin{center} Trainingsvektor- \\ dateien \end{center}}}}
+\put(10.4,2.4){\framebox(4,1.2){\parbox{4cm}
+         {\begin{center} LOG-Dateien \end{center}}}}
+\put(10.4,0.8){\framebox(4,1.2){\parbox{4cm}
+         {\begin{center} Symboltabellen- \\ dateien \end{center}}}}
+\put(4,0.6){\vector(2,3){1.2}}
+\put(4,2.2){\vector(2,1){1.2}}
+\put(4,3.8){\vector(2,-1){1.2}}
+\put(4,5.4){\vector(2,-3){1.2}}
+\put(9.2,2.6){\vector(1,-1){1.2}}
+\put(9.2,3){\vector(1,0){1.2}}
+\put(9.2,3.4){\vector(1,1){1.2}} 
+\end{picture}
+\caption{\label{flow} Eingabe und Ausgabe von Vistra}
+\end{figure}
+
+Folgende Aktionen sind m"oglich:
+\begin{itemize}
+
+\item Trainingsvektor-Dateien unterschiedlicher Formate k"onnen eingelesen
+und geschrieben werden. 
+Zwei Formate stehen standardm"a"sig zur Verf"ugung:
+\begin{itemize}
+\item das N01-Format und
+\item das LVQ-Format.
+\end{itemize}
+Beide Formate werden u.a. von KNet der Universit"at Stuttgart,
+einem parallelen Simulator f"ur die selbstorganisierenden Karten
+von Teuvo Kohonen (Kohonen Feature Maps), verwendet
+(siehe \cite{bayer}). 
+Das LVQ-Format ist ein ASCII-Format und stammt urspr"unglich
+aus dem LVQ\_PAK, einem Public-Domain Paket, das "uber 
+Internet von der Kohonen-Gruppe zur Verf"ugung gestellt 
+wird\footnote{erh"altlich "uber die Internet-Adresse cochlea.hut.fi}.
+
+Beim N01-Format handelt es sich um ein bin"ares Format. 
+Die Vektoren liegen in maschinencodierter Form vor.
+Bin"are Formate haben den Vorteil gegen"uber ASCII-Formaten, da"s sie
+schneller eingelesen bzw.~geschrieben werden k"onnen, da 
+zeitaufwendige Konvertierungen von Strings in Flie"skommazahlen 
+vermieden werden.
+Nachteilig ist, da"s sie maschinenabh"angig sind und vom Menschen
+nicht gelesen werden k"onnen. 
+Obwohl SUN- und DEC-Workstations unterschiedliche Codierungen f"ur
+Zahlen verwenden, kann Vistra N01-Formate auf beiden Fabrikaten
+lesen und schreiben.
+
+Trainingsvektoren k"onnen in einem Format gelesen und in einem anderen
+Format geschrieben werden.
+Dadurch ist Vistra in der Lage, eine Vektordatei
+von einem Format in ein anderes zu konvertieren.
+N01- und LVQ-Format sind in Kapitel~\ref{formate} detailliert beschrieben.
+
+\item Symboltabellen k"onnen eingelesen und geschrieben werden. 
+Anstelle eines Ausgabevektors, wird einem Eingabevektor h"aufig nur
+ein Symbol (ein String) zur Klassifikation der Ausgabe zugeordnet.
+Eine Symboltabellen-Datei enth"alt dann eine Liste dieser Klassensymbole. 
+Das genaue Aussehen von Symboltabellen-Dateien kann Kapitel~\ref{formate}
+entnommen werden.
+
+\item Neben dem LVQ-Format kann Vistra um weitere ASCII\--For\-mate 
+f"ur Trainings\-vektor-Dateien erweitert werden.
+Voraussetzung ist, da"s sich das Format durch Vistra's 
+Formatbeschreibungssprache FDL ({\bf F}ormat {\bf D}escription 
+{\bf L}anguage) 
+hinreichend beschreiben l"a"st.
+Ist dies der Fall, so kann Vistra ein solches Format sowohl lesen als
+auch schreiben.
+Zu diesem Zweck wurde ein Interpreter f"ur FDL entwickelt. 
+FDL ist ausf"uhrlich in Kapitel~\ref{fdl} beschrieben.  
+
+\item Vistra kann die auf den Trainingsvektoren durchgef"uhrten
+Transformationen in einer LOG-Datei festhalten.
+Dadurch wird es z.B.~m"oglich, mit Trainings- und Testvektoren, die zu
+unterschiedlichen Zeitpunkten bzw. in separaten Dateien zur Verf"ugung stehen, 
+die gleichen Transformationen durchzuf"uhren. 
+Neben dem interaktiven Modus verf"ugt Vistra deshalb "uber einen Batch-Modus,
+der die Transformationen einer LOG-Datei im Stapelbetrieb ausf"uhrt. 
+\end{itemize}     
+
+\subsubsection*{Transformationen}
+
+Vistra kann folgende Transformationen auf einer Menge von
+Vektoren durchf"uhren:
+
+\begin{itemize}
+\item Hauptachsentransformationen (PCA -- Principle Component Analysis)
+\item Halblogarithmische Transformationen (HLOG) 
+\item Diskrete eindimensionale Fourier Transformationen (FFT)
+\item Normalisieren der Vektoren (auf die L"ange 1)
+\item Skalieren auf einen bestimmten Wertebereich
+\item Mischen der Vektoren ("`Randomize"')
+\item Erweitern der Eingabevektoren mit den zugeh"origen Ausgabevektoren
+\item Erweitern der Vektoren mit einem Klassenvektor
+\item elementweise Addition, Subtraktion, Multiplikation und Division der
+Vektoren oder Dimensionen mit Skalaren 
+\item Manuelles Editieren einzelner Vektoren oder Dimensionen
+\item Entfernen von Dimensionen
+\item Entfernen von Vektoren
+\end{itemize}
+
+Zu jedem Vektor bzw.~jeder Dimension k"onnen au"serdem statistische
+Werte wie Minima, Maxima, Mittelwerte, Standardabweichungen, L"angen
+etc.~berechnet werden.   
+Diese Werte k"onnen dann auch als Skalare zur elementweisen
+Verkn"upfung in einer der vier Grundrechenarten verwendet werden.
+
+\subsubsection*{Visualisierungs-Formen}
+
+Die Vektoren (Eingabe- oder Ausgabevektoren) k"onnen auf folgende
+Arten dargestellt werden:
+\begin{itemize}
+\item textuell
+\item als Grauwertbilder
+\item als Farbbilder
+\item als Histogramme
+\item als Linienz"uge
+\item als 2-dimensionale Projektion in einem gemeinsamen Koordinatensystem
+\end{itemize}
+
+Die Gr"o"se der graphischen Darstellungen kann innerhalb vorgegebener
+Grenzen variiert werden.
+Die Visualisierungsformen werden in Kapitel~\ref{benutzung} behandelt.  
+
+\subsection{Installation}
+
+Die Installation von Vistra l"auft in folgenden Schritten ab:
+\begin{enumerate}
+\item Das ausf"uhrbare Programm "`vistra"' wird in ein beliebiges
+Verzeichnis kopiert.
+\item Es wird sichergestellt, da"s sich das Programm "`pca"' auf dem
+Befehlspfad befindet. \\
+Vistra ruft "`pca"' zur Durchf"uhrung von Hauptachsentransformationen auf.
+Dazu wird die vom Original leicht abgewandelte Version von "`pca"' ben"otigt,
+die die Eingabe im LVQ-Format erwartet und die Ausgabe ebenfalls im
+LVQ-Format schreibt\footnote{die Originalversion von "`pca"'
+ist "uber die Internet-Adresse ftp.icsi.berkeley.ed erh"altlich.}.
+\item Es wird, falls gew"unscht, ein neues Verzeichnis angelegt, das
+die Formatbeschreibungs-Dateien f"ur die ASCII-Formate aufbewahrt, 
+um die Vistra erweitert werden soll.
+Anstelle eines neuen Verzeichnisses k"onnen die Formatbeschreibungen auch
+in ein bereits existierendes Verzeichnis gestellt werden.
+Es sollte dann jedoch sichergestellt sein, da"s keine anderen Dateien in
+diesem Verzeichnis auf {\tt .fmt} enden, da Vistra alle Dateien mit dieser
+Endung f"ur Formatbeschreibungs-Dateien h"alt.   
+\item Es wird eine Environment-Variable namens "`VISTRAFORMATS"' eingerichtet,
+die auf den Pfadnamen des Format-Verzeichnisses aus Schritt~3
+(hier als {\tt <format\_dir>} bezeichnet), gesetzt wird:
+\begin{verbatim}
+setenv VISTRAFORMATS <format_dir>
+\end{verbatim} 
+Existiert die Environment-Variable oder das angegebene Verzeichnis nicht,
+so wird Vistra w"ahrend des Programmstarts eine entsprechende Warnung
+ausgeben und die benutzerdefinierten Formate nicht einbinden k"onnen.
+\end{enumerate}
+
+\subsection{Aufruf}
+\label{call}
+
+Dieser Abschnitt beschreibt, wie und mit welchen Optionen Vistra
+gestartet wird.
+Dabei wird zwischen dem Aufruf des interaktiven Modus und
+dem Aufruf des Batch-Modus unterschieden.
+
+%\newpage
+\subsubsection*{Interaktiver Modus}
+
+Der Aufruf im interaktiven Modus sieht wie folgt aus:
+
+{\tt vistra [ <options> ]  [ <patternfile> ]}
+
+{\tt <patternfile>} steht hierbei f"ur den Dateinamen einer
+Trainingsvektor-Datei.
+Mit den Vektoren dieser Datei wird das Programm zu Beginn geladen.
+Wird {\tt <patternfile>} weggelassen, so erscheint das Hauptfenster 
+von Vistra zun"achst ohne Vektoren. 
+Der Benutzer hat dann lediglich die M"oglichkeit, eine
+Trainingsvektor-Datei nachtr"aglich zu laden oder das Programm wieder
+zu verlassen.
+  
+{\tt <options>} steht f"ur eine Liste von einer oder mehreren der
+in Tabelle~\ref{interoptions} aufgef"uhrten Optionen. 
+
+\begin{table}[ht]
+\begin{tabular}[t]{lp{10.5cm}}
+{\bf Option} & {\bf Bedeutung} \\ \hline
+{\tt -rfmt} {\tt <readformat>} & Ist nur von Bedeutung, wenn der Name einer
+Trainingsvektor-Datei angegeben wird. 
+{\tt <readformat>} gibt dann das Format dieser Datei an.
+M"ogliche Werte sind {\tt n01, lvq} sowie die Namen aller benutzerdefinierten
+Formate, um die Vistra erweitert wurde. 
+Im letzten Fall mu"s der Namen der Formatbeschreibungs-Datei ohne die
+Endung {\tt .fmt} angegeben werden. 
+ 
+{\sl Default:} Suffix von {\tt <patternfile>}. \\
+{\tt -log} & Ist nur von Bedeutung, wenn der Name einer Trainingsvektor-Datei
+angegeben wird.
+Durch diese Option wird ein Schalter gesetzt, der bewirkt, da"s die 
+Transformationen, denen die Trainingsvektoren von {\tt <patternfile>}
+unterzogen werden, in eine LOG-Datei geschrieben werden. 
+Diese Speicherungsfunktion kann sp"ater "uber einen Men"upunkt beliebig
+an- und ausgeschaltet werden. 
+
+Der Name der LOG-Datei ist {\tt <patternfile>.log}.
+Die LOG-Datei wird in das Verzeichnis von {\tt <patternfile>} gestellt
+(falls {\tt <patternfile>} sich in einem Verzeichnis befindet, f"ur
+das der Benutzer keine Schreibberechtigung besitzt, so sollte 
+in einem anderen Verzeichnis ein Link auf diese Datei eingerichtet
+werden). \\
+{\tt -nf} {\tt <font>} & Im Hauptfenster von Vistra sind entweder
+die Eingabevektoren oder die Ausgabevektoren einer Vektordatei permanent
+in textueller Form sichtbar. 
+
+Um m"oglichst viele Vektoren auf einmal auf dem Bildschirm zu haben, 
+kann es w"unschenswert sein, den Text-Font selbst festzulegen, der zur 
+Darstellung der Vektorelemente verwendet wird.
+Dies geschieht, indem man f"ur {\tt <font>} den Namen eines
+X-Windows Text-Fonts angibt. 
+
+{\sl Default:} {\tt 7x13} \\
+\end{tabular}
+\caption{\label{interoptions} Command-line Optionen f"ur den interaktiven Modus}
+\end{table}
+
+%\newpage
+\subsubsection*{Batch-Modus}
+
+Der Batch-Modus von Vistra bietet die M"oglichkeit, Transformationen,
+die der Benutzer im interaktiven Modus durchgef"uhrt hat, zu einem
+sp"ateren Zeitpunkt auf Testvektoren oder anderen Trainingsvektoren 
+zu wiederholen.
+Dazu werden die Modifikationen bzw.~Transformationen w"ahrend des
+interaktiven Programmlaufs in eine LOG-Datei geschrieben, die sp"ater
+als Eingabe f"ur Vistra's Batch-Modus dient. 
+Kapitel~\ref{log} beschreibt das Format der LOG-Dateien sowie die 
+internen Abl"aufe w"ahrend des Batch-Betriebs.
+
+Vistra wird im Batch-Modus wie folgt gestartet:
+   
+\nopagebreak
+{\tt vistra -batch <logfile> [ <options> ] <patternfile>}
+
+\begin{sloppypar}
+{\tt <logfile>} ist der Name einer LOG-Datei, deren Befehle auf die
+Vektor-Datei {\tt <patternfile>} angewandt werden. \\
+{\tt <options>} steht f"ur eine Liste von einer oder mehreren der
+in Tabelle~\ref{batchoptions} aufgef"uhrten Optionen.
+\end{sloppypar}
+ 
+\begin{table}[ht]
+\begin{tabular}[t]{lp{10.2cm}}
+{\bf Option} & {\bf Bedeutung} \\ \hline
+{\tt -out} {\tt <outputfile>} &
+{\tt <outputfile>} gibt den Namen der Datei an, in die die transformierten
+Trainingsvektoren geschrieben werden. 
+
+{\sl Default:} {\tt <patternfile>.out} \\
+{\tt -rfmt} {\tt <readformat>} &
+{\tt <readformat>} gibt das Format der Vek\-tor-Da\-tei {\tt <patternfile>} an.
+M"ogliche Werte sind {\tt n01, lvq} oder der Namen eines benutzerdefinierten
+Formats ohne die Endung {\tt .fmt}. 
+
+{\sl Default:} Suffix von {\tt <patternfile>}. \\
+{\tt -wfmt} {\tt <writeformat>} &
+{\tt <writeformat>} gibt den Namen des Ausgabeformats an.
+Alle Werte f"ur {\tt <readformat>} sind auch f"ur {\tt <writeformat>}
+zul"assig. 
+
+{\sl Default:} Suffix von {\tt <outputfile>}, falls eine Ausgabedatei 
+angegeben ist. 
+Ansonsten erh"alt die Ausgabe-Datei das gleiche Format wie die Eingabe-Datei.
+\end{tabular}
+\caption{\label{batchoptions} Command-line Optionen f"ur den Batch-Modus}
+\end{table}
+
+
+
+
+
+

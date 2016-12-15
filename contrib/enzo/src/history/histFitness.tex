@@ -1,0 +1,23 @@
+\begin{moduledoc}{Saving all informations about fitness of the networks}{histFitness}
+
+\item[\KeyWord{historyFile} \Param{filename}]~\\
+This string contains the prefix of the filename where all informations are stored.
+The extension of the filename is {\it .fit} for the net informations and
+{\it .popfit} for the population informations.
+\end{moduledoc}
+
+The modul {\it histFitness} writes all fitness informations of a net in a 
+special file (extension {\it .fit}).
+Each line of the file accords to one net. 
+
+
+The file with the {\it .popfit} extension contains informations about the 
+fitness of whole population. 
+Each line describes the several fitness values (best fitness of all members, 
+worst fitness of all members and the average fitness) of the population 
+at each generation.  The population file is ready for gnuplot and other
+programs.
+
+The fitness values are not computed in this modul, they are computed during 
+the {\it evalution} functions and stored in special slots of the 
+data structure.

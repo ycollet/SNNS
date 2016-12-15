@@ -1,0 +1,15 @@
+\begin{moduledoc}{Random selection of weights}{weightInit}
+  \item[\KeyWord{weightProb} \optParam{ x } ]~\\
+    This parameter sets the probability $p_{exists}$. Each weight will
+    be deleted probability $1 - p_{exists}$.
+    Default: 1.0
+\end{moduledoc}
+The module {\it weightInit} deletes weights from a net of the start-population randomly. 
+This could by necessary to increase the diversity of the population or to reduce the
+free dimensions of the network.
+
+\algo{7cm}{weightInit}{
+{\bf forall} (Weights in the net) {\bf do}\\
+\hspace*{0.5cm}{\bf if} (Rand(0,1) $> p_{exists}$ ) {\bf then}\\
+\hspace*{1.0cm}delete the weight in the net;\\
+}

@@ -1,0 +1,55 @@
+COMPILERBINDIR= ____
+PROGRAM   = nessus
+
+
+# -- C-Compiler Configuration --
+
+COMPILERDEBUG=
+#COMPILERDEBUG= -g  -DTEST -DDEBUG -DLOOPTEST -DSCANTEST
+CFLAGS= $(COMPILERDEBUG) $(CCFLAGS) $(FPOPTIONS)
+LDOPTIONS= -lm -ll
+CC= cc
+
+# Objetcs
+
+COMPOBJECTS= co_main.o \
+	co_parser.o \
+	co_scanner.o \
+	co_symTab.o \
+	co_error.o \
+	co_output.o \
+	co_cFuncs.o \
+	co_conns.o \
+	co_strings.o \
+	co_mem.o \
+	co_pFuncs.o \
+	co_expr.o \
+	co_stmt.o \
+	co_struct.o \
+	co_sites.o \
+	co_io.o \
+	co_logical.o \
+	co_params.o \
+	co_loop.o
+
+SOURCES= Tokens.l Syntax.y \
+	co_constants.h co_types.h co_prototypes.h co_include.h \
+	co_main.h co_main.c \
+	co_parser.h co_parser.c \
+	co_scanner.h co_scanner.c \
+	co_symTab.h co_symTab.c \
+	co_error.h co_error.c \
+	co_output.h co_output.c \
+	co_cFuncs.h co_cFuncs.c \
+	co_conns.h co_conns.c \
+	co_strings.h co_strings.c \
+	co_mem.h co_mem.c \
+	co_pFuncs.h co_pFuncs.c \
+	co_expr.h co_expr.c \
+	co_stmt.h co_stmt.c \
+	co_struct.h co_struct.c \
+	co_sites.h co_sites.c \
+	co_io.h co_io.c \
+	co_logical.h co_logical.c \
+	co_params.h co_params.c \
+	co_loop.h co_loop.c

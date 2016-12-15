@@ -1,0 +1,67 @@
+\chapter{Aufbau eines Nessus-Programms}
+\label{Programmaufbau}
+
+Wenn man ein konnektionistisches Netz in {\bf Nessus} definieren will,
+geht man so vor, da"s man das Netz zuerst in Teilnetze\index{Teilnetz}
+zerlegt.  Merkmale dieser Teilnetze k"onnen zum Beispiel gleichartige
+Zellen oder bestimmte Verbindungsmuster\index{Verbindung} sein.
+
+Solche gleichartigen Teilnetze k"onnen in {\bf Nessus} besonders
+bequem definiert werden.  Damit ist normalerweise schon ein gro"ser
+Teil der Verbindungen des Netzes definiert.  F"ur Zellen mit gleichen
+Parametern kann man Typen einf"uhren.
+
+\begin{figure}[htb]
+  \small
+  \begin{center}
+      \makebox[\textwidth][c]{
+	   \input{f_prog.tex}
+      }
+    \caption{\label{KB1} Struktur\index{Struktur!eines Programms} eines {\bf Nessus}-Programms}\index{Programm!Aufbau}
+  \end{center}
+\end{figure}
+
+Abbildung~\ref{KB1} zeigt die "ubliche Struktur\index{Struktur!eines
+Programms} eines {\bf Nessus}-Programms\index{Programm!Aufbau}:
+
+\begin{enumerate}
+  
+\item Im Konstantendefinitionsteil k"onnen Konstanten
+\index{Konstante!Definition} definiert werden.  Dadurch wird die
+Lesbarkeit eines Programms erh"oht.
+  
+\item Im Typdefinitionsteil k"onnen Zell- oder Site-Typen definiert
+werden. Zell- oder Site-Typen sind im Prinzip nichts anderes als
+benannte Kombinationen von Parameterwerten f"ur Zellen bzw. Sites
+mit bestimmten Merkmalen.
+  
+\item Im Strukturdefinitionsteil werden Zellen zu bestimmten
+vordefinierten Strukturen einschlie"slich ihrer impliziten
+Verbindungen zusammengefa"st.
+  
+\item Im Variablendeklarationsteil m"ussen alle f"ur die Erg"anzung
+der Topologie\index{Topologie} 	ben"otigten Variablen\index{Variable}
+deklariert werden.
+  
+\item Der Topologiemodifikationsteil\index{Topologie} dient dann dazu,
+die bisher definierten 	Strukturen zu erg"anzen und miteinander zu
+verbinden.
+\end{enumerate}
+
+Alle diese Komponenten bis auf den Topologiemodifikationsteil
+\index{Topologie} k"onnen entfallen.
+
+\begin{center}
+\fbox{
+\begin{minipage}{\textwidth}
+{\footnotesize
+\begin{center}
+\begin{eqnarray}
+  \mbox{program} & ::= & \mbox{program\_header $[$const\_block$]$ $[$typedef\_block$]$}  \nonumber\\[.3 cm]
+          &    & \mbox{$[$structure\_block$]$ $[$var\_block$]$ topology\_modif\_block}  \label{sytopology} \\ \nonumber
+\end{eqnarray}
+\end{center}
+}
+\end{minipage}
+}
+\end{center}

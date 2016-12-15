@@ -1,0 +1,48 @@
+network colorMap(size, regionFile, borderFile,  mSep, lSep);
+          {size = no. of regions, regionFile = file of region names}
+          {borderFile = file of borders (map)}
+
+const
+  colors = ["red", "green", "blue", "white"];
+  regions = file regionFile of string;
+  regionNames = [regions];     
+          {build array of region names}
+  borders = file borderFile of map;
+          {logical file name for map of regions}
+  borderMap = map string to string:
+      get (mSep, lSep) from borders;
+          {domain and range are region names}
+
+typedef
+  site with name "inhibitory", sitefunc Site_Pi : inhibSite;
+  unit with actfunc Act_Logistic, outfunc Out_Identity, act 1.0, 
+                                     site inhibSite: colorType;
+	{actfunc should be a special function (UFColor)}
+
+structure
+  array[size] of clique[4] of colorType  
+      get name from colors plane | at (1, 10)
+      by -1.0 through inhibSite  : mapUnits;
+
+var
+  int  : region1No, region2No;
+  unit : color1, color2;
+
+begin
+          {look for adjacent regions}
+  for region1No := 0 to size-1 do
+    for region2No := 0 to size-1 do
+          {foreach pair of regions}
+      if (regionNames[region1No], regionNames[region2No]) in borderMap 
+                 and  region1No <> region2No then
+          {adjacent regions: connect correspondent colors}
+        foreach color1 in mapUnits[region1No], color2 in mapUnits[region2No] do
+          color1.inhibSite <-> color2.inhibSite : 1
+        end
+      end
+    end;
+    foreach color1 in mapUnits[region1No] do
+      color1.name := regionNames[region1No] | "_" | color1.name
+    end
+  end
+end.

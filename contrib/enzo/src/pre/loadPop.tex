@@ -1,0 +1,19 @@
+\begin{moduledoc}{Load a starting population}{loadPop}
+  \item[\KeyWord{network} \optParam{ x } ]~\\
+    This string contains the prefix of the filename, where the networks are  
+    stored in.\\ 
+    Default: {\tt enzo} 
+  \item[\KeyWord{popsize} \optParam{ x } ]~\\
+    This parameter $x$ sets the number of networks for the starting population.\\
+    Default: {\tt POP\_SIZE\_VALUE} (30)
+\end{moduledoc}
+
+The module {\it loadPop} loads networks for the starting population. 
+The filename for the reference net consists of the prefix {\it network} and 
+the extension {\tt \_ref.net}.
+The filename for the other networks consists of the prefix {\it network} 
+and an extension containing a number, e.g., \verb+network_0000.net+.
+It is important that all  hidden units of the reference net and the
+other networks of the starting population get the same unit name in SNNS.
+The purpose of this module was to restart an evolution from a stopped
+process. The postfix of network names are just in the way \ENZO stored them.

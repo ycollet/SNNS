@@ -1,0 +1,1083 @@
+\chapter{Strukturdefinitionen}
+\label{Strukturdefinitionen}
+
+Im Strukturdefinitionsblock\index{Struktur!Definitionsblock} werden
+alle Zellen definiert und benannt, die Bestandteil des Netzes 
+werden sollen.
+
+\begin{center}
+\fbox{
+\begin{minipage}{\textwidth}
+{\footnotesize
+\begin{center}
+\begin{eqnarray}
+  \mbox{structure\_block} & ::= & \mbox{{\bf structure}\index{struct} structure\_definition}  \nonumber\\
+  	  &     & \mbox{\{ structure\_definition \} }  \label{systructure}\\[.3 cm]
+  \mbox{structure\_definition} & ::= & \mbox{struct\_specification
+{\bf ~:~} identifier\_list {\bf ~;~}}\label{systructdef}\\[.3 cm] 
+  \mbox{struct\_specification } & ::= & \mbox{single\_unit} \nonumber\\
+  	  &  |  & \mbox{linear\_struct} \nonumber\\
+          &  |  &  \mbox{matrix\_struct} \label{systructspec} \\[.3 cm]
+  \mbox{identifier\_list} & ::= & \mbox{identifier \{ {\bf ~,~} identifier \} } \label{syidlist}\\ \nonumber
+\end{eqnarray}
+\end{center}
+}
+\end{minipage}
+}
+\end{center}
+
+Eine Strukturdefinition besteht aus der Definition der
+Struktur\index{Struktur} und einer Liste von
+Bezeichnern\index{Bezeichner} (siehe Regel~\ref{systructdef}).  F"ur
+{\it jeden\/} Bezeichner\index{Bezeichner!mehrere f"ur eine Struktur}
+wird die Struktur einmal angelegt.
+
+Syntaxregel~\ref{systructspec} zeigt die m"oglichen Struktur-Typen:
+
+\begin{enumerate}
+\item ``single\_unit'' bezeichnet  die Spezifikation einer einzelnen
+Zelle. 
+
+\item Hinter ``linear\_struct'' verbirgt sich die Spezifikation eines
+Felds\index{Feld} von Zellen, die untereinander nach bestimmten
+Mustern verbunden sein k"onnen.
+  
+\item ``matrix\_struct'' steht f"ur die Spezifikation von
+Feldern\index{Feld} linearer Strukturen.\index{Struktur!Typen} 
+\end{enumerate}
+
+F"ur jede Struktur\index{Struktur!graphische Darstellung} mu"s bei
+ihrer Definition angegeben werden, wie sie w"ahrend der Simulation
+graphisch\index{graphische Darstellung!einer Struktur} dargestellt
+werden soll. Die Definitionen dieser Strukturtopologien folgen direkt
+auf die Spezifikation der Zellen, aus denen die Struktur besteht.
+Welche Strukturtopologien erlaubt sind und wie sie definiert werden,
+wird in Abschnitt~\ref{StrukturTopologie}\index{Topologie} erkl"art.
+
+
+
+\section{Einzelne Zellen}
+\label{unitstruct}
+
+F"ur eine Struktur,\index{Struktur!einzelne Zelle} die nur aus einer
+einzelnen Zelle besteht, m"ussen nur die Parameter dieser Zelle und
+ihre Position festgelegt werden.
+
+\begin{center}
+\fbox{
+\begin{minipage}{\textwidth}
+{\footnotesize
+\begin{center}
+\begin{eqnarray}
+  \mbox{single\_unit} & ::= & \mbox{{\bf unit}\index{unit} $[$struct\_unit\_type$]$ } \\ \nonumber
+                      &     & \mbox{$[$unit\_param\_list$]$
+position\_specification}\index{Position} \label{sysingleunit}\\[.3 cm]  
+  \mbox{struct\_unit\_type} & ::= & \mbox{{\bf of}\index{of} identifier} \label{systructunittype}\\ \nonumber
+\end{eqnarray}
+\end{center}
+}
+\end{minipage}
+}
+\end{center}
+
+Die explizite Definition von Parametern folgt
+Syntaxregel~\ref{syunitparamlist}. Die Syntax ist dieselbe wie bei der
+Typdefinition, es gibt aber semantische Unterschiede:
+
+\begin{enumerate}
+  
+\item Es gibt keine Parameter,\index{Parameter!einer Zelle!in
+Struktur} die definiert werden {\it m"ussen\/}. Es kann also z. B. die
+Definition der Aktivierungsfunktion\index{Aktivierungsfunktion}
+weggelassen werden.
+  
+\item F"ur alle nicht definierten Parameter\index{Parameter!einer
+Zelle!Standardwerte} einer Zelle werden von SNNS Standardwerte
+eingesetzt.  
+
+\item F"ur die Sites\index{Site} einer Zelle gibt es keinen
+Standardwert. Wird eine Zelle im Strukturdefinitionsblock ohne
+Sites\index{Site} definiert, wird angenommen, da"s sie auch keine hat.
+
+\item Die Menge der Sites einer Zelle darf grunds"atzlich nach der
+Strukturdefinition nicht mehr ver"andert werden. Alle anderen in der
+Strukturspezifikation 	festgelegten Parameterwerte
+\index{Parameter!einer Zelle!variable} d"urfen nachtr"aglich
+ver"andert werden. Darin unterscheiden sie sich von den in einer
+Typdefinition festgelegten Parameterwerten.
+\end{enumerate}
+
+Die Angabe eines Typs f"ur eine einzelne Zelle folgt
+Regel~\ref{systructunittype}. Es d"urfen auch nach der Angabe eines
+Zelltyps noch andere Parameter\index{Parameter!einer Zelle} definiert,
+aber keine in der Typdefinition festgelegten Merkmale "uberschrieben
+werden.
+
+Im Strukturdefinitionsblock des Beispiels\\
+
+\input{b_unit.tex}
+
+werden f"unf Zellen definiert. ``u1'', ``u2'' und ``u3'' sind Zellen
+mit der Aktivierungsfunktion ``Act\_Sum'' und der Ausgabefunktion
+``Out\_Identity''. Bei ``v1'' und ``v2'' bleiben die Funktionen
+undefiniert. SNNS setzt daf"ur beim Laden des Netzes Standardwerte
+ein. Diese Standardwerte sind ``Act\_Logistic'' f"ur die Aktivierungs-
+und ``Out\_Identity'' f"ur die Ausgabefunktion.
+
+Man beachte, da"s bei ``u1'', ``u2'' und ``u3'' die
+Aktivierungsfunktion nicht mehr "uberschrieben werden darf, da sie
+Merkmal des Zelltyps ``stdUnitType'' ist.
+
+
+
+\section{Eindimensionale Strukturen}
+\label{EinDimStrukturen}
+
+Eindimensionale Strukturen\index{Struktur!eindimensionale} sind
+Felder\index{Feld} von Zellen. Es gibt drei verschiedene Typen solcher
+linearer Strukturen (siehe Syntaxregel~\ref{sylinearstruct}):
+
+\begin{enumerate}
+  \item Einfache Felder\index{Feld!einer Struktur} von Zellen ohne
+Verbindungen\index{Verbindung} zwischen den Zellen (``cluster\_struct'')\index{cluster}
+dienen 
+	der Definition gr"o"serer Mengen gleichartiger Zellen.
+  \item Felder\index{Feld einer Struktur} von Zellen mit impliziten
+	Verbindungen,\index{Verbindung!implizite} die den in {\bf
+	Nessus} vordefinierten Topologieformen entsprechen, sind in
+	Regel~\ref{sylinearstruct} unter ``connected\_struct'' zusammmengefa"st. 
+  \item Teilnetze\index{Teilnetz}\index{Teilnetz}\index{Teilnetz!Sites} k"onnen als
+	selbst"andige 
+ 	{\bf Nessus}-Programme definiert und dann in das 
+	Netzwerk eingebunden werden (``subnet\_struct'').
+\end{enumerate}
+
+\begin{center}
+\fbox{
+\begin{minipage}{\textwidth}
+{\footnotesize
+\begin{center}
+\begin{eqnarray}
+  \mbox{linear\_struct} & ::= & \mbox{cluster\_struct}\index{cluster} \nonumber\\
+ 	  &  |  & \mbox{connected\_struct} \nonumber\\
+          &  |  & \mbox{subnet\_struct} \label{sylinearstruct}\\ \nonumber
+\end{eqnarray}
+\end{center}
+}
+\end{minipage}
+}
+\end{center}
+
+Einfache Felder und solche\index{Feld} mit Verbindungen
+\index{Verbindung} \index{Verbindung!implizite!Parameter} zwischen den
+Zellen unterscheiden sich auch durch die Angaben, die zu ihrer
+Definition gemacht werden m"ussen:
+
+\begin{itemize}
+  \item In beiden F"allen m"ussen die
+Feldl"ange\index{Feld!L"ange},die\index{L"ange!eines Felds} Parameterwerte der Zellen und 
+	die graphische\index{graphische Darstellung!einer Struktur}
+Darstellung der Struktur\index{Struktur!lineare} definiert werden.  
+  \item Bei Feldern\index{Feld} mit impliziten Verbindungen\index{Verbindung} m"ussen zus"atzlich noch
+ 	\begin{itemize}
+  	  \item die Verbindungsst"arke,\index{Verbindung!implizite!Gewicht}
+  	  \item die Zielsites\index{Site} der impliziten Verbindungen\index{Verbindung!implizite!Zielsite} und
+  	  \item in einigen F"allen die Verbindungsrichtung\index{Verbindung!implizite!Richtung}
+	\end{itemize}
+	angegeben werden.
+\end{itemize}
+
+
+\subsection{Einfache Felder von Zellen}
+\label{EinfacheFelder}
+
+Einfache Felder\index{Feld!einfaches!von Zellen} von Zellen werden,
+wie Syntaxregel~\ref{syclusterstruct} zeigt, durch das Schl"usselwort
+{\bf cluster}\index{cluster} definiert, dem die Anzahl der
+Feldelemente folgen mu"s.  Die L"ange eines Felds \index{L"ange!eines
+Felds} mu"s eine Konstante\index{Konstante!als Feldl"ange} vom Typ
+{\bf int}\index{int} sein.
+
+\begin{center}
+\fbox{
+\begin{minipage}{\textwidth}
+{\footnotesize
+\begin{center}
+\begin{eqnarray}
+  \mbox{cluster\_struct} & ::= & \mbox{{\bf cluster}\index{cluster}
+array\_size $[$unit\_specification$]$}  \nonumber \\ 
+                             &     & \mbox{topology\_specification} \label{syclusterstruct}\\[.3 cm]
+  \mbox{array\_size}\index{array!Gr"o"se eines}\index{L"ange!eines
+Felds}  & ::= & \mbox{``$[$'' expression ``$]$''} \label{syarraysize}\\[.3 cm] 
+  \mbox{unit\_specification} & ::= & \mbox{struct\_unit\_type $[$unit\_param\_list$]$} \nonumber \\
+                             &     & \mbox{$[$var\_param\_list$]$} \label{syunitspecification} \\ \nonumber
+\end{eqnarray}
+\end{center}
+}
+\end{minipage}
+}
+\end{center}
+
+
+
+Bei einfachen Feldern\index{Feld} m"ussen nur die Feldl"ange und die
+Merkmale der einzelnen Zellen des Felds definiert werden. Dabei gibt
+es zwei verschiedene Arten, diese Merkmale zu definieren:
+
+\begin{itemize}
+  \item Es k"onnen Parameterwerte\index{Parameter!einer Zelle!mit {\bf
+with}}  definiert werden, die f"ur alle Zellen des Felds\index{Feld} gleich sind. Das 
+	geschieht 
+	\begin{itemize}
+	  \item mittels einer Typangabe (gem"a"s Regel~\ref{systructunittype} f"ur
+	        ``struct\_unit\_type'') oder
+	  \item "uber eine explizite Definition der
+Parameterwerte\index{Parameter!einer Zelle!mit {\bf get}} (gem"a"s Regel~\ref{syunitparamlist} f"ur 
+	        ``unit\_param\_list''),
+	\end{itemize}
+	analog zur Definition der Parameterwerte einer einzelnen Zelle.
+  \item Die Parameter {\bf name}\index{name} und {\bf act}\index{act}
+	k"onnen mit Werten belegt
+	werden, die f"ur jede Zelle des Felds verschieden sind. Wie diese Definition erfolgt,
+	wird im n"achsten Abschnitt erkl"art.
+\end{itemize}
+
+So definiert zum Beispiel das Programmst"uck\\
+\begin{center}
+\begin{tabbing}
+{\bf typedef}\\
+~~{\bf unit}~{\bf with}~{\bf actfunc}~\verb&Act_Logistic&\verb&,&~~{\bf
+	outfunc}~\verb&Out_Identity&\verb&,&~~~~\\
+~~~~~~~~~~~~~~~~~~~~~{\bf iotype}~{\bf output}~~\verb&:&~\verb&outUnitType&\verb&;&\\ 
+{\bf structure}\\[.15cm]
+~~{\bf cluster}\verb&[&10\verb&]&~{\bf of}~\verb&outUnitType&~~{\bf with}~{\bf act}~1.0~{\bf plane}~{\bf at}~
+	\verb&(&1\verb&,&50\verb&)&~\verb&:&~\verb&u1&~\verb&,&~\verb&u2&~\verb&,&~\verb&u3&\verb&;&\\
+\end{tabbing}
+\end{center}
+
+ein die drei Felder ``u1'', ``u2'' und ``u3'' aus aus je zehn Zellen
+des Zelltyps ``outUnitType''.
+
+\subsubsection{Einzelbelegung der Parameterwerte der Zellen eines
+Felds}
+\index{Feld}
+
+Die Belegung von Parametern mit unterschiedlichen Werten f"ur jede
+Zelle eines Felds erfolgt nach Syntaxregel~\ref{syvarparamlist} in
+einer Liste von Definitionen, die mit dem Schl"usselwort {\bf get}
+\index{get} beginnt. Jede solche Definition legt die Werte f"ur ein
+bestimmtes Merkmal der Zellen fest (Regel~\ref{syvarparameter}).
+\index{Parameter!einer Zelle!mit {\bf get}}
+
+Die Merkmale, die so definiert werden d"urfen, sind
+\begin{itemize}
+  \item {\bf name}:\index{name} der Name der Zelle und
+  \item {\bf act}:\index{act} der anf"angliche
+Aktivierungswert\index{Aktivierung} der Zelle. 
+\end{itemize}
+
+F"ur jedes so definierte Merkmal wird ein Ausdruck nach
+Syntaxregel~\ref{syvarparameter} geschrieben. Dabei wird vor dem
+Schl"usselwort {\bf from}\index{from} das Schl"usselwort des Merkmals
+angegeben, dahinter ein Feld,\index{Feld} das die Werte des Merkmals
+f"ur die einzelnen Zellen enth"alt. Dieses Feld kann auf verschiedene
+Arten angegeben werden (siehe Regel~\ref{syelementgroup}):
+
+\begin{itemize}
+  \item Es kann ein konstantes Feld\index{Feld} angegeben werden, wie in Syntaxregel~\ref{syarray}
+	beschrieben. Die Werte k"onnen insbesondere, wie auch bei der Definition einer
+	Feldkonstanten, aus einer Datei\index{Datei!explizite Parameterwerte} eingelesen werden.
+  \item Es kann der Name einer bereits definierten Feldkonstanten\index{Feld} angegeben werden.
+  \item Es kann ein zusammenh"angender Bereich\index{Bereich!von Feldelementen} von
+	Elementen einer bereits definierten Feldkonstanten angegeben werden. 
+\end{itemize}
+
+ Die L"ange des so definierten Wertefelds\index{Feld} mu"s mit der
+L"ange des Zellenfelds\index{L"ange!eines Felds} "ubereinstimmen.
+Werden verschiedene (unterschiedlich benannte)
+Strukturen\index{Struktur!explizite Parameter} des so definierten
+Zellenfelds erzeugt, so sind diese alle identisch.
+
+\begin{center}
+\fbox{
+\begin{minipage}{\textwidth}
+{\footnotesize
+\begin{center}
+\begin{eqnarray}
+    \mbox{var\_param\_list} & ::= & \mbox{{\bf get}\index{get}
+var\_parameter\index{Parameter!einer Zelle!mit {\bf get}} \{ {\bf ~,~}
+var\_parameter \}}\label{syvarparamlist}\\[.3cm]  
+  \mbox{var\_parameter} & ::= & \mbox{ parameter\_key {\bf
+from}\index{from} element\_group}\label{syvarparameter}\\[.3cm] 
+  \mbox{parameter\_key} & ::= & \mbox{ {\bf act}\index{act} $|$ {\bf
+name}\index{name} }\label{syparameterkey}\\[.3cm] 
+  \mbox{element\_group} & ::= & \mbox{array\_constant} \nonumber \\
+                        &  |  & \mbox{identifier}\nonumber\\
+                        &  |  & \mbox{field\_range}\label{syelementgroup} \\[.3cm]
+  \mbox{field\_range}   & ::= & \mbox{variable}\index{Variable} \nonumber\\
+                        &  |  & \mbox{variable\index{Variable} ``$[$''
+expression {\bf \verb&..&} expression ``$]$''}  
+						 \label{syfieldrange} \\ \nonumber
+\end{eqnarray}
+\end{center}
+}
+\end{minipage}
+}
+\end{center}
+
+Abbildung~\ref{BspStructCluster} zeigt die Definition eines Netzes,
+bestehend aus $4 * 100$ Ausgabe- und $4 * 50$ Eingabezellen. 
+
+\begin{figure}[htb]
+  \begin{center}
+    \mbox{
+      \begin{minipage}{\textwidth}
+           \begin{tabbing}\=nn\=\kill
+	   \input{b_clust.tex}
+           \end{tabbing}
+      \end{minipage}
+    }
+    \caption{\label{BspStructCluster} Beispiel: Felder einfacher Zellen}
+  \end{center}
+\end{figure}
+
+
+
+
+\subsection{Felder mit impliziten Verbindungen}
+\label{StructFelder}
+
+Felder\index{Feld} mit impliziten Verbindungen\index{Verbindung} sind
+Felder von Zellen mit einem vordefinierten Muster von Verbindungen
+zwischen diesen Zellen. Die Topologie der internen Verbindungen des
+Felds wird durch das dazugeh"orige Schl"usselwort festgelegt. Es gibt
+zwei M"oglichkeiten, die Verbindungen innerhalb des Felds zu
+definieren:
+
+\begin{enumerate}
+\item Man w"ahlt eine der vordefinierten Topologien von
+Verbindungen. \index{Verbindung!implizite!vordefinierte Topologie}
+
+\item Man definiert eine {\bf map}-Konstante,\index{map} die {\bf
+int} \index{int} auf {\bf int} abbildet. Es k"onnen dann alle die
+Feldelemente miteinander verbunden werden, zwischen deren Indizes die
+durch die {\bf map}-Konstante\index{map} definierte
+Relation\index{Relation!in Topologiedefinition} existiert.
+\end{enumerate}
+
+Folgende  Topologieformen sind in  {\bf Nessus} vordefiniert:
+
+\begin{itemize} 
+\index{Verbindung!implizite!star} 
+\index{Topologieform!star}
+\index{Topologieform!ring}  
+\index{Topologieform!chain}  
+\index{Topologieform!clique}
+\index{Verbindung!implizite!clique}
+\index{Verbindung!implizite!chain}
+\index{Verbindung!implizite!ring}
+  
+\item {\bf clique}\index{clique} ist ein Feld von Zellen, die
+vollst"andig untereinander verbunden sind.
+  
+\item {\bf chain}\index{chain} ist ein Feld von Zellen mit
+impliziten Verbindungen\index{Verbindung} von der ersten zur zweiten
+Zelle, der zweiten zur dritten, usw. Es gibt aber keine Verbindung von
+der letzten zur"uck zur ersten Zelle.
+
+\item {\bf ring}\index{ring} ist ein Feld\index{Feld} von Zellen mit
+impliziten Verbindungen wie bei dem Typ {\bf chain},\index{chain} aber
+mit der R"uckw"artsverbindung von der letzten zur ersten Zelle
+(geschlossene Kette).
+  
+\item {\bf star}\index{star} ist ein Feld von Zellen mit impliziten
+sternf"ormigen Verbindungen\index{Verbindung} einer ausgezeichneten
+Zelle zu allen anderen.
+\end{itemize}
+
+Die Topologieformen sind in Abbildung~\ref{StructTopolBild}
+dargestellt. Die Felder bestehen aus je vier Zellen und die
+Verbindungen\index{Verbindung} sind vorw"artsgerichtet.
+
+\begin{figure}[htbp]
+  \begin{center}
+     \footnotesize
+	\input{f_struct.tex}
+    \caption{\label{StructTopolBild} Vordefinierte Verbindungstopologien}
+  \end{center}
+\end{figure}
+
+\begin{center}
+\fbox{
+\begin{minipage}{\textwidth}
+{\footnotesize
+\begin{center}
+\begin{eqnarray}
+  \mbox{connected\_struct} & ::= & \mbox{chained\_struct}\index{chain} \nonumber\\
+          &  |  & \mbox{clique\_struct}\index{clique} \nonumber\\
+          &  |  & \mbox{star\_struct} \nonumber\\
+          &  |  & \mbox{map\_struct} \label{syconnectedstruct}\\ \nonumber
+\end{eqnarray}
+\end{center}
+}
+\end{minipage}
+}
+\end{center}
+
+
+\subsubsection{Die Topologieformen chain und ring}
+\index{Verbindung!implizite!chain}
+\index{Verbindung!implizite!ring}
+\index{Topologieform!chain}
+\index{Topologieform!ring}
+
+Bei den beiden Topologieformen {\bf chain}\index{chain} und {\bf
+ring}\index{ring} m"ussen zus"atzlich zur Spezifikation der Zellen
+noch folgende Angaben "uber die Verbindungen gemacht werden (siehe
+Syntaxregel~\ref{sychainedstruct}):
+
+\begin{itemize}
+  \item Die St"arke der Verbindungen zwischen den Zellen kann  eine {\bf float}-Konstante\index{float} oder das
+	Schl"usselwort {\bf random}\index{random} sein (siehe Regel~\ref{syrandomexpression}).
+  \item Hinter dem Schl"usselwort {\bf through}\index{through} kann der Typname f"ur die Site der\index{Site} Zielzellen, an
+	der die Verbindungen ankommen, angegeben werden. 
+  \item Danach kann noch die Richtung der Verbindung\index{Verbindung} festgelegt werden (siehe Regel~\ref{sydirection}).
+\end{itemize}
+
+\begin{center}
+\fbox{
+\begin{minipage}{\textwidth}
+{\footnotesize
+\begin{center}
+\begin{eqnarray}
+  \mbox{chained\_struct} & ::= & \mbox{connection\_key array\_size $[$unit\_specification$]$ } \nonumber\\
+                         &     & \mbox{topology\_specification  $[$direction$]$ } \nonumber\\
+                         &     & \mbox{$[${\bf by}\index{by}
+expression\_or\_random$]$ $[$site\_specification$]$}  \label{sychainedstruct}\\[.3 cm]
+  \mbox{site\_specification} & ::= & \mbox{{\bf through}\index{through} identifier} \label{sysitespecification}\\[.3 cm]
+  \mbox{direction} & ::= & \mbox{{\bf \verb&->&}}\index{forward!Verbindung!Richtung einer}~~~|~~~
+			\mbox{{\bf \verb&<-&}}\index{backward!Verbindung!Richtung einer}~~~|~~~\mbox{{\bf
+\verb&<->&}}\index{bidirectional!Verbindung!Richtung einer} \label{sydirection}\\[.3 cm] 
+  \mbox{connection\_key} & ::= & \mbox{{\bf chain}} \index{chain}~~~|~~~ \mbox{{\bf ring}}\index{ring}\index{ring} \label{syconnectionkey} \\  \nonumber
+\end{eqnarray}
+\end{center}
+}
+\end{minipage}
+}
+\end{center}
+
+Diese Angaben "uber die Verbindungen zwischen den Elementen des Felds
+d"urfen entfallen. Wenn das Gewicht der Verbindung nicht angegeben
+wird, wird bei der "Ubersetzung der Standardwert 0.0 eingesetzt.
+
+{\bf \verb&->&} gibt an, da"s die impliziten Verbindungen in
+Vorw"artsrichtung definiert werden sollen. Analog dazu definiert {\bf
+\verb&<-&} r"uckw"artsgerichtete und {\bf \verb&<-&} bidirektionale
+Verbindungen.
+
+Fehlt die Angabe der Verbindungsrichtung,\index{Verbindung} wird der
+Standardwert {\bf \verb&->&} eingesetzt. Die Standardwerte f"ur
+Verbindungsgewicht und -richtung sind in {\bf Nessus} definiert.
+
+Die Angabe der Site der\index{Site} Zielzelle, an der die Verbindung
+ankommt, mu"s genau dann fehlen, wenn die Zellen des Felds keine
+Sites\index{Site} haben. Es ist ein Fehler, wenn Verbindungen zu
+nichtexistenten Sites\index{Site} definiert oder bei vorhandenen
+Sites\index{Site} die Zielsites nicht angegeben werden.
+\index{Verbindung!implizite!chain} \index{Verbindung!implizite!ring}
+
+"Andert man das vorherige Beispiel ab zu\\
+\begin{tabbing}
+{\bf typedef}\\
+~~{\bf unit}~{\bf with}~{\bf actfunc}~\verb&Act_Logistic&\verb&,&~~{\bf
+	outfunc}~\verb&Out_Identity&\verb&,&\\
+~~{\bf iotype}~{\bf output}~~\verb&:&~\verb&outUnitType&\verb&;&\\[.15cm]
+{\bf structure}\\
+~~{\bf ring}\verb&[&10\verb&]&~{\bf of}~\verb&outUnitType&~~{\bf with}~{\bf act}~1.0~{\bf plane}~{\bf at}~
+	\verb&(&1\verb&,&50\verb&)&~\verb&->&~{\bf by random}~\verb&:&~\verb&r1&~\verb&,&\verb&;&\\
+~~{\bf ring}\verb&[&10\verb&]&~{\bf of}~\verb&outUnitType&~~{\bf with}~{\bf act}~1.0~{\bf plane}~{\bf at}~
+	\verb&(&1\verb&,&50\verb&)&~\verb&<-&~{\bf by random}~\verb&:&~\verb&r2&\verb&;&\\
+\end{tabbing}
+werden zwei Ringe ``r1'' und ``r2'' aus je zehn Zellen definiert. Die
+Zellen von ``r1'' sind so miteinander verbunden, da"s gilt\\
+\centerline{r1$[$0$]$ \verb&->& r1$[$1$]$ \verb&->& r1$[$2$]$
+\verb&->& \ldots \verb&->& r1$[$9$]$ \verb&->& r1$[$0$]$.} Die Zellen
+von ``r2'' sind gerade umgekehrt miteinander verbunden. Es gilt\\
+\centerline{r1$[$9$]$ \verb&->& r1$[$8$]$ \verb&->& r1$[$7$]$
+\verb&->& \ldots \verb&->& r1$[$0$]$ \verb&->& r1$[$9$]$.}
+
+\subsubsection{Die Topologieform {\bf clique}}
+
+\index{Verbindung!implizite!clique} \index{Topologieform!clique} Wie
+Syntaxregel~\ref{sycliquestruct} zeigt, ist die Definition der
+Topologieform {\bf clique}\index{clique} der der Form {\bf
+chain}\index{chain} oder {\bf ring}\index{ring} sehr "ahnlich. Der
+einzige Unterschied: da bei der Form {\bf clique}\index{clique} jede
+Zelle mit allen anderen Zellen des Felds au"ser sich selbst verbunden
+wird, sind alle Verbindungen\index{Verbindung} von vorneherein
+bidirektional.\index{bidirectional} Die Richtung der Verbindung darf
+bei der Definition einer Clique nicht angegeben werden.
+
+\begin{center}
+\fbox{
+\begin{minipage}{\textwidth}
+{\footnotesize
+\begin{center}
+\begin{eqnarray}
+  \mbox{clique\_struct} & ::= & \mbox{{\bf clique}\index{clique} array\_size $[$unit\_specification$]$  } \nonumber\\
+     &     & \mbox{topology\_specification $[${\bf by}\index{by} expression\_or\_random$]$\index{random} } \nonumber\\
+     &     & \mbox{$[$site\_specification$]$} \label{sycliquestruct}\\ \nonumber 
+\end{eqnarray}
+\end{center}
+}
+\end{minipage}
+}
+\end{center}
+
+\index{Verbindung!implizite!clique}
+
+
+
+
+\subsubsection{Die Topologieform {\bf star}}
+
+\index{Verbindung!implizite!star} \index{Topologieform!star} Die
+Topologieform {\bf star}\index{star} wird so definiert, wie die Formen
+{\bf chain}\index{chain} und {\bf ring},\index{ring} aber es mu"s noch
+angegeben werden, welches Element des Felds das Zentrum -- also die
+Zelle, die mit allen anderen verbunden wird -- werden soll (siehe
+Syntaxregel~\ref{systarstruct}). Das Zentrum wird "uber den Index des
+entsprechenden Feldelements definiert. Der Ausdruck nach {\bf
+center}\index{center} in Syntaxregel~\ref{systarcenter} mu"s eine
+Konstante\index{Konstante!als Zentrum einer Struktur} vom Typ {\bf
+int} sein.
+
+Man beachte dabei, da"s alle Felder\index{Feld} in {\bf Nessus} mit
+dem Index 0 beginnen !
+
+Wird das Zentrum der Struktur\index{Struktur!star} nicht definiert,
+wird das {\it erste\/} Feldelement als Zentrum genommen, also das
+Feldelement mit Index 0.
+
+\index{Verbindung!implizite!star}
+\begin{center}
+\fbox{
+\begin{minipage}{\textwidth}
+{\footnotesize
+\begin{center}
+\begin{eqnarray}
+  \mbox{star\_struct} & ::= & \mbox{{\bf star}\index{star} array\_size $[$unit\_specification$]$ topology\_specification} \nonumber\\
+                         &     & \mbox{$[$direction$]$ $[${\bf by}\index{by} expression\_or\_random$]$\index{random} $[$site\_specification$]$}  \nonumber\\
+                         &     & \mbox{$[$star\_center$]$}\index{center} \label{systarstruct}\\
+  \mbox{star\_center} & ::= & \mbox{{\bf center}\index{center} expression} \label{systarcenter} \\ \nonumber 
+\end{eqnarray}
+\end{center}
+}
+\end{minipage}
+}
+\end{center}
+
+Durch das Programmst"uck\\
+\begin{tabbing}
+{\bf typedef}\\[.15cm]
+~~{\bf unit}~{\bf with}~{\bf actfunc}~\verb&Act_Logistic&\verb&,&~~{\bf
+	outfunc}~\verb&Out_Identity&\verb&,&~\verb&:&~\verb&UnitType&\verb&;&\\[.3cm] 
+{\bf structure}\\[.15cm]
+~~{\bf star}\verb&[&5\verb&]&~{\bf of}~\verb&UnitType&~~{\bf with}~{\bf ellipse}(5,5)~{\bf at}~
+	\verb&(&3\verb&,&3\verb&)&~\verb&->&~{\bf by random}~{\bf
+center}~0~~\verb&:&~\verb&s1&~\verb&,&\verb&;&\\[.15cm] 
+~~{\bf star}\verb&[&5\verb&]&~{\bf of}~\verb&UnitType&~~{\bf with}~{\bf plane}~{\bf at}~
+	\verb&(&1\verb&,&50\verb&)&~\verb&<-&~{\bf by random}~{\bf
+center}~2~~\verb&:&~\verb&s2&\verb&;&\\[.15cm]
+\end{tabbing}
+
+werden die zwei in Abbildung~\ref{StarBild} dargestellten Strukturen
+definiert.
+
+\begin{figure}[htbp]
+  \begin{center}
+    \mbox{
+      \begin{minipage}{\textwidth}
+        \begin{center}
+	   \input{f_star.tex}
+	\end{center}
+      \end{minipage}
+    }
+    \caption{\label{StarBild} Beispiel: Strukturen des Typs {\bf star}}
+  \end{center}
+\end{figure}
+
+
+\subsubsection{Felder mit unregelm"a"siger Topologie}
+\label{mapstruct}
+
+\index{Verbindung!implizite!irregular} \index{Topologieform!irregular}
+Entspricht das Muster der Verbindungen\index{Verbindung} zwischen den
+Elementen eines Felds einer {\bf map}-Konstanten, \index{map}
+\index{Konstante!Relation!als irregular-Topologie} so kann die
+Relation\index{Relation!als Verbindungsmuster} direkt zur Definition
+der impliziten Verbindungen innerhalb der Struktur herangezogen
+werden.
+
+Sei {\it arrUnit\/} ein Feld von Zellen und {\it intMap\/} eine {\bf map}-Konstante\index{map} vom Typ {\bf int to int}. Dann
+ist die Semantik dieser Felddefinition folgende: 
+\begin{quote}
+  F"ur zwei Indizes x und y  (Typ {\bf int}\index{int} und $\geq$ 0) gilt: \\
+  $\exists$ Verbindung von {\it arrUnit\/}$[$x$]$~ 
+	nach~{\it arrUnit\/}$[$y$]$ $\Longleftrightarrow$~x~{\it intMap\/}~y.
+\end{quote}
+
+Man kann also Felder\index{Feld} von Zellen mit unregelm"a"siger
+interner Topologie sehr bequem dadurch definieren, da"s man eine {\bf
+map}-Konstante\index{map} definiert, die diese Topologie darstellt.
+
+\index{Verbindung!implizite!irregular}
+\begin{center}
+\fbox{
+\begin{minipage}{\textwidth}
+{\footnotesize
+\begin{center}
+\begin{eqnarray}
+  \mbox{map\_struct} & ::= & \mbox{{\bf irregular}\index{irregular} array\_size $[$unit\_specification$]$ } \nonumber \\
+                         &     & \mbox{topology\_specification  $[$direction$]$}  \nonumber\\
+                         &     & \mbox{ $[${\bf by}\index{by} expression\_or\_random$]$ $[$site\_specification$]$ }\index{random}\nonumber\\
+                         &     & \mbox{$[$map\_specification$]$} \label{symapstruct}\\
+  \mbox{map\_specification} & ::= & \mbox{{\bf map}\index{map} identifier} \label{symapspec} \\ \nonumber 
+\end{eqnarray}
+\end{center}
+}
+\end{minipage}
+}
+\end{center}
+\index{Verbindung!implizite!irregular}
+
+\begin{figure}[htb]
+  \begin{center}
+    \mbox{
+      \begin{minipage}{\textwidth}
+        \begin{center}
+	   \input{f_map.tex}
+	\end{center}
+      \end{minipage}
+    }
+    \caption{\label{MapStructBild} Beispiel: Gerichteter Graph}
+  \end{center}
+\end{figure}
+
+%\clearpage
+
+Soll zum Beispiel der in Abbildung~\ref{MapStructBild} gezeigte
+gerichtete Graph durch ein Netz dargestellt werden, kann man dieses
+durch das nachfolgende Programmst"uck definieren.
+\begin{tabbing}bbbb\=bbbb\=bbbb\=bbbb\=bbbb\=bbbb\=\kill
+{\bf const}\\
+~~\verb&graph&~\verb&=&~{\bf map}~{\bf int}~{\bf to}~{\bf int}\verb&:&\\
+~~~~~~~~~~0~{\bf to}~\verb&[&1\verb&,&~2\verb&,&~3\verb&,&~7\verb&]&\verb&,&\\
+~~~~~~~~~~\verb&[&1\verb&,&7\verb&]&~{\bf to}~5\verb&,&\\
+~~~~~~~~~~7~{\bf to}~\verb&[&5\verb&,&~6\verb&]&\verb&,&\\
+~~~~~~~~~~\verb&[&2\verb&,&~3\verb&,&~5\verb&,&~6\verb&,&~7\verb&]&~{\bf to}~4\verb&;&\\[.15cm]
+{\bf structure}\\
+~~{\bf irregular}\verb&[&8\verb&]&~{\bf with}~{\bf act}~{\bf random}~\\
+~~~~{\bf ellipse}\verb&(&4\verb&,&4\verb&)&~{\bf
+at}\verb&(&4\verb&,&4\verb&)&~\verb&->&~{\bf by}~$0.5$~{\bf map}~\verb&graph&~\verb&:&~\verb&net&\verb&;&\\
+\end{tabbing}
+Man beachte dabei, da"s die Verbindung von net$[$7$]$ nach net$[$5$]$
+durch die {\bf map}-Konstante nur einmal definiert wird, obwohl sich
+die Teilrelationen graph$[$1$]$ und graph$[$2$]$ "uberschneiden.
+
+
+
+\subsection{Teilnetze}
+\label{subnetstruct} \label{Teilnetze}
+
+ \index{Topologieform!subnet}
+Es ist in {\bf Nessus} m"oglich, ein Netz  in einzelne Teilnetze\index{Teilnetz}\index{Teilnetz} zu zerlegen, um diese in
+eigenst"andigen Programmen zu definieren, zu "ubersetzen und zu testen. Das hat unter anderem
+folgende Vorteile: 
+\begin{itemize}
+  \item Ein gro"ses komplexes Netz kann nach den Prinzipien des ``top-down''-Designs und
+	``information-hiding'' definiert werden. Diese
+Entwurfsprinzipien haben sich in der Programmierung 
+	seit langem bew"ahrt. Die Vorteile der Anwendung dieser Entwurfsprinzipien sind beim Entwurf
+	konnektionistischer Modelle im Prinzip dieselben, wie bei der Programmierung anderer
+	Systeme: 
+	\begin{itemize}
+	  \item bessere "Uberschaubarkeit des Modells,
+	  \item klar definierte Schnittstellen zwischen einzelnen Komponenten (Teilnetzen),
+	  \item M"oglichkeit, eine Teilnetzdefinition\index{Teilnetz} mehrfach in ein Netz einzubinden.
+	\end{itemize}
+  \item Teilnetze sind ein sehr gutes Hilfsmittel, um die M"oglichkeiten der Sprache zu erweitern.
+	So kann man Teilnetze beliebiger Topologien entwerfen und in Netze einbinden.
+  \item Man kann sich Sammlungen von Netzen zusammenstellen, die bestimmte Funktionen erf"ullen.
+\end{itemize}
+
+Teilnetze gelten in {\bf Nessus} als Struktur. Sie werden also im
+Strukturdefinitionsblock\index{Struktur!Teilnetz} in das Programm
+eingebunden. Der logische Name der Datei,\index{Datei!als Teilnetz} in
+der sich das {\bf Nessus}-Programm befindet, das als
+Teilnetz\index{Teilnetz} fungieren soll, mu"s zuvor als
+Konstante\index{Konstante!Teilnetzdatei} definiert worden sein (siehe
+Syntaxregel~\ref{syfiletype}).
+
+\begin{center}
+\fbox{
+\begin{minipage}{\textwidth}
+{\footnotesize
+\begin{center}
+\begin{eqnarray}
+  \mbox{subnet\_struct} & ::= & \mbox{{\bf subnet}\index{subnet} identifier position\_specification }\nonumber\\
+                        &     & \mbox{$[$parameter\_specification$]$}\index{Parameter} \label{sysubnetstruct}\\[.3 cm]
+  \mbox{parameter\_specification}\index{Parameter!"ubergabe an Teilnetz} & ::= & \mbox{{\bf var}\index{param} parameter\_value}\label{syparamspec}\\[.3 cm]
+  \mbox{parameter\_value} & ::= & \mbox{``$[$''~expression \{ {\bf ~,~} expression \}~``$]$''}\label{syparamval}\\ \nonumber
+\end{eqnarray}
+\end{center}
+}
+\end{minipage}
+}
+\end{center}
+
+Der Ausdruck ``parameter\_specification''\index{Parameter!"Ubergabe an
+Teilnetz} ist optional. Es gibt die M"oglichkeit, an Programme zur
+"Ubersetzungs- bzw. an Teilnetze zur Einbindungszeit Parameter zu
+"ubergeben. Diese Parameter werden in der
+Kopfzeile\index{Kopfzeile!des Programms} des Programms definiert.
+Dient dieses Programm dann als Definition eines Teilnetzes, so wird in
+``parameter\_specification''\index{Parameter!"Ubergabe an Teilnetz}
+angegeben, welche Werte die Parameter annehmen sollen.
+
+\begin{figure}[htbp]
+\begin{center}
+%    \mbox{
+      \begin{minipage}{\textwidth}
+%	\vspace{4cm}
+        \screendump{0.5}{zug.ps}
+      \end{minipage}
+%    }
+    \caption{\label{SubnetStructBild} Beispiel: Netz f"ur Zugverbindungen}
+  \end{center}
+\end{figure}
+
+So besteht zum Beispiel das in Abbildung~\ref{SubnetStructBild}
+gezeigte Netz, das bestimmte Zugverbindungen in Baden-W"urttemberg und
+Bayern darstellen soll, aus zwei "ahnlichen Komponenten. Diese beiden
+Teilgraphen kann man durch das folgende Teilnetz definieren:
+
+\begin{center}
+    \mbox{
+      \begin{minipage}{\textwidth}
+           \begin{tabbing}\=nn\=\kill
+{\bf network}~\verb&mapBsp&\verb&(&\verb&size&\verb&,&~\verb&cities&\verb&,&~\verb&sMap&\verb&)&\verb&;&\\
+{\bf const}\\
+~~\verb&cityNames&~\verb&=&~{\bf file}~\verb&cities&~{\bf of}~{\bf string}\verb&;&\\
+~~\verb&cityList&~\verb&=&~\verb&[&\verb&cityNames&\verb&]&\verb&;&\\
+~~\verb&stateMap&~\verb&=&~{\bf file}~\verb&sMap&~{\bf of}~{\bf map}\verb&;&\\
+~~\verb&graph&~\verb&=&~{\bf map}~{\bf int}~{\bf to}~{\bf int}\verb&:&\\
+%~~~~~~~~~~{\bf get}~\verb&(&\verb&"to"&\verb&,&~\verb&"&$\backslash$n\verb&"&\verb&)&~{\bf from}~\verb&stateMap&\verb&;&\\
+~~~~~~~~~~{\bf get}{\tt ("`to"`, "`$\backslash$n"`)}~{\bf from}~\verb&stateMap&\verb&;&\\
+{\bf structure}\\
+~~{\bf irregular}\verb&[&\verb&size&\verb&]&~{\bf with}~{\bf act}~$0.6935$~{\bf get}~{\bf name}~{\bf from}~\verb&cityList&\\
+~~~~{\bf ellipse}\verb&(&4\verb&,&4\verb&)&~{\bf at}\verb&(&4\verb&,&4\verb&)&~\verb&->&~{\bf by}~$0.5$~{\bf map}~\verb&graph&~\verb&:&~\verb&net&\verb&;&\\
+{\bf begin}\\
+{\bf end}\verb&.&\\
+           \end{tabbing}
+      \end{minipage}
+    }
+  \end{center}
+
+Dieses Teilnetzprogramm erwartet als Parameter 
+
+\begin{itemize}
+  \item eine ganze Zahl (Anzahl der Zellen in der Struktur),
+  \item den Namen einer Datei, die Zeichenketten - hier die Namen der St"adte - enth"alt, und
+  \item den Namen der Datei, in der die {\bf map}-Konstante f"ur die Verbindungsdefinition steht.
+\end{itemize}
+Das ganze Netz wird dann durch folgendes Programm erzeugt:
+\begin{tabbing}bbbb\=bbbb\=bbbb\=bbbb\=bbbb\=bbbb\=\kill
+{\bf network}~\verb&main&\verb&(&\verb&)&\verb&;&\\
+{\bf const}\\
+~~\verb&graphNetz&~\verb&=&~{\bf file}~\verb&"graphNetz.n"&~{\bf of}~{\bf subnet}\verb&;&\\[.15cm]
+{\bf structure}\\
+~~{\bf subnet}~\verb&gNetz&~{\bf at}\verb&(&0\verb&,&~0\verb&)&~{\bf var}~\verb&[&8\verb&,&~\verb&"Baden-Wuertt.dat"&\verb&,&~\verb&"Baden-Wuertt.map"&\verb&]&\verb&:&~\verb&BW_graph&\verb&;&\\
+~~{\bf subnet}~\verb&gNetz&~{\bf at}\verb&(&3\verb&,&~0\verb&)&~{\bf var}~\verb&[&6\verb&,&~\verb&"Bayern.dat"&\verb&,&~\verb&"Bayern.map"&\verb&]&~\verb&:&~\verb&Bayern_graph&\verb&;&\\[.15cm]
+{\bf begin}\\
+{\bf end}\verb&.&
+\end{tabbing}
+
+Dabei m"ussen \verb&"Baden-Wuertt.dat"& bzw. \verb&"Bayern.dat"&
+Dateien sein, die die Namen der St"adte enthalten, und
+\verb&"Baden-Wuertt.map"& bzw. \verb&"Bayern.map"& die {\bf
+map}-Konstante, die die Zugverbindungen beschreibt.  Der Mechanismus
+der Parameter"ubergabe und der Parameterdeklaration
+\index{Parameter!"Ubergabe an Teilnetz} in der Kopfzeile eines
+Programms wird in Kapitel~\ref{Parameter} vorgestellt.
+
+
+
+\section{Felder eindimensionaler Strukturen}
+\label{Matrizen}
+
+Es gibt in {\bf Nessus} noch die M"oglichkeit, Felder der bisher
+vorgestellten Strukturen\index{Struktur!zweidimensionale} zu
+definieren. Dies ist dann sinnvoll, wenn man eine gr"o"sere Anzahl
+regelm"a"siger Strukturen definieren will, ohne jede dieser Strukturen
+mit einem eigenen Bezeichner\index{Bezeichner} versehen zu m"ussen.
+Wie Syntaxregel~\ref{symatrixstruct} zeigt, wird dazu der
+Strukturdefinition der Ausdruck {\bf array\index{array!einer Struktur}
+of} vorangestellt.
+
+\begin{center}
+\fbox{
+\begin{minipage}{\textwidth}
+{\footnotesize
+\begin{center}
+\begin{eqnarray}
+  \mbox{matrix\_struct} & ::= & \mbox{{\bf array} array\_size {\bf of}\index{of}
+               linear\_struct}\label{symatrixstruct}\\ \nonumber
+\end{eqnarray}\index{array}
+\end{center}
+}
+\end{minipage}
+}
+\end{center}
+
+Die Elemente eines solchen zweidimensionalen Felds sind
+eindimensionale Felder von Zellen. Variable, die diese Feldelemente
+als Wert annehmen sollen, m"ussen deshalb vom Typ {\bf array of unit}
+sein (siehe auch Kapitel~\ref{Variablendeklarationen}).
+
+Zum Beispiel erzeugt das Programmst"uck
+\begin{tabbing}bbbb\=bbbb\=bbbb\=bbbb\=bbbb\=bbbb\=\kill
+~~{\bf array}\verb&[&4\verb&]&~{\bf of}~{\bf star}\verb&[&6\verb&]&~{\bf with}~{\bf
+act}~$0.7$~{\bf ellipse}\verb&(&3\verb&,&4\verb&)&~{\bf at}\verb&(&2\verb&,&2\verb&)&~\verb&->&~\verb&:&~\verb&netUnits&\verb&;&\\
+\end{tabbing}
+das in Abbildung~\ref{ArrayStar} dargestellte Netz.
+
+\begin{figure}[htbp]
+  \begin{center}
+%    \mbox{
+      \begin{minipage}{\textwidth}
+%	\vspace{5cm}
+        \screendump{0.5}{linear.ps}
+      \end{minipage}
+%    }
+    \caption{\label{ArrayStar} Beispiel: Feld linearer Strukturen}
+  \end{center}
+\end{figure}
+
+
+
+\section{Die graphische Darstellung von Strukturen}
+\label{StrukturTopologie}
+
+F"ur jede Struktur\index{Struktur!graphische Darstellung} mu"s bei
+ihrer Definition angegeben werden, wie sie w"ahrend der Simulation
+graphisch\index{graphische Darstellung!einer Struktur} dargestellt
+werden soll.  Die Definitionen dieser Strukturtopologien folgen direkt
+auf die Spezifikation der Zellen, aus denen die Struktur besteht. Die
+vollst"andige Spezifikation der graphischen\index{graphische
+Darstellung!einer Struktur} Darstellung besteht aus zwei Komponenten,
+n"amlich
+
+\begin{itemize}
+  \item der Angabe, welche Form die Struktur\index{Struktur!graphische Form} haben soll und
+  \item der Angabe der Stelle der graphischen Benutzeroberf"ache, an der sie dargestellt
+ 	werden soll.
+\end{itemize}
+
+Dabei darf bei Teilnetzen (Struktur {\bf subnet}) und einzelnen Zellen
+(Struktur {\bf unit}) die Form der Struktur nicht angegeben werden.
+Eine einzelne Zelle ben"otigt keine Angabe einer Form, da sie immer
+als einzelner Punkt dargestellt wird, und ein Teilnetz enth"alt in dem
+{\bf Nessus}-Programm, durch das es definiert wird, schon die
+Formdefinitionen der Strukturen\index{Struktur!graphische Darstellung}
+- deshalb ist es falsch, diese f"ur das gesamte Teilnetz nochmals
+festlegen zu wollen.
+
+Die m"oglichen graphischen\index{graphische Darstellung!einer
+Struktur} Darstellungsformen werden schon aus
+Syntaxregel~\ref{sytopologyspecification} deutlich. Es gibt drei
+Formen:
+\begin{description}
+  \item[{\bf plane}:~~~]\index{plane} Durch dieses Schl"usselwort wird angegeben, da"s die Zellen alle
+	in einer Ebene dargestellt werden sollen. Nach {\bf plane}\index{plane} kann angegeben werden,
+	ob diese Ebene waagerecht (``{\bf -}'') oder senkrecht (``{\bf $|$}'') dargestellt
+	werden soll. Der Standardwert f"ur die Orientierung der Darstellung ist ``{\bf -}''.
+  \item[{\bf matrix}:~~]\index{matrix} Dies bewirkt, da"s die Zellen der Struktur in Form einer Matrix
+	dargestellt werden. Dabei mu"s nach dem Schl"usselwort {\bf matrix}\index{matrix} die Dimension
+	der Matrix angegeben werden, etwa (3,8) f"ur eine Matrix mit drei Spalten und acht
+	Zeilen. 
+  \item[{\bf ellipse}:~]\index{ellipse} Die Zellen der Struktur sollen in Form einer
+Ellipse\index{ellipse} dargestellt 
+	werden. Nach dem Schl"usselwort mu"s angegeben werden, welche Form diese Ellipse\index{ellipse}
+	haben soll. Die beiden Koordinaten\index{Koordinaten} beziehen sich dabei auf ihre beiden
+	Achsen. Sind beide gleich, ist die Darstellungsform ein Kreis.
+\end{description}
+
+Man beachte, da"s bei einer Matrix die inneren
+Positionen\index{Position!einer Struktur} des durch sie definierten
+Rechtecks belegt werden, das hei"st, eine {\bf matix}(4,4) kann
+sechzehn Zellen aufnehmen. Das ist bei der Definition einer
+Ellipse\index{ellipse} nicht der Fall. Sie gibt nur die Form an
+(Umfang der Ellipse), in der die Zellen angeordnet werden.
+
+\begin{center}
+\fbox{
+\begin{minipage}{\textwidth}
+{\footnotesize
+\begin{center}
+\begin{eqnarray}
+  \mbox{topology\_specification} & ::= & \mbox{area\_specification position\_specification} 
+		\label{sytopologyspecification}\\[.3 cm]
+  \mbox{area\_specification} & ::= & \mbox{{\bf plane}\index{plane} orientation} \nonumber \\
+                             &  |  & \mbox{ area\_key coordinates} \label{syareaspecification}\\[.3 cm]
+  \mbox{orientation} & ::= & \mbox{{\bf $-$}}\;\;|\;\;\mbox{{\bf ``$|$''}} \label{syorientation}\\[.3 cm]
+  \mbox{area\_key} & ::= & \mbox{{\bf matrix}}\index{matrix} \nonumber \\
+                             &  |  & \mbox{{\bf ellipse}}\index{ellipse} \label{syareakey}\\[.3 cm]
+  \mbox{position\_specification}\index{Position!einer Struktur} & ::= & \mbox{{\bf at}\index{at} coordinates} 
+		\label{sypositionspecification}\\[.3 cm]
+  \mbox{coordinates} & ::= & \mbox{{\bf (} expression{\bf ~,~}expression{\bf )}} \label{sycoordinates} \\ \nonumber 
+\end{eqnarray}
+\end{center}
+}
+\end{minipage}
+}
+\end{center}
+
+Die Position\index{Position!einer Struktur} der
+Struktur\index{Struktur!graphische Darstellung!Position} definiert
+immer ihren Mittelpunkt. Sie wird nach dem Schl"usselwort {\bf
+at}\index{at} angegeben.
+
+Bei Teilnetzen gibt diese Positionsangabe\index{Position!einer
+Struktur} den Ursprung der Teilnetzkoordinaten\index{Koordinaten} an.
+
+Ist die angegebene Gr"o"se einer Matrix oder Ellipse\index{ellipse}
+f"ur eine Struktur\index{Struktur} nicht ausreichend, so wird diese
+von der Struktur belegte Fl"ache bei der "Ubersetzung vergr"o"sert.
+Dabei werden die Proportionen der Ausdehnung in x- und in y-Richtung
+bewahrt.
+
+Sei n die Anzahl der Zellen einer Struktur, die als Ellipse
+dargestellt werden soll, und a und b ihre beiden Achsen, so mu"s $$n <
+\pi(\frac{3(a + b)}{4} - \frac{1}{2}\sqrt{ab})$$ gelten, damit nicht
+mehrere Zellen an derselben Position dargestellt werden.
+
+Der erste der beiden Ausdr"ucke in der Regel~\ref{sycoordinates} f"ur
+``coordinates'' kennzeichnet die Position\index{Position!einer
+Struktur} auf der X-Achse (horizontale Verschiebung), die zweite
+Angabe bezieht sich auf die Y-Achse (vertikale Verschiebung).
+
+Der Ursprung des SNNS-Koordinatenkreuzes\index{Koordinaten!Ursprung}
+liegt in der linken oberen Ecke eines Fensters.  Die Koordinaten sind
+positiv, wenn man sich von dort aus nach unten und rechts bewegt.
+
+Ein Fenster hat etwa eine Gr"o"se von 30 auf 30. Diese Gr"o"se ist
+variabel. Dabei bezieht sich diese Angabe - wie auch die
+Koordinaten\index{Koordinaten!vs. Pixels} - nicht auf Pixels, sondern
+auf Positionen\index{Position!einer Struktur} von Zellen. Die Zellen
+d"urfen in diesem Koordinatenschema also dicht gepackt werden, auf dem
+Bildschirm wird trotzdem ein Abstand zwischen ihnen bestehen.
+
+Werden Strukturen mehrfach angelegt, so bleiben ihre Formen erhalten,
+aber ihr Mittelpunkt mu"s verschoben werden. Diese Verschiebung
+geschieht immer in der Richtung, in der die Ausehnung der Struktur
+geringer ist -- die andere Koordinate bleibt konstant.  Die
+Koordinate, die ver"andert werden mu"s, wird gerade soweit erh"oht,
+da"s sich die Kopien der Struktur nicht "uberlagern. Eine solche
+Verschiebung kann dadurch verursacht werden, da"s f"ur eine Struktur
+mehrere Namen definiert wurden, oder auch dadurch, da"s ein Feld
+solcher Strukturen angelegt wurde.
+
+
+\subsection{Beispiel}
+
+Definiert man die Strukturen 
+
+  \begin{center}
+    \mbox{
+      \begin{minipage}{\textwidth}
+           \begin{tabbing}\=nn\=\kill
+	   \>{\bf unit} \ldots {\bf at} (12,9) {\bf :} u1, u2, u3{\bf ;} \\
+	   \>{\bf cluster}$[$8$]$ \ldots {\bf plane -} {\bf at} (10,6) {\bf :} horizCluster{\bf ;} \\
+	   \>{\bf cluster}$[$5$]$ \ldots {\bf plane $|$} {\bf at} (3,7) {\bf :} vertCluster{\bf ;} \\
+	   \>{\bf array}$[$6$]$ {\bf of cluster}$[$5$]$  \ldots {\bf matrix} (2,3) {\bf at} (1,2) : outUnits{\bf ;} \\
+	   \>{\bf cluster}$[$12$]$  \ldots {\bf ellipse} (12,4) {\bf at} (11,13) : inUnits{\bf ;} \\
+           \end{tabbing}
+      \end{minipage}
+    }
+  \end{center}
+
+so entsteht die in Abbildung~\ref{TopologieBild} gezeigte Darstellung.
+
+\begin{figure}[htb]
+  \begin{center}
+    \fbox{
+      \begin{minipage}{\textwidth}
+        \begin{center}
+	   \input{f_top.tex}
+	\end{center}
+      \end{minipage}
+    }
+    \caption{\label{TopologieBild} Beispiel: Graphische Darstellung von Strukturen}
+  \end{center}
+\end{figure}
+
+In der Abbildung entspricht eine Einheit einer Einheit in der
+Definition. Da diese Einheiten immer Zellpositionen darstellen, kann
+es vorkommen, da"s die Positionen der einzelnen Zellen gerundet werden
+m"ussen. Das ist insbesondere dann der Fall, eine Dimension einer
+Matrix gerade ist. In diesem speziellen Fall verursacht das Runden der
+Positionen\index{Position!einer Struktur} eine Verschiebung aller
+Zellen um eine halbe Position nach rechts (siehe Strukturen
+``outUnits'', ``horizCluster'' in Abbildung~\ref{TopologieBild}).
+
+
+\section{Beispiel: Erkennung von Buchstaben}
+
+Hier sollen jetzt ein Beispiel gezeigt werden, das von den
+M"oglichkeiten der Strukturdefinitionen Gebrauch macht. Es soll ein
+Musterklassifikator definiert werden, der in der Lage ist, in einer
+5x7-Matrix dargestellte Gro"sbuchstaben zu erkennen.
+Abbildung~\ref{LetterNetBild} zeigt das Netz im Display von SNNS f"ur
+den Buchstaben ``B''.
+
+\begin{figure}[htbp]
+  \begin{center}
+%    \mbox{
+      \begin{minipage}{\textwidth}
+%	\vspace{10cm}
+        \screendump{0.5}{buchstabe.ps}
+      \end{minipage}
+%    }
+    \caption{\label{LetterNetBild} Beispiel: Netz zur Erkennung von Gro"sbuchstaben}
+  \end{center}
+\end{figure}
+
+Als Ausgabe dient ein ``winner-takes-all'' Netz aus 26 Ausgabezellen -
+eine f"ur jeden Buchstaben.  Dazwischen liegt noch eine Schicht aus
+zehn internen Zellen, die die Abbildung der Ein- auf die Ausgabezellen
+leisten. Innerhalb der Zwischenschicht bilden sich beim Lernen des
+Netzes Verbindungen zwischen den Zellen. Die einzelnen Schichten sind
+untereinander vollst"andig verbunden.
+
+Es ist naheliegend, in einem solchen Fall jede Schicht als eine
+Struktur des {\bf Nessus}-Programms zu definieren und danach - im
+Topologieerg"anzungsteil - die einzelnen Schichten miteinander zu
+verbinden.
+
+Abbildung~\ref{LetterNetProg} zeigt das Programm zur Definition dieses
+Netzes. Die Anweisungen im Topologiemodifikationsblock werden in
+Kapitel~\ref{Topologie} erkl"art.
+
+\begin{figure}[htbp]
+  \begin{center}
+    \mbox{
+      \begin{minipage}{\textwidth}
+           \begin{tabbing}\=nn\=\kill
+	   \input{b_letter.tex}
+           \end{tabbing}
+      \end{minipage}
+    }
+    \caption{\label{LetterNetProg} Beispiel: Musterklassifikator}
+  \end{center}
+\end{figure}

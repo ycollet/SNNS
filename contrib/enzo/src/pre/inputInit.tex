@@ -1,0 +1,15 @@
+\begin{moduledoc}{Random selection of input units}{inputInit}
+  \item[\KeyWord{minNoInput} \optParam{ x } ]~\\
+    This parameter sets the lower bound of the number of active input units.\\
+    Default: 1 
+  \item[\KeyWord{maxNoInput} \optParam{ x } ]~\\
+    This parameter sets the upper bound of the number of active input units.\\
+    Default: {\it Number of all input units}
+\end{moduledoc}
+
+The module {\it inputInit} randomly selects between {\it minNoInput} and
+{\it maxNoInput} input units for the net of the starting generation.
+The other input units  deactivated in the network structure by deleting 
+all incoming and outgoing weights of this units.
+The purpose of this module is to increase the diversity of the starting population
+by creating different input layer topologies.

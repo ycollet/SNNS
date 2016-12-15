@@ -1,0 +1,23 @@
+VISTRA
+
+Vistra is provided as is. No warranty whatsoever.
+There is no English documentation. There is only minimal support.
+Vistra was developed on SUN SS2 with SunOS 4.1.2 and DECs with Ultrix 4.2
+Vistra needs X11R5.
+Vistra compiles with gcc-2.4.5. It does not compile with some older versions.
+Vistra expects a widget set from the FWF (Free widget foundation).
+If you don't have those widget sets, see README.2 on how to compile
+Vistra without those libraries (and hence without a file selector).
+The action Transform:PCA expects a program that reads patterns in LVQ format
+and writes its result in LVQ format. If there is no such program with
+the name pca in your path, Vistra's response is undefined, most likely a
+crash.
+
+To compile Vistra, first adapt the Makefile, then say make.
+However, there is an executable for Sun (vistra) and DEC (vistra.dec)
+included.
+
+To enable Vistra to find the format desciptions you have to set an 
+environment variable VISTRAFORMATS to the formats directory of Vistra.
+
+HB

@@ -1,0 +1,799 @@
+\chapter{Konstanten, Bezeichner und Typen}
+\label{Konstanten}
+
+\section{Bezeichner und Kommentare}
+
+F"ur Zell- bzw. Sitetypen, Strukturen und Variablen m"ussen eindeutige
+Bezeichner\index{Bezeichner} eingef"uhrt werden.  Diese
+Bezeichner\index{Bezeichner} sind "uber das ganze Programm an jeweils
+einen Datentyp\index{Datentyp!Bindung an Objekt} gebunden.
+
+\label{Namen}
+
+Bezeichner\index{Bezeichner} d"urfen keine Schl"usselworte
+\index{Schl"usselwort!vs.  Bezeichner} sein. Die Schl"usselworte in
+{\bf Nessus} sind in Abbildung~\ref{SchlWorte} dargestellt.
+
+\begin{figure}[htb]
+\footnotesize
+\begin{center}
+\fbox{
+\begin{minipage}{\textwidth}
+\begin{center}
+\begin{tabular}{lllllll} 
+\index{backward}\index{backward!Verbindung!Richtung einer}
+  {\bf act}\index{act}          & {\bf clique}\index{clique}  & {\bf exp}\index{exp}         & {\bf input}\index{input}    
+& {\bf name}\index{name}        &{\bf sin}\index{sin}          & {\bf through}\index{through} \\
+
+  {\bf actfunc}\index{actfunc}  & {\bf cluster}\index{cluster}& {\bf file}\index{file}       & {\bf int}\index{int}     
+& {\bf network}\index{network}  & {\bf site}\index{site}       & {\bf to}\index{to}  \\
+
+  {\bf and}\index{and}          & {\bf const}\index{const}    & {\bf float}\index{float}     & {\bf iotype}\index{iotype} 
+& {\bf not}\index{not}          & {\bf sitefunc}\index{sitefunc}& {\bf typedef}\index{typedef} \\
+
+  {\bf arctan}\index{arctan}    & {\bf cos}\index{cos}        & {\bf for}\index{for}         & {\bf irregular}\index{irregular}
+& {\bf of}\index{of}            & {\bf sqr}\index{sqr}        & {\bf unit}\index{unit}  \\ 
+
+  {\bf array}\index{array}      & {\bf div}\index{div}        & {\bf foreach}\index{foreach} & {\bf ln}\index{ln}      
+&{\bf or}\index{or}             & {\bf sqrt}\index{sqrt}      & {\bf var}\index{var}  \\
+
+  {\bf at} \index{at}           & {\bf do}\index{do}          & {\bf from}\index{from}       & {\bf map}\index{map}   
+& {\bf outfunc}\index{outfunc}  & {\bf star}\index{star}      & {\bf while}\index{while} \\
+
+  {\bf begin}                   & {\bf ellipse}\index{ellipse}& {\bf get}\index{get}         & {\bf matrix}\index{matrix}
+& {\bf output}\index{output}    & {\bf string}\index{string}  & {\bf with}\index{with} \\ 
+
+  {\bf by}\index{by}            & {\bf else}\index{else}      & {\bf hidden}\index{hidden}   & {\bf max}\index{max}     
+& {\bf plane}\index{plane}      & {\bf structure}\index{structure}   \\
+
+  {\bf center}\index{center}    & {\bf elseif}\index{elseif}  & {\bf if}\index{if}           & {\bf min}\index{min}   
+& {\bf random}\index{random}    & {\bf subnet}\index{subnet} \\
+
+  {\bf chain}\index{chain}      & {\bf end}\index{end}        & {\bf in}\index{in}           & {\bf mod}\index{mod}  
+& {\bf ring}\index{ring}        & {\bf then}\index{then} \\
+
+\end{tabular}
+\end{center}                         
+\end{minipage}
+}
+\caption{\label{SchlWorte} Schl"usselworte in {\bf Nessus}}
+\end{center}\index{Schl"usselworte}
+\end{figure}
+
+Ein Bezeichner\index{Bezeichner} besteht aus einer beliebigen Anzahl
+von Buchstaben\index{Buchstaben} und Ziffern. Das erste Zeichen mu"s
+ein Buchstabe sein, auch der Unterstrich ``\_'' ist als erstes Zeichen
+verboten. Der regul"are Ausdruck f"ur Bezeichner ist\\ \centerline{
+${\bf [a-zA-Z]}$ ${\bf [a-zA-Z0-9\_]^*}$} Jeder in einem
+Nessus-Programm verwendete Bezeichner\index{Bezeichner} mu"s textuell
+vor seiner ersten Verwendung definiert werden.
+Variablen\index{Variable} m"ussen deklariert werden.
+
+In {\bf Nessus} wird Gro"s- und Kleinschreibung unterschieden.
+Schl"usselworte d"urfen nur Kleinbuchstaben\index{Gro"s- und
+Kleinschreibung} enthalten.
+
+\label{Kommentar} 
+
+An jeder Stelle des Programms d"urfen Kommentare\index{Kommentar}
+stehen. Sie erstrecken sich immer von einer "offnenden ``{\bf \{}''
+bis zur ersten schlie"senden geschweiften
+Klammer\index{Klammerung!eines Kommentars} ``{\bf \}}''.
+Kommentare\index{Kommentar} k"onnen beliebige Zeichen au"ser ``{\bf
+\}}'' enthalten und "uber mehrere Zeilen gehen.
+
+\centerline{\small {\bf \{} Das ist ein Kommentar. {\bf \}}}
+
+
+\section{Definition von Konstanten}
+
+Die Konstantendefinitionen\index{Konstante} eines {\bf
+Nessus}-Programms sind in einem Block zusammengefa"st (const\_block in
+Syntaxregel~\ref{syConsBl}), der mit dem Schl"usselwort {\bf
+cons}\index{cons} beginnt und mindestens eine Konstantendefinition
+\index{Konstantendefinition} enthalten mu"s.  Dieser Block kann aber
+auch ganz entfallen, falls keine Konstanten definiert werden sollen.
+Die Syntax der Konstantendefinitionen
+\index{Konstantendefinition!Syntax} lautet:
+
+\begin{center}
+\fbox{
+\begin{minipage}{\textwidth}
+{\footnotesize
+\begin{center}
+\begin{eqnarray}
+  \mbox{const\_block} & ::= & \mbox{{\bf const}\index{const} constant\_def \{constant\_def\}} \label{syConsBl} \\[.3 cm]
+  \mbox{constant\_def}   & ::= & \mbox{{\bf identifier} {\bf \verb&=&} constant {\bf \verb&;&}}\label{syConsDef}\\[.3 cm]
+  \mbox{constant}        & ::= & \mbox{expression} \nonumber \\
+                         &  |  & \mbox{file\_ constant} \nonumber \\
+                         &  |  & \mbox{array\_\index{array} constant} \nonumber \\
+                         &  |  & \mbox{map\_ constant} \label{syConstant}\\ \nonumber
+\end{eqnarray}
+\end{center}
+}
+\end{minipage}
+}
+\end{center}
+
+Der Wert einer Konstanten kann
+\begin{itemize}
+  
+\item ein Ausdruck\index{Ausdruck!zur Konstantendefinition} eines der
+einfachen Datentypen\index{Datentyp!einfacher} {\bf int},\index{int}
+{\bf float}\index{float} oder {\bf string},\index{string}
+  
+\item der logische Name einer Datei,\index{Datei!logischer Name}
+  
+\item ein Feld\index{Feld}\index{Feld} eines der einfachen Datentypen oder
+  
+\item eine Relation\index{Relation} (in {\bf Nessus}: {\bf
+map}-Konstante) \index{map}
+\end{itemize}
+sein.
+
+\subsection{Einfache Datentypen}
+\subsubsection{Ganze und rationale Zahlen}
+
+Einfache Datentypen sind in {\bf Nessus} ganze
+Zahlen\index{Zahl!ganze} ({\bf int}),\index{int} rationale
+Zahlen\index{Zahl!rationale} ({\bf float})\index{float} und
+Zeichenketten\index{Zeichenkette} ({\bf string}).\index{string} Die
+Ausdr"ucke k"onnen beliebig aus den f"ur diese Datentypen erlaubten
+Operatoren und Funktionen (siehe
+Kapitel~\ref{EinfacheAusdruecke}\index{Ausdruck!einfacher Datentyp}
+zusammengesetzt sein, vorausgesetzt sie enthalten nur
+Literale\index{Literal} und Konstanten,\index{Konstante!einfacher
+Datentyp} deren Definition ihrer Verwendung textuell vorausgeht.
+
+Der Wertebereich\index{Wertebereich!numerische Konstante} dieser
+Konstanten\index{Konstante!numerische} ist nicht in {\bf Nessus}
+definiert. Die darstellbaren Werte der ganzen bzw. die Genauigkeit der
+rationalen Zahlen\index{Zahl!rationale!Genauigkeit} entsprechen der
+von {\it int\/}- bzw. {\it float\/}-Zahlen der Sprache C
+(siehe~\cite{ker781}) auf dem jeweiligen System. Bei {\it
+float\/}-Zahlen\index{float} werden von SNNS\index{SNNS} sowieso nur
+f"unf Stellen nach dem Komma ber"ucksichtigt.
+ 
+Numerische Konstanten werden so geschrieben, wie in C auch. Ganze
+Zahlen mit einem Exponenten werden als rationale Zahlen aufgefa"st.
+\label{Zeichenketten} Zeichenketten \index{Zeichenkette} werden in
+{\bf \verb&" "&} eingeschlossen und d"urfen beliebige Zeichen bis auf
+{\bf \verb&"&} enthalten.
+
+\centerline{"' Dies ist eine Zeichenkette "'}
+
+Innerhalb der Zeichenkette\index{Zeichenkette} wird {\bf "'} als
+{\bf $\backslash$"'} geschrieben: \\
+
+\centerline{ {\bf "'}So schreibt man {\bf $\backslash$"'}
+in einer Zeichenkette.{\bf "'}. }
+
+Es gibt in {\bf Nessus} keinen Datentyp ``character'', auch einzelne
+Buchstaben\index{Buchstabe!als Zeichenkette} m"ussen als Zeichenketten
+geschrieben werden. Es gibt zwei Klassen von Symbolen, aus denen
+Zeichenketten bestehen k"onnen. Die eine Klasse entha"alt solche
+Symbole, auf denen eine lexikalische Reihenfolge definiert ist. Die
+anndere Klasse enth"alt alle Symbole ohne eine solche lexikalische
+Reihenfolge.  	 Die lexikalische\index{Reihenfolge!lexikalische}
+Reihenfolge ist auf allen Buchstaben\index{Buchstaben!lexikalische
+Reihenfolge} und Ziffern definiert, nicht jedoch auf Sonderzeichen
+\index{Zeichenkette!Sonderzeichen} und dem Unterstrich ``\_''. Auf
+diesen Symbolen ist die lexikalische\index{lexikalische Reihenfolge}
+Reihenfolge
+
+\begin{center}
+	  $"'$0$"'$ \verb&..& $"'$9$"'$~~kleiner als~~
+          $"'$A$"'$ \verb&..& $"'$Z$"'$~~kleiner als~~
+	  $"'$a$"'$ \verb&..& $"'$z$"'$
+\end{center}
+
+definiert. Dadurch ist die lexikalische Reihenfolge in der Sprache und
+damit systemunabh"angig definiert.
+
+Es gibt in {\bf Nessus} keine leeren Zeichenketten
+\index{Zeichenkette!leere}, jede Kette mu"s aus mindestens einem
+Zeichen bestehen.
+
+Zeichenketten, \index{Zeichenkette} die von SNNS gelesen werden, also
+die Namen von Zellen oder Sites, d"urfen keine Leerzeichen
+\index{Zeichenkette} und nicht den senkrechten Strich ``$|$''
+enthalten.
+
+
+\pagebreak[1]
+\subsection{Dateien}
+\label{Dateien}
+
+In {\bf Nessus} ist es m"oglich, Daten aus Dateien einzulesen und im
+Programm zu verwenden. Im Gegensatz zu anderen Sprachen ist die Ein-
+und Ausgabe Teil der Sprache und systemunabh"angig definiert.
+
+Damit Daten eingelesen werden k"onnen, mu"s ein logischer Name f"ur
+die Eingabedatei\index{Datei!logischer Name} vereinbart werden.
+
+Syntaxregel~\ref{syfile} zeigt die Syntax der Dateivereinbarung.
+\index{Datei} ``expression'' mu"s vom Datentyp {\bf string}
+\index{string} sein und bezeichnet den physischen Dateinamen.
+\index{Dateiname!physischer}
+
+\index{Datei!Typ}
+\index{Datei!Typ!int}
+\index{Datei!Typ!float}
+\index{Datei!Typ!map}
+\index{Datei!Typ!subnet}
+
+\begin{center}
+\fbox{
+\begin{minipage}{\textwidth}
+{\footnotesize
+\begin{center}
+\begin{eqnarray}
+  \mbox{file\_constant} & ::= & \mbox{{\bf file}\index{file} expression {\bf of}\index{of} file\_type} \label{syfile} \\[.3cm]
+  \mbox{file\_type}      & ::= & \mbox{simple\_type} \nonumber\\
+                        & | & \mbox{{\bf map}}\index{map} \nonumber \\
+                        & | & \mbox{{\bf subnet}}\index{subnet} \label{syfiletype} \\[.3cm]
+  \mbox{simple\_type}    & ::= & \mbox{{\bf int}}\index{int}~~~|~~~\mbox{{\bf
+float}}\index{float}~~~|~~~\mbox{{\bf string}}\index{string} \label{sysimpletype} \\ \nonumber 
+\end{eqnarray}
+\end{center}
+}
+\end{minipage}
+}
+\end{center}
+
+F"ur das Format von Dateien der einfachen Typen {\bf int},\index{int} {\bf
+float}\index{float} und {\bf string}\index{string} gilt, da"s
+
+\begin{itemize}
+\item alle Buchstaben\index{Buchstaben!aus Datei} A-Z und a-z,
+\item alle Ziffern 0-9 und
+\item der Unterstrich 
+\end{itemize}
+
+als g"ultige Eingabesymbole aufgefa"st werden. Alle anderen Zeichen,
+\index{Zeichenkette!Format in Datei} der Zeilentrenner eingeschlossen,
+werden als Trennzeichen\index{Trennzeichen!in Datei} aufgefa"st. Diese
+Trennzeichen werden beim Einlesen der Datei
+\index{Datei!Eingabesymbole} ignoriert und d"urfen auch mehrfach
+hintereinander auftreten. Es darf allerdings nie der Punkt zur
+Trennung von Zahlen\index{Zahl!Format in Datei} verwendet werden, da
+er als Dezimalpunkt einer rationalen Zahl interpretiert w"urde.
+
+Zeichenketten in Dateien\index{Datei!Typ string} werden nicht in
+"' "' eingeschlossen.
+
+Dateien\index{Datei!Verwendung} k"onnen in {\bf Nessus}-Programmen auf
+zwei Arten verwendet werden:
+
+\begin{enumerate}
+\item Die Datei wird als Konstante\index{Konstante!ganzzahlige} eines
+der Typen {\bf 	array\index{array} of} simple\_type (siehe
+Syntaxregel~\ref{sysimpletype}) oder als Abbildungsdefinition einer
+{\bf 	map}-Konstanten\index{map} aufgefa"st. In beiden F"allen
+werden die 	Dateielemente\index{Datei!als Relation} bei der
+Vereinbarung dieser Konstanten implizit eingelesen. Die Konstanten
+werden dann verwendet, 	als w"aren ihre Werte intern im Programm
+definiert worden.  
+
+\item Die Datei enth"alt ein {\bf Nessus}-Programm.  Das damit
+definierte Netz soll als Teilnetz\index{Teilnetz}\index{Teilnetz}
+eingelesen werden.
+\end{enumerate}
+
+
+\subsection{Felder von Konstanten}
+\label{KonstantenFelder}
+
+In {\bf Nessus} k"onnen Felder\index{Feld} der einfachen Datentypen
+{\bf int},\index{int} {\bf float}\index{float} und {\bf string}
+\index{string} (simple\_type gem"a"s Syntaxregel~\ref{sysimpletype})
+gebildet werden.
+
+\begin{center}
+\fbox{
+\begin{minipage}{\textwidth}
+{\footnotesize
+\begin{center}
+\begin{eqnarray}
+  \mbox{array\_constant}\index{array} & ::= & \mbox{``$[$'' array\_elements ``$]$''} \label{syarray}\\[.3 cm]
+  \mbox{array\_elements} & ::= & \mbox{range\_definition} \nonumber\\
+                         &  |  & \mbox{expression\_list} \label{syarrayelements}\\[.3 cm]
+  \mbox{expression\_list} & ::= & \mbox{expression $\{$ {\bf ,} expression $\}$} \label{syexprlist}\\[.3 cm]
+  \mbox{range\_definition} & ::= & \mbox{expression {\bf \verb&..&} expression} \label{syrange}\\ \nonumber
+\end{eqnarray}
+\end{center}
+}
+\end{minipage}
+}
+\end{center}
+
+Alle Elemente eines Felds\index{Feld} m"ussen Konstanten
+\index{Konstante!Datei} desselben Datentyps sein. Die L"ange
+\index{L"ange!eines Felds} eines Felds wird nicht explizit angegeben.
+Jedes Feld mu"s aber aus mindestens einem Element bestehen -- leere
+Felder \index{Feld} sind verboten.
+
+\label{internarraydef}
+\index{Feld!interne Definition}
+
+Bei der Definition eines Felds durch Aufz"ahlung werden die einzelnen
+Feldelemente\index{Feld}\index{Feldelement!explizite Definition}
+explizit angef"uhrt. Die einzelnen Elemente werden durch Kommata
+getrennt.
+
+Bei der Definition eines Felds dyurch die Angabe eines
+Wertebereichs\index{Bereich!Definition!Feld} m"ussen die Begrenzer des
+Wertebereichs Elemente von einem der aufz"ahlbaren Datentypen
+
+\begin{itemize}
+\item {\bf int}\index{int} oder  \index{Feldelement!Definition durch
+Bereichsangabe}
+
+\item {\bf string}\index{string}, bestehend aus genau einem der
+Zeichen, \index{Zeichenkette!Bereichsdefinition} auf denen die vorher
+beschriebene lexikalische \index{Reihenfolge!lexikalische}
+\index{lexikalische Reihenfolge} Reihenfolge definiert ist
+\end{itemize}
+
+sein. Bei der Definition eines Wertebereichs
+\index{Bereich!Definition!Obergrenze}
+\index{Bereich!Definition!Untergrenze} darf die untere Grenze nicht
+gr"o"ser als die obere Grenze des Wertebereichs sein.  L"ange
+\index{L"ange!eines Felds} Null definiert.
+
+\begin{center}
+    \mbox{
+      \begin{minipage}{\textwidth}
+           \begin{tabbing}\=nn\=\kill
+{\bf cons}\\
+~~{\bf \verb&enumerate&}~{\bf \verb&=&}~{\bf \verb&[&}~{"'unit1"'}~, {
+"'unit2"'}~, {"'new"'}~, {"'old"'}~{\bf \verb&]&}{\bf \verb&;&}\\
+%~~{\bf \verb&range&}~{\bf \verb&=&}~{\bf \verb&[&}~{"'A"'}~{\bf
+%\verb&..&}~{\verb&"Z"&}~{\bf \verb&]&}{\bf \verb&;&}\\
+~~{\bf  range = ["'A"' .. "'Z"' ]; }\\
+           \end{tabbing}
+      \end{minipage}
+    }
+  
+\end{center}
+
+Im obigen Beispiel wird ``enumerate'' als ein Feld von vier
+Zeichenketten definiert.  ``range'' ist ein Feld mit den Zeichenketten
+{\verb&"A"&}, {\verb&"B"&}, \ldots, {\verb&"Z"&}.
+
+\label{filearray}\index{file}
+\index{Feld!aus Datei}
+
+Soll die Aufz"ahlung der Elemente eines Felds\index{Feld} aus einer
+Datei eingelesen werden, schreibt man innerhalb eckiger Klammern den
+Namen der Dateikonstanten,\index{Konstante!Feld!aus Datei} d.h., den
+logischen Namen der Datei. Diese Datei wird dann bei der "Ubersetzung
+eingelesen und ihre Elemente werden zu den Elementen des
+Felds.\index{Feld}
+
+Der Konstantendefinitionsteil 
+  \begin{center}
+      \mbox{
+	\begin{minipage}{\textwidth}
+          \begin{center}
+	   \begin{tabbing}Abbb\=bbbb\=ton\=\kill
+		\input{b_cons.tex}
+          \end{tabbing}
+         \end{center}
+        \end{minipage}
+       }
+  \end{center}
+
+definiert ``nameList'' als das Feld\index{Feld} der in
+``input\verb&.&dat'' enthaltenen Zeichenketten.\index{Zeichenkette!aus
+Datei}
+
+
+\subsection{Relationen}
+\label{Relationen}
+
+Mittels Relationen -- sie werden im Rest dieser Dokumentation als {\bf
+map}-Konstanten\index{Konstante!Relation} bezeichnet -- kann man eine
+Abbildung von Werten eines einfachen Datentyps (simple\_type nach
+Syntaxregel~\ref{sysimpletype}) auf Werte eines anderen oder desselben
+einfachen Datentyps definieren. In einem Programm zur Definition
+neuronaler Netze ist das dann sinnvoll, wenn
+
+\begin{itemize}
+\item ein unregelm"a"siges konstantes Muster von
+Verbindungen,\index{Verbindung!implizite!Definition durch Relation}
+das sich nicht durch wenige geschlossene Ausdr"ucke (etwa:
+verbinde x mit y wenn \dots) darstellen l"a"st, oder
+
+\item eine tats"achliche Relation\index{Relation} zwischen zwei Datentypen 
+\end{itemize}
+im Programm definiert werden mu"s.
+
+Die Semantik der {\bf map}-Konstanten\index{map} ist die einer
+Relation, das hei"st, alle Mengen d"urfen sich beliebig
+"uberschneiden, sowohl Bild und Urbild, als auch verschiedene Bilder
+oder Urbilder.
+
+Auf die Werte von Bild und Urbild einer {\bf map}-Konstanten
+\index{map} kann sp"ater nicht mehr zugegriffen werden.  Insbesondere
+ist es gleichg"ultig, ob in einer Zeile ein einzelnes Element mit oder
+ohne Mengenklammern geschrieben wurde. Die Relation
+\index{Relation!Semantik} gilt immer f"ur Paare (x,y) mit
+x~$\in$~Bildmenge und y~$\in$~Urbildmenge. F"ur je zwei solche Paare
+kann dann abgefragt werden, ob die Relation\index{Relation} existiert.
+
+Die so definierte Relation weist a priori keine zus"atzlichen
+Eigenschaften au"ser den explizit definierten Abbildungen auf.
+Insbesondere ist sie weder symmetrisch noch transitiv.
+
+Die Verwendung einer solchen {\bf map}-Konstanten \index{map}
+\index{Konstante!Feld} in einem Programm wird in den
+Abschnitten~\ref{mapstruct} und \ref{mapcond} genauer beschrieben.
+
+Eine {\bf map}-Konstante\index{map} kann intern in einem {\bf
+Nessus}-Programm definiert oder aus einer Datei\index{Datei!als
+Relation} eingelesen werden.
+
+\begin{center}
+\fbox{
+\begin{minipage}{\textwidth}
+{\footnotesize
+\begin{center}
+\begin{eqnarray}
+  \mbox{map\_constant} & ::= & \mbox{{\bf map}\index{map} {\bf of}\index{of} simple\_type
+{\bf to}\index{to} simple\_type {\bf :}} \nonumber\\ 
+                       &     & \mbox{map\_def {\bf ;}}  \label{symap} \\[.3 cm]
+  \mbox{map\_def}      & ::= & \mbox{map\_file}~~~|~~~\mbox{map\_block}  \label{symapdef} \\[.3 cm]
+  \mbox{map\_file}     & ::= & \mbox{ {\bf get}}\index{get}\mbox{~``$($'' expression $[$,
+expression$]$ ``$)$''~}\mbox{{\bf from}\index{from} {\bf identifier} } \label{symapfile}\\[.3 cm]  
+  \mbox{map\_block} & ::= & \mbox{map\_line {\bf \{ ,} map\_line {\bf \}}} \label{symapblock}\\[.3 cm]
+  \mbox{map\_line}  & ::= & \mbox{map\_domain {\bf to}\index{to} map\_domain} \label{symapline}\\[.3 cm]
+  \mbox{map\_domain}& ::= & \mbox{array\_constant\index{array}}~~~|~~~\mbox{expression}
+\label{symapdomain}\\ \nonumber 
+\end{eqnarray} 
+\end{center}
+}  
+\end{minipage}
+}
+\end{center}
+
+\begin{figure}[htbp]
+  \begin{center}
+    \mbox{
+      \begin{minipage}{\textwidth}
+           \begin{tabbing}\=nn\=\kill
+~~{\bf \verb&mapCons&}~{\bf \verb&=&}~{\bf map}~{\bf int}~{\bf to}~{\bf string}{\bf \verb&:&}\\
+~~~~~~~~~~~~0~~~~~~~~~~~{\bf to}~{\bf \verb&[&} "'x"' {\bf \verb&..&} "'z"' {\bf \verb&]&}{\bf \verb&,&}\\
+~~~~~~~~~~~~{\bf \verb&[&}0{\bf \verb&..&}10{\bf \verb&]&}~~{\bf to}~{\bf \verb&[&}
+"'a"'{\bf \verb&..&} "'d"' {\bf \verb&]&}{\bf \verb&,&}\\
+           \end{tabbing}
+      \end{minipage}
+    }
+    \caption{\label{ZeilenBsp} Beispiel: Zeilenweise Relationsdefinition}
+  \end{center}
+\end{figure}
+
+Abbildung~\ref{ZeilenBsp} zeigt anhand eines Beispiels die zeilenweise
+Definition von Relationen\index{Relation!zeilenweise Definition}. Man
+beachte, da"s die Zeile\\ \centerline{{\bf \verb&[&}0{\bf
+\verb&..&}10{\bf \verb&]&}~~{\bf to}~{\bf \verb&[&}
+"'a"'{\bf \verb&..&} "'d"' {\bf \verb&]&}}
+jedes Paar (a,b) mit a in $[$0\verb&..&10$]$ und b in {\bf \verb&[&}
+"'a"'{\bf \verb&..&} "'d"' {\bf \verb&]&} in
+die Relation aufnimmt.
+
+Eine intern definierte Relation besteht aus folgenden Komponenten:
+
+\begin{itemize}
+\item Im Kopf der Relationsdefinition\index{Relation} werden die
+Datentypen der Elemente von Urbild- und Bildmenge festgelegt. Diese
+Datentypen m"ussen zu den einfachen Typen geh"oren (simple\_type).
+  
+\item Die {\bf map}-Konstante wird zeilenweise definiert, die Anzahl
+der Zeilen mu"s nicht explizit angegeben werden
+(Syntaxregel~\ref{symapblock}). Die Zeilen werden durch Kommata
+getrennt.
+
+\item Jede dieser Zeilen definiert eine Relation zwischen zwei
+Teilmengen der beiden Datentypen.  Besteht eine der Teilmengen
+einer Zeile aus nur einem Element, d"urfen die eckigen Klammern
+weggelassen werden, wie Regel~\ref{symapdomain} zeigt.
+\end{itemize}
+
+Es ist m"oglich, Relationen\index{Relation} aus feineren oder
+disjunkten anderen Relationen\index{Relation!Verfeinerung}
+zusammenzusetzen, ohne die Abbildungen nochmals schreiben zu m"ussen.
+In den Kapiteln~\ref{LogischeAusdruecke}, \ref{mapstruct}
+und~\ref{mapcond} wird gezeigt, da"s auch Zeilenbereiche
+\index{Bereich!Definition!Relation} einer {\bf map}-Konstanten
+\index{Konstante!Relation!Verfeinerung} als Teilrelation
+\index{Teilrelation} angesprochen werden k"onnen. In obigem Beispiel
+w"are\\
+
+\centerline{``mapCons$[$0{\bf ..}1$]$''~~~$\equiv$~~~``mapCons'',}
+
+da ``mapCons'' nur aus den beiden Zeilen mit Indizes 0 und 1 besteht.
+
+\label{filemap}
+
+Eine {\bf map}-Konstante\index{map}\index{Konstante!Relation!aus
+Datei} kann aus einer Datei\index{Datei!als Relation} eingelesen
+werden (siehe Syntaxregel~\ref{symapfile}).  Daf"ur mu"s die Konstante
+``identifier'' nach dem Schl"usselwort {\bf from} gem"a"s
+Regel~\ref{syfile} zuvor als eine Datei vom Typ {\bf map}\index{map}
+definiert worden sein.
+
+In den Kopfzeilen\index{Kopfzeile!einer {\bf map}-Konstanten} der aus
+Dateien einzulesenden {\bf map}-Konstanten \index{map}
+\index{Konstante!Relation!Kopfzeile} werden wie bei explizit im
+Programm definierten die Datentypen von Bild und Urbild festgelegt.
+Anstatt dann jedoch die einzelnen Zeilen der {\bf map}-Konstanten
+\index{map} zu schreiben, mu"s nun angegeben werden, wie die Zeilen
+aus der Datei eingelesen werden sollen (siehe
+Syntaxregel~\ref{symapfile}):
+
+\begin{itemize}
+  
+\item ``identifier'' bezeichnet die zu der {\bf map}-Datei\index{map}
+geh"orende Dateikonstante.
+
+  
+\item Innnerhalb der Klammern mu"s angegeben werden, wie Bild und
+Urbild bzw. die einzelnen Zeilen getrennt werden:
+     \begin{itemize} 
+            \item Dr erste Ausdruck definiert die Zeichenkette, die in
+		  der Datei Bild und Urbild einer Zeile der {\bf
+		  map}-Konstanten trennt. Diese Angabe mu"s
+                  durch eine Konstante vom Typ {\bf
+		  string}\index{string} erfolgen und darf
+                  nicht entfallen.
+            \item Mit dem zweiten Ausdruck {\it darf\/} angegeben
+		  werden,wie die
+                  einzelnen Zeilen der {\bf map}-Konstanten\index{map}
+		  getrennt werden. Die Angabe einer speziellen 
+                  Zeichenkette\index{Relation!Trennsymbol in Datei}
+		  zur Trennung von Zeilen darf entfallen, sie mu"s aber unbedingt in den 
+                  F"allen angegeben werden, in denen die Zeile der {\bf map}-Konstanten\index{map} selbst ein
+                  oder mehrere  ``$\backslash$n'' enth"alt, etwa weil sie l"anger ist als die maximale
+                  Zeilenl"ange des Edierers, mit dem die Datei erzeugt wurde.
+	\end{itemize}
+  \item Die einzelnen Elemente von Bild oder Urbild k"onnen durch ein beliebiges der Zeichen
+        getrennt werden, die in Abschnitt~\ref{Dateien} als Trennzeichen\index{Trennzeichen!externe Relation} aufgef"uhrt wurden.
+	Die  Trennzeichen\index{Relation!Trennzeichen in externer} zwischen den Elementen m"ussen nat"urlich andere sein, als die zwischen
+        Bild und Urbild bzw. zwischen den einzelnen Zeilen.
+\end{itemize}
+
+\begin{figure}[htbp]
+  \begin{center}
+    \mbox{
+      \begin{minipage}{\textwidth}
+           \begin{tabbing}\=nn\=\kill
+	   \input{b_map.tex}
+           \end{tabbing}
+      \end{minipage}
+    }
+    \caption{\label{DatIntBsp} Beispiel: {\bf map}-Konstanten aus Dateien einlesen}
+  \end{center}
+\end{figure}
+
+Die Datei ``LetterDigitRelation.map'' k"onnte etwa folgenden Inhalt haben:
+  \begin{center}
+    \fbox{
+      \begin{minipage}{\textwidth}
+           \begin{tabbing}\=nn\=\kill \\
+		~~~~~~~~~~~~{\footnotesize \verb& 0 1 2 3 4 5 6 7 8 9 10 :  a, b, c, d, e; &}\\
+		~~~~~~~~~~~~{\footnotesize \verb& 11 12 13 14 15 16 17 18 19 20 : &}\\
+		~~~~~~~~~~~~~~~~~~{\footnotesize \verb& f, g, h, i, j, k, l, m, n, o, p, q, r, s, t ; &}\\
+		~~~~~~~~~~~~{\footnotesize \verb& 21 22 23 24 25 26 : u, v, w, x, y, z; &}\\
+		~~~~~~~~~~~~{\footnotesize \verb& 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 &}\\
+		~~~~~~~~~~~~~~~~~~{\footnotesize \verb& 21 22 23 24 25 26 : x ; &}\\
+		~~~~~~~~~~~~{\footnotesize \verb& 0 1 2 3 4 5 6 7 8 9 : y ; &}\\
+           \end{tabbing}
+      \end{minipage}
+    }
+  \end{center}
+
+Feldelemente, die aus einer Datei eingelesen werden, m"ussen in dieser
+Datei immer aufgez"ahlt sein. Die Definition der Feldelemente durch
+die Angabe eines Wertebereichs ist nicht zul"assig.
+ 
+
+\section{Typdefinitionen}
+\label{Typdefinitionen}
+
+Es gibt in {\bf Nessus} zwei Arten von Typdefinitionen:
+\begin{itemize}
+  \item Definition eines  Site-Typs\index{Site} und
+  \item Definition eines Zell-Typs.
+\end{itemize}
+
+\begin{center}
+\fbox{
+\begin{minipage}{\textwidth}
+{\footnotesize
+\begin{center}
+\begin{eqnarray}
+  \mbox{type\_block} & ::= & \mbox{{\bf typedef}\index{typedef} type\_definition \{type\_definition\}}
+					 \label{sytypeblock} \\[.3 cm]
+  \mbox{type\_definition} & ::= & \mbox{type\_expression {\bf :}~ identifier {\bf ;}} \label{sytypedef}\\[.3 cm]
+  \mbox{type\_expression} & ::= & \mbox{site\_type}\index{Site} \nonumber\\
+          &  |  & \mbox{unit\_type} \label{sytypeexpr}\\ \nonumber
+\end{eqnarray}
+\end{center}
+}
+\end{minipage}
+}
+\end{center}
+
+\subsection{Site-Typen}\index{Site}
+\label{Sites}\index{Site}
+
+Da Sites unver"anderliche Merkmale einer Zelle sind, mu"s f"ur jede
+Site, die in einem {\bf Nessus}-Programm vorkommen soll, ein Site-Typ
+definiert werden. Die Sites werden im "ubrigen Programm nur "uber den
+Namen dieses Typs angesprochen. Au"serdem mu"s der Name einer Site
+eindeutig sein -- es d"urfen nie zwei Typen f"ur Sites definiert
+werden, deren Name gleich ist.
+
+Enth"alt ein Netz Teilnetze \index{Teilnetz} \index{Teilnetz}
+\index{Teilnetz!Sites} aus externen {\bf Nessus}-Programmen, so
+m"ussen in diesen zwar f"ur die Sites lokale Typnamen eingef"uhrt
+werden, aber wenn der Site-Name in zwei verschiedenen
+Teilnetzen\index{Teilnetz} oder in einem Teilnetz\index{Teilnetz} und
+im Hauptprogramm derselbe ist, mu"s auch die Sitefunktion dieselbe
+sein. Eine genaue Erkl"arung zum Umgang mit Sites in
+Teilnetzen\index{Teilnetz}\index{Teilnetz!Sites} findet sich in
+Kapitel~\ref{Teilnetze}.
+
+\begin{center}
+\fbox{
+\begin{minipage}{\textwidth}
+{\footnotesize
+\begin{center}
+\begin{eqnarray}
+  \mbox{site\_type} & ::= & \mbox{{\bf site\index{site} with} name\_definition {\bf ~,~}
+site\_function}\label{sysitetype} \\[.3 cm] 
+  \mbox{name\_definition} & ::=  & \mbox{{\bf name}\index{name} expression} \label{synamedef} \\[.3 cm]
+  \mbox{site\_function} & ::=  & \mbox{{\bf sitefunc}\index{sitefunc} identifier}
+				 \label{sysitefunc} \\ \nonumber
+\end{eqnarray}
+\end{center}
+}
+\end{minipage}
+}
+\end{center}
+
+Die Merkmale einer Site \index{Site} von {\bf Nessus} und SNNS
+bestehen aus zwei Parametern\index{Parameter!einer Site} (siehe
+Regel~\ref{sysitetype}):
+\begin{itemize}
+  \item dem Namen der Site (vom Typ {\bf string}) und
+  \item dem Namen der Sitefunktion (identifier).
+\end{itemize}
+
+
+\subsection{Zelltypen}
+\label{unitTypes}
+
+Ein konnektionistisches Netzwerk besteht im allgemeinen aus wenigen
+gr"o"seren Gruppen von gleichartigen Zellen. Die Zellen innerhalb
+einer solchen Gruppe unterscheiden sich oft nur durch wenige Merkmale.
+
+In solchen F"allen ist es sinnvoll, wenn man nicht f"ur jede Zelle
+alle ihre Merkmale neu festlegen mu"s. In {\bf Nessus} gibt es deshalb
+die M"oglichkeit, Zelltypen einzuf"uhren. Ein Zelltyp ist nichts
+anderes als ein benanntes Muster von Parameterwerten
+\index{Parameter!einer Zelle} einer Zelle. Definiert wird die Belegung
+bestimmter Merkmale mit Werten, die dann f"ur alle Zellen dieses Typs
+gleich sind.
+
+Es m"ussen bei der Definition von Zelltypen folgende Einschr"ankungen
+beachtet werden:
+\begin{itemize}
+  
+\item Die Merkmale ``act\_function'', ``out\_function'' und
+``sites\_list'' m"ussen immer definiert werden, wenn ein Zelltyp
+eingef"uhrt wird. Die Definition von ``act\_initial''\index{act} und
+`name\_definition'' hingegen ist fakultativ. \index{Parameter!einer
+Zelle!obligatorische}
+  
+\item Die Merkmale einer Zelle, die "uber die Typdefinition festgelegt
+werden, d"urfen in den 	restlichen Anweisungen des {\bf
+Nessus}-Programms nicht mehr ver"andert werden. \index{Parameter!einer
+Zelle!konstante}
+\end{itemize}
+
+``initial\_act''\index{act} ist die Definition eines anf"anglichen
+Aktivierungswerts\index{Aktivierung} f"ur die Zelle. Der
+Aktivierungswert einer Zelle ist f"ur SNNS auf $[-1.0, 1.0]$
+beschr"ankt. Statt einer {\bf float}-Konstanten\index{float} kann auch
+das Schl"usselwort {\bf random}\index{random} angegeben werden. In
+diesem Fall wird f"ur jede sp"ater definierte Zelle dieses Typs eine
+Zufallszahl\index{Zahl!zuf"allige}\index{Zufallszahl} aus dem
+Intervall $[-1.0, 1.0]$ erzeugt.
+
+\begin{center}
+\fbox{
+\begin{minipage}{\textwidth}
+{\footnotesize
+\begin{center}
+\begin{eqnarray}
+  \mbox{unit\_type} & ::= & \mbox{{\bf unit}\index{unit} unit\_param\_list}\label{syunittype}\\[.3 cm]
+  \mbox{unit\_param\_list} & ::= & \mbox{{\bf with}\index{with}
+unit\_parameter \{ {\bf ~,~} unit\_parameter \} } \label{syunitparamlist}\\[.3 cm] 
+  \mbox{unit\_parameter}\index{Parameter!einer Zelle} & ::= & \mbox{name\_definition} \nonumber\\
+          &  |  & \mbox{initial\_act}\nonumber\\\index{act}
+          &  |  & \mbox{topology\_type}\nonumber\\
+          &  |  & \mbox{act\_function}\nonumber\\
+          &  |  & \mbox{out\_function}\nonumber\\
+          &  |  & \mbox{sites\_definition} \label{syunitparam}\\[.3cm]
+  \mbox{initial\_act}\index{act} & ::= & \mbox{{\bf act} expression\_or\_random} \label{syactinit} \\[.3cm]
+  \mbox{act\_function} & ::= & \mbox{{\bf actfunc}\index{actfunc} {\bf identifier}} \label{syactfunc} \\[.3cm]
+  \mbox{out\_function} & ::= & \mbox{{\bf outfunc}\index{outfunc} {\bf
+identifier}} \label{syoutfunc}\\  \nonumber
+\end{eqnarray}
+\end{center}
+}
+\end{minipage}
+}
+\end{center}
+
+\pagebreak[2]
+
+\begin{center}
+\fbox{
+\begin{minipage}{\textwidth}
+{\footnotesize
+\begin{center}
+\begin{eqnarray}
+  \mbox{sites\_definition} & ::= & \mbox{{\bf site}\index{site} sites\_list} \label{sysitesdef} \\[.3cm]
+  \mbox{sites\_list} & ::= & \mbox{{\bf identifier}}\nonumber \\
+          &  |  & \mbox{ ``$[$'' {\bf identifier} \{ {\bf ~,~} {\bf
+identifier} \} ``$]$''}\label{sysiteslist}\\[.3cm] 
+  \mbox{expression\_or\_random} & ::= & \mbox{expression}\;\;|\;\;\mbox{{\bf random}}\index{random} \label{syrandomexpression} \\[.3cm]
+  \mbox{topology\_type} & ::= & \mbox{{\bf iotype}\index{type} topology\_key}\label{syrtopologytype} \\[.3cm]
+  \mbox{topology\_key} & ::= & \mbox{{\bf hidden}\index{hidden} }\nonumber \\
+          &  |  & \mbox{{\bf input}\index{input} $[$ {\bf output}\index{output} $]$ }\nonumber\\
+          &  |  & \mbox{{\bf output}\index{output} $[$ {\bf
+input}\index{input} $]$ } \label{sytopologykey}\\ \nonumber 
+\end{eqnarray}
+\end{center}
+}
+\end{minipage}
+}
+\end{center}
+
+
+
+\subsection{Beispiel}
+
+Das nachfolgende Beispiel zeigt zwei Site- und zwei
+Zelltypdefinitionen.  Man beachte, da"s s"amtliche angegebenen
+Funktionsnamen Bezeichner\index{Bezeichner} und keine Zeichenketten
+sind und Sites "uber den f"ur den Sitetyp eingef"uhrten Bezeichner
+\index{Bezeichner} und nicht "uber den Sitenamen angesprochen werden.
+
+\begin{center}
+    \mbox{
+      \begin{minipage}{\textwidth}
+           \begin{tabbing}\=nn\=\kill
+	   \input{b_type.tex}
+           \end{tabbing}
+      \end{minipage}
+    }
+\end{center}
+
+Dadurch, da"s der Parameter {\bf sites}\index{sites} in der Definition
+von ``inUnitType'' fehlt, wird festgelegt, da"s eine Zelle dieses Typs
+keine Sites hat. Dagegen hat jede Zelle vom Typ ``outUnitType'' die
+beiden Sites ``inSiteType'' und ``exSiteType''.
+
+Diejenigen Parameter\index{Parameter!einer Zelle!variable} eines
+Zelltyps, deren Werte nicht in der Typdefinition definiert wurden,
+k"onnen sp"ater f"ur Zellen dieses Typs nachdefiniert werden. Die
+Parameterwerte, die in einem Zelltyp definiert werden, umfassen in
+{\bf Nessus} oft nur gemeinsame Parameter vieler Zellen.  Man beachte,
+da"s die Parameterwerte, die in der Typdefinition festgelegt wurden,
+nicht mehr "uberschrieben werden d"urfen.
+
+

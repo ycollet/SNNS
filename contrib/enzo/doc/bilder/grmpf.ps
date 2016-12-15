@@ -1,0 +1,66 @@
+%!PS-Adobe-2.0
+%%Title: my_pic
+%%Creator: js
+%%CreationDate: Mon Feb 21 1994
+%%For: schaefr@springbank (Johannes Schaefer)
+%%BoundingBox: 0 30 175 175
+%%Pages: 0
+%%EndComments
+%
+%
+%
+%3 3  scale
+/kgx 120 def
+/kgy 100 def
+/rii  17 def
+/ri   25 def
+/ra   50 def
+/rand 10 def
+/offs 10 def
+/pwidth 40 def
+
+/winkel 45 def
+/wspace 15 def
+% winkel + wspace = 60  ==> 6 segmente
+
+
+
+
+
+% rahmen
+kgx ra sub rand sub offs add kgy ra sub rand sub offs add moveto  % li unten
+kgx ra sub rand sub offs add kgy ra add rand add offs add lineto  % li oben
+kgx ra add rand add offs add kgy ra add rand add offs add lineto  % re oben
+kgx ra add rand add offs add kgy ra sub rand sub offs add lineto  % re unten
+closepath stroke
+
+% rahmen
+kgx ra sub rand sub kgy ra sub rand sub moveto  % li unten
+kgx ra sub rand sub kgy ra add rand add lineto  % li oben
+kgx ra add rand add kgy ra add rand add lineto  % re oben
+kgx ra add rand add kgy ra sub rand sub lineto  % re unten
+closepath gsave 1 setgray fill grestore stroke
+
+% protokoll rahmen
+kgx ra sub rand sub rand sub pwidth sub kgy ra sub rand sub moveto  % li unten
+kgx ra sub rand sub rand sub pwidth sub kgy ra add rand add lineto  % li oben
+kgx ra sub rand sub rand sub            kgy ra add rand add lineto  % re oben
+kgx ra sub rand sub rand sub            kgy ra sub rand sub lineto  % re unten
+closepath  stroke
+
+
+% segmente zeichnen
+0 winkel wspace add 360
+    {newpath
+     kgx kgy ri 3 index wspace add dup winkel add  arc
+     kgx kgy ra 3 index winkel add wspace add dup winkel sub arcn
+     closepath stroke pop} for
+
+% innerer kreis
+kgx kgy rii 0 360 arc stroke
+
+
+stroke
+showpage
+
+%eof

@@ -1,0 +1,54 @@
+\begin{moduledoc}{A simple weight mutation}{simpleMut}
+
+\item[\KeyWord{probadd} \optParam{$p_{add}$}]~\\
+This parameter $x$ indicates the probability $p_{add}$ for inserting a
+non existing weight.\\
+Default: 0.0
+
+\item[\KeyWord{probdel} \optParam{$p_{del}$}]~\\
+This parameter $x$ indicates the probability $p_{del}$ for deleting an
+existing weight.\\
+Default: 0.0
+
+\item[\KeyWord{initRange} \optParam{f}]~\\
+The parameter $x$ determines the interval  [-range, range] where
+inserted weights are randomly selected from.\\
+Default: 0.5;
+
+\end{moduledoc}
+
+The module {\it simpleMut} executes a simple kind of weight mutation. 
+Each existing weights of the offspring will be deleted with the probability
+$p_{del}$, each weight, that exists in the reference net and not in the offspring 
+will be inserted with the probability $p_{add}$.
+The inserted weight will be created when both units, the input and the output unit 
+exists.
+Note that neglecting the selection there exists a equilibrium state of
+adding and deleting weights, i.e.,
+the number of weights $n$ in the network, that depends
+on the values of $p_{add}$ and $p_{del}$:  $n = \frac{p_{add}}{p_{add}*p_{del}} $.
+
+
+
+
+\algo{12cm}{simpleMut}{
+{{\bf for all} (Weights of the reference net) {\bf do} \\
+\hspace*{0.5cm}Search the appropriate weight in the offspring; \\
+\hspace*{0.5cm}{\bf if} ( the weight exists in the offspring ) {\bf then} \\
+\hspace*{1.0cm}{\bf if} {( RAND(0,1) $< p_{del}$ )} {\bf then}\\
+\hspace*{1.5cm}delete the weight in the offspring;\\
+\hspace*{0.5cm}{\bf else if} ( the weight doesn't exist in the offspring) {\bf then}\\
+\hspace*{1.0cm}{\bf if} ( both units, start and end-unit exist in the offspring) {\bf then}\\
+\hspace*{1.5cm}{\bf if} ( RAND(0,1)  $ < p_{add}$ ) {\bf then}\\
+\hspace*{2.0cm}insert weight in the offspring;
+}
+}
+
+
+
+
+
+
+
+
+

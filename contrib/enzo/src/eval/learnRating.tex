@@ -1,0 +1,33 @@
+\begin{moduledoc}{Evaluation of the learning process}{learnRating}
+
+\item[\KeyWord{noLearnRating} \optParam{f}]~\\
+This value is added to the fitness term if the network couldn't
+learn the patterns properly, e.g. its mean error was higher
+than specified by {\it maxtss}\\
+Default: 200.0
+
+\item[\KeyWord{epochRating} \optParam{f}]~\\
+The number of learning epochs needed is multiplied by this value and added to
+the fitness term.\\
+Default: 0.0
+
+\item[\KeyWord{tssRating} \optParam{f}]~\\ 
+The mean error is multiplied by this value and added to the fitness term.\\
+Default: 0.0
+
+\item[\KeyWord{maxtss} \optParam{f}]~\\ 
+If the mean error is lower than this value, learning is stopped.
+It is necessary to decide if learning was successful or not.\\
+Default: 0.5
+
+
+\end{moduledoc}
+
+
+The module {\it learnRating} evaluates the learning properties of
+all offspring networks. It is possible to evaluate the mean error,
+the number of training epochs until the mean error is lower
+than a given threshold and additionally punish networks which couldn't learn
+the patterns with a specified precision.
+
+

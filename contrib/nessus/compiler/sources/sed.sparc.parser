@@ -1,0 +1,6 @@
+/.*register YYSTYPE \*yypvt\;.*$/ a\
+register short yyn;             /* sparc */
+/.*static YYSTYPE \*yyv\;.*$/ c\
+YYSTYPE *yyv;                           /* value stack */  /* sparc */             
+ 
+ 

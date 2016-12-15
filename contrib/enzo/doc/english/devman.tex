@@ -1,0 +1,418 @@
+% %W%	%G%
+
+\part{\ENZO Implementation Guide} % ==================================================
+
+%\noch{zus"atzliches init; msgv[1] == \&reference in EVOLUTION\_INIT}
+
+%\noch{Kap. zsf. "anderungen am SNNS}
+
+%\noch{Kap. zsf. "anderungen kernel\_shell: sh\_netinfo, sh\_no\_pattern etc }
+
+%\noch{"anderung der BLOCK-gr"o"sen im SNNS zwecks Speicherersparnis (kr\_def.h)}
+
+%\noch{ein jeder entwickler mu"s das benutzerhandbuch kennen}
+
+%\\noch{man darf sich nicht darauf verlassen, da"s das gerade aktive Netz
+ %     in anderen Modulen nicht ge"andert wird!}
+
+%\\noch{es gibt eine stop-fkt, die abbricht, wenn mit *parents/*offsprings
+%      was nicht stimmt}
+
+\section{Design}
+The kernel of \ENZO\ has a simple structure:
+
+\begin{verbatim}
+    init-modules
+
+    read-control-file
+
+    {pre-evolution}
+    
+    {evaluation}
+    {history}
+    {survival-of-the-fittest}
+    
+    while not {stop-evolution} do
+    begin
+        {selection}
+        {crossover}
+        {mutation}
+        {optimization}
+        {evaluation}
+        {history}
+        {survival-of-the-fittest}
+    end
+    {post-evolution}
+
+    exit-modules
+\end{verbatim}
+
+The names in brackets correspond to the evolutionary operators,
+which consist of several modules.
+All modules of one operator type are linked to a library, e.g.,
+each operator has a corresponding library.
+This allows easy extension, and since all functionality is implemented
+in the libraries, one can use the skeleton implementation of
+the algorithm to optimize other things than neural networks by exchanging the
+libraries.
+The flexible design also allows for a good parallelization, if necessary.
+
+\ENZO\ was implemented in ANSI-C to allow  portability to
+other systems. On the other hand it would be very appealing to implement
+a genetic algorithm (as well as neural network simulators)
+in a object oriented language like C++.
+To achieve some of the flexibility of an object-oriented design,
+all modules have a standardized interface, and  their functions are referred through
+function pointer, stored in a module table.
+
+
+\subsection{Extension of \ENZO by own modules}
+
+For extension exists a sample module, which should allow you
+to integrate an own module specialized for your purposes.
+Just try it ...
+
+To add an own module, the following things have to be done:
+\begin{enumerate}
+  \item Design of the interface functions.
+  \item Implementation of the module.
+  \item Test the module extensively!
+  \item Add the new module in the global module table, and change
+        the makefile such that your code is compiled and linked to the program.
+\item	Don't forget the documentation of key words and functionality of the module.
+\end{enumerate}
+
+
+
+\subsection{Dependencies between modules \label{abh} ?}
+
+\centerline{\em Ideally, there should be no dependencies !}
+
+Some kind of dependencies between certain operators seem still
+suggestive, e.g. during pre-evolution one might also want to
+perform a local optimization. The corresponding module is part
+of the optimization library. By sharing the keywords\footnote{This is similar to
+a message dispatcher in a window-based environment}
+the pre-evolution module
+can find the optimization function through the module table
+and call it via the module interface.
+To provide this functionality a module should indicate if
+it wants to use a command line exclusively, i.e., it should be removed
+and not further dispatched.
+
+
+
+\subsection{Sharing data}
+
+The nepomuk library provides a user data field additionally to the
+network information, e.g., the structure \verb+networkData+ is used
+to store the data of the evolution process  with the individuals.
+This is necessary to append the fitness to the network, but it could also
+be used to optimize the parameters of the evolution !
+One should be careful with this global-like data. Before adding a new field
+to this structure, alternatives that do not need global data exchange
+should be evaluated.
+
+
+
+\section{Interfaces}
+
+There are three levels of interfaces to distinguish:
+the standardized module interfaces, the nepomuk interface and
+the interface to the neural network simulator.
+They are discussed in the following sections.
+
+\subsection{Module interfaces \label{opschnitt}}
+
+Every module has to implement the following functions,which are
+made public through the module table.
+Also has each module to define a keyword,
+which activates the module during initialization.
+The syntax is simply: \verb+keyword+ .\\
+
+\begin{description}
+  \item[\tt int module\_init( ModuleTableEntry *self, int msgc, char *msgv{[]} )]%
+    ~\\
+    This function handles the initialization of the module.	\\
+    \verb+message = "initialize" :+  for general  initialization;\\
+    \verb+message = "exit" :+       for general exit;\\
+
+
+    \verb+other keywords :+ specific  initialization.\\
+    \verb+self+ the entry in the global module table.\\
+
+     \verb+return value:+\\
+       $0:$ The message was not used.\\
+       $1:$ The message was used.\\
+       $< 0:$ A warning should be generated.\\
+       $> 1:$ An  error message should be generated.\\
+
+	
+
+
+  \item[\tt %
+        int module\_work( PopID *parents, PopID *offsprings, PopID *ref )]~\\
+	This is the working horse of every module.\\
+	These functions should not manipulate neither the  parents nor the
+	reference networks, but only the offsprings.
+	During selection, the concerning networks are copied to an offspring
+	population, which can be manipulated.
+
+
+  \item[\tt char *module\_errMsg( int err\_code )]~\\
+     Returns a error message depending on   \verb+err_code+ .
+\end{description}
+
+The activation of modules is done with the function 
+\verb+enzo_actModule()+ .
+Furthermore the function  \verb+enzo_logprint( char *fmt, ... )+ allows
+for output in the log file (as \verb+printf()+).
+
+
+
+\subsection{The \nepomuk library} % --------------------------------------------------
+
+
+All  \nepomuk interface functions have the prefix \verb+kpm_+,
+shortcut for {\bf K}arlsruher {\bf P}opulations-{\bf M}anager;
+
+Initialization and cleanup of \nepomuk:
+
+\begin{description}
+
+  \item[\tt kpm\_err kpm\_initialize( int max\_nets, int max\_pats )]~\\
+	Initializes the internal data structures and fields of \nepomuk.
+        The number of networks to manage is given by \verb+max_nets+
+	and the number of pattern sets by \verb+max_pats+.
+
+  \item[\tt kpm\_err kpm\_exit( void )]~\\
+	For a clean  exit this function needs to be called. It frees allocated
+	memory and resets \nepomuk.
+
+\end{description}
+
+Network management:
+\begin{description}
+
+  \item[\tt kpm\_err kpm\_setCurrentNet( NetID id )]~\\
+    Selects the network with the given \verb+id+ for further manipulation.
+	
+  \item[\tt NetID   kpm\_getCurrentNet( void )]~\\
+    Returns the \verb+NetID+ of the currently activated network.
+
+  \item[\tt NetID   kpm\_loadNet( char *filename, void *usr\_data )]~\\
+    Loads a new network from the file \verb+filename+ , makes it the active network
+and returns its \verb+NetID+ . The given \verb+usr_data+ is appended to the structure.
+
+
+  \item[\tt kpm\_err kpm\_saveNet( NetID id, char *filename, char *netname )]~\\
+	Saves the network referred by \verb+id+ in the file \verb+filename+.
+
+  \item[\tt kpm\_err kpm\_deleteNet( NetID id )]~\\
+	Deletes the complete data structures of the network referred by \verb+id+,
+	i.e., the internal representation as well as the  \verb+userData+.
+        
+
+  \item[\tt kpm\_sortNets( CmpFct netcmp )] ~\\
+	Sort the networks in \nepomuk\ using the function \verb+netcmp+.
+	The function works as \verb+strcmp+ and keeps the
+        networks sorted. Is \verb+netcmp == NULL+ no sorting is done.
+
+  \item[\tt NetID   kpm\_copyNet( NetID id, void *usr\_data )]~\\
+	Creates a copy of the network, appends the given  \verb+usr_data+
+ 	and returns the \verb+NetID+.
+
+  \item[\tt NetID   kpm\_newNet ( void *usr\_data )]~\\
+	Creates a new (empty) network, appends the given  \verb+usr_data+
+ 	and returns the \verb+NetID+.
+	
+  \item[\tt void   *kpm\_getData( NetID id )]~\\
+	Returns the \verb+usr_data+ of the active network.
+
+
+  \item[\tt kpm\_err kpm\_getNetDescr( NetID id, NetDescr *n )]~\\
+	Returns a description of the active network, e.g. number of units,
+	weights, etc.
+
+\end{description}
+
+Management of subpopulations:
+
+\begin{description}
+  \item[\tt PopID kpm\_newPopID( void )]~\\
+	Returns a new, unused population identification.
+
+  \item[\tt kpm\_err kpm\_validPopId( PopID id )]~\\
+	Checks, if the identification is valid. Returns \verb+KPM_NO_ERROR+
+ 	if valid and  \verb+KPM_INVALID_POPID+ otherwise.
+
+  \item[\tt kpm\_err kpm\_setPopMember( NetID n\_id, PopID p\_id )]~\\
+	Makes the network referred by \verb+n_id+ a member of the
+	population referred by \verb+p_id+ . 
+
+  \item[\tt PopID kpm\_getPopID( NetID id )]~\\
+	Returns the identification of the population the network referred by
+	\verb+n_id+  belongs to.
+
+  \item[\tt NetID kpm\_popFirstMember( PopID p\_id )]~\\
+	Returns the network identification of the first network in the
+	population referred by \verb+p_id+.
+	If no network exists, \verb+NULL+ is returned, otherwise the network
+	is made the active network.
+	The first network is the smallest network with respect to  function
+	passed to \verb+kpm_init+ .
+
+  \item[\tt NetID kpm\_popNextMember( PopID p\_id, NetID n\_id )]~\\
+	Returns the network identification of the network direct after
+	\verb+n_id+ in the population \verb+p_id+.
+	If none exists, \verb+NULL+, else the network is mad the active network.
+\end{description}
+
+Pattern management:
+
+\begin{description}
+  \item[\tt PatID kpm\_loadPat( char *filename, void *usr\_data )]~\\
+	Loads a new pattern set from the file \verb+filename+, appends the
+	\verb+usr_data+ and returns its \verb+PatID+ .
+
+  \item[\tt kpm\_err  kpm\_setCurrentPattern( PatID id )]~\\
+	Sets the pattern set referred by \verb+id+.
+
+
+  \item[\tt PatID kpm\_getCurrentPattern( void )]~\\
+	Returns the  \verb+PatID+ of the current pattern set.
+
+  \item[\tt void *kpm\_getPatData( PatID id )]~\\
+	Returns the \verb+usr_data+ of the  pattern set referred by \verb+id+.
+
+  \item[\tt PatID kpm\_getFirstPat( void )]~\\
+	Returns the \verb+PatID+  of the first pattern set, or \verb+NULL+
+	if none exists.
+
+
+  \item[\tt PatID kpm\_getNextPat( PatID pat )]~\\
+	Returns the \verb+PatID+  of the pattern set following the set referred by
+	\verb+pat+ , or \verb+NULL+ if none exists.
+
+  \item[\tt kpm\_err kpm\_setPatName( PatID id, char *name )]~\\
+	A name can be assigned to pattern set for identification, e.g.,
+    	"`learn"', "`test"', "`cross validation"', \dots .
+	This functions copies the given string to store it with the pattern set.
+
+
+  \item[\tt char *kpm\_getPatName( PatID id )]~\\
+	Returns the name of the pattern set referred by \verb+id+ or \verb+NULL+
+	if none exists.
+
+\end{description}
+
+\subsection{Interface to a neural network simulator} % --------------------------------
+
+
+All  interface functions have the prefix \verb+ksh_+. They are located
+in the file \verb+kr_shell.c+ which is linked to the nepomuk library.
+There are about 100 interface functions for network manipulation request, e.g.,
+to delete units, to add units, to perform learning, etc...
+
+Every simulator that offers a large set of manipulation functions, as the SNNS simulator does,
+could be used with \ENZO.
+The functions of the interface do almost nothing except calling the
+appropriate functions of the neural network simulator. 
+
+
+
+
+
+\section{Implementation internals}
+
+\subsection{\ENZO }
+
+\ENZO is no stand alone program, but uses a neural network simulator for
+network manipulation. It provides an interface to the simulator that should
+allow for easy communication with most simulators, that provide an interface
+for network manipulation. Figure \ref{design} shows the design and the interfaces of
+\ENZO in connection with the SNNS simulator,
+figure \ref{link} shows which libraries and objects are linked together to
+the executable \verb+enzo+.
+
+\begin{figure}[thb]
+\centerline{\psfig{figure=../bilder/link.eps,width=15cm,height=12cm} }
+\caption[Linking the executable ]{ \label{link}
+{\small The figure shows all libraries and objects which are linked
+together to form the executable \verb+enzo+. 
+}}
+\end{figure}
+
+The interface functions of the simulator are called solely through \ENZO's interface
+module (kr\_shell.c). These interface functions are, in turn, called from the modules
+forming the evolutionary operators or from the population manager \nepomuk.
+The handling of networks and patterns 
+is done exclusively via the \nepomuk interface.
+The main loop is linked with the other parts through function pointers.
+It uses a module table to store all functions, and activates dependent on the command file
+the specialized modules.
+The function pointers forming an operator are  stored in a corresponding table. Note that
+a pointer could appear here several times.
+
+Summarizing, \ENZO consists of three main parts: the main loop,
+the population manager library \nepomuk
+and the specialized modules forming the evolutionary operators libraries.
+
+\subsection{\nepomuk}
+
+The population is managed with an array of constant size; the number of
+population members is fixed at initialization.
+Note that the functions for subpopulation management are designed for
+rather small population (linear search), i.e., several hundred members
+would be impossible. This would also lead to a memory problem.
+
+For an efficient population management, free and used array elements are
+stored in lists, i.e., requirements can be satisfied in O(1).
+See also  figure \ref{nepstruct}.
+
+\begin{figure}[ht]
+\setlength{\unitlength}{0.0125in}%
+\begin{picture}(426,373)(54,435)
+\put(50,435){\epsffile{../bilder/pop_list.pstex}}
+\put( 54,687){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\tenrm Population}}}
+\put( 75,717){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\tenrm free-list}}}
+\put( 66,801){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\tenrm firstUsed}}}
+\put(159,801){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\tenrm firstFree}}}
+\put( 75,657){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\tenrm used-list}}}
+\put(240,630){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\tenrm usedSucc/Pred}}}
+\put(324,687){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\tenrm \dots}}}
+\put(405,738){\makebox(0,0)[b]{\raisebox{0pt}[0pt][0pt]{\tenrm freeSucc}}}
+\put(195,500){\parbox{7cm}{\small
+\begin{itemize}
+  \item int    used;      % TRUE if a valid net is stored  
+  \item int    subPop;    % indicates the subpop membership
+    
+  \item memNet snnsNet;   % snns-specific Network-Information
+    
+  \item NetID  freeSucc;  % pointer to the successor in freeList
+  \item NetID  usedSucc,  % dto. for the usedList
+  \item        usedPred;  % and the predecessor in usedList
+
+  \item void  *userData;  % this is what the user wants to store
+\end{itemize}}}
+\end{picture}
+\caption{ \label{nepstruct} \sl Data structure used in \nepomuk. }
+\end{figure}
+
+\subsection{Necessary changes  in SNNS modules}
+
+Two little changes had to be made to the original SNNS software.
+Since we are working with a population of networks, the allocated memory
+for units, etc... should be in a descent range. For that, the default block size
+for memory allocation in the file \verb+kr_def.h+ were decreased.
+
+Furthermore, the handling of several networks needs additional interface
+functions to copy network information into the data structures of the SNNS kernel.
+The functions located in the file \verb+enzo_kr_mem.c+ provide this functionality.
+It's included in the SNNS file \verb+kr_mem.c+.
+To activate this extensions you have to compile the SNNS kernel library
+with the flag \verb+ -D__ENZO__+. 
+
+
+
+

@@ -1,0 +1,10 @@
+SNNS pattern definition file V1.4 *
+generated at * \
+[ No. of patterns : %n \ |
+  No. of input units : %e \ |
+  No. of output units : %a \ |
+  *
+]
+{ #*
+  %i %o <
+}

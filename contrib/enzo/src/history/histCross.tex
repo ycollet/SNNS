@@ -1,0 +1,27 @@
+\begin{moduledoc}{Saving all informations about the networks on the cross validation patterns}{histCross}
+
+\item[\KeyWord{historyFile} \Param{filename}]~\\
+This string contains the prefix of the filename where all informations are stored.
+The extension of the filename is {\it .cross} for the network informations and
+{\it .popcross} for the population informations.
+\end{moduledoc}
+
+The modul {\it histCross} writes all informations about the network in a special file 
+(extension {\it .cross})
+Each line of the file accords to one network. It contains information about the number 
+of hits (the network classified the pattern correct), miss (the network cassified the pattern wrong)
+and nones (the network did not classify the pattern in an unique way). 
+It also contains the quotient  hits and misses.
+
+The file with the {\it .popcross} extension contains informations about the whole 
+population. Each line describes the several test values (best quotient of all members, 
+worst quotient of all members and the average quotient) of the population 
+at each generation.  The population file is ready for gnuplot and other
+programs.
+
+The values are not computed in this modul, they are computed in the evalution
+functions and stored in special slots of the data structure.
+
+This module is only useful in conjunction with  evaluation modules
+using classification performance, e.g. {\it bestGuessHigh} or {\it classes}.
+

@@ -1,0 +1,39 @@
+\begin{moduledoc}{Evaluation of the topology}{topologyRating}
+
+\item[\KeyWord{weightRating} \optParam{f}]~\\
+The number of connections in the network is multiplied by this value and
+divided through  the maximal number of connections ( in the reference network).
+The result is added
+to the fitness term.\\
+Default: 0.0
+
+\item[\KeyWord{unitRating} \optParam{u}]~\\  
+The number of hidden units in the network is multiplied by this value and
+divided through  the maximal number of hidden units ( in the reference network).
+The result is added
+to the fitness term.\\
+Default: 0.0
+
+\item[\KeyWord{inputRating} \optParam{k}]~\\ 
+The number of input units in the network is multiplied by this value and
+divided through  the maximal number of input units ( in the reference network).
+The result is added
+to the fitness term.\\
+Default: 0.0
+
+\end{moduledoc}
+
+
+
+The module {\it topologyRating} evaluates the topology of all
+offspring networks. Criteria are the number of connections,
+the number of hidden units and the number of input units.
+These numbers are multiplied by a scaling factor and divided through
+the maximal values of the reference network. The result contributes
+to the fitness.
+
+
+
+
+
+

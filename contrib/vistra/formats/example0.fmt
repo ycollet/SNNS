@@ -1,0 +1,11 @@
+%e %a < 
+inputs: \
+{ %i \ }
+[ outputs: \ | 
+  %o \
+]
+[ classes: \ |
+  %c \ 
+]
+
+

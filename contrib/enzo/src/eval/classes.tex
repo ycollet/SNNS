@@ -1,0 +1,44 @@
+\begin{moduledoc}{Evaluation using the 40 - 20 - 40 method}{classes}
+
+
+\item[\KeyWord{crossPattern} \optParam{name}]~\\
+Name of the file which contains the set of cross validation patterns.\\
+Default: -
+
+
+\item[\KeyWord{hitRating} \optParam{f}]~\\
+Value that is added to the fitness term, in case the network classifies a
+pattern correctly.\\
+Default: 0.0
+
+\item[\KeyWord{missRating} \optParam{f}]~\\  
+Value that is added to the fitness term, in case the network classifies a
+pattern wrong.\\
+Default: 10.0
+
+\item[\KeyWord{noneRating} \optParam{f}]~\\ 
+Value that is added to the fitness term, in case the network doesn't classifies a
+pattern.\\
+Default: 10.0
+
+\item[\KeyWord{highDesc} \optParam{f}]~\\ 
+Maximal output value of the output neuron.\\
+Default: 1.0
+
+\item[\KeyWord{lowDesc} \optParam{f}]~\\ 
+Minimal output value of the output neuron.\\
+Default: -1.0
+
+\item[\KeyWord{decisionThreshold} \optParam{f}]~\\ 
+Distance between the output of  {\it min-activation} and
+the output of {\it max-activation}.\\
+Default: 0.2
+
+\end{moduledoc}
+
+The module is useful for two state classification networks with one output neuron, i.e.,
+one value reflecting a positive classification (usually 1),
+and the other reflecting the negative classification (usually 0).
+The values are set by {\it highDesc} and {\it lowDesc}. The distance
+{\it decisionThreshold} is taken around the average. If the output is within
+the {\it decisionTreshold} area it is taken as not classified.

@@ -1,0 +1,53 @@
+{\bf network}~\verb&neckerCube&\verb&(&\verb&pathName&~\verb&:=&~\verb&"./"&\verb&)&\verb&;&\\
+~~{\footnotesize \{\verb{version Feldman '88{\}}\\
+{\bf const}\\
+~~\verb&inDat&~\verb&=&~\verb&pathName&~\verb&|&~\verb&"NeckerView.n"&\verb&;&\\
+~~\verb&subFile&~\verb&=&~{\bf file}~\verb&inDat&~{\bf of}~{\bf subnet}\verb&;&\\
+{\bf structure}\\
+~~{\bf subnet}~\verb&subFile&~{\bf at}\verb&(&0\verb&,&~1\verb&)&~\verb&:&\verb&BCloser&\verb&;&~{\footnotesize \{\verb{subnet represents view with closer B edge{\}}\\
+~~{\bf subnet}~\verb&subFile&~{\bf at}\verb&(&2\verb&,&~1\verb&)&~\verb&:&\verb&HCloser&\verb&;&~{\footnotesize \{\verb{subnet represents view with closer H edge{\}}\\
+{\bf var}\\
+~~{\bf unit}~\verb&:&~\verb&x&\verb&,&~\verb&y&\verb&;&\\
+~~{\bf array}~{\bf of}~{\bf unit}~\verb&:&~\verb&bStruct&\verb&,&~\verb&hStruct&\verb&;&\\
+{\bf begin}\\
+~~{\footnotesize \{\verb{connect subnets by inhibitory connections{\}}\\
+~~{\bf foreach}~\verb&bStruct&~{\bf in}~\verb&[&\verb&BCloser&\verb&.&\verb&FrontEdges&\verb&,&~\verb&BCloser&\verb&.&\verb&BackEdges&\verb&]&\verb&,&\\
+~~~~~~~~~~\verb&hStruct&~{\bf in}~\verb&[&\verb&HCloser&\verb&.&\verb&FrontEdges&\verb&,&~\verb&HCloser&\verb&.&\verb&BackEdges&\verb&]&~{\bf do}\\
+~~~~{\bf foreach}~\verb&x&~{\bf in}~\verb&bStruct&\verb&,&~\verb&y&~{\bf in}~\verb&hStruct&~{\bf do}\\
+~~~~~~\verb&x&~\verb&<->&~\verb&y&~\verb&:&~\verb&-&~$.575$~~~~~~{\footnotesize \{\verb{inhibitory connections among edges of both cubes{\}}\\
+~~~~{\bf end}\\
+~~{\bf end}\verb&;&\\
+~~{\bf foreach}~\verb&x&~{\bf in}~\verb&BCloser&\verb&.&\verb&Relations&\verb&,&~\verb&y&~{\bf in}~\verb&HCloser&\verb&.&\verb&Relations&~{\bf do}\\
+~~~~~~\verb&x&~\verb&<->&~\verb&y&~\verb&:&~\verb&-&~$.8$~~~~~~~~{\footnotesize \{\verb{inhibitory connections - relational units of both cubes{\}}\\
+~~{\bf end}\verb&;&\\
+~~\verb&BCloser&\verb&.&\verb&Result&~\verb&<->&~\verb&HCloser&\verb&.&\verb&Result&~\verb&:&~\verb&-&$1.0$\verb&;&\\
+~~\verb&BCloser&\verb&.&\verb&Result&\verb&.&{\bf name}~\verb&:=&~\verb&"bCloser"&\verb&;&\\
+~~\verb&HCloser&\verb&.&\verb&Result&\verb&.&{\bf name}~\verb&:=&~\verb&"hCloser"&\\
+{\bf end}\verb&.&\\[.5 cm]
+
+{\bf network}~\verb&neckerView&\verb&(&\verb&)&\verb&;&\\
+~~{\footnotesize \{\verb{version Feldman '88 -- subnet for one view{\}}\\
+{\bf const}~\\
+~~\verb&names&~\verb&=&~\verb&[&\verb&"A"&\verb&..&\verb&"H"&\verb&]&\verb&;&\\
+~~\verb&relNam&~\verb&=&~\verb&[&\verb&"A<<>>E"&\verb&,&~\verb&"B<<>>F"&\verb&,&~\verb&"C<<>>G"&\verb&,&~\verb&"D<<>>H"&\verb&]&\verb&;&\\
+{\bf structure}\\
+~~{\bf ring}\verb&[&4\verb&]&~{\bf with}~{\bf act}~{\bf random}~{\bf get}~{\bf name}~{\bf from}~\verb&names&\verb&[&0\verb&..&3\verb&]&~\\
+~~~~~~~~~~{\bf matrix}~\verb&(&2\verb&,&2\verb&)&~{\bf at}~\verb&(&3\verb&,&~5\verb&)&~\verb&<->&~{\bf by}~$.200$~\verb&:&~\verb&FrontEdges&\verb&;&\\
+~~{\bf ring}\verb&[&4\verb&]&~{\bf with}~{\bf act}~{\bf random}~{\bf get}~{\bf name}~{\bf from}~\verb&names&\verb&[&4\verb&..&7\verb&]&\\
+~~~~~~~~~~~~~~~{\bf matrix}~\verb&(&2\verb&,&2\verb&)&~{\bf at}~\verb&(&4\verb&,&~3\verb&)&~\verb&<->&~{\bf by}~$.200$~\verb&:&~\verb&BackEdges&\verb&;&\\
+~~{\bf ring}\verb&[&4\verb&]&~{\bf with}~{\bf act}~{\bf random}~{\bf get}~{\bf name}~{\bf from}~\verb&relNam&~\\
+~~~~~~~~~~~~~~~{\bf matrix}~\verb&(&2\verb&,&2\verb&)&~{\bf at}~\verb&(&2\verb&,&~2\verb&)&~~\verb&<->&~{\bf by}~$.300$~\verb&:&~\verb&Relations&\verb&;&\\
+~~{\bf unit}~{\bf with}~{\bf iotype}~{\bf output}\verb&,&~{\bf act}~{\bf random}~{\bf at}~\verb&(&2\verb&,&~0\verb&)&~\verb&:&~\verb&Result&\verb&;&\\
+{\bf var}\\
+~~{\bf unit}\verb&:&~\verb&x&\verb&,&~\verb&y&\verb&,&~\verb&z&\verb&,&~\verb&res&\verb&;&\\
+{\bf begin}\\
+~~{\footnotesize \{\verb{define connections between front and back face edges of cube{\}}\\
+~~{\bf foreach}~\verb&x&~{\bf in}~\verb&FrontEdges&\verb&,&~\verb&y&~{\bf in}~\verb&BackEdges&\verb&,&~\verb&z&~{\bf in}~\verb&Relations&~{\bf do}\\
+~~~~\verb&x&\verb&<->&\verb&y&~\verb&:&~$.2$\verb&;&~~~~~~~~{\footnotesize \{\verb{connect front and back faces of cube{\}}\\
+~~~~\verb&x&\verb&<->&\verb&z&~\verb&:&~$.3$\verb&;&~~~~~~~~{\footnotesize \{\verb{connect front face to relational units{\}}\\
+~~~~\verb&y&\verb&<->&\verb&z&~\verb&:&~$.3$~~~~~~~~~{\footnotesize \{\verb{connect front face to relational units{\}}\\
+~~{\bf end}\verb&;&~\\
+~~{\bf foreach}~\verb&x&~{\bf in}~\verb&Relations&~{\bf do}\\
+~~~~\verb&x&\verb&<->&\verb&Result&~\verb&:&~$.5$~~~~~~~{\footnotesize \{\verb{connect relational units to result unit{\}}\\
+~~{\bf end}\\
+{\bf end}\verb&.&\\

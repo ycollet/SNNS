@@ -1,0 +1,17 @@
+
+
+\begin{moduledoc}{Storing networks after evolution}{saveAll}
+  
+\item[\KeyWord{netDestName} \Param{filename}]~\\
+Sets the prefix of the filename. Networks are written to files with the
+prefix followed by a number for each network and the suffix .net, e.g. {\it filename}\verb+_1.net+ .\\
+
+\item[\KeyWord{saveNetsCnt} \optParam{cnt}]~\\
+ Number of networks, which are to be stored.\\
+  Default: 99
+  
+\end{moduledoc}
+
+Saves the given number of  networks  at the end of the evolution. Usually this are
+parent networks and the reference net. The networks are numbered with increasing
+fitness, e.g. the best network is {\it filename}\verb+_0.net+

@@ -1,0 +1,23 @@
+Recognition of digits
+
+The task is to classify digits using a multilayer perceptron
+with a topology 23-12-10-10 with 1076connections.
+The patterns are given with a feature description using
+containing 23 features. The training consists of 10 patterns, the test set
+contains 70 patterns. Each digit from 0 to 9  has an associated output
+neuron. 
+
+By using ENZO a network solving the task without hidden layers  could be found,
+thus showing that the patterns are linearly separable.
+
+Note that input units are not removed totally from the network,
+but rather all their connection are cut off. They get the unit name  <xxx>.
+If you analyze the network with the graphical user interface of SNNS,
+select in the display setup <show name> to easily identify removed input units.
+
+If you want to use the X-history output window, use for all benchmarks
+the command file with an additional <x> as prefix.
+
+Start the  benchmark with:
+
+	enzo sa.cmd    or    enzo xsa.cmd 

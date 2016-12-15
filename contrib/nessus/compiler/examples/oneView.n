@@ -1,0 +1,33 @@
+network oneView();
+  {necker cube, version Feldman '88 -- subnet for one view}
+
+const 
+  names = ["A".."H"];
+  relNam = ["A<<>>E", "B<<>>F", "C<<>>G", "D<<>>H"];
+
+structure
+  ring[4] with act random get name from names[0..3] 
+          matrix (2,2) at (3, 5) <-> by .200 : FrontEdges;
+  ring[4] with act random get name from names[4..7]
+          matrix (2,2) at (4, 3) <-> by .200 : BackEdges;
+  ring[4] with act random get name from relNam 
+          matrix (2,2) at (2, 2)  <-> by .300 : Relations;
+  unit with iotype output, act random at (2, 0) : Result;
+
+var
+  unit: x, y, z, res;
+
+begin
+
+  {define connections between front and back face edges of cube}
+  foreach x in FrontEdges, y in BackEdges, z in Relations do
+    x<->y : .2;        {connect front and back faces of cube}
+    x<->z : .3;        {connect front face to relational units}
+    y<->z : .3         {connect front face to relational units}
+  end;	
+
+  foreach x in Relations do
+    x<->Result : .5       {connect relational units to result unit}
+  end
+
+end.

@@ -1,0 +1,27 @@
+\begin{moduledoc}{Crossover of the connections between input- and output layer}{linCross}
+
+\item[\KeyWord{probCross} \optParam{ x } ]~\\
+    Probability of inserting a connection, that is contained in only one parent.
+    Default: 0.5 
+\end{moduledoc}
+
+
+This module does a linear crossover for all weights, which connect
+directly the input layer to the output layer, e.g., in nets without
+hidden layers or with shortcut connections.
+Only those connections are manipulated in the offspring net, no other
+units or weights are involved.
+If a network does not contain any of these connections, it remains
+unchanged.
+
+\algo{10cm}{linCross}{
+delete all connections from all offsprings\\
+{\bf forall} possible connections {\bf do}\\
+\hspace*{0.5cm}{\bf if} ( connection in both parents ) {\bf then}\\
+\hspace*{1.0cm}insert connection in offspring;\\
+\hspace*{1.0cm}set weight to the mean value of the parents' weights\\
+\hspace*{0.5cm}{\bf else if} ( connection only in one parent ){\bf then}\\
+\hspace*{1.0cm}{\bf if} ( RAND(0,1) $ < p_{cross}$ ) {\bf then}\\
+\hspace*{1.5cm}insert connection in offspring;\\
+\hspace*{1.5cm}set weight to the value of the parent's weight;
+}
