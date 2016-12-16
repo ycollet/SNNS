@@ -37,8 +37,10 @@
 #include "error.h"
 #include "batchman.h"     /* for input_is_file */
 
-#define yyzwrap() 1       /* terminate scanner at EOF of input */
-
+//#define yyzwrap() 1       /* terminate scanner at EOF of input */
+int yywrap(void) {
+  return 1;
+}
 %}
 
 DIGIT  [0-9]+

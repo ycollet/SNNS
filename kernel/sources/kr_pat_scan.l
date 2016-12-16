@@ -28,6 +28,9 @@
 #include "kr_pat_parse.h"
 #include "kr_pat_scan.ph"
 
+int yywrap(void) {
+  return 1;
+}
 %}
 
 digit           [0-9]

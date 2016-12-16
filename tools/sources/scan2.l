@@ -33,8 +33,10 @@
 #include "glob_typ.h"     /* SNNS-Kernel: Global Datatypes and Constants */
 #include "error.h"
 
-#define yyywrap() 1       /* terminate scanner at EOF of input */
-
+//#define yyywrap() 1       /* terminate scanner at EOF of input */
+int yyywrap(void) {
+  return 1;
+}
 /* change the type of the scanning function: */
 #undef YY_DECL
 #define YY_DECL Data_type yyylex(void) 

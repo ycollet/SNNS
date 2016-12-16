@@ -139,10 +139,10 @@ statement:
  | FOR Identifier Assignment expr    
                         { icode_op(assign, $<t>2.stp, $<t>4.stp, 0);
 			  /* assign result of expr to Identifier */ }
-     TO expr            { $$.stp = st_insert(newtmp());
+     TO expr            { $<t>$.stp = st_insert(newtmp());
 			  icode_op(less_eq, $<t>$.stp, $<t>2.stp, $<t>7.stp);
 			  /* instruction to evaluate loop condition */
-			  $$.tmp = get_ic_pos();
+			  $<t>$.tmp = get_ic_pos();
 			  /* store position of less_eq */
 			  icode_jmp(jmp_false, 0, $<t>$.stp); 
 			  /* exit FOR loop if condition is false */
