@@ -24,7 +24,7 @@
 #include <stdio.h>
 #include <malloc.h>
 #include <string.h>
-#include <struct.h>
+//#include <struct.h>
 #include <time.h>
 #include <memory.h>
 

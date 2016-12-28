@@ -17,7 +17,7 @@
              (c) 1991 by Thomas Korb and the SNNS-Group
 
 ******************************************************************************/
-# define IDENTIFIER 257
+# define IDENTIFIER 258
 # define XINT 258
 # define XFLOAT 259
 # define STRING 260

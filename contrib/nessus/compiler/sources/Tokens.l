@@ -413,7 +413,7 @@ int yyyylex()
 char *yydisplay(ch)
      register int ch;
 {
-    char *sprintf();
+    //char *sprintf();
     static char buf[20];
     static char *token[] = {
 #include "co_tokPrint.h"
