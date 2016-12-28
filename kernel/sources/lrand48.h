@@ -18,7 +18,7 @@
 
 ******************************************************************************/
 
-#if ! defined(HAVE_LRAND48) || HAVE_LRAND48 == 0
+#if !defined(HAVE_LRAND48)
 #ifndef _LRAND48_DEFINED_
 #define _LRAND48_DEFINED_
 

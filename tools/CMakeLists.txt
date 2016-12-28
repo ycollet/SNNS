@@ -1,6 +1,6 @@
 include_directories(${CMAKE_SOURCE_DIR}/kernel/sources
-                    ${CMAKE_SOURCE_DIR}/
                     ${CMAKE_BINARY_DIR}
+                    ${CMAKE_SOURCE_DIR}
 		    sources)
 
 set(TOOLS_SOURCES_C sources/analyze.c

@@ -51,7 +51,7 @@ add_flex_bison_dependency(kr_pat_scan kr_pat_parse)
 
 include_directories(${CMAKE_BINARY_DIR}
                     ${CMAKE_SOURCE_DIR}
-		    sources)
+                    sources)
 
 add_library(kernel STATIC ${KERNELSOURCES_C}
                           ${BISON_kr_par_parse_OUTPUTS}

@@ -17,7 +17,7 @@
 
 ******************************************************************************/
 
-#if ! defined(HAVE_GETCWD) || HAVE_GETCWD == 0
+#if !defined(HAVE_GETCWD)
 #ifndef _GETCWD_DEFINED_
 #define _GETCWD_DEFINED_
 
