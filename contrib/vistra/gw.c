@@ -1362,8 +1362,7 @@ static Boolean notPrintableGW(GW gw)
              break; 
     grayMat:
     clrMat:  if(gw->arg1 * gw->arg2 < ndims)
-             { sprintf(buf, "%u dimensions cannot be displayed 
-within a %ux%u matrix!", ndims, gw->arg1, gw->arg2);
+             { sprintf(buf, "%u dimensions cannot be displayed within a %ux%u matrix!", ndims, gw->arg1, gw->arg2);
                answer = TRUE;
              }
              break;

@@ -52,20 +52,18 @@
 #ifndef _PROTO_H
 #define _PROTO_H
 
-extern long time(long l);
-extern int fprintf(FILE *stream, char *fmtstr, ...);
-extern int printf(char *fmtstr, ...);
-extern char *vsprintf(char *s, char *fmtstr,va_list ap);
-extern char *vfprintf(FILE *stream, char *fmtstr,va_list ap);
-extern int fclose(FILE *stream);
-extern int fflush(FILE *stream);
+#include <stdio.h>
+#include <time.h>
+
+//extern long time(long l);
+//extern int fprintf(FILE *stream, char *fmtstr, ...);
+//extern int printf(char *fmtstr, ...);
+//extern char *vsprintf(char *s, char *fmtstr,va_list ap);
+//extern char *vfprintf(FILE *stream, char *fmtstr,va_list ap);
+//extern int fclose(FILE *stream);
+//extern int fflush(FILE *stream);
 
 extern double drand48(void);
 extern long   lrand48(void);
 extern void   srand48(long seedval);
-
-
-
-
-
 #endif

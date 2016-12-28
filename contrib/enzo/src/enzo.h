@@ -71,8 +71,8 @@
 #include "networkData.h"
 #include "subUtils.h"
 
+#include <stdio.h>
 
-extern int    setlinebuf( FILE *stream );
 /*  extern time_t time( time_t *tloc );  */
 
 

@@ -28,7 +28,9 @@
 #include "def.h"
 #include <math.h>
 /* #include <sys/stdtypes.h> */   
+#ifdef XFWF_FILE_SELECTION
 #include <Xfwf/FileSel.h>
+#endif
 #include <X11/Shell.h>
 #include <X11/Xaw/Box.h>
 #include <X11/Xaw/Command.h>

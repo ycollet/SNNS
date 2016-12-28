@@ -52,6 +52,7 @@
 #ifndef _SUBUTILS_H
 #define _SUBUTILS_H
 
+#include <math.h>
 
 /* -------------------------------------------------------------------------- */
 
@@ -78,8 +79,6 @@
 
 #define MAX_FILENAME_LEN 128   /* length for filenames                        */
 #define MAX_ERR_MSG_LEN  256   /* length for err messages                     */
-
-#define INFINITY      1234567890
 
 #define GET_NET_DATA(id)      (NetworkData *) kpm_getNetData( id )
 

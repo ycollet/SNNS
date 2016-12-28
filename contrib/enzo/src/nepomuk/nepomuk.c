@@ -52,6 +52,8 @@
 
 
 #include <string.h>
+#include <stdlib.h>
+
 #include "glob_typ.h"
 #include "kr_typ.h"	 /*  Kernel Types and Constants  */
 #include "kernel.h"
@@ -682,7 +684,7 @@ kpm_err kpm_getNetDescr( NetID id, NetDescr *n )
             }
                  
             break;
-          case SITES:
+          //case SITES:
             /* sites aren't supported (yet) */
         }
     }

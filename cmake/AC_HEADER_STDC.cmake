@@ -38,5 +38,4 @@ if (HAVE_DIRENT_H)
   set(HAVE_SYS_TYPES_H 1)
 endif ()
 
-check_include_files("dlfcn.h;stdint.h;stddef.h;inttypes.h;stdlib.h;strings.h;string.h;float.h" StandardHeadersExist)
 set(HAVE_LIBM 1)

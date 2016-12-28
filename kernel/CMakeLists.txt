@@ -58,5 +58,9 @@ add_library(kernel STATIC ${KERNELSOURCES_C}
 			  ${CMAKE_BINARY_DIR}/kr_pat_scan.c
 			  ${CMAKE_BINARY_DIR}/kr_pat_parse.c)
 
+if (SNNS_ENABLE_ENZO)
+  set_target_properties(kernel PROPERTIES COMPILE_DEFINITIONS "__ENZO__")
+endif ()
+
 add_library(func STATIC ${USR_FUNC_SOURCES_C}
                         ${UTILITY_SOURCES_C})
