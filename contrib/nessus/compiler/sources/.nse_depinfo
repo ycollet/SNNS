@@ -1,2 +1,0 @@
-nessus-LD: /lib/libm.a /lib/libl.a
-nessus-COMP: /usr/lib/crt0.o
