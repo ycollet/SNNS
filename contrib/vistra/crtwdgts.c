@@ -1,7 +1,7 @@
-#include "hook"
-#include "up"
-#include "down"
-#include "left"
+#include "hook.h"
+#include "up.h"
+#include "down.h"
+#include "left.h"
 
 static void getPopupPosition(Widget, Position *, Position *);
 static Widget createErrDlgShell(Widget);
