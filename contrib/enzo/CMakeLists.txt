@@ -99,3 +99,6 @@ set(ENZO_SRCS src/enzo.c
 
 add_executable(enzo ${ENZO_SRCS})
 target_link_libraries(enzo kernel func pre kernel func nepomuk kernel func stop selection mutation crossover opt eval history survival post m)
+
+install(TARGETS enzo
+        DESTINATION bin)

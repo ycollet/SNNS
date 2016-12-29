@@ -252,6 +252,30 @@ if (SNNS_ENABLE_VISTRA)
 endif ()
 
 #
+# Installation
+#
+
+install(FILES man/man1/analyze.1
+              man/man1/batchman.1
+	      man/man1/ff_bignet.1
+	      man/man1/isnns.1
+	      man/man1/linknets.1
+	      man/man1/snns.1
+	      man/man1/snns2c.1
+	      man/man1/td_bignet.1
+	      man/man1/xgui.1
+        DESTINATION man/man1)
+
+install(DIRECTORY examples/
+        DESTINATION share/snns/examples)
+
+install(FILES help.hdoc Readme Readme.bugs Readme.licence Readme.linux
+        DESTINATION share/snns/doc)
+
+install(FILES default.cfg
+        DESTINATION share/snns/conf)
+
+#
 # Packaging
 #
 

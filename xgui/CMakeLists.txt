@@ -115,3 +115,6 @@ add_executable(xgui sources/ui_main.c)
 target_link_libraries(xgui xgui1 xgui2 3d kernel func m)
 target_link_libraries(xgui SM ICE Xmu Xt Xext X11)
 target_link_libraries(xgui Xaw3d)
+
+install(TARGETS xgui
+        DESTINATION bin)

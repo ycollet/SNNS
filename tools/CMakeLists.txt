@@ -41,17 +41,17 @@ set(BATCH_SOURCES_C sources/batchman.c
 set(SNNS2C_SRCS sources/snns2c.c
                 sources/snns2clib.c)
 
-set(PAT_SEL_SRCS sources/pat_sel.c)
-set(NETLEARN_SRCS sources/netlearn.c)
+set(PAT_SEL_SRCS   sources/pat_sel.c)
+set(NETLEARN_SRCS  sources/netlearn.c)
 set(TD_BIGNET_SRCS sources/td_bignet.c)
 set(FF_BIGNET_SRCS sources/ff_bignet.c)
-set(NETPERF_SRCS sources/netperf.c)
-set(SNNSBAT_SRCS sources/snnsbat.c)
+set(NETPERF_SRCS   sources/netperf.c)
+set(SNNSBAT_SRCS   sources/snnsbat.c)
 set(FEEDBACK_GENNET_SRCS sources/feedback-gennet.c)
-set(CONVERT2SNNS_SRCS sources/convert2snns.c)
-set(ISNNS_SRCS sources/isnns.c)
-set(LINKNETS_SRCS sources/linknets.c
-                  sources/snns2clib.c)
+set(CONVERT2SNNS_SRCS    sources/convert2snns.c)
+set(ISNNS_SRCS     sources/isnns.c)
+set(LINKNETS_SRCS  sources/linknets.c
+                   sources/snns2clib.c)
 
 set(BATCHMAN_SRCS sources/batchman.c
                   sources/gram1.tab.c
@@ -116,3 +116,55 @@ add_executable(mkout sources/mkout.c)
 target_link_libraries(mkout m)
 add_executable(mkpat sources/mkpat.c)
 target_link_libraries(mkpat m)
+
+
+install(TARGETS snns2c
+        DESTINATION bin)
+
+install(TARGETS pat_sel
+        DESTINATION bin)
+
+install(TARGETS netlearn
+        DESTINATION bin)
+
+install(TARGETS td_bignet
+        DESTINATION bin)
+
+install(TARGETS ff_bignet
+        DESTINATION bin)
+
+install(TARGETS netperf
+        DESTINATION bin)
+
+install(TARGETS snnsbat
+        DESTINATION bin)
+
+install(TARGETS feedback-gennet
+        DESTINATION bin)
+
+install(TARGETS convert2snns
+        DESTINATION bin)
+
+install(TARGETS isnns
+        DESTINATION bin)
+
+install(TARGETS linknets
+        DESTINATION bin)
+
+install(TARGETS batchman
+        DESTINATION bin)
+
+install(TARGETS analyze
+        DESTINATION bin)
+
+install(TARGETS pat_sel_simple
+        DESTINATION bin)
+
+install(TARGETS mkhead
+        DESTINATION bin)
+
+install(TARGETS mkout
+        DESTINATION bin)
+
+install(TARGETS mkpat
+        DESTINATION bin)
