@@ -1188,7 +1188,7 @@ static Boolean ui_rem_performPrunInit (int learnType)
     float net_error;
 
     /* create temporary file */
-    tmp_file = tempnam ("./","SNNS_");
+    tmp_file = mktemp("SNNS_XXXXXXXX");
 
     /* display message */
     ui_tw_printMessage

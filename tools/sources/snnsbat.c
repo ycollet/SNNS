@@ -1575,7 +1575,7 @@ static void pruneNet ()
 
     if (pr_recreate)
 	/* create temporary file */
-	pr_tmp_file = tempnam ("./","SNNS_");
+	pr_tmp_file = mktemp("SNNS_XXXXXXXX");
 
     do
 	/* prune links until error is beyond maximum error */

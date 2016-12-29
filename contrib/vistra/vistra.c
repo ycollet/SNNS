@@ -960,9 +960,9 @@ XtPointer garbage;
                char *tempIn, *tempOut, buf[512];
 
                /* Schreibe Patterns in ein temporaeres LVQ-File */
-               if(! (tempIn = tempnam(NULL,"@PCA_IN")))
+               if(! (tempIn = mktemp("@PCA_INXXXXXXXX")))
                  { xhandleErr(39); return; }
-               if(! (tempOut = tempnam(NULL, "@PCA_OUT")))
+               if(! (tempOut = mktemp("@PCA_OUTXXXXXXXX")))
                  { free(tempIn); xhandleErr(39); return; }
                if(! (pcaIn = fopen(tempIn, "w")))
                { free(tempIn); free(tempOut);

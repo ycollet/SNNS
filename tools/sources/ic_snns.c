@@ -1767,7 +1767,7 @@ void pruneNet(arglist_type *arglist)
   if (max_error < accepted_error) max_error = accepted_error;
 
   if (recreate)
-  if ((tmp_file1 = tempnam("./", "batch")) == NULL)
+  if ((tmp_file1 = mktemp("batchXXXXXXXX")) == NULL)
   err_prt("Cannot create temporary file");
     
   do

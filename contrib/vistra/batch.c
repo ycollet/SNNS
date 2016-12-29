@@ -215,8 +215,8 @@ static int execLine()
                char *tempIn, *tempOut, buf[512];
 
                /* Schreibe Patterns in ein temporaeres LVQ-File */
-               if(! (tempIn = tempnam(NULL,"@PCA_IN"))) error(39);
-               if(! (tempOut = tempnam(NULL, "@PCA_OUT"))) error(39);
+               if(! (tempIn = mktemp("@PCA_INXXXXXXXX"))) error(39);
+               if(! (tempOut = mktemp("@PCA_OUTXXXXXXXX"))) error(39);
 	       if(! (pcaIn = fopen(tempIn, "w"))) 
                { sprintf(errorInfo, "Temporary file: %s", tempIn);
                  error(34);
