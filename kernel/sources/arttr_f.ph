@@ -44,4 +44,4 @@ FlintType  ACT_ARTMAP_DRho (struct Unit *unit_ptr);
 /* end private definition section */
 
 #endif 
-x
+
