@@ -1,6 +1,6 @@
 /*****************************************************************************
   FILE           : $Source: /projects/higgs1/SNNS/CVS/SNNS/kernel/sources/matrix.h,v $
-  SHORTNAME      : 
+  SHORTNAME      :
   SNNS VERSION   : 4.2
 
   PURPOSE        : SNNS-Kernel standard matrix operations
@@ -26,12 +26,11 @@
 /* type definitions:							*/
 /************************************************************************/
 
-typedef struct
-{
-	int	rows;		/* number of rows			*/
-	int	columns;	/* number of columns			*/
-	float	*field;		/* matrix organized as list		*/
-	float	**r_pt;		/* array of references to rows		*/
+typedef struct {
+    int	rows;		/* number of rows			*/
+    int	columns;	/* number of columns			*/
+    float	*field;		/* matrix organized as list		*/
+    float	**r_pt;		/* array of references to rows		*/
 } RbfFloatMatrix;
 
 /************************************************************************/
@@ -107,14 +106,14 @@ extern void	RbfMulTranspMatrix(RbfFloatMatrix *m1, RbfFloatMatrix *m2);
 /* c = number of columns of m3.						*/
 /************************************************************************/
 
-extern void	RbfMulMatrix(RbfFloatMatrix *m1, RbfFloatMatrix *m2, RbfFloatMatrix *m3); 
+extern void	RbfMulMatrix(RbfFloatMatrix *m1, RbfFloatMatrix *m2, RbfFloatMatrix *m3);
 
 /************************************************************************/
 /* set m1 to m2+m3. number of columns of m1, m2 and m3 must be equal.	*/
 /* number of rows of m1, m2 and m3 must be equal.			*/
 /************************************************************************/
 
-extern void	RbfAddMatrix(RbfFloatMatrix *m1, RbfFloatMatrix *m2, RbfFloatMatrix *m3); 
+extern void	RbfAddMatrix(RbfFloatMatrix *m1, RbfFloatMatrix *m2, RbfFloatMatrix *m3);
 
 /************************************************************************/
 /* print out matrix m to stream (file) s				*/

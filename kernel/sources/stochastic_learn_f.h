@@ -4,7 +4,7 @@
   SNNS VERSION   : 4.2
 
   PURPOSE        : SNNS-Kernel Learning Functions
-  NOTES          : with following learning functions: 
+  NOTES          : with following learning functions:
                    - Monte-Carlo
                    - Simulated Annealing
 
@@ -23,41 +23,41 @@
 #ifndef _STOCHASTIC_LEARN_F_DEFINED_
 #define _STOCHASTIC_LEARN_F_DEFINED_
 
-extern krui_err LEARN_MonteCarlo(int start_pattern, int end_pattern, 
-				 float *parameterInArray, int NoOfInParams, 
-				 float **parameterOutArray, int *NoOfOutParams);
-extern krui_err TEST_MonteCarlo(int start_pattern, int end_pattern, 
-				float *parameterInArray, int NoOfInParams, 
-				float **parameterOutArray, int *NoOfOutParams);
-extern krui_err LEARN_SimulatedAnnealingSS(int start_pattern, int end_pattern, 
-					   float *parameterInArray, 
-					   int NoOfInParams, 
-					   float **parameterOutArray, 
-					   int *NoOfOutParams);
+extern krui_err LEARN_MonteCarlo(int start_pattern, int end_pattern,
+                                 float *parameterInArray, int NoOfInParams,
+                                 float **parameterOutArray, int *NoOfOutParams);
+extern krui_err TEST_MonteCarlo(int start_pattern, int end_pattern,
+                                float *parameterInArray, int NoOfInParams,
+                                float **parameterOutArray, int *NoOfOutParams);
+extern krui_err LEARN_SimulatedAnnealingSS(int start_pattern, int end_pattern,
+        float *parameterInArray,
+        int NoOfInParams,
+        float **parameterOutArray,
+        int *NoOfOutParams);
 extern krui_err LEARN_SimulatedAnnealingWTA(int start_pattern, int end_pattern,
-					    float *parameterInArray, 
-					    int NoOfInParams, 
-					    float **parameterOutArray, 
-					    int *NoOfOutParams);
+        float *parameterInArray,
+        int NoOfInParams,
+        float **parameterOutArray,
+        int *NoOfOutParams);
 extern krui_err LEARN_SimulatedAnnealingWWTA(int start_pattern, int end_pattern,
-					     float *parameterInArray, 
-					     int NoOfInParams, 
-					     float **parameterOutArray, 
-					     int *NoOfOutParams);
-extern krui_err TEST_SimulatedAnnealingSS(int start_pattern, int end_pattern, 
-					  float *parameterInArray, 
-					  int NoOfInParams, 
-					  float **parameterOutArray, 
-					  int *NoOfOutParams);
-extern krui_err TEST_SimulatedAnnealingWTA(int start_pattern, int end_pattern, 
-					   float *parameterInArray, 
-					   int NoOfInParams, 
-					   float **parameterOutArray, 
-					   int *NoOfOutParams);
+        float *parameterInArray,
+        int NoOfInParams,
+        float **parameterOutArray,
+        int *NoOfOutParams);
+extern krui_err TEST_SimulatedAnnealingSS(int start_pattern, int end_pattern,
+        float *parameterInArray,
+        int NoOfInParams,
+        float **parameterOutArray,
+        int *NoOfOutParams);
+extern krui_err TEST_SimulatedAnnealingWTA(int start_pattern, int end_pattern,
+        float *parameterInArray,
+        int NoOfInParams,
+        float **parameterOutArray,
+        int *NoOfOutParams);
 extern krui_err TEST_SimulatedAnnealingWWTA(int start_pattern, int end_pattern,
-					    float *parameterInArray, 
-					    int NoOfInParams, 
-					    float **parameterOutArray, 
-					    int *NoOfOutParams);
+        float *parameterInArray,
+        int NoOfInParams,
+        float **parameterOutArray,
+        int *NoOfOutParams);
 
-#endif 
+#endif

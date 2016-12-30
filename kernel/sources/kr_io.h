@@ -3,7 +3,7 @@
   SHORTNAME      : kr_io.h
   SNNS VERSION   : 4.2
 
-  PURPOSE        : SNNS-Kernel User Interface File I/O Function Prototypes 
+  PURPOSE        : SNNS-Kernel User Interface File I/O Function Prototypes
   NOTES          :
 
   AUTHOR         : Niels Mache
@@ -38,13 +38,13 @@ extern krui_err krio_loadPatterns( char  *filename );
 extern krui_err krio_savePatterns( char  *filename );
 
 extern krui_err  krio_saveResult( char *filename,
-                           bool create,
-                           int  startpattern,
-                           int  endpattern,
-                           bool includeinput,
-                           bool includeoutput,
-			   float *Update_param_array, 
-			   int NoOfUpdateParam);
+                                  bool create,
+                                  int  startpattern,
+                                  int  endpattern,
+                                  bool includeinput,
+                                  bool includeoutput,
+                                  float *Update_param_array,
+                                  int NoOfUpdateParam);
 
 
 /*  Function for the 3D-Kernel	*/
@@ -57,7 +57,7 @@ extern void krio_readTimeDelayDefs(void);
 
 
 
-#endif 
+#endif
 
 
 

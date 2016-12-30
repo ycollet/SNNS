@@ -10,7 +10,7 @@
   AUTHOR         : Bruno Orsier
   DATE           : 01.10.96
 
-  CHANGED BY     : 
+  CHANGED BY     :
   RCS VERSION    : $Revision: 1.3 $
   LAST CHANGE    : $Date: 1998/02/25 15:27:38 $
 
@@ -21,11 +21,11 @@
 #ifndef _SCALED_CONJ_GRAD_DEFINED_
 #define _SCALED_CONJ_GRAD_DEFINED_
 
-extern krui_err LEARN_SCG(int start_pattern, int end_pattern, 
-			  float *parameterInArray, int NoOfInParams, 
-			  float **parameterOutArray, int *NoOfOutParams) ;
+extern krui_err LEARN_SCG(int start_pattern, int end_pattern,
+                          float *parameterInArray, int NoOfInParams,
+                          float **parameterOutArray, int *NoOfOutParams) ;
 
 extern krui_err TEST_SCG(int start_pattern, int end_pattern,
-			 float *parameterInArray, int NoOfInParams,
-			 float **parameterOutArray, int *NoOfOutParams);
+                         float *parameterInArray, int NoOfInParams,
+                         float **parameterOutArray, int *NoOfOutParams);
 #endif

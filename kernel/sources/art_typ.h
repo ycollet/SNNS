@@ -1,6 +1,6 @@
 /*****************************************************************************
   FILE           : $Source: /projects/higgs1/SNNS/CVS/SNNS/kernel/sources/art_typ.h,v $
-  SHORTNAME      : 
+  SHORTNAME      :
   SNNS VERSION   : 4.2
 
   PURPOSE        : SNNS-Kernel: Global Datatypes and Constants for ART Networks
@@ -17,17 +17,12 @@
     Copyright (c) 1996-1998  SNNS Group, WSI, Univ. Tuebingen, FRG
 
 ******************************************************************************/
-#ifndef ART_GLOBAL_TYPES
 
+#ifndef ART_GLOBAL_TYPES
 #define ART_GLOBAL_TYPES
 
-
-
-/* define the possible values for the status of an ART-network
-*/
-#define ART_NO_CLASSIFICATION 0  /* The network hasn't reched a stable state
-                                    yet
-                                 */
+/* define the possible values for the status of an ART-network */
+#define ART_NO_CLASSIFICATION 0  /* The network hasn't reched a stable state yet */
 #define ART_CLASSIFIED        1  /* The network has found a class for the
                                     actual input pattern
                                  */
@@ -38,12 +33,6 @@
                                     appropriate class -> all map units
                                     are turned on.
                                  */
-
-
-
-
-
-
 /* types */
 typedef   int                    art_cl_status;
 

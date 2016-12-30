@@ -18,6 +18,7 @@
     Copyright (c) 1996-1998  SNNS Group, WSI, Univ. Tuebingen, FRG
 
 ******************************************************************************/
+
 #ifndef _CC_GLOB_DEFINED_
 #define  _CC_GLOB_DEFINED_
 
@@ -93,7 +94,6 @@ int cc_end                = 0;
 int cc_storageFree        = 1;
 int cc_allButtonIsPressed = 1;
 
-
 struct Unit  **FirstInputUnitPtr,**FirstHiddenUnitPtr,
              **FirstOutputUnitPtr,**FirstSpecialUnitPtr,
               *bestSpecialUnitPtr;
@@ -114,13 +114,11 @@ int cc_modification = -1;
 int cc_fastmode;
 float cc_Parameter[5];
 
-
 int *reset=0;
 int cc_cascade=0;
 int NoOfLayers = 0;             /* number hidden layers */
 Layer_Type* ListOfLayers=NULL;  /* data of layers */
 int SizeOfLayerlist;  
-
 
 int cc_outputXMax;
 
@@ -159,8 +157,6 @@ float (*cc_OutputUnitUpdate)(float oldValue, float* previousSlope,
 
 /* end global definition section */
 
-
-
 /* begin privat definition section */
 
 static int OldNoOfSpecialUnitStorage = 0;
@@ -179,10 +175,3 @@ static TopoPtrArray	global_topo_ptr;
 /* end  privat definition section */
 
 #endif /* _CC_GLOB_DEFINED_ */
-
-
-
-
-
-
-

@@ -1,21 +1,21 @@
 /*****************************************************************************
   FILE           : $Source: /projects/higgs1/SNNS/CVS/SNNS/kernel/sources/krui_typ.h,v $
-  SHORTNAME      : 
+  SHORTNAME      :
   SNNS VERSION   : 4.2
- 
+
   PURPOSE        : SNNS-Kernel User Interface Function Prototypes
   NOTES          : ANSI-C only
- 
+
   AUTHOR         : Niels Mache
   DATE           : 27.02.90
- 
+
   CHANGED BY     : Sven Doering
   RCS VERSION    : $Revision: 2.9 $
   LAST CHANGE    : $Date: 1998/02/25 15:27:20 $
- 
+
     Copyright (c) 1990-1995  SNNS Group, IPVR, Univ. Stuttgart, FRG
     Copyright (c) 1996-1998  SNNS Group, WSI, Univ. Tuebingen, FRG
- 
+
 ******************************************************************************/
 
 
@@ -38,7 +38,7 @@ Development History of the SNNS Kernel (reverse order):
      matrix.c
      matrix.h
       - general purpose matrix operations
-     
+
 *******************************************************************************
 
 
@@ -129,10 +129,10 @@ SNNS Kernel Version 1.3:
 
 26.04.91:
    CHANGES:
-      krui_showPattern( mode ) 
+      krui_showPattern( mode )
       - has now only one parameter <mode> (the parameter <pattern_no> has left)
         krui_showPattern(...) shows now the CURRENT pattern.
-        
+
       - The pattern file format has been changed but the scanner is downward kompatible.
         The new file format has now a SNNS-header with time stamp and is better readable.
         Comments (beginning with a #) are also possible.
@@ -153,7 +153,7 @@ SNNS Kernel Version 1.2:
 
 18.03.91:
    CHANGES:
-     krui_randomizeWeights( ... )  
+     krui_randomizeWeights( ... )
        - has been removed from the user interface
      krui_updateNet( ... )
        - parameters of krui_updateNet has changed
@@ -183,7 +183,7 @@ SNNS Kernel Version 1.1:
 19.12.90:
    CHANGES:
      krui_learnAllPatterns( ... ) and krui_learnSinglePattern( ... )
-     have parameter arrays now. The return type has changed to krui_err. 
+     have parameter arrays now. The return type has changed to krui_err.
 
    NEW FUNCTIONS:
      krui_getLearnFunc( ... )
@@ -191,7 +191,7 @@ SNNS Kernel Version 1.1:
      krui_setLearnFunc( ... )
        - Changes the learning function
 
-        
+
 *******************************************************************************
 
 ###############################################################################
@@ -204,7 +204,7 @@ SNNS Kernel Version 1.1:
 18.10.90:
    NEW FUNCTIONS:
      krui_getUnitNoNearPosition( ... )
-       - Returns the unit no. near the given position 
+       - Returns the unit no. near the given position
 
 
 04.10.90:
@@ -295,8 +295,8 @@ int  krui_getNextUnit( void );
 */
 
 int  krui_getCurrentUnit( void );
-     /*  Returns the no. of the current unit or 0 if no units available.
-     */
+/*  Returns the no. of the current unit or 0 if no units available.
+*/
 
 krui_err    krui_setCurrentUnit( int  UnitNo );
 /*  Initializes a unit for access. If the unit has sites, the first site
@@ -1114,7 +1114,7 @@ NOTE: The network should be feedforward in topological mode,
       otherwise function will return a warning message.
 */
 
-krui_err  krui_testNet( int  pattern_no, 
+krui_err  krui_testNet( int  pattern_no,
                         float  *updateParameterArray, int  NoOfUpdateParams,
                         float  *parameterInArray, int  NoOfInParams,
                         float  * *parameterOutArray, int  *NoOfOutParams );
@@ -1525,14 +1525,14 @@ NOTE: If krui_loadNet is called more then once,  krui_deleteNet will
 
 
 /* #############################################################
- 
+
   Functions for the extern kernels
 
 ############################################################# */
 
 krui_err  krui_setSpecialNetworkType( int  net_type );
 /*  Sets the topologic type of the current network.
-    Returns an error if the topologic type of the current network  
+    Returns an error if the topologic type of the current network
     doesn't fit to this type.
     Topologic types are:
       - NET_TYPE_GENERAL
@@ -1548,14 +1548,14 @@ int  krui_getSpecialNetworkType( void );
 
 int krui_initInversion(void);
 void  krui_inv_forwardPass(struct UnitList *inputs);
-double krui_inv_backwardPass(float learn, float delta_max, int *err_units, 
-			     float ratio, struct UnitList *inputs,
-			     struct UnitList *outputs);
+double krui_inv_backwardPass(float learn, float delta_max, int *err_units,
+                             float ratio, struct UnitList *inputs,
+                             struct UnitList *outputs);
 
 #ifdef MASPAR_KERNEL
 
 /* #############################################################
- 
+
   Functions for the parallel kernel
 
 ############################################################# */

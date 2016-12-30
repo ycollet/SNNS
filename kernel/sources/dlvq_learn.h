@@ -1,15 +1,15 @@
 /*****************************************************************************
   FILE           : $Source: /projects/higgs1/SNNS/CVS/SNNS/kernel/sources/dlvq_learn.h,v $
-  SHORTNAME      : 
+  SHORTNAME      :
   SNNS VERSION   : 4.2
 
   PURPOSE        : Header file of correspondent '.c' file
   NOTES          :
 
-  AUTHOR         : Michael Schmalzl 
+  AUTHOR         : Michael Schmalzl
   DATE           : 5.2.93
 
-  CHANGED BY     : 
+  CHANGED BY     :
   RCS VERSION    : $Revision: 2.6 $
   LAST CHANGE    : $Date: 1998/02/25 15:26:07 $
 
@@ -22,7 +22,7 @@
 
 extern krui_err getNoOfClasses(int startPattern, int endPattern);
 extern krui_err LEARN_DLVQ(int startPattern, int endPattern, float *ParameterInArray,
-                   int NoOfInParams, float **ParameterOutArray, int *NoOfOutParams);
+                           int NoOfInParams, float **ParameterOutArray, int *NoOfOutParams);
 extern void normPatterns(int startPattern, int endPattern);
 extern void allocInitialUnitArray(void);
 extern void initInitialUnitArray(int startPattern, int endPattern);

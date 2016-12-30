@@ -1,9 +1,9 @@
 /*****************************************************************************
   FILE           : $Source: /projects/higgs1/SNNS/CVS/SNNS/kernel/sources/krart_df.h,v $
-  SHORTNAME      : 
+  SHORTNAME      :
   SNNS VERSION   : 4.2
 
-  PURPOSE        : SNNS Kernel definitions for ART-Networks 
+  PURPOSE        : SNNS Kernel definitions for ART-Networks
   NOTES          :
 
   AUTHOR         : Kai-Uwe Herrmann
@@ -64,7 +64,7 @@
 /* Logical unit numbers for ART1 networks
 */
 
-  /* special units */
+/* special units */
 #define ART1_NO_OF_SPEC_UNITS   8
 
 #define ART1_CL_UNIT    1
@@ -76,7 +76,7 @@
 #define ART1_RHO_UNIT   7
 #define ART1_G2_UNIT    8
 
-  /* delay type units */
+/* delay type units */
 #define ART1_DEL_REC_UNIT         1
 #define ART1_D1_UNIT              2
 #define ART1_D2_UNIT              3
@@ -86,7 +86,7 @@
 /* Logical unit numbers for ARTMAP networks
 */
 
-  /* special units */
+/* special units */
 #define ARTMAP_NO_OF_SPECa_UNITS   8
 
 #define ARTMAP_CLa_UNIT   1
@@ -124,7 +124,7 @@
 #define ARTMAP_QU_UNIT    9
 #define ARTMAP_DRHO_UNIT 10
 
-  /* delay type units */
+/* delay type units */
 #define ARTMAP_DELa_REC_UNIT   1
 #define ARTMAP_D1a_UNIT        2
 #define ARTMAP_D2a_UNIT        3
@@ -143,7 +143,7 @@
    and the logical target layer
 */
 
-  /* fix links for ART1 */
+/* fix links for ART1 */
 #define ART1_LINK_INP_CMP   1.0
 #define ART1_LINK_INP_G1    1.0
 #define ART1_LINK_INP_RI    1.0
@@ -170,17 +170,17 @@
 
 
 /* trainable links for ART1 */
-  /* the initial values of the bottom up link weights should be
-             0 < weight < (1 / (beta + |I|))
-             where beta is a value > 0.0 and should not be too big,
-                   I is the number of ones in the binary input vector.
-                   gamma has to be choosen > 1.0.
-  */
+/* the initial values of the bottom up link weights should be
+           0 < weight < (1 / (beta + |I|))
+           where beta is a value > 0.0 and should not be too big,
+                 I is the number of ones in the binary input vector.
+                 gamma has to be choosen > 1.0.
+*/
 #define ART1_LINK_CMP_REC(beta,gamma)    (1.0 / ((beta) + (gamma) * NoOfInputUnits))
 #define ART1_LINK_DEL_CMP                1.0
 
-  /* Formulas to adjust the link weights in an ART1 network
-  */
+/* Formulas to adjust the link weights in an ART1 network
+*/
 #define ART1_ADJUST_LINK_DEL_CMP(unit)                      (unit->act)
 #define ART1_ADJUST_LINK_CMP_REC(unit, beta, norm) \
                                        ((unit->act)/((beta) + (norm)))
@@ -210,8 +210,8 @@
 #define ART2_LINK_P_REC(param_d,gamma) (1.0/(gamma*(1-param_d)*sqrt((double) NoOfInputUnits)))
 #define ART2_LINK_REC_P                0.0
 
-  /* Formulas to adjust the link weights in an ART2 network
-  */
+/* Formulas to adjust the link weights in an ART2 network
+*/
 #define ART2_ADJUST_LINK_REC_P(unit_u, d)       (unit_u->act / (1-d))
 #define ART2_ADJUST_LINK_P_REC(unit_u, d)       (unit_u->act / (1-d))
 
@@ -299,12 +299,12 @@
 
 
 /* trainable links for ARTMAP */
-  /* the initial values of the bottom up link weights should be
-             0 < weight < (1 / (beta + |I|))
-             where beta is a value > 0.0 and should not be too big,
-                   I is the number of ones in the binary input vector.
-                   gamma has to be choosen > 1.0.
-  */
+/* the initial values of the bottom up link weights should be
+           0 < weight < (1 / (beta + |I|))
+           where beta is a value > 0.0 and should not be too big,
+                 I is the number of ones in the binary input vector.
+                 gamma has to be choosen > 1.0.
+*/
 #define ARTMAP_LINK_CMPa_RECa(beta,gamma)    (1.0 / ((beta) + (gamma) * ArtMap_NoOfInpUnits_a))
 #define ARTMAP_LINK_DELa_CMPa                1.0
 #define ARTMAP_LINK_CMPb_RECb(beta,gamma)    (1.0 / ((beta) + (gamma) * ArtMap_NoOfInpUnits_b))

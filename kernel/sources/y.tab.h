@@ -36,31 +36,31 @@
 /* Tokens.  */
 #ifndef YYTOKENTYPE
 # define YYTOKENTYPE
-   /* Put the tokens into the symbol table, so that GDB and other debuggers
-      know about them.  */
-   enum yytokentype {
-     L_BRACKET = 258,
-     R_BRACKET = 259,
-     VERSION_HEADER = 260,
-     GENERATED_AT = 261,
-     NO_OF_PATTERN = 262,
-     NO_OF_INPUT = 263,
-     NO_OF_OUTPUT = 264,
-     NO_OF_VAR_IDIM = 265,
-     NO_OF_VAR_ODIM = 266,
-     MAXIMUM_IDIM = 267,
-     MAXIMUM_ODIM = 268,
-     NO_OF_CLASSES = 269,
-     CLASS_REDISTRIB = 270,
-     REMAPFUNCTION = 271,
-     REMAP_PARAM = 272,
-     ERROR = 273,
-     PATTERNEND = 274,
-     PATTERNNOCLASS = 275,
-     NUMBER = 276,
-     NAME = 277,
-     V_NUMBER = 278
-   };
+/* Put the tokens into the symbol table, so that GDB and other debuggers
+   know about them.  */
+enum yytokentype {
+    L_BRACKET = 258,
+    R_BRACKET = 259,
+    VERSION_HEADER = 260,
+    GENERATED_AT = 261,
+    NO_OF_PATTERN = 262,
+    NO_OF_INPUT = 263,
+    NO_OF_OUTPUT = 264,
+    NO_OF_VAR_IDIM = 265,
+    NO_OF_VAR_ODIM = 266,
+    MAXIMUM_IDIM = 267,
+    MAXIMUM_ODIM = 268,
+    NO_OF_CLASSES = 269,
+    CLASS_REDISTRIB = 270,
+    REMAPFUNCTION = 271,
+    REMAP_PARAM = 272,
+    ERROR = 273,
+    PATTERNEND = 274,
+    PATTERNNOCLASS = 275,
+    NUMBER = 276,
+    NAME = 277,
+    V_NUMBER = 278
+};
 #endif
 /* Tokens.  */
 #define L_BRACKET 258
@@ -92,17 +92,16 @@
 typedef union YYSTYPE
 #line 36 "kr_pat_parse_bison.y"
 {
-	float	value;		/* allgemeine Zahl */	
-        char    *name;          /* allgemeiner String */
-	struct
-	{
-		int	v;
-		int	r;
-	}	version;	/* Versionsnummer #.# */
+    float	value;		/* allgemeine Zahl */
+    char    *name;          /* allgemeiner String */
+    struct {
+        int	v;
+        int	r;
+    }	version;	/* Versionsnummer #.# */
 }
 /* Line 1489 of yacc.c.  */
 #line 105 "y.tab.h"
-	YYSTYPE;
+YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1
 # define YYSTYPE_IS_TRIVIAL 1

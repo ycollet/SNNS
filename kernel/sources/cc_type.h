@@ -9,7 +9,7 @@
   AUTHOR         : Michael Schmalzl
   DATE           : 24.2.93
 
-  CHANGED BY     : 
+  CHANGED BY     :
   RCS VERSION    : $Revision: 2.9 $
   LAST CHANGE    : $Date: 1998/02/25 15:26:05 $
 
@@ -22,66 +22,65 @@
 #define _CC_TYPE_DEFINED_
 
 typedef struct CC_DATA {
-  struct {
-    float pixelError;
-    int learningFunc;
-    int modification;
-    int onOff;
-    int pruneOnOff;
-    int backfittOnOff;
-    int backfittPatience;
-    int pruneFunc;
-    float addParameters[5]; 
-    int fastmode;
-  } GLOBAL;
-  struct {
-    double covarianceChange;
-    int    candidatePatience;
-    int    maxNoOfUpdateCycles;
-    int    maxNoOfCandUnits;
-    int    actFunc;
-  } CAND;
-  struct {
-    double errorChange;
-    int    outputPatience;
-    int    maxNoOfUpdateCycles;
-  } OUT;
+    struct {
+        float pixelError;
+        int learningFunc;
+        int modification;
+        int onOff;
+        int pruneOnOff;
+        int backfittOnOff;
+        int backfittPatience;
+        int pruneFunc;
+        float addParameters[5];
+        int fastmode;
+    } GLOBAL;
+    struct {
+        double covarianceChange;
+        int    candidatePatience;
+        int    maxNoOfUpdateCycles;
+        int    maxNoOfCandUnits;
+        int    actFunc;
+    } CAND;
+    struct {
+        double errorChange;
+        int    outputPatience;
+        int    maxNoOfUpdateCycles;
+    } OUT;
 } CASCADE_TYPE;
 
 typedef struct CC_LAYER {
-  int xPosFirstRow;
-  int NoOfUnitsInLayer;
+    int xPosFirstRow;
+    int NoOfUnitsInLayer;
 } Layer_Type;
 
 typedef struct CC_GROUP {
-  struct Unit* BestUnitPtr;
-  int Score;
+    struct Unit* BestUnitPtr;
+    int Score;
 } CC_Group_Type;
 
 typedef struct TAC_LINK_ERROR {
-  float LnCurrentSlope;
-  float LnPreviousSlope;
-  float LnLastWeightChange;
+    float LnCurrentSlope;
+    float LnPreviousSlope;
+    float LnLastWeightChange;
 } TAC_LINK_ERROR_TYPE;
 
 typedef struct TAC_SPECIAL_UNIT {
-  int   NoOfUnitsInRegion;
-  float SummedErrorInRegion;
-  float ErrorCorrelation;
-  float Window;
-  float* Xi;
-  float* Ri;
-  TAC_LINK_ERROR_TYPE* LinkError;
+    int   NoOfUnitsInRegion;
+    float SummedErrorInRegion;
+    float ErrorCorrelation;
+    float Window;
+    float* Xi;
+    float* Ri;
+    TAC_LINK_ERROR_TYPE* LinkError;
 } TAC_SPECIAL_UNIT_TYPE;
 
-
-typedef struct TAC_PRIME{
-  float xi_CurrentSlope;
-  float ri_CurrentSlope;
-  float xi_PreviousSlope;
-  float ri_PreviousSlope;
-  float xi_LastChange;
-  float ri_LastChange;
+typedef struct TAC_PRIME {
+    float xi_CurrentSlope;
+    float ri_CurrentSlope;
+    float xi_PreviousSlope;
+    float ri_PreviousSlope;
+    float xi_LastChange;
+    float ri_LastChange;
 } TAC_PRIME_TYPE;
 
 #endif

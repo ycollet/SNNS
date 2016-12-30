@@ -1,6 +1,6 @@
 /*****************************************************************************
   FILE           : $Source: /projects/higgs1/SNNS/CVS/SNNS/kernel/sources/kr_mem.h,v $
-  SHORTNAME      : 
+  SHORTNAME      :
   SNNS VERSION   : 4.2
 
   PURPOSE        : SNNS-Kernel Memory Manager Function Prototypes
@@ -70,8 +70,8 @@ extern struct NameTable *krm_NTableSymbolSearch( char  *symbol, int  sym_type );
 
 /*  Creates a new symbol in the name-table.   Returns name-table ptr or NULL if
     memory alloc has failed.  */
-extern struct NameTable *krm_NTableCreateEntry(char  *symbol_name, 
-					       int  symbol_type );
+extern struct NameTable *krm_NTableCreateEntry(char  *symbol_name,
+        int  symbol_type );
 
 /*  Inserts a symbol in the name-table. This function duplicates symbol ptrs
     if the symbol was found in the name-table.  Returns symbol ptr or NULL if
@@ -88,13 +88,13 @@ extern struct NameTable *krm_getNTableFirstEntry( void );
 extern struct NameTable *krm_getNTableNextEntry( void );
 
 /*  create new site-table entry */
-extern struct SiteTable *krm_STableCreateEntry(char  *site_symbol, 
-					       SiteFuncPtr  site_func );
+extern struct SiteTable *krm_STableCreateEntry(char  *site_symbol,
+        SiteFuncPtr  site_func );
 
 /*  change the properties of the given site-table entry */
-extern struct SiteTable *krm_STableChangeEntry(struct  SiteTable  *stbl_ptr, 
-					       char  *new_site_name,
-                                         SiteFuncPtr  new_site_func );
+extern struct SiteTable *krm_STableChangeEntry(struct  SiteTable  *stbl_ptr,
+        char  *new_site_name,
+        SiteFuncPtr  new_site_func );
 
 /*  release a previosly defined site-table entry */
 extern void krm_STableRemoveEntry( struct SiteTable  *STable_ptr );
@@ -116,14 +116,14 @@ extern void krm_releaseFtypeEntry( struct FtypeUnitStruct  *Ftype_entry );
 
 /*  create and define a Ftype entry
 */
-extern struct FtypeUnitStruct *krm_FtypeCreateEntry( char *Ftype_symbol, OutFuncPtr out_func, 
-                                              ActFuncPtr act_func, ActDerivFuncPtr act_deriv_func, ActDerivFuncPtr act_2_deriv_func,
-	PyObject *python_out_func, PyObject *python_act_func,
-	PyObject *python_act_deriv_func, PyObject *python_act_2_deriv_func);
+extern struct FtypeUnitStruct *krm_FtypeCreateEntry( char *Ftype_symbol, OutFuncPtr out_func,
+        ActFuncPtr act_func, ActDerivFuncPtr act_deriv_func, ActDerivFuncPtr act_2_deriv_func,
+        PyObject *python_out_func, PyObject *python_act_func,
+        PyObject *python_act_deriv_func, PyObject *python_act_2_deriv_func);
 
 /*  add a site to a previosly defined Ftype entry */
-extern struct Site *krm_FtypeAddSite(struct FtypeUnitStruct  *Ftype_entry, 
-				     struct SiteTable  *STable_entry );
+extern struct Site *krm_FtypeAddSite(struct FtypeUnitStruct  *Ftype_entry,
+                                     struct SiteTable  *STable_entry );
 
 /*  returns a pointer to first Ftype entry */
 extern struct FtypeUnitStruct *krm_getFtypeFirstEntry( void );
@@ -179,5 +179,5 @@ GROUP: Global Var's (as declared by the Memory Manager)
 
 extern int  NoOfAllocPatternPairs;  /*  no. of allocated pattern pairs  */
 
-#endif 
+#endif
 

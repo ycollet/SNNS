@@ -1,6 +1,6 @@
 /*****************************************************************************
   FILE           : $Source: /projects/higgs1/SNNS/CVS/SNNS/kernel/sources/tbl_func.h,v $
-  SHORTNAME      : 
+  SHORTNAME      :
   SNNS VERSION   : 4.2
 
   PURPOSE        : SNNS-Kernel: Transfer functions using table lookup and
@@ -24,4 +24,4 @@
 extern FlintType   ACT_LogisticTbl(struct Unit *unit_ptr);
 
 
-#endif 
+#endif

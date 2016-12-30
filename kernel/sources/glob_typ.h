@@ -1,22 +1,23 @@
 /*****************************************************************************
   FILE           : $Source: /projects/higgs1/SNNS/CVS/SNNS/kernel/sources/glob_typ.h,v $
-  SHORTNAME      : 
+  SHORTNAME      :
   SNNS VERSION   : 4.2
- 
+
   PURPOSE        : SNNS-Kernel: Global Datatypes and Constants
   NOTES          : For User's Application Programs, User-Interface and Kernel
- 
+
   AUTHOR         : Niels Mache
-  DATE           : 14.02.90 
- 
+  DATE           : 14.02.90
+
   CHANGED BY     : Michael Vogt, Guenter Mamier, Sven Doering, Christine Bagdi
   RCS VERSION    : $Revision: 2.31 $
   LAST CHANGE    : $Date: 1998/04/20 11:54:49 $
- 
+
     Copyright (c) 1990-1995  SNNS Group, IPVR, Univ. Stuttgart, FRG
     Copyright (c) 1996-1998  SNNS Group, WSI, Univ. Tuebingen, FRG
- 
+
 ******************************************************************************/
+
 #ifndef KR_GLOBAL_TYPES
 #define KR_GLOBAL_TYPES
 
@@ -36,7 +37,6 @@
 */
 
 #endif
-
 
 /* ******************************************   */
 
@@ -212,8 +212,8 @@ GROUP: Public Constants
 #define  JOG_WEIGHT_FUNC 8
 #define  ACT_2_DERIV_FUNC 9
 #define  PRUNING_FUNC    10
-#define  TEST_FUNC       11  
-#define  REMAP_FUNC       12  
+#define  TEST_FUNC       11
+#define  REMAP_FUNC       12
 
 #define  FUNC_TYPE_MASK  0x00ff
 #define  DEFAULT_FUNC    0x0100
@@ -279,11 +279,11 @@ GROUP: Public Constants
 /*  Maximum Dimensions of Pattern
 */
 #define MAX_NO_OF_VAR_I_DIM     2  /* maximum number of variable input       */
-				   /* dimensions                             */
+/* dimensions                             */
 #define MAX_NO_OF_VAR_O_DIM     2  /* maximum number of variable             */
-				   /* output dimensions                      */
+/* output dimensions                      */
 #define MAX_NO_OF_VAR_DIM       2  /* maximum of MAX_NO_OF_VAR_I_DIM         */
-				   /* MAX_NO_OF_VAR_O_DIM                    */
+/* MAX_NO_OF_VAR_O_DIM                    */
 
 /*  Maximum no. of learning parameters for learning functions
 */
@@ -309,16 +309,11 @@ GROUP: Public Constants
 */
 #define     NO_OF_REMAP_PARAMS   5
 
-
-
-
 /*  Translation Table op's
 */
 #define     OP_TRANSTABLE_GET           1
 #define     OP_TRANSTABLE_SET           2
 #define     OP_TRANSTABLE_CLEAR         3
-
-
 
 /*#################################################
 
@@ -342,11 +337,9 @@ typedef int     bool;
 typedef float   FlintType;
 typedef int     krui_err;
 
-
-typedef struct
-{
-    double parameter[NO_OF_LEARN_PARAMS]; 
-    /*  UI_NO_OF_CASCADE_PARAMS is declared in ui.h the learn parameter     */ 
+typedef struct {
+    double parameter[NO_OF_LEARN_PARAMS];
+    /*  UI_NO_OF_CASCADE_PARAMS is declared in ui.h the learn parameter     */
     int noOfParameters;                      /* number of learn parameters  */
     char **parameterDescription;             /* not supported yet           */
     double result[NO_OF_RESULTS];            /* the result of training      */
@@ -362,53 +355,51 @@ typedef struct
     bool interrupted;                        /* marks if all epochs learned */
 } NetLearnParameters;
 
-typedef struct 
-{
+typedef struct {
     int number_of_pattern;     /* the number of pattern (pairs) in           */
-                               /* this set                                   */
+    /* this set                                   */
     int virtual_no_of_pattern; /* the number of pattern (pairs) if           */
-                               /* class_distrib_active == TRUE               */
+    /* class_distrib_active == TRUE               */
     bool output_present;       /* TRUE if output pattern present             */
     bool fixed_fixsizes;       /* the fixsizes of all pattern are equal      */
     int in_fixsize;            /* if fixed_fixsizes TRUE, fixsize of         */
-                               /* the input pattern, else -1                 */
+    /* the input pattern, else -1                 */
     int out_fixsize;           /* if fixed_fixsizes TRUE, fixsize of         */
-                               /* the output pattern, else -1                */
+    /* the output pattern, else -1                */
     int in_number_of_dims;     /* number of variable input dimensions        */
     int out_number_of_dims;    /* number of variable output dimensions       */
     int in_max_dim_sizes[MAX_NO_OF_VAR_I_DIM];  /* maximum values of         */
-                                                /* the input dimension       */
+    /* the input dimension       */
     int out_max_dim_sizes[MAX_NO_OF_VAR_O_DIM]; /* maximum values of the     */
-                                                /* output dimension          */
+    /* output dimension          */
     int in_min_dim_sizes[MAX_NO_OF_VAR_I_DIM];  /* minimum values of the     */
-                                                /* input dimensions          */
+    /* input dimensions          */
     int out_min_dim_sizes[MAX_NO_OF_VAR_O_DIM]; /* minimum values of the     */
-                                                /* output dimensions         */
+    /* output dimensions         */
 
     int classes;               /* number of pattern classes if > 0           */
     char **class_names;        /* array of <classes> class names, ordered    */
     bool class_distrib_active; /* class amount redistribution is active      */
     int *class_redistribution; /* amounts for redistrib. <classes> entries   */
-    
+
     char *remap_function;      /* name of remap function or NULL             */
     float remap_params[NO_OF_REMAP_PARAMS];     /* remap function parameters */
     int no_of_remap_params;    /* number of remap function parameters        */
 } pattern_set_info;
 
-typedef struct
-{
+typedef struct {
     int input_dim;             /* number of variable input dimensions        */
     int input_dim_sizes[MAX_NO_OF_VAR_I_DIM];  /* actual sizes of the input  */
-                                               /* dimensions                 */
+    /* dimensions                 */
     int input_fixsize;         /* size of the fixed part of the in pattern   */
-                               /* or 0 if no input pattern present           */
+    /* or 0 if no input pattern present           */
     int output_dim;            /* number of variable output dimensions       */
     int output_dim_sizes[MAX_NO_OF_VAR_O_DIM]; /* actual sizes of the output */
-                                               /* dimensions                 */
+    /* dimensions                 */
     int output_fixsize;        /* size of the fixed part of the out pattern  */
-                               /* or 0 if no output pattern present          */
+    /* or 0 if no output pattern present          */
     int my_class;              /* class index of this pattern, if classes    */
-                               /* available, -1 otherwise                    */
+    /* available, -1 otherwise                    */
 } pattern_descriptor;
 
 #ifdef __STDC__
@@ -416,8 +407,6 @@ typedef double  FlintTypeParam;
 #else
 typedef float  FlintTypeParam;
 #endif
-
-
 
 /*#################################################
 
@@ -428,25 +417,22 @@ GROUP: 3D-Kernel Definitions
 #define HAVE_QSORT
 
 struct   PosType  {
-  short  x,
-	 y,
-	 z;
+    short  x,
+           y,
+           z;
 };
-
-
 
 #define  NO_OF_UNIT_CENTER_POS  1
 
 struct   PositionVector  {
-  float  x,
-	 y,
-	 z,
-	 w;
+    float  x,
+           y,
+           z,
+           w;
 };
 
-
 /* List of Inversion Units */
-struct UnitList{
+struct UnitList {
     int             no;
     FlintType       act;
     FlintType       i_act;
@@ -471,6 +457,5 @@ GROUP: Constants for the parallel kernel
 */
 #define  MASPAR_DISCONNECT  0
 #define  MASPAR_CONNECT  1
-
 
 #endif

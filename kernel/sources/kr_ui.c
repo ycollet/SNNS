@@ -70,8 +70,7 @@ long randomSeedVal=0;
   RETURNS  : Returns the number of units used by the network.
   UPDATE   :
 ******************************************************************************/
-int krui_getNoOfUnits(void)
-{
+int krui_getNoOfUnits(void) {
     return( NoOfUnits );
 }
 
@@ -86,24 +85,22 @@ int krui_getNoOfUnits(void)
   RETURNS  : Returns the unit no. of the first unit or 0 if no units available.
   UPDATE   :
 ******************************************************************************/
-int  krui_getFirstUnit(void)
-{
+int  krui_getFirstUnit(void) {
     return( kr_getUnit( FIRST ) );
 }
 
 /*****************************************************************************
   FUNCTION : krui_getNextUnit
 
-  PURPOSE  : Initializes the next available unit for access. If the unit has 
+  PURPOSE  : Initializes the next available unit for access. If the unit has
              sites, the first site will be set to the current site.
   NOTES    :
 
-  RETURNS  : Returns the unit no. of the next unit or 0 if no more units 
+  RETURNS  : Returns the unit no. of the next unit or 0 if no more units
              available.
   UPDATE   :
 ******************************************************************************/
-int  krui_getNextUnit(void)
-{
+int  krui_getNextUnit(void) {
     return( kr_getUnit( NEXT ) );
 }
 
@@ -116,8 +113,7 @@ int  krui_getNextUnit(void)
   RETURNS  : Returns the no. of the current unit or 0 if no units available
   UPDATE   :
 ******************************************************************************/
-int  krui_getCurrentUnit(void)
-{
+int  krui_getCurrentUnit(void) {
     return( kr_getUnit( CURRENT ) );
 }
 
@@ -131,8 +127,7 @@ int  krui_getCurrentUnit(void)
   RETURNS  : Returns error code if the given unit doesn't exist, 0 otherwise.
   UPDATE   :
 ******************************************************************************/
-krui_err  krui_setCurrentUnit(int unit_no)
-{
+krui_err  krui_setCurrentUnit(int unit_no) {
     return( kr_setCurrUnit( unit_no ) );
 }
 
@@ -145,8 +140,7 @@ krui_err  krui_setCurrentUnit(int unit_no)
   RETURNS  : Returns the name of the unit. (NULL if not available)
   UPDATE   :
 ******************************************************************************/
-char  *krui_getUnitName(int UnitNo)
-{
+char  *krui_getUnitName(int UnitNo) {
     struct Unit   *unit_ptr;
 
     if ((unit_ptr = kr_getUnitPtr( UnitNo ) ) == NULL)
@@ -167,8 +161,7 @@ char  *krui_getUnitName(int UnitNo)
   RETURNS  : Returns error code if memory allocation fails, 0 otherwise.
   UPDATE   :
 ******************************************************************************/
-krui_err  krui_setUnitName(int unit_no, char *unit_name)
-{
+krui_err  krui_setUnitName(int unit_no, char *unit_name) {
     struct Unit   *unit_ptr;
     char    *str_ptr;
 
@@ -179,12 +172,11 @@ krui_err  krui_setUnitName(int unit_no, char *unit_name)
 
     NetModified = TRUE;
 
-    if (unit_name == NULL)
-        {
-            krm_NTableReleaseSymbol( unit_ptr->unit_name, UNIT_SYM );
-            unit_ptr->unit_name = NULL;
-            return( KernelErrorCode );
-        }
+    if (unit_name == NULL) {
+        krm_NTableReleaseSymbol( unit_ptr->unit_name, UNIT_SYM );
+        unit_ptr->unit_name = NULL;
+        return( KernelErrorCode );
+    }
 
     if (!kr_symbolCheck( unit_name ))  return( KernelErrorCode );
 
@@ -206,8 +198,7 @@ krui_err  krui_setUnitName(int unit_no, char *unit_name)
              0 otherwise.
   UPDATE   :
 ******************************************************************************/
-int  krui_searchUnitName(char *unit_name)
-{
+int  krui_searchUnitName(char *unit_name) {
     struct  NameTable  *n_ptr;
 
     if (NoOfUnits <= 0)  {
@@ -221,8 +212,8 @@ int  krui_searchUnitName(char *unit_name)
     }
 
     UICurrentNameSearchUnitSymbolPtr = n_ptr->Entry.symbol;
-    UICurrentNameSearchUnitNo = 
-	kr_unitNameSearch( MinUnitNo, UICurrentNameSearchUnitSymbolPtr );
+    UICurrentNameSearchUnitNo =
+        kr_unitNameSearch( MinUnitNo, UICurrentNameSearchUnitSymbolPtr );
 
     return( UICurrentNameSearchUnitNo );
 }
@@ -239,8 +230,7 @@ int  krui_searchUnitName(char *unit_name)
              0 otherwise.
   UPDATE   :
 ******************************************************************************/
-int  krui_searchNextUnitName(void)
-{
+int  krui_searchNextUnitName(void) {
 
     if (NoOfUnits <= 0) {
         UICurrentNameSearchUnitNo = 0;
@@ -248,12 +238,11 @@ int  krui_searchNextUnitName(void)
     }
 
     if (UICurrentNameSearchUnitNo != 0) {
-        UICurrentNameSearchUnitNo = 
-	    kr_unitNameSearch( UICurrentNameSearchUnitNo + 1, 
-			       UICurrentNameSearchUnitSymbolPtr );
+        UICurrentNameSearchUnitNo =
+            kr_unitNameSearch( UICurrentNameSearchUnitNo + 1,
+                               UICurrentNameSearchUnitSymbolPtr );
         return( UICurrentNameSearchUnitNo );
-    }
-    else
+    } else
         return( 0 );
 }
 
@@ -266,8 +255,7 @@ int  krui_searchNextUnitName(void)
   RETURNS  : Returns the output function name of the unit.
   UPDATE   :
 ******************************************************************************/
-char  *krui_getUnitOutFuncName(int UnitNo)
-{
+char  *krui_getUnitOutFuncName(int UnitNo) {
     struct Unit   *unit_ptr;
     static char  out_func_name[FUNCTION_NAME_MAX_LEN];
 
@@ -275,10 +263,10 @@ char  *krui_getUnitOutFuncName(int UnitNo)
         return( NULL );         /*  invalid unit #  */
 
     if(unit_ptr->out_func == OUT_Custom_Python) {
-    	strncpy(out_func_name, 
-		krf_getFuncName((FunctionPtr) unit_ptr->python_out_func),
-		sizeof(out_func_name)-1);
-	out_func_name[sizeof(out_func_name)-1]=0;		
+        strncpy(out_func_name,
+                krf_getFuncName((FunctionPtr) unit_ptr->python_out_func),
+                sizeof(out_func_name)-1);
+        out_func_name[sizeof(out_func_name)-1]=0;
     } else strcpy( out_func_name, krf_getFuncName( (FunctionPtr) unit_ptr->out_func ));
 
     return( out_func_name );
@@ -296,8 +284,7 @@ char  *krui_getUnitOutFuncName(int UnitNo)
              error code otherwise.
   UPDATE   :
 ******************************************************************************/
-krui_err  krui_setUnitOutFunc(int unit_no, char *unitOutFuncName)
-{
+krui_err  krui_setUnitOutFunc(int unit_no, char *unitOutFuncName) {
     struct Unit   *unit_ptr;
     FunctionPtr func_ptr;
 
@@ -311,12 +298,12 @@ krui_err  krui_setUnitOutFunc(int unit_no, char *unitOutFuncName)
 
     if ( !krf_funcSearch( unitOutFuncName, OUT_FUNC, &func_ptr ))
         return( KernelErrorCode );
-    
+
     unit_ptr->out_func = (OutFuncPtr) func_ptr;
     unit_ptr->Ftype_entry = NULL;
     if((OutFuncPtr)func_ptr == OUT_Custom_Python) {
-    	unit_ptr->python_out_func 
-    			= kr_findPythonFunction(unitOutFuncName, OUT_FUNC);
+        unit_ptr->python_out_func
+            = kr_findPythonFunction(unitOutFuncName, OUT_FUNC);
     }
 
     NetModified = TRUE;
@@ -333,8 +320,7 @@ krui_err  krui_setUnitOutFunc(int unit_no, char *unitOutFuncName)
   RETURNS  : Returns the activation function name of the unit.
   UPDATE   :
 ******************************************************************************/
-char  *krui_getUnitActFuncName(int UnitNo)
-{
+char  *krui_getUnitActFuncName(int UnitNo) {
     struct Unit   *unit_ptr;
     static char  act_func_name[FUNCTION_NAME_MAX_LEN];
 
@@ -342,10 +328,10 @@ char  *krui_getUnitActFuncName(int UnitNo)
         return( NULL );         /*  invalid unit #  */
 
     if(unit_ptr->act_func == ACT_Custom_Python) {
-    	strncpy(act_func_name, 
-		krf_getFuncName((FunctionPtr) unit_ptr->python_act_func),
-		sizeof(act_func_name)-1);
-	act_func_name[sizeof(act_func_name)-1]=0;		
+        strncpy(act_func_name,
+                krf_getFuncName((FunctionPtr) unit_ptr->python_act_func),
+                sizeof(act_func_name)-1);
+        act_func_name[sizeof(act_func_name)-1]=0;
     } else strcpy( act_func_name, krf_getFuncName( (FunctionPtr) unit_ptr->act_func ));
 
     return( act_func_name );
@@ -366,8 +352,7 @@ char  *krui_getUnitActFuncName(int UnitNo)
 
 extern FlintType ACT_Custom_Python(struct Unit *unit_ptr);
 
-krui_err  krui_setUnitActFunc(int unit_no, char *unitActFuncName)
-{
+krui_err  krui_setUnitActFunc(int unit_no, char *unitActFuncName) {
     struct Unit   *unit_ptr;
     FunctionPtr   act_func_ptr, act_deriv_func_ptr, act_2_deriv_func_ptr;
 
@@ -383,8 +368,8 @@ krui_err  krui_setUnitActFunc(int unit_no, char *unitActFuncName)
     if( !krf_funcSearch( unitActFuncName, ACT_DERIV_FUNC, &act_deriv_func_ptr ))
         return( KernelErrorCode );
     /*  set the second derivation function of the activation function  */
-    if ( !krf_funcSearch( unitActFuncName, ACT_2_DERIV_FUNC, 
-			  &act_2_deriv_func_ptr ))
+    if ( !krf_funcSearch( unitActFuncName, ACT_2_DERIV_FUNC,
+                          &act_2_deriv_func_ptr ))
         return( KernelErrorCode );
 
 
@@ -394,12 +379,12 @@ krui_err  krui_setUnitActFunc(int unit_no, char *unitActFuncName)
     unit_ptr->Ftype_entry = NULL;
 
     if((ActFuncPtr)act_func_ptr == ACT_Custom_Python) {
-	 unit_ptr->python_act_func =
-	 	kr_findPythonFunction(unitActFuncName,ACT_FUNC);
-	 unit_ptr->python_act_deriv_func =
-	 	kr_findPythonFunction(unitActFuncName,ACT_DERIV_FUNC);
-	 unit_ptr->python_act_2_deriv_func =
-	 	kr_findPythonFunction(unitActFuncName,ACT_2_DERIV_FUNC);
+        unit_ptr->python_act_func =
+            kr_findPythonFunction(unitActFuncName,ACT_FUNC);
+        unit_ptr->python_act_deriv_func =
+            kr_findPythonFunction(unitActFuncName,ACT_DERIV_FUNC);
+        unit_ptr->python_act_2_deriv_func =
+            kr_findPythonFunction(unitActFuncName,ACT_2_DERIV_FUNC);
     }
 
     NetModified = TRUE;
@@ -418,8 +403,7 @@ krui_err  krui_setUnitActFunc(int unit_no, char *unitActFuncName)
              Returns NULL if unit has no FType.
   UPDATE   :
 ******************************************************************************/
-char  *krui_getUnitFTypeName(int UnitNo)
-{
+char  *krui_getUnitFTypeName(int UnitNo) {
     struct FtypeUnitStruct    *Ftype_entry;
     struct Unit   *unit_ptr;
 
@@ -444,13 +428,11 @@ char  *krui_getUnitFTypeName(int UnitNo)
   RETURNS  : Returns the activation value of the unit.
   UPDATE   :
 ******************************************************************************/
-FlintType  krui_getUnitActivation(int UnitNo)
-{
+FlintType  krui_getUnitActivation(int UnitNo) {
 
     if KERNEL_STANDARD {
-        return( kr_getUnitValues( UnitNo, SEL_UNIT_ACT ) );
-    }
-    else  {
+    return( kr_getUnitValues( UnitNo, SEL_UNIT_ACT ) );
+    } else  {
 
 #ifdef MASPAR_KERNEL
 
@@ -476,14 +458,12 @@ FlintType  krui_getUnitActivation(int UnitNo)
   RETURNS  :
   UPDATE   :
 ******************************************************************************/
-krui_err  krui_setUnitActivation(int UnitNo, FlintTypeParam unit_activation)
-{
+krui_err  krui_setUnitActivation(int UnitNo, FlintTypeParam unit_activation) {
     krui_err err = KRERR_NO_ERROR;
 
     if KERNEL_STANDARD  {
-        err = kr_setUnitValues( UnitNo, SEL_UNIT_ACT, unit_activation );
-    }
-    else  {
+    err = kr_setUnitValues( UnitNo, SEL_UNIT_ACT, unit_activation );
+    } else  {
 
 #ifdef MASPAR_KERNEL
 
@@ -507,11 +487,10 @@ krui_err  krui_setUnitActivation(int UnitNo, FlintTypeParam unit_activation)
   RETURNS  : Returns the initial activation value of the unit.
   UPDATE   :
 ******************************************************************************/
-FlintType  krui_getUnitInitialActivation(int UnitNo)
-{
+FlintType  krui_getUnitInitialActivation(int UnitNo) {
 
     if KERNEL_STANDARD
-        return( kr_getUnitValues( UnitNo, SEL_UNIT_IACT ) );
+    return( kr_getUnitValues( UnitNo, SEL_UNIT_IACT ) );
     else  {
 
 #ifdef MASPAR_KERNEL
@@ -537,12 +516,11 @@ FlintType  krui_getUnitInitialActivation(int UnitNo)
   RETURNS  :
   UPDATE   :
 ******************************************************************************/
-void  krui_setUnitInitialActivation(int UnitNo, 
-				    FlintTypeParam unit_i_activation)
-{
+void  krui_setUnitInitialActivation(int UnitNo,
+                                    FlintTypeParam unit_i_activation) {
 
     if KERNEL_STANDARD
-        kr_setUnitValues( UnitNo, SEL_UNIT_IACT, unit_i_activation );
+    kr_setUnitValues( UnitNo, SEL_UNIT_IACT, unit_i_activation );
     else  {
 
 #ifdef MASPAR_KERNEL
@@ -567,11 +545,10 @@ void  krui_setUnitInitialActivation(int UnitNo,
   RETURNS  : Returns the output value of the unit.
   UPDATE   :
 ******************************************************************************/
-FlintType  krui_getUnitOutput(int UnitNo)
-{
+FlintType  krui_getUnitOutput(int UnitNo) {
 
     if KERNEL_STANDARD
-        return( kr_getUnitValues( UnitNo, SEL_UNIT_OUT ) );
+    return( kr_getUnitValues( UnitNo, SEL_UNIT_OUT ) );
     else  {
 
 #ifdef MASPAR_KERNEL
@@ -597,13 +574,11 @@ FlintType  krui_getUnitOutput(int UnitNo)
   RETURNS  :
   UPDATE   :
 ******************************************************************************/
-krui_err  krui_setUnitOutput(int unit_no, FlintTypeParam unit_output)
-{
+krui_err  krui_setUnitOutput(int unit_no, FlintTypeParam unit_output) {
 
     if KERNEL_STANDARD  {
-        kr_setUnitValues( unit_no, SEL_UNIT_OUT, unit_output );
-    }
-    else  {
+    kr_setUnitValues( unit_no, SEL_UNIT_OUT, unit_output );
+    } else  {
 
 #ifdef MASPAR_KERNEL
 
@@ -628,13 +603,11 @@ krui_err  krui_setUnitOutput(int unit_no, FlintTypeParam unit_output)
   RETURNS  : Returns the bias value of the unit.
   UPDATE   :
 ******************************************************************************/
-FlintType  krui_getUnitBias(int UnitNo)
-{
+FlintType  krui_getUnitBias(int UnitNo) {
 
     if KERNEL_STANDARD  {
-        return( kr_getUnitValues( UnitNo, SEL_UNIT_BIAS ) );
-    }
-    else  {
+    return( kr_getUnitValues( UnitNo, SEL_UNIT_BIAS ) );
+    } else  {
 
 #ifdef MASPAR_KERNEL
 
@@ -658,13 +631,11 @@ FlintType  krui_getUnitBias(int UnitNo)
   RETURNS  :
   UPDATE   :
 ******************************************************************************/
-void  krui_setUnitBias(int UnitNo, FlintTypeParam unit_bias)
-{
+void  krui_setUnitBias(int UnitNo, FlintTypeParam unit_bias) {
 
     if KERNEL_STANDARD  {
-        kr_setUnitValues( UnitNo, SEL_UNIT_BIAS, unit_bias );
-    }
-    else  {
+    kr_setUnitValues( UnitNo, SEL_UNIT_BIAS, unit_bias );
+    } else  {
 
 #ifdef MASPAR_KERNEL
 
@@ -686,13 +657,11 @@ void  krui_setUnitBias(int UnitNo, FlintTypeParam unit_bias)
   RETURNS  : Returns Value A of the unit.
   UPDATE   :
 ****************************************************************************/
-FlintType  krui_getUnitValueA(int UnitNo)
-{
+FlintType  krui_getUnitValueA(int UnitNo) {
 
     if KERNEL_STANDARD  {
-        return( kr_getUnitValues( UnitNo, SEL_UNIT_VALA ) );
-    }
-    else  {
+    return( kr_getUnitValues( UnitNo, SEL_UNIT_VALA ) );
+    } else  {
 
 #ifdef MASPAR_KERNEL
 
@@ -717,13 +686,11 @@ FlintType  krui_getUnitValueA(int UnitNo)
   RETURNS  :
   UPDATE   :
 *****************************************************************************/
-void  krui_setUnitValueA(int UnitNo, FlintTypeParam unit_valueA)
-{
+void  krui_setUnitValueA(int UnitNo, FlintTypeParam unit_valueA) {
 
     if KERNEL_STANDARD  {
-        kr_setUnitValues( UnitNo, SEL_UNIT_VALA, unit_valueA );
-    }
-    else  {
+    kr_setUnitValues( UnitNo, SEL_UNIT_VALA, unit_valueA );
+    } else  {
 
 #ifdef MASPAR_KERNEL
 
@@ -747,8 +714,7 @@ void  krui_setUnitValueA(int UnitNo, FlintTypeParam unit_valueA)
   RETURNS  : Returns the subnet number of the unit.
   UPDATE   :
 ******************************************************************************/
-int  krui_getUnitSubnetNo(int UnitNo)
-{
+int  krui_getUnitSubnetNo(int UnitNo) {
     struct Unit   *unit_ptr;
 
     if ( (unit_ptr = kr_getUnitPtr( UnitNo ) ) == NULL)
@@ -768,8 +734,7 @@ int  krui_getUnitSubnetNo(int UnitNo)
   RETURNS  :
   UPDATE   :
 ******************************************************************************/
-void  krui_setUnitSubnetNo(int UnitNo, int subnet_no)
-{
+void  krui_setUnitSubnetNo(int UnitNo, int subnet_no) {
     struct Unit   *unit_ptr;
 
     if ( (unit_ptr = kr_getUnitPtr( UnitNo ) ) == NULL)
@@ -791,8 +756,7 @@ void  krui_setUnitSubnetNo(int UnitNo, int subnet_no)
   RETURNS  : Returns the layer number of the unit.
   UPDATE   :
 ******************************************************************************/
-unsigned short  krui_getUnitLayerNo(int UnitNo)
-{
+unsigned short  krui_getUnitLayerNo(int UnitNo) {
     struct Unit   *unit_ptr;
 
     if ( (unit_ptr = kr_getUnitPtr( UnitNo ) ) == NULL)
@@ -811,8 +775,7 @@ unsigned short  krui_getUnitLayerNo(int UnitNo)
   RETURNS  :
   UPDATE   :
 ******************************************************************************/
-void    krui_setUnitLayerNo(int UnitNo, int layer_no)
-{
+void    krui_setUnitLayerNo(int UnitNo, int layer_no) {
     struct Unit   *unit_ptr;
 
     if ( (unit_ptr = kr_getUnitPtr( UnitNo ) ) == NULL)
@@ -833,8 +796,7 @@ void    krui_setUnitLayerNo(int UnitNo, int layer_no)
   RETURNS  : Returns the position of the unit.
   UPDATE   :
 ******************************************************************************/
-void    krui_getUnitPosition(int UnitNo, struct PosType *position)
-{
+void    krui_getUnitPosition(int UnitNo, struct PosType *position) {
     struct Unit   *unit_ptr;
 
     if ( (unit_ptr = kr_getUnitPtr( UnitNo ) ) == NULL)
@@ -855,8 +817,7 @@ void    krui_getUnitPosition(int UnitNo, struct PosType *position)
   RETURNS  :
   UPDATE   :
 ******************************************************************************/
-void    krui_setUnitPosition(int UnitNo, struct PosType *position)
-{
+void    krui_setUnitPosition(int UnitNo, struct PosType *position) {
     struct Unit   *unit_ptr;
 
     if ( (unit_ptr = kr_getUnitPtr( UnitNo ) ) == NULL)
@@ -882,8 +843,7 @@ void    krui_setUnitPosition(int UnitNo, struct PosType *position)
              no unit exists at this position
   UPDATE   :
 ******************************************************************************/
-int   krui_getUnitNoAtPosition(struct PosType *position, int subnet_no)
-{
+int   krui_getUnitNoAtPosition(struct PosType *position, int subnet_no) {
     register int       i;
     register short     x, y, net_no;
     struct Unit     *unit_ptr;
@@ -894,15 +854,14 @@ int   krui_getUnitNoAtPosition(struct PosType *position, int subnet_no)
     net_no = (short) subnet_no;
 
     for (i = 1, unit_ptr = unit_array + 1;
-         i <= MaxUnitNo;
-         i++, unit_ptr++)
-        {
-            if ( UNIT_IN_USE( unit_ptr ) &&
+            i <= MaxUnitNo;
+            i++, unit_ptr++) {
+        if ( UNIT_IN_USE( unit_ptr ) &&
                 (unit_ptr->subnet_no == net_no) &&
                 (unit_ptr->unit_pos.x == x) && (unit_ptr->unit_pos.y == y) )
 
-                return( i );
-        }
+            return( i );
+    }
 
     return( 0 );
 }
@@ -920,8 +879,7 @@ int   krui_getUnitNoAtPosition(struct PosType *position, int subnet_no)
              subnet no or 0, if no unit exists at this position.
   UPDATE   :
 ******************************************************************************/
-int  krui_getUnitNoNearPosition(struct PosType *position, int subnet_no, int range, int gridWidth)
-{
+int  krui_getUnitNoNearPosition(struct PosType *position, int subnet_no, int range, int gridWidth) {
     register int       i, devit, width;
     register short     x, y, net_no;
     struct Unit        *unit_ptr;
@@ -933,14 +891,13 @@ int  krui_getUnitNoNearPosition(struct PosType *position, int subnet_no, int ran
     width = gridWidth;
 
     for (i = 1, unit_ptr = unit_array + 1; i <= MaxUnitNo;
-         i++, unit_ptr++)
-        {
-            if ( UNIT_IN_USE( unit_ptr ) &&
+            i++, unit_ptr++) {
+        if ( UNIT_IN_USE( unit_ptr ) &&
                 (unit_ptr->subnet_no == net_no) &&
                 (abs( unit_ptr->unit_pos.x - x) * width <= devit) &&
                 (abs( unit_ptr->unit_pos.y - y) * width <= devit) )
-                return( i );
-        }
+            return( i );
+    }
 
     return( 0 );
 }
@@ -955,8 +912,7 @@ int  krui_getUnitNoNearPosition(struct PosType *position, int subnet_no, int ran
   RETURNS  : Returns the topologic type, i.e. input, output, hidden
   UPDATE   :
 ******************************************************************************/
-int  krui_getUnitTType(int unit_no)
-{
+int  krui_getUnitTType(int unit_no) {
     struct Unit   *unit_ptr;
 
     if ((unit_ptr = kr_getUnitPtr( unit_no )) == NULL)
@@ -976,8 +932,7 @@ int  krui_getUnitTType(int unit_no)
   RETURNS  : Returns error code if topologic type or unit number is invalid.
   UPDATE   :
 ******************************************************************************/
-krui_err  krui_setUnitTType(int unit_no, int UnitTType)
-{
+krui_err  krui_setUnitTType(int unit_no, int UnitTType) {
 
 #ifdef MASPAR_KERNEL
     MASPAR_FF1_VALIDATE_OP;
@@ -997,8 +952,7 @@ krui_err  krui_setUnitTType(int unit_no, int UnitTType)
   RETURNS  :
   UPDATE   :
 ******************************************************************************/
-krui_err  krui_freezeUnit(int unit_no)
-{
+krui_err  krui_freezeUnit(int unit_no) {
     struct Unit   *unit_ptr;
 
 #ifdef MASPAR_KERNEL
@@ -1023,8 +977,7 @@ krui_err  krui_freezeUnit(int unit_no)
   RETURNS  :
   UPDATE   :
 ******************************************************************************/
-krui_err  krui_unfreezeUnit(int unit_no)
-{
+krui_err  krui_unfreezeUnit(int unit_no) {
     struct Unit   *unit_ptr;
 
 #ifdef MASPAR_KERNEL
@@ -1048,8 +1001,7 @@ krui_err  krui_unfreezeUnit(int unit_no)
   RETURNS  : Returns true, if unit is frozen
   UPDATE   :
 ******************************************************************************/
-bool  krui_isUnitFrozen(int unit_no)
-{
+bool  krui_isUnitFrozen(int unit_no) {
     struct Unit   *unit_ptr;
 
     if ((unit_ptr = kr_getUnitPtr( unit_no )) == NULL)
@@ -1067,25 +1019,28 @@ bool  krui_isUnitFrozen(int unit_no)
 
   RETURNS  : Returns the input type of the unit:
              NO_INPUTS    : if the unit has not inputs (at least not now)
-             SITES        : if the unit has one or more sites (and no direct 
+             SITES        : if the unit has one or more sites (and no direct
 	                    input links !)
              DIRECT_LINKS : if the unit has direct input links (and no sites !)
 
   UPDATE   :
 ******************************************************************************/
-int  krui_getUnitInputType(int unit_no)
-{
+int  krui_getUnitInputType(int unit_no) {
     struct Unit  *unit_ptr;
 
     if ((unit_ptr = kr_getUnitPtr( unit_no )) == NULL)
         return( KernelErrorCode );
 
     switch ((int) unit_ptr->flags & UFLAG_INPUT_PAT)    {
-      case UFLAG_NO_INP :  return( NO_INPUTS    );
-      case UFLAG_SITES  :  return( SITES        );
-      case UFLAG_DLINKS :  return( DIRECT_LINKS );
+    case UFLAG_NO_INP :
+        return( NO_INPUTS    );
+    case UFLAG_SITES  :
+        return( SITES        );
+    case UFLAG_DLINKS :
+        return( DIRECT_LINKS );
 
-      default :  return( NO_INPUTS );
+    default :
+        return( NO_INPUTS );
     }
 }
 
@@ -1108,8 +1063,7 @@ int  krui_getUnitInputType(int unit_no)
               invalid functions occured. Returns (positive) unit number otherwise.
   UPDATE   :
 ******************************************************************************/
-int  krui_createDefaultUnit(void)
-{
+int  krui_createDefaultUnit(void) {
 
 #ifdef MASPAR_KERNEL
     MASPAR_FF1_VALIDATE_OP;
@@ -1140,15 +1094,14 @@ int  krui_createDefaultUnit(void)
   UPDATE   :
 ******************************************************************************/
 int  krui_createUnit(char *unit_name, char *out_func_name, char *act_func_name,
-		     FlintTypeParam i_act, FlintTypeParam bias)
-{
+                     FlintTypeParam i_act, FlintTypeParam bias) {
 
 #ifdef MASPAR_KERNEL
     MASPAR_FF1_VALIDATE_OP;
 #endif
 
-    return( kr_createUnit( unit_name, out_func_name, act_func_name, 
-			   i_act, bias) );
+    return( kr_createUnit( unit_name, out_func_name, act_func_name,
+                           i_act, bias) );
 }
 
 
@@ -1166,8 +1119,7 @@ int  krui_createUnit(char *unit_name, char *out_func_name, char *act_func_name,
   RETURNS  : Returns error code if unit doesn't exist.
   UPDATE   :
 ******************************************************************************/
-krui_err  krui_deleteUnit(int unit_no)
-{
+krui_err  krui_deleteUnit(int unit_no) {
     struct  Unit      *unit_ptr;
 
 
@@ -1198,8 +1150,7 @@ krui_err  krui_deleteUnit(int unit_no)
   RETURNS  : Returns error code if unit doesn't exist.
   UPDATE   :
 ******************************************************************************/
-krui_err  krui_deleteUnitList(int no_of_units, int unit_list[])
-{
+krui_err  krui_deleteUnitList(int no_of_units, int unit_list[]) {
     struct  Unit      *unit_ptr;
     int               i;
 
@@ -1232,12 +1183,11 @@ krui_err  krui_deleteUnitList(int no_of_units, int unit_list[])
 
   NOTES    : Function has no effect on the current unit.
 
-  RETURNS  : Returns the unit number or (negative) error code if memory 
+  RETURNS  : Returns the unit number or (negative) error code if memory
              allocation fails or functionality type isn't defined.
   UPDATE   :
 ******************************************************************************/
-int  krui_createFTypeUnit(char *Ftype_symbol)
-{
+int  krui_createFTypeUnit(char *Ftype_symbol) {
     int     unit_no;
 
 #ifdef MASPAR_KERNEL
@@ -1268,8 +1218,7 @@ int  krui_createFTypeUnit(char *Ftype_symbol)
 
   UPDATE   :
 ******************************************************************************/
-krui_err  krui_setUnitFType(int unit_no, char *Ftype_symbol)
-{
+krui_err  krui_setUnitFType(int unit_no, char *Ftype_symbol) {
     struct  Unit      *unit_ptr;
     struct  FtypeUnitStruct   *ftype_ptr;
 
@@ -1282,11 +1231,11 @@ krui_err  krui_setUnitFType(int unit_no, char *Ftype_symbol)
     if (!kr_symbolCheck( Ftype_symbol ))
         return( KernelErrorCode );
 
-    if ( (ftype_ptr = krm_FtypeSymbolSearch( Ftype_symbol ) ) == NULL)
-        {                       /*  Ftype name isn't defined    */
-            KernelErrorCode = KRERR_FTYPE_SYMBOL;
-            return( KernelErrorCode );
-        }
+    if ( (ftype_ptr = krm_FtypeSymbolSearch( Ftype_symbol ) ) == NULL) {
+        /*  Ftype name isn't defined    */
+        KernelErrorCode = KRERR_FTYPE_SYMBOL;
+        return( KernelErrorCode );
+    }
 
     NetModified = TRUE;
     kr_changeFtypeUnit( unit_ptr, ftype_ptr );
@@ -1306,11 +1255,10 @@ krui_err  krui_setUnitFType(int unit_no, char *Ftype_symbol)
              Copying of output links is slow.
              If return code < 0, an error occured.
 
-  RETURNS  : Returns the unit number of the new unit or error message < 0 
+  RETURNS  : Returns the unit number of the new unit or error message < 0
   UPDATE   :
 ******************************************************************************/
-int   krui_copyUnit(int unit_no, int copy_mode)
-{
+int   krui_copyUnit(int unit_no, int copy_mode) {
     int   new_unit_no;
 
 #ifdef MASPAR_KERNEL
@@ -1346,8 +1294,7 @@ REMEMBER: The Unit-Functionality-List stores:
   RETURNS  : Returns true, if an entry is available
   UPDATE   :
 ******************************************************************************/
-bool  krui_setFirstFTypeEntry(void)
-{
+bool  krui_setFirstFTypeEntry(void) {
     UICurrentFtypeEntry = krm_getFtypeFirstEntry();
     UICurrentFtypeSite = NULL;
     return( UICurrentFtypeEntry != NULL );
@@ -1363,16 +1310,14 @@ bool  krui_setFirstFTypeEntry(void)
   RETURNS  : Returns true, if an entry is available
   UPDATE   :
 ******************************************************************************/
-bool  krui_setNextFTypeEntry(void)
-{
+bool  krui_setNextFTypeEntry(void) {
     struct  FtypeUnitStruct   *ftype_ptr;
 
     UICurrentFtypeSite = NULL;
-    if ( (ftype_ptr = krm_getFtypeNextEntry() ) != NULL)
-        {
-            UICurrentFtypeEntry = ftype_ptr;
-            return( TRUE );
-        }
+    if ( (ftype_ptr = krm_getFtypeNextEntry() ) != NULL) {
+        UICurrentFtypeEntry = ftype_ptr;
+        return( TRUE );
+    }
 
     return( FALSE );
 }
@@ -1387,15 +1332,13 @@ bool  krui_setNextFTypeEntry(void)
   RETURNS  : Returns true, if an entry with this name is available.
   UPDATE   :
 ******************************************************************************/
-bool  krui_setFTypeEntry(char *Ftype_symbol)
-{
+bool  krui_setFTypeEntry(char *Ftype_symbol) {
     struct  FtypeUnitStruct   *ftype_ptr;
 
-    if ( (ftype_ptr = krm_FtypeSymbolSearch( Ftype_symbol ) ) != NULL)
-        {
-            UICurrentFtypeEntry = ftype_ptr;
-            return( TRUE );
-        }
+    if ( (ftype_ptr = krm_FtypeSymbolSearch( Ftype_symbol ) ) != NULL) {
+        UICurrentFtypeEntry = ftype_ptr;
+        return( TRUE );
+    }
 
     return( FALSE );
 }
@@ -1411,8 +1354,7 @@ bool  krui_setFTypeEntry(char *Ftype_symbol)
   RETURNS  : Returns the name of the current FType entry.
   UPDATE   :
 ******************************************************************************/
-char  *krui_getFTypeName(void)
-{
+char  *krui_getFTypeName(void) {
 
     if (UICurrentFtypeEntry == NULL)
         return( NULL );
@@ -1432,8 +1374,7 @@ char  *krui_getFTypeName(void)
              isn't definite, 0 otherwise.
   UPDATE   :
 ******************************************************************************/
-krui_err  krui_setFTypeName(char *Ftype_symbol)
-{
+krui_err  krui_setFTypeName(char *Ftype_symbol) {
     struct NameTable    *NTable_ptr;
 
     if (UICurrentFtypeEntry == NULL)
@@ -1469,15 +1410,14 @@ krui_err  krui_setFTypeName(char *Ftype_symbol)
              FType entry
   UPDATE   :
 ******************************************************************************/
-char  *krui_getFTypeActFuncName(void)
-{
+char  *krui_getFTypeActFuncName(void) {
     static char  act_func_name[FUNCTION_NAME_MAX_LEN];
 
     if (UICurrentFtypeEntry == NULL)
         return( NULL );
 
-    strcpy( act_func_name, 
-	    krf_getFuncName( (FunctionPtr) UICurrentFtypeEntry->act_func ) );
+    strcpy( act_func_name,
+            krf_getFuncName( (FunctionPtr) UICurrentFtypeEntry->act_func ) );
 
     return( act_func_name );
 }
@@ -1495,8 +1435,7 @@ char  *krui_getFTypeActFuncName(void)
              error code otherwise.
   UPDATE   :
 ******************************************************************************/
-krui_err  krui_setFTypeActFunc(char *act_func_name)
-{
+krui_err  krui_setFTypeActFunc(char *act_func_name) {
     FunctionPtr  act_func_ptr, act_deriv_func_ptr, act_2_deriv_func_ptr;
 
 #ifdef MASPAR_KERNEL
@@ -1504,11 +1443,11 @@ krui_err  krui_setFTypeActFunc(char *act_func_name)
 #endif
 
     KernelErrorCode = KRERR_NO_ERROR;
-    if (UICurrentFtypeEntry == NULL)
-        {                       /*  Current Ftype entry isn't defined   */
-            KernelErrorCode = KRERR_FTYPE_ENTRY;
-            return( KernelErrorCode );
-        }
+    if (UICurrentFtypeEntry == NULL) {
+        /*  Current Ftype entry isn't defined   */
+        KernelErrorCode = KRERR_FTYPE_ENTRY;
+        return( KernelErrorCode );
+    }
 
     if ( !krf_funcSearch( act_func_name, ACT_FUNC, &act_func_ptr ) )
         return( KernelErrorCode );
@@ -1516,14 +1455,14 @@ krui_err  krui_setFTypeActFunc(char *act_func_name)
     if ( !krf_funcSearch( act_func_name, ACT_DERIV_FUNC, &act_deriv_func_ptr ))
         return( KernelErrorCode );
     /*  set the second derivation function of the activation function  */
-    if ( !krf_funcSearch( act_func_name, ACT_2_DERIV_FUNC, 
-			  &act_2_deriv_func_ptr ))
+    if ( !krf_funcSearch( act_func_name, ACT_2_DERIV_FUNC,
+                          &act_2_deriv_func_ptr ))
         return( KernelErrorCode );
 
     UICurrentFtypeEntry->act_func = (ActFuncPtr) act_func_ptr;
     UICurrentFtypeEntry->act_deriv_func = (ActDerivFuncPtr) act_deriv_func_ptr;
-    UICurrentFtypeEntry->act_2_deriv_func = 
-	(ActDerivFuncPtr) act_2_deriv_func_ptr;
+    UICurrentFtypeEntry->act_2_deriv_func =
+        (ActDerivFuncPtr) act_2_deriv_func_ptr;
 
     kr_changeFtypeUnits( UICurrentFtypeEntry );
     return( KernelErrorCode );
@@ -1541,15 +1480,14 @@ krui_err  krui_setFTypeActFunc(char *act_func_name)
   UPDATE   :
 ******************************************************************************/
 
-char  *krui_getFTypeOutFuncName(void)
-{
+char  *krui_getFTypeOutFuncName(void) {
     static char  out_func_name[FUNCTION_NAME_MAX_LEN];
 
     if (UICurrentFtypeEntry == NULL)
         return( NULL );
 
-    strcpy( out_func_name, 
-	    krf_getFuncName( (FunctionPtr) UICurrentFtypeEntry->out_func ) );
+    strcpy( out_func_name,
+            krf_getFuncName( (FunctionPtr) UICurrentFtypeEntry->out_func ) );
 
     return( out_func_name );
 }
@@ -1566,16 +1504,15 @@ char  *krui_getFTypeOutFuncName(void)
              error code otherwise.
   UPDATE   :
 ******************************************************************************/
-krui_err   krui_setFTypeOutFunc(char *out_func_name)
-{
+krui_err   krui_setFTypeOutFunc(char *out_func_name) {
     FunctionPtr  out_func_ptr;
 
     KernelErrorCode = KRERR_NO_ERROR;
-    if (UICurrentFtypeEntry == NULL)
-        {   /*  Current Ftype entry isn't defined   */
-            KernelErrorCode = KRERR_FTYPE_ENTRY;
-            return( KernelErrorCode );
-        }
+    if (UICurrentFtypeEntry == NULL) {
+        /*  Current Ftype entry isn't defined   */
+        KernelErrorCode = KRERR_FTYPE_ENTRY;
+        return( KernelErrorCode );
+    }
 
     if ( !krf_funcSearch( out_func_name, OUT_FUNC, &out_func_ptr ) )
         return( KernelErrorCode );
@@ -1597,8 +1534,7 @@ krui_err   krui_setFTypeOutFunc(char *out_func_name)
              FType entry.
   UPDATE   :
 ******************************************************************************/
-bool  krui_setFirstFTypeSite(void)
-{
+bool  krui_setFirstFTypeSite(void) {
 
     if (UICurrentFtypeEntry == NULL)  {
         UICurrentFtypeSite = NULL;
@@ -1625,8 +1561,7 @@ bool  krui_setFirstFTypeSite(void)
              FType entry.
   UPDATE   :
 ******************************************************************************/
-bool  krui_setNextFTypeSite(void)
-{
+bool  krui_setNextFTypeSite(void) {
 
     if (UICurrentFtypeSite == NULL)
         return( FALSE );
@@ -1649,8 +1584,7 @@ bool  krui_setNextFTypeSite(void)
              Ftype entry).
   UPDATE   :
 ******************************************************************************/
-char  *krui_getFTypeSiteName(void)
-{
+char  *krui_getFTypeSiteName(void) {
 
     if (UICurrentFtypeSite == NULL)
         return( NULL );
@@ -1675,8 +1609,7 @@ char  *krui_getFTypeSiteName(void)
              0 otherwise.
   UPDATE   :
 ******************************************************************************/
-krui_err  krui_setFTypeSiteName(char *FType_site_name)
-{
+krui_err  krui_setFTypeSiteName(char *FType_site_name) {
     struct  SiteTable     *stbl_ptr;
 
 #ifdef MASPAR_KERNEL
@@ -1684,23 +1617,23 @@ krui_err  krui_setFTypeSiteName(char *FType_site_name)
 #endif
 
     KernelErrorCode = KRERR_NO_ERROR;
-    if (UICurrentFtypeEntry == NULL)
-        {                       /*  Current Ftype entry isn't defined   */
-            KernelErrorCode = KRERR_FTYPE_ENTRY;
-            return( KernelErrorCode );
-        }
+    if (UICurrentFtypeEntry == NULL) {
+        /*  Current Ftype entry isn't defined   */
+        KernelErrorCode = KRERR_FTYPE_ENTRY;
+        return( KernelErrorCode );
+    }
 
     if (!kr_symbolCheck( FType_site_name ))
         return( KernelErrorCode );
 
-    if ( (stbl_ptr = krm_STableSymbolSearch( FType_site_name )) == NULL)
-        {                       /*   site name isn't defined */
-            KernelErrorCode = KRERR_UNDEF_SITE_NAME;
-            return( KernelErrorCode );
-        }
+    if ( (stbl_ptr = krm_STableSymbolSearch( FType_site_name )) == NULL) {
+        /*   site name isn't defined */
+        KernelErrorCode = KRERR_UNDEF_SITE_NAME;
+        return( KernelErrorCode );
+    }
 
-    kr_changeFtypeSites( UICurrentFtypeEntry, UICurrentFtypeSite->site_table, 
-			 stbl_ptr);
+    kr_changeFtypeSites( UICurrentFtypeEntry, UICurrentFtypeSite->site_table,
+                         stbl_ptr);
     UICurrentFtypeSite->site_table = stbl_ptr;
 
     return( KernelErrorCode );
@@ -1727,10 +1660,9 @@ krui_err  krui_setFTypeSiteName(char *FType_site_name)
              0 otherwise.
   UPDATE   :
 ******************************************************************************/
-krui_err  krui_createFTypeEntry(char *Ftype_symbol, char *act_func_name, 
-				char *out_func_name, int no_of_sites, 
-				char **array_of_site_names)
-{
+krui_err  krui_createFTypeEntry(char *Ftype_symbol, char *act_func_name,
+                                char *out_func_name, int no_of_sites,
+                                char **array_of_site_names) {
     FunctionPtr act_func, out_func, act_deriv_func, act_2_deriv_func;
     struct  FtypeUnitStruct   *Ftype_entry;
     struct  SiteTable         *STable_entry;
@@ -1740,8 +1672,8 @@ krui_err  krui_createFTypeEntry(char *Ftype_symbol, char *act_func_name,
 
     KernelErrorCode = KRERR_NO_ERROR;
 
-    if (Ftype_symbol == NULL)
-    {   /*  Ftype name isn't defined   */
+    if (Ftype_symbol == NULL) {
+        /*  Ftype name isn't defined   */
         KernelErrorCode = KRERR_FTYPE_NAME;
         return( KernelErrorCode );
     }
@@ -1759,40 +1691,40 @@ krui_err  krui_createFTypeEntry(char *Ftype_symbol, char *act_func_name,
         return( KernelErrorCode );
     /*  set the second derivation function of the activation function  */
     if ( !krf_funcSearch( act_func_name, ACT_2_DERIV_FUNC, &act_2_deriv_func ))
-	return( KernelErrorCode );
+        return( KernelErrorCode );
 
     if ((Ftype_entry = krm_FtypeCreateEntry( Ftype_symbol
-                                            ,(OutFuncPtr) out_func
-                                            ,(ActFuncPtr) act_func
-                                            ,(ActDerivFuncPtr) act_deriv_func
-                                            ,(ActDerivFuncPtr) act_2_deriv_func
-					    ,kr_findPythonFunction(out_func_name,OUT_FUNC)
-					    ,kr_findPythonFunction(act_func_name, ACT_FUNC)
-					    ,kr_findPythonFunction(act_func_name,ACT_DERIV_FUNC)
-					    ,kr_findPythonFunction(act_func_name,ACT_2_DERIV_FUNC)
-                                            )) == NULL)
+                       ,(OutFuncPtr) out_func
+                       ,(ActFuncPtr) act_func
+                       ,(ActDerivFuncPtr) act_deriv_func
+                       ,(ActDerivFuncPtr) act_2_deriv_func
+                       ,kr_findPythonFunction(out_func_name,OUT_FUNC)
+                       ,kr_findPythonFunction(act_func_name, ACT_FUNC)
+                       ,kr_findPythonFunction(act_func_name,ACT_DERIV_FUNC)
+                       ,kr_findPythonFunction(act_func_name,ACT_2_DERIV_FUNC)
+                                           )) == NULL)
         return( KernelErrorCode );
 
     /*  create sites at the Ftype  */
     for (i = 0; i < no_of_sites; i++)  {
-        if ( (Ftype_site_name = array_of_site_names[ i ]) == NULL){
-	    /*   site name isn't defined because it is a NULL pointer  */
-	    KernelErrorCode = KRERR_UNDEF_SITE_NAME;
-	    return( KernelErrorCode );
-	}
+        if ( (Ftype_site_name = array_of_site_names[ i ]) == NULL) {
+            /*   site name isn't defined because it is a NULL pointer  */
+            KernelErrorCode = KRERR_UNDEF_SITE_NAME;
+            return( KernelErrorCode );
+        }
 
-        if ((STable_entry = krm_STableSymbolSearch( Ftype_site_name )) == NULL){
-	    /*  site isn't defined  */
-	    krm_releaseFtypeEntry( Ftype_entry );
-	    KernelErrorCode = KRERR_UNDEF_SITE_NAME;
-	    return( KernelErrorCode );
-	}
+        if ((STable_entry = krm_STableSymbolSearch( Ftype_site_name )) == NULL) {
+            /*  site isn't defined  */
+            krm_releaseFtypeEntry( Ftype_entry );
+            KernelErrorCode = KRERR_UNDEF_SITE_NAME;
+            return( KernelErrorCode );
+        }
 
-        if (krm_FtypeAddSite( Ftype_entry , STable_entry ) == NULL){
-	    /*  memory alloc failed */
-	    krm_releaseFtypeEntry( Ftype_entry );
-	    return( KernelErrorCode );
-	}
+        if (krm_FtypeAddSite( Ftype_entry , STable_entry ) == NULL) {
+            /*  memory alloc failed */
+            krm_releaseFtypeEntry( Ftype_entry );
+            return( KernelErrorCode );
+        }
     }
 
     return( KernelErrorCode );
@@ -1810,8 +1742,7 @@ krui_err  krui_createFTypeEntry(char *Ftype_symbol, char *act_func_name,
   RETURNS  : Returns error code if FType symbol dosn't exist, 0 otherwise.
   UPDATE   :
 ******************************************************************************/
-krui_err    krui_deleteFTypeEntry(char *Ftype_symbol)
-{
+krui_err    krui_deleteFTypeEntry(char *Ftype_symbol) {
     struct  FtypeUnitStruct   *ftype_ptr;
 
     if ( (ftype_ptr = krm_FtypeSymbolSearch( Ftype_symbol ) ) == NULL)
@@ -1840,8 +1771,7 @@ GROUP: Functions for reading of the function table
   RETURNS  : Returns the number of available functions
   UPDATE   :
 ******************************************************************************/
-int  krui_getNoOfFunctions(void)
-{
+int  krui_getNoOfFunctions(void) {
     return( krf_getNoOfFuncs() );
 }
 
@@ -1856,8 +1786,7 @@ int  krui_getNoOfFunctions(void)
              Activation, Site).
   UPDATE   :
 ******************************************************************************/
-void  krui_getFuncInfo(int func_no, char **func_name, int *func_type)
-{
+void  krui_getFuncInfo(int func_no, char **func_name, int *func_type) {
     static struct FuncInfoDescriptor  functionDescr;
     functionDescr.number = func_no - 1;
     KernelErrorCode = krf_getFuncInfo( GET_FUNC_INFO, &functionDescr );
@@ -1876,8 +1805,7 @@ void  krui_getFuncInfo(int func_no, char **func_name, int *func_type)
   RETURNS  : Returns true if the given function name and type exists.
   UPDATE   :
 ******************************************************************************/
-bool  krui_isFunction(char *func_name, int func_type)
-{
+bool  krui_isFunction(char *func_name, int func_type) {
     FunctionPtr  dummy_func_ptr;
     bool        is_func;
 
@@ -1898,9 +1826,8 @@ bool  krui_isFunction(char *func_name, int func_type)
   RETURNS  : Returns TRUE if the given function exists, FALSE otherwise.
   UPDATE   :
 ******************************************************************************/
-bool  krui_getFuncParamInfo(char *func_name, int func_type, 
-			    int *no_of_input_params, int *no_of_output_params)
-{
+bool  krui_getFuncParamInfo(char *func_name, int func_type,
+                            int *no_of_input_params, int *no_of_output_params) {
     static struct FuncInfoDescriptor  functionDescr;
 
     functionDescr.func_type = func_type;
@@ -1934,18 +1861,17 @@ GROUP: Site Table Functions
              Returns FALSE and NULL, if not available.
   UPDATE   :
 ******************************************************************************/
-bool   krui_getFirstSiteTableEntry(char **site_name, char **site_func)
-{
+bool   krui_getFirstSiteTableEntry(char **site_name, char **site_func) {
     struct  SiteTable   *s_ptr;
 
     if ( (s_ptr = krm_getSTableFirstEntry() ) == NULL) {
-	*site_name = NULL;
-	*site_func = NULL;
-	return( FALSE );
+        *site_name = NULL;
+        *site_func = NULL;
+        return( FALSE );
     } else {
-	*site_name = (s_ptr->Entry.site_name)->Entry.symbol;
-	*site_func = krf_getFuncName( (FunctionPtr) s_ptr->site_func );
-	return( TRUE );
+        *site_name = (s_ptr->Entry.site_name)->Entry.symbol;
+        *site_func = krf_getFuncName( (FunctionPtr) s_ptr->site_func );
+        return( TRUE );
     }
 }
 
@@ -1960,18 +1886,17 @@ bool   krui_getFirstSiteTableEntry(char **site_name, char **site_func)
              Returns FALSE and NULL, if not available.
   UPDATE   :
 ******************************************************************************/
-bool  krui_getNextSiteTableEntry(char **site_name, char **site_func)
-{
+bool  krui_getNextSiteTableEntry(char **site_name, char **site_func) {
     struct  SiteTable   *s_ptr;
 
     if ( (s_ptr = krm_getSTableNextEntry() ) == NULL) {
-	*site_name = NULL;
-	*site_func = NULL;
-	return( FALSE );
+        *site_name = NULL;
+        *site_func = NULL;
+        return( FALSE );
     } else {
-	*site_name = (s_ptr->Entry.site_name)->Entry.symbol;
-	*site_func = krf_getFuncName( (FunctionPtr) s_ptr->site_func );
-	return( TRUE );
+        *site_name = (s_ptr->Entry.site_name)->Entry.symbol;
+        *site_func = krf_getFuncName( (FunctionPtr) s_ptr->site_func );
+        return( TRUE );
     }
 }
 
@@ -1987,8 +1912,7 @@ bool  krui_getNextSiteTableEntry(char **site_name, char **site_func)
              If the site name do not exist, function returns NULL.
   UPDATE   :
 ******************************************************************************/
-char  *krui_getSiteTableFuncName(char *site_name)
-{
+char  *krui_getSiteTableFuncName(char *site_name) {
     struct SiteTable  *s_ptr;
 
     if ( (s_ptr = krm_STableSymbolSearch( site_name )) == NULL)
@@ -2012,8 +1936,7 @@ char  *krui_getSiteTableFuncName(char *site_name)
             0 otherwise.
   UPDATE   :
 ******************************************************************************/
-krui_err  krui_createSiteTableEntry(char *site_name, char *site_func)
-{
+krui_err  krui_createSiteTableEntry(char *site_name, char *site_func) {
     FunctionPtr   func_ptr;
 
     KernelErrorCode = KRERR_NO_ERROR;
@@ -2022,9 +1945,9 @@ krui_err  krui_createSiteTableEntry(char *site_name, char *site_func)
     if (!kr_symbolCheck( site_name ))
         return( KernelErrorCode );
     if (krm_STableSymbolSearch( site_name ) != NULL) {
-	/*  symbol is already in the site table */
-	KernelErrorCode = KRERR_REDEF_SITE_NAME;
-	return( KernelErrorCode );
+        /*  symbol is already in the site table */
+        KernelErrorCode = KRERR_REDEF_SITE_NAME;
+        return( KernelErrorCode );
     }
 
     (void) krm_STableCreateEntry( site_name, (SiteFuncPtr) func_ptr );
@@ -2044,13 +1967,12 @@ krui_err  krui_createSiteTableEntry(char *site_name, char *site_func)
              isn't defined, 0 otherwise.
   UPDATE   :
 ******************************************************************************/
-krui_err  krui_changeSiteTableEntry(char *old_site_name, char *new_site_name, 
-				    char *new_site_func)
-{
+krui_err  krui_changeSiteTableEntry(char *old_site_name, char *new_site_name,
+                                    char *new_site_func) {
     FunctionPtr   func_ptr;
     SiteFuncPtr     site_func_ptr;
     struct SiteTable  *stbl_ptr1,
-    *stbl_ptr2;
+               *stbl_ptr2;
 
 #ifdef MASPAR_KERNEL
     MASPAR_FF1_VALIDATE_OP;
@@ -2071,7 +1993,7 @@ krui_err  krui_changeSiteTableEntry(char *old_site_name, char *new_site_name,
     }
 
     stbl_ptr2 = krm_STableSymbolSearch( new_site_name );
-    if ( (stbl_ptr2 != NULL) && (stbl_ptr2 != stbl_ptr1) ){
+    if ( (stbl_ptr2 != NULL) && (stbl_ptr2 != stbl_ptr1) ) {
         /*  new symbol is already in the site table (and new_site_name and
             old_site_name are not identical) */
         KernelErrorCode = KRERR_REDEF_SITE_NAME;
@@ -2095,8 +2017,7 @@ krui_err  krui_changeSiteTableEntry(char *old_site_name, char *new_site_name,
              0 otherwise.
   UPDATE   :
 ******************************************************************************/
-krui_err  krui_deleteSiteTableEntry(char *site_name)
-{
+krui_err  krui_deleteSiteTableEntry(char *site_name) {
     struct SiteTable    *st_ptr;
 
     if ((st_ptr = krm_STableSymbolSearch( site_name )) == NULL)
@@ -2123,14 +2044,13 @@ GROUP: Site Functions
   PURPOSE  : Initializes the first site at the current unit.
   NOTES    :
 
-  RETURNS  : Returns false if no site available or if no sites permitted at 
+  RETURNS  : Returns false if no site available or if no sites permitted at
              this unit.
   UPDATE   :
 ******************************************************************************/
-bool  krui_setFirstSite(void)
-{
+bool  krui_setFirstSite(void) {
     if KERNEL_STANDARD
-        return( kr_setSite( FIRST, NULL ) );
+    return( kr_setSite( FIRST, NULL ) );
 
     KernelErrorCode = KRERR_SITES_NO_SUPPORT;
     return( FALSE );
@@ -2146,10 +2066,9 @@ bool  krui_setFirstSite(void)
   RETURNS  : Returns false if no more sites available.
   UPDATE   :
 ******************************************************************************/
-bool  krui_setNextSite(void)
-{
+bool  krui_setNextSite(void) {
     if KERNEL_STANDARD
-        return( kr_setSite( NEXT, NULL ) );
+    return( kr_setSite( NEXT, NULL ) );
 
     KernelErrorCode = KRERR_SITES_NO_SUPPORT;
     return( FALSE );
@@ -2170,11 +2089,10 @@ bool  krui_setNextSite(void)
              0 otherwise.
   UPDATE   :
 ******************************************************************************/
-krui_err  krui_setSite(char *site_name)
-{
+krui_err  krui_setSite(char *site_name) {
 
     if KERNEL_STANDARD
-        return( kr_setSite( NAME, site_name ) );
+    return( kr_setSite( NAME, site_name ) );
 
     KernelErrorCode = KRERR_SITES_NO_SUPPORT;
     return( KernelErrorCode );
@@ -2190,15 +2108,14 @@ krui_err  krui_setSite(char *site_name)
   RETURNS  : Returns the actual value of the current site
   UPDATE   :
 ******************************************************************************/
-FlintType   krui_getSiteValue(void)
-{
+FlintType   krui_getSiteValue(void) {
 
     if KERNEL_STANDARD  {
-        if (sitePtr == NULL)
+    if (sitePtr == NULL)
             KernelErrorCode = KRERR_NO_SITES;
         else
             return( (*sitePtr->site_table->site_func) (sitePtr) );
-    }else
+    } else
         KernelErrorCode = KRERR_SITES_NO_SUPPORT;
 
     return( (FlintType) 0 );
@@ -2215,15 +2132,14 @@ FlintType   krui_getSiteValue(void)
              NULL if not available.
   UPDATE   :
 ******************************************************************************/
-char  *krui_getSiteName(void)
-{
+char  *krui_getSiteName(void) {
 
     if KERNEL_STANDARD    {
-        if (sitePtr == NULL)
+    if (sitePtr == NULL)
             KernelErrorCode = KRERR_NO_SITES;
         else
             return( ((sitePtr->site_table)->Entry.site_name)->Entry.symbol );
-    }else
+    } else
         KernelErrorCode = KRERR_SITES_NO_SUPPORT;
 
     return( NULL );
@@ -2240,8 +2156,7 @@ char  *krui_getSiteName(void)
   RETURNS  : Returns error code if site name isn't defined.
   UPDATE   :
 ******************************************************************************/
-krui_err  krui_setSiteName(char *site_name)
-{
+krui_err  krui_setSiteName(char *site_name) {
     struct  SiteTable     *stbl_ptr;
 
 #ifdef MASPAR_KERNEL
@@ -2249,16 +2164,16 @@ krui_err  krui_setSiteName(char *site_name)
 #endif
 
     if (sitePtr == NULL) {
-	KernelErrorCode = KRERR_FTYPE_SITE;
-	return( KernelErrorCode );
+        KernelErrorCode = KRERR_FTYPE_SITE;
+        return( KernelErrorCode );
     }
 
     if (!kr_symbolCheck( site_name ))
         return( KernelErrorCode );
-    if ((stbl_ptr = krm_STableSymbolSearch( site_name )) == NULL){
-	/*   site name isn't defined */
-	KernelErrorCode = KRERR_UNDEF_SITE_NAME;
-	return( KernelErrorCode );
+    if ((stbl_ptr = krm_STableSymbolSearch( site_name )) == NULL) {
+        /*   site name isn't defined */
+        KernelErrorCode = KRERR_UNDEF_SITE_NAME;
+        return( KernelErrorCode );
     }
 
     KernelErrorCode = KRERR_NO_ERROR;
@@ -2280,17 +2195,16 @@ krui_err  krui_setSiteName(char *site_name)
   RETURNS  : Returns the name of the current unit/site function
   UPDATE   :
 ******************************************************************************/
-char  *krui_getSiteFuncName(void)
-{
+char  *krui_getSiteFuncName(void) {
     static char  site_func_name[FUNCTION_NAME_MAX_LEN];
 
-    if (sitePtr == NULL){
+    if (sitePtr == NULL) {
         KernelErrorCode = KRERR_FTYPE_SITE;
         return( NULL );
     }
 
-    strcpy( site_func_name, 
-	    krf_getFuncName( (FunctionPtr) sitePtr->site_table->site_func ) );
+    strcpy( site_func_name,
+            krf_getFuncName( (FunctionPtr) sitePtr->site_table->site_func ) );
 
     return( site_func_name );
 }
@@ -2299,16 +2213,16 @@ char  *krui_getSiteFuncName(void)
 /*****************************************************************************
   FUNCTION : krui_addSite
 
-  PURPOSE  : Adds a site at the current unit. If the unit has already sites, 
-             this new site will be inserted above all other sites, i.e. the 
+  PURPOSE  : Adds a site at the current unit. If the unit has already sites,
+             this new site will be inserted above all other sites, i.e. the
 	     new created site will be the first site at this unit.
              If the unit has direct input links, i.e the unit has input links
-             but no sites, the creation of sites is not permitted 
+             but no sites, the creation of sites is not permitted
 	     (krui_addSite will return an error code).
-             If there exists already a site with the given name, the creation 
-	     of the new site is prohibited and krui_addSite returns an error 
+             If there exists already a site with the given name, the creation
+	     of the new site is prohibited and krui_addSite returns an error
 	     code.
-             krui_addSite has no effect on the current site. To change the 
+             krui_addSite has no effect on the current site. To change the
 	     current site to this new site, call krui_setFirstSite().
              The unit's FType will be deleted.
   NOTES    : The number of sites per unit is nearly unlimited (2^32).
@@ -2321,11 +2235,10 @@ char  *krui_getSiteFuncName(void)
              0 otherwise.
   UPDATE   :
 ******************************************************************************/
-krui_err  krui_addSite(char *site_name)
-{
+krui_err  krui_addSite(char *site_name) {
     FlagWord    flags;
     struct Site       *site_ptr,
-    *site_ptr1;
+               *site_ptr1;
     struct SiteTable  *stbl_ptr;
 
 #ifdef MASPAR_KERNEL
@@ -2333,52 +2246,52 @@ krui_err  krui_addSite(char *site_name)
 #endif
 
     KernelErrorCode = KRERR_NO_ERROR;
-    if ( (stbl_ptr = krm_STableSymbolSearch( site_name )) == NULL)
-        {                       /*  site name isn't defined */
-            KernelErrorCode = KRERR_UNDEF_SITE_NAME;
-            return( KernelErrorCode );
-        }
+    if ( (stbl_ptr = krm_STableSymbolSearch( site_name )) == NULL) {
+        /*  site name isn't defined */
+        KernelErrorCode = KRERR_UNDEF_SITE_NAME;
+        return( KernelErrorCode );
+    }
 
     flags = unitPtr->flags & UFLAG_INPUT_PAT;
 
-    switch (flags){
+    switch (flags) {
     case UFLAG_NO_INP :
-	/*  Unit has no inputs  */
-	if ((site_ptr = kr_createDefaultSite() ) == NULL)
-	    return( KernelErrorCode );
+        /*  Unit has no inputs  */
+        if ((site_ptr = kr_createDefaultSite() ) == NULL)
+            return( KernelErrorCode );
 
-	unitPtr->sites = site_ptr; /*  Connect site    */
-	unitPtr->flags |= UFLAG_SITES; /*  Set site flag   */
-	unitPtr->Ftype_entry = NULL; /*  Delete Ftype    */
+        unitPtr->sites = site_ptr; /*  Connect site    */
+        unitPtr->flags |= UFLAG_SITES; /*  Set site flag   */
+        unitPtr->Ftype_entry = NULL; /*  Delete Ftype    */
 
-	break;
+        break;
 
     case UFLAG_SITES :
-	/*  Unit has already sites  */
-	if (kr_searchUnitSite( unitPtr, stbl_ptr ) != NULL){
-	    /* there exists already a site with this name at this unit */
-	    KernelErrorCode = KRERR_DUPLICATED_SITE;
-	    return( KernelErrorCode );
-	}
+        /*  Unit has already sites  */
+        if (kr_searchUnitSite( unitPtr, stbl_ptr ) != NULL) {
+            /* there exists already a site with this name at this unit */
+            KernelErrorCode = KRERR_DUPLICATED_SITE;
+            return( KernelErrorCode );
+        }
 
-	if ( (site_ptr = kr_createDefaultSite() ) == NULL)
-	    return( KernelErrorCode );
+        if ( (site_ptr = kr_createDefaultSite() ) == NULL)
+            return( KernelErrorCode );
 
-	site_ptr1 = unitPtr->sites;
-	unitPtr->sites = site_ptr; /*  Connect site    */
-	site_ptr->next = site_ptr1;
-	unitPtr->Ftype_entry = NULL; /*  Delete Ftype    */
+        site_ptr1 = unitPtr->sites;
+        unitPtr->sites = site_ptr; /*  Connect site    */
+        site_ptr->next = site_ptr1;
+        unitPtr->Ftype_entry = NULL; /*  Delete Ftype    */
 
-	break;
+        break;
 
     case UFLAG_DLINKS :
-	/*  Unit has direct input links and can't have sites */
-	KernelErrorCode = KRERR_CREATE_SITE;
-	return( KernelErrorCode );
+        /*  Unit has direct input links and can't have sites */
+        KernelErrorCode = KRERR_CREATE_SITE;
+        return( KernelErrorCode );
 
     default :
-	KernelErrorCode = KRERR_CREATE_SITE;
-	return( KernelErrorCode );
+        KernelErrorCode = KRERR_CREATE_SITE;
+        return( KernelErrorCode );
     }
 
     site_ptr->site_table = stbl_ptr;
@@ -2408,8 +2321,7 @@ krui_err  krui_addSite(char *site_name)
   RETURNS  :
   UPDATE   :
 ******************************************************************************/
-bool  krui_deleteSite(void)
-{
+bool  krui_deleteSite(void) {
     struct Site   *next_site_ptr;
     struct Unit   *unit_ptr;
 
@@ -2420,37 +2332,37 @@ bool  krui_deleteSite(void)
     unit_ptr = unitPtr;
 
     if ( UNIT_HAS_SITES( unit_ptr ) && (unit_ptr->sites != NULL) &&
-	 (sitePtr != NULL) ){
-	/*  Unit has sites  */
-	NetModified = TRUE;
+            (sitePtr != NULL) ) {
+        /*  Unit has sites  */
+        NetModified = TRUE;
 
-	next_site_ptr = sitePtr->next;
+        next_site_ptr = sitePtr->next;
 
-	krm_releaseAllLinks( sitePtr->links ); /*   Remove links    */
-	krm_releaseSite( sitePtr ); /*      Remove site     */
+        krm_releaseAllLinks( sitePtr->links ); /*   Remove links    */
+        krm_releaseSite( sitePtr ); /*      Remove site     */
 
-	if (prevSitePtr == NULL){
-	    /*  This site is the first site at the current unit */
+        if (prevSitePtr == NULL) {
+            /*  This site is the first site at the current unit */
 
-	    if (next_site_ptr == NULL){
-		/*  Unit has only this site */
-		unit_ptr->sites = NULL; /*  Clear site pointer  */
-		unit_ptr->flags &= (~UFLAG_INPUT_PAT); /* Clear input flags */
-		sitePtr     = NULL; /*  No more sites available  */
-		prevSitePtr = NULL;
-	    } else {
-		/*  It is the first site at the unit but not the only one   */
-		unit_ptr->sites  = next_site_ptr; /*  Connect the other sites */
-		sitePtr = next_site_ptr; 
-	    }
-	} else {
-	    /*  This is not the first site at the unit  */
-	    prevSitePtr->next = next_site_ptr; /*  Connect the previous site
+            if (next_site_ptr == NULL) {
+                /*  Unit has only this site */
+                unit_ptr->sites = NULL; /*  Clear site pointer  */
+                unit_ptr->flags &= (~UFLAG_INPUT_PAT); /* Clear input flags */
+                sitePtr     = NULL; /*  No more sites available  */
+                prevSitePtr = NULL;
+            } else {
+                /*  It is the first site at the unit but not the only one   */
+                unit_ptr->sites  = next_site_ptr; /*  Connect the other sites */
+                sitePtr = next_site_ptr;
+            }
+        } else {
+            /*  This is not the first site at the unit  */
+            prevSitePtr->next = next_site_ptr; /*  Connect the previous site
 						   with the next site  */
-	    sitePtr = next_site_ptr; 
-	}
+            sitePtr = next_site_ptr;
+        }
 
-	unit_ptr->Ftype_entry = NULL; /*  Delete unit's Ftype */
+        unit_ptr->Ftype_entry = NULL; /*  Delete unit's Ftype */
     }
 
     if (sitePtr != NULL)
@@ -2476,17 +2388,16 @@ GROUP: Link Functions
 
   RETURNS  : Returns the no. of first predecessor unit of the current unit/site
              and the connection strenght.
-             Returns 0 if no predecessor unit available, i.e. if the current 
+             Returns 0 if no predecessor unit available, i.e. if the current
 	     unit and/or site has no inputs.
   UPDATE   :
 ******************************************************************************/
-int  krui_getFirstPredUnit(FlintType *strength)
-{
-  float dummy1,dummy2,dummy3;
+int  krui_getFirstPredUnit(FlintType *strength) {
+    float dummy1,dummy2,dummy3;
 
 
     if KERNEL_STANDARD  {
-        return(kr_getPredecessorUnit(FIRST, strength ,&dummy1,&dummy2,&dummy3));
+    return(kr_getPredecessorUnit(FIRST, strength ,&dummy1,&dummy2,&dummy3));
     } else {
 
 #ifdef MASPAR_KERNEL
@@ -2509,15 +2420,14 @@ int  krui_getFirstPredUnit(FlintType *strength)
 
   RETURNS  : Returns the no. of first predecessor unit of the current unit/site
              and the connection strenght.
-             Returns 0 if no predecessor unit available, i.e. if the current 
+             Returns 0 if no predecessor unit available, i.e. if the current
 	     unit and/or site has no inputs.
   UPDATE   :
 ******************************************************************************/
 int  krui_getFirstPredUnitAndData(FlintType *strength,float *val_a,
-				  float *val_b, float *val_c)
-{
+                                  float *val_b, float *val_c) {
     if KERNEL_STANDARD  {
-        return( kr_getPredecessorUnit( FIRST, strength ,val_a ,val_b ,val_c ) );
+    return( kr_getPredecessorUnit( FIRST, strength ,val_a ,val_b ,val_c ) );
     } else {
 
 #ifdef MASPAR_KERNEL
@@ -2544,12 +2454,11 @@ int  krui_getFirstPredUnitAndData(FlintType *strength,float *val_a,
              Returns 0 if no more predecessor units exists.
   UPDATE   :
 ******************************************************************************/
-int  krui_getNextPredUnit(FlintType *strength)
-{
+int  krui_getNextPredUnit(FlintType *strength) {
     float dummy1,dummy2,dummy3;
 
     if KERNEL_STANDARD  {
-        return(kr_getPredecessorUnit(NEXT, strength ,&dummy1,&dummy2,&dummy3));
+    return(kr_getPredecessorUnit(NEXT, strength ,&dummy1,&dummy2,&dummy3));
     } else {
 
 #ifdef MASPAR_KERNEL
@@ -2577,11 +2486,10 @@ int  krui_getNextPredUnit(FlintType *strength)
   UPDATE   :
 ******************************************************************************/
 int  krui_getNextPredUnitAndData(FlintType *strength,float *val_a,
-				 float *val_b, float *val_c)
-{
+                                 float *val_b, float *val_c) {
 
     if KERNEL_STANDARD  {
-        return(kr_getPredecessorUnit( NEXT, strength, val_a, val_b, val_c ) );
+    return(kr_getPredecessorUnit( NEXT, strength, val_a, val_b, val_c ) );
     } else {
 
 #ifdef MASPAR_KERNEL
@@ -2603,17 +2511,16 @@ int  krui_getNextPredUnitAndData(FlintType *strength,float *val_a,
 
   RETURNS  : Returns the no. of the current predecessor unit (of the current
              unit/site) and the connection strenght.
-             Returns 0 if no predecessor unit available, i.e. if the current 
+             Returns 0 if no predecessor unit available, i.e. if the current
 	     unit and/or site has no inputs
   UPDATE   :
 ******************************************************************************/
-int  krui_getCurrentPredUnit(FlintType *strength)
-{
+int  krui_getCurrentPredUnit(FlintType *strength) {
     float dummy1,dummy2,dummy3;
 
     if KERNEL_STANDARD  {
-        return(kr_getPredecessorUnit(CURRENT, strength, &dummy1, &dummy2, 
-				     &dummy3 ) );
+    return(kr_getPredecessorUnit(CURRENT, strength, &dummy1, &dummy2,
+    &dummy3 ) );
     } else {
 
 #ifdef MASPAR_KERNEL
@@ -2635,18 +2542,17 @@ int  krui_getCurrentPredUnit(FlintType *strength)
   IMPORTANT: If a successor unit exists, the current unit and site will be
              set to this successor unit and the attached site.
 
-  RETURNS  : Returns the no. of the first successor unit of the unit 
+  RETURNS  : Returns the no. of the first successor unit of the unit
              <source_unit_no> and the connection strenght.
              Returns (negative) error code if unit doesn't exist.
              Returns 0 if no successor unit available, i.e. if the given unit
              has no output connection.
   UPDATE   :
 ******************************************************************************/
-int  krui_getFirstSuccUnit(int source_unit_no, FlintType *weight)
-{
+int  krui_getFirstSuccUnit(int source_unit_no, FlintType *weight) {
 
     if KERNEL_STANDARD  {
-        return( kr_getSuccessorUnit( FIRST, source_unit_no, weight ) );
+    return( kr_getSuccessorUnit( FIRST, source_unit_no, weight ) );
     } else {
 
 #ifdef MASPAR_KERNEL
@@ -2668,15 +2574,14 @@ int  krui_getFirstSuccUnit(int source_unit_no, FlintType *weight)
   IMPORTANT: If a successor unit exists, the current unit and site will be
              set to this successor unit and the attached site.
 
-  RETURNS  : Returns the no. of the next successor unit and the connection 
+  RETURNS  : Returns the no. of the next successor unit and the connection
              strenght.
   UPDATE   :
 ******************************************************************************/
-int  krui_getNextSuccUnit(FlintType *weight)
-{
+int  krui_getNextSuccUnit(FlintType *weight) {
 
     if KERNEL_STANDARD  {
-        return( kr_getSuccessorUnit( NEXT, 0, weight ) );
+    return( kr_getSuccessorUnit( NEXT, 0, weight ) );
     } else {
 
 #ifdef MASPAR_KERNEL
@@ -2693,14 +2598,13 @@ int  krui_getNextSuccUnit(FlintType *weight)
 /*****************************************************************************
   FUNCTION : krui_areConnected
 
-  PURPOSE  : True if there exists a connection between source unit 
+  PURPOSE  : True if there exists a connection between source unit
              <source_unit_no> and target unit <target_unit_no>, otherwise false.
   NOTES    : This function is slow (Units are backward chained only).
   RETURNS  :
   UPDATE   :
 ******************************************************************************/
-bool  krui_areConnected(int sourceNo, int targetNo)
-{
+bool  krui_areConnected(int sourceNo, int targetNo) {
     register struct Link *link_ptr ;
     register struct Unit *s_unit_ptr, *t_unit_ptr ;
     register struct Site *site_ptr ;
@@ -2708,18 +2612,18 @@ bool  krui_areConnected(int sourceNo, int targetNo)
     s_unit_ptr = kr_getUnitPtr (sourceNo) ;
     t_unit_ptr = kr_getUnitPtr (targetNo) ;
 
-    if( UNIT_HAS_DIRECT_INPUTS (t_unit_ptr)){
+    if( UNIT_HAS_DIRECT_INPUTS (t_unit_ptr)) {
         for (link_ptr = (struct Link *) t_unit_ptr->sites;
-             link_ptr != NULL; link_ptr = link_ptr->next)
-            if (link_ptr->to == s_unit_ptr) 
-		return (TRUE) ;
-    }else if( UNIT_HAS_SITES (t_unit_ptr)){
-	for (site_ptr = t_unit_ptr->sites; site_ptr != NULL ;
-	     site_ptr = site_ptr->next)
-	    for (link_ptr = site_ptr->links; link_ptr != NULL ;
-		 link_ptr = link_ptr->next)
-		if (link_ptr->to == s_unit_ptr) 
-		    return (TRUE) ;
+                link_ptr != NULL; link_ptr = link_ptr->next)
+            if (link_ptr->to == s_unit_ptr)
+                return (TRUE) ;
+    } else if( UNIT_HAS_SITES (t_unit_ptr)) {
+        for (site_ptr = t_unit_ptr->sites; site_ptr != NULL ;
+                site_ptr = site_ptr->next)
+            for (link_ptr = site_ptr->links; link_ptr != NULL ;
+                    link_ptr = link_ptr->next)
+                if (link_ptr->to == s_unit_ptr)
+                    return (TRUE) ;
     }
 
     return (FALSE) ;
@@ -2729,9 +2633,9 @@ bool  krui_areConnected(int sourceNo, int targetNo)
 /*****************************************************************************
   FUNCTION : krui_areConnectedWeight
 
-  PURPOSE  : True if there exists a connection between source unit 
-             <source_unit_no> and target unit <target_unit_no>, otherwise 
-	     false. If there exist a connection between these units, 
+  PURPOSE  : True if there exists a connection between source unit
+             <source_unit_no> and target unit <target_unit_no>, otherwise
+	     false. If there exist a connection between these units,
 	     krui_areConnectedWeight returns the connection strength also.
              Returns FALSE if unit doesn't exist.
   NOTES    : This function is slow (Units are backward chained only).
@@ -2740,11 +2644,10 @@ bool  krui_areConnected(int sourceNo, int targetNo)
   RETURNS  :
   UPDATE   :
 ******************************************************************************/
-bool  krui_areConnectedWeight(int source_unit_no, int target_unit_no, 
-			      FlintType *weight)
-{
+bool  krui_areConnectedWeight(int source_unit_no, int target_unit_no,
+                              FlintType *weight) {
     if KERNEL_STANDARD  {
-        return( kr_areConnected( source_unit_no, target_unit_no, weight ) );
+    return( kr_areConnected( source_unit_no, target_unit_no, weight ) );
     } else {
 
 #ifdef MASPAR_KERNEL
@@ -2761,21 +2664,20 @@ bool  krui_areConnectedWeight(int source_unit_no, int target_unit_no,
 /*****************************************************************************
   FUNCTION : krui_isConnected
 
-  PURPOSE  : True if there exists a connection between source unit 
+  PURPOSE  : True if there exists a connection between source unit
              <source_unit_no> and the current unit/site, otherwise false.
-  NOTES    : If there exists a connection between the two units, the current 
-             link is set to the link between the two units. (alter the link 
+  NOTES    : If there exists a connection between the two units, the current
+             link is set to the link between the two units. (alter the link
 	     weight with krui_setLinkWeight)
 
   RETURNS  :
   UPDATE   :
 ******************************************************************************/
-bool  krui_isConnected(int source_unit_no)
-{
+bool  krui_isConnected(int source_unit_no) {
     FlintType  weight;
 
     if KERNEL_STANDARD  {
-        return( kr_isConnected( source_unit_no, &weight ) );
+    return( kr_isConnected( source_unit_no, &weight ) );
     } else {
 
 #ifdef MASPAR_KERNEL
@@ -2798,11 +2700,10 @@ bool  krui_isConnected(int source_unit_no)
   RETURNS  : Returns the link weight of the current link.
   UPDATE   :
 ******************************************************************************/
-FlintType  krui_getLinkWeight(void)
-{
+FlintType  krui_getLinkWeight(void) {
 
     if KERNEL_STANDARD  {
-        return( kr_getLinkWeight() );
+    return( kr_getLinkWeight() );
     } else {
 
 #ifdef MASPAR_KERNEL
@@ -2824,11 +2725,10 @@ FlintType  krui_getLinkWeight(void)
   RETURNS  :
   UPDATE   :
 ******************************************************************************/
-void  krui_setLinkWeight(FlintTypeParam weight)
-{
+void  krui_setLinkWeight(FlintTypeParam weight) {
 
     if KERNEL_STANDARD  {
-        kr_setLinkWeight( weight );
+    kr_setLinkWeight( weight );
     } else {
 
 #ifdef MASPAR_KERNEL
@@ -2846,24 +2746,23 @@ void  krui_setLinkWeight(FlintTypeParam weight)
 
   PURPOSE  : Creates a link between source unit and the current unit/site.
   NOTES    : krui_createLink DO NOT set the current link.
-             If you want to create a link and its unknown if there exists 
-	     already a connection between the two units, use krui_createLink 
-	     and test the return code, instead of the sequence 
+             If you want to create a link and its unknown if there exists
+	     already a connection between the two units, use krui_createLink
+	     and test the return code, instead of the sequence
 	     krui_isConnected and krui_createLink.
   RETURNS  : Returns an error code:
              - if memory allocation fails
              - if source unit doesn't exist or
-             - if there exists already a connection between current unit/site 
+             - if there exists already a connection between current unit/site
 	       and the source unit
              0 otherwise.
 
   UPDATE   :
 ******************************************************************************/
-krui_err  krui_createLink(int source_unit_no, FlintTypeParam weight)
-{
+krui_err  krui_createLink(int source_unit_no, FlintTypeParam weight) {
 
     if KERNEL_STANDARD  {
-        return( kr_createLink( source_unit_no, weight ) );
+    return( kr_createLink( source_unit_no, weight ) );
     } else {
 
 #ifdef MASPAR_KERNEL
@@ -2882,28 +2781,27 @@ krui_err  krui_createLink(int source_unit_no, FlintTypeParam weight)
 
   PURPOSE  : Creates a link between source unit and the current unit/site.
   NOTES    : krui_createLink DO NOT set the current link.
-             If you want to create a link and its unknown if there exists 
-	     already a connection between the two units, use krui_createLink 
-	     and test the return code, instead of the sequence 
+             If you want to create a link and its unknown if there exists
+	     already a connection between the two units, use krui_createLink
+	     and test the return code, instead of the sequence
 	     krui_isConnected and krui_createLink.
   RETURNS  : Returns pointer to new unit.
 
   UPDATE   : 13.05.96 <Juergen Gatter>
 ******************************************************************************/
-struct Link*  krui_createLinkWithAdditionalParameters(int source_unit_no, 
-						      FlintTypeParam weight,
-						      float val_a, float val_b,
-						      float val_c)
-{
+struct Link*  krui_createLinkWithAdditionalParameters(int source_unit_no,
+        FlintTypeParam weight,
+        float val_a, float val_b,
+        float val_c) {
 
     if KERNEL_STANDARD  {
-        return( kr_createLinkWithAdditionalParameters(source_unit_no, weight, 
-						      val_a, val_b, val_c ) );
+    return( kr_createLinkWithAdditionalParameters(source_unit_no, weight,
+    val_a, val_b, val_c ) );
     } else {
 
 #ifdef MASPAR_KERNEL
-        KernelErrorCode=krff_createLink( source_unit_no, weight ) 
-        return( NULL );
+        KernelErrorCode=krff_createLink( source_unit_no, weight )
+                        return( NULL );
 #else
         KernelErrorCode = KRERR_NO_MASPAR_KERNEL;
         return( NULL );
@@ -2924,8 +2822,7 @@ struct Link*  krui_createLinkWithAdditionalParameters(int source_unit_no,
   RETURNS  :
   UPDATE   :
 ******************************************************************************/
-krui_err  krui_deleteLink(void)
-{
+krui_err  krui_deleteLink(void) {
 
 #ifdef MASPAR_KERNEL
     MASPAR_FF1_VALIDATE_OP;
@@ -2944,8 +2841,7 @@ krui_err  krui_deleteLink(void)
   RETURNS  :
   UPDATE   :
 ******************************************************************************/
-krui_err  krui_deleteAllInputLinks(void)
-{
+krui_err  krui_deleteAllInputLinks(void) {
 
 #ifdef MASPAR_KERNEL
     MASPAR_FF1_VALIDATE_OP;
@@ -2964,8 +2860,7 @@ krui_err  krui_deleteAllInputLinks(void)
   RETURNS  :
   UPDATE   :
 ******************************************************************************/
-krui_err  krui_deleteAllOutputLinks(void)
-{
+krui_err  krui_deleteAllOutputLinks(void) {
 
 #ifdef MASPAR_KERNEL
     MASPAR_FF1_VALIDATE_OP;
@@ -2985,16 +2880,15 @@ krui_err  krui_deleteAllOutputLinks(void)
   RETURNS  :
   UPDATE   :
 ******************************************************************************/
-void  krui_jogWeights(FlintTypeParam minus, FlintTypeParam plus)
-{
+void  krui_jogWeights(FlintTypeParam minus, FlintTypeParam plus) {
 
     if (minus >= plus)  {
         KernelErrorCode = KRERR_PARAMETERS;
-        return; 
+        return;
     }
 
     if KERNEL_STANDARD  {
-        kr_jogWeights( minus, plus );
+    kr_jogWeights( minus, plus );
     } else {
 
 #ifdef MASPAR_KERNEL
@@ -3013,8 +2907,8 @@ void  krui_jogWeights(FlintTypeParam minus, FlintTypeParam plus)
   PURPOSE  : Add uniform distributed random values to connection weights of
              highly correlated, non-special hidden units.
              <minus> must be less then <plus>.
-	     The two hidden units with maximum positive or negative correlation 
-	     with an absolute value higher then mincorr are searched. The 
+	     The two hidden units with maximum positive or negative correlation
+	     with an absolute value higher then mincorr are searched. The
 	     incoming weights of one of these units are jogged.
   NOTES    :
 
@@ -3022,17 +2916,16 @@ void  krui_jogWeights(FlintTypeParam minus, FlintTypeParam plus)
   UPDATE   :
 ******************************************************************************/
 krui_err  krui_jogCorrWeights(FlintTypeParam minus, FlintTypeParam plus,
-			      FlintTypeParam mincorr)
-{
+                              FlintTypeParam mincorr) {
     krui_err res = KRERR_NO_ERROR;
 
     if (minus >= plus)  {
         KernelErrorCode = KRERR_PARAMETERS;
-        return KernelErrorCode;  
+        return KernelErrorCode;
     }
 
     if KERNEL_STANDARD  {
-        res = kr_jogCorrWeights( minus, plus, mincorr );
+    res = kr_jogCorrWeights( minus, plus, mincorr );
     } else {
 
 #ifdef MASPAR_KERNEL
@@ -3062,8 +2955,7 @@ GROUP: Functions for network propagation
   RETURNS  : Variance
 
 ******************************************************************************/
-float krui_getVariance (void)
-{
+float krui_getVariance (void) {
     register struct Unit   *unit_ptr;
     int   pattern_no=0, o, noOfOutputUnits, size, noOfPatternPairs, sub_pat_no;
     Patterns  out_pat;
@@ -3077,37 +2969,37 @@ float krui_getVariance (void)
     KernelErrorCode = KRERR_NO_ERROR;
 
     KernelErrorCode = kr_initSubPatternOrder(0,kr_np_pattern(PATTERN_GET_NUMBER,
-							     0, 0) - 1);
+                      0, 0) - 1);
     if(KernelErrorCode != KRERR_NO_ERROR) {
-	free (OutputUnitSumVariance);
-	free (OutputUnitVariance);
-	return (KernelErrorCode);
+        free (OutputUnitSumVariance);
+        free (OutputUnitVariance);
+        return (KernelErrorCode);
     }
-    while(kr_getSubPatternByOrder(&pattern_no,&sub_pat_no)){
-	out_pat = kr_getSubPatData(pattern_no,sub_pat_no,OUTPUT,&size);
-	if(out_pat == NULL){
-	    KernelErrorCode = KRERR_NP_NO_SUCH_PATTERN;
-	    free (OutputUnitSumVariance);
-	    free (OutputUnitVariance);
-	    return(-1);
-	}
-	out_pat += size;
-	o=0;
-	FOR_ALL_UNITS( unit_ptr )
-	    if (IS_OUTPUT_UNIT( unit_ptr ) && UNIT_IN_USE( unit_ptr ))  {
-		--out_pat;
-		OutputUnitVariance[o] += (*out_pat) * (*out_pat);
-		OutputUnitSumVariance [o] += *out_pat;
-		o++;
-	    }
+    while(kr_getSubPatternByOrder(&pattern_no,&sub_pat_no)) {
+        out_pat = kr_getSubPatData(pattern_no,sub_pat_no,OUTPUT,&size);
+        if(out_pat == NULL) {
+            KernelErrorCode = KRERR_NP_NO_SUCH_PATTERN;
+            free (OutputUnitSumVariance);
+            free (OutputUnitVariance);
+            return(-1);
+        }
+        out_pat += size;
+        o=0;
+        FOR_ALL_UNITS( unit_ptr )
+        if (IS_OUTPUT_UNIT( unit_ptr ) && UNIT_IN_USE( unit_ptr ))  {
+            --out_pat;
+            OutputUnitVariance[o] += (*out_pat) * (*out_pat);
+            OutputUnitSumVariance [o] += *out_pat;
+            o++;
+        }
     }
     o=0;
     FOR_ALL_UNITS( unit_ptr )
-	if (IS_OUTPUT_UNIT( unit_ptr ) && UNIT_IN_USE( unit_ptr ))  {
-	    Variance += (OutputUnitVariance[o]/noOfPatternPairs)-
-		pow(OutputUnitSumVariance[o]/noOfPatternPairs,2) ;
-	    o++;
-	}
+    if (IS_OUTPUT_UNIT( unit_ptr ) && UNIT_IN_USE( unit_ptr ))  {
+        Variance += (OutputUnitVariance[o]/noOfPatternPairs)-
+                    pow(OutputUnitSumVariance[o]/noOfPatternPairs,2) ;
+        o++;
+    }
     free (OutputUnitSumVariance);
     free (OutputUnitVariance);
     return(Variance);
@@ -3123,19 +3015,18 @@ float krui_getVariance (void)
   RETURNS  : Number of Parameters
   UPDATE   :
 ******************************************************************************/
-int krui_countLinks(void)
-{
-  register struct Unit   *unit_ptr;
-  register struct Link   *link_ptr;
-  register int i=0;
+int krui_countLinks(void) {
+    register struct Unit   *unit_ptr;
+    register struct Link   *link_ptr;
+    register int i=0;
 
-  FOR_ALL_UNITS( unit_ptr )
+    FOR_ALL_UNITS( unit_ptr )
     if ((IS_OUTPUT_UNIT(unit_ptr) || IS_HIDDEN_UNIT(unit_ptr))) {
-      i++;
-      FOR_ALL_LINKS (unit_ptr,link_ptr)
+        i++;
+        FOR_ALL_LINKS (unit_ptr,link_ptr)
         i ++;
     }
-  return i;
+    return i;
 }
 
 
@@ -3148,8 +3039,7 @@ int krui_countLinks(void)
   RETURNS  : Returns error code if unit doesn't exist, 0 otherwise.
   UPDATE   :
 ******************************************************************************/
-krui_err   krui_updateSingleUnit(int unit_no)
-{
+krui_err   krui_updateSingleUnit(int unit_no) {
     register struct Unit   *unit_ptr;
 
 
@@ -3163,9 +3053,9 @@ krui_err   krui_updateSingleUnit(int unit_no)
     if (unit_ptr->out_func == NULL)
         /*  Identity Function   */
         unit_ptr->Out.output = unit_ptr->act = (*unit_ptr->act_func) (unit_ptr);
-    else{
-	unit_ptr->act = (*unit_ptr->act_func) (unit_ptr);
-	unit_ptr->Out.output = (*unit_ptr->out_func) (unit_ptr->act);
+    else {
+        unit_ptr->act = (*unit_ptr->act_func) (unit_ptr);
+        unit_ptr->Out.output = (*unit_ptr->out_func) (unit_ptr->act);
     }
 
     return( KRERR_NO_ERROR );
@@ -3182,8 +3072,7 @@ krui_err   krui_updateSingleUnit(int unit_no)
   RETURNS  :
   UPDATE   :
 ******************************************************************************/
-char  *krui_getUpdateFunc(void)
-{
+char  *krui_getUpdateFunc(void) {
     static char  updateFunc[FUNCTION_NAME_MAX_LEN];
 
     strcpy( updateFunc, krf_getCurrentNetworkFunc( UPDATE_FUNC ) );
@@ -3200,8 +3089,7 @@ char  *krui_getUpdateFunc(void)
   RETURNS  : Returns error code if remap function is invalid.
   UPDATE   :
 ******************************************************************************/
-krui_err krui_setRemapFunc(char *name, float *params)
-{
+krui_err krui_setRemapFunc(char *name, float *params) {
     return( kr_npui_setRemapFunction(name, params) );
 }
 
@@ -3215,8 +3103,7 @@ krui_err krui_setRemapFunc(char *name, float *params)
   RETURNS  : Returns error code if update function is invalid.
   UPDATE   :
 ******************************************************************************/
-krui_err   krui_setUpdateFunc(char *update_func)
-{
+krui_err   krui_setUpdateFunc(char *update_func) {
 
     return( krf_setCurrentNetworkFunc( update_func, UPDATE_FUNC ) );
 }
@@ -3236,11 +3123,10 @@ krui_err   krui_setUpdateFunc(char *update_func)
   RETURNS  : Returns error code if an error occured, 0 othrwise.
   UPDATE   :
 ******************************************************************************/
-krui_err  krui_updateNet(float *parameterInArray, int NoOfInParams)
-{
+krui_err  krui_updateNet(float *parameterInArray, int NoOfInParams) {
 
     return( kr_callNetworkFunction( UPDATE_FUNC, parameterInArray, NoOfInParams,
-                                   NULL, NULL, 0, 0 ) );
+                                    NULL, NULL, 0, 0 ) );
 }
 
 
@@ -3257,12 +3143,11 @@ GROUP: Initialisation Functions
   PURPOSE  :
   NOTES    :
 
-  RETURNS  : Returns the current initialisation function. The default 
+  RETURNS  : Returns the current initialisation function. The default
              initialisation function is RandomizeWeights (see also kr_def.h).
   UPDATE   :
 ******************************************************************************/
-char  *krui_getInitialisationFunc(void)
-{
+char  *krui_getInitialisationFunc(void) {
 
     return( krf_getCurrentNetworkFunc( INIT_FUNC ) );
 }
@@ -3278,8 +3163,7 @@ char  *krui_getInitialisationFunc(void)
   RETURNS  :
   UPDATE   :
 ******************************************************************************/
-krui_err   krui_setInitialisationFunc(char *initialisation_func)
-{
+krui_err   krui_setInitialisationFunc(char *initialisation_func) {
 
     return( krf_setCurrentNetworkFunc( initialisation_func, INIT_FUNC ) );
 }
@@ -3294,11 +3178,10 @@ krui_err   krui_setInitialisationFunc(char *initialisation_func)
   RETURNS  :
   UPDATE   :
 ******************************************************************************/
-krui_err  krui_initializeNet(float *parameterInArray, int NoOfInParams)
-{
+krui_err  krui_initializeNet(float *parameterInArray, int NoOfInParams) {
 
     return( kr_callNetworkFunction( INIT_FUNC, parameterInArray, NoOfInParams,
-                                   NULL, NULL, 0, 0 ) );
+                                    NULL, NULL, 0, 0 ) );
 }
 
 
@@ -3312,15 +3195,14 @@ GROUP: Learning Functions
 /*****************************************************************************
   FUNCTION : krui_getLearnFunc
 
-  PURPOSE  : Returns the current learning function. The default learning 
+  PURPOSE  : Returns the current learning function. The default learning
              function is Backpropagation (see also kr_def.h).
   NOTES    :
 
   RETURNS  :
   UPDATE   :
 ******************************************************************************/
-char  *krui_getLearnFunc(void)
-{
+char  *krui_getLearnFunc(void) {
     static char  learnFunc[FUNCTION_NAME_MAX_LEN];
 
     strcpy( learnFunc, krf_getCurrentNetworkFunc( LEARN_FUNC ) );
@@ -3338,8 +3220,7 @@ char  *krui_getLearnFunc(void)
   RETURNS  : Returns error code if learning function is invalid
   UPDATE   :
 ******************************************************************************/
-krui_err   krui_setLearnFunc(char *learning_func)
-{
+krui_err   krui_setLearnFunc(char *learning_func) {
 
     return( krf_setCurrentNetworkFunc( learning_func, LEARN_FUNC ) );
 }
@@ -3354,8 +3235,7 @@ krui_err   krui_setLearnFunc(char *learning_func)
   RETURNS  : TRUE or FALSE
   UPDATE   :
 ******************************************************************************/
-int krui_checkPruning ()
-{
+int krui_checkPruning () {
 
     return (!strcmp (krf_getCurrentNetworkFunc (LEARN_FUNC),
                      "PruningFeedForward"));
@@ -3367,7 +3247,7 @@ int krui_checkPruning ()
   FUNCTION : krui_trainNetwork
 
   PURPOSE  :  Learn all pattern pairs using current learning method.
-              parameterInArray contains the learning parameter(s). 
+              parameterInArray contains the learning parameter(s).
 	      NoOfInParams stores the number of learning parameters.
               parameterOutArray returns the results from the learning function.
               this array is a static array defined in the learning function.
@@ -3383,8 +3263,7 @@ int krui_checkPruning ()
              the parameters are invalid.
   UPDATE   :
 ******************************************************************************/
-krui_err krui_trainNetwork(NetLearnParameters *parameters)
-{
+krui_err krui_trainNetwork(NetLearnParameters *parameters) {
     register int i;
     krui_err error;
     float parameterInArray[NO_OF_LEARN_PARAMS];
@@ -3399,16 +3278,16 @@ krui_err krui_trainNetwork(NetLearnParameters *parameters)
 
     noOfStoredErrors =0;
     for(i = 0 , dotraining = TRUE , error = KRERR_NO_ERROR;
-        dotraining && i < parameters->noOfEpochs && error == KRERR_NO_ERROR;
-        i++){
+            dotraining && i < parameters->noOfEpochs && error == KRERR_NO_ERROR;
+            i++) {
 
         error = kr_callNetworkFunction( LEARN_FUNC,
-                            parameterInArray, parameters->noOfParameters,
-                            &parameterOutArray, &parameters->noOfResults,
-                            parameters->firstPattern,
-                            parameters->lastPattern);
+                                        parameterInArray, parameters->noOfParameters,
+                                        &parameterOutArray, &parameters->noOfResults,
+                                        parameters->firstPattern,
+                                        parameters->lastPattern);
         if (( parameters->noOfEpochs < NO_OF_STORED_ERRORS) ||
-            (((i+1)%((parameters->noOfEpochs / NO_OF_STORED_ERRORS)+1)) == 0)){
+                (((i+1)%((parameters->noOfEpochs / NO_OF_STORED_ERRORS)+1)) == 0)) {
             storedLearnErrors[noOfStoredErrors] =
                 parameters->learnErrors[parameters->noOfErrors] =
                     (double) parameterOutArray[0];
@@ -3425,10 +3304,10 @@ krui_err krui_trainNetwork(NetLearnParameters *parameters)
     storedAtEpoch[noOfStoredErrors++] =
         parameters->atEpoch[parameters->noOfErrors++] = i;
     parameters->netError = (double) parameterOutArray[0];
-    if( dotraining ){
+    if( dotraining ) {
         parameters->lastEpoch = parameters->noOfEpochs;
         parameters->interrupted = FALSE;
-    }else{
+    } else {
         parameters->lastEpoch = i;
         parameters->interrupted = TRUE;
     }
@@ -3451,8 +3330,7 @@ krui_err krui_trainNetwork(NetLearnParameters *parameters)
   UPDATE   :
 ******************************************************************************/
 krui_err krui_getNetworkErrorArray(double **learnErrors,int **atEpoch,
-				   int *noOfErrors)
-{
+                                   int *noOfErrors) {
     *learnErrors = &storedLearnErrors[0];
     *atEpoch = &storedAtEpoch[0];
     *noOfErrors = noOfStoredErrors;
@@ -3469,8 +3347,7 @@ krui_err krui_getNetworkErrorArray(double **learnErrors,int **atEpoch,
   RETURNS  :
   UPDATE   :
 ******************************************************************************/
-krui_err krui_stopTraining(void)
-{
+krui_err krui_stopTraining(void) {
     dotraining = FALSE;
     return(KRERR_NO_ERROR);
 }
@@ -3480,7 +3357,7 @@ krui_err krui_stopTraining(void)
   FUNCTION : krui_learnAllPatterns
 
   PURPOSE  :  Learn all pattern pairs using current learning method.
-              parameterInArray contains the learning parameter(s). 
+              parameterInArray contains the learning parameter(s).
 	      NoOfInParams stores the number of learning parameters.
               parameterOutArray returns the results from the learning function.
               this array is a static array defined in the learning function.
@@ -3497,7 +3374,7 @@ krui_err krui_stopTraining(void)
   UPDATE   :
 ******************************************************************************/
 krui_err   krui_learnAllPatterns(float *parameterInArray, int NoOfInParams
-                               , float **parameterOutArray, int *NoOfOutParams)
+                                 , float **parameterOutArray, int *NoOfOutParams)
 /*  REMEMBER:  parameterOutArray[ 0 ] returns the current net error
                parameterInArray[ 0 ] contains the 1st learning parameter
 */
@@ -3505,9 +3382,9 @@ krui_err   krui_learnAllPatterns(float *parameterInArray, int NoOfInParams
 
     /*  learn all patterns  */
     return( kr_callNetworkFunction( LEARN_FUNC,
-				    parameterInArray, NoOfInParams,
-				    parameterOutArray, NoOfOutParams,  
-				    0,kr_np_pattern(PATTERN_GET_NUMBER,0,0)-1));
+                                    parameterInArray, NoOfInParams,
+                                    parameterOutArray, NoOfOutParams,
+                                    0,kr_np_pattern(PATTERN_GET_NUMBER,0,0)-1));
 }
 
 
@@ -3515,7 +3392,7 @@ krui_err   krui_learnAllPatterns(float *parameterInArray, int NoOfInParams
   FUNCTION : krui_testAllPatterns
 
   PURPOSE  :  Test all pattern pairs using current learning method.
-              parameterInArray contains the learning parameter(s). 
+              parameterInArray contains the learning parameter(s).
 	      NoOfInParams stores the number of learning parameters.
               parameterOutArray returns the results from the learning function.
               this array is a static array defined in the learning function.
@@ -3543,9 +3420,9 @@ krui_err   krui_testAllPatterns(float *parameterInArray, int NoOfInParams,
 
     /*  test all patterns  */
     return( kr_callNetworkFunction( TEST_FUNC,
-                                   parameterInArray, NoOfInParams,
-                                   parameterOutArray, NoOfOutParams,   
-				   0, kr_np_pattern(PATTERN_GET_NUMBER,0,0)-1));
+                                    parameterInArray, NoOfInParams,
+                                    parameterOutArray, NoOfOutParams,
+                                    0, kr_np_pattern(PATTERN_GET_NUMBER,0,0)-1));
 }
 
 
@@ -3559,16 +3436,15 @@ krui_err   krui_testAllPatterns(float *parameterInArray, int NoOfInParams,
   RETURNS  :
   UPDATE   :
 ******************************************************************************/
-krui_err   krui_learnSinglePattern(int pattern_no, float *parameterInArray, 
-				   int NoOfInParams, float **parameterOutArray,
-				   int *NoOfOutParams)
-{
+krui_err   krui_learnSinglePattern(int pattern_no, float *parameterInArray,
+                                   int NoOfInParams, float **parameterOutArray,
+                                   int *NoOfOutParams) {
 
     KernelErrorCode = KRERR_NO_ERROR;
     return( kr_callNetworkFunction( LEARN_FUNC,
-                                   parameterInArray, NoOfInParams,
-                                   parameterOutArray, NoOfOutParams,
-                                   pattern_no - 1, pattern_no - 1 ) );
+                                    parameterInArray, NoOfInParams,
+                                    parameterOutArray, NoOfOutParams,
+                                    pattern_no - 1, pattern_no - 1 ) );
 }
 
 
@@ -3582,16 +3458,15 @@ krui_err   krui_learnSinglePattern(int pattern_no, float *parameterInArray,
   RETURNS  :
   UPDATE   :
 ******************************************************************************/
-krui_err   krui_testSinglePattern(int pattern_no, float *parameterInArray, 
-				  int NoOfInParams, float **parameterOutArray, 
-				  int *NoOfOutParams)
-{
+krui_err   krui_testSinglePattern(int pattern_no, float *parameterInArray,
+                                  int NoOfInParams, float **parameterOutArray,
+                                  int *NoOfOutParams) {
 
     KernelErrorCode = KRERR_NO_ERROR;
     return( kr_callNetworkFunction( TEST_FUNC,
-                                   parameterInArray, NoOfInParams,
-                                   parameterOutArray, NoOfOutParams,
-                                   pattern_no - 1, pattern_no - 1 ) );
+                                    parameterInArray, NoOfInParams,
+                                    parameterOutArray, NoOfOutParams,
+                                    pattern_no - 1, pattern_no - 1 ) );
 }
 
 
@@ -3600,7 +3475,7 @@ krui_err   krui_testSinglePattern(int pattern_no, float *parameterInArray,
 
   PURPOSE  :  Learn all pattern pairs using current feed forward
               learning method.
-              parameterInArray contains the learning parameter(s). 
+              parameterInArray contains the learning parameter(s).
 	      NoOfInParams stores the number of learning parameters.
               parameterOutArray returns the results from the learning function.
               this array is a static array defined in the learning function.
@@ -3617,12 +3492,11 @@ krui_err   krui_testSinglePattern(int pattern_no, float *parameterInArray,
   UPDATE   :
 ******************************************************************************/
 krui_err krui_learnAllPatternsFF (float *parameterInArray, int NoOfInParams,
-                                  float **parameterOutArray, int *NoOfOutParams)
-{
+                                  float **parameterOutArray, int *NoOfOutParams) {
 
-  return(kr_callNetworkFunction(FF_LEARN_FUNC | LEARN_FUNC, parameterInArray, 
-				NoOfInParams, parameterOutArray, NoOfOutParams,
-				0, kr_np_pattern(PATTERN_GET_NUMBER, 0, 0)-1));
+    return(kr_callNetworkFunction(FF_LEARN_FUNC | LEARN_FUNC, parameterInArray,
+                                  NoOfInParams, parameterOutArray, NoOfOutParams,
+                                  0, kr_np_pattern(PATTERN_GET_NUMBER, 0, 0)-1));
 
 }
 
@@ -3639,13 +3513,12 @@ krui_err krui_learnAllPatternsFF (float *parameterInArray, int NoOfInParams,
 ******************************************************************************/
 krui_err krui_learnSinglePatternFF (int pattern_no, float *parameterInArray,
                                     int NoOfInParams, float **parameterOutArray,
-                                    int *NoOfOutParams)
-{
+                                    int *NoOfOutParams) {
 
-  KernelErrorCode = KRERR_NO_ERROR;
-  return (kr_callNetworkFunction (FF_LEARN_FUNC | LEARN_FUNC, parameterInArray,
-				  NoOfInParams, parameterOutArray, 
-				  NoOfOutParams, pattern_no-1, pattern_no-1));
+    KernelErrorCode = KRERR_NO_ERROR;
+    return (kr_callNetworkFunction (FF_LEARN_FUNC | LEARN_FUNC, parameterInArray,
+                                    NoOfInParams, parameterOutArray,
+                                    NoOfOutParams, pattern_no-1, pattern_no-1));
 
 }
 
@@ -3666,8 +3539,7 @@ GROUP: Pruning Functions
   RETURNS  :
   UPDATE   :
 ******************************************************************************/
-char *krui_getPrunFunc (void)
-{
+char *krui_getPrunFunc (void) {
 
     static char prunFunc [FUNCTION_NAME_MAX_LEN];
 
@@ -3686,8 +3558,7 @@ char *krui_getPrunFunc (void)
   RETURNS  : returns error code if pruning function is invalid
   UPDATE   :
 ******************************************************************************/
-krui_err krui_setPrunFunc (char *pruning_func)
-{
+krui_err krui_setPrunFunc (char *pruning_func) {
 
     return (krf_setCurrentNetworkFunc (pruning_func, PRUNING_FUNC));
 }
@@ -3709,8 +3580,7 @@ GROUP: FF-Learning Functions
   RETURNS  :
   UPDATE   :
 ******************************************************************************/
-char *krui_getFFLearnFunc (void)
-{
+char *krui_getFFLearnFunc (void) {
 
     static char FFLearnFunc [FUNCTION_NAME_MAX_LEN];
 
@@ -3729,11 +3599,10 @@ char *krui_getFFLearnFunc (void)
   RETURNS  : returns error code if pruning function is invalid
   UPDATE   :
 ******************************************************************************/
-krui_err krui_setFFLearnFunc (char *FF_learning_func)
-{
+krui_err krui_setFFLearnFunc (char *FF_learning_func) {
 
-    return (krf_setCurrentNetworkFunc(FF_learning_func, 
-				      FF_LEARN_FUNC | LEARN_FUNC));
+    return (krf_setCurrentNetworkFunc(FF_learning_func,
+                                      FF_LEARN_FUNC | LEARN_FUNC));
 }
 
 
@@ -3749,11 +3618,10 @@ GROUP: Pattern Management
   PURPOSE  : Sets the class distribution in the current pattern.
   NOTES    : Patterns must be loaded before calling this function.
 
-  RETURNS  : Returns kernel error code 
+  RETURNS  : Returns kernel error code
   UPDATE   :
 ******************************************************************************/
-krui_err krui_setClassDistribution(unsigned int *classDist)
-{
+krui_err krui_setClassDistribution(unsigned int *classDist) {
 
     return(kr_npui_setClassDistribution(classDist));
 }
@@ -3763,13 +3631,12 @@ krui_err krui_setClassDistribution(unsigned int *classDist)
   FUNCTION : krui_setClassInfo
 
   PURPOSE  : Sets the class name in the current pattern.
-  NOTES    : 
+  NOTES    :
 
-  RETURNS  : Returns kernel error code 
+  RETURNS  : Returns kernel error code
   UPDATE   :
 ******************************************************************************/
-krui_err krui_setClassInfo(char *name)
-{
+krui_err krui_setClassInfo(char *name) {
     printf("Kernel debug: new pattern class : %s \n",name);
     return(kr_npui_setClass(name));
 }
@@ -3778,15 +3645,14 @@ krui_err krui_setClassInfo(char *name)
 /*****************************************************************************
   FUNCTION : krui_useClassDistribution
 
-  PURPOSE  : Toggles the use of the user defined distribution of patterns 
+  PURPOSE  : Toggles the use of the user defined distribution of patterns
              (TRUE) as compared to the distribution in the pattern file
-  NOTES    : 
+  NOTES    :
 
   RETURNS  : kernel error code
   UPDATE   :
 ******************************************************************************/
-krui_err  krui_useClassDistribution(bool use_it)
-{
+krui_err  krui_useClassDistribution(bool use_it) {
 
     return( kr_npui_useChunk(use_it) );
 }
@@ -3800,8 +3666,7 @@ krui_err  krui_useClassDistribution(bool use_it)
   RETURNS  : Returns a error code if pattern number is invalid.
   UPDATE   :
 ******************************************************************************/
-krui_err  krui_setPatternNo(int pattern_no)
-{
+krui_err  krui_setPatternNo(int pattern_no) {
 
     return( kr_np_pattern( PATTERN_SET, 0, pattern_no ) );
 }
@@ -3810,13 +3675,12 @@ krui_err  krui_setPatternNo(int pattern_no)
   FUNCTION : krui_getPatternNo
 
   PURPOSE  : Returns the current pattern number.
-  NOTES    : 
+  NOTES    :
 
-  RETURNS  : 
+  RETURNS  :
   UPDATE   :
 ******************************************************************************/
-krui_err  krui_getPatternNo(void)
-{
+krui_err  krui_getPatternNo(void) {
 
     return( kr_np_pattern( PATTERN_GET, 0, 0 ) );
 }
@@ -3830,8 +3694,7 @@ krui_err  krui_getPatternNo(void)
   RETURNS  :
   UPDATE   :
 ******************************************************************************/
-krui_err  krui_deletePattern(void)
-{
+krui_err  krui_deletePattern(void) {
 
     return( kr_np_pattern( PATTERN_DELETE, 0 , 0 ) );
 }
@@ -3846,8 +3709,7 @@ krui_err  krui_deletePattern(void)
   RETURNS  :
   UPDATE   :
 ******************************************************************************/
-krui_err  krui_modifyPattern(void)
-{
+krui_err  krui_modifyPattern(void) {
 
     return( kr_np_pattern( PATTERN_MODIFY, 0 , 0 ) );
 }
@@ -3874,8 +3736,7 @@ krui_err  krui_modifyPattern(void)
   RETURNS  :
   UPDATE   :
 ******************************************************************************/
-krui_err  krui_showPattern(int mode)
-{
+krui_err  krui_showPattern(int mode) {
 
     return( kr_np_pattern( PATTERN_SHOW, mode, 0 ) );
 }
@@ -3891,8 +3752,7 @@ krui_err  krui_showPattern(int mode)
              Returns error code if an error occured
   UPDATE   :
 ******************************************************************************/
-krui_err  krui_allocNewPatternSet(int *set_no)
-{
+krui_err  krui_allocNewPatternSet(int *set_no) {
 
     KernelErrorCode = kr_npui_allocNewPatternSet(set_no);
     return KernelErrorCode;
@@ -3914,8 +3774,7 @@ krui_err  krui_allocNewPatternSet(int *set_no)
              input/output units is incompatible, 0 otherwise.
   UPDATE   :
 ******************************************************************************/
-krui_err  krui_newPattern(void)
-{
+krui_err  krui_newPattern(void) {
 
     return( kr_np_pattern( PATTERN_NEW, 0, 0 ) );
 }
@@ -3930,8 +3789,7 @@ krui_err  krui_newPattern(void)
   RETURNS  :
   UPDATE   :
 ******************************************************************************/
-int  krui_getNoOfPatterns(void)
-{
+int  krui_getNoOfPatterns(void) {
     int number;
     number = kr_np_pattern( PATTERN_GET_NUMBER, 0, 0 );
     return (number >= 0) ? number : 0;
@@ -3947,8 +3805,7 @@ int  krui_getNoOfPatterns(void)
   RETURNS  :
   UPDATE   :
 ******************************************************************************/
-int  krui_getTotalNoOfSubPatterns(void)
-{
+int  krui_getTotalNoOfSubPatterns(void) {
     int number;
     number = kr_np_pattern( SUBPATTERN_GET_NUMBER, 0, 0 );
     return (number >= 0) ? number : 0;
@@ -3967,8 +3824,7 @@ int  krui_getTotalNoOfSubPatterns(void)
   RETURNS  :
   UPDATE   :
 ******************************************************************************/
-void  krui_deleteAllPatterns(void)
-{
+void  krui_deleteAllPatterns(void) {
 
     (void) kr_np_pattern( PATTERN_DELETE_ALL, 0, 0 );
 }
@@ -3988,8 +3844,7 @@ void  krui_deleteAllPatterns(void)
   RETURNS  :
   UPDATE   :
 ******************************************************************************/
-krui_err  krui_shufflePatterns(bool on_or_off)
-{
+krui_err  krui_shufflePatterns(bool on_or_off) {
 
     if (on_or_off)
         return kr_np_pattern( PATTERN_SHUFFLE_ON, 0, 0 );
@@ -4013,8 +3868,7 @@ krui_err  krui_shufflePatterns(bool on_or_off)
   RETURNS  :
   UPDATE   :
 ******************************************************************************/
-krui_err  krui_shuffleSubPatterns(bool on_or_off)
-{
+krui_err  krui_shuffleSubPatterns(bool on_or_off) {
 
     if (on_or_off)
         return kr_np_pattern( PATTERN_SUB_SHUFFLE_ON, 0, 0 );
@@ -4033,8 +3887,7 @@ krui_err  krui_shuffleSubPatterns(bool on_or_off)
 
   UPDATE   :
 ******************************************************************************/
-krui_err  krui_setCurrPatSet(int number)
-{
+krui_err  krui_setCurrPatSet(int number) {
 
     return kr_npui_setCurrPatSet(number);
 }
@@ -4054,8 +3907,7 @@ krui_err  krui_setCurrPatSet(int number)
 
   UPDATE   :
 ******************************************************************************/
-krui_err  krui_deletePatSet(int number)
-{
+krui_err  krui_deletePatSet(int number) {
 
     return kr_npui_deletePatSet(number);
 }
@@ -4072,8 +3924,7 @@ krui_err  krui_deletePatSet(int number)
   UPDATE   :
 ******************************************************************************/
 krui_err  krui_GetPatInfo(pattern_set_info *set_info,
-			  pattern_descriptor *pat_info)
-{
+                          pattern_descriptor *pat_info) {
 
     return kr_npui_GetPatInfo(set_info, pat_info);
 }
@@ -4089,8 +3940,7 @@ krui_err  krui_GetPatInfo(pattern_set_info *set_info,
 
   UPDATE   :
 ******************************************************************************/
-krui_err  krui_DefShowSubPat(int *insize, int *outsize, int *inpos, int *outpos)
-{
+krui_err  krui_DefShowSubPat(int *insize, int *outsize, int *inpos, int *outpos) {
 
     return kr_npui_DefShowSubPat(insize, outsize, inpos, outpos);
 }
@@ -4106,8 +3956,7 @@ krui_err  krui_DefShowSubPat(int *insize, int *outsize, int *inpos, int *outpos)
   UPDATE   :
 ******************************************************************************/
 krui_err  krui_DefTrainSubPat(int *insize, int *outsize,
-                              int *instep, int *outstep, int *max_n_pos)
-{
+                              int *instep, int *outstep, int *max_n_pos) {
 
     return kr_npui_DefTrainSubPat(insize, outsize, instep, outstep, max_n_pos);
 }
@@ -4127,8 +3976,7 @@ krui_err  krui_DefTrainSubPat(int *insize, int *outsize,
 
   UPDATE   :
 ******************************************************************************/
-krui_err krui_AlignSubPat(int *inpos, int *outpos, int *no)
-{
+krui_err krui_AlignSubPat(int *inpos, int *outpos, int *no) {
 
     return kr_npui_AlignSubPat(inpos, outpos, no);
 }
@@ -4146,8 +3994,7 @@ krui_err krui_AlignSubPat(int *inpos, int *outpos, int *no)
   UPDATE   :
 ******************************************************************************/
 krui_err  krui_GetShapeOfSubPattern(int *insize, int *outsize,
-                                    int *inpos, int *outpos, int n_pos)
-{
+                                    int *inpos, int *outpos, int n_pos) {
 
     return kr_npui_GetShapeOfSubPat(insize, outsize, inpos, outpos, n_pos);
 }
@@ -4170,8 +4017,7 @@ GROUP: I/O Functions
   RETURNS  :  Returns error code if an error occured, or 0 otherwise.
   UPDATE   :
 ******************************************************************************/
-krui_err  krui_saveNet(char *filename, char *netname)
-{
+krui_err  krui_saveNet(char *filename, char *netname) {
 
     return( krio_saveNet( filename, netname ) );
 }
@@ -4188,8 +4034,7 @@ krui_err  krui_saveNet(char *filename, char *netname)
              loading/memory allocation, or 0 otherwise.
   UPDATE   :
 ******************************************************************************/
-krui_err  krui_loadNet(char *filename, char **netname)
-{
+krui_err  krui_loadNet(char *filename, char **netname) {
     char        *netfile_version; /*  isn't used now  */
 
     KernelErrorCode = KRERR_NO_ERROR;
@@ -4215,8 +4060,7 @@ krui_err  krui_loadNet(char *filename, char **netname)
              loading/memory allocation, or 0 otherwise.
   UPDATE   :
 ******************************************************************************/
-krui_err  krui_loadNewPatterns(char *filename, int *set_no)
-{
+krui_err  krui_loadNewPatterns(char *filename, int *set_no) {
 
     KernelErrorCode = kr_npui_loadNewPatterns(filename, set_no);
     return KernelErrorCode;
@@ -4233,8 +4077,7 @@ krui_err  krui_loadNewPatterns(char *filename, int *set_no)
   RETURNS  :
   UPDATE   :
 ******************************************************************************/
-krui_err  krui_saveNewPatterns(char *filename, int set_no)
-{
+krui_err  krui_saveNewPatterns(char *filename, int set_no) {
 
     KernelErrorCode = kr_npui_saveNewPatterns(filename, set_no);
     return KernelErrorCode;
@@ -4258,8 +4101,7 @@ krui_err  krui_saveNewPatterns(char *filename, int set_no)
 krui_err  krui_saveResultParam(char *filename, bool create,
                                int startpattern, int endpattern,
                                bool includeinput, bool includeoutput,
-                               float *Update_param_array, int NoOfUpdateParam)
-{
+                               float *Update_param_array, int NoOfUpdateParam) {
 
     return( krio_saveResult(filename, create, startpattern, endpattern,
                             includeinput, includeoutput,
@@ -4294,8 +4136,7 @@ GROUP: Functions for memory management
   RETURNS  : Returns error code if memory allocation fails, 0 otherwise.
   UPDATE   :
 ******************************************************************************/
-krui_err  krui_allocateUnits(int no_of_units)
-{
+krui_err  krui_allocateUnits(int no_of_units) {
 
     return( krm_allocUnits( no_of_units ) );
 }
@@ -4315,8 +4156,7 @@ krui_err  krui_allocateUnits(int no_of_units)
   RETURNS  :
   UPDATE   :
 ******************************************************************************/
-void  krui_deleteNet(void)
-{
+void  krui_deleteNet(void) {
 
     krm_releaseMem();
 }
@@ -4340,8 +4180,7 @@ GROUP: Functions for reading/searching the symbol table
   RETURNS  :
   UPDATE   :
 ******************************************************************************/
-bool  krui_getFirstSymbolTableEntry(char **symbol_name, int *symbol_type)
-{
+bool  krui_getFirstSymbolTableEntry(char **symbol_name, int *symbol_type) {
     struct NameTable      *n_tbl;
 
     n_tbl = krm_getNTableFirstEntry();
@@ -4350,9 +4189,9 @@ bool  krui_getFirstSymbolTableEntry(char **symbol_name, int *symbol_type)
         n_tbl = krm_getNTableNextEntry();
 
     if (n_tbl == NULL) {
-	*symbol_name = NULL;
-	*symbol_type = 0;
-	return( FALSE );
+        *symbol_name = NULL;
+        *symbol_type = 0;
+        return( FALSE );
     }
 
     *symbol_name = n_tbl->Entry.symbol;
@@ -4372,8 +4211,7 @@ bool  krui_getFirstSymbolTableEntry(char **symbol_name, int *symbol_type)
   RETURNS  :
   UPDATE   :
 ******************************************************************************/
-bool  krui_getNextSymbolTableEntry(char **symbol_name, int *symbol_type)
-{
+bool  krui_getNextSymbolTableEntry(char **symbol_name, int *symbol_type) {
     struct NameTable      *n_tbl;
 
     n_tbl = krm_getNTableNextEntry();
@@ -4382,9 +4220,9 @@ bool  krui_getNextSymbolTableEntry(char **symbol_name, int *symbol_type)
         n_tbl = krm_getNTableNextEntry();
 
     if (n_tbl == NULL) {
-	*symbol_name = NULL;
-	*symbol_type = 0;
-	return( FALSE );
+        *symbol_name = NULL;
+        *symbol_type = 0;
+        return( FALSE );
     }
 
     *symbol_name = n_tbl->Entry.symbol;
@@ -4404,8 +4242,7 @@ bool  krui_getNextSymbolTableEntry(char **symbol_name, int *symbol_type)
   RETURNS  : Returns true, if the symbol exists.
   UPDATE   :
 ******************************************************************************/
-bool  krui_symbolSearch(char *symbol, int symbol_type)
-{
+bool  krui_symbolSearch(char *symbol, int symbol_type) {
 
     return( krm_NTableSymbolSearch( symbol, symbol_type ) != NULL );
 }
@@ -4427,8 +4264,7 @@ GROUP: Miscellanous
   RETURNS  :
   UPDATE   :
 ******************************************************************************/
-char  *krui_getVersion(void)
-{
+char  *krui_getVersion(void) {
     static char snns_version[128];
 
     strcpy( snns_version, SNNS_VERSION );
@@ -4446,11 +4282,10 @@ char  *krui_getVersion(void)
   RETURNS  :
   UPDATE   :
 ******************************************************************************/
-void  krui_getNetInfo(int *no_of_sites, int *no_of_links, 
-		      int *no_of_STable_entries, int *no_of_FTable_entries)
-{
+void  krui_getNetInfo(int *no_of_sites, int *no_of_links,
+                      int *no_of_STable_entries, int *no_of_FTable_entries) {
     int   array_size,
-    info_array[ 10 ];
+          info_array[ 10 ];
 
     krm_getMemoryManagerInfo( &array_size, info_array );
 
@@ -4471,12 +4306,11 @@ void  krui_getNetInfo(int *no_of_sites, int *no_of_links,
   RETURNS  :
   UPDATE   :
 ******************************************************************************/
-void  krui_getMemoryManagerInfo(int *unit_bytes, int *site_bytes, 
-				int *link_bytes, int *NTable_bytes, 
-				int *STable_bytes, int *FTable_bytes)
-{
+void  krui_getMemoryManagerInfo(int *unit_bytes, int *site_bytes,
+                                int *link_bytes, int *NTable_bytes,
+                                int *STable_bytes, int *FTable_bytes) {
     int   array_size,
-    info_array[ 10 ];
+          info_array[ 10 ];
 
     krm_getMemoryManagerInfo( &array_size, info_array );
 
@@ -4493,21 +4327,20 @@ void  krui_getMemoryManagerInfo(int *unit_bytes, int *site_bytes,
   FUNCTION : krui_getUnitDefaults
 
   PURPOSE  : Returns Information about the unit default settings.
-             For more information about default settings see 
+             For more information about default settings see
 	     krui_createDefaultUnit() and krui_createFTypeUnit( .. ).
   NOTES    :
 
   RETURNS  :
   UPDATE   :
 ******************************************************************************/
-void  krui_getUnitDefaults(FlintType *act, FlintType *bias, int *st, 
-			   int *subnet_no, int *layer_no, char **act_func, 
-			   char **out_func)
-{
+void  krui_getUnitDefaults(FlintType *act, FlintType *bias, int *st,
+                           int *subnet_no, int *layer_no, char **act_func,
+                           char **out_func) {
     int ttflags;
 
     kr_getUnitDefaults( act, bias, &ttflags, subnet_no, layer_no,
-                       act_func, out_func );
+                        act_func, out_func );
 
     *st = kr_flags2TType( ttflags );
 }
@@ -4517,7 +4350,7 @@ void  krui_getUnitDefaults(FlintType *act, FlintType *bias, int *st,
   FUNCTION :  krui_setUnitDefaults
 
   PURPOSE  : Changes the unit default settings.
-             For more information about default settings see 
+             For more information about default settings see
 	     krui_createDefaultUnit() and krui_createFTypeUnit( .. ).
   NOTES    :
 
@@ -4527,10 +4360,9 @@ void  krui_getUnitDefaults(FlintType *act, FlintType *bias, int *st,
              0 otherwise.
   UPDATE   :
 ******************************************************************************/
-krui_err  krui_setUnitDefaults(FlintTypeParam act, FlintTypeParam bias, 
-			       int st, int subnet_no, int layer_no, 
-			       char *act_func, char *out_func)
-{
+krui_err  krui_setUnitDefaults(FlintTypeParam act, FlintTypeParam bias,
+                               int st, int subnet_no, int layer_no,
+                               char *act_func, char *out_func) {
     int        ttflags;
 
     ttflags = kr_TType2Flags( st );
@@ -4538,7 +4370,7 @@ krui_err  krui_setUnitDefaults(FlintTypeParam act, FlintTypeParam bias,
         return( KernelErrorCode );
 
     kr_setUnitDefaults( act, bias, ttflags, subnet_no, layer_no,
-                       act_func, out_func );
+                        act_func, out_func );
     return( KernelErrorCode );
 }
 
@@ -4555,8 +4387,7 @@ krui_err  krui_setUnitDefaults(FlintTypeParam act, FlintTypeParam bias,
 ******************************************************************************/
 extern FlintType OUT_Custom_Python(FlintType act);
 
-void  krui_resetNet(void)
-{
+void  krui_resetNet(void) {
     register int   i;
     register struct Unit   *unit_ptr;
 
@@ -4564,8 +4395,8 @@ void  krui_resetNet(void)
         return;
 
 
-    for (i = MinUnitNo, unit_ptr = unit_array + MinUnitNo; i <= MaxUnitNo; 
-	 i++, unit_ptr++)
+    for (i = MinUnitNo, unit_ptr = unit_array + MinUnitNo; i <= MaxUnitNo;
+            i++, unit_ptr++)
         if UNIT_IN_USE( unit_ptr )  {
             /*  unit is in use  */
             unit_ptr->act = unit_ptr->i_act;
@@ -4573,9 +4404,9 @@ void  krui_resetNet(void)
             if (unit_ptr->out_func == OUT_IDENTITY)
                 unit_ptr->Out.output = unit_ptr->act;
             else if(unit_ptr->out_func == OUT_Custom_Python)
-	    	unit_ptr->Out.output =
-			kr_PythonOutFunction(unit_ptr->python_out_func,
-				unit_ptr->act);
+                unit_ptr->Out.output =
+                    kr_PythonOutFunction(unit_ptr->python_out_func,
+                                         unit_ptr->act);
             else
                 /*  no identity output function: calculate unit's output also */
                 unit_ptr->Out.output = (*unit_ptr->out_func) (unit_ptr->act);
@@ -4593,16 +4424,15 @@ void  krui_resetNet(void)
   RETURNS  :
   UPDATE   :
 ******************************************************************************/
-void  krui_setSeedNo(long int seed)
-{
+void  krui_setSeedNo(long int seed) {
 
     if (seed != 0) {
-	randomSeedVal = seed;
-        srand48( seed );  
+        randomSeedVal = seed;
+        srand48( seed );
     } else {
         if (randomSeedVal == 0) {
             randomSeedVal = (long) time( (time_t *) 0);
-            srand48( randomSeedVal ); 
+            srand48( randomSeedVal );
         }
     }
 }
@@ -4617,11 +4447,10 @@ void  krui_setSeedNo(long int seed)
   RETURNS  : Returns the no. of input units
   UPDATE   :
 ******************************************************************************/
-int  krui_getNoOfInputUnits(void)
-{
+int  krui_getNoOfInputUnits(void) {
 
     return( kr_getNoOfUnits( INPUT ) + kr_getNoOfUnits( DUAL ) +
-	    kr_getNoOfUnits( SPECIAL_I ) + kr_getNoOfUnits( SPECIAL_D ) );
+            kr_getNoOfUnits( SPECIAL_I ) + kr_getNoOfUnits( SPECIAL_D ) );
 }
 
 
@@ -4634,11 +4463,10 @@ int  krui_getNoOfInputUnits(void)
   RETURNS  : returns the no. of output units
   UPDATE   :
 ******************************************************************************/
-int  krui_getNoOfOutputUnits(void)
-{
+int  krui_getNoOfOutputUnits(void) {
 
     return( kr_getNoOfUnits( OUTPUT ) + kr_getNoOfUnits( DUAL ) +
-	    kr_getNoOfUnits( SPECIAL_O ) + kr_getNoOfUnits( SPECIAL_D ) );
+            kr_getNoOfUnits( SPECIAL_O ) + kr_getNoOfUnits( SPECIAL_D ) );
 }
 /*****************************************************************************
   FUNCTION : krui_getNoOfTTypeUnits
@@ -4650,8 +4478,7 @@ int  krui_getNoOfOutputUnits(void)
   RETURNS  :
   UPDATE   :
 ******************************************************************************/
-int  krui_getNoOfTTypeUnits(int UnitTType)
-{
+int  krui_getNoOfTTypeUnits(int UnitTType) {
 
     return( kr_getNoOfUnits( UnitTType ) );
 }
@@ -4666,10 +4493,9 @@ int  krui_getNoOfTTypeUnits(int UnitTType)
   RETURNS  : Returns the no. of special input units
   UPDATE   :
 ******************************************************************************/
-int  krui_getNoOfSpecialInputUnits(void)
-{
+int  krui_getNoOfSpecialInputUnits(void) {
 
-  return( kr_getNoOfSpecialUnits( INPUT ) + kr_getNoOfUnits( DUAL ) );
+    return( kr_getNoOfSpecialUnits( INPUT ) + kr_getNoOfUnits( DUAL ) );
 }
 
 
@@ -4682,10 +4508,9 @@ int  krui_getNoOfSpecialInputUnits(void)
   RETURNS  : returns the no. of special output units
   UPDATE   :
 ******************************************************************************/
-int  krui_getNoOfSpecialOutputUnits(void)
-{
+int  krui_getNoOfSpecialOutputUnits(void) {
 
-  return( kr_getNoOfSpecialUnits( OUTPUT ) + kr_getNoOfUnits( DUAL ) );
+    return( kr_getNoOfSpecialUnits( OUTPUT ) + kr_getNoOfUnits( DUAL ) );
 }
 
 
@@ -4698,8 +4523,7 @@ int  krui_getNoOfSpecialOutputUnits(void)
   RETURNS  :
   UPDATE   :
 ******************************************************************************/
-krui_err  krui_xyTransTable(int op, int *x, int *y, int z)
-{
+krui_err  krui_xyTransTable(int op, int *x, int *y, int z) {
 
     return(kr_xyTransTable(op,x,y,z));
 }
@@ -4713,9 +4537,8 @@ krui_err  krui_xyTransTable(int op, int *x, int *y, int z)
   RETURNS  :
   UPDATE   :
 ******************************************************************************/
-krui_err  krui_getUnitCenters(int unit_no, int center_no, 
-			      struct PositionVector **unit_center)
-{
+krui_err  krui_getUnitCenters(int unit_no, int center_no,
+                              struct PositionVector **unit_center) {
     struct Unit   *unit_ptr;
 
     KernelErrorCode = KRERR_NO_ERROR;
@@ -4736,16 +4559,15 @@ krui_err  krui_getUnitCenters(int unit_no, int center_no,
 /*****************************************************************************
   FUNCTION :  krui_setUnitCenters
 
-  PURPOSE  : Sets the 3D transform center of the specified unit and center 
+  PURPOSE  : Sets the 3D transform center of the specified unit and center
              number
   NOTES    :
 
   RETURNS  :
   UPDATE   :
 ******************************************************************************/
-krui_err  krui_setUnitCenters(int unit_no, int center_no, 
-			      struct PositionVector *unit_center)
-{
+krui_err  krui_setUnitCenters(int unit_no, int center_no,
+                              struct PositionVector *unit_center) {
     struct Unit   *unit_ptr;
     struct PositionVector    *unit_posvec_ptr;
 
@@ -4761,8 +4583,8 @@ krui_err  krui_setUnitCenters(int unit_no, int center_no,
 
     unit_posvec_ptr = unit_ptr->unit_center_pos + center_no;
 
-    memcpy( (char *) unit_posvec_ptr, (char *) unit_center, 
-	    sizeof( struct PositionVector ) );
+    memcpy( (char *) unit_posvec_ptr, (char *) unit_center,
+            sizeof( struct PositionVector ) );
 
     return( KRERR_NO_ERROR );
 }
@@ -4771,15 +4593,14 @@ krui_err  krui_setUnitCenters(int unit_no, int center_no,
 /*****************************************************************************
   FUNCTION : krui_topo_err_msg
 
-  PURPOSE  : generate a message about an error found while doing a 
+  PURPOSE  : generate a message about an error found while doing a
              topologiacal sorting of the network units
   NOTES    :
 
   RETURNS  :
   UPDATE   :
 ******************************************************************************/
-static char  *krui_topo_err_msg(void)
-{
+static char  *krui_topo_err_msg(void) {
     char  *dest_unit_name,  *src_unit_name;
     static char  msg1[512];
     static char  msg2[512];
@@ -4796,19 +4617,19 @@ static char  *krui_topo_err_msg(void)
 
     if (topo_msg.dest_error_unit > 0)
         if (dest_unit_name == NULL)
-            sprintf( msg1, "Unit #%d is the destination unit. ", 
-		     topo_msg.dest_error_unit );
+            sprintf( msg1, "Unit #%d is the destination unit. ",
+                     topo_msg.dest_error_unit );
         else
-            sprintf( msg1, "Unit #%d (%s) is the destination unit. ", 
-		     topo_msg.dest_error_unit, dest_unit_name );
+            sprintf( msg1, "Unit #%d (%s) is the destination unit. ",
+                     topo_msg.dest_error_unit, dest_unit_name );
 
     if (topo_msg.src_error_unit > 0)
         if (src_unit_name == NULL)
-            sprintf( msg2, "Unit #%d is the source unit. ", 
-		     topo_msg.src_error_unit );
+            sprintf( msg2, "Unit #%d is the source unit. ",
+                     topo_msg.src_error_unit );
         else
-            sprintf( msg2, "Unit #%d (%s) is the source unit. ", 
-		     topo_msg.src_error_unit, src_unit_name );
+            sprintf( msg2, "Unit #%d (%s) is the source unit. ",
+                     topo_msg.src_error_unit, src_unit_name );
 
     if (topo_msg.dest_error_unit == 0)
         return( msg2 );
@@ -4831,8 +4652,7 @@ static char  *krui_topo_err_msg(void)
   RETURNS  :
   UPDATE   :
 ******************************************************************************/
-char  *krui_error(int error_code)
-{
+char  *krui_error(int error_code) {
     static char *err_message[] = {
         "Invalid error code",
         "Insufficient memory",
@@ -4965,30 +4785,30 @@ char  *krui_error(int error_code)
         "Invalid error code", /* RPC: Cooperativ failed */
         "Invalid error code", /* RPC: No response from the slaves */
         /*130*/ "Algorithm needs patterns. Please press TEST first to check patterns.",
-	"RBF-DDA: First input parameter out of range 0<theta_pos<=1.",
-	"RBF-DDA: Second input parameter out of range 0<theta_neg<=1.",
-	"RBF-DDA: Third input parameter must be >=0.",
-	"RBF-DDA: More than one desired class in output pattern.",
-	"RBF-DDA: Input-hidden connection pointer problem.",
-	"RBF-DDA: Input-output shortcut connections are not allowed.",
-	"RBF-DDA: Activation function of input units must be Act_Identity.",
-	"RBF-DDA: Activation function of hidden units must be Act_RBF_Gaussian.",
-	"RBF-DDA: Activation function of output units must be Act_Identity.",
+        "RBF-DDA: First input parameter out of range 0<theta_pos<=1.",
+        "RBF-DDA: Second input parameter out of range 0<theta_neg<=1.",
+        "RBF-DDA: Third input parameter must be >=0.",
+        "RBF-DDA: More than one desired class in output pattern.",
+        "RBF-DDA: Input-hidden connection pointer problem.",
+        "RBF-DDA: Input-output shortcut connections are not allowed.",
+        "RBF-DDA: Activation function of input units must be Act_Identity.",
+        "RBF-DDA: Activation function of hidden units must be Act_RBF_Gaussian.",
+        "RBF-DDA: Activation function of output units must be Act_Identity.",
         /*140*/ "CC error : Invalid additional Parameters.",
         "Activation-functions have to be Act_Threshold.",
         "Learning function must be online Backpropagation",
-	"No learning possible with only one class",
-	"Invalid pattern remap function",
+        "No learning possible with only one class",
+        "Invalid pattern remap function",
         "Patterns don't have class information",
-	"Illegal virtual class distribution",
-	"Patterns can not be normalized"
+        "Illegal virtual class distribution",
+        "Patterns can not be normalized"
     };  /* 147 error messages */
 
     static char *ext_messages[] = {
         "SNNS-Kernel No Errors",
         "SNNS-Kernel Error: ",
         "SNNS-Kernel Network Topologic Error: "
-        };
+    };
 
     int  NoOfMessages = (sizeof (err_message)) / (sizeof (err_message[0]));
     static char  mesg[512], aux[512];
@@ -4999,101 +4819,102 @@ char  *krui_error(int error_code)
     error_code = abs( error_code );
     if ( error_code >= NoOfMessages )  error_code = 0; /* invalid error code */
 
-    switch (-error_code)
-        {
-          case KRERR_CYCLES:
-          case KRERR_DEAD_UNITS:
-          case KRERR_I_UNITS_CONNECT:
-          case KRERR_O_UNITS_CONNECT:
-          case KRERR_NOT_NEIGHBOUR_LAYER:
-          case KRERR_ACT_FUNC:
-          case KRERR_OUT_FUNC:
-          case KRERR_SITE_FUNC:
-          case KRERR_UNEXPECTED_SITES:
-          case KRERR_UNEXPECTED_DIRECT_INPUTS:
-          case KRERR_SITE_MISSING:
-          case KRERR_UNEXPECTED_LINK:
-          case KRERR_LINK_MISSING:
-          case KRERR_LINK_TO_WRONG_SITE:
-          case KRERR_PARAM_BETA:
-          case KRERR_UNDETERMINED_UNIT:
+    switch (-error_code) {
+    case KRERR_CYCLES:
+    case KRERR_DEAD_UNITS:
+    case KRERR_I_UNITS_CONNECT:
+    case KRERR_O_UNITS_CONNECT:
+    case KRERR_NOT_NEIGHBOUR_LAYER:
+    case KRERR_ACT_FUNC:
+    case KRERR_OUT_FUNC:
+    case KRERR_SITE_FUNC:
+    case KRERR_UNEXPECTED_SITES:
+    case KRERR_UNEXPECTED_DIRECT_INPUTS:
+    case KRERR_SITE_MISSING:
+    case KRERR_UNEXPECTED_LINK:
+    case KRERR_LINK_MISSING:
+    case KRERR_LINK_TO_WRONG_SITE:
+    case KRERR_PARAM_BETA:
+    case KRERR_UNDETERMINED_UNIT:
 
-            strcpy( mesg, ext_messages[2] );
+        strcpy( mesg, ext_messages[2] );
+        strcat( mesg, err_message[ error_code ] );
+
+        switch (-error_code) {
+        case KRERR_CYCLES:
+            sprintf( aux, "%d cycle(s) in the network. ",
+                     topo_msg.no_of_cycles );
+            strcat( mesg, aux );
+            break;
+        case KRERR_DEAD_UNITS:
+            sprintf( aux, "%d dead unit(s) in the network. ",
+                     topo_msg.no_of_dead_units );
+            strcat( mesg, aux );
+            break;
+
+        default:
+            break;
+        }
+
+        strcat( mesg, krui_topo_err_msg() );
+        return( mesg );
+
+
+    case KRERR_FEW_LAYERS:
+    case KRERR_MUCH_LAYERS:
+    case KRERR_NOT_FULLY_CONNECTED:
+        strcpy( mesg, ext_messages[2] );
+        strcat( mesg, err_message[ error_code ] );
+
+        switch (-error_code) {
+        case KRERR_FEW_LAYERS:
+            sprintf(aux, "Only %d layers found.", topo_msg.no_of_layers );
+            break;
+        case KRERR_MUCH_LAYERS:
+            sprintf( aux, "%d layers found.", topo_msg.no_of_layers );
+            break;
+
+        default:
+            break;
+        }
+
+        strcat( mesg, aux );
+        return( mesg );
+
+    case KRERR_NO_OF_UNITS_IN_LAYER:
+        strcpy (mesg, ext_messages[2]);
+        strcat (mesg, err_message [error_code]);
+        sprintf (aux, "The name of the layer is: %s", topo_msg.name);
+        strcat (mesg, aux);
+        return (mesg);
+
+    case KRERR_UNIT_MISSING:
+        strcpy (mesg, ext_messages[2]);
+        strcat (mesg, err_message [error_code]);
+        sprintf (aux, "The missing unit is the %s unit.", topo_msg.name);
+        strcat (mesg, aux);
+        return (mesg);
+
+
+
+    case KRERR_FILE_OPEN:
+        lineno = 0;
+
+    default:
+        if (lineno != 0) {              /*  file I/O error  */
+            strcpy( mesg, ext_messages[1] );
+            sprintf( aux, "Loading file failed at line %d : ", lineno );
+            strcat( mesg, aux );
             strcat( mesg, err_message[ error_code ] );
 
-            switch (-error_code){
-	    case KRERR_CYCLES:
-		sprintf( aux, "%d cycle(s) in the network. ", 
-			 topo_msg.no_of_cycles );
-		strcat( mesg, aux );
-		break;
-	    case KRERR_DEAD_UNITS:
-		sprintf( aux, "%d dead unit(s) in the network. ", 
-			 topo_msg.no_of_dead_units );
-		strcat( mesg, aux );
-		break;
-
-	    default: break;
-	    }
-
-            strcat( mesg, krui_topo_err_msg() );
+            lineno = 0;
             return( mesg );
-
-
-          case KRERR_FEW_LAYERS:
-          case KRERR_MUCH_LAYERS:
-          case KRERR_NOT_FULLY_CONNECTED:
-	      strcpy( mesg, ext_messages[2] );
-	      strcat( mesg, err_message[ error_code ] );
-
-	      switch (-error_code){
-	      case KRERR_FEW_LAYERS:
-		  sprintf(aux, "Only %d layers found.", topo_msg.no_of_layers );
-		  break;
-	      case KRERR_MUCH_LAYERS:
-		  sprintf( aux, "%d layers found.", topo_msg.no_of_layers );
-		  break;
-
-	      default: break;
-	      }
-
-	      strcat( mesg, aux );
-	      return( mesg );
-
-          case KRERR_NO_OF_UNITS_IN_LAYER:
-	      strcpy (mesg, ext_messages[2]);
-	      strcat (mesg, err_message [error_code]);
-	      sprintf (aux, "The name of the layer is: %s", topo_msg.name);
-	      strcat (mesg, aux);
-	      return (mesg);
-
-          case KRERR_UNIT_MISSING:
-	      strcpy (mesg, ext_messages[2]);
-	      strcat (mesg, err_message [error_code]);
-	      sprintf (aux, "The missing unit is the %s unit.", topo_msg.name);
-	      strcat (mesg, aux);
-	      return (mesg);
-
-
-
-          case KRERR_FILE_OPEN:
-	      lineno = 0;
-
-          default:
-	      if (lineno != 0){               /*  file I/O error  */
-		  strcpy( mesg, ext_messages[1] );
-		  sprintf( aux, "Loading file failed at line %d : ", lineno );
-		  strcat( mesg, aux );
-		  strcat( mesg, err_message[ error_code ] );
-
-		  lineno = 0;
-		  return( mesg );
-	      } else {               /*  standard error  */
-		  strcpy( mesg, ext_messages[1] );
-		  strcat( mesg, err_message[ error_code ] );
-		  return( mesg );
-	      }
+        } else {               /*  standard error  */
+            strcpy( mesg, ext_messages[1] );
+            strcat( mesg, err_message[ error_code ] );
+            return( mesg );
         }
+    }
 }
 
 
@@ -5106,10 +4927,9 @@ char  *krui_error(int error_code)
   RETURNS  : Returns the float value of the error
   UPDATE   :
 ******************************************************************************/
-float krui_NA_Error(int currentPattern, int error_unit, int error, bool ave)
-{
+float krui_NA_Error(int currentPattern, int error_unit, int error, bool ave) {
 
-  return( kr_NA_Error(currentPattern, error_unit, error, ave) );
+    return( kr_NA_Error(currentPattern, error_unit, error, ave) );
 }
 
 
@@ -5137,8 +4957,7 @@ float krui_NA_Error(int currentPattern, int error_unit, int error, bool ave)
   RETURNS  :
   UPDATE   :
 ******************************************************************************/
-krui_err  krui_setSpecialNetworkType(int net_type)
-{
+krui_err  krui_setSpecialNetworkType(int net_type) {
 
     (void) kr_setSpecialNetworkType( net_type );
     return( KernelErrorCode );
@@ -5154,8 +4973,7 @@ krui_err  krui_setSpecialNetworkType(int net_type)
   RETURNS  : Returns the special topologic type of the current network, if set.
   UPDATE   :
 ******************************************************************************/
-int  krui_getSpecialNetworkType(void)
-{
+int  krui_getSpecialNetworkType(void) {
 
     return( kr_getSpecialNetworkType() );
 }
@@ -5168,8 +4986,7 @@ int  krui_getSpecialNetworkType(void)
   NOTES    :
   UPDATE   : 06.02.92
 ******************************************************************************/
-int krui_initInversion(void)
-{
+int krui_initInversion(void) {
 
     return( kr_initInversion() );
 }
@@ -5182,8 +4999,7 @@ int krui_initInversion(void)
   NOTES    :
   UPDATE   : 29.01.92
 ******************************************************************************/
-void  krui_inv_forwardPass(struct UnitList *inputs)
-{
+void  krui_inv_forwardPass(struct UnitList *inputs) {
 
     kr_inv_forwardPass(inputs);
 }
@@ -5198,8 +5014,7 @@ void  krui_inv_forwardPass(struct UnitList *inputs)
 *****************************************************************************/
 double krui_inv_backwardPass(float learn, float delta_max, int *err_units,
                              float ratio, struct UnitList *inputs,
-                             struct UnitList *outputs)
-{
+                             struct UnitList *outputs) {
 
     return(kr_inv_backwardPass(learn,delta_max,err_units,
                                ratio,inputs,outputs) ) ;
@@ -5224,10 +5039,9 @@ double krui_inv_backwardPass(float learn, float delta_max, int *err_units,
   RETURNS  :
   UPDATE   :
 ******************************************************************************/
-krui_err  krui_MasPar(int mode )
-{
+krui_err  krui_MasPar(int mode ) {
 
-  return( kr_initMasPar( mode ) );
+    return( kr_initMasPar( mode ) );
 }
 
 
@@ -5240,10 +5054,9 @@ krui_err  krui_MasPar(int mode )
   RETURNS  :
   UPDATE   :
 ******************************************************************************/
-krui_err  krui_getMasParStatus(void)
-{
+krui_err  krui_getMasParStatus(void) {
 
-  return( kr_getMasParStatus() );
+    return( kr_getMasParStatus() );
 }
 
 
@@ -5256,8 +5069,7 @@ krui_err  krui_getMasParStatus(void)
   RETURNS  :
   UPDATE   :
 ******************************************************************************/
-krui_err  krui_MasParBenchmark(int func_type,int cycles,float  *result )
-{
+krui_err  krui_MasParBenchmark(int func_type,int cycles,float  *result ) {
     float  parameterInArray[NO_OF_LEARN_PARAMS];
     float  *parameterOutArray;
     int  NoOfOutParams;
@@ -5265,8 +5077,8 @@ krui_err  krui_MasParBenchmark(int func_type,int cycles,float  *result )
 
     parameterInArray[0] = (float) cycles;
     (void) kr_callNetworkFunction( func_type | BENCH_FUNC,
-				   parameterInArray, 1, &parameterOutArray, 
-				   &NoOfOutParams, 0, 0 );
+                                   parameterInArray, 1, &parameterOutArray,
+                                   &NoOfOutParams, 0, 0 );
 
     *result = parameterOutArray[0];
     return( KernelErrorCode );
@@ -5285,8 +5097,7 @@ krui_err  krui_MasParBenchmark(int func_type,int cycles,float  *result )
   RETURNS  :
   UPDATE   :
 ******************************************************************************/
-void krui_kohonen_SetExtraParameter(int x)
-{
+void krui_kohonen_SetExtraParameter(int x) {
 
     kohonen_SetExtraParameter(x);
 }
@@ -5301,8 +5112,7 @@ void krui_kohonen_SetExtraParameter(int x)
   RETURNS  :
   UPDATE   :
 ******************************************************************************/
-void krui_spanning_tree(void)
-{
+void krui_spanning_tree(void) {
 
     spanning_tree();
 }
@@ -5317,8 +5127,7 @@ void krui_spanning_tree(void)
   RETURNS  :
   UPDATE   :
 ******************************************************************************/
-void krui_cc_updatePosOfSpecialUnits(void)
-{
+void krui_cc_updatePosOfSpecialUnits(void) {
 
     cc_updatePosOfSpecialUnits();
 }
@@ -5332,8 +5141,7 @@ void krui_cc_updatePosOfSpecialUnits(void)
   RETURNS  :
   UPDATE   :
 ******************************************************************************/
-krui_err krui_cc_deleteAllSpecialUnits(void)
-{
+krui_err krui_cc_deleteAllSpecialUnits(void) {
 
     return(cc_deleteAllSpecialUnits());
 }
@@ -5347,8 +5155,7 @@ krui_err krui_cc_deleteAllSpecialUnits(void)
   RETURNS  :
   UPDATE   :
 ******************************************************************************/
-int krui_getErrorCode(void)
-{
+int krui_getErrorCode(void) {
 
     return(krui_error_code);
 }
@@ -5362,8 +5169,7 @@ int krui_getErrorCode(void)
   RETURNS  :
   UPDATE   :
 ******************************************************************************/
-krui_err krui_setErrorHandler(void(* error_Handler )(int))
-{
+krui_err krui_setErrorHandler(void(* error_Handler )(int)) {
 
     krui_errorHandler = error_Handler;
     return(0);
@@ -5377,8 +5183,7 @@ krui_err krui_setErrorHandler(void(* error_Handler )(int))
   RETURNS  :
   UPDATE   :
 ******************************************************************************/
-void krui_execHandler(int error_code)
-{
+void krui_execHandler(int error_code) {
 
     if(krui_errorHandler != NULL)  ((*krui_errorHandler) (error_code));
 }

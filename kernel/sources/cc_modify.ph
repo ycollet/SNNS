@@ -17,6 +17,7 @@
     Copyright (c) 1996-1998  SNNS Group, WSI, Univ. Tuebingen, FRG
 
 ******************************************************************************/
+
 #ifndef _CC_MODIFY_DEFINED_
 #define  _CC_MODIFY_DEFINED_
 

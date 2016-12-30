@@ -1,15 +1,15 @@
 /*****************************************************************************
   FILE           : $Source: /projects/higgs1/SNNS/CVS/SNNS/kernel/sources/getcwd.h,v $
-  SHORTNAME      : 
+  SHORTNAME      :
   SNNS VERSION   : 4.2
 
   PURPOSE        : getcwd
-  NOTES          : 
+  NOTES          :
 
   AUTHOR         : Guenter Mamier
   DATE           : 2.3.98
 
-  CHANGED BY     : 
+  CHANGED BY     :
   RCS VERSION    : $Revision: 2.3 $
   LAST CHANGE    : $Date: 1998/03/03 17:54:27 $
 

@@ -17,6 +17,7 @@
     Copyright (c) 1996-1998  SNNS Group, WSI, Univ. Tuebingen, FRG
 
 ******************************************************************************/
+
 #ifndef _CC_DISPLAY_DEFINED_
 #define  _CC_DISPLAY_DEFINED_
 

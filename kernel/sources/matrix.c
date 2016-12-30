@@ -1,6 +1,6 @@
 /*****************************************************************************
   FILE           : $Source: /projects/higgs1/SNNS/CVS/SNNS/kernel/sources/matrix.c,v $
-  SHORTNAME      : 
+  SHORTNAME      :
   SNNS VERSION   : 4.2
 
   PURPOSE        : SNNS-Kernel standard matrix operations
@@ -40,30 +40,26 @@
 /* returns 0 if impossible, 1 otherwise					*/
 /************************************************************************/
 
-int	RbfAllocMatrix(int r, int c, RbfFloatMatrix *m)
-{
-	int	rc;			/* return code			*/
-	int	i;			/* index variable		*/
+int	RbfAllocMatrix(int r, int c, RbfFloatMatrix *m) {
+    int	rc;			/* return code			*/
+    int	i;			/* index variable		*/
 
-	m -> field = (float *) malloc(r * c * sizeof(float));
-	m -> r_pt = (float **) malloc(r * sizeof(float *));
-	if (m -> field == (float *) NULL ||
-	    m -> r_pt == (float **) NULL)
-	{
-		/* malloc was impossible, return 0 (reports error)	*/
-		rc = 0;
-	}
-	else
-	{
-		/* malloc successfull, initialize matrix:		*/
-		rc = 1;
-		m -> rows = r;
-		m -> columns = c;
-		for (i = 0; i<r; i++)
-			(m -> r_pt)[i] = &(m -> field)[i * c];
-	}
+    m -> field = (float *) malloc(r * c * sizeof(float));
+    m -> r_pt = (float **) malloc(r * sizeof(float *));
+    if (m -> field == (float *) NULL ||
+            m -> r_pt == (float **) NULL) {
+        /* malloc was impossible, return 0 (reports error)	*/
+        rc = 0;
+    } else {
+        /* malloc successfull, initialize matrix:		*/
+        rc = 1;
+        m -> rows = r;
+        m -> columns = c;
+        for (i = 0; i<r; i++)
+            (m -> r_pt)[i] = &(m -> field)[i * c];
+    }
 
-	return rc;			/* report status		*/
+    return rc;			/* report status		*/
 }
 
 /************************************************************************/
@@ -71,12 +67,11 @@ int	RbfAllocMatrix(int r, int c, RbfFloatMatrix *m)
 /* deallocate matrix m							*/
 /************************************************************************/
 
-void	RbfFreeMatrix(RbfFloatMatrix *m)
-{
-	free(m -> field);
-	free(m -> r_pt);
-	m -> rows = 0;
-	m -> columns = 0;
+void	RbfFreeMatrix(RbfFloatMatrix *m) {
+    free(m -> field);
+    free(m -> r_pt);
+    m -> rows = 0;
+    m -> columns = 0;
 }
 
 /************************************************************************/
@@ -84,18 +79,16 @@ void	RbfFreeMatrix(RbfFloatMatrix *m)
 /* set all elements of matrix m to value c				*/
 /************************************************************************/
 
-void RbfClearMatrix(RbfFloatMatrix *m, double c)
-{
-	int	count;
-	float	*ptoelement;
+void RbfClearMatrix(RbfFloatMatrix *m, double c) {
+    int	count;
+    float	*ptoelement;
 
-	ptoelement = m -> field;
-	count = (m -> rows)*(m -> columns);
+    ptoelement = m -> field;
+    count = (m -> rows)*(m -> columns);
 
-	while(count--)
-	{
-		*ptoelement++ = c;
-	}
+    while(count--) {
+        *ptoelement++ = c;
+    }
 }
 
 /************************************************************************/
@@ -103,17 +96,15 @@ void RbfClearMatrix(RbfFloatMatrix *m, double c)
 /*                                      				*/
 /************************************************************************/
 
-float RbfSquareOfNorm(RbfFloatMatrix *m)
-{
-  int	i, j;
-  float norm = 0.0;
+float RbfSquareOfNorm(RbfFloatMatrix *m) {
+    int	i, j;
+    float norm = 0.0;
 
-  for (i = m->rows -1 ; i>=0; i--)
-    {
-      for (j = m->columns -1 ; j>=0; j--)
-	norm += RbfMatrixGetValue(m, i ,j )*RbfMatrixGetValue(m, i, j);
+    for (i = m->rows -1 ; i>=0; i--) {
+        for (j = m->columns -1 ; j>=0; j--)
+            norm += RbfMatrixGetValue(m, i ,j )*RbfMatrixGetValue(m, i, j);
     };
-  return norm ;
+    return norm ;
 }
 
 /************************************************************************/
@@ -122,16 +113,14 @@ float RbfSquareOfNorm(RbfFloatMatrix *m)
 /* set all elements of matrix m to value 0, the diagonal to 1  		*/
 /************************************************************************/
 
-void RbfIdempotentMatrix(RbfFloatMatrix *m)
-{
-register int     i,j;
+void RbfIdempotentMatrix(RbfFloatMatrix *m) {
+    register int     i,j;
 
-for (i = m->rows -1 ; i>=0; i--)
-  {
-    for (j = m->columns -1 ; j>=0; j--)
-      RbfMatrixSetValue(m,  i, j, 0);
-    RbfMatrixSetValue(m, i, i, 1);
-  };
+    for (i = m->rows -1 ; i>=0; i--) {
+        for (j = m->columns -1 ; j>=0; j--)
+            RbfMatrixSetValue(m,  i, j, 0);
+        RbfMatrixSetValue(m, i, i, 1);
+    };
 
 }
 
@@ -140,15 +129,13 @@ for (i = m->rows -1 ; i>=0; i--)
 /* set all elements of matrix m to their value multiplied with a      	*/
 /************************************************************************/
 
-void RbfMulScalarMatrix(RbfFloatMatrix *m, float a)
-{
-register int     i,j;
+void RbfMulScalarMatrix(RbfFloatMatrix *m, float a) {
+    register int     i,j;
 
-for (i = m->rows -1 ; i>=0; i--)
-  {
-    for (j = m->columns -1 ; j>=0; j--)
-      RbfMatrixSetValue(m, i, j, a * RbfMatrixGetValue(m, i, j) );
-  };
+    for (i = m->rows -1 ; i>=0; i--) {
+        for (j = m->columns -1 ; j>=0; j--)
+            RbfMatrixSetValue(m, i, j, a * RbfMatrixGetValue(m, i, j) );
+    };
 
 }
 
@@ -158,28 +145,25 @@ for (i = m->rows -1 ; i>=0; i--)
 /* dimensions as m2							*/
 /************************************************************************/
 
-void RbfSetMatrix(RbfFloatMatrix *m1, RbfFloatMatrix *m2)
-{
-	int	count;
-	float	*ptofrom;
-	float	*ptoto;
+void RbfSetMatrix(RbfFloatMatrix *m1, RbfFloatMatrix *m2) {
+    int	count;
+    float	*ptofrom;
+    float	*ptoto;
 
 #ifdef	DEBUG_MODE
-	if (m1 -> rows != m2 -> rows ||
-	    m1 -> columns != m2 -> columns)
-	{
-		ErrMess("RbfSetMatrix: incompatible matrixes.\n");
-	}
+    if (m1 -> rows != m2 -> rows ||
+            m1 -> columns != m2 -> columns) {
+        ErrMess("RbfSetMatrix: incompatible matrixes.\n");
+    }
 #endif
 
-	count = (m2 -> rows)*(m2 -> columns);
-	ptofrom = m2 -> field;
-	ptoto = m1 -> field;
+    count = (m2 -> rows)*(m2 -> columns);
+    ptofrom = m2 -> field;
+    ptoto = m1 -> field;
 
-	while(count--)
-	{
-		*ptoto++ = *ptofrom++;
-	}
+    while(count--) {
+        *ptoto++ = *ptofrom++;
+    }
 }
 
 /************************************************************************/
@@ -189,23 +173,22 @@ void RbfSetMatrix(RbfFloatMatrix *m1, RbfFloatMatrix *m2)
 /* number of columns of m1 must be equal to number of rows of m2.	*/
 /************************************************************************/
 
-void	RbfTranspMatrix(RbfFloatMatrix *m1, RbfFloatMatrix *m2)
-{
-	
-	int		r;
-	int		c;
+void	RbfTranspMatrix(RbfFloatMatrix *m1, RbfFloatMatrix *m2) {
+
+    int		r;
+    int		c;
 
 #ifdef	DEBUG_MODE
-	if (m1 -> rows != m2 -> columns ||
-	    m1 -> columns != m2 -> rows)
-		ErrMess("RbfTranspMatrix: incompatible matrixes.\n"); 
+    if (m1 -> rows != m2 -> columns ||
+            m1 -> columns != m2 -> rows)
+        ErrMess("RbfTranspMatrix: incompatible matrixes.\n");
 #endif
 
-	/* make m1 to become m2 transposed				*/
+    /* make m1 to become m2 transposed				*/
 
-	for (r = 0; r < m2 -> rows; r++)
-	    for (c = 0; c < m2 -> columns; c++)
-		RbfMatrixSetValue(m1, c, r, RbfMatrixGetValue(m2, r, c));
+    for (r = 0; r < m2 -> rows; r++)
+        for (c = 0; c < m2 -> columns; c++)
+            RbfMatrixSetValue(m1, c, r, RbfMatrixGetValue(m2, r, c));
 }
 
 #ifdef RBF_MATRIX_LUDCOMP
@@ -220,90 +203,77 @@ void	RbfTranspMatrix(RbfFloatMatrix *m1, RbfFloatMatrix *m2)
 /* error								*/
 /************************************************************************/
 
-static int RbfLUDcmp(RbfFloatMatrix *m, int *indx)
-{
-	register float		sum;
-	register float		dum;
-	register float		big;
-	register int		i, j, k, imax;
-	register float		temp;
-	register float		*vv;
+static int RbfLUDcmp(RbfFloatMatrix *m, int *indx) {
+    register float		sum;
+    register float		dum;
+    register float		big;
+    register int		i, j, k, imax;
+    register float		temp;
+    register float		*vv;
 
-	if ((vv = (float *) malloc(m -> rows * sizeof(float))) == NULL)
-	{
-	    ErrMess("RbfLUDcmp: impossible to allocate helpmatrix.\n");
-	    return KRERR_INSUFFICIENT_MEM;
-	}
+    if ((vv = (float *) malloc(m -> rows * sizeof(float))) == NULL) {
+        ErrMess("RbfLUDcmp: impossible to allocate helpmatrix.\n");
+        return KRERR_INSUFFICIENT_MEM;
+    }
 
-	for (i = 0; i < m -> rows; i++)
-	{
-	    big = 0.0;
-	    for (j = 0; j < m -> rows; j++)
-	    {
-		if ((temp = fabs(RbfMatrixGetValue(m, i, j))) > big)
-		    big = temp;
-	    }
-	    if (big == 0.0)
-	    {
-		free(vv);
-		return 0;
-	    }
-	    vv[i] = 1.0/big;
-	}
-	for (j = 0; j < m -> rows; j++)
-	{
-	    for (i = 0; i < j; i++)
-	    {
-		sum = RbfMatrixGetValue(m, i, j);
-		for (k = 0; k < i; k++)
-		    sum -= RbfMatrixGetValue(m, i, k) *
-			   RbfMatrixGetValue(m, k, j);
-		RbfMatrixSetValue(m, i, j, sum);
-	    }
-	    big = 0.0;
-	    for (i = j; i < m -> rows; i++)
-	    {
-		sum = RbfMatrixGetValue(m, i, j);
-		for (k = 0; k < j; k++)
-		    sum -= RbfMatrixGetValue(m, i, k) *
-			   RbfMatrixGetValue(m, k, j);
-		RbfMatrixSetValue(m, i, j, sum);
-		if ((dum = vv[i] * fabs(sum)) >= big)
-		{
-		    big = dum;
-		    imax = i;
-		}
-	    }
-	    if (j != imax)
-	    {
-		for (k = 0; k < m -> rows; k++)
-		{
-		    dum = RbfMatrixGetValue(m, imax, k);
-		    RbfMatrixSetValue(m, imax, k, 
-			RbfMatrixGetValue(m, j, k));
-		    RbfMatrixSetValue(m, j, k, dum);
-		}
-		dum = vv[imax];
-		vv[imax] = vv[j];
-		vv[j] = dum;
-	    }
-	    indx[j] = imax;
-	    if (RbfMatrixGetValue(m, j, j) == 0.0)
-	    {
-		fprintf(stderr,"RbfLUDcmp: seems to be a singular matrix\n");
-		free(vv);
-		return 0;
-	    }
-	    if (j != (m -> rows - 1))
-	    {
-		dum = 1.0/RbfMatrixGetValue(m, j, j);
-		for (i = j+1; i < m -> rows; i++)
-		    RbfMatrixSetValue(m, i, j,
-			RbfMatrixGetValue(m, i, j) * dum);
-	    }
-	}
-	free(vv);
-	return 1;
+    for (i = 0; i < m -> rows; i++) {
+        big = 0.0;
+        for (j = 0; j < m -> rows; j++) {
+            if ((temp = fabs(RbfMatrixGetValue(m, i, j))) > big)
+                big = temp;
+        }
+        if (big == 0.0) {
+            free(vv);
+            return 0;
+        }
+        vv[i] = 1.0/big;
+    }
+    for (j = 0; j < m -> rows; j++) {
+        for (i = 0; i < j; i++) {
+            sum = RbfMatrixGetValue(m, i, j);
+            for (k = 0; k < i; k++)
+                sum -= RbfMatrixGetValue(m, i, k) *
+                       RbfMatrixGetValue(m, k, j);
+            RbfMatrixSetValue(m, i, j, sum);
+        }
+        big = 0.0;
+        for (i = j; i < m -> rows; i++) {
+            sum = RbfMatrixGetValue(m, i, j);
+            for (k = 0; k < j; k++)
+                sum -= RbfMatrixGetValue(m, i, k) *
+                       RbfMatrixGetValue(m, k, j);
+            RbfMatrixSetValue(m, i, j, sum);
+            if ((dum = vv[i] * fabs(sum)) >= big) {
+                big = dum;
+                imax = i;
+            }
+        }
+        if (j != imax) {
+            for (k = 0; k < m -> rows; k++) {
+                dum = RbfMatrixGetValue(m, imax, k);
+                RbfMatrixSetValue(m, imax, k,
+                                  RbfMatrixGetValue(m, j, k));
+                RbfMatrixSetValue(m, j, k, dum);
+            }
+            dum = vv[imax];
+            vv[imax] = vv[j];
+            vv[j] = dum;
+        }
+        indx[j] = imax;
+        if (RbfMatrixGetValue(m, j, j) == 0.0) {
+            fprintf(stderr,"RbfLUDcmp: seems to be a singular matrix\n");
+            free(vv);
+            return 0;
+        }
+        if (j != (m -> rows - 1)) {
+            dum = 1.0/RbfMatrixGetValue(m, j, j);
+            for (i = j+1; i < m -> rows; i++)
+                RbfMatrixSetValue(m, i, j,
+                                  RbfMatrixGetValue(m, i, j) * dum);
+        }
+    }
+    free(vv);
+    return 1;
 }
 
 /************************************************************************/
@@ -312,33 +282,28 @@ static int RbfLUDcmp(RbfFloatMatrix *m, int *indx)
 /* the algorithm RbfLUDcmp. b is replaced by the solution x.		*/
 /************************************************************************/
 
-static void RbfLUBksb(RbfFloatMatrix *m, int *indx, float *b)
-{
-	register float	sum;
-	register int	i, ii=0, ip, j;
+static void RbfLUBksb(RbfFloatMatrix *m, int *indx, float *b) {
+    register float	sum;
+    register int	i, ii=0, ip, j;
 
-	for (i = 0; i < m -> rows; i++)
-	{
-	    ip = indx[i];
-	    sum = b[ip];
-	    b[ip] = b[i];
-	    if (ii)
-	    {
-		for (j = ii-1; j < i; j++)
-		    sum -= RbfMatrixGetValue(m, i, j) * b[j];
-	    }
-	    else if (sum != 0.0)
-		ii = i+1;
-	    b[i] = sum;
-	}
-	for (i = (m -> rows - 1); i >= 0; i--)
-	{
-	    sum = b[i];
-	    for (j = i+1; j < m -> rows; j++)
-		sum -= RbfMatrixGetValue(m, i, j) * b[j];
-	    b[i] = sum / RbfMatrixGetValue(m, i, i);
-	}
-	
+    for (i = 0; i < m -> rows; i++) {
+        ip = indx[i];
+        sum = b[ip];
+        b[ip] = b[i];
+        if (ii) {
+            for (j = ii-1; j < i; j++)
+                sum -= RbfMatrixGetValue(m, i, j) * b[j];
+        } else if (sum != 0.0)
+            ii = i+1;
+        b[i] = sum;
+    }
+    for (i = (m -> rows - 1); i >= 0; i--) {
+        sum = b[i];
+        for (j = i+1; j < m -> rows; j++)
+            sum -= RbfMatrixGetValue(m, i, j) * b[j];
+        b[i] = sum / RbfMatrixGetValue(m, i, i);
+    }
+
 }
 
 /************************************************************************/
@@ -350,51 +315,47 @@ static void RbfLUBksb(RbfFloatMatrix *m, int *indx, float *b)
 /* singulary! (Algorithm taken from "Numerical Recipts")		*/
 /************************************************************************/
 
-int	RbfInvMatrix(RbfFloatMatrix *m)
-{
-	register 	int	i, j;
-	register	int	*indx;
-	register	float	*b;
-	register	int	tmp_err;
-	RbfFloatMatrix	help;
+int	RbfInvMatrix(RbfFloatMatrix *m) {
+    register 	int	i, j;
+    register	int	*indx;
+    register	float	*b;
+    register	int	tmp_err;
+    RbfFloatMatrix	help;
 
 #ifdef	DEBUG_MODE
-	if (m -> rows != m -> columns)
-	    ErrMess("RbfInvMatrix: matrix not of form N x N.\n");
+    if (m -> rows != m -> columns)
+        ErrMess("RbfInvMatrix: matrix not of form N x N.\n");
 #endif
 
-	if (!RbfAllocMatrix(m -> rows, m -> rows, &help) ||
-	    (indx = (int *) malloc(m -> rows * sizeof(int))) == NULL ||
-	    (b = (float *) malloc(m -> rows * sizeof(float))) == NULL)
-	{
-	    ErrMess("RbfInvMatrix: impossible to allocate helpmatrix.\n");
-	    return KRERR_INSUFFICIENT_MEM;
-	}
+    if (!RbfAllocMatrix(m -> rows, m -> rows, &help) ||
+            (indx = (int *) malloc(m -> rows * sizeof(int))) == NULL ||
+            (b = (float *) malloc(m -> rows * sizeof(float))) == NULL) {
+        ErrMess("RbfInvMatrix: impossible to allocate helpmatrix.\n");
+        return KRERR_INSUFFICIENT_MEM;
+    }
 
-	RbfSetMatrix(&help, m);
-	if ((tmp_err = RbfLUDcmp(&help, indx)) != 1)
-	{
-	    free(b);
-	    free(indx);
-	    RbfFreeMatrix(&help);
-	    return tmp_err;
-	}
+    RbfSetMatrix(&help, m);
+    if ((tmp_err = RbfLUDcmp(&help, indx)) != 1) {
+        free(b);
+        free(indx);
+        RbfFreeMatrix(&help);
+        return tmp_err;
+    }
 
-	for (j = 0; j < m -> rows; j++)
-	{
-	    for (i = 0; i < m -> rows; i++)
-		b[i] = 0.0;
-	    b[j] = 1.0;
-	    RbfLUBksb(&help, indx, b);
-	    for (i = 0; i < m -> rows; i++)
-		RbfMatrixSetValue(m, i, j, b[i]);
-	}
+    for (j = 0; j < m -> rows; j++) {
+        for (i = 0; i < m -> rows; i++)
+            b[i] = 0.0;
+        b[j] = 1.0;
+        RbfLUBksb(&help, indx, b);
+        for (i = 0; i < m -> rows; i++)
+            RbfMatrixSetValue(m, i, j, b[i]);
+    }
 
-	free(b);
-	free(indx);
-	RbfFreeMatrix(&help);
+    free(b);
+    free(indx);
+    RbfFreeMatrix(&help);
 
-	return 1;
+    return 1;
 }
 
 #else
@@ -411,117 +372,106 @@ int	RbfInvMatrix(RbfFloatMatrix *m)
 int	RbfInvMatrix(m)
 RbfFloatMatrix	*m;
 {
-	RbfFloatMatrix	help;
-	int		i, j, r, k, n;
-	float		max, hr, hi;
+    RbfFloatMatrix	help;
+    int		i, j, r, k, n;
+    float		max, hr, hi;
 
 #ifdef	DEBUG_MODE
-	if (m -> rows != m -> columns)
-	    ErrMess("RbfInvMatrix: matrix not of form N x N.\n");
+    if (m -> rows != m -> columns)
+        ErrMess("RbfInvMatrix: matrix not of form N x N.\n");
 #endif
 
-	n = m -> rows;			/* n = dimension of matrix	*/
+    n = m -> rows;			/* n = dimension of matrix	*/
 
-	/* allocate helpmatrix: 0. row: field p[N] of algorithm		*/
-	/*			1. row: field hv[N] of algorithm	*/
+    /* allocate helpmatrix: 0. row: field p[N] of algorithm		*/
+    /*			1. row: field hv[N] of algorithm	*/
 
-	if (!RbfAllocMatrix(2, n, &help))
-	{
-	    ErrMess("RbfInvMatrix: impossible to allocate helpmatrix.\n");
-	    return KRERR_INSUFFICIENT_MEM;
-	}
+    if (!RbfAllocMatrix(2, n, &help)) {
+        ErrMess("RbfInvMatrix: impossible to allocate helpmatrix.\n");
+        return KRERR_INSUFFICIENT_MEM;
+    }
 
-	/* initialize permutation field:				*/
- 
-	for (j = 0; j < n; j++)
-	    RbfMatrixSetValue(&help, 0, j, (float) j);
+    /* initialize permutation field:				*/
 
-	/* invert matrix:						*/
-	/* notation in comments: m[r,c] means element at row r column c */
+    for (j = 0; j < n; j++)
+        RbfMatrixSetValue(&help, 0, j, (float) j);
 
-	for (j = 0; j < n; j++)
-	{
-	    /* looking for pivot:					*/
-	    /* find row r, where r >= j and m[r,j] is maximal		*/
+    /* invert matrix:						*/
+    /* notation in comments: m[r,c] means element at row r column c */
 
-	    max = fabs(RbfMatrixGetValue(m, j, j));
-	    r = j;
-	    for (i = j+1; i < n; i++)
-	    {
-		hi = fabs(RbfMatrixGetValue(m, j, i));
-		if (hi > max)
-		{
-		    max = hi;
-		    r = i;
-		}
-	    }
+    for (j = 0; j < n; j++) {
+        /* looking for pivot:					*/
+        /* find row r, where r >= j and m[r,j] is maximal		*/
 
-	    /* test if matrix is singulary:				*/
-	    /* if true, then return directly and report errorcode	*/
+        max = fabs(RbfMatrixGetValue(m, j, j));
+        r = j;
+        for (i = j+1; i < n; i++) {
+            hi = fabs(RbfMatrixGetValue(m, j, i));
+            if (hi > max) {
+                max = hi;
+                r = i;
+            }
+        }
 
-	    if (max == 0.0)
-	    {
-		RbfFreeMatrix(&help);
-		return 0;
-	    }
+        /* test if matrix is singulary:				*/
+        /* if true, then return directly and report errorcode	*/
 
-	    /* if r != j (r > j) then switch row r with row j and mark	*/
-	    /* this in helpmatrix:					*/
+        if (max == 0.0) {
+            RbfFreeMatrix(&help);
+            return 0;
+        }
 
-	    if (r > j)
-	    {
-		for (k = 0; k < n; k++)
-		{
-		    hr = RbfMatrixGetValue(m, j, k);
-		    RbfMatrixSetValue(m, j, k, RbfMatrixGetValue(m, r, k));
-		    RbfMatrixSetValue(m, r, k, hr);
-		}
-		hi = RbfMatrixGetValue(&help, 0, j);
-		RbfMatrixSetValue(&help, 0, j, RbfMatrixGetValue(&help, 0, r));
-		RbfMatrixSetValue(&help, 0, r, hi);
-	    }
+        /* if r != j (r > j) then switch row r with row j and mark	*/
+        /* this in helpmatrix:					*/
 
-	    /* do the transformation:					*/
+        if (r > j) {
+            for (k = 0; k < n; k++) {
+                hr = RbfMatrixGetValue(m, j, k);
+                RbfMatrixSetValue(m, j, k, RbfMatrixGetValue(m, r, k));
+                RbfMatrixSetValue(m, r, k, hr);
+            }
+            hi = RbfMatrixGetValue(&help, 0, j);
+            RbfMatrixSetValue(&help, 0, j, RbfMatrixGetValue(&help, 0, r));
+            RbfMatrixSetValue(&help, 0, r, hi);
+        }
 
-	    hr = 1.0 / RbfMatrixGetValue(m, j, j);
-	    for (i = 0; i < n; i++)
-	    {
-		RbfMatrixSetValue(m, i, j, hr * RbfMatrixGetValue(m, i, j));
-	    }
-	    RbfMatrixSetValue(m, j, j, hr);
-	    for (k = 0; k < n; k++)
-		if (k != j)
-		{
-		    for (i = 0; i < n; i++)
-			if (i != j)
-			{
-				RbfMatrixSetValue(m, i, k,
-				    RbfMatrixGetValue(m, i, k) -
-				    RbfMatrixGetValue(m, i, j) *
-				    RbfMatrixGetValue(m, j, k));
-			}
-		    RbfMatrixSetValue(m, j, k, 
-			-hr * RbfMatrixGetValue(m, j, k));
-		}
-	}
+        /* do the transformation:					*/
 
-	/* now switch back the columns:					*/
+        hr = 1.0 / RbfMatrixGetValue(m, j, j);
+        for (i = 0; i < n; i++) {
+            RbfMatrixSetValue(m, i, j, hr * RbfMatrixGetValue(m, i, j));
+        }
+        RbfMatrixSetValue(m, j, j, hr);
+        for (k = 0; k < n; k++)
+            if (k != j) {
+                for (i = 0; i < n; i++)
+                    if (i != j) {
+                        RbfMatrixSetValue(m, i, k,
+                                          RbfMatrixGetValue(m, i, k) -
+                                          RbfMatrixGetValue(m, i, j) *
+                                          RbfMatrixGetValue(m, j, k));
+                    }
+                RbfMatrixSetValue(m, j, k,
+                                  -hr * RbfMatrixGetValue(m, j, k));
+            }
+    }
 
-	for (i = 0; i < n; i++)
-	{
-	    for (k = 0; k < n; k++)
-		RbfMatrixSetValue(&help, 1, 
-		    (int) RbfMatrixGetValue(&help, 0, k),
-		    RbfMatrixGetValue(m, i, k));
-	    for (k = 0; k < n; k++)
-		RbfMatrixSetValue(m, i, k,
-		    RbfMatrixGetValue(&help, 1, k));
-	}
+    /* now switch back the columns:					*/
 
-	/* report success:						*/
+    for (i = 0; i < n; i++) {
+        for (k = 0; k < n; k++)
+            RbfMatrixSetValue(&help, 1,
+                              (int) RbfMatrixGetValue(&help, 0, k),
+                              RbfMatrixGetValue(m, i, k));
+        for (k = 0; k < n; k++)
+            RbfMatrixSetValue(m, i, k,
+                              RbfMatrixGetValue(&help, 1, k));
+    }
 
-	RbfFreeMatrix(&help);
-	return 1;
+    /* report success:						*/
+
+    RbfFreeMatrix(&help);
+    return 1;
 }
 
 #endif
@@ -532,37 +482,32 @@ RbfFloatMatrix	*m;
 /* rows and columns of m1.                                              */
 /************************************************************************/
 
-void	RbfMulTranspMatrix(RbfFloatMatrix *m1, RbfFloatMatrix *m2)
-{
+void	RbfMulTranspMatrix(RbfFloatMatrix *m1, RbfFloatMatrix *m2) {
     int	dest_c;
     int	dest_r;
     int	count;
     register float scalar_product;
 
 #ifdef	DEBUG_MODE
-	if (m2 -> rows != m1 -> rows ||
-	    m2 -> rows != m1 -> columns)
-	{
-		ErrMess("RbfMulTranspMatrix: incompatible matrixes.\n");
-	}
+    if (m2 -> rows != m1 -> rows ||
+            m2 -> rows != m1 -> columns) {
+        ErrMess("RbfMulTranspMatrix: incompatible matrixes.\n");
+    }
 #endif
 
     /* notice that m2*m2T is a symmetric matrix!                        */
 
-    for (dest_r = 0; dest_r < m1 -> rows; dest_r++)
-    {
-	for (dest_c = dest_r; dest_c < m1 -> rows; dest_c++)
-	{
-	    scalar_product = 0.0;
-	    for (count = 0; count < m2 -> columns; count++)
-	    {
-		scalar_product += RbfMatrixGetValue(m2, dest_r, count) *
-			          RbfMatrixGetValue(m2, dest_c, count);
-	    }
-	    RbfMatrixSetValue(m1, dest_r, dest_c, scalar_product);
-	    if (dest_r != dest_c)
-		RbfMatrixSetValue(m1, dest_c, dest_r, scalar_product);
-	}
+    for (dest_r = 0; dest_r < m1 -> rows; dest_r++) {
+        for (dest_c = dest_r; dest_c < m1 -> rows; dest_c++) {
+            scalar_product = 0.0;
+            for (count = 0; count < m2 -> columns; count++) {
+                scalar_product += RbfMatrixGetValue(m2, dest_r, count) *
+                                  RbfMatrixGetValue(m2, dest_c, count);
+            }
+            RbfMatrixSetValue(m1, dest_r, dest_c, scalar_product);
+            if (dest_r != dest_c)
+                RbfMatrixSetValue(m1, dest_c, dest_r, scalar_product);
+        }
     }
 }
 
@@ -573,37 +518,33 @@ void	RbfMulTranspMatrix(RbfFloatMatrix *m1, RbfFloatMatrix *m2)
 /* c = number of columns of m3.						*/
 /************************************************************************/
 
-void	RbfMulMatrix(RbfFloatMatrix *m1, RbfFloatMatrix *m2, RbfFloatMatrix *m3)
-{
-	int	dest_c;
-	int	dest_r;
-	int	count;
+void	RbfMulMatrix(RbfFloatMatrix *m1, RbfFloatMatrix *m2, RbfFloatMatrix *m3) {
+    int	dest_c;
+    int	dest_r;
+    int	count;
 
 #ifdef	DEBUG_MODE
-	if (m1 -> rows != m2 -> rows ||
-	    m1 -> columns != m3 -> columns ||
-	    m2 -> columns != m3 -> rows)
-	{
-		ErrMess("RbfMulMatrix: incompatible matrixes.\n");
-	}
+    if (m1 -> rows != m2 -> rows ||
+            m1 -> columns != m3 -> columns ||
+            m2 -> columns != m3 -> rows) {
+        ErrMess("RbfMulMatrix: incompatible matrixes.\n");
+    }
 #endif
 
-	/* This seems to be a strange way to multiply two matrices but  */
-	/* it prevents the swapper from trashing:                       */
+    /* This seems to be a strange way to multiply two matrices but  */
+    /* it prevents the swapper from trashing:                       */
 
-	RbfClearMatrix(m1, 0.0);
+    RbfClearMatrix(m1, 0.0);
 
-	for (dest_r = 0; dest_r < m1 -> rows; dest_r++)
-	{
-	    for (count = 0; count < m2 -> columns; count++)
-	    {
-		for (dest_c = 0; dest_c < m1 -> columns; dest_c++)
-		    RbfMatrixSetValue(m1, dest_r, dest_c,
-			    RbfMatrixGetValue(m2, dest_r, count) *
-			    RbfMatrixGetValue(m3, count, dest_c) +
-			    RbfMatrixGetValue(m1, dest_r, dest_c));
-	    }
-	}
+    for (dest_r = 0; dest_r < m1 -> rows; dest_r++) {
+        for (count = 0; count < m2 -> columns; count++) {
+            for (dest_c = 0; dest_c < m1 -> columns; dest_c++)
+                RbfMatrixSetValue(m1, dest_r, dest_c,
+                                  RbfMatrixGetValue(m2, dest_r, count) *
+                                  RbfMatrixGetValue(m3, count, dest_c) +
+                                  RbfMatrixGetValue(m1, dest_r, dest_c));
+        }
+    }
 }
 
 /************************************************************************/
@@ -611,27 +552,25 @@ void	RbfMulMatrix(RbfFloatMatrix *m1, RbfFloatMatrix *m2, RbfFloatMatrix *m3)
 /* number of rows of m1, m2 and m3 must be equal.			*/
 /************************************************************************/
 
-void	RbfAddMatrix(RbfFloatMatrix *m1, RbfFloatMatrix *m2, RbfFloatMatrix *m3)
-{
-	int	dest_c;
-	int	dest_r;
+void	RbfAddMatrix(RbfFloatMatrix *m1, RbfFloatMatrix *m2, RbfFloatMatrix *m3) {
+    int	dest_c;
+    int	dest_r;
 
 #ifdef	DEBUG_MODE
-	if (!(m1 -> rows == m2 -> rows &&
-	      m2 -> rows == m3 -> rows) ||
-	    !(m1 -> columns == m2 -> columns &&
-	      m2 -> columns == m3 -> columns)
-	   )
-	{
-		ErrMess("RbfAddMatrix: incompatible matrixes.\n");
-	}
+    if (!(m1 -> rows == m2 -> rows &&
+            m2 -> rows == m3 -> rows) ||
+            !(m1 -> columns == m2 -> columns &&
+              m2 -> columns == m3 -> columns)
+       ) {
+        ErrMess("RbfAddMatrix: incompatible matrixes.\n");
+    }
 #endif
 
-	for (dest_r = 0; dest_r < m1 -> rows; dest_r++)
-	    for (dest_c = 0; dest_c < m1 -> columns; dest_c++)
-		RbfMatrixSetValue(m1, dest_r, dest_c,
-		    RbfMatrixGetValue(m2, dest_r, dest_c) +
-		    RbfMatrixGetValue(m3, dest_r, dest_c));
+    for (dest_r = 0; dest_r < m1 -> rows; dest_r++)
+        for (dest_c = 0; dest_c < m1 -> columns; dest_c++)
+            RbfMatrixSetValue(m1, dest_r, dest_c,
+                              RbfMatrixGetValue(m2, dest_r, dest_c) +
+                              RbfMatrixGetValue(m3, dest_r, dest_c));
 }
 
 /************************************************************************/
@@ -639,17 +578,15 @@ void	RbfAddMatrix(RbfFloatMatrix *m1, RbfFloatMatrix *m2, RbfFloatMatrix *m3)
 /* print out matrix m to stream (file) s				*/
 /************************************************************************/
 
-void	RbfPrintMatrix(RbfFloatMatrix *m, FILE *s)
-{
-	int	r;
-	int	c;
+void	RbfPrintMatrix(RbfFloatMatrix *m, FILE *s) {
+    int	r;
+    int	c;
 
-	for (r = 0; r < m -> rows; r++)
-	{
-		for (c = 0; c < m -> columns; c++)
-			fprintf(s, "%.4e ",RbfMatrixGetValue(m, r, c));
-		fprintf(s,"\n");
-	}
+    for (r = 0; r < m -> rows; r++) {
+        for (c = 0; c < m -> columns; c++)
+            fprintf(s, "%.4e ",RbfMatrixGetValue(m, r, c));
+        fprintf(s,"\n");
+    }
 }
 
 /************************************************************************/
@@ -657,9 +594,8 @@ void	RbfPrintMatrix(RbfFloatMatrix *m, FILE *s)
 /* print message to stderr			                        */
 /************************************************************************/
 
-void    ErrMess(char *message)
-{
-        fprintf(stderr, "%s", message);
+void    ErrMess(char *message) {
+    fprintf(stderr, "%s", message);
 }
 
 /************************************************************************/

@@ -1,24 +1,26 @@
 /*****************************************************************************
   FILE           : $Source: /projects/higgs1/SNNS/CVS/SNNS/kernel/sources/getcwd.c,v $
-  SHORTNAME      : 
+  SHORTNAME      :
   SNNS VERSION   : 4.2
 
   PURPOSE        : getcwd
-  NOTES          : 
+  NOTES          :
 
   AUTHOR         : Guenter Mamier
   DATE           : 2.3.98
 
-  CHANGED BY     : 
+  CHANGED BY     :
   RCS VERSION    : $Revision: 2.3 $
   LAST CHANGE    : $Date: 1998/03/03 15:59:56 $
 
     Copyright (c) 1996-1998  SNNS Group, WSI, Univ. Tuebingen, FRG
 
 ******************************************************************************/
+
 #include <config.h>
 
-#if ! defined(HAVE_GETCWD) || HAVE_GETCWD == 0
+#if !defined(HAVE_GETCWD)
+
 #include <stdlib.h>
 
 /* unfortunately there is no easy way to locate the current directory
@@ -28,13 +30,12 @@
 
 #define _DEFAULT_CWD_NAME ""
 
-char *getcwd(char *buf, size_t size)
-{
+char *getcwd(char *buf, size_t size) {
     if (buf == NULL)
-	buf = malloc(size);
+        buf = malloc(size);
 
     if (buf != NULL)
-	strncpy(buf, _DEFAULT_CWD_NAME, size);
+        strncpy(buf, _DEFAULT_CWD_NAME, size);
 
     return buf;
 }

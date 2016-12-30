@@ -17,6 +17,7 @@
     Copyright (c) 1996-1998  SNNS Group, WSI, Univ. Tuebingen, FRG
 
 ******************************************************************************/
+
 #ifndef _CC_LEARN_DEFINED_
 #define  _CC_LEARN_DEFINED_
 
@@ -67,9 +68,6 @@ krui_err cc_propagateSpecialOnlineCase(int start,int end,int n,
 
  krui_err cc_actualizeLayerlist(struct Unit* UnitPtr,int LayerNo);
 
-
-
 /* end privat definition section */
-
 
 #endif /* _CC_LEARN_DEFINED_ */

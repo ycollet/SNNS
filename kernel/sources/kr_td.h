@@ -1,6 +1,6 @@
 /*****************************************************************************
   FILE           : $Source: /projects/higgs1/SNNS/CVS/SNNS/kernel/sources/kr_td.h,v $
-  SHORTNAME      : 
+  SHORTNAME      :
   SNNS VERSION   : 4.2
 
   PURPOSE        : Time delay learning and propagation functions
@@ -23,20 +23,20 @@
 
 extern void  propagateTDNetForward(int pattern_no, int sub_pat_no);
 
-extern krui_err LEARN_TDbackprop(int start_pattern, int end_pattern, 
-				 float parameterInArray[], int NoOfInParams,
-				 float * *parameterOutArray, 
-				 int *NoOfOutParams );
+extern krui_err LEARN_TDbackprop(int start_pattern, int end_pattern,
+                                 float parameterInArray[], int NoOfInParams,
+                                 float * *parameterOutArray,
+                                 int *NoOfOutParams );
 
-extern krui_err LEARN_TDBP_McClelland(int start_pattern, int end_pattern, 
-				      float parameterInArray[], 
-				      int NoOfInParams,
-				      float * *parameterOutArray, 
-				      int *NoOfOutParams);
+extern krui_err LEARN_TDBP_McClelland(int start_pattern, int end_pattern,
+                                      float parameterInArray[],
+                                      int NoOfInParams,
+                                      float * *parameterOutArray,
+                                      int *NoOfOutParams);
 
-extern krui_err TEST_TDbackprop(int start_pattern, int end_pattern, 
-				 float parameterInArray[], int NoOfInParams,
-				 float * *parameterOutArray, 
-				 int *NoOfOutParams );
- 
-#endif 
+extern krui_err TEST_TDbackprop(int start_pattern, int end_pattern,
+                                float parameterInArray[], int NoOfInParams,
+                                float * *parameterOutArray,
+                                int *NoOfOutParams );
+
+#endif

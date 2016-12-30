@@ -1,6 +1,6 @@
 /*****************************************************************************
   FILE           : $Source: /projects/higgs1/SNNS/CVS/SNNS/kernel/sources/cc_learn.h,v $
-  SHORTNAME      : 
+  SHORTNAME      :
   SNNS VERSION   : 4.2
 
   PURPOSE        : Header file of correspondent '.c' file
@@ -17,19 +17,20 @@
     Copyright (c) 1996-1998  SNNS Group, WSI, Univ. Tuebingen, FRG
 
 ******************************************************************************/
+
 #ifndef _CC_LEARN_DEFINED_
 #define  _CC_LEARN_DEFINED_
 
 /* begin global definition section */
 extern krui_err LEARN_CC(int StartPattern, int EndPattern,
-                      float *ParameterInArray, int NoOfInParams,
-                      float **ParameterOutArray, int *NoOfOutParams);
+                         float *ParameterInArray, int NoOfInParams,
+                         float **ParameterOutArray, int *NoOfOutParams);
 extern krui_err LEARN_CasCor(int StartPattern, int EndPattern,
-                      float *ParameterInArray, int NoOfInParams,
-                      float **ParameterOutArray, int *NoOfOutParams);
+                             float *ParameterInArray, int NoOfInParams,
+                             float **ParameterOutArray, int *NoOfOutParams);
 extern krui_err TEST_CasCor(int start_pattern, int end_pattern,
-			float *parameterInArray, int NoOfInParams,
-			float **parameterOutArray, int *NoOfOutParams);
+                            float *parameterInArray, int NoOfInParams,
+                            float **parameterOutArray, int *NoOfOutParams);
 
 /* end   global definition section */
 

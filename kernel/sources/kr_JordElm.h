@@ -9,7 +9,7 @@
   AUTHOR         : Tobias Soyez
   DATE           : 09.11.1993
 
-  CHANGED BY     : 
+  CHANGED BY     :
   RCS VERSION    : $Revision: 2.6 $
   LAST CHANGE    : $Date: 1998/02/25 15:26:25 $
 
@@ -25,7 +25,7 @@
 
 extern krui_err kr_topoCheckJE (void) ;
 extern krui_err kr_topoSortJE  (void) ;
- 
+
 
 #endif
 

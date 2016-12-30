@@ -17,6 +17,7 @@
     Copyright (c) 1996-1998  SNNS Group, WSI, Univ. Tuebingen, FRG
 
 ******************************************************************************/
+
 #ifndef _ART_UI_DEFINED_
 #define  _ART_UI_DEFINED_
 
@@ -35,8 +36,6 @@ krui_err artui_getClassifiedStatus (
                                     art_cl_status *status
                                    );
 
-
-
 /* funcname: artui_getClassNo ()
    Purpose : Returns the index of the F2-winner-unit
    in-par  : none
@@ -46,8 +45,6 @@ krui_err artui_getClassifiedStatus (
 krui_err artui_getClassNo (
                            int *class_no
                           );
-
-
 
 /* funcname: artui_getN ()
    Purpose : Returns the number of F1-units in an ART1 or ART2 network
@@ -59,9 +56,6 @@ krui_err artui_getN (
                      int *N
                     );
 
-
-
-
 /* funcname: artui_getM ()
    Purpose : Returns the number of F2-units in an ART1 or ART2 network
    in-par  : none
@@ -71,9 +65,6 @@ krui_err artui_getN (
 krui_err artui_getM (
                      int *M
                     );
-
-
-
 
 /* funcname: artui_getNa ()
    Purpose : Returns the number of F1a-units in an ARTMAP network
@@ -85,9 +76,6 @@ krui_err artui_getNa (
                      int *Na
                     );
 
-
-
-
 /* funcname: artui_getNb ()
    Purpose : Returns the number of F1b-units in an ARTMAP network
    in-par  : none
@@ -97,9 +85,6 @@ krui_err artui_getNa (
 krui_err artui_getNb (
                      int *Nb
                     );
-
-
-
 
 /* funcname: artui_getMa ()
    Purpose : Returns the number of F2a-units in an ARTMAP network
@@ -111,9 +96,6 @@ krui_err artui_getMa (
                      int *Ma
                     );
 
-
-
-
 /* funcname: artui_getMb ()
    Purpose : Returns the number of F2b-units in an ARTMAP network
    in-par  : none
@@ -124,7 +106,6 @@ krui_err artui_getMb (
                      int *Mb
                     );
 
-
 /* end global definition section */
 
 /* begin private definition section */
@@ -132,7 +113,3 @@ krui_err artui_getMb (
 /* end private definition section */
 
 #endif 
-
-
-
-

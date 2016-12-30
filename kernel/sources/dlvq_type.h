@@ -1,15 +1,15 @@
 /*****************************************************************************
   FILE           : $Source: /projects/higgs1/SNNS/CVS/SNNS/kernel/sources/dlvq_type.h,v $
-  SHORTNAME      : 
+  SHORTNAME      :
   SNNS VERSION   : 4.2
 
   PURPOSE        : Header file of correspondent '.c' file
   NOTES          :
 
-  AUTHOR         : Michael Schmalzl 
+  AUTHOR         : Michael Schmalzl
   DATE           : 5.2.93
 
-  CHANGED BY     : 
+  CHANGED BY     :
   RCS VERSION    : $Revision: 2.6 $
   LAST CHANGE    : $Date: 1998/02/25 15:26:09 $
 
@@ -19,9 +19,8 @@
 ******************************************************************************/
 
 typedef struct MIX_UP {
-           int counter;
-           double *link;
-   } MIX_UP_TYPE;
+    int counter;
+    double *link;
+} MIX_UP_TYPE;
 
 typedef int UNIT_NO;
-

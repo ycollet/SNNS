@@ -17,6 +17,7 @@
     Copyright (c) 1996-1998  SNNS Group, WSI, Univ. Tuebingen, FRG
 
 ******************************************************************************/
+
 #ifndef _ARTTR_F_DEFINED_
 #define  _ARTTR_F_DEFINED_
 
@@ -36,7 +37,6 @@ FlintType  ACT_ARTMAP_NCa  (struct Unit *unit_ptr);
 FlintType  ACT_ARTMAP_NCb  (struct Unit *unit_ptr);
 FlintType  ACT_ARTMAP_DRho (struct Unit *unit_ptr);
 
-
 /* end global definition section */
 
 /* begin private definition section */
@@ -44,3 +44,4 @@ FlintType  ACT_ARTMAP_DRho (struct Unit *unit_ptr);
 /* end private definition section */
 
 #endif 
+x

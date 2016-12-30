@@ -3,13 +3,13 @@
   SHORTNAME      : pat_parse
   SNNS VERSION   : 4.2
 
-  PURPOSE        : parser for new pattern format; bison format 
+  PURPOSE        : parser for new pattern format; bison format
   NOTES          : impossible to use with yacc
 
   AUTHOR         : Michael Vogt
   DATE           : 10.9.93
 
-  CHANGED BY     : 
+  CHANGED BY     :
   RCS VERSION    : $Revision: 2.7 $
   LAST CHANGE    : $Date: 1998/02/25 15:26:59 $
 

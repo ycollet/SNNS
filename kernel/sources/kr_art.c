@@ -1,6 +1,6 @@
 /*****************************************************************************
   FILE           : $Source: /projects/higgs1/SNNS/CVS/SNNS/kernel/sources/kr_art.c,v $
-  SHORTNAME      : 
+  SHORTNAME      :
   SNNS VERSION   : 4.2
 
   PURPOSE        : SNNS Kernel Functions for ART networks
@@ -55,26 +55,25 @@ GROUP: ART kernel functions
    presented to the network.
 */
 
-krui_err krart_reset_activations (void)
-{
-   krui_err        ret_code = KRERR_NO_ERROR;
+krui_err krart_reset_activations (void) {
+    krui_err        ret_code = KRERR_NO_ERROR;
 
-   struct Unit     *unit_ptr;
+    struct Unit     *unit_ptr;
 
 
-   FOR_ALL_UNITS (unit_ptr) {
+    FOR_ALL_UNITS (unit_ptr) {
 
-      if (! IS_INPUT_UNIT (unit_ptr)) {
-         unit_ptr->act = unit_ptr->i_act;
-      } /*if*/
+        if (! IS_INPUT_UNIT (unit_ptr)) {
+            unit_ptr->act = unit_ptr->i_act;
+        } /*if*/
 
-      /* The output is set for input units, too
-      */
-      unit_ptr->Out.output = unit_ptr->act;
+        /* The output is set for input units, too
+        */
+        unit_ptr->Out.output = unit_ptr->act;
 
-   } /*FOR_ALL_UNITS*/
+    } /*FOR_ALL_UNITS*/
 
-   return (ret_code);
+    return (ret_code);
 
 } /* krart_reset_activations () */
 /*___________________________________________________________________________*/
@@ -90,37 +89,36 @@ krui_err krart_reset_activations (void)
 
 extern FlintType OUT_Custom_Python(FlintType act);
 
-void  krart_prop_synch (void)
-{
-  struct Unit    *unit_ptr;
+void  krart_prop_synch (void) {
+    struct Unit    *unit_ptr;
 
-  /* calculate new activations of non input units
-  */
+    /* calculate new activations of non input units
+    */
 
-  FOR_ALL_UNITS (unit_ptr) {
+    FOR_ALL_UNITS (unit_ptr) {
 
-     if (!IS_INPUT_UNIT(unit_ptr)) {
-        unit_ptr->act = (*unit_ptr->act_func) (unit_ptr);
-     } /*if*/
+        if (!IS_INPUT_UNIT(unit_ptr)) {
+            unit_ptr->act = (*unit_ptr->act_func) (unit_ptr);
+        } /*if*/
 
-  } /*FOR_ALL_UNITS*/
+    } /*FOR_ALL_UNITS*/
 
-  /* set new output values
-  */
+    /* set new output values
+    */
 
-  FOR_ALL_UNITS (unit_ptr) {
+    FOR_ALL_UNITS (unit_ptr) {
 
-     if (unit_ptr->out_func == OUT_IDENTITY) {
-        unit_ptr->Out.output = unit_ptr->act;
-     } else if(unit_ptr->out_func == OUT_Custom_Python) {
-     	unit_ptr->Out.output =
-		kr_PythonOutFunction(unit_ptr->python_out_func,
-				unit_ptr->act);
-     } else {
-        unit_ptr->Out.output = (*unit_ptr->out_func) (unit_ptr->act);
-     } /*if*/
+        if (unit_ptr->out_func == OUT_IDENTITY) {
+            unit_ptr->Out.output = unit_ptr->act;
+        } else if(unit_ptr->out_func == OUT_Custom_Python) {
+            unit_ptr->Out.output =
+                kr_PythonOutFunction(unit_ptr->python_out_func,
+                                     unit_ptr->act);
+        } else {
+            unit_ptr->Out.output = (*unit_ptr->out_func) (unit_ptr->act);
+        } /*if*/
 
-  } /*FOR_ALL_UNITS*/
+    } /*FOR_ALL_UNITS*/
 
 } /* krart_prop_synch */
 /*___________________________________________________________________________*/
@@ -133,66 +131,66 @@ void  krart_prop_synch (void)
    the winning recognition unit.
 */
 struct Unit  *krart_get_winner (TopoPtrArray wta_layer, FlintType winner_output)
-                            /* points to first pointer to recognition unit
-                            */
-                                /* output value of the winning unit */
+/* points to first pointer to recognition unit
+*/
+/* output value of the winning unit */
 
 {
-   TopoPtrArray   topo_ptr;
+    TopoPtrArray   topo_ptr;
 
-   struct Unit    *unit_ptr,
-                  *winner_ptr = NULL;  /* points to the unit with the maximal
+    struct Unit    *unit_ptr,
+               *winner_ptr = NULL;  /* points to the unit with the maximal
                                           activation
                                        */
 
-   FlintType      max_out  = 0.0;      /* contains the maximal activation
+    FlintType      max_out  = 0.0;      /* contains the maximal activation
                                        */
 
 
-   topo_ptr = wta_layer;
+    topo_ptr = wta_layer;
 
-   while ((unit_ptr = *topo_ptr++) != NULL) {
+    while ((unit_ptr = *topo_ptr++) != NULL) {
 
-      if (unit_ptr->Out.output > max_out) {
-         max_out    = unit_ptr->Out.output;
-         winner_ptr = unit_ptr;
-         continue;
-      } /*if*/
+        if (unit_ptr->Out.output > max_out) {
+            max_out    = unit_ptr->Out.output;
+            winner_ptr = unit_ptr;
+            continue;
+        } /*if*/
 
-      /* The foollowing statements assure, that a winner is returned, if
-         no Reset signal is sent from Reset general unit. So we will
-         find a winner, even if the winner unit's activation is 0.0
-         This is neccessary to assure, that all recognition units are
-         tested for to get a 'not classifiable' signal when all and really
-         all local reset units are turned on.
-      */
-      if ((winner_ptr == NULL) && (unit_ptr->Out.output >= max_out)) {
-         max_out    = unit_ptr->Out.output;
-         winner_ptr = unit_ptr;
-      } /*if*/
+        /* The foollowing statements assure, that a winner is returned, if
+           no Reset signal is sent from Reset general unit. So we will
+           find a winner, even if the winner unit's activation is 0.0
+           This is neccessary to assure, that all recognition units are
+           tested for to get a 'not classifiable' signal when all and really
+           all local reset units are turned on.
+        */
+        if ((winner_ptr == NULL) && (unit_ptr->Out.output >= max_out)) {
+            max_out    = unit_ptr->Out.output;
+            winner_ptr = unit_ptr;
+        } /*if*/
 
-   } /*while*/
-
-
-
-   /* set activation and output of winner unit to 1.0, the one of the
-      other recognition units to 0.0
-   */
-
-   topo_ptr = wta_layer;
-
-   while ((unit_ptr = *topo_ptr++) != NULL) {
-
-      if (unit_ptr != winner_ptr) {
-         unit_ptr->Out.output = 0.0;
-      } else {
-         unit_ptr->Out.output = winner_output;
-      } /*if*/
-
-   } /*while*/
+    } /*while*/
 
 
-   return (winner_ptr);
+
+    /* set activation and output of winner unit to 1.0, the one of the
+       other recognition units to 0.0
+    */
+
+    topo_ptr = wta_layer;
+
+    while ((unit_ptr = *topo_ptr++) != NULL) {
+
+        if (unit_ptr != winner_ptr) {
+            unit_ptr->Out.output = 0.0;
+        } else {
+            unit_ptr->Out.output = winner_output;
+        } /*if*/
+
+    } /*while*/
+
+
+    return (winner_ptr);
 
 } /* krart_get__winner () */
 /*___________________________________________________________________________*/
@@ -202,17 +200,16 @@ struct Unit  *krart_get_winner (TopoPtrArray wta_layer, FlintType winner_output)
 
 
 /*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^*/
-void  krart_deleteTouchFlags (void)
-{
-   register struct Unit *unit_ptr;
+void  krart_deleteTouchFlags (void) {
+    register struct Unit *unit_ptr;
 
-   FOR_ALL_UNITS (unit_ptr) {
+    FOR_ALL_UNITS (unit_ptr) {
 
-      /* delete touch flags
-      */
-      unit_ptr->flags &= ~UFLAG_REFRESH;
+        /* delete touch flags
+        */
+        unit_ptr->flags &= ~UFLAG_REFRESH;
 
-   } /*FOR_ALL_UNITS*/
+    } /*FOR_ALL_UNITS*/
 
 } /* krart_deleteTouchFlags () */
 /*___________________________________________________________________________*/
@@ -222,20 +219,19 @@ void  krart_deleteTouchFlags (void)
 
 
 /*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^*/
-void  krart_init_sorting (void)
-{
-   register struct Unit *unit_ptr;
+void  krart_init_sorting (void) {
+    register struct Unit *unit_ptr;
 
 
-   krart_deleteTouchFlags ();
+    krart_deleteTouchFlags ();
 
-   FOR_ALL_UNITS (unit_ptr) {
+    FOR_ALL_UNITS (unit_ptr) {
 
-      /* init lln and lun
-      */
-      unit_ptr->lln = unit_ptr->lun = 0;
+        /* init lln and lun
+        */
+        unit_ptr->lln = unit_ptr->lun = 0;
 
-   } /*FOR_ALL_UNITS*/
+    } /*FOR_ALL_UNITS*/
 
 } /* krart_init_sorting () */
 /*___________________________________________________________________________*/
@@ -243,21 +239,20 @@ void  krart_init_sorting (void)
 
 
 /*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^*/
-int  krart_get_NoOfInputUnits (void)
-{
-   register struct Unit  *unit_ptr;
-   int                   count           = 0;
+int  krart_get_NoOfInputUnits (void) {
+    register struct Unit  *unit_ptr;
+    int                   count           = 0;
 
 
-   FOR_ALL_UNITS (unit_ptr) {
+    FOR_ALL_UNITS (unit_ptr) {
 
-      if (IS_INPUT_UNIT(unit_ptr)) {
-         count++;
-      } /*if*/
+        if (IS_INPUT_UNIT(unit_ptr)) {
+            count++;
+        } /*if*/
 
-   } /*FOR_ALL_UNITS*/
+    } /*FOR_ALL_UNITS*/
 
-   return (count);
+    return (count);
 
 
 } /* krart_get_NoOfInputUnits () */
@@ -267,20 +262,19 @@ int  krart_get_NoOfInputUnits (void)
 
 
 /*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^*/
-bool   krart_check_undeterminedUnits (void)
-{
-   register struct Unit   *unit_ptr;
+bool   krart_check_undeterminedUnits (void) {
+    register struct Unit   *unit_ptr;
 
-   FOR_ALL_UNITS (unit_ptr) {
+    FOR_ALL_UNITS (unit_ptr) {
 
-      if (unit_ptr->lln == 0) {
-         TOPO_MSG_UNDETERMINED_UNIT (unit_ptr);
-         return (TRUE);
-      } /*if*/
+        if (unit_ptr->lln == 0) {
+            TOPO_MSG_UNDETERMINED_UNIT (unit_ptr);
+            return (TRUE);
+        } /*if*/
 
-   } /*FOR_ALL_UNITS*/
+    } /*FOR_ALL_UNITS*/
 
-   return (FALSE);
+    return (FALSE);
 
 } /* krart_check_undeterminedUnits () */
 /*___________________________________________________________________________*/
@@ -292,17 +286,16 @@ bool   krart_check_undeterminedUnits (void)
 
 
 /*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^*/
-void  krart_save_inp_pat (TopoPtrArray topo_inp_ptr)
-{
-  TopoPtrArray   topo_ptr = topo_inp_ptr;
+void  krart_save_inp_pat (TopoPtrArray topo_inp_ptr) {
+    TopoPtrArray   topo_ptr = topo_inp_ptr;
 
-  while (*topo_ptr != NULL) {
-     if (IS_INPUT_UNIT (*topo_ptr)) {
-        (*topo_ptr)->value_a = (*topo_ptr)->act;
-     } /*if*/
-     topo_ptr++;
-  } /*while*/
-  return;
+    while (*topo_ptr != NULL) {
+        if (IS_INPUT_UNIT (*topo_ptr)) {
+            (*topo_ptr)->value_a = (*topo_ptr)->act;
+        } /*if*/
+        topo_ptr++;
+    } /*while*/
+    return;
 } /* krart_save_inp_pat () */
 /*___________________________________________________________________________*/
 
@@ -312,19 +305,18 @@ void  krart_save_inp_pat (TopoPtrArray topo_inp_ptr)
 
 
 /*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^*/
-bool  krart_inp_pat_changed (TopoPtrArray topo_inp_ptr)
-{
+bool  krart_inp_pat_changed (TopoPtrArray topo_inp_ptr) {
 
-   TopoPtrArray    topo_ptr = topo_inp_ptr;
+    TopoPtrArray    topo_ptr = topo_inp_ptr;
 
-   while (*topo_ptr != NULL) {
-      if ((IS_INPUT_UNIT(*topo_ptr)) && ((*topo_ptr)->value_a != (*topo_ptr)->act)) {
-         return (TRUE);
-      } /*if*/
-      topo_ptr++;
-   } /*FOR_ALL_UNITS*/
+    while (*topo_ptr != NULL) {
+        if ((IS_INPUT_UNIT(*topo_ptr)) && ((*topo_ptr)->value_a != (*topo_ptr)->act)) {
+            return (TRUE);
+        } /*if*/
+        topo_ptr++;
+    } /*FOR_ALL_UNITS*/
 
-   return (FALSE);
+    return (FALSE);
 } /* krart_inp_pat_changed () */
 /*___________________________________________________________________________*/
 

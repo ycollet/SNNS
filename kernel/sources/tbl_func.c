@@ -1,6 +1,6 @@
 /*****************************************************************************
   FILE           : $Source: /projects/higgs1/SNNS/CVS/SNNS/kernel/sources/tbl_func.c,v $
-  SHORTNAME      : 
+  SHORTNAME      :
   SNNS VERSION   : 4.2
 
   PURPOSE        : SNNS-Kernel: Transfer functions using table lookup and
@@ -39,53 +39,51 @@ GROUP: Unit activation functions using table lookup
 /*  Sigmoid function
     using table lookup and linear approximation method
 */
-FlintType   ACT_LogisticTbl(struct Unit *unit_ptr)
-{
+FlintType   ACT_LogisticTbl(struct Unit *unit_ptr) {
 #include "sigmoid.tbl"	/*  m,b value tables for linear approximation  */
 
-  ACT_FUNC_DEFS
-  register FlintType  sum, x;
-  register int	index;
+    ACT_FUNC_DEFS
+    register FlintType  sum, x;
+    register int	index;
 
 
-  sum =  0.0;
-  if (GET_FIRST_SITE( unit_ptr ))
-    do
-      sum += GET_SITE_VALUE;
-    while (GET_NEXT_SITE);
-  else
-    if (GET_FIRST_UNIT_LINK( unit_ptr ))
-      do
-        sum += GET_WEIGHTED_OUTPUT;
-      while (GET_NEXT_LINK);
+    sum =  0.0;
+    if (GET_FIRST_SITE( unit_ptr ))
+        do
+            sum += GET_SITE_VALUE;
+        while (GET_NEXT_SITE);
+    else if (GET_FIRST_UNIT_LINK( unit_ptr ))
+        do
+            sum += GET_WEIGHTED_OUTPUT;
+        while (GET_NEXT_LINK);
 
-/*  ***************************************************  */
+    /*  ***************************************************  */
 
 
-  x = sum + GET_UNIT_BIAS( unit_ptr );
-  index = (int) (x * SCALE_FACTOR) + INDEX_OFFSET;
+    x = sum + GET_UNIT_BIAS( unit_ptr );
+    index = (int) (x * SCALE_FACTOR) + INDEX_OFFSET;
 
-  if (index < 0)
-    {  /*  x is less then MIN_APPROX_X:
-	   approx. func value to MINUS_INFINITE_FUNC_VALUE  */
-    if (index <= MIN_INDEX)
-      { /*  printf( "x below -infinite : %g\n", x );  */
-	return( MINUS_INFINITE_FUNC_VALUE );
-      }
-    /*	printf( "x below MIN_APPROX_X : %g\n", x );  */
-    return( m[0] * x + b[0] );
+    if (index < 0) {
+        /*  x is less then MIN_APPROX_X:
+        approx. func value to MINUS_INFINITE_FUNC_VALUE  */
+        if (index <= MIN_INDEX) {
+            /*  printf( "x below -infinite : %g\n", x );  */
+            return( MINUS_INFINITE_FUNC_VALUE );
+        }
+        /*	printf( "x below MIN_APPROX_X : %g\n", x );  */
+        return( m[0] * x + b[0] );
     }
 
-  if (index > NO_OF_APPROX)
-    {  /*  x is greater then MAX_APPROX_X:
-	   approx. func value to PLUS_INFINITE_FUNC_VALUE  */
-    if (index >= MAX_INDEX)
-      { /*  printf( "x above +infinite : %g\n", x );  */
-	return( PLUS_INFINITE_FUNC_VALUE );
-      }
-    /*	printf( "x above MAX_APPROX_X : %g\n", x );  */
-    return( m[ NO_OF_APPROX ] * x + b[ NO_OF_APPROX ] );
+    if (index > NO_OF_APPROX) {
+        /*  x is greater then MAX_APPROX_X:
+        approx. func value to PLUS_INFINITE_FUNC_VALUE  */
+        if (index >= MAX_INDEX) {
+            /*  printf( "x above +infinite : %g\n", x );  */
+            return( PLUS_INFINITE_FUNC_VALUE );
+        }
+        /*	printf( "x above MAX_APPROX_X : %g\n", x );  */
+        return( m[ NO_OF_APPROX ] * x + b[ NO_OF_APPROX ] );
     }
 
-  return( m[ index ] * x + b[ index ] );
+    return( m[ index ] * x + b[ index ] );
 }

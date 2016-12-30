@@ -1,10 +1,10 @@
 /*****************************************************************************
   FILE           : $Source: /projects/higgs1/SNNS/CVS/SNNS/kernel/sources/strdup.c,v $
-  SHORTNAME      : 
+  SHORTNAME      :
   SNNS VERSION   : 4.2
 
   PURPOSE        : strdup.
-  NOTES          : 
+  NOTES          :
 
   AUTHOR         : Niels Mache
   DATE           : 30.07.90
@@ -23,14 +23,13 @@
 #include <string.h>
 #include <stdlib.h>
 
-char *strdup(const char *source)
-{
+char *strdup(const char *source) {
     int len;
     char *copy;
-    
+
     len = strlen(source) + 1;
     if ((copy = malloc(len * sizeof(char))))
-	strcpy(copy, source);
+        strcpy(copy, source);
 
     return(copy);
 }

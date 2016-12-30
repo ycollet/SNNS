@@ -17,6 +17,7 @@
     Copyright (c) 1996-1998  SNNS Group, WSI, Univ. Tuebingen, FRG
 
 ******************************************************************************/
+
 #ifndef _INIT_F_DEFINED_
 #define  _INIT_F_DEFINED_
 
@@ -71,7 +72,6 @@ krui_err ENZO_noinit(void);
 #define	 RBF_INIT_REINIT	1
 #define  RBF_INIT_KOHONEN	2
 #define  MY_HUGE_VAL		1E20
-
 
 /* end private definition section */
 

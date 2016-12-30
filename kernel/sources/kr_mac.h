@@ -1,6 +1,6 @@
 /*****************************************************************************
   FILE           : $Source: /projects/higgs1/SNNS/CVS/SNNS/kernel/sources/kr_mac.h,v $
-  SHORTNAME      : 
+  SHORTNAME      :
   SNNS VERSION   : 4.2
 
   PURPOSE        : SNNS-Kernel Macros
@@ -87,10 +87,10 @@ for ((link_ptr) = (site_ptr)->links; (link_ptr) != NULL; \
 
 #define IS_SPECIAL_I_UNIT( unit_ptr ) \
 (((unit_ptr)->flags & UFLAG_TTYP_SPEC_I) == UFLAG_TTYP_SPEC_I)
-  
+
 #define IS_SPECIAL_H_UNIT( unit_ptr ) \
 (((unit_ptr)->flags & UFLAG_TTYP_SPEC_H) == UFLAG_TTYP_SPEC_H)
- 
+
 #define IS_SPECIAL_O_UNIT( unit_ptr ) \
 (((unit_ptr)->flags & UFLAG_TTYP_SPEC_O) == UFLAG_TTYP_SPEC_O)
 

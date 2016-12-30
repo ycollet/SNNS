@@ -1,6 +1,6 @@
 /*****************************************************************************
   FILE           : $Source: /projects/higgs1/SNNS/CVS/SNNS/kernel/sources/func_mac.h,v $
-  SHORTNAME      : 
+  SHORTNAME      :
   SNNS VERSION   : 4.2
 
   PURPOSE        : SNNS-Kernel: Macros for transfer functions
@@ -17,6 +17,7 @@
     Copyright (c) 1996-1998  SNNS Group, WSI, Univ. Tuebingen, FRG
 
 ******************************************************************************/
+
 #ifndef KR_FUNC_MACROS
 #define KR_FUNC_MACROS
 
@@ -27,7 +28,6 @@
                             register struct Site  *__site_ptr;
 
 #define  SITE_FUNC_DEFS     register struct Link  *__link_ptr;
-
 
 /*#################################################
 
@@ -54,9 +54,8 @@ GROUP: Link Macros
 
 #define  LINK_FROM_INPUT_UNIT (IS_INPUT_UNIT(__link_ptr->to))
 
-/* calculate each component of the euclidic distance */ 
+/* calculate each component of the euclidic distance */
 #define  GET_EUCLID_COMP    ( ((__link_ptr->weight) - (__link_ptr->to->Out.output))*((__link_ptr->weight) - (__link_ptr->to->Out.output)) )
-
 
 /*#################################################
 
@@ -86,6 +85,5 @@ GROUP: Unit Macros
 
 #define  GET_UNIT_BIAS( u_ptr )  ((u_ptr)->bias)
 #define  GET_UNIT_ACT( u_ptr )   ((u_ptr)->act)
-
 
 #endif

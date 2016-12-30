@@ -22,11 +22,11 @@
 
 #define PR_ALL_PATTERNS -1
 
-extern int pr_trainCycles, pr_retrainCycles, pr_recreate, pr_refresh, 
-           pr_inputPruning, pr_hiddenPruning;
+extern int pr_trainCycles, pr_retrainCycles, pr_recreate, pr_refresh,
+       pr_inputPruning, pr_hiddenPruning;
 
 extern float pr_maxErrorInc, pr_acceptedError, pr_minError,
-             pr_obs_initParameter;
+       pr_obs_initParameter;
 
 extern void pr_checkDeadUnits (void);
 

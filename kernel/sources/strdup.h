@@ -1,6 +1,6 @@
 /*****************************************************************************
   FILE           : $Source: /projects/higgs1/SNNS/CVS/SNNS/kernel/sources/strdup.h,v $
-  SHORTNAME      : 
+  SHORTNAME      :
   SNNS VERSION   : 4.2
 
   PURPOSE        : System V Library Function strdup.
@@ -10,7 +10,7 @@
   AUTHOR         : Niels Mache
   DATE           : 30.07.90
 
-  CHANGED BY     : 
+  CHANGED BY     :
   RCS VERSION    : $Revision: 2.7 $
   LAST CHANGE    : $Date: 1998/03/02 17:57:56 $
 

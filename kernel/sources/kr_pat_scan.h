@@ -9,7 +9,7 @@
   AUTHOR         : Michael Vogt
   DATE           : 10.9.93
 
-  CHANGED BY     : 
+  CHANGED BY     :
   RCS VERSION    : $Revision: 2.8 $
   LAST CHANGE    : $Date: 1998/03/31 13:08:00 $
 

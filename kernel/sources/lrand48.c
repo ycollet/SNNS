@@ -1,10 +1,10 @@
 /*****************************************************************************
   FILE           : $Source: /projects/higgs1/SNNS/CVS/SNNS/kernel/sources/lrand48.c,v $
-  SHORTNAME      : 
+  SHORTNAME      :
   SNNS VERSION   : 4.2
 
   PURPOSE        : lrand48 functions
-  NOTES          : 
+  NOTES          :
 
   AUTHOR         : Michael Vogt
   DATE           : 2.3.98
@@ -22,20 +22,17 @@
 #if ! defined(HAVE_LRAND48) || HAVE_LRAND48 == 0
 #include <stdlib.h>
 
-long lrand48(void)
-{
+long lrand48(void) {
     return (long) random();
 }
 
-void srand48(long seedval)
-{
+void srand48(long seedval) {
     srandom(seedval);
 }
 
-double drand48(void)
-{
+double drand48(void) {
     return((double) (random() & 0x7fffffff)
-	   / (double) 0x7fffffff);
+           / (double) 0x7fffffff);
 }
 
 #endif /* ! HAVE_LRAND48 */

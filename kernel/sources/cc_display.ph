@@ -17,6 +17,7 @@
     Copyright (c) 1996-1998  SNNS Group, WSI, Univ. Tuebingen, FRG
 
 ******************************************************************************/
+
 #ifndef _CC_DISPLAY_DEFINED_
 #define  _CC_DISPLAY_DEFINED_
 
@@ -35,7 +36,6 @@ int cc_hiddenXminPos;
 int cc_display_mode=Y_MAX_MODE1;
 int cc_LayerDistance=DEFAULT_DISTANCE_BETWEEN_LAYERS;
 int cc_lastFirstOutputRow;
-
 
 /* end privat definition section */
 

@@ -1,15 +1,15 @@
 /*****************************************************************************
   FILE           : $Source: /projects/higgs1/SNNS/CVS/SNNS/kernel/sources/alloca.h,v $
-  SHORTNAME      : 
+  SHORTNAME      :
   SNNS VERSION   : 4.2
 
   PURPOSE        : alloca
-  NOTES          : 
+  NOTES          :
 
   AUTHOR         : Michael Vogt
   DATE           : 2.3.98
 
-  CHANGED BY     : 
+  CHANGED BY     :
   RCS VERSION    : $Revision: 2.3 $
   LAST CHANGE    : $Date: 1998/03/03 17:54:26 $
 
@@ -18,7 +18,7 @@
 
 ******************************************************************************/
 
-#if ! defined(HAVE_ALLOCA) || HAVE_ALLOCA == 0
+#if !defined(HAVE_ALLOCA)
 #ifndef _ALLOCA_DEFINED_
 #define _ALLOCA_DEFINED_
 

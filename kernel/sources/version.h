@@ -1,12 +1,12 @@
 /*****************************************************************************
   FILE           : $Source: /projects/higgs1/SNNS/CVS/SNNS/kernel/sources/version.h,v $
-  SHORTNAME      : 
+  SHORTNAME      :
   SNNS VERSION   : 4.2
 
   PURPOSE        : SNNS-Kernel: Current Version and Patchlevel
   NOTES          :
 
-  AUTHOR         : Niels Mache 
+  AUTHOR         : Niels Mache
   DATE           : 15.08.9
 
   CHANGED BY     : Sven Doering

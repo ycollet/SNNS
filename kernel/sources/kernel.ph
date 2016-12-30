@@ -17,6 +17,7 @@
     Copyright (c) 1996-1998  SNNS Group, WSI, Univ. Tuebingen, FRG
  
 ******************************************************************************/
+
 #ifndef _KENREL_DEFINED_
 #define  _KENREL_DEFINED_
 
@@ -179,7 +180,6 @@ int kr_unitNameSearch( int  min_unit_no, char  *unit_symbol_ptr );
 /*  Creates a unit with default values. */
 int  kr_makeDefaultUnit( void );
 
-
 /*  Copy a given unit, according to the copy mode
         1. copy unit (with it sites, if available) and input/output links
         2. copy unit (with it sites, if available) and input links
@@ -194,7 +194,6 @@ krui_err  kr_copyUnit( int  copy_mode, int  source_unit );
 
 /*  Sets the topologic type of the unit. */
 krui_err  kr_unitSetTType( int  unit_no, int  UnitTType );
-
 
 /*  changes all units in the network with the given functionality type
     to the new functions of the (new) functionality type */
@@ -243,13 +242,11 @@ int kr_getNoOfSpecialUnits( int  UnitTType );
 /*  force unit array garbage collection */
 void  kr_forceUnitGC( void );
 
-
 /*#################################################
 
 GROUP: Topological Sorting Functions
 
 #################################################*/
-
 
 /*  Sort units according to the given mode:
     TOPOLOGICAL:
@@ -275,7 +272,6 @@ GROUP: Topological Sorting Functions
       stores the pointers to this units in the topologic array. */
 krui_err kr_topoSort( int sort_mode );
 
-
 /*  Checks the topology of the network:
      a) counts the number of layers of the network and
      b) determines if the network has cycles.
@@ -288,13 +284,11 @@ krui_err  kr_IOCheck( void );
 
 krui_err  kr_makeUnitPermutation( void );
 
-
 /*#################################################
 
 GROUP: Other functions
 
 #################################################*/
-
 
 /*  Add random uniform distributed values to connection weights.
     <minus> must be less then <plus>. */
@@ -349,8 +343,6 @@ TopoPtrArray  topo_ptr_array   = NULL;  /* pointers to topological sorted units
 
 int  no_of_topo_units = 0;  /*  no. of unit pointers in the topo_ptr_array  */
 
-
-
 /*  Kernel Interface Error Code */
 krui_err  KernelErrorCode = KRERR_NO_ERROR;
 
@@ -362,7 +354,6 @@ int  lineno = 0;
     functions. */
 struct TopologicMessages  topo_msg;
 
-
 /*  Pointers and numbers for storing the current unit, site or link.
     Used by unit/site/link searching routines. */
 struct Unit  *unitPtr = NULL;
@@ -371,7 +362,6 @@ struct Site  *sitePtr = NULL,
 struct Link  *linkPtr = NULL,
 	     *prevLinkPtr = NULL;
 int  unitNo = 0;
-
 
 int   specialNetworkType = NET_TYPE_GENERAL; /* topologic type of a network  */
 
@@ -402,8 +392,6 @@ GROUP:  3D-Functions
 
 krui_err  kr_xyTransTable(int op, int *x, int *y, int z);
 
-
-
 /* end global definition section */
 
 /* begin private definition section */
@@ -424,7 +412,6 @@ static int  DefaultSubnetNo  = DEF_SUBNET_NO,	 /*  default subnet no.  */
             DefaultPosY      = DEF_POS_Y;	 /*  default y-position  */
 
 static int  DefaultPosZ = DEF_POS_Z;	 /*  default z-position  */
-
 
 static FlintType
      DefaultIAct      = DEF_I_ACT,	 /*  default initial activation  */
@@ -448,16 +435,11 @@ static PyObject * DefaultUPythonFuncAct2Deriv;
 struct TransTable  *transTable = NULL;
 int transTableSize = 0;
 
-
-
-
 /*#################################################
 
 GROUP: Macros
 
 #################################################*/
-
-
 
 /*#################################################
 
@@ -495,7 +477,6 @@ static krui_err  kr_callNetworkFunctionSTD(int type, float *parameterInArray,
 					   float **parameterOutArray, 
 					   int *NoOfOutParams, 
 					   int start_pattern, int end_pattern);
-
 
 /* end private definition section */
 

@@ -1,6 +1,6 @@
 /*****************************************************************************
   FILE           : $Source: /projects/higgs1/SNNS/CVS/SNNS/kernel/sources/kr_inversion.h,v $
-  SHORTNAME      : 
+  SHORTNAME      :
   SNNS VERSION   : 4.2
 
   PURPOSE        : Header file of correspondent '.c' file
@@ -27,7 +27,7 @@
 extern int    kr_initInversion(void);
 extern void   kr_inv_forwardPass(struct UnitList *inputs);
 extern double kr_inv_backwardPass(float learn, float delta_max, int *err_units,
-				  float ratio, struct UnitList *inputs,
-				  struct UnitList *outputs);
+                                  float ratio, struct UnitList *inputs,
+                                  struct UnitList *outputs);
 
-#endif 
+#endif

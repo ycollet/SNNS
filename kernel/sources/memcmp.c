@@ -1,10 +1,10 @@
 /*****************************************************************************
   FILE           : $Source: /projects/higgs1/SNNS/CVS/SNNS/kernel/sources/memcmp.c,v $
-  SHORTNAME      : 
+  SHORTNAME      :
   SNNS VERSION   : 4.2
 
   PURPOSE        : memcmp function
-  NOTES          : 
+  NOTES          :
 
   AUTHOR         : Michael Vogt
   DATE           : 2.3.98
@@ -21,16 +21,14 @@
 
 #include <string.h>
 
-int memcmp(const void *s1, const void *s2, size_t n)
-{
+int memcmp(const void *s1, const void *s2, size_t n) {
     unsigned const char *p1 = s1;
     unsigned const char *p2 = s2;
 
-    while (n>0 && *p1 == *p2)
-    {
-	p1++;
-	p2++;
-	n--;
+    while (n>0 && *p1 == *p2) {
+        p1++;
+        p2++;
+        n--;
     }
 
     return (n>0) ? ((*p1 < *p2) ? -1 : 1) : 0;

@@ -95,7 +95,7 @@ extern  bool krart_inp_pat_changed (TopoPtrArray topo_inp_ptr);
 
 
 
-#endif 
+#endif
 
 
 

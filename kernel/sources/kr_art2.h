@@ -1,6 +1,6 @@
 /*****************************************************************************
   FILE           : $Source: /projects/higgs1/SNNS/CVS/SNNS/kernel/sources/kr_art2.h,v $
-  SHORTNAME      : kr_art2 
+  SHORTNAME      : kr_art2
   SNNS VERSION   : 4.2
 
   PURPOSE        : SNNS Kernel Function Prototypes for ART2-Networks
@@ -36,8 +36,8 @@ extern  struct Unit     *Art2_nc_unit;
    initializes net for propagation.
 */
 extern  krui_err  kra2_init_propagate (
-                                      void
-                                     );
+    void
+);
 
 
 /***************************************************************************/
@@ -48,8 +48,8 @@ extern  krui_err  kra2_init_propagate (
    Returns an error code, when actual network is no ART2 architecture.
 */
 extern  krui_err  kra2_sort (
-                            void
-                           );
+    void
+);
 
 
 
@@ -60,13 +60,13 @@ extern  krui_err  kra2_sort (
    in this Module.
 */
 extern  krui_err kra2_set_params (
-                                FlintType rho,
-                                FlintType param_a,
-                                FlintType param_b,
-                                FlintType param_c,
-                                FlintType param_d,
-                                FlintType theta
-                               );
+    FlintType rho,
+    FlintType param_a,
+    FlintType param_b,
+    FlintType param_c,
+    FlintType param_d,
+    FlintType theta
+);
 
 
 /***************************************************************************/
@@ -75,17 +75,17 @@ extern  krui_err kra2_set_params (
    returns the actual value of Parameter rho.
 */
 extern  FlintType kra2_get_rho (
-                               void
-                              );
+    void
+);
 
 /***************************************************************************/
 /* kra2_get_a ()
 
    returns the actual value of Parameter a.
 */
- FlintType kra2_get_a (
-                             void
-                            );
+FlintType kra2_get_a (
+    void
+);
 
 /***************************************************************************/
 /* kra2_get_b ()
@@ -93,8 +93,8 @@ extern  FlintType kra2_get_rho (
    returns the actual value of Parameter b.
 */
 extern  FlintType kra2_get_b (
-                             void
-                            );
+    void
+);
 
 /***************************************************************************/
 /* kra2_get_c ()
@@ -102,8 +102,8 @@ extern  FlintType kra2_get_b (
    returns the actual value of Parameter c.
 */
 extern  FlintType kra2_get_c (
-                             void
-                            );
+    void
+);
 
 
 /***************************************************************************/
@@ -112,8 +112,8 @@ extern  FlintType kra2_get_c (
    returns the actual value of Parameter d.
 */
 extern  FlintType kra2_get_d (
-                             void
-                            );
+    void
+);
 
 
 /***************************************************************************/
@@ -122,8 +122,8 @@ extern  FlintType kra2_get_d (
    returns the actual value of Parameter theta.
 */
 extern  FlintType kra2_get_theta (
-                                 void
-                                );
+    void
+);
 
 
 /***************************************************************************/
@@ -132,8 +132,8 @@ extern  FlintType kra2_get_theta (
    checks if global reset has to be sent into network
 */
 extern  void kra2_checkReset (
-                             void
-                            );
+    void
+);
 
 
 
@@ -144,8 +144,8 @@ extern  void kra2_checkReset (
    returns TRUE if global reset is actually active, else FALSE
 */
 extern  bool kra2_Reset (
-                        void
-                       );
+    void
+);
 
 
 
@@ -156,8 +156,8 @@ extern  bool kra2_Reset (
    sets current phase to bottom up
 */
 extern  void kra2_init_pattern (
-                               void
-                              );
+    void
+);
 
 
 
@@ -167,8 +167,8 @@ extern  void kra2_init_pattern (
    sets current phase to bottom up
 */
 extern  bool kra2_topdn_phase (
-                             void
-                            );
+    void
+);
 
 
 
@@ -179,8 +179,8 @@ extern  bool kra2_topdn_phase (
 */
 
 extern  void kra2_compute_norms (
-                                void
-                               );
+    void
+);
 
 
 
@@ -195,8 +195,8 @@ extern  void kra2_compute_norms (
 */
 
 extern  FlintType kra2_L2_Norm (
-                               int VectorNr
-                              );
+    int VectorNr
+);
 
 
 
@@ -206,8 +206,8 @@ extern  FlintType kra2_L2_Norm (
    returns TRUE if net has classified input pattern
 */
 extern  bool kra2_classified (
-                             void
-                            );
+    void
+);
 
 
 
@@ -217,8 +217,8 @@ extern  bool kra2_classified (
    returns TRUE if net is not able to classify input pattern
 */
 extern  bool kra2_not_classifiable (
-                                   void
-                                  );
+    void
+);
 
 
 
@@ -228,8 +228,8 @@ extern  bool kra2_not_classifiable (
    saves informaion of relevant unit in F1-Layer for stability check
 */
 extern  void kra2_save_for_stability_check (
-                                           void
-                                          );
+    void
+);
 
 
 
@@ -239,8 +239,8 @@ extern  void kra2_save_for_stability_check (
    checks, if F1-Layer is stable.
 */
 extern  void kra2_check_f1_stability (
-                                     void
-                                    );
+    void
+);
 
 
 
@@ -252,8 +252,8 @@ extern  void kra2_check_f1_stability (
    returns TRUE if F1-Layer is stable
 */
 extern  bool kra2_f1_stable (
-                            void
-                           );
+    void
+);
 
 
 
@@ -264,12 +264,12 @@ extern  bool kra2_f1_stable (
    Returns the number of the actually activated class J, 1 <= J <= M
 */
 extern  int  kra2_getClassNo (void
-                            );
+                             );
 
 
 
 
-#endif 
+#endif
 
 
 /* 275 lines generated by deleteprivatedefinitions.awk */
