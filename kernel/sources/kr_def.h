@@ -29,16 +29,6 @@
 
 /*  default constants for block memory allocation in # of components
 */
-#ifdef __BORLANDC__
-
-#define  UNIT_BLOCK     100
-#define  LINK_BLOCK     500
-#define  SITE_BLOCK     20
-#define  NTABLE_BLOCK   50
-#define  STABLE_BLOCK   20
-#define  PATTERN_BLOCK  50
-
-#else
 #ifdef  __ENZO__
 
 /* A population of networks doesn't allow to use this much memory ... */
@@ -60,7 +50,6 @@
 #define  PATTERN_BLOCK  200
 
 #endif /*__ENZO__*/
-#endif /*__BORLANDC__*/
 
 /*  Unit/Site Default Initialisations
 */

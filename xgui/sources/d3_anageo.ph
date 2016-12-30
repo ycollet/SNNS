@@ -42,7 +42,7 @@ static void d3_rotateXmatrix (matrix, float);
 static void d3_rotateYmatrix (matrix, float);
 static void d3_rotateZmatrix (matrix, float);
 
-#ifdef _UNUSED_UNCTIONS_
+#ifdef _UNUSED_FUNCTIONS_
 
 static void d3_showVector (vector);
 

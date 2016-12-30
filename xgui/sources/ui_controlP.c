@@ -984,7 +984,7 @@ static Boolean ui_rem_performLearn (int learnType)
 		krui_jogWeights(jog_low, jog_high);
 	}
 
-#ifdef PARGAGON_KERNEL
+#ifdef PARAGON_KERNEL
 	if (ParallelMode) {
 	  ui_checkError(err = krip_learnAllPatterns(ui_learnParameters, 
 		         			    UI_NO_LEARN_PARAMS
@@ -1007,12 +1007,12 @@ static Boolean ui_rem_performLearn (int learnType)
         if (err != KRERR_NO_ERROR)
             return (TRUE);
 	break;
-#ifdef PARGAGON_KERNEL
+#ifdef PARAGON_KERNEL
         }
 #endif
       case UI_LEARN_SINGLE:
 
-#ifdef PARGAGON_KERNEL
+#ifdef PARAGON_KERNEL
 	if (ParallelMode) {
 	  ui_confirmOk("Function not supported in parallel mode.");
 	  return (TRUE);
@@ -1031,7 +1031,7 @@ static Boolean ui_rem_performLearn (int learnType)
                 return (TRUE);
 	} else
 	    ui_confirmOk("Can't learn current pattern.");
-#ifdef PARGAGON_KERNEL
+#ifdef PARAGON_KERNEL
         }
 #endif
 	break;

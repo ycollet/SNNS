@@ -18,27 +18,3 @@
 
 ******************************************************************************/
 #include <config.h>
-#ifdef  __MSDOS__
-
-#ifndef  MSDOS_RAND_FUNCS
-#define  MSDOS_RAND_FUNCS
-
-#include <stdlib.h>
-
-void srand48(long seedval)
-{
-        srand((int) seedval);
-}
-
-long lrand48(void )
-{
-        return ((long) rand());
-}
-
-double drand48(void)
-{
-        return ((double) rand() / (double) RAND_MAX);
-}
-
-#endif
-#endif

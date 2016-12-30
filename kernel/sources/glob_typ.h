@@ -22,24 +22,6 @@
 
 #include <stdio.h>
 
-#ifdef ultrix
-   /* DEC's pseudo ansi C-compiler doesn't understand const  */
-#  define const
-#endif
-
-
-#ifndef __BORLANDC__
-
-
-
-/*  define MASPAR_KERNEL to build the parallel MasPar Kernel
-*/
-/*
-#define MASPAR_KERNEL
-*/
-
-#endif
-
 #ifdef MASPAR_KERNEL
 
 /*  define MASPAR_KERNEL_EMULATION to build a (sequentiel) kernel that simulates

@@ -20,19 +20,8 @@
 #ifndef _KR_UI_DEFINED_
 #define  _KR_UI_DEFINED_
 
-
-
 #include "krui_typ.h"	/*  Interface function prototypes  */
 #include "kr_typ.h"
-/*
-#ifdef __MSDOS__
-
-#ifndef  int
-#define  int long
-#endif
-
-#endif
-*/
 /* pcc */
 extern int       krui_countLinks(void);
 
@@ -295,21 +284,6 @@ extern krui_err  krui_cc_deleteAllSpecialUnits(void);
 extern int       krui_getErrorCode(void);
 extern krui_err  krui_setErrorHandler(void(* error_Handler )(int));
 extern void      krui_execHandler(int error_code);
-
-
-/*
-#ifdef __MSDOS__
-
-#ifndef  KR_TYPES
-#undef  int
-#endif
-
-#endif
-*/
-
-
-
-
 
 #endif 
 

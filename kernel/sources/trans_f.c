@@ -34,10 +34,6 @@
 
 #include "trans_f.ph"
 
-#ifdef  __BORLANDC__
-#pragma option -w-
-#endif
-
 /*#################################################
 
 GROUP: Aritmetic Functions
@@ -1688,8 +1684,3 @@ FlintType ACT_2_DERIV_tanh (struct Unit *unit_ptr)
     return (2 * ACT_2_DERIV_Logistic (unit_ptr));
 
 }
-
-
-#ifdef  __BORLANDC__
-#pragma option -w+.
-#endif

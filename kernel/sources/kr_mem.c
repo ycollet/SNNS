@@ -37,17 +37,9 @@
 #include "kr_mem.ph"	 /*  Function prototypes  */
 #include "kr_mac.h"	 /*  Kernel Macros  */
 
-
 #ifndef MAXSHORT
 #define MAXSHORT SHRT_MAX
 #endif
-
-/*  ULTRIX-32 Operating System	*/
-#if defined (ultrix) || defined (__BORLANDC__) 
-#include "strdup.h"	/*  include strdup function because strdup is
-			    missing in ULTRIX-32  */
-#endif
-
 
 /*****************************************************************************
   FUNCTION : krm_allocLinks

@@ -24,13 +24,7 @@
 #include <string.h>
 #include <ctype.h>
 #include <time.h>
-#ifndef  __BORLANDC__
-#include <sys/param.h>
-#include <sys/types.h>
 #include <sys/times.h>
-#include <sys/utsname.h>
-#endif
-
 
 /*  SNNS-Kernel constants and data type definitions  */
 #include "glob_typ.h"
@@ -63,16 +57,11 @@ int main()
   char	*netname, file_name[80];
   float learn_parameters[5];
   float *return_values;
-#ifdef  __BORLANDC__
-  clock_t  init_time;
-#else
   struct tms  tp;
   long  HZ_value;
   long init_time;
-#endif
 
 
-#ifndef  __BORLANDC__
   /*  get HZ value  */
   if ((getenv( "HZ" ) == NULL) ||
       (sscanf( getenv( "HZ" ), "%ld", &HZ_value ) != 1))  {
@@ -83,7 +72,6 @@ int main()
     HZ_value = HZ;
 #endif
   }
-#endif
 
 
   fprintf( stdout, "\n%s\n", krui_getVersion() );
@@ -155,12 +143,8 @@ int main()
   if (choose_me == 1)  {
     fprintf( stdout, "\nBegin propagation ...\n" );
 
-#ifdef  __BORLANDC__
-    init_time = clock();
-#else
     (void) times( &tp );
     init_time = tp.tms_utime;
-#endif
 
     for (i = 0; i < N; i++)  {
       for (j=1; j <= no_of_patterns; j++)  {
@@ -190,12 +174,8 @@ int main()
     step = ((N - 1) / 10) + 1;
     fprintf( stdout, "\nBegin learning ...\n" );
 
-#ifdef  __BORLANDC__
-    init_time = clock();
-#else
     (void) times( &tp );
     init_time = tp.tms_utime;
-#endif
 
     for (i = 0; i < N; i++)  {
 /*  REMEMBER:  return_values[ 0 ] returns the current net error
@@ -215,12 +195,8 @@ int main()
   }
 
 
-#ifdef  __BORLANDC__
-  cpu_time = (double) (clock() - init_time) / (double) CLK_TCK;
-#else
   (void) times( &tp );
   cpu_time = (double) (tp.tms_utime - init_time) / (double) HZ_value;
-#endif
 
   fprintf( stdout, "\n\nNo. of units updated: %.0f\n", (double) no_of_units * (double) N * (double) no_of_patterns );
   fprintf( stdout, "No. of sites updated: %.0f\n", (double) no_of_sites * (double) N * (double) no_of_patterns);

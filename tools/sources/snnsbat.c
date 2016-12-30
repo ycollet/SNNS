@@ -51,51 +51,6 @@
 
 #include "snnsbat.h"
 
-
-#ifdef NeXT
-char *tempnam(dir,pfx)
-char *dir, *pfx;
-{
-char *filename,*start,*t;
-int n,count;
-
-filename = (char*)malloc(MAXPATHLEN);
-if((dir == NULL)&&(pfx == NULL))
-    tmpnam(filename);
-if((dir == NULL)&&(pfx != NULL))
-    {
-    t=tmpnam(NULL);
-    start = rindex(t,'/');
-    *start = '\0';
-    start++;
-    sprintf(filename,"%s/%s%s",t,pfx,start);
-    }
-if(dir != NULL)
-    {
-    t=tmpnam(NULL);
-    start = rindex(t,'/');
-    *start = '\0';
-    start++;
-    if(pfx != NULL)
-        {
-        if(dir[strlen(dir)-1] != '/')
-            sprintf(filename,"%s/%s%s",dir,pfx,start);
-        else
-            sprintf(filename,"%s%s%s",dir,pfx,start);
-        }
-    else
-        {
-        if(dir[strlen(dir)-1] != '/')
-            sprintf(filename,"%s/%s",dir,start);
-        else
-            sprintf(filename,"%s%s",dir,start);
-        }
-
-    }
-return(filename);
-}
-#endif /* NeXT */
-
 /*****************************************************************************
   FUNCTION : skipComments
 

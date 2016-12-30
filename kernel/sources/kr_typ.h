@@ -30,18 +30,6 @@ GROUP: Type Definitions
 
 #################################################*/
 
-#ifdef __BORLANDC__
-
-#ifndef strdup
-#define  strdup  bsd_strdup
-#endif
-
-/*
-#define  int long
-*/
-
-#endif
-
 /*  type definition of input/output pattern array
 */
 typedef  FlintType     *Patterns;

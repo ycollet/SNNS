@@ -21,18 +21,19 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#ifdef NeXT
+
 #ifdef HAVE_SYS_FILE_H
 #include <sys/file.h>
 #endif
-#else
+
 #ifdef HAVE_UNISTD_H
 #include <unistd.h>
 #endif
-#endif
+
 #include <string.h>
 #include <time.h>
 #include <sys/types.h>
+
 #ifdef HAVE_SYS_TIME_H
 #include <sys/time.h>
 #endif

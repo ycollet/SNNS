@@ -17,14 +17,3 @@
     Copyright (c) 1996-1998  SNNS Group, WSI, Univ. Tuebingen, FRG
 
 ******************************************************************************/
-#ifdef  __MSDOS__
-
-#ifndef  MSDOS_RAND_FUNCS
-#define  MSDOS_RAND_FUNCS
-
-void srand48(long seedval);
-long lrand48(void);
-double drand48(void);
-
-#endif
-#endif

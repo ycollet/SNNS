@@ -1,7 +1,6 @@
 **********************************************************************
-	SNNS Version 4.2 Linux Installation Notes
+	SNNS Version 4.3 Linux Installation Notes
 **********************************************************************
-
 
 The configure script doesn't work with the Linux 'Bourne Again Shell'.
 It needs a c-shell. To install SNNS you have two possibilties:
@@ -26,12 +25,12 @@ It needs a c-shell. To install SNNS you have two possibilties:
        path. This is normaly /usr/X11R6/lib and /usr/X11R6/include
      - run 'make' and 'make install'
 
-     - go to the SNNSv4.2/xgui/sources directory
+     - go to the SNNSv4.3/xgui/sources directory
      - repeat the steps above for the interface Makefile
      - also change the LDOPTIONS entry to 
 	-L$(XDIR) -lXaw -lXmu -lXt -lSM -lICE -lXext -lX11 -lm -lfl
 
-     - go to the SNNSv4.2/tools/sources directory
+     - go to the SNNSv4.3/tools/sources directory
      - repeat the steps above for the tools Makefile
      - also change the LDOPTIONS entry to 
 	-L$(XDIR) -lXaw -lXmu -lXt -lSM -lICE -lXext -lX11 -lm -lfl
@@ -41,7 +40,6 @@ The Linux version of LaTeX has other limits than the standard Unix
 version. With the Linux version it is possible to compile the user 
 manual using LaTeX, where under Unix biglatex has to be used.
 
-
 **********************************************************************
-      End of document 'SNNS Version 4.2 Installation Linux Notes'
+      End of document 'SNNS Version 4.3 Installation Linux Notes'
 **********************************************************************

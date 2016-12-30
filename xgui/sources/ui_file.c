@@ -30,22 +30,12 @@
 
 #include "ui.h"
 
-#ifdef ultrix
 #ifdef HAVE_SYS_FILE_H
 #include <sys/file.h>
-#endif
-#else
-#ifdef HAVE_UNISTD_H
-#include <unistd.h>
-#endif
 #endif
 
-#ifdef NeXT
-#ifdef HAVE_SYS_FILE_H
-#include <sys/file.h>
-#endif
-#include <sys/dir.h>
-#define dirent direct
+#ifdef HAVE_UNISTD_H
+#include <unistd.h>
 #endif
 
 #include <X11/Shell.h>
@@ -68,51 +58,6 @@
 #ifndef S_ISDIR
 #define S_ISDIR(mode)   (((mode) & (_S_IFMT)) == (_S_IFDIR))
 #endif
-
-#ifdef NeXT
-
-char *tempnam(dir,pfx)
-char *dir, *pfx;
-{
-char *filename,*start,*t;
-int n,count;
-
-filename = (char*)malloc(MAXPATHLEN);
-if((dir == NULL)&&(pfx == NULL))
-    tmpnam(filename);
-if((dir == NULL)&&(pfx != NULL))
-    {
-    t=tmpnam(NULL);
-    start = rindex(t,'/');
-    *start = '\0';
-    start++;
-    sprintf(filename,"%s/%s%s",t,pfx,start);
-    }
-if(dir != NULL)
-    {
-    t=tmpnam(NULL);
-    start = rindex(t,'/');
-    *start = '\0';
-    start++;
-    if(pfx != NULL)
-        {
-        if(dir[strlen(dir)-1] != '/')
-            sprintf(filename,"%s/%s%s",dir,pfx,start);
-        else
-            sprintf(filename,"%s%s%s",dir,pfx,start);
-        }
-    else
-        {
-        if(dir[strlen(dir)-1] != '/')
-            sprintf(filename,"%s/%s",dir,start);
-        else
-            sprintf(filename,"%s%s",dir,start);
-        }
-
-    }
-return(filename);
-}
-#endif /* NeXT */
 
 /*****************************************************************************
   FUNCTION : ui_loadSelectedFile

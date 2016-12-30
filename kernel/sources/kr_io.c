@@ -41,13 +41,8 @@
                             save in TACOMA-mode */
 #include "cc_mac.h"
 
-#ifdef ultrix
-#define retchk( ret_code )  if ((ret_code) == EOF)  return( KRERR_IO )
-#define RETCHKGTO( ret_code )  if ((ret_code) == EOF)  goto ende
-#else
-#define retchk( ret_code )  if ((ret_code) < 0)  return( KRERR_IO )
+#define retchk( ret_code )     if ((ret_code) < 0)  return( KRERR_IO )
 #define RETCHKGTO( ret_code )  if ((ret_code) < 0)  goto ende
-#endif
 
 /*****************************************************************************
   FUNCTION : mstrcat 

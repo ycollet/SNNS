@@ -1,8 +1,8 @@
 **********************************************************************
-			 SNNSv4.2 Readme file
+			 SNNSv4.3 Readme file
 **********************************************************************
 
-The SNNSv4.2 directory consists of the following files: 
+The SNNSv4.3 directory consists of the following files: 
 
 (Executable files  are  marked with a '*'  suffix,  directories with a
 '/',  symbolic  links with a '@' in this Readme file. These characters
@@ -13,23 +13,9 @@ ENZO/                   hookup place for generic algorithm tool ENZO.
 			seperately. 
 Readme			this file Readme
 Readme.bugs		A list of know problems
-Readme.dec		Readme file with dec notes
-Readme.getSNNS		Readme file how to obtain SNNS
 Readme.install		Readme file how to install SNNS
 Readme.license		Readme file of the SNNS license
 Readme.linux		Readme file with linux notes
-Readme.openwin		Readme file with open-windows notes
-
-build*			shell script to build SNNS
-			(must be invoked after 'configure')
-
-cleanup*		shell script to clean up the SNNS directories
-			from old executable and temporary files.
-
-configuration/		configuration directory (used by 'configure').
-
-configure*		shell script to create the proper SNNS 
-			Makefiles (must be called before 'build').
 
 default.cfg		Default SNNS window configuration file.
 
@@ -55,5 +41,5 @@ xgui/			SNNS simulator X window graphical user
 			interface directory
 
 **********************************************************************
-		     End of SNNSv4.2 Readme file
+		     End of SNNSv4.3 Readme file
 **********************************************************************

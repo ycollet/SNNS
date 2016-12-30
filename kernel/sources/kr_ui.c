@@ -371,7 +371,7 @@ krui_err  krui_setUnitActFunc(int unit_no, char *unitActFuncName)
     struct Unit   *unit_ptr;
     FunctionPtr   act_func_ptr, act_deriv_func_ptr, act_2_deriv_func_ptr;
 
-#ifdef MASPAR_KERNE
+#ifdef MASPAR_KERNEL
     MASPAR_FF1_VALIDATE_OP;
 #endif
 

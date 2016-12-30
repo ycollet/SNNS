@@ -22,18 +22,7 @@
 
 /* begin global definition section */
 
-
 #include "krui_typ.h"	/*  Interface function prototypes  */
-
-/*
-#ifdef __MSDOS__
-
-#ifndef  int
-#define  int long
-#endif
-
-#endif
-*/
 
 void (*krui_errorHandler)(int)=NULL;
 int krui_error_code;
@@ -259,18 +248,6 @@ krui_err krui_cc_deleteAllSpecialUnits(void);
 int krui_getErrorCode(void);
 krui_err krui_setErrorHandler(void(* error_Handler )(int));
 void krui_execHandler(int error_code);
-
-
-/*
-#ifdef __MSDOS__
-
-#ifndef  KR_TYPES
-#undef  int
-#endif
-
-#endif
-*/
-
 
 /* end global definition section */
 

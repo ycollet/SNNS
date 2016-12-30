@@ -19,14 +19,7 @@
 ******************************************************************************/
 #include <config.h>
 
-
 #include "ui.h"
-
-#ifndef ultrix
-#ifdef HAVE_UNISTD_H
-#include <unistd.h>
-#endif
-#endif
 
 #ifdef __linux__
 #include <linux/limits.h>
