@@ -15,14 +15,11 @@
 /*                                                                            */
 /* -------------------------------------------------------------------------- */
 
-
 #ifndef __MY_MODULE__
 #define __MY_MODULE__
-
 
 int   my_module_init( ModuleTableEntry *self, int msgc, char *msgv[] );
 int   my_module_work( PopID *parents, PopID *offsprings, PopID *ref );
 char *my_module_errMsg( int err_code );
-
 
 #endif

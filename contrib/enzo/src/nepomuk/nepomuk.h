@@ -1,9 +1,9 @@
 /*
- * File:     (@(#)nepomuk.h	1.2    8/23/95) 
+ * File:     (@(#)nepomuk.h	1.2    8/23/95)
  * Purpose:  declaration of population managment functions
  *
- *    
- *           #######     #     #     #######      #####  
+ *
+ *           #######     #     #     #######      #####
  *           #           ##    #          #      #     #
  *           #           # #   #         #       #     #
  *           ######      #  #  #        #        #     #
@@ -13,15 +13,15 @@
  *
  *             ( Evolutionaerer NetZwerk Optimierer )
  *
- *               Implementation:   knete 1.0  
- *               adapted to:       SNNSv4.0    
+ *               Implementation:   knete 1.0
+ *               adapted to:       SNNSv4.0
  *
  *                      Copyright (c) 1994 - 1995
  *      Institut fuer Logik, Komplexitaet und Deduktionssysteme
- *                        Universitaet Karlsruhe 
+ *                        Universitaet Karlsruhe
  *
  * Authors: Johannes Schaefer, Matthias Schubert, Thomas Ragg
- * Release: 1.0, August 1995 
+ * Release: 1.0, August 1995
  *
  * Permission to use, copy, modify, and distribute this software and its
  * documentation for any purpose is hereby granted without fee, provided
@@ -40,16 +40,17 @@
  * THE USE OR PERFORMANCE OF THIS SOFTWARE.
  *
  *
- *      date        | author          | description                          
- *    --------------+-----------------+------------------------------------  
- *      dd. mon. yy | name of author  | Short description of changes made.   
- *                  | (initials)      | Mark changed parts with initials.    
- *                  |                 |                                      
- *                                                                           
+ *      date        | author          | description
+ *    --------------+-----------------+------------------------------------
+ *      dd. mon. yy | name of author  | Short description of changes made.
+ *                  | (initials)      | Mark changed parts with initials.
+ *                  |                 |
+ *
  */
 
 #ifndef _NEPOMUK_H
 #define _NEPOMUK_H
+
 /* ---------------------------------------------------------------- const --- */
 /*                                                                            */
 
@@ -68,11 +69,8 @@
 
 #define KPM_INVALID_POP_ID  0
 
-
 /*                                                                            */
 /* -------------------------------------------------------------------------- */
-
-
 
 /* ---------------------------------------------------------------- types --- */
 /*                                                                            */
@@ -81,117 +79,103 @@
 /* nets are generally stored in a fixed sized array; */
 /* free and used nets additionally are linked via a simple list */
 
-typedef struct _PopNet
-{
-    int used;
-    int subPop;
+typedef struct _PopNet {
+  int used;
+  int subPop;
 
-    struct _PopNet *freeSucc;
-    struct _PopNet *usedSucc;
-    
-    memNet snnsNet;   /* this is the structure returned from krm_getNet() */
+  struct _PopNet *freeSucc;
+  struct _PopNet *usedSucc;
 
-    void *userData;
-    
+  memNet snnsNet;   /* this is the structure returned from krm_getNet() */
+
+  void *userData;
+
 } PopNet;
 
 /* the patterns are organized exactly like the nets */
 
-typedef struct _PopPat
-{
-    int used;
-    int subPop;
+typedef struct _PopPat {
+  int used;
+  int subPop;
 
-    struct _PopPat *freeSucc;
-    struct _PopPat *usedSucc;
-    
-    memPat snnsPat;  /* this is the structure returned from krm_getPat() */
+  struct _PopPat *freeSucc;
+  struct _PopPat *usedSucc;
 
-    char *name;
-    
-    void *userData;
-    
+  memPat snnsPat;  /* this is the structure returned from krm_getPat() */
+
+  char *name;
+
+  void *userData;
+
 } PopPat;
-
 
 typedef PopNet *NetID;    /* the user should only care about NetID's ... */
 typedef PopPat *PatID;    /* ... and PatID's  */
-
 typedef int     PopID;    /* ... and PopID's  */
-
 typedef int     kpm_err;  /* ... and worry about kpm_errors !    */
 
 typedef int (*CmpFct)( NetID id_1, NetID id_2 );   /* cf. strcmp() */
 
-
 /* the following structures are mainly all informations you can get about     */
 /* a net from SNNS; be careful when using them, they mai be stripped someday  */
-     
-typedef struct
-{
-    /* everything worth knowing about an unit */
 
-    int number;
-    
-    char *name,
-         *outFuncName,
-         *actFuncName,
-         *FTypeName;
-    
-    FlintType activation,
-              initAct,
-              output,
-              bias;
-    
-    int  subnetNo,
-         layerNo;
-    
-    struct PosType    position;
+typedef struct {
+  /* everything worth knowing about an unit */
 
-    int TType,
-        frozen,
-        inputType;
-    
+  int number;
+
+  char *name,
+    *outFuncName,
+    *actFuncName,
+    *FTypeName;
+
+  FlintType activation,
+    initAct,
+    output,
+    bias;
+
+  int  subnetNo,
+    layerNo;
+
+  struct PosType    position;
+
+  int TType,
+    frozen,
+    inputType;
+
 } UnitDescr;
 
+typedef struct {
+  /* everything worth knowing about a weight */
 
-typedef struct
-{
-    /* everything worth knowing about a weight */
+  FlintType strength;
+  int source, target;
 
-    FlintType strength;
-    int source, target;
-    
 } WeightDescr;
 
+typedef struct {
+  /* Default values for units */
+  int       no_of_units,
+    no_of_links;
+  FlintType act, bias;
+  int       io_type,
+    subnet_no,
+    layer_no;
+  char     *act_func,
+    *out_func;
 
-typedef struct
-{
-    /* Default values for units */
-    int       no_of_units,
-              no_of_links;
-    FlintType act, bias;
-    int       io_type,
-              subnet_no,
-              layer_no;
-    char     *act_func,
-             *out_func;
+  /* net description vectors */
 
-    /* net description vectors */
+  /* the units are numbered from 0 to no_of_units-1 */
+  /* this is NOT the SNNS-unit-number; you'll have to subtract one */
+  UnitDescr   *units;
 
-    /* the units are numbered from 0 to no_of_units-1 */
-    /* this is NOT the SNNS-unit-number; you'll have to subtract one */
-    UnitDescr   *units;
-    
-    WeightDescr *weights;
-    
+  WeightDescr *weights;
+
 } NetDescr;
 
 /*                                                                            */
 /* -------------------------------------------------------------------------- */
-
-
-
 
 /* ------------------------------------------------------------ init/exit --- */
 /*                                                                            */
@@ -214,11 +198,8 @@ extern kpm_err kpm_exit      ( void );
 /*                                                                            */
 /* -------------------------------------------------------------------------- */
 
-
-
 /* --------------------------------------------------- network management --- */
 /*                                                                            */
-
 
 /* --- kpm_setCurrPNet ------------------------------------------------------ */
 /*                                                                            */
@@ -233,7 +214,6 @@ extern kpm_err kpm_setCurrPNet( NetID id );
 
 /*                                                                            */
 /* -------------------------------------------------------------------------- */
-
 
 /* --- kpm_setCurrentNet ---------------------------------------------------- */
 /*                                                                            */
@@ -295,8 +275,6 @@ extern void kpm_sortNets( CmpFct netcmp );
 /*                                                                            */
 /* -------------------------------------------------------------------------- */
 
-
-
 /* --- kpm_deleteNet -------------------------------------------------------- */
 /*                                                                            */
 /*   Deletes the net given by id from nepomuk                                 */
@@ -306,8 +284,6 @@ extern kpm_err kpm_deleteNet( NetID id );
 
 /*                                                                            */
 /* -------------------------------------------------------------------------- */
-
-
 
 /* --- kpm_getNetDescr ------------------------------------------------------ */
 /*                                                                            */
@@ -319,7 +295,6 @@ extern kpm_err kpm_getNetDescr( NetID id, NetDescr *n );
 /*                                                                            */
 /* -------------------------------------------------------------------------- */
 
-
 /* --- kpm_freeNetDescr ----------------------------------------------------- */
 /*                                                                            */
 /*   Frees the memory allocated for a net descriptor.                         */
@@ -329,7 +304,6 @@ extern void kpm_freeNetDescr( NetDescr *n );
 
 /*                                                                            */
 /* --- kpm_freeNetDescr ----------------------------------------------------- */
-
 
 /* --- kpm_copyNet ---------------------------------------------------------- */
 /*                                                                            */
@@ -363,8 +337,6 @@ extern NetID kpm_newNet ( void *usr_data );
 /*                                                                            */
 /* -------------------------------------------------------------------------- */
 
-
-
 /* --- kpm_getNetData ------------------------------------------------------- */
 /*                                                                            */
 /*   Returns the stored userData in NetID, NULL if id's not valid             */
@@ -374,8 +346,6 @@ extern void *kpm_getNetData( NetID id );
 
 /*                                                                            */
 /* -------------------------------------------------------------------------- */
-
-
 
 /* ---------------------------------------------- managing pop-membership --- */
 /*                                                                            */
@@ -394,16 +364,12 @@ extern NetID kpm_popNextMember ( PopID p_id, NetID n_id );
 /*                                                                            */
 /* -------------------------------------------------------------------------- */
 
-
-
-
 /* --------------------------------------------------- pattern management --- */
 /*                                                                            */
 
 extern kpm_err kpm_setCurrentPattern( PatID id );
 extern PatID   kpm_loadPat( char *filename, void *usr_data );
 extern PatID   kpm_getCurrentPattern( void );
-
 
 /* --- kpm_getPatData ------------------------------------------------------- */
 /*                                                                            */
@@ -415,8 +381,6 @@ extern void *kpm_getPatData( PatID id );
 /*                                                                            */
 /* -------------------------------------------------------------------------- */
 
-
-
 /* --- kpm_getFirst/NextPat ------------------------------------------------- */
 /*                                                                            */
 /* return NULL if no more Pat available                                       */
@@ -425,10 +389,9 @@ extern void *kpm_getPatData( PatID id );
 
 extern PatID kpm_getFirstPat( void );
 extern PatID kpm_getNextPat( PatID pat );
-     
+
 /*                                                                            */
 /* -------------------------------------------------------------------------- */
-
 
 /* --- kpm_set/getPatName --------------------------------------------------- */
 /*                                                                            */

@@ -2,8 +2,8 @@
  * File:     (%W%    %G%)
  * Purpose:  declaration of the sorting routines (by fitness) for networks
  *
- *    
- *           #######     #     #     #######      #####  
+ *
+ *           #######     #     #     #######      #####
  *           #           ##    #          #      #     #
  *           #           # #   #         #       #     #
  *           ######      #  #  #        #        #     #
@@ -14,14 +14,14 @@
  *             ( Evolutionaerer NetZwerk Optimierer )
  *
 * Implementation:   1.0
- *               adapted to:       SNNSv4.0    
+ *               adapted to:       SNNSv4.0
  *
  *                      Copyright (c) 1994 - 1995
  *      Institut fuer Logik, Komplexitaet und Deduktionssysteme
- *                        Universitaet Karlsruhe 
+ *                        Universitaet Karlsruhe
  *
  * Authors: Johannes Schaefer, Matthias Schubert, Thomas Ragg
- * Release: 1.0, August 1995 
+ * Release: 1.0, August 1995
  *
  * Permission to use, copy, modify, and distribute this software and its
  * documentation for any purpose is hereby granted without fee, provided
@@ -40,13 +40,13 @@
  * THE USE OR PERFORMANCE OF THIS SOFTWARE.
  *
  *
- *      date        | author          | description                          
- *    --------------+-----------------+------------------------------------  
- *      dd. mon. yy | name of author  | Short description of changes made.   
- *                  | (initials)      | Mark changed parts with initials.    
- *                  |                 |                                      
- *                                                                           
- */                                                                           
+ *      date        | author          | description
+ *    --------------+-----------------+------------------------------------
+ *      dd. mon. yy | name of author  | Short description of changes made.
+ *                  | (initials)      | Mark changed parts with initials.
+ *                  |                 |
+ *
+ */
 
 
 #ifndef __FITTEST__

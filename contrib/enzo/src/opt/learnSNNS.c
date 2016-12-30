@@ -2,8 +2,8 @@
  * File:     (%W%    %G%)
  * Purpose:  definition of learning routines for SNNS - networks
  *
- *    
- *           #######     #     #     #######      #####  
+ *
+ *           #######     #     #     #######      #####
  *           #           ##    #          #      #     #
  *           #           # #   #         #       #     #
  *           ######      #  #  #        #        #     #
@@ -13,15 +13,15 @@
  *
  *             ( Evolutionaerer NetZwerk Optimierer )
  *
-* Implementation:   1.0
- *               adapted to:       SNNSv4.0    
+ * Implementation:   1.0
+ *               adapted to:       SNNSv4.0
  *
  *                      Copyright (c) 1994 - 1995
  *      Institut fuer Logik, Komplexitaet und Deduktionssysteme
- *                        Universitaet Karlsruhe 
+ *                        Universitaet Karlsruhe
  *
  * Authors: Johannes Schaefer, Matthias Schubert, Thomas Ragg
- * Release: 1.0, August 1995 
+ * Release: 1.0, August 1995
  *
  * Permission to use, copy, modify, and distribute this software and its
  * documentation for any purpose is hereby granted without fee, provided
@@ -40,14 +40,13 @@
  * THE USE OR PERFORMANCE OF THIS SOFTWARE.
  *
  *
- *      date        | author          | description                          
- *    --------------+-----------------+------------------------------------  
- *      dd. mon. yy | name of author  | Short description of changes made.   
- *                  | (initials)      | Mark changed parts with initials.    
- *                  |                 |                                      
- *                                                                           
- */                                                                           
-
+ *      date        | author          | description
+ *    --------------+-----------------+------------------------------------
+ *      dd. mon. yy | name of author  | Short description of changes made.
+ *                  | (initials)      | Mark changed parts with initials.
+ *                  |                 |
+ *
+ */
 
 #include "enzo.h"
 #include "learnSNNS.h"
@@ -76,12 +75,10 @@
 
 #define MAX_SNNSFCT     30
 
-
 /*--------------------------------------------------------------variables----*/
 
-
 static PatID learnPattern                   = NULL;
-static PatID testPattern                    = NULL; 
+static PatID testPattern                    = NULL;
 static char  learnfct[MAX_SNNSFCT]          = DEFAULT_LEARN_FUNC;
 static float learnParam[5]                  = {0.0, 0.0, 0.0, 5.0, 0.0};
 static int   maxEpochs                      = 50;
@@ -92,7 +89,8 @@ static char  tmpFileName[MAX_FILENAME_LEN]  = "enzo.tmp";
 
 /*--------------------------------------------------------------functions----*/
 
-static int debug =0;
+static int debug = 0;
+
 /*---------------------------------------------------------------------------*/
 /*                                                                           */
 /* int learnSNNS_init( ModuleTableEntry *self, int msgc, char *msgv[] )      */
@@ -101,47 +99,57 @@ static int debug =0;
 /*                                                                           */
 /*---------------------------------------------------------------------------*/
 
+int learnSNNS_init( ModuleTableEntry *self, int msgc, char *msgv[] ) {
+  int i;
+  debug = 0;
 
-int learnSNNS_init( ModuleTableEntry *self, int msgc, char *msgv[] )
-{
-    int i;
-    debug = 0;
-    
-    MODULE_KEY( LEARN_SNNS_KEY );
-    
-    SEL_MSG( msgv[0] )
+  MODULE_KEY( LEARN_SNNS_KEY );
 
-    MSG_CASE( GENERAL_INIT    ) { /* nothing to do */ }
-    MSG_CASE( GENERAL_EXIT    ) { /* nothing to do */ }
-    MSG_CASE( EVOLUTION_INIT  ) { /* nothing to do */ }
+  SEL_MSG( msgv[0] )
 
-    MSG_CASE( LEARN_FCT       ) { if( msgc > 1 )
-				      strcpy( learnfct, msgv[1] );
-			        }
+    MSG_CASE( GENERAL_INIT    ) {
+    /* nothing to do */
+  }
+  MSG_CASE( GENERAL_EXIT    ) {
+    /* nothing to do */
+  }
+  MSG_CASE( EVOLUTION_INIT  ) {
+    /* nothing to do */
+  }
 
-    MSG_CASE( MAX_EPOCHS      ) { if( msgc > 1 )
-				      maxEpochs = atoi( msgv[1] );
-			        }
-    MSG_CASE( MAX_TSS         ) { if( msgc > 1 )
-				      maxTss = (float) atof( msgv[1] );
-			        }
-    MSG_CASE( SHUFFLE         ) { if( msgc > 1 )
-				      shuffleFlag = FLAG_VALUE( msgv[1] );
-			        }
-    MSG_CASE( WRITE           ) { if( msgc > 1)
-				      writeFlag = FLAG_VALUE( msgv[1] );
-				}
-    MSG_CASE( TMP_FILE        ) { if (msgc > 1)
-				      strcpy( tmpFileName , msgv[1] );
-				}
-    MSG_CASE( LEARN_PARAMS    ) { for( i=0; i< 5 && i<(msgc-1); i++ )
-				      {
-					  learnParam[i] = atof( msgv[i+1] );
-				      }
-			        }
-    END_MSG;
+  MSG_CASE( LEARN_FCT       ) {
+    if( msgc > 1 )
+      strcpy( learnfct, msgv[1] );
+  }
 
-    return ( INIT_USED );
+  MSG_CASE( MAX_EPOCHS      ) {
+    if( msgc > 1 )
+      maxEpochs = atoi( msgv[1] );
+  }
+  MSG_CASE( MAX_TSS         ) {
+    if( msgc > 1 )
+      maxTss = (float) atof( msgv[1] );
+  }
+  MSG_CASE( SHUFFLE         ) {
+    if( msgc > 1 )
+      shuffleFlag = FLAG_VALUE( msgv[1] );
+  }
+  MSG_CASE( WRITE           ) {
+    if( msgc > 1)
+      writeFlag = FLAG_VALUE( msgv[1] );
+  }
+  MSG_CASE( TMP_FILE        ) {
+    if (msgc > 1)
+      strcpy( tmpFileName , msgv[1] );
+  }
+  MSG_CASE( LEARN_PARAMS    ) {
+    for( i=0; i< 5 && i<(msgc-1); i++ ) {
+      learnParam[i] = atof( msgv[i+1] );
+    }
+  }
+  END_MSG;
+
+  return ( INIT_USED );
 }
 
 /*---------------------------------------------------------------------------*/
@@ -155,115 +163,95 @@ int learnSNNS_init( ModuleTableEntry *self, int msgc, char *msgv[] )
 /*  the learnparameters too.                                                 */
 /*---------------------------------------------------------------------------*/
 
-int learnSNNS_work( PopID *parents, PopID *offsprings, PopID *reference )
-{
-    NetworkData *data;
-    
-    NetID activeMember;
+int learnSNNS_work( PopID *parents, PopID *offsprings, PopID *reference ) {
+  NetworkData *data;
 
-    int   noLearnParam, no_of_patterns,ret=KRERR_NO_ERROR;
-    int   OutParams;
-    float *return_values;
-    int   epochs;
-    float tss, testTss;
-    int ham;
-    char  fileName[MAX_FILENAME_LEN];
-    FILE  *output;
+  NetID activeMember;
+
+  int   noLearnParam, no_of_patterns,ret=KRERR_NO_ERROR;
+  int   OutParams;
+  float *return_values;
+  int   epochs;
+  float tss, testTss;
+  int ham;
+  char  fileName[MAX_FILENAME_LEN];
+  FILE  *output;
+
+  if (learnPattern == NULL)
+    learnPattern = subul_getPatID( PATTERN_LEARN );
+
+  if (testPattern == NULL)
+    testPattern = subul_getPatID( PATTERN_TEST );
 
 
-    if (learnPattern == NULL)
-      learnPattern = subul_getPatID( PATTERN_LEARN );
-    
-    if (testPattern == NULL)
-      testPattern = subul_getPatID( PATTERN_TEST );
+  /* sets learning patterns */
 
-	  
-    /* sets learning patterns */
+  if( (kpm_setCurrentPattern( learnPattern )) != KPM_NO_ERROR ) {
+    return( ERROR_PAT );
+  }
 
-    if( (kpm_setCurrentPattern( learnPattern )) != KPM_NO_ERROR )
-      {
-	return( ERROR_PAT );
+  no_of_patterns = ksh_getNoOfPatterns();
+
+  /* the learning routine */
+  /* get the first net of the offspring-population */
+
+  FOR_ALL_OFFSPRINGS( activeMember ) {
+    data = ( kpm_getNetData( activeMember ));
+
+    if( kpm_setCurrentNet( activeMember) != KPM_NO_ERROR ) {
+      return ( ERROR_ACTIVATE );
+    }
+
+    if( ( ksh_setLearnFunc(learnfct)) != KRERR_NO_ERROR ) {
+      return ( ERROR_LEARN );
+    }
+
+    /* sets learning function and determines no of parameters */
+
+    ksh_getFuncParamInfo( ksh_getLearnFunc(), LEARN_FUNC,
+			  &noLearnParam, &OutParams );
+
+    if( (kpm_setCurrentPattern( learnPattern )) != KPM_NO_ERROR ) {
+      return( ERROR_PAT );
+    }
+
+    ksh_shufflePatterns( shuffleFlag );
+
+    tss = INFINITY;
+
+    /* if demanded, open the tmp-file for the learnoutput */
+
+    for( epochs = 0; ((epochs < maxEpochs) && (tss > maxTss)); epochs++ ) {
+      ret = ksh_learnAllPatterns( learnParam, noLearnParam,
+				  &return_values, &OutParams );
+
+      if (ret != KRERR_NO_ERROR &&  ret != KRERR_DEAD_UNITS &&  ret != KRERR_NET_DEPTH) {
+	return ( ERROR_LEARNFUNC );
       }
+      tss = return_values[0]/no_of_patterns;
 
-    no_of_patterns = ksh_getNoOfPatterns();
+      if( signal_evolution ) break;  /* --- js, 28.2.94 --- */
+    }
 
-    /* the learning routine */ 
-    /* get the first net of the offspring-population */
-    
-    FOR_ALL_OFFSPRINGS( activeMember )
-    {
+    if ( writeFlag )
+      fclose( output );                /* -- masch, 22.3.94 -- */
 
+    data->epochs += epochs;
+    data->histRec.learnEpochs = epochs;
+    data->tss    = tss;
+    /* determine the testTss for the testPatterns                  */
+    /* afterwards print the whole information in the tmp-file      */
 
-	data = ( kpm_getNetData( activeMember ));
+    if( (kpm_setCurrentPattern( testPattern )) == KPM_NO_ERROR ) {
+      ksh_get_epoch_error( &testTss, &ham );
+      testTss /= ksh_getNoOfPatterns();
+      data->histRec.testTss = testTss;
+    }
+    kpm_setCurrentPattern ( learnPattern );
+  }
 
-	if( kpm_setCurrentNet( activeMember) != KPM_NO_ERROR )
-	{
-	    return ( ERROR_ACTIVATE );
-	}
-	
-
-	if( ( ksh_setLearnFunc(learnfct)) != KRERR_NO_ERROR )
-	{
-	    return ( ERROR_LEARN );
-	}
-
-	/* sets learning function and determines no of parameters */
-    
-	ksh_getFuncParamInfo( ksh_getLearnFunc(), LEARN_FUNC,
-			       &noLearnParam, &OutParams );
-
-	if( (kpm_setCurrentPattern( learnPattern )) != KPM_NO_ERROR )
-	  {
-	    return( ERROR_PAT );
-	  }
-	
-	ksh_shufflePatterns( shuffleFlag );
-	
-	tss = INFINITY;
-
-
-	/* if demanded, open the tmp-file for the learnoutput */
-	  
-	for( epochs = 0; ((epochs < maxEpochs) && (tss > maxTss)); epochs++ )
-	{
-
-
-	    ret = ksh_learnAllPatterns( learnParam, noLearnParam,
-				   &return_values, &OutParams );
-
-	    if (ret != KRERR_NO_ERROR &&  ret != KRERR_DEAD_UNITS &&  ret != KRERR_NET_DEPTH){
-	      return ( ERROR_LEARNFUNC );
-	    }
-	    tss = return_values[0]/no_of_patterns;
-	    
-
-	    
-	    if( signal_evolution ) break;  /* --- js, 28.2.94 --- */
-	}
-	
-	if ( writeFlag )
-	  fclose( output );                /* -- masch, 22.3.94 -- */
-
-	data->epochs += epochs;
-	data->histRec.learnEpochs = epochs;
-	data->tss    = tss; 
-	/* determine the testTss for the testPatterns                  */
-	/* afterwards print the whole information in the tmp-file      */
-	
-	if( (kpm_setCurrentPattern( testPattern )) == KPM_NO_ERROR )
-	  {
-	    ksh_get_epoch_error( &testTss, &ham );
-	    testTss /= ksh_getNoOfPatterns();
-	    data->histRec.testTss = testTss;
-	  }
-	kpm_setCurrentPattern ( learnPattern );
-	
-      }
-
-    
-    return( MODULE_NO_ERROR ); 
+  return( MODULE_NO_ERROR );
 }
-
 
 /*---------------------------------------------------------------------------*/
 /*                                                                           */
@@ -274,33 +262,29 @@ int learnSNNS_work( PopID *parents, PopID *offsprings, PopID *reference )
 /*                                                                           */
 /*---------------------------------------------------------------------------*/
 
-char *learnSNNS_errMsg(int err_code)
-{
+char *learnSNNS_errMsg(int err_code) {
   static char msg[MAX_ERR_MSG_LEN];
-  
-  switch ( err_code )
-    {
-    case MODULE_NO_ERROR :
-      return ( "learnSNNS : No Error found" );
 
-    case ERROR_PAT :
-      return ("learnSNNS : Can't set the learnpattern via Nepomuk");
+  switch ( err_code ) {
+  case MODULE_NO_ERROR :
+    return ( "learnSNNS : No Error found" );
 
-    case ERROR_LEARN :
-      sprintf(msg,"learnSNNS : Can't activate the SNNS-learnfunction %s",
-	      learnfct);
-      return ( msg );
+  case ERROR_PAT :
+    return ("learnSNNS : Can't set the learnpattern via Nepomuk");
 
-    case ERROR_LEARNFUNC :
-      sprintf(msg,"learnSNNS : An error occurred during learning  with SNNS-learnfunction %s",
-	      learnfct);
-      return ( msg );
+  case ERROR_LEARN :
+    sprintf(msg,"learnSNNS : Can't activate the SNNS-learnfunction %s",
+	    learnfct);
+    return ( msg );
 
-    case ERROR_ACTIVATE :
-      return ("learnSNNS : Can't activate a offspring-net");
-    }
+  case ERROR_LEARNFUNC :
+    sprintf(msg,"learnSNNS : An error occurred during learning  with SNNS-learnfunction %s",
+	    learnfct);
+    return ( msg );
+
+  case ERROR_ACTIVATE :
+    return ("learnSNNS : Can't activate a offspring-net");
+  }
 
   return ( "learnSNNS : Unknown error" );
-
 }
-

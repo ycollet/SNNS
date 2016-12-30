@@ -1,14 +1,14 @@
 /*
- * File:    (%W%    %G%) 
- * Purpose: This function writes all information about the testing of the nets   
- *          in two files. The first file contains all information about the        
- *          generated nets (.cross), the second file contains the best, worst       
- *          and average fitness of the parent-population (.popcross).               
- *          The information are written by the testing functions e.g.              
- *          bestGuessHigh, bestGuessLow or classes. 
+ * File:    (%W%    %G%)
+ * Purpose: This function writes all information about the testing of the nets
+ *          in two files. The first file contains all information about the
+ *          generated nets (.cross), the second file contains the best, worst
+ *          and average fitness of the parent-population (.popcross).
+ *          The information are written by the testing functions e.g.
+ *          bestGuessHigh, bestGuessLow or classes.
  *
- *    
- *           #######     #     #     #######      #####  
+ *
+ *           #######     #     #     #######      #####
  *           #           ##    #          #      #     #
  *           #           # #   #         #       #     #
  *           ######      #  #  #        #        #     #
@@ -18,15 +18,15 @@
  *
  *             ( Evolutionaerer NetZwerk Optimierer )
  *
-* Implementation:   1.0
- *               adapted to:       SNNSv4.0    
+ * Implementation:   1.0
+ *               adapted to:       SNNSv4.0
  *
  *                      Copyright (c) 1994 - 1995
  *      Institut fuer Logik, Komplexitaet und Deduktionssysteme
- *                        Universitaet Karlsruhe 
+ *                        Universitaet Karlsruhe
  *
  * Authors: Johannes Schaefer, Matthias Schubert, Thomas Ragg
- * Release: 1.0, August 1995 
+ * Release: 1.0, August 1995
  *
  * Permission to use, copy, modify, and distribute this software and its
  * documentation for any purpose is hereby granted without fee, provided
@@ -45,13 +45,13 @@
  * THE USE OR PERFORMANCE OF THIS SOFTWARE.
  *
  *
- *      date        | author          | description                          
- *    --------------+-----------------+------------------------------------  
- *      dd. mon. yy | name of author  | Short description of changes made.   
- *                  | (initials)      | Mark changed parts with initials.    
- *                  |                 |                                      
- *                                                                           
- */                                                                           
+ *      date        | author          | description
+ *    --------------+-----------------+------------------------------------
+ *      dd. mon. yy | name of author  | Short description of changes made.
+ *                  | (initials)      | Mark changed parts with initials.
+ *                  |                 |
+ *
+ */
 
 #include "enzo.h"
 #include "histCross.h"
@@ -63,14 +63,11 @@
 #define ERROR_MEM         2
 #define ERROR_FILEOPEN    3
 
-
-
 #define OUTELEM_TEXT   "# No.      hit    miss    none    %%correct\n"
 #define OUTELEM_FORMAT "%4d    %6d  %6d  %6d  %10.4f\n"
 
 #define OUTPOP_TEXT    "# No.     best         worst       average %%correct\n"
 #define OUTPOP_FORMAT  "%4d  %10.4f    %10.4f    %10.4f\n"
-
 
 /*-----------------------------------------------------------------types-----*/
 
@@ -79,107 +76,98 @@ static char        histFileName[255] = "enzo_hist";
 
 /*-----------------------------------------------------------------functions-*/
 
+int histCross_init( ModuleTableEntry *self, int msgc, char *msgv[] ) {
+  char fileName[MAX_FILENAME_LEN];
 
-int histCross_init( ModuleTableEntry *self, int msgc, char *msgv[] )
-{
-    char fileName[MAX_FILENAME_LEN];
-    
-    MODULE_KEY( HIST_CROSS_KEY );
+  MODULE_KEY( HIST_CROSS_KEY );
 
-    SEL_MSG( msgv[0] )
+  SEL_MSG( msgv[0] )
 
-    MSG_CASE( GENERAL_INIT ) { /* nothing to do */ }
-    MSG_CASE( GENERAL_EXIT )
-    {
-	if( hfpCross )    fclose( hfpCross );
-	if( hfpPopcross ) fclose( hfpPopcross );
-    }
+    MSG_CASE( GENERAL_INIT ) {
+    /* nothing to do */
+  }
+  MSG_CASE( GENERAL_EXIT ) {
+    if( hfpCross )    fclose( hfpCross );
+    if( hfpPopcross ) fclose( hfpPopcross );
+  }
 
-    MSG_CASE( EVOLUTION_INIT )
-    {
-	sprintf(fileName,"%s.cross",histFileName);
-	if( (hfpCross = fopen( fileName, "w" )) == NULL )
-	    return( ERROR_FILEOPEN );
-	setlinebuf( hfpCross );
-	fprintf( hfpCross, OUTELEM_TEXT );
+  MSG_CASE( EVOLUTION_INIT ) {
+    sprintf(fileName,"%s.cross",histFileName);
+    if( (hfpCross = fopen( fileName, "w" )) == NULL )
+      return( ERROR_FILEOPEN );
+    setlinebuf( hfpCross );
+    fprintf( hfpCross, OUTELEM_TEXT );
 
-	sprintf(fileName,"%s.popcross",histFileName);
-	if( (hfpPopcross = fopen( fileName, "w" )) == NULL )
-	    return( ERROR_FILEOPEN );
-	setlinebuf( hfpPopcross );
-	fprintf( hfpPopcross, OUTPOP_TEXT );
-    }
-    
-    MSG_CASE( HISTORY_FILE ) { if( msgc > 1 )  strcpy ( histFileName,msgv[1] );}
-    
-    END_MSG;
+    sprintf(fileName,"%s.popcross",histFileName);
+    if( (hfpPopcross = fopen( fileName, "w" )) == NULL )
+      return( ERROR_FILEOPEN );
+    setlinebuf( hfpPopcross );
+    fprintf( hfpPopcross, OUTPOP_TEXT );
+  }
 
-    return( INIT_USED );
+  MSG_CASE( HISTORY_FILE ) {
+    if( msgc > 1 )  strcpy ( histFileName,msgv[1] );
+  }
+
+  END_MSG;
+
+  return( INIT_USED );
 }
-
 
 /*---------------------------------------------------------------------------*/
 
-int histCross_work( PopID *parents, PopID *offsprings, PopID *ref )
-{
+int histCross_work( PopID *parents, PopID *offsprings, PopID *ref ) {
   NetID  net;
   NetworkData *netData;
   int pars = 0;
-  
+
   static int genCnt = 0;
   float maxHit = -INFINITY,
-        minHit =  INFINITY,
-        aveHit =  0.0;
-    
+    minHit =  INFINITY,
+    aveHit =  0.0;
 
-  FOR_ALL_PARENTS( net )
-  {
-      pars ++;
-      netData = GET_NET_DATA( net );
-      
-      aveHit += netData->histRec.testFitness;
-	
-      if( netData->histRec.testFitness > maxHit )
-          maxHit = netData->histRec.testFitness;
-      
-      if( netData->histRec.testFitness < minHit )
-	  minHit = netData->histRec.testFitness;
+
+  FOR_ALL_PARENTS( net ) {
+    pars ++;
+    netData = GET_NET_DATA( net );
+
+    aveHit += netData->histRec.testFitness;
+
+    if( netData->histRec.testFitness > maxHit )
+      maxHit = netData->histRec.testFitness;
+
+    if( netData->histRec.testFitness < minHit )
+      minHit = netData->histRec.testFitness;
   }
-  
-  if( pars )
-  {
-      aveHit /= pars;
-      fprintf( hfpPopcross, OUTPOP_FORMAT, genCnt, maxHit, minHit, aveHit );
-      genCnt++;
+
+  if( pars ) {
+    aveHit /= pars;
+    fprintf( hfpPopcross, OUTPOP_FORMAT, genCnt, maxHit, minHit, aveHit );
+    genCnt++;
   }
-  
-  
-  FOR_ALL_OFFSPRINGS( net )
-  {
-      netData = GET_NET_DATA( net );
-      fprintf( hfpCross, OUTELEM_FORMAT, netData->histID,
-  	                                netData->histRec.testHit,
-	                                netData->histRec.testMiss,
-	                                netData->histRec.testNone,
-	                                netData->histRec.testFitness  );
+
+  FOR_ALL_OFFSPRINGS( net ) {
+    netData = GET_NET_DATA( net );
+    fprintf( hfpCross, OUTELEM_FORMAT, netData->histID,
+	     netData->histRec.testHit,
+	     netData->histRec.testMiss,
+	     netData->histRec.testNone,
+	     netData->histRec.testFitness  );
   }
-  
+
   return( MODULE_NO_ERROR );
 }
 
 /*---------------------------------------------------------------------------*/
 
-char *histCross_errMsg( int err_code )
-{
-  switch (err_code) 
-    {
-    case MODULE_NO_ERROR :
-      return ("histCross : No Error found");
-    case ERROR_FILEOPEN :
-      return ("histCross : Can't open history-file for writing");
-    case ERROR_MEM :
-      return ("histCross : Memory excess");
-    }
+char *histCross_errMsg( int err_code ) {
+  switch (err_code) {
+  case MODULE_NO_ERROR :
+    return ("histCross : No Error found");
+  case ERROR_FILEOPEN :
+    return ("histCross : Can't open history-file for writing");
+  case ERROR_MEM :
+    return ("histCross : Memory excess");
+  }
   return( "histCross : Unknown error" );
 }
- 

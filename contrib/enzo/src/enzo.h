@@ -2,8 +2,8 @@
  * File:     (%W%    %G%)
  * Purpose:  main include file, included by all modules
  *
- *    
- *           #######     #     #     #######      #####  
+ *
+ *           #######     #     #     #######      #####
  *           #           ##    #          #      #     #
  *           #           # #   #         #       #     #
  *           ######      #  #  #        #        #     #
@@ -13,15 +13,15 @@
  *
  *             ( Evolutionaerer NetZwerk Optimierer )
  *
-* Implementation:   1.0
- *               adapted to:       SNNSv4.0    
+ * Implementation:   1.0
+ *               adapted to:       SNNSv4.0
  *
  *                      Copyright (c) 1994 - 1995
  *      Institut fuer Logik, Komplexitaet und Deduktionssysteme
- *                        Universitaet Karlsruhe 
+ *                        Universitaet Karlsruhe
  *
  * Authors: Johannes Schaefer, Matthias Schubert, Thomas Ragg
- * Release: 1.0, August 1995 
+ * Release: 1.0, August 1995
  *
  * Permission to use, copy, modify, and distribute this software and its
  * documentation for any purpose is hereby granted without fee, provided
@@ -40,13 +40,13 @@
  * THE USE OR PERFORMANCE OF THIS SOFTWARE.
  *
  *
- *      date        | author          | description                          
- *    --------------+-----------------+------------------------------------  
- *      dd. mon. yy | name of author  | Short description of changes made.   
- *                  | (initials)      | Mark changed parts with initials.    
- *                  |                 |                                      
- *                                                                           
- */                                                                           
+ *      date        | author          | description
+ *    --------------+-----------------+------------------------------------
+ *      dd. mon. yy | name of author  | Short description of changes made.
+ *                  | (initials)      | Mark changed parts with initials.
+ *                  |                 |
+ *
+ */
 
 #ifndef __ENZO__
 #define __ENZO__
@@ -60,7 +60,6 @@
 
 #include "proto.h"
 
-
 #include "glob_typ.h"
 #include "kr_typ.h"
 #include "enzo_mem_typ.h"
@@ -71,20 +70,14 @@
 #include "networkData.h"
 #include "subUtils.h"
 
-#include <stdio.h>
-
 /*  extern time_t time( time_t *tloc );  */
-
-
 
 /* ------------------------------------------------------------ constants --- */
 /*                                                                            */
-
 /* some errors are all the same for every module                              */
 
 #define MODULE_NO_ERROR    0
 #define MODULE_UNKNOWN_ERR 1
-
 
 /* return codes for the init-functions                                        */
 /*    INIT_return < 0  -- warning                                             */
@@ -93,7 +86,6 @@
 #define INIT_NOT_USED 0
 #define INIT_USED     1  /* note: this is also the code for UNKNOWN_ERROR     */
 
-
 /* The following strings are used for general initialization/exit.            */
 /* Do NOT use them as tokens!                                                 */
 
@@ -101,12 +93,10 @@
 #define EVOLUTION_INIT "start_evolution"  /* issued after pre-evolution       */
 #define GENERAL_EXIT   "exit"             /* issued at the very end           */
 
-
 #define WARN_EVOLUTION  -1    /* a warning has occured                        */
 #define DO_EVOLUTION     0    /* the struggle for life continues              */
 #define STOP_EVOLUTION   1    /* regular termination of evolution             */
 #define ERR_EVOLUTION   42    /* something's gone somewhere terribly wrong    */
-
 
 /* Module-flags indicating the status of a module                             */
 
@@ -120,7 +110,7 @@
 #define PATTERN_LEARN "learn"            /* training the neural net           */
 #define PATTERN_TEST  "test"             /* evaluating generalization fitness */
 #define PATTERN_CROSS "crossvalidation"  /* independent validation patterns   */
-                                         /* not used for optimizing           */
+/* not used for optimizing           */
 
 
 /* Indicators for the type of a module                                        */
@@ -138,52 +128,42 @@
 #define MTYPE_SURVIVAL   9
 #define MTYPE_POST      10
 
-
 /*                                                                            */
 /* -------------------------------------------------------------------------- */
-
-
 
 /* ---------------------------------------------------------------- types --- */
 /*                                                                            */
 
 typedef int   ModuleWorkFunction( PopID *parents,
-				  PopID *offsprings,
-				  PopID *ref);
+                                  PopID *offsprings,
+                                  PopID *ref);
 typedef char *ModuleErrFunction ( int err_code );
 
+typedef struct _ModuleTableEntry {
+  char *name;
 
-typedef struct _ModuleTableEntry
-{
-    char *name;
-    
-    /*  ModuleInitFunction *initFct;    this doesn't work ... */
-    int (*initFct)( struct _ModuleTableEntry *self, int msgc, char *msgv[] );
+  /*  ModuleInitFunction *initFct;    this doesn't work ... */
+  int (*initFct)( struct _ModuleTableEntry *self, int msgc, char *msgv[] );
 
-    ModuleWorkFunction *workFct;
-    ModuleErrFunction  *errFct;
+  ModuleWorkFunction *workFct;
+  ModuleErrFunction  *errFct;
 
-    int type;
-    int flags;
-    
+  int type;
+  int flags;
+
 } ModuleTableEntry;
 
 typedef int ModuleInitFunction( ModuleTableEntry *self,
-			        int msgc, char *msgv[]   );
-
-
+                                int msgc, char *msgv[]   );
 
 /*                                                                            */
 /* -------------------------------------------------------------------------- */
 
-
-
 /* ---------------------------------------------------------- global vars --- */
 /*                                                                            */
 
-                                        /*               def'd in ...         */
+/*               def'd in ...         */
 extern ModuleTableEntry ModuleTable[];  /*                          m_table.c */
-
 
 /*   If a signal occured, this variable is set to TRUE,                       */
 /*   so time consuming modules can check for it and stop working.             */
@@ -191,8 +171,6 @@ extern int signal_evolution;            /* TRUE iff a signal occured;         */
 
 /*                                                                            */
 /* -------------------------------------------------------------------------- */
-
-
 
 /* ------------------------------------------------------------ functions --- */
 /*                                                                            */
@@ -209,7 +187,6 @@ extern void enzo_actModule( ModuleTableEntry *module, int prio );
 /*                                                                            */
 /* -------------------------------------------------------------------------- */
 
-
 /* --- enzo_logprint ------------------------------------------------------- */
 /*                                                                            */
 /*   Function for writing into the log-file; use just like printf().          */
@@ -221,16 +198,11 @@ extern void enzo_logprint( char *fmt, ... );
 /*                                                                            */
 /* -------------------------------------------------------------------------- */
 
-
-
 extern double drand48(void);
 extern long   lrand48(void);
 extern void   srand48(long seedval);
 
-
 /*                                                                            */
 /* -------------------------------------------------------------------------- */
-
-
 
 #endif

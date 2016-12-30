@@ -5,8 +5,7 @@
 #include <cupittypes.h>
 #include <math.h>
 
-Real sigmoid (Real x)
-{
+Real sigmoid (Real x) {
   Real y;
   if (x < -16.0)
     y = 0;
@@ -19,11 +18,9 @@ Real sigmoid (Real x)
   /*return x;*/
 }
 
-Real sigmoidPrime (Real x)
-{
+Real sigmoidPrime (Real x) {
   Real y;
   y = (x * (1-x) );
-  
+
   return y;
 }
-

@@ -1,11 +1,11 @@
 /*
  * File:     (%W%    %G%)
- * Purpose:  HiddenInitPop crates random net for the initial population;       
- *           the lower bound on the number of hidden units is 0 if not set,         
- *           the upper is given by the reference net.  
+ * Purpose:  HiddenInitPop crates random net for the initial population;
+ *           the lower bound on the number of hidden units is 0 if not set,
+ *           the upper is given by the reference net.
  *
- *    
- *           #######     #     #     #######      #####  
+ *
+ *           #######     #     #     #######      #####
  *           #           ##    #          #      #     #
  *           #           # #   #         #       #     #
  *           ######      #  #  #        #        #     #
@@ -15,15 +15,15 @@
  *
  *             ( Evolutionaerer NetZwerk Optimierer )
  *
-* Implementation:   1.0
- *               adapted to:       SNNSv4.0    
+ * Implementation:   1.0
+ *               adapted to:       SNNSv4.0
  *
  *                      Copyright (c) 1994 - 1995
  *      Institut fuer Logik, Komplexitaet und Deduktionssysteme
- *                        Universitaet Karlsruhe 
+ *                        Universitaet Karlsruhe
  *
  * Authors: Johannes Schaefer, Matthias Schubert, Thomas Ragg
- * Release: 1.0, August 1995 
+ * Release: 1.0, August 1995
  *
  * Permission to use, copy, modify, and distribute this software and its
  * documentation for any purpose is hereby granted without fee, provided
@@ -42,15 +42,13 @@
  * THE USE OR PERFORMANCE OF THIS SOFTWARE.
  *
  *
- *      date        | author          | description                          
- *    --------------+-----------------+------------------------------------  
- *      dd. mon. yy | name of author  | Short description of changes made.   
- *                  | (initials)      | Mark changed parts with initials.    
- *                  |                 |                                      
- *                                                                           
- */                                                                           
-
-
+ *      date        | author          | description
+ *    --------------+-----------------+------------------------------------
+ *      dd. mon. yy | name of author  | Short description of changes made.
+ *                  | (initials)      | Mark changed parts with initials.
+ *                  |                 |
+ *
+ */
 
 #include "enzo.h"
 #include "hiddenInitPop.h"
@@ -60,9 +58,7 @@
 #define HIDDEN_INIT_POP_KEY       "hiddenInitPop"
 #define LOWER_BOUND             "minNoHidden"
 
-
 #define MAX_DEL_UNITS  200
-
 
 /*--------------------------------------------------------------variables----*/
 
@@ -75,27 +71,25 @@ static int   lowerBound = 0;
 /*                                                                           */
 /*---------------------------------------------------------------------------*/
 
-static void deleteHiddenUnits( int cnt )
-{
-    int i, j, h, n;
-    int delList[MAX_DEL_UNITS];
+static void deleteHiddenUnits( int cnt ) {
+  int i, j, h, n;
+  int delList[MAX_DEL_UNITS];
 
-    /* create a list of all hidden units */
-    for( h=0, i = ksh_getFirstUnit(); i != 0; i = ksh_getNextUnit() )
-    {
-	if( ksh_getUnitTType( i ) == HIDDEN )  delList[h++] = i;
-    }
+  /* create a list of all hidden units */
+  for( h=0, i = ksh_getFirstUnit(); i != 0; i = ksh_getNextUnit() ) {
+    if( ksh_getUnitTType( i ) == HIDDEN )  delList[h++] = i;
+  }
 
-    /* shuffle this list */
-    for( i = 0; i < h; i++ )
-    {
-	j = (lrand48() % (h-i)) + i;
-	n = delList[i];	delList[i] = delList[j]; delList[j] = n;
-    }
+  /* shuffle this list */
+  for( i = 0; i < h; i++ ) {
+    j = (lrand48() % (h-i)) + i;
+    n = delList[i];
+    delList[i] = delList[j];
+    delList[j] = n;
+  }
 
-    /* and delete the first count elements */
-    ksh_deleteUnitList( cnt, delList );
-
+  /* and delete the first count elements */
+  ksh_deleteUnitList( cnt, delList );
 }
 
 /*--------------------------------------------------------------------------*/
@@ -106,25 +100,29 @@ static void deleteHiddenUnits( int cnt )
 /*                                                                          */
 /*--------------------------------------------------------------------------*/
 
-int hiddenInitPop_init (ModuleTableEntry *self, int msgc, char *msgv[] )
-{
-    MODULE_KEY( HIDDEN_INIT_POP_KEY );
+int hiddenInitPop_init (ModuleTableEntry *self, int msgc, char *msgv[] ) {
+  MODULE_KEY( HIDDEN_INIT_POP_KEY );
 
-    SEL_MSG( msgv[0] )
+  SEL_MSG( msgv[0] )
 
-    MSG_CASE( GENERAL_INIT    ) { /* nothing to do */ }
-    MSG_CASE( GENERAL_EXIT    ) { /* nothing to do */ }
-    MSG_CASE( EVOLUTION_INIT  ) { /* nothing to do */ }
+    MSG_CASE( GENERAL_INIT    ) {
+    /* nothing to do */
+  }
+  MSG_CASE( GENERAL_EXIT    ) {
+    /* nothing to do */
+  }
+  MSG_CASE( EVOLUTION_INIT  ) {
+    /* nothing to do */
+  }
 
-    MSG_CASE( LOWER_BOUND )     {  if( msgc > 1 )
-	                               lowerBound = atoi( msgv[1] );
-			        }
-    END_MSG;
+  MSG_CASE( LOWER_BOUND )     {
+    if( msgc > 1 )
+      lowerBound = atoi( msgv[1] );
+  }
+  END_MSG;
 
-    return ( INIT_USED );
+  return ( INIT_USED );
 }
-
-
 
 /*--------------------------------------------------------------------------*/
 /*                                                                          */
@@ -134,29 +132,23 @@ int hiddenInitPop_init (ModuleTableEntry *self, int msgc, char *msgv[] )
 /*                                                                          */
 /*--------------------------------------------------------------------------*/
 
-
-int hiddenInitPop_work (PopID *parents, PopID *offsprings, PopID *reference)
-{
+int hiddenInitPop_work (PopID *parents, PopID *offsprings, PopID *reference) {
   NetID activeNet;
   int hiddenUnits;
   int maxHiddenUnits;
 
-  
-
   FOR_ALL_OFFSPRINGS( activeNet )
+  {
 
-    {
+    kpm_setCurrentNet( activeNet );
+    maxHiddenUnits = ksh_getNoOfTTypeUnits( HIDDEN );
+    hiddenUnits = (int) RANDOM( lowerBound, maxHiddenUnits+1 );
 
-      kpm_setCurrentNet( activeNet );
-      maxHiddenUnits = ksh_getNoOfTTypeUnits( HIDDEN );
-      hiddenUnits = (int) RANDOM( lowerBound, maxHiddenUnits+1 );
-      
-      deleteHiddenUnits( maxHiddenUnits - hiddenUnits );
+    deleteHiddenUnits( maxHiddenUnits - hiddenUnits );
 
-    } 
+  }
 
   return (MODULE_NO_ERROR);
-
 }
 
 /*--------------------------------------------------------------------------*/
@@ -166,13 +158,10 @@ int hiddenInitPop_work (PopID *parents, PopID *offsprings, PopID *reference)
 /*                                                                          */
 /*--------------------------------------------------------------------------*/
 
-char *hiddenInitPop_errMsg (int err_code)
-{
-  switch ( err_code )       
-    {                   
-    case MODULE_NO_ERROR :
-      return ("hiddenInitPop : No error found");
-    }
+char *hiddenInitPop_errMsg (int err_code) {
+  switch ( err_code ) {
+  case MODULE_NO_ERROR :
+    return ("hiddenInitPop : No error found");
+  }
   return ("hiddenInitPop : unknown error");
 }
-

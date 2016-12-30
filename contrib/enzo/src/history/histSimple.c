@@ -1,9 +1,9 @@
 /*
  * File:     (%W%    %G%)
- * Purpose:  These funcions write a simple history of all networks in a file  
+ * Purpose:  These funcions write a simple history of all networks in a file
  *
- *    
- *           #######     #     #     #######      #####  
+ *
+ *           #######     #     #     #######      #####
  *           #           ##    #          #      #     #
  *           #           # #   #         #       #     #
  *           ######      #  #  #        #        #     #
@@ -13,15 +13,15 @@
  *
  *             ( Evolutionaerer NetZwerk Optimierer )
  *
-* Implementation:   1.0
- *               adapted to:       SNNSv4.0    
+ * Implementation:   1.0
+ *               adapted to:       SNNSv4.0
  *
  *                      Copyright (c) 1994 - 1995
  *      Institut fuer Logik, Komplexitaet und Deduktionssysteme
- *                        Universitaet Karlsruhe 
+ *                        Universitaet Karlsruhe
  *
  * Authors: Johannes Schaefer, Matthias Schubert, Thomas Ragg
- * Release: 1.0, August 1995 
+ * Release: 1.0, August 1995
  *
  * Permission to use, copy, modify, and distribute this software and its
  * documentation for any purpose is hereby granted without fee, provided
@@ -40,14 +40,13 @@
  * THE USE OR PERFORMANCE OF THIS SOFTWARE.
  *
  *
- *      date        | author          | description                          
- *    --------------+-----------------+------------------------------------  
- *      dd. mon. yy | name of author  | Short description of changes made.   
- *                  | (initials)      | Mark changed parts with initials.    
- *                  |                 |                                      
- *                                                                           
- */                                                                           
-
+ *      date        | author          | description
+ *    --------------+-----------------+------------------------------------
+ *      dd. mon. yy | name of author  | Short description of changes made.
+ *                  | (initials)      | Mark changed parts with initials.
+ *                  |                 |
+ *
+ */
 
 #include "enzo.h"
 #include "histSimple.h"
@@ -62,94 +61,89 @@
 #define HIST_MEM_ERR      2
 #define HISTFILE_OPEN_ERR 3
 
-
-
-#define OUT_TEXT \
-" No : (first) | parent1 | fitness | learn epochs | relearn epochs |\
+#define OUT_TEXT							\
+  " No : (first) | parent1 | fitness | learn epochs | relearn epochs |\
  tss | testTss | testHam | noUnits | noWeights \n"
-#define OUT_FORMAT \
-"%4d: (%3d)\t| %4d\t| %f\t| %d\t| %d\t| %f\t| %f\t |%4d | %3d | %4d  \n"
-
+#define OUT_FORMAT							\
+  "%4d: (%3d)\t| %4d\t| %f\t| %d\t| %d\t| %f\t| %f\t |%4d | %3d | %4d  \n"
 
 /* ------------------------------------------------------------ variables ---*/
-
 
 static char *histfile;
 static FILE *hfp;
 
-
 /*---------------------------------------------------------------------------*/
 
-int histSimple_init( ModuleTableEntry *self, int msgc, char *msgv[] )
-{
-    char filename[MAX_FILENAME_LEN];
-    
-    MODULE_KEY( HIST_SIMPLE_KEY );
+int histSimple_init( ModuleTableEntry *self, int msgc, char *msgv[] ) {
+  char filename[MAX_FILENAME_LEN];
 
-    SEL_MSG( msgv[0] )
+  MODULE_KEY( HIST_SIMPLE_KEY );
 
-    MSG_CASE( GENERAL_INIT   ) { /* nothing to do */ }
-    MSG_CASE( GENERAL_EXIT   ) { if( hfp )  fclose( hfp );  }
+  SEL_MSG( msgv[0] )
 
-    MSG_CASE( EVOLUTION_INIT )
-    {
-	sprintf( filename, "%s.%s", histfile, FILE_EXTENSION);
-	if( (hfp = fopen( filename, "w" )) == NULL )
-	    return( HISTFILE_OPEN_ERR );
-	setlinebuf( hfp );
-	fprintf( hfp, OUT_TEXT );
-    }
+    MSG_CASE( GENERAL_INIT   ) {
+    /* nothing to do */
+  }
+  MSG_CASE( GENERAL_EXIT   ) {
+    if( hfp )  fclose( hfp );
+  }
 
-    MSG_CASE( HISTORY_FILE )    { if( msgc > 1 ) histfile = strdup( msgv[1] ); }
-    
-    END_MSG;
+  MSG_CASE( EVOLUTION_INIT ) {
+    sprintf( filename, "%s.%s", histfile, FILE_EXTENSION);
+    if( (hfp = fopen( filename, "w" )) == NULL )
+      return( HISTFILE_OPEN_ERR );
+    setlinebuf( hfp );
+    fprintf( hfp, OUT_TEXT );
+  }
 
-    return( INIT_USED );
+  MSG_CASE( HISTORY_FILE )    {
+    if( msgc > 1 ) histfile = strdup( msgv[1] );
+  }
+
+  END_MSG;
+
+  return( INIT_USED );
 }
 
 /*---------------------------------------------------------------------------*/
 
-int histSimple_work( PopID *parents, PopID *offsprings, PopID *ref )
-{
-    static int generationCnt = 0;
+int histSimple_work( PopID *parents, PopID *offsprings, PopID *ref ) {
+  static int generationCnt = 0;
 
-    NetID  net;
-    NetworkData *netData;
-    int dummy, weights;
+  NetID  net;
+  NetworkData *netData;
+  int dummy, weights;
 
+  generationCnt++;
 
-    generationCnt++;
+  FOR_ALL_OFFSPRINGS( net ) {
+    netData = GET_NET_DATA( net );
 
-    FOR_ALL_OFFSPRINGS( net )
-    {
-	netData = GET_NET_DATA( net );
+    ksh_getNetInfo( &dummy, &weights, &dummy, &dummy );
+    fprintf( hfp, OUT_FORMAT , netData->histID,
+	     generationCnt,
+	     netData->histRec.parent1,
+	     netData->fitness,
+	     netData->histRec.firstEpochs,
+	     netData->histRec.learnEpochs,
+	     netData->tss,
+	     netData->histRec.testTss,
+	     netData->histRec.testHam,
+	     ksh_getNoOfUnits(),
+	     weights                        );
+  }
 
-	ksh_getNetInfo( &dummy, &weights, &dummy, &dummy );
-	fprintf( hfp, OUT_FORMAT , netData->histID,
-		      generationCnt,
-		      netData->histRec.parent1,
-		      netData->fitness,
-		      netData->histRec.firstEpochs,
-		      netData->histRec.learnEpochs,
-		      netData->tss,
-		      netData->histRec.testTss,
-		      netData->histRec.testHam,
-		      ksh_getNoOfUnits(),
-		      weights                        );
-    }
-
-    return( MODULE_NO_ERROR );
+  return( MODULE_NO_ERROR );
 }
 
 /*---------------------------------------------------------------------------*/
 
-char *histSimple_errMsg( int err_code )
-{
-    static int err_cnt = 4;
-    static char *err_msg[] =
-    {"no error (history)", "unknown error (history)",
-     "memory excess in module history", "can't open history-file"};
+char *histSimple_errMsg( int err_code ) {
+  static int err_cnt = 4;
+  static char *err_msg[] = {
+    "no error (history)", "unknown error (history)",
+    "memory excess in module history", "can't open history-file"
+  };
 
-    return( err_msg[ err_code < err_cnt ? err_code : MODULE_UNKNOWN_ERR ] );
+  return( err_msg[ err_code < err_cnt ? err_code : MODULE_UNKNOWN_ERR ] );
 }
-

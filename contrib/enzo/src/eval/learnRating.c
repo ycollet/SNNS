@@ -2,8 +2,8 @@
  * File:     (%W%    %G%)
  * Purpose:  definition of learn rating evaluation functions
  *
- *    
- *           #######     #     #     #######      #####  
+ *
+ *           #######     #     #     #######      #####
  *           #           ##    #          #      #     #
  *           #           # #   #         #       #     #
  *           ######      #  #  #        #        #     #
@@ -13,15 +13,15 @@
  *
  *             ( Evolutionaerer NetZwerk Optimierer )
  *
-* Implementation:   1.0
- *               adapted to:       SNNSv4.0    
+ * Implementation:   1.0
+ *               adapted to:       SNNSv4.0
  *
  *                      Copyright (c) 1994 - 1995
  *      Institut fuer Logik, Komplexitaet und Deduktionssysteme
- *                        Universitaet Karlsruhe 
+ *                        Universitaet Karlsruhe
  *
  * Authors: Johannes Schaefer, Matthias Schubert, Thomas Ragg
- * Release: 1.0, August 1995 
+ * Release: 1.0, August 1995
  *
  * Permission to use, copy, modify, and distribute this software and its
  * documentation for any purpose is hereby granted without fee, provided
@@ -40,26 +40,22 @@
  * THE USE OR PERFORMANCE OF THIS SOFTWARE.
  *
  *
- *      date        | author          | description                          
- *    --------------+-----------------+------------------------------------  
- *      dd. mon. yy | name of author  | Short description of changes made.   
- *                  | (initials)      | Mark changed parts with initials.    
- *                  |                 |                                      
- *                                                                           
- */                                                                           
-
+ *      date        | author          | description
+ *    --------------+-----------------+------------------------------------
+ *      dd. mon. yy | name of author  | Short description of changes made.
+ *                  | (initials)      | Mark changed parts with initials.
+ *                  |                 |
+ *
+ */
 
 #include "enzo.h"
 #include "learnRating.h"
-
 
 #define LEARNRATING_KEY "learnRating"
 #define NOLEARN_RATING  "noLearnRating"
 #define EPOCH_RATING    "epochRating"
 #define TSS_RATING      "tssRating"
 #define MAX_TSS         "maxtss"
-
-
 
 #define ERROR_NETDATA     13
 
@@ -70,9 +66,7 @@ static float    epochRating      =   0.0;
 static float    tssRating        =   0.0;
 static float    maxTss           =   0.5;
 
-
 /*--------------------------------------------------------------functions----*/
-
 
 /*--------------------------------------------------------------------------*/
 /*                                                                          */
@@ -82,33 +76,41 @@ static float    maxTss           =   0.5;
 /*                                                                          */
 /*--------------------------------------------------------------------------*/
 
+int learnRating_init( ModuleTableEntry *self, int msgc, char *msgv[] ) {
+  MODULE_KEY( LEARNRATING_KEY );
 
-int learnRating_init( ModuleTableEntry *self, int msgc, char *msgv[] )
-{
-    MODULE_KEY( LEARNRATING_KEY );
-    
-    SEL_MSG( msgv[0] )
+  SEL_MSG( msgv[0] )
 
-    MSG_CASE( GENERAL_INIT   ) { /* nothing to do */ }
-    MSG_CASE( GENERAL_EXIT   ) { /* nothing to do */ }
-    MSG_CASE( EVOLUTION_INIT ) { /* nothing to do */ }
-    
-    MSG_CASE( NOLEARN_RATING ) { if( msgc > 1 )
-				     nolearnRating = (float) atof( msgv[1] );
-			       }
-    MSG_CASE( EPOCH_RATING   ) { if( msgc > 1)
-				    epochRating = (float) atof( msgv[1] );
-			       }
-    MSG_CASE( TSS_RATING     ) { if( msgc > 1)
-				    tssRating = (float) atof( msgv[1] );
-			       }
+    MSG_CASE( GENERAL_INIT   ) {
+    /* nothing to do */
+  }
+  MSG_CASE( GENERAL_EXIT   ) {
+    /* nothing to do */
+  }
+  MSG_CASE( EVOLUTION_INIT ) {
+    /* nothing to do */
+  }
 
-    MSG_CASE( MAX_TSS        ) { if( msgc > 1)
-				     maxTss = (float) atof( msgv[1] );
-			       }
-    END_MSG;
+  MSG_CASE( NOLEARN_RATING ) {
+    if( msgc > 1 )
+      nolearnRating = (float) atof( msgv[1] );
+  }
+  MSG_CASE( EPOCH_RATING   ) {
+    if( msgc > 1)
+      epochRating = (float) atof( msgv[1] );
+  }
+  MSG_CASE( TSS_RATING     ) {
+    if( msgc > 1)
+      tssRating = (float) atof( msgv[1] );
+  }
 
-    return ( INIT_USED );
+  MSG_CASE( MAX_TSS        ) {
+    if( msgc > 1)
+      maxTss = (float) atof( msgv[1] );
+  }
+  END_MSG;
+
+  return ( INIT_USED );
 }
 
 /*--------------------------------------------------------------------------*/
@@ -126,29 +128,24 @@ int learnRating_init( ModuleTableEntry *self, int msgc, char *msgv[] )
 /*                                                                          */
 /*--------------------------------------------------------------------------*/
 
-int learnRating_work( PopID *parents, PopID *offsprings, PopID *reference )
-{
+int learnRating_work( PopID *parents, PopID *offsprings, PopID *reference ) {
   NetID        activeMember;
   NetworkData  *ndata;
-    
-  FOR_ALL_OFFSPRINGS ( activeMember )
-    {
-      if ((ndata = kpm_getNetData( activeMember )) == NULL)
-	{
-	  return ( ERROR_NETDATA);
-	}
-      
-      if (ndata->tss > maxTss)
-	ndata->fitness += nolearnRating;
-      
-      ndata->fitness += epochRating * ndata->epochs
-                      + tssRating   * ndata->tss;
+
+  FOR_ALL_OFFSPRINGS ( activeMember ) {
+    if ((ndata = kpm_getNetData( activeMember )) == NULL) {
+      return ( ERROR_NETDATA);
     }
-    
-  return( MODULE_NO_ERROR ); 
 
+    if (ndata->tss > maxTss)
+      ndata->fitness += nolearnRating;
+
+    ndata->fitness += epochRating * ndata->epochs
+      + tssRating   * ndata->tss;
+  }
+
+  return( MODULE_NO_ERROR );
 }
-
 
 /***************************************************************************/
 /*                                                                         */
@@ -159,21 +156,17 @@ int learnRating_work( PopID *parents, PopID *offsprings, PopID *reference )
 /*                                                                         */
 /***************************************************************************/
 
-char *learnRating_errMsg(int err_code)
-{
-  
-  switch (err_code)
-    {
-    case MODULE_NO_ERROR :
-      return ( "learnRating : No Error found" );
+char *learnRating_errMsg(int err_code) {
 
-    case ERROR_NETDATA : 
-      return ("learnRating : Can't get the data of an offspring-net");
+  switch (err_code) {
+  case MODULE_NO_ERROR :
+    return ( "learnRating : No Error found" );
 
-          }
+  case ERROR_NETDATA :
+    return ("learnRating : Can't get the data of an offspring-net");
+
+  }
 
   return ( "learnRating : Unknown error" );
 
 }
-
-

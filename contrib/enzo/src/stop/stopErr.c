@@ -1,9 +1,9 @@
 /*
- * File:     stopErr.c 
+ * File:     stopErr.c
  * Purpose:  Ends evolution if parents or offsprings are not valid.
  *
- *    
- *           #######     #     #     #######      #####  
+ *
+ *           #######     #     #     #######      #####
  *           #           ##    #          #      #     #
  *           #           # #   #         #       #     #
  *           ######      #  #  #        #        #     #
@@ -14,14 +14,14 @@
  *             ( Evolutionaerer NetZwerk Optimierer )
  *
 * Implementation:   1.0
- *               adapted to:       SNNSv4.0    
+ *               adapted to:       SNNSv4.0
  *
  *                      Copyright (c) 1994 - 1995
  *      Institut fuer Logik, Komplexitaet und Deduktionssysteme
- *                        Universitaet Karlsruhe 
+ *                        Universitaet Karlsruhe
  *
  * Authors: Johannes Schaefer, Matthias Schubert, Thomas Ragg
- * Release: 1.0, August 1995 
+ * Release: 1.0, August 1995
  *
  * Permission to use, copy, modify, and distribute this software and its
  * documentation for any purpose is hereby granted without fee, provided
@@ -40,13 +40,13 @@
  * THE USE OR PERFORMANCE OF THIS SOFTWARE.
  *
  *
- *      date        | author          | description                          
- *    --------------+-----------------+------------------------------------  
- *      dd. mon. yy | name of author  | Short description of changes made.   
- *                  | (initials)      | Mark changed parts with initials.    
- *                  |                 |                                      
- *                                                                           
- */                                                                           
+ *      date        | author          | description
+ *    --------------+-----------------+------------------------------------
+ *      dd. mon. yy | name of author  | Short description of changes made.
+ *                  | (initials)      | Mark changed parts with initials.
+ *                  |                 |
+ *
+ */
 
 
 
@@ -59,33 +59,36 @@
 
 
 
-int stopErr_init( ModuleTableEntry *self, int msgc, char *msgv[] )
-{
+int stopErr_init( ModuleTableEntry *self, int msgc, char *msgv[] ) {
     MODULE_KEY( STOP_ERR_KEY );
 
     SEL_MSG( msgv[0] )
 
-    MSG_CASE( GENERAL_INIT   ) { /* nothing to do */ }
-    MSG_CASE( GENERAL_EXIT   ) { /* nothing to do */ }
-    MSG_CASE( EVOLUTION_INIT ) { /* nothing to do */ }
-    
+    MSG_CASE( GENERAL_INIT   ) {
+        /* nothing to do */
+    }
+    MSG_CASE( GENERAL_EXIT   ) {
+        /* nothing to do */
+    }
+    MSG_CASE( EVOLUTION_INIT ) {
+        /* nothing to do */
+    }
+
     END_MSG;
 
     return( INIT_USED );
 }
 
 
-int stopErr_work( PopID *parents, PopID *offsprings, PopID *ref )
-{
+int stopErr_work( PopID *parents, PopID *offsprings, PopID *ref ) {
     if(    kpm_validPopID( *parents    ) == KPM_NO_ERROR
-        && kpm_validPopID( *offsprings ) == KPM_NO_ERROR  )
-    return( FALSE );      /* seems to be all right */
+            && kpm_validPopID( *offsprings ) == KPM_NO_ERROR  )
+        return( FALSE );      /* seems to be all right */
 
     else return( TRUE );  /* there's something gone wrong with the pops! */
 }
 
 
-char *stopErr_errMsg( int err_code )
-{
+char *stopErr_errMsg( int err_code ) {
     return( "Evolution stopped by " STOP_ERR_KEY "!" );
 }

@@ -1,10 +1,10 @@
 /*
  * File:     (%W%    %G%)
- * Purpose:  Removes dead units from the network including their links;    
- *           for input units it only removes the links.    
+ * Purpose:  Removes dead units from the network including their links;
+ *           for input units it only removes the links.
  *
- *    
- *           #######     #     #     #######      #####  
+ *
+ *           #######     #     #     #######      #####
  *           #           ##    #          #      #     #
  *           #           # #   #         #       #     #
  *           ######      #  #  #        #        #     #
@@ -14,15 +14,15 @@
  *
  *             ( Evolutionaerer NetZwerk Optimierer )
  *
-* Implementation:   1.0
- *               adapted to:       SNNSv4.0    
+ * Implementation:   1.0
+ *               adapted to:       SNNSv4.0
  *
  *                      Copyright (c) 1994 - 1995
  *      Institut fuer Logik, Komplexitaet und Deduktionssysteme
- *                        Universitaet Karlsruhe 
+ *                        Universitaet Karlsruhe
  *
  * Authors: Johannes Schaefer, Matthias Schubert, Thomas Ragg
- * Release: 1.0, August 1995 
+ * Release: 1.0, August 1995
  *
  * Permission to use, copy, modify, and distribute this software and its
  * documentation for any purpose is hereby granted without fee, provided
@@ -41,86 +41,79 @@
  * THE USE OR PERFORMANCE OF THIS SOFTWARE.
  *
  *
- *      date        | author          | description                          
- *    --------------+-----------------+------------------------------------  
- *      dd. mon. yy | name of author  | Short description of changes made.   
- *                  | (initials)      | Mark changed parts with initials.    
- *                  |                 |                                      
- *                                                                           
+ *      date        | author          | description
+ *    --------------+-----------------+------------------------------------
+ *      dd. mon. yy | name of author  | Short description of changes made.
+ *                  | (initials)      | Mark changed parts with initials.
+ *                  |                 |
+ *
  */
 
 #include "enzo.h"
 #include "cleanup.h"
 
-
 #define CLEANUP_KEY  "cleanup"
-
-
 
 #define MAX_DEL_UNITS 200
 
+int cleanup_init( ModuleTableEntry *self, int msgc, char *msgv[] ) {
+  MODULE_KEY( CLEANUP_KEY );
 
+  SEL_MSG( msgv[0] )
 
-int cleanup_init( ModuleTableEntry *self, int msgc, char *msgv[] )
-{
-    MODULE_KEY( CLEANUP_KEY );
+    MSG_CASE( GENERAL_INIT    ) {
+    /* nothing to do */
+  }
+  MSG_CASE( GENERAL_EXIT    ) {
+    /* nothing to do */
+  }
+  MSG_CASE( EVOLUTION_INIT )  {
+    /* nothing to do */
+  }
 
-    SEL_MSG( msgv[0] )
+  END_MSG;
 
-    MSG_CASE( GENERAL_INIT    ) { /* nothing to do */ }
-    MSG_CASE( GENERAL_EXIT    ) { /* nothing to do */ }
-    MSG_CASE( EVOLUTION_INIT )  { /* nothing to do */ }
-    
-    END_MSG;
-
-    return( INIT_USED );
+  return( INIT_USED );
 }
 
+int cleanup_work( PopID *parents, PopID *offsprings, PopID *ref ) {
+  NetID     net;
+  int cnt, u_no;
+  int       delList[MAX_DEL_UNITS];
+  FlintType dummy;
+  NetworkData *netData;
 
-int cleanup_work( PopID *parents, PopID *offsprings, PopID *ref )
-{
-    NetID     net;
-    int cnt, u_no;
-    int       delList[MAX_DEL_UNITS];
-    FlintType dummy;
-    NetworkData *netData;
-    
-    FOR_ALL_OFFSPRINGS( net )
-    {
-	cnt = 0;
-	for( u_no = ksh_getFirstUnit(); u_no != 0; u_no = ksh_getNextUnit() )
-	{
-	    if(    ksh_getUnitTType( u_no ) != OUTPUT
-	        && ksh_getUnitTType( u_no ) != INPUT )
-	    {
-		if(    ksh_getUnitInputType( u_no ) == NO_INPUTS
-		    || ksh_getFirstSuccUnit( u_no, &dummy ) == 0  )
-		{
-		    delList[cnt++] = u_no;
-		}
-		/* getFirstSuccUnit makes the succUnit current */
-		/* after setting the unit u_no current, getNextUnit will work */
-		ksh_setCurrentUnit( u_no );
-	    }
+  FOR_ALL_OFFSPRINGS( net ) {
+    cnt = 0;
+    for( u_no = ksh_getFirstUnit(); u_no != 0; u_no = ksh_getNextUnit() ) {
+      if(    ksh_getUnitTType( u_no ) != OUTPUT
+	     && ksh_getUnitTType( u_no ) != INPUT ) {
+	if(    ksh_getUnitInputType( u_no ) == NO_INPUTS
+	       || ksh_getFirstSuccUnit( u_no, &dummy ) == 0  ) {
+	  delList[cnt++] = u_no;
 	}
-	    
-	ksh_deleteUnitList( cnt, delList );
-	netData = GET_NET_DATA(net);
-	netData->histRec.cleaned = cnt;
+	/* getFirstSuccUnit makes the succUnit current */
+	/* after setting the unit u_no current, getNextUnit will work */
+	ksh_setCurrentUnit( u_no );
+      }
     }
 
-    return( MODULE_NO_ERROR );
+    ksh_deleteUnitList( cnt, delList );
+    netData = GET_NET_DATA(net);
+    netData->histRec.cleaned = cnt;
+  }
+
+  return( MODULE_NO_ERROR );
 }
 
+char *cleanup_errMsg( int err_code ) {
+  /* supply the caller with some information about an error */
 
-char *cleanup_errMsg( int err_code )
-{
-    /* supply the caller with some information about an error */
+  static int   err_cnt   = 2;   /* number of recognized errors */
+  static char *err_msg[] = {
+    "no error (cleanup)", "unknown error (cleanup)",
+    "specific error message -- not used"
+  };
 
-    static int   err_cnt   = 2;   /* number of recognized errors */
-    static char *err_msg[] =
-    { "no error (cleanup)", "unknown error (cleanup)",
-      "specific error message -- not used"};
-
-    return( err_msg[ err_code < err_cnt ? err_code : MODULE_UNKNOWN_ERR ] );
+  return( err_msg[ err_code < err_cnt ? err_code : MODULE_UNKNOWN_ERR ] );
 }

@@ -2,8 +2,8 @@
  * File:     (%W%    %G%)
  * Purpose:  definition of topology (rating) evaluation functions
  *
- *    
- *           #######     #     #     #######      #####  
+ *
+ *           #######     #     #     #######      #####
  *           #           ##    #          #      #     #
  *           #           # #   #         #       #     #
  *           ######      #  #  #        #        #     #
@@ -13,15 +13,15 @@
  *
  *             ( Evolutionaerer NetZwerk Optimierer )
  *
-* Implementation:   1.0
- *               adapted to:       SNNSv4.0    
+ * Implementation:   1.0
+ *               adapted to:       SNNSv4.0
  *
  *                      Copyright (c) 1994 - 1995
  *      Institut fuer Logik, Komplexitaet und Deduktionssysteme
- *                        Universitaet Karlsruhe 
+ *                        Universitaet Karlsruhe
  *
  * Authors: Johannes Schaefer, Matthias Schubert, Thomas Ragg
- * Release: 1.0, August 1995 
+ * Release: 1.0, August 1995
  *
  * Permission to use, copy, modify, and distribute this software and its
  * documentation for any purpose is hereby granted without fee, provided
@@ -40,31 +40,28 @@
  * THE USE OR PERFORMANCE OF THIS SOFTWARE.
  *
  *
- *      date        | author          | description                          
- *    --------------+-----------------+------------------------------------  
- *      dd. mon. yy | name of author  | Short description of changes made.   
- *                  | (initials)      | Mark changed parts with initials.    
- *                  |                 |                                      
- *                                                                           
- */                                                                           
+ *      date        | author          | description
+ *    --------------+-----------------+------------------------------------
+ *      dd. mon. yy | name of author  | Short description of changes made.
+ *                  | (initials)      | Mark changed parts with initials.
+ *                  |                 |
+ *
+ */
 
 #include "enzo.h"
 
 #include "topoRating.h"
-
 
 #define LEARN_SNNS_KEY  "topologyRating"
 #define WEIGHT_RATING   "weightRating"
 #define UNIT_RATING     "unitRating"
 #define INPUT_RATING    "inputRating"
 
-
 #define ERROR_NO_REFNET   10
 #define ERROR_NO_REFDATA  11   /* no longer used, js */
 #define ERROR_DESCR       12   /* no longer used, js */
 #define ERROR_NETDATA     13
 #define ERROR_ILLEGALREF  14
-
 
 /* ------------------------------------------------------ local variables --- */
 /*                                                                            */
@@ -78,57 +75,56 @@ static int      refInputUnits, refNoOfUnits, refNoOfLinks;
 /*                                                                            */
 /* -------------------------------------------------------------------------- */
 
-
-
 /* -------------------------------------------------- interface functions --- */
 /*                                                                            */
-
 
 /* --- toplogyRating -------------------------------------------------------- */
 /*                                                                            */
 /*  Reads the incoming string and handles all initial work                    */
 /*                                                                            */
 
-int topologyRating_init( ModuleTableEntry *self, int msgc, char *msgv[] )
-{
-    MODULE_KEY( LEARN_SNNS_KEY );
-    
-    SEL_MSG( msgv[0] )
+int topologyRating_init( ModuleTableEntry *self, int msgc, char *msgv[] ) {
+  MODULE_KEY( LEARN_SNNS_KEY );
 
-    MSG_CASE( GENERAL_INIT   ) { /* nothing to do */ }
-    MSG_CASE( GENERAL_EXIT   ) { /* nothing to do */ }
-    MSG_CASE( EVOLUTION_INIT )
-    {
-        if( kpm_popFirstMember( *REFERENCE ) == NULL )
-	    return( ERROR_NO_REFNET );
-        
-        refInputUnits = ksh_getNoOfTTypeUnits( INPUT );
-        refNoOfUnits  = ksh_getNoOfUnits();
-        GET_NO_OF_LINKS( refNoOfLinks );
-	if( refNoOfLinks == 0 || refNoOfUnits == 0 || refInputUnits == 0 )
-	{
-	  return ( ERROR_ILLEGALREF );
-	}
+  SEL_MSG( msgv[0] )
+
+    MSG_CASE( GENERAL_INIT   ) {
+    /* nothing to do */
+  }
+  MSG_CASE( GENERAL_EXIT   ) {
+    /* nothing to do */
+  }
+  MSG_CASE( EVOLUTION_INIT ) {
+    if( kpm_popFirstMember( *REFERENCE ) == NULL )
+      return( ERROR_NO_REFNET );
+
+    refInputUnits = ksh_getNoOfTTypeUnits( INPUT );
+    refNoOfUnits  = ksh_getNoOfUnits();
+    GET_NO_OF_LINKS( refNoOfLinks );
+    if( refNoOfLinks == 0 || refNoOfUnits == 0 || refInputUnits == 0 ) {
+      return ( ERROR_ILLEGALREF );
     }
-    
-    MSG_CASE( WEIGHT_RATING ) { if( msgc > 1 )
-                                    weightrating = (float) atof( msgv[1] );
-                              }
-    MSG_CASE( UNIT_RATING   ) { if( msgc > 1)
-                                    unitrating = (float) atof( msgv[1] );
-                              }
-    MSG_CASE( INPUT_RATING  ) { if( msgc > 1)
-                                    inputrating = (float) atof( msgv[1] );
-                              }
-    END_MSG;
+  }
 
-    return ( INIT_USED );
+  MSG_CASE( WEIGHT_RATING ) {
+    if( msgc > 1 )
+      weightrating = (float) atof( msgv[1] );
+  }
+  MSG_CASE( UNIT_RATING   ) {
+    if( msgc > 1)
+      unitrating = (float) atof( msgv[1] );
+  }
+  MSG_CASE( INPUT_RATING  ) {
+    if( msgc > 1)
+      inputrating = (float) atof( msgv[1] );
+  }
+  END_MSG;
+
+  return ( INIT_USED );
 }
 
 /*                                                                            */
 /* -------------------------------------------------------------------------- */
-
-
 
 /* --- topologyRating_work -------------------------------------------------- */
 /*                                                                            */
@@ -138,44 +134,38 @@ int topologyRating_init( ModuleTableEntry *self, int msgc, char *msgv[] )
 /*  The value will be added to the total fitness-value.                       */
 /*                                                                            */
 
-int topologyRating_work( PopID *parents, PopID *offsprings, PopID *reference )
-{
-    NetworkData *data;
-    NetID activeMember;
-    int i, input, deadInput, noOfLinks; 
-    
-    FOR_ALL_OFFSPRINGS (activeMember)
-    {
-        if( (data = kpm_getNetData( activeMember )) == NULL )
-        {
-            return( ERROR_NETDATA );
-        }
-        
-        input = 0;
-        deadInput = 0;
-        
-        for( i = ksh_getFirstUnit(); i != 0; i = ksh_getNextUnit() )
-        {
-            if( ksh_getUnitTType( i ) == INPUT )
-            {
-                input++;
-                if( subul_deadInputUnit( i ) ) deadInput++;
-            }
-        }
-        
-        if( input > 0 ) data->fitness += inputrating*(input- deadInput)/input;
-        
-        GET_NO_OF_LINKS( noOfLinks );
-        data->fitness +=    unitrating   * ksh_getNoOfUnits() / refNoOfUnits
-                          + weightrating * noOfLinks           / refNoOfLinks;
+int topologyRating_work( PopID *parents, PopID *offsprings, PopID *reference ) {
+  NetworkData *data;
+  NetID activeMember;
+  int i, input, deadInput, noOfLinks;
+
+  FOR_ALL_OFFSPRINGS (activeMember) {
+    if( (data = kpm_getNetData( activeMember )) == NULL ) {
+      return( ERROR_NETDATA );
     }
-    
-    return( MODULE_NO_ERROR ); 
+
+    input = 0;
+    deadInput = 0;
+
+    for( i = ksh_getFirstUnit(); i != 0; i = ksh_getNextUnit() ) {
+      if( ksh_getUnitTType( i ) == INPUT ) {
+	input++;
+	if( subul_deadInputUnit( i ) ) deadInput++;
+      }
+    }
+
+    if( input > 0 ) data->fitness += inputrating*(input- deadInput)/input;
+
+    GET_NO_OF_LINKS( noOfLinks );
+    data->fitness +=    unitrating   * ksh_getNoOfUnits() / refNoOfUnits
+      + weightrating * noOfLinks           / refNoOfLinks;
+  }
+
+  return( MODULE_NO_ERROR );
 }
 
 /*                                                                            */
 /* -------------------------------------------------------------------------- */
-
 
 /* --- topologyRating_errMsg ------------------------------------------------ */
 /*                                                                            */
@@ -183,20 +173,20 @@ int topologyRating_work( PopID *parents, PopID *offsprings, PopID *reference )
 /*                                                                            */
 /*                                                                            */
 
-char *topologyRating_errMsg(int err_code)
-{
-    switch( err_code )
-    {
-      case MODULE_NO_ERROR:  return( "topoRating: No Error found" );
-      case ERROR_NO_REFNET:  return( "topoRating: Can't get reference net" );
-      case ERROR_NETDATA:    return( "topoRating: Can't get offspring data" );
-      case ERROR_ILLEGALREF:
-	return( "topoRating: Illegal reference net: no links or no units");
-    }
-    
-    return ( "topologyRating : Unknown error" );
+char *topologyRating_errMsg(int err_code) {
+  switch( err_code ) {
+  case MODULE_NO_ERROR:
+    return( "topoRating: No Error found" );
+  case ERROR_NO_REFNET:
+    return( "topoRating: Can't get reference net" );
+  case ERROR_NETDATA:
+    return( "topoRating: Can't get offspring data" );
+  case ERROR_ILLEGALREF:
+    return( "topoRating: Illegal reference net: no links or no units");
+  }
+
+  return ( "topologyRating : Unknown error" );
 }
 
 /*                                                                            */
 /* -------------------------------------------------------------------------- */
-

@@ -1,11 +1,11 @@
 /*
  * File:     (%W%    %G%)
- * Purpose:  inputInit crates random net for the initial population;         
- *           the lower bound on the number of hidden units is 0 if not set,         
- *           the upper is given by the reference net. 
+ * Purpose:  inputInit crates random net for the initial population;
+ *           the lower bound on the number of hidden units is 0 if not set,
+ *           the upper is given by the reference net.
  *
- *    
- *           #######     #     #     #######      #####  
+ *
+ *           #######     #     #     #######      #####
  *           #           ##    #          #      #     #
  *           #           # #   #         #       #     #
  *           ######      #  #  #        #        #     #
@@ -15,15 +15,15 @@
  *
  *             ( Evolutionaerer NetZwerk Optimierer )
  *
-* Implementation:   1.0
- *               adapted to:       SNNSv4.0    
+ * Implementation:   1.0
+ *               adapted to:       SNNSv4.0
  *
  *                      Copyright (c) 1994 - 1995
  *      Institut fuer Logik, Komplexitaet und Deduktionssysteme
- *                        Universitaet Karlsruhe 
+ *                        Universitaet Karlsruhe
  *
  * Authors: Johannes Schaefer, Matthias Schubert, Thomas Ragg
- * Release: 1.0, August 1995 
+ * Release: 1.0, August 1995
  *
  * Permission to use, copy, modify, and distribute this software and its
  * documentation for any purpose is hereby granted without fee, provided
@@ -42,13 +42,13 @@
  * THE USE OR PERFORMANCE OF THIS SOFTWARE.
  *
  *
- *      date        | author          | description                          
- *    --------------+-----------------+------------------------------------  
- *      dd. mon. yy | name of author  | Short description of changes made.   
- *                  | (initials)      | Mark changed parts with initials.    
- *                  |                 |                                      
- *                                                                           
- */                                                                           
+ *      date        | author          | description
+ *    --------------+-----------------+------------------------------------
+ *      dd. mon. yy | name of author  | Short description of changes made.
+ *                  | (initials)      | Mark changed parts with initials.
+ *                  |                 |
+ *
+ */
 
 /*    inputInit crates random net for the initial population;              */
 /*    the lower bound on the number of hidden units is 0 if not set,         */
@@ -68,7 +68,6 @@
 /*                                                                           */
 /* ------------------------------------------------------------------------- */
 
-
 #include "enzo.h"
 #include "inputInit.h"
 
@@ -78,16 +77,12 @@
 #define LOWER_BOUND            "minNoInput"
 #define UPPER_BOUND            "maxNoInput"
 
-
-
-
 /*--------------------------------------------------------------variables----*/
 
 static int   lowerBound = 0;
 static int   upperBound = 0;
 
 /*--------------------------------------------------------------functions----*/
-
 
 /*--------------------------------------------------------------------------*/
 /*                                                                          */
@@ -97,31 +92,34 @@ static int   upperBound = 0;
 /*                                                                          */
 /*--------------------------------------------------------------------------*/
 
-int inputInit_init (ModuleTableEntry *self, int msgc, char *msgv[] )
-{
-    
-    MODULE_KEY( RAND_INIT_POP_KEY );
+int inputInit_init (ModuleTableEntry *self, int msgc, char *msgv[] ) {
+  MODULE_KEY( RAND_INIT_POP_KEY );
 
-    SEL_MSG( msgv[0] )
+  SEL_MSG( msgv[0] )
 
-    MSG_CASE( GENERAL_INIT    ) { /* nothing to do */ }
-    MSG_CASE( GENERAL_EXIT    ) { /* nothing to do */ }
-    MSG_CASE( EVOLUTION_INIT  ) { /* nothing to do */ }
+    MSG_CASE( GENERAL_INIT    ) {
+    /* nothing to do */
+  }
+  MSG_CASE( GENERAL_EXIT    ) {
+    /* nothing to do */
+  }
+  MSG_CASE( EVOLUTION_INIT  ) {
+    /* nothing to do */
+  }
 
-    MSG_CASE( LOWER_BOUND )     {  if( msgc > 1 )
-	                               lowerBound = atoi( msgv[1] );
-			        }
-    MSG_CASE( UPPER_BOUND )    {   if (msgc > 1)
-				       upperBound = atoi( msgv[1] );
-			       }
-      
+  MSG_CASE( LOWER_BOUND )     {
+    if( msgc > 1 )
+      lowerBound = atoi( msgv[1] );
+  }
+  MSG_CASE( UPPER_BOUND )    {
+    if (msgc > 1)
+      upperBound = atoi( msgv[1] );
+  }
 
-    END_MSG;
+  END_MSG;
 
-    return ( INIT_USED );
+  return ( INIT_USED );
 }
-
-
 
 /*--------------------------------------------------------------------------*/
 /*                                                                          */
@@ -131,64 +129,53 @@ int inputInit_init (ModuleTableEntry *self, int msgc, char *msgv[] )
 /*                                                                          */
 /*--------------------------------------------------------------------------*/
 
-
-int inputInit_work (PopID *parents, PopID *offsprings, PopID *reference)
-{
+int inputInit_work (PopID *parents, PopID *offsprings, PopID *reference) {
   NetID activeNet;
   int   maxInputUnits, inputUnits;
   int   i,count;
   int   delcnt;
   float randsel;
 
-  FOR_ALL_OFFSPRINGS( activeNet )
-    {  
-      /* first termine the number of existing input units, which
-	 aren't dead                                               */
+  FOR_ALL_OFFSPRINGS( activeNet ) {
+    /* first termine the number of existing input units, which
+       aren't dead                                               */
 
-      maxInputUnits = 0;
-      for( i = ksh_getFirstUnit(); i != 0; i = ksh_getNextUnit() )
-	{
-	  if(( ksh_getUnitTType( i ) == INPUT ) && 
-	     !subul_deadInputUnit( i ))
-	    maxInputUnits++;
-	}
-	 
-      /* now determine the number of used units                    */
-
-      if ( upperBound )
-	{
-	  inputUnits = (int) RANDOM( lowerBound, upperBound+1 );
-	  if (inputUnits > maxInputUnits)
-	    inputUnits = maxInputUnits;
-	}
-      else
-	inputUnits = (int) RANDOM( lowerBound, maxInputUnits+1 );
-      
-      /* now delete the random input units                          */
-      delcnt = 0;
-      count = maxInputUnits - inputUnits;
-      randsel = 0.75 * (1.0 - (inputUnits / (float) maxInputUnits));
-
-      while (delcnt < count)
-	{
-	  for ( i = ksh_getFirstUnit(); i != 0; i = ksh_getNextUnit())
-	    {
-	      if ((RAND_01 < randsel) && 
-		  (ksh_getUnitTType( i ) == INPUT) &&
-		  (!subul_deadInputUnit( i )) &&
-		  (delcnt < count))
-		{
-		  ksh_setCurrentUnit( i );
-		  ksh_deleteAllOutputLinks();
-		  delcnt++;
-		}
-	    }
-	}
+    maxInputUnits = 0;
+    for( i = ksh_getFirstUnit(); i != 0; i = ksh_getNextUnit() ) {
+      if(( ksh_getUnitTType( i ) == INPUT ) &&
+	 !subul_deadInputUnit( i ))
+	maxInputUnits++;
     }
 
-  
-  return (MODULE_NO_ERROR);
+    /* now determine the number of used units                    */
 
+    if ( upperBound ) {
+      inputUnits = (int) RANDOM( lowerBound, upperBound+1 );
+      if (inputUnits > maxInputUnits)
+	inputUnits = maxInputUnits;
+    } else
+      inputUnits = (int) RANDOM( lowerBound, maxInputUnits+1 );
+
+    /* now delete the random input units                          */
+    delcnt = 0;
+    count = maxInputUnits - inputUnits;
+    randsel = 0.75 * (1.0 - (inputUnits / (float) maxInputUnits));
+
+    while (delcnt < count) {
+      for ( i = ksh_getFirstUnit(); i != 0; i = ksh_getNextUnit()) {
+	if ((RAND_01 < randsel) &&
+	    (ksh_getUnitTType( i ) == INPUT) &&
+	    (!subul_deadInputUnit( i )) &&
+	    (delcnt < count)) {
+	  ksh_setCurrentUnit( i );
+	  ksh_deleteAllOutputLinks();
+	  delcnt++;
+	}
+      }
+    }
+  }
+
+  return (MODULE_NO_ERROR);
 }
 
 /*--------------------------------------------------------------------------*/
@@ -198,12 +185,10 @@ int inputInit_work (PopID *parents, PopID *offsprings, PopID *reference)
 /*                                                                          */
 /*--------------------------------------------------------------------------*/
 
-char *inputInit_errMsg (int err_code)
-{
-  switch ( err_code )       
-    {                   
-    case MODULE_NO_ERROR :
-      return ("inputInit : No error found");
-    }
+char *inputInit_errMsg (int err_code) {
+  switch ( err_code ) {
+  case MODULE_NO_ERROR :
+    return ("inputInit : No error found");
+  }
   return ("inputInit : unknown error");
 }

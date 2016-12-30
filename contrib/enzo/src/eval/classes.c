@@ -2,8 +2,8 @@
  * File:     (%W%    %G%)
  * Purpose:  definition  of classification routines
  *
- *    
- *           #######     #     #     #######      #####  
+ *
+ *           #######     #     #     #######      #####
  *           #           ##    #          #      #     #
  *           #           # #   #         #       #     #
  *           ######      #  #  #        #        #     #
@@ -13,15 +13,15 @@
  *
  *             ( Evolutionaerer NetZwerk Optimierer )
  *
-* Implementation:   1.0
- *               adapted to:       SNNSv4.0    
+ * Implementation:   1.0
+ *               adapted to:       SNNSv4.0
  *
  *                      Copyright (c) 1994 - 1995
  *      Institut fuer Logik, Komplexitaet und Deduktionssysteme
- *                        Universitaet Karlsruhe 
+ *                        Universitaet Karlsruhe
  *
  * Authors: Johannes Schaefer, Matthias Schubert, Thomas Ragg
- * Release: 1.0, August 1995 
+ * Release: 1.0, August 1995
  *
  * Permission to use, copy, modify, and distribute this software and its
  * documentation for any purpose is hereby granted without fee, provided
@@ -40,18 +40,16 @@
  * THE USE OR PERFORMANCE OF THIS SOFTWARE.
  *
  *
- *      date        | author          | description                          
- *    --------------+-----------------+------------------------------------  
- *      dd. mon. yy | name of author  | Short description of changes made.   
- *                  | (initials)      | Mark changed parts with initials.    
- *                  |                 |                                      
- *                                                                           
- */                                                                           
-
+ *      date        | author          | description
+ *    --------------+-----------------+------------------------------------
+ *      dd. mon. yy | name of author  | Short description of changes made.
+ *                  | (initials)      | Mark changed parts with initials.
+ *                  |                 |
+ *
+ */
 
 #include "enzo.h"
 #include "classes.h"
-
 
 #define CLASSES_KEY     "classes"
 #define HIGH_VALUE      "highDec"
@@ -83,98 +81,115 @@ static float noneRating = 1.0;
 static float dist   = 0.2;
 static PatID crossPats   = NULL;
 
-
 /*-------------------------------------------------------------- functions ---*/
 
-int classes_init( ModuleTableEntry *self, int msgc, char *msgv[] )
-{
-    MODULE_KEY( CLASSES_KEY );
+int classes_init( ModuleTableEntry *self, int msgc, char *msgv[] ) {
+  MODULE_KEY( CLASSES_KEY );
 
-    SEL_MSG( msgv[0] )
+  SEL_MSG( msgv[0] )
 
-    MSG_CASE( GENERAL_INIT    ) { /* nothing to do */ }
-    MSG_CASE( GENERAL_EXIT    ) { /* nothing to do */ }
-    MSG_CASE( EVOLUTION_INIT  )
-     {
-       /* First check whether the crosspatterns are loaded   */
-       if (crossPats == NULL)
-	 crossPats = subul_getPatID( PATTERN_CROSS );
+    MSG_CASE( GENERAL_INIT    ) {
+    /* nothing to do */
+  }
+  MSG_CASE( GENERAL_EXIT    ) {
+    /* nothing to do */
+  }
+  MSG_CASE( EVOLUTION_INIT  ) {
+    /* First check whether the crosspatterns are loaded   */
+    if (crossPats == NULL)
+      crossPats = subul_getPatID( PATTERN_CROSS );
+  }
+
+  MSG_CASE( HIGH_VALUE ) {
+    if( msgc > 1 ) highDec = atof(msgv[1]);
+  }
+  MSG_CASE( LOW_VALUE )  {
+    if( msgc > 1 ) lowDec = atof(msgv[1]);
+  }
+  MSG_CASE( HIT_VALUE )  {
+    if (msgc > 1)  hitRating = (float) atof(msgv[1]);
+  }
+  MSG_CASE( MISS_VALUE ) {
+    if (msgc > 1) missRating = (float) atof(msgv[1]);
+  }
+  MSG_CASE( NONE_VALUE ) {
+    if (msgc > 1) noneRating = (float) atof(msgv[1]);
+  }
+  MSG_CASE( DISTANCE )   {
+    if (msgc > 1) dist = fabs( atof (msgv[1]));
+  }
+
+  END_MSG;
+
+  return( INIT_USED );
+}
+
+
+int classes_work ( PopID *parents, PopID *offsprings, PopID *reference ) {
+  NetID activeMember;
+  NetworkData *data;
+  float average;
+  int i, hit, miss, none, noPattern, result;
+
+  /* activate the cross-patterns */
+  if( kpm_setCurrentPattern( crossPats ) != KPM_NO_ERROR ) {
+    return (ERROR_ACTIVATE_PAT);
+  }
+
+  ksh_readNetinfo();
+
+  average = (highDec + lowDec) / 2.0;
+
+  FOR_ALL_OFFSPRINGS( activeMember ) {
+    hit = miss = none = 0;
+
+    if( (data = GET_NET_DATA( activeMember )) == NULL ) {
+      return(ERROR_NO_DATA);
+    }
+
+    for( noPattern = 1; noPattern <= ksh_no_patterns(); noPattern++) {
+      ksh_propagate_pattern(  noPattern);
+      ksh_get_target_pattern( noPattern);
+
+      result = NONE;
+
+      for( i = 0; i < ksh_no_outputs(); i++ ) {
+	if     ( POS_CORRECT || NEG_CORRECT ) {
+	  result = HIT;
+	} else if( NO_DECISION                ) {
+	  result = NONE;
+	  break;
+	} else		                      {
+	  result = MISS;
+	  break;
+	}
       }
 
-    MSG_CASE( HIGH_VALUE ) { if( msgc > 1 ) highDec = atof(msgv[1]); }
-    MSG_CASE( LOW_VALUE )  { if( msgc > 1 ) lowDec = atof(msgv[1]); }
-    MSG_CASE( HIT_VALUE )  { if (msgc > 1)  hitRating = (float) atof(msgv[1]); }
-    MSG_CASE( MISS_VALUE ) { if (msgc > 1) missRating = (float) atof(msgv[1]); }
-    MSG_CASE( NONE_VALUE ) { if (msgc > 1) noneRating = (float) atof(msgv[1]); }
-    MSG_CASE( DISTANCE )   { if (msgc > 1) dist = fabs( atof (msgv[1]));   }
-
-    END_MSG;
-
-    return( INIT_USED );
-}
-
-
-int classes_work ( PopID *parents, PopID *offsprings, PopID *reference )
-{
-    NetID activeMember;
-    NetworkData *data;
-    float average;
-    int i, hit, miss, none, noPattern, result;
-
-    /* activate the cross-patterns */
-    if( kpm_setCurrentPattern( crossPats ) != KPM_NO_ERROR )
-    {
-	return (ERROR_ACTIVATE_PAT);
+      switch( result ) {
+      case HIT:
+	hit++;
+	break;
+      case NONE:
+	none++;
+	break;
+      case MISS:
+	miss++;
+	break;
+      }
     }
-    
-    ksh_readNetinfo(); 
 
-    average = (highDec + lowDec) / 2.0;
+    data->fitness += hit*hitRating + miss*missRating + none*noneRating;
+    data->histRec.testHit  = hit;
+    data->histRec.testNone = none;
+    data->histRec.testMiss = miss;
 
-    FOR_ALL_OFFSPRINGS( activeMember )
-    {
-	hit = miss = none = 0;
+  } /* endfor ALL_OFFSPRINGS */
 
-	if( (data = GET_NET_DATA( activeMember )) == NULL )
-	{
-	    return(ERROR_NO_DATA);
-	}
-	
-	for( noPattern = 1; noPattern <= ksh_no_patterns(); noPattern++)
-	{
-	    ksh_propagate_pattern(  noPattern);
-	    ksh_get_target_pattern( noPattern);
-
-	    result = NONE;
-	    
-	    for( i = 0; i < ksh_no_outputs(); i++ )
-	    {
-		if     ( POS_CORRECT || NEG_CORRECT ) { result = HIT;          }
-		else if( NO_DECISION                ) { result = NONE;  break; }
-		else		                      { result = MISS;  break; }
-	    }
-	    
-	    switch( result )
-	    {
-	      case HIT:  hit++;  break;
-	      case NONE: none++; break;
-	      case MISS: miss++; break;
-	    }
-	}	    
-	
-	data->fitness += hit*hitRating + miss*missRating + none*noneRating;
-	data->histRec.testHit  = hit;
-	data->histRec.testNone = none;
-	data->histRec.testMiss = miss;
-
-      } /* endfor ALL_OFFSPRINGS */
-
-    return( MODULE_NO_ERROR );
+  return( MODULE_NO_ERROR );
 }
 
 
-char *classes_errMsg( int err_code )
-{
+char *classes_errMsg( int err_code ) {
   switch ( err_code ) {
 
   case MODULE_NO_ERROR :
@@ -188,10 +203,8 @@ char *classes_errMsg( int err_code )
 
   case ERROR_NO_DATA :
     return ("classes : Can't get the networkdata");
-    
+
   }
-  
-return("classes : Unknown error");
 
+  return("classes : Unknown error");
 }
-

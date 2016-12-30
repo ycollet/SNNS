@@ -102,3 +102,9 @@ target_link_libraries(enzo kernel func pre kernel func nepomuk kernel func stop 
 
 install(TARGETS enzo
         DESTINATION bin)
+
+install(FILES doc/enzo.ps
+        DESTINATION share/snns/doc)
+
+install(FILES README.ENZO
+        DESTINATION share/snns/doc)

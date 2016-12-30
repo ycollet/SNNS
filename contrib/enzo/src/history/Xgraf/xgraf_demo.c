@@ -1,27 +1,27 @@
-#include <stdio.h> 
-#include <math.h> 
+#include <stdio.h>
+#include <math.h>
 #include "graf.h"
 
 int main(argc, argv)
 int argc;
 char *argv[];
 {
-float i;
+    float i;
 
-        start_graf("xgraf_demo", 800, 600, 100, 100);
-	
-	setcoord_graf(-5.0, 100.0, -50.0, 50.0);
+    start_graf("xgraf_demo", 800, 600, 100, 100);
 
-	for(i=.0; i<100.5; i+=.05) point_graf((float)i, 50*(float)sin((double)i));
+    setcoord_graf(-5.0, 100.0, -50.0, 50.0);
 
-	text_graf(50.0, 15.0, "HALLO_SINUS");
+    for(i=.0; i<100.5; i+=.05) point_graf((float)i, 50*(float)sin((double)i));
 
-	axis_graf("X", "50*sin(X)");
+    text_graf(50.0, 15.0, "HALLO_SINUS");
 
-	sleep(10000);
-	end_graf();
+    axis_graf("X", "50*sin(X)");
 
-	return (0);
+    sleep(10000);
+    end_graf();
+
+    return (0);
 
 } /* main() */
 
