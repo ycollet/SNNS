@@ -4,6 +4,9 @@
 /* Define if you have alloca, as a function or macro.  */
 #cmakedefine HAVE_ALLOCA
 
+/* Define if you have qsort, as a function or macro.  */
+#cmakedefine HAVE_QSORT
+
 /* Define if you have <alloca.h> and it should be used (not on Ultrix).  */
 #cmakedefine HAVE_ALLOCA_H
 

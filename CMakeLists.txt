@@ -219,6 +219,7 @@ check_function_exists(getcwd HAVE_GETCWD)
 check_function_exists(lrand48 HAVE_LRAND48)
 check_function_exists(strdup HAVE_LRAND48)
 check_function_exists(alloca HAVE_ALLOCA)
+check_function_exists(qsort HAVE_QSORT)
 
 find_program(HAVE_XGRABSC xgrabsc)
 
