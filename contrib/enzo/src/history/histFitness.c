@@ -76,96 +76,96 @@ static char        histFileName[MAX_FILENAME_LEN] = HISTORY_FILE_VALUE;
 /*-----------------------------------------------------------------functions-*/
 
 int histFitness_init( ModuleTableEntry *self, int msgc, char *msgv[] ) {
-  char fileName[MAX_FILENAME_LEN];
+    char fileName[MAX_FILENAME_LEN];
 
-  MODULE_KEY( HIST_FITNESS_KEY );
+    MODULE_KEY( HIST_FITNESS_KEY );
 
-  SEL_MSG( msgv[0] )
+    SEL_MSG( msgv[0] )
 
     MSG_CASE( GENERAL_INIT )   {
-    /* nothing to do */
-  }
-  MSG_CASE( EVOLUTION_INIT ) {
-    sprintf(fileName,"%s.fit",histFileName);
-    if( (hfpFit = fopen( fileName, "w" )) == NULL )
-      return( ERROR_FILEOPEN );
-    setlinebuf( hfpFit );
-    fprintf( hfpFit, OUTELEM_TEXT );
+        /* nothing to do */
+    }
+    MSG_CASE( EVOLUTION_INIT ) {
+        sprintf(fileName,"%s.fit",histFileName);
+        if( (hfpFit = fopen( fileName, "w" )) == NULL )
+            return( ERROR_FILEOPEN );
+        setlinebuf( hfpFit );
+        fprintf( hfpFit, OUTELEM_TEXT );
 
-    sprintf(fileName,"%s.popfit",histFileName);
-    if( (hfpPopfit = fopen( fileName, "w" )) == NULL )
-      return( ERROR_FILEOPEN );
-    setlinebuf( hfpPopfit );
-    fprintf( hfpPopfit, OUTPOP_TEXT );
-  }
+        sprintf(fileName,"%s.popfit",histFileName);
+        if( (hfpPopfit = fopen( fileName, "w" )) == NULL )
+            return( ERROR_FILEOPEN );
+        setlinebuf( hfpPopfit );
+        fprintf( hfpPopfit, OUTPOP_TEXT );
+    }
 
-  MSG_CASE( GENERAL_EXIT ) {
-    if( hfpFit )     fclose( hfpFit );
-    if( hfpPopfit )  fclose( hfpPopfit );
-  }
+    MSG_CASE( GENERAL_EXIT ) {
+        if( hfpFit )     fclose( hfpFit );
+        if( hfpPopfit )  fclose( hfpPopfit );
+    }
 
-  MSG_CASE( HISTORY_FILE    ) {
-    if( msgc > 1 ) strcpy ( histFileName,msgv[1] );
-  }
+    MSG_CASE( HISTORY_FILE    ) {
+        if( msgc > 1 ) strcpy ( histFileName,msgv[1] );
+    }
 
-  END_MSG;
+    END_MSG;
 
-  return( INIT_USED );
+    return( INIT_USED );
 }
 
 /*---------------------------------------------------------------------------*/
 
 int histFitness_work( PopID *parents, PopID *offsprings, PopID *ref ) {
-  NetID  net;
-  NetworkData *netData;
-  int pars = 0;
+    NetID  net;
+    NetworkData *netData;
+    int pars = 0;
 
-  static int   genCnt     = 0;          /* count no of generations */
-  float aveFitness = 0.0,
-    maxFitness = -INFINITY,
-    minFitness =  INFINITY;
+    static int   genCnt     = 0;          /* count no of generations */
+    float aveFitness = 0.0,
+          maxFitness = -INFINITY,
+          minFitness =  INFINITY;
 
 
-  FOR_ALL_PARENTS( net ) {
-    pars ++;
-    netData = GET_NET_DATA( net );
+    FOR_ALL_PARENTS( net ) {
+        pars ++;
+        netData = GET_NET_DATA( net );
 
-    aveFitness += netData->fitness;
-    if( netData->fitness > maxFitness ) {
-      maxFitness = netData->fitness;
+        aveFitness += netData->fitness;
+        if( netData->fitness > maxFitness ) {
+            maxFitness = netData->fitness;
+        }
+        if( netData->fitness < minFitness ) {
+            minFitness = netData->fitness;
+        }
     }
-    if( netData->fitness < minFitness ) {
-      minFitness = netData->fitness;
+
+    if( pars ) {
+        aveFitness /= pars;
+
+        fprintf( hfpPopfit, OUTPOP_FORMAT,
+                 genCnt, minFitness, maxFitness, aveFitness );
     }
-  }
 
-  if( pars ) {
-    aveFitness /= pars;
+    FOR_ALL_OFFSPRINGS( net ) {
+        netData = GET_NET_DATA( net );
+        fprintf( hfpFit, OUTELEM_FORMAT, netData->histID, netData->fitness );
+    }
 
-    fprintf( hfpPopfit, OUTPOP_FORMAT,
-	     genCnt, minFitness, maxFitness, aveFitness );
-  }
+    genCnt++;
 
-  FOR_ALL_OFFSPRINGS( net ) {
-    netData = GET_NET_DATA( net );
-    fprintf( hfpFit, OUTELEM_FORMAT, netData->histID, netData->fitness );
-  }
-
-  genCnt++;
-
-  return( MODULE_NO_ERROR );
+    return( MODULE_NO_ERROR );
 }
 
 /*---------------------------------------------------------------------------*/
 
 char *histFitness_errMsg( int err_code ) {
-  switch (err_code) {
-  case MODULE_NO_ERROR :
-    return ("histFitness : No Error found");
-  case ERROR_FILEOPEN :
-    return ("histFitness : Can't open history-file for writing");
-  case ERROR_MEM :
-    return ("histFitness : Memory excess");
-  }
-  return( "histFitness : Unknown error" );
+    switch (err_code) {
+    case MODULE_NO_ERROR :
+        return ("histFitness : No Error found");
+    case ERROR_FILEOPEN :
+        return ("histFitness : Can't open history-file for writing");
+    case ERROR_MEM :
+        return ("histFitness : Memory excess");
+    }
+    return( "histFitness : Unknown error" );
 }

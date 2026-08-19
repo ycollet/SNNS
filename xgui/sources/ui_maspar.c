@@ -52,7 +52,7 @@
 
 static void connect_MasPar (void)
 
-{ 
+{
     err = krui_MasPar (MASPAR_CONNECT);
     if (err == KRERR_NO_ERROR) {
         ui_xSetToggleState (connect, TRUE);
@@ -76,7 +76,7 @@ static void connect_MasPar (void)
 
 static void disconnect_MasPar (void)
 
-{ 
+{
     err = krui_MasPar (MASPAR_DISCONNECT);
     if (err == KRERR_NO_ERROR) {
         ui_xSetToggleState (disconnect, TRUE);
@@ -173,46 +173,50 @@ void ui_masparPannel (Widget w, Widget button, caddr_t call_data)
     Widget masparPannel, border, pannel, label0, label1, done;
 
     n = 0;
-    XtSetArg (arg[n], XtNwidth, &width); n++;
-    XtSetArg (arg[n], XtNheight, &height); n++;
+    XtSetArg (arg[n], XtNwidth, &width);
+    n++;
+    XtSetArg (arg[n], XtNheight, &height);
+    n++;
     XtGetValues (button, arg, (unsigned int) n);
-    XtTranslateCoords (button, (Position) (width / 2), (Position) (height / 2), 
+    XtTranslateCoords (button, (Position) (width / 2), (Position) (height / 2),
                        &xPos, &yPos);
 
     n = 0;
-    XtSetArg(arg[n], XtNx, xPos); n++;
-    XtSetArg(arg[n], XtNy, yPos); n++;
-    masparPannel = XtCreatePopupShell ("MasPar", transientShellWidgetClass, 
+    XtSetArg(arg[n], XtNx, xPos);
+    n++;
+    XtSetArg(arg[n], XtNy, yPos);
+    n++;
+    masparPannel = XtCreatePopupShell ("MasPar", transientShellWidgetClass,
                                        button, arg, (unsigned int) n);
-    border = XtCreateManagedWidget ("border", boxWidgetClass, 
-                                     masparPannel, NULL, ZERO);
-    pannel = XtCreateManagedWidget ("pannel", formWidgetClass, 
-                                     border, NULL, ZERO);
-/*
-    label0 = ui_xCreateLabelItem ("MasPar          ", pannel, 
-                                  16 * 8, NULL, NULL); 
-    connect = ui_xCreateToggleItem ("connect", pannel, NULL, label0, NULL);
-    disconnect = ui_xCreateToggleItem ("disconnect", pannel, NULL, connect, NULL);
-*/
-    label1 = ui_xCreateLabelItem ("Network Topology", pannel, 
-                                  16 * 8, NULL, label0); 
+    border = XtCreateManagedWidget ("border", boxWidgetClass,
+                                    masparPannel, NULL, ZERO);
+    pannel = XtCreateManagedWidget ("pannel", formWidgetClass,
+                                    border, NULL, ZERO);
+    /*
+        label0 = ui_xCreateLabelItem ("MasPar          ", pannel,
+                                      16 * 8, NULL, NULL);
+        connect = ui_xCreateToggleItem ("connect", pannel, NULL, label0, NULL);
+        disconnect = ui_xCreateToggleItem ("disconnect", pannel, NULL, connect, NULL);
+    */
+    label1 = ui_xCreateLabelItem ("Network Topology", pannel,
+                                  16 * 8, NULL, label0);
     standard = ui_xCreateToggleItem ("standard", pannel, NULL, label1, label0);
-    feedforward = ui_xCreateToggleItem ("feedforward", pannel, NULL, 
-                                  standard, label0);
+    feedforward = ui_xCreateToggleItem ("feedforward", pannel, NULL,
+                                        standard, label0);
 
     done = ui_xCreateButtonItem ("done", border, NULL, label1);
 
     XtAddCallback (done, XtNcallback, (XtCallbackProc) closeMasparPannel, (Widget) masparPannel);
-/*
-    XtAddCallback (connect, XtNcallback, (XtCallbackProc) connect_MasPar, NULL);
-    XtAddCallback (disconnect, XtNcallback, (XtCallbackProc) disconnect_MasPar, NULL);
-*/
+    /*
+        XtAddCallback (connect, XtNcallback, (XtCallbackProc) connect_MasPar, NULL);
+        XtAddCallback (disconnect, XtNcallback, (XtCallbackProc) disconnect_MasPar, NULL);
+    */
     XtAddCallback (standard, XtNcallback, (XtCallbackProc) standard_Net, NULL);
     XtAddCallback (feedforward, XtNcallback, (XtCallbackProc) feedforward_Net, NULL);
 
     ui_checkWindowPosition(masparPannel);
     XtPopup (masparPannel, XtGrabNone);
-    ui_xDontResizeWidget(masparPannel); 
+    ui_xDontResizeWidget(masparPannel);
 }
 
 

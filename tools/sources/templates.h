@@ -4,7 +4,7 @@
   SNNS VERSION   : 4.2
 
   PURPOSE        : Templates for snns2c.c
-  
+
   AUTHOR         : Bernward Kett
   DATE           : 31.08.94
 
@@ -14,7 +14,7 @@
 
     Copyright (c) 1990-1995  SNNS Group, IPVR, Univ. Stuttgart, FRG
     Copyright (c) 1996-1998  SNNS Group, WSI, Univ. Tuebingen, FRG
-  
+
   used files     : glob_typ.h, kr_ui.h      from kernel/sources
                    libkernel.a              from kernel/bin/<architecture>
                    functions.h, templates.h from actual directory
@@ -48,7 +48,7 @@
 "  generated at %s  by snns2c ( Bernward Kett 1995 ) \n"\
 "*********************************************************/\n\n"\
 "#include <math.h>\n\n"
- 
+
 
 #define ProcHeader ""\
 "\n\nint %s(float *in, float *out, int init)\n"\
@@ -217,7 +217,7 @@
 
 #define TdnnExitTemplate ""\
 "  if (++Pattern_counter < %d) return(Not_Valid);\n"\
-"  else return(OK);\n" 
+"  else return(OK);\n"
 
 #define TdnnTypeTemplate "\n"\
 "typedef struct UT {\n"\
@@ -243,17 +243,17 @@
   It is only necessary to compute the newest Activation of the Feature
   Units (e.g. Delay 0)
 
-  For all Units U in a layer L:   
+  For all Units U in a layer L:
     For all Source Feature Units SFU of the Unit U:
       For all delays in DelayLength:
          sum = sum + (delayed Activation of the Feature Unit)
                       * ( weight to the delayed Activation)
       end
     end
-    Activation (Unit U, delay 0 ) = ActivationFunc(sum, bias of Unit U) 
+    Activation (Unit U, delay 0 ) = ActivationFunc(sum, bias of Unit U)
   end
 
-  After updating all units the activation of the  units become older, 
+  After updating all units the activation of the  units become older,
   e.g. the delay of each Activation is increased. To avoid this work
   there is a pointer for each Layer which shows which activation
   is the newest one.
@@ -307,4 +307,4 @@
 "        } /* if */  \n"\
 "     }  /* for source */ \n"\
 "     unit->act[%s] = %s(sum, unit->Bias); \n"\
-"  };  /* for member */ \n\n"  
+"  };  /* for member */ \n\n"

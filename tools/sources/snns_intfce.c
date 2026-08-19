@@ -3,20 +3,20 @@
   SHORTNAME      : snns_intfce
   SNNS VERSION   : 4.2
 
-  PURPOSE        : Interface between Batchman's jacket function calls (via 
+  PURPOSE        : Interface between Batchman's jacket function calls (via
                    the symbol table) and SNNS-kernel calls
 
   NOTES          : This file is provided for future extensions of Batchman
-                   and has *no semantic purpose* in this version. The 
-                   intention is to set up a clearly defined entry point 
-                   between the batch language processing and the SNNS-kernel. 
+                   and has *no semantic purpose* in this version. The
+                   intention is to set up a clearly defined entry point
+                   between the batch language processing and the SNNS-kernel.
                    Instead of adressing the kernel, XGUI callback
                    functions can be executed from here.
 
   AUTHOR         : Jens Wieland
-  DATE           : 
+  DATE           :
 
-  CHANGED BY     : 
+  CHANGED BY     :
   RCS VERSION    : $Revision: 1.12 $
   LAST CHANGE    : $Date: 1998/07/08 11:13:58 $
 
@@ -40,11 +40,10 @@
   RETURNS  :
   NOTES    : init function name is mandatory
 
-  UPDATE   : 
+  UPDATE   :
 ******************************************************************************/
-void int_setInitFunc(arglist_type *arglist)
-{
-  setInitFunc(arglist);
+void int_setInitFunc(arglist_type *arglist) {
+    setInitFunc(arglist);
 }
 
 
@@ -56,11 +55,10 @@ void int_setInitFunc(arglist_type *arglist)
   RETURNS  :
   NOTES    : learning function name is mandatory
 
-  UPDATE   : 
+  UPDATE   :
 ******************************************************************************/
-void int_setLearnFunc(arglist_type *arglist)
-{
-  setLearnFunc(arglist);
+void int_setLearnFunc(arglist_type *arglist) {
+    setLearnFunc(arglist);
 }
 
 
@@ -72,11 +70,10 @@ void int_setLearnFunc(arglist_type *arglist)
   RETURNS  :
   NOTES    : update function name is mandatory
 
-  UPDATE   : 
+  UPDATE   :
 ******************************************************************************/
-void int_setUpdateFunc(arglist_type *arglist)
-{
-  setUpdateFunc(arglist);
+void int_setUpdateFunc(arglist_type *arglist) {
+    setUpdateFunc(arglist);
 }
 
 
@@ -88,11 +85,10 @@ void int_setUpdateFunc(arglist_type *arglist)
   RETURNS  :
   NOTES    : pruning and subordinate learning function names are mandatory
 
-  UPDATE   : 
+  UPDATE   :
 ******************************************************************************/
-void int_setPruningFunc(arglist_type *arglist)
-{
-  setPruningFunc(arglist);
+void int_setPruningFunc(arglist_type *arglist) {
+    setPruningFunc(arglist);
 }
 
 
@@ -104,11 +100,10 @@ void int_setPruningFunc(arglist_type *arglist)
   RETURNS  :
   NOTES    : remap function name is mandatory
 
-  UPDATE   : 
+  UPDATE   :
 ******************************************************************************/
-void int_setRemapFunc(arglist_type *arglist)
-{
-  setRemapFunc(arglist);
+void int_setRemapFunc(arglist_type *arglist) {
+    setRemapFunc(arglist);
 }
 
 
@@ -120,11 +115,10 @@ void int_setRemapFunc(arglist_type *arglist)
   RETURNS  :
   NOTES    : kernel call is performed in defSubpattern()
 
-  UPDATE   : 
+  UPDATE   :
 ******************************************************************************/
-void int_setSubPattern(arglist_type *arglist)
-{
-  setSubPattern(arglist);
+void int_setSubPattern(arglist_type *arglist) {
+    setSubPattern(arglist);
 }
 
 
@@ -132,14 +126,13 @@ void int_setSubPattern(arglist_type *arglist)
   FUNCTION : setShuffle
 
   PURPOSE  : sets the pattern shuffling mode for ordinary patterns
-  RETURNS  : 
-  NOTES    : 
+  RETURNS  :
+  NOTES    :
 
-  UPDATE   : 
+  UPDATE   :
 ******************************************************************************/
-void int_setShuffle(arglist_type *arglist)
-{
-  setShuffle(arglist);
+void int_setShuffle(arglist_type *arglist) {
+    setShuffle(arglist);
 }
 
 
@@ -147,14 +140,13 @@ void int_setShuffle(arglist_type *arglist)
   FUNCTION : setSubShuffle
 
   PURPOSE  : sets the pattern shuffling mode for subpatterns
-  RETURNS  : 
-  NOTES    : 
+  RETURNS  :
+  NOTES    :
 
-  UPDATE   : 
+  UPDATE   :
 ******************************************************************************/
-void int_setSubShuffle(arglist_type *arglist)
-{
-  setSubShuffle(arglist);
+void int_setSubShuffle(arglist_type *arglist) {
+    setSubShuffle(arglist);
 }
 
 
@@ -162,16 +154,15 @@ void int_setSubShuffle(arglist_type *arglist)
   FUNCTION : setClassDistrib
 
   PURPOSE  : sets the distribution of the classes in the pattern file
-             to the values given as parameters. 
+             to the values given as parameters.
   RETURNS  :
   NOTES    : first parameter (bool) switches redistribution on or off
              also sets the value of PAT
 
-  UPDATE   : 
+  UPDATE   :
 ******************************************************************************/
-void int_setClassDistrib(arglist_type *arglist)
-{
-  setClassDistrib(arglist);
+void int_setClassDistrib(arglist_type *arglist) {
+    setClassDistrib(arglist);
 }
 
 
@@ -180,14 +171,13 @@ void int_setClassDistrib(arglist_type *arglist)
 
   PURPOSE  : switches to the parallel kernel if argument is TRUE and back
              if argument is FALSE
-  RETURNS  : 
-  NOTES    : 
+  RETURNS  :
+  NOTES    :
 
-  UPDATE   : 
+  UPDATE   :
 ******************************************************************************/
-void int_setParallelMode(arglist_type *arglist)
-{
-  setParallelMode(arglist);
+void int_setParallelMode(arglist_type *arglist) {
+    setParallelMode(arglist);
 }
 
 
@@ -195,14 +185,13 @@ void int_setParallelMode(arglist_type *arglist)
   FUNCTION : setCascadeParams
 
   PURPOSE  : sets the parameters of the cascade correlation algorithms
-  RETURNS  : 
-  NOTES    : 
+  RETURNS  :
+  NOTES    :
 
-  UPDATE   : 
+  UPDATE   :
 ******************************************************************************/
-void int_setCascadeParams(arglist_type *arglist)
-{
-  setCascadeParams(arglist);
+void int_setCascadeParams(arglist_type *arglist) {
+    setCascadeParams(arglist);
 }
 
 
@@ -211,14 +200,13 @@ void int_setCascadeParams(arglist_type *arglist)
   FUNCTION : initNet
 
   PURPOSE  : initializes the network
-  RETURNS  : 
+  RETURNS  :
   NOTES    : resets the value of CYCLES
 
-  UPDATE   : 
+  UPDATE   :
 ******************************************************************************/
-void int_initNet(arglist_type *arglist)
-{
-  initNet(arglist);
+void int_initNet(arglist_type *arglist) {
+    initNet(arglist);
 }
 
 
@@ -226,14 +214,13 @@ void int_initNet(arglist_type *arglist)
   FUNCTION : resetNet
 
   PURPOSE  : resets the network to its initial configuration
-  RETURNS  : 
+  RETURNS  :
   NOTES    : resets the value of CYCLES
 
-  UPDATE   : 
+  UPDATE   :
 ******************************************************************************/
-void int_resetNet(arglist_type *arglist)
-{
-  resetNet(arglist);
+void int_resetNet(arglist_type *arglist) {
+    resetNet(arglist);
 }
 
 
@@ -242,14 +229,13 @@ void int_resetNet(arglist_type *arglist)
 
   PURPOSE  : loads a network file
              Parameter: network file
-  RETURNS  : 
+  RETURNS  :
   NOTES    : resets the value of CYCLES
 
-  UPDATE   : 
+  UPDATE   :
 ******************************************************************************/
-void int_loadNet(arglist_type *arglist)
-{
-  loadNet(arglist);
+void int_loadNet(arglist_type *arglist) {
+    loadNet(arglist);
 }
 
 
@@ -258,14 +244,13 @@ void int_loadNet(arglist_type *arglist)
 
   PURPOSE  : saves a network
              Parameter: network file name
-  RETURNS  : 
+  RETURNS  :
   NOTES    :
 
-  UPDATE   : 
+  UPDATE   :
 ******************************************************************************/
-void int_saveNet(arglist_type *arglist)
-{
-  saveNet(arglist);
+void int_saveNet(arglist_type *arglist) {
+    saveNet(arglist);
 }
 
 
@@ -277,14 +262,13 @@ void int_saveNet(arglist_type *arglist)
 	     optional parameters: start pattern, end pattern,
 	                          include input, include output
 				  file mode: create | append
-  RETURNS  : 
+  RETURNS  :
   NOTES    :
 
-  UPDATE   : 
+  UPDATE   :
 ******************************************************************************/
-void int_saveResult(arglist_type *arglist)
-{
-  saveResult(arglist);
+void int_saveResult(arglist_type *arglist) {
+    saveResult(arglist);
 }
 
 
@@ -293,14 +277,13 @@ void int_saveResult(arglist_type *arglist)
 
   PURPOSE  : trains the network one cycle with the current patternset
              Parameters: none
-  RETURNS  : 
+  RETURNS  :
   NOTES    : sets the values of SSE, MSE, SSEPU, CYCLES
 
-  UPDATE   : 
+  UPDATE   :
 ******************************************************************************/
-void int_trainNet(arglist_type *arglist)
-{
-  trainNet(arglist);
+void int_trainNet(arglist_type *arglist) {
+    trainNet(arglist);
 }
 
 
@@ -309,14 +292,13 @@ void int_trainNet(arglist_type *arglist)
 
   PURPOSE  : tests the network with the current patternset
              Parameters: none
-  RETURNS  : 
+  RETURNS  :
   NOTES    : sets the values of SSE, MSE, SSEPU
 
-  UPDATE   : 
+  UPDATE   :
 ******************************************************************************/
-void int_testNet(arglist_type *arglist)
-{
-  testNet(arglist);
+void int_testNet(arglist_type *arglist) {
+    testNet(arglist);
 }
 
 
@@ -324,41 +306,38 @@ void int_testNet(arglist_type *arglist)
   FUNCTION : pruneNet
 
   PURPOSE  : prune the net using the pruning parameters
-  RETURNS  : 
+  RETURNS  :
   NOTES    : function taken from snnsbat.c with minor changes
 
-  UPDATE   : 
+  UPDATE   :
 ******************************************************************************/
-void int_pruneNet(arglist_type *arglist)
-{
-  pruneNet(arglist);
+void int_pruneNet(arglist_type *arglist) {
+    pruneNet(arglist);
 }
 
 /*****************************************************************************
   FUNCTION : pruneTrainNet
 
   PURPOSE  : pruning: Train one Cycle with pruning-function
-  RETURNS  : 
+  RETURNS  :
   NOTES    : function taken pruneNet with minor changes
              sets the values of SSE, MSE, SSEPU, CYCLES
-  UPDATE   : 
+  UPDATE   :
 ******************************************************************************/
-void int_pruneTrainNet(arglist_type *arglist)
-{
-  pruneTrainNet(arglist);
+void int_pruneTrainNet(arglist_type *arglist) {
+    pruneTrainNet(arglist);
 }
 
 /*****************************************************************************
   FUNCTION : pruneNetNow
 
   PURPOSE  : pruning: prune Net and calc error of new net
-  RETURNS  : 
+  RETURNS  :
   NOTES    : function taken pruneNet with minor changes
              sets the values of SSE, MSE, SSEPU
-  UPDATE   : 
+  UPDATE   :
 ******************************************************************************/
-void int_pruneNetNow(arglist_type *arglist)
-{
+void int_pruneNetNow(arglist_type *arglist) {
     pruneNetNow(arglist);
 }
 
@@ -366,13 +345,12 @@ void int_pruneNetNow(arglist_type *arglist)
   FUNCTION : setActFunc
 
   PURPOSE  : sets the Activation Funtion for _all_ Neurons
-  RETURNS  : 
+  RETURNS  :
   NOTES    :
 
-  UPDATE   : 
+  UPDATE   :
 ******************************************************************************/
-void int_setActFunc(arglist_type *arglist)
-{
+void int_setActFunc(arglist_type *arglist) {
     setActFunc(arglist);
 }
 
@@ -381,14 +359,13 @@ void int_setActFunc(arglist_type *arglist)
   FUNCTION : delCandUnits
 
   PURPOSE  : Cascade Correlation: deletes the candidate units
-  RETURNS  : 
-  NOTES    : 
+  RETURNS  :
+  NOTES    :
 
-  UPDATE   : 
+  UPDATE   :
 ******************************************************************************/
-void int_delCandUnits(arglist_type *arglist)
-{
-  delCandUnits(arglist);
+void int_delCandUnits(arglist_type *arglist) {
+    delCandUnits(arglist);
 }
 
 
@@ -398,14 +375,13 @@ void int_delCandUnits(arglist_type *arglist)
 
   PURPOSE  : loads a pattern file
              Parameter: pattern file name
-  RETURNS  : 
+  RETURNS  :
   NOTES    : sets the value of PAT
 
-  UPDATE   : 
+  UPDATE   :
 ******************************************************************************/
-void int_loadPattern(arglist_type *arglist)
-{
-  loadPattern(arglist);
+void int_loadPattern(arglist_type *arglist) {
+    loadPattern(arglist);
 }
 
 
@@ -414,14 +390,13 @@ void int_loadPattern(arglist_type *arglist)
 
   PURPOSE  : makes the named patternset the current
              Parameter: pattern file name
-  RETURNS  : 
+  RETURNS  :
   NOTES    : sets the value of PAT
 
-  UPDATE   : 
+  UPDATE   :
 ******************************************************************************/
-void int_setPattern(arglist_type *arglist)
-{
-  setPattern(arglist);
+void int_setPattern(arglist_type *arglist) {
+    setPattern(arglist);
 }
 
 
@@ -430,28 +405,26 @@ void int_setPattern(arglist_type *arglist)
 
   PURPOSE  : deletes the named patternset
              Parameter: pattern file name
-  RETURNS  : 
+  RETURNS  :
   NOTES    : resets the value of PAT
 
-  UPDATE   : 
+  UPDATE   :
 ******************************************************************************/
-void int_delPattern(arglist_type *arglist)
-{
-  delPattern(arglist);
+void int_delPattern(arglist_type *arglist) {
+    delPattern(arglist);
 }
 
 /*****************************************************************************
   FUNCTION : setSeed
 
   PURPOSE  : sets the seed for the pseudo random generator
-             Parameter: (optional) seed_value 
-  RETURNS  : 
+             Parameter: (optional) seed_value
+  RETURNS  :
   NOTES    :
 
-  UPDATE   : 
+  UPDATE   :
 ******************************************************************************/
-void int_setSeed(arglist_type *arglist)
-{
+void int_setSeed(arglist_type *arglist) {
     setSeed(arglist);
 }
 
@@ -461,13 +434,12 @@ void int_setSeed(arglist_type *arglist)
 
   PURPOSE  : adds (multiplies) noise to the link weights
              Parameter: minus, plus noise boundary
-  RETURNS  : 
+  RETURNS  :
   NOTES    :
 
-  UPDATE   : 
+  UPDATE   :
 ******************************************************************************/
-void int_jogWeights(arglist_type *arglist)
-{
+void int_jogWeights(arglist_type *arglist) {
     jogWeights(arglist);
 }
 
@@ -477,13 +449,12 @@ void int_jogWeights(arglist_type *arglist)
 
   PURPOSE  : adds (multiplies) noise to the link weights of correlated hiddens
              Parameter: minus, plus noise boundary
-  RETURNS  : 
+  RETURNS  :
   NOTES    :
 
-  UPDATE   : 
+  UPDATE   :
 ******************************************************************************/
-void int_jogCorrWeights(arglist_type *arglist)
-{
+void int_jogCorrWeights(arglist_type *arglist) {
     jogCorrWeights(arglist);
 }
 

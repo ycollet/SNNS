@@ -3,13 +3,13 @@
   SHORTNAME      : bn_art2
   SNNS VERSION   : 4.2
 
-  PURPOSE        : 
+  PURPOSE        :
   NOTES          :
 
   AUTHOR         : Kai-Uwe Herrmann
   DATE           : 15.1.1993
 
-  CHANGED BY     : 
+  CHANGED BY     :
   RCS VERSION    : $Revision: 2.6 $
   LAST CHANGE    : $Date: 1998/02/25 15:19:32 $
 
@@ -22,6 +22,6 @@
 
 extern void bn_createART2 (void);
 
-#endif 
+#endif
 /* end of file */
 /* lines:  */

@@ -3,13 +3,13 @@
   SHORTNAME         : params
   VERSION           : 2.0
 
-  PURPOSE           : header file for co_params.c 
+  PURPOSE           : header file for co_params.c
   NOTES             :
 
-  AUTHOR            : Thomas Korb 
+  AUTHOR            : Thomas Korb
   DATE              : 27.6.1991
 
-  CHANGED BY        : 
+  CHANGED BY        :
   IDENTIFICATION    : %W% %G%
   SCCS VERSION      : %I%
   LAST CHANGE       : %G%

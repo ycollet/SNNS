@@ -7,10 +7,10 @@
                       functions into C.
   NOTES             :
 
-  AUTHOR            : Thomas Korb 
+  AUTHOR            : Thomas Korb
   DATE              : 27.6.1991
 
-  CHANGED BY        : 
+  CHANGED BY        :
   IDENTIFICATION    : %W% %G%
   SCCS VERSION      : %I%
   LAST CHANGE       : %G%
@@ -21,8 +21,9 @@
 
 #include "co_cFuncs.h"
 
-struct FuncListStruct *FUNC_RemoveTab()
-{ return NULL; }
+struct FuncListStruct *FUNC_RemoveTab() {
+    return NULL;
+}
 
 static FuncListType *SiteFuncList = NULL;             /* ptr. to list of site functions */
 static FuncListType *ActFuncList = NULL;        /* ptr. to list of activation functions */
@@ -42,20 +43,20 @@ void CF_IncludeNewFunctions()
  Side effects: Modifies lists of functions.
 *****************************************************************************************/
 CF_MarkFunction(Function, FuncType)
-     ParserStackType *Function;
-     SymbolType FuncType;
+ParserStackType *Function;
+SymbolType FuncType;
 {
-  switch(FuncType) {                                 /* select list to insert function */
-  case SITEFUNC:
-    CF_InsertSiteFuncList(Function);
-    break;
-  case ACTFUNC:
-    CF_InsertActFuncList(Function);
-    break;
-  case OUTFUNC:
-    CF_InsertOutFuncList(Function);
-    break;
-  }
+    switch(FuncType) {                                 /* select list to insert function */
+    case SITEFUNC:
+        CF_InsertSiteFuncList(Function);
+        break;
+    case ACTFUNC:
+        CF_InsertActFuncList(Function);
+        break;
+    case OUTFUNC:
+        CF_InsertOutFuncList(Function);
+        break;
+    }
 }
 
 
@@ -68,26 +69,25 @@ CF_MarkFunction(Function, FuncType)
  Side effects: Modifies lists of site functions.
 *****************************************************************************************/
 void CF_InsertSiteFuncList(Function)
-     ParserStackType *Function;
+ParserStackType *Function;
 {
-  register FuncListType *Act;
-  
-  if( ! SiteFuncList) {                             /* no site functions defined before */
-    SiteFuncList = (FuncListType *) M_alloc(sizeof(FuncListType));
-    SiteFuncList->FuncName = Function->yvalue->var->Name;
-    SiteFuncList->NextFunc = NULL;
-  }
-  else {
-    for(Act = SiteFuncList; Act->NextFunc; Act = Act->NextFunc)
-      if( ! strcmp(Act->FuncName, Function->yvalue->var->Name))
-	return;         /* function already in list -- strcmp necessary for subnets !! */
-    if( ! Act->NextFunc && strcmp(Act->FuncName, Function->yvalue->var->Name)) {/* new */
-      Act->NextFunc = (FuncListType *) M_alloc(sizeof(FuncListType));
-      Act->NextFunc->FuncName = Function->yvalue->var->Name;
-      Act->NextFunc->NextFunc = NULL;
+    register FuncListType *Act;
+
+    if( ! SiteFuncList) {                             /* no site functions defined before */
+        SiteFuncList = (FuncListType *) M_alloc(sizeof(FuncListType));
+        SiteFuncList->FuncName = Function->yvalue->var->Name;
+        SiteFuncList->NextFunc = NULL;
+    } else {
+        for(Act = SiteFuncList; Act->NextFunc; Act = Act->NextFunc)
+            if( ! strcmp(Act->FuncName, Function->yvalue->var->Name))
+                return;         /* function already in list -- strcmp necessary for subnets !! */
+        if( ! Act->NextFunc && strcmp(Act->FuncName, Function->yvalue->var->Name)) {/* new */
+            Act->NextFunc = (FuncListType *) M_alloc(sizeof(FuncListType));
+            Act->NextFunc->FuncName = Function->yvalue->var->Name;
+            Act->NextFunc->NextFunc = NULL;
+        }
     }
-  }
-  return;
+    return;
 }
 
 
@@ -100,26 +100,25 @@ void CF_InsertSiteFuncList(Function)
  Side effects: Modifies lists of activation functions.
 *****************************************************************************************/
 void CF_InsertActFuncList(Function)
-     ParserStackType *Function;
+ParserStackType *Function;
 {
-  register FuncListType *Act;
-  
-  if( ! ActFuncList) {                        /* no activation functions defined before */
-    ActFuncList = (FuncListType*) M_alloc(sizeof(FuncListType));
-    ActFuncList->FuncName = Function->yvalue->var->Name;
-    ActFuncList->NextFunc = NULL;
-  }
-  else {
-    for(Act = ActFuncList; Act->NextFunc; Act = Act->NextFunc)
-      if( ! strcmp(Act->FuncName, Function->yvalue->var->Name))
-	return;         /* function already in list -- strcmp necessary for subnets !! */
-    if( ! Act->NextFunc && strcmp(Act->FuncName, Function->yvalue->var->Name)) {    /* new */
-      Act->NextFunc = (FuncListType*) M_alloc(sizeof(FuncListType));
-      Act->NextFunc->FuncName = Function->yvalue->var->Name;
-      Act->NextFunc->NextFunc = NULL;
+    register FuncListType *Act;
+
+    if( ! ActFuncList) {                        /* no activation functions defined before */
+        ActFuncList = (FuncListType*) M_alloc(sizeof(FuncListType));
+        ActFuncList->FuncName = Function->yvalue->var->Name;
+        ActFuncList->NextFunc = NULL;
+    } else {
+        for(Act = ActFuncList; Act->NextFunc; Act = Act->NextFunc)
+            if( ! strcmp(Act->FuncName, Function->yvalue->var->Name))
+                return;         /* function already in list -- strcmp necessary for subnets !! */
+        if( ! Act->NextFunc && strcmp(Act->FuncName, Function->yvalue->var->Name)) {    /* new */
+            Act->NextFunc = (FuncListType*) M_alloc(sizeof(FuncListType));
+            Act->NextFunc->FuncName = Function->yvalue->var->Name;
+            Act->NextFunc->NextFunc = NULL;
+        }
     }
-  }
-  return;
+    return;
 }
 
 
@@ -132,25 +131,24 @@ void CF_InsertActFuncList(Function)
  Side effects: Modifies lists of output functions.
 *****************************************************************************************/
 void CF_InsertOutFuncList(Function)
-     ParserStackType *Function;
+ParserStackType *Function;
 {
-  register FuncListType *Act;
+    register FuncListType *Act;
 
-  if( ! OutFuncList) {                            /* no output functions defined before */
-    OutFuncList = (FuncListType*) M_alloc(sizeof(FuncListType));
-    OutFuncList->FuncName = Function->yvalue->var->Name;
-    OutFuncList->NextFunc = NULL;
-  }
-  else {
-    for(Act = OutFuncList; Act->NextFunc; Act = Act->NextFunc)
-      if( ! strcmp(Act->FuncName, Function->yvalue->var->Name))
-	return;         /* function already in list -- strcmp necessary for subnets !! */
-    if( ! Act->NextFunc && strcmp(Act->FuncName, Function->yvalue->var->Name)) {/* new */
-      Act->NextFunc = (FuncListType*) M_alloc(sizeof(FuncListType));
-      Act->NextFunc->FuncName = Function->yvalue->var->Name;
-      Act->NextFunc->NextFunc = NULL;
+    if( ! OutFuncList) {                            /* no output functions defined before */
+        OutFuncList = (FuncListType*) M_alloc(sizeof(FuncListType));
+        OutFuncList->FuncName = Function->yvalue->var->Name;
+        OutFuncList->NextFunc = NULL;
+    } else {
+        for(Act = OutFuncList; Act->NextFunc; Act = Act->NextFunc)
+            if( ! strcmp(Act->FuncName, Function->yvalue->var->Name))
+                return;         /* function already in list -- strcmp necessary for subnets !! */
+        if( ! Act->NextFunc && strcmp(Act->FuncName, Function->yvalue->var->Name)) {/* new */
+            Act->NextFunc = (FuncListType*) M_alloc(sizeof(FuncListType));
+            Act->NextFunc->FuncName = Function->yvalue->var->Name;
+            Act->NextFunc->NextFunc = NULL;
+        }
     }
-  }
-  return;
+    return;
 }
-     
+

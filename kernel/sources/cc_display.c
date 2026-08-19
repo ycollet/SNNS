@@ -200,8 +200,7 @@ void cc_setSpecialUnits(int X_Max) {
   UPDATE   : 30.03.96
 ******************************************************************************/
 
-krui_err cc_setHiddenUnit(struct Unit *NotUsedUnitPtr, int LayerOfNewUnit)
-{
+krui_err cc_setHiddenUnit(struct Unit *NotUsedUnitPtr, int LayerOfNewUnit) {
     struct Unit* UnitPtr;
     int i,LayerNo;
     int* UnitCount;

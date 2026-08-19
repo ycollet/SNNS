@@ -15,7 +15,7 @@
 
     Copyright (c) 1990-1995  SNNS Group, IPVR, Univ. Stuttgart, FRG
     Copyright (c) 1996-1998  SNNS Group, WSI, Univ. Tuebingen, FRG
-             
+
 ******************************************************************************/
 #include <config.h>
 
@@ -63,10 +63,10 @@ static int d3_get_float_input (Widget w, float *f)
 
     temp = ui_xFloatFromAsciiWidget (w);
     if (temp != *f) {
-         *f = temp;
-         return (TRUE);
+        *f = temp;
+        return (TRUE);
     } else
-         return (FALSE);
+        return (FALSE);
 }
 
 
@@ -82,14 +82,15 @@ static int d3_get_float_input (Widget w, float *f)
 
 static int d3_get_float_rad_input (Widget w, float *f)
 
-{    float temp;
+{
+    float temp;
 
     temp = rad (ui_xFloatFromAsciiWidget (w));
     if (temp != *f) {
-         *f = temp;
-         return (TRUE);
+        *f = temp;
+        return (TRUE);
     } else
-         return (FALSE);
+        return (FALSE);
 }
 
 
@@ -118,26 +119,26 @@ static void d3_closeSetupPannel (Widget w, Widget pannel, caddr_t call_data)
 
     d3_state.scale_step [0] = ui_xFloatFromAsciiWidget (scaleStepWidget);
 
-    f1 = d3_get_float_rad_input (rotXinitWidget, &d3_state.rot_vec[0]);  
-    f2 = d3_get_float_rad_input (rotYinitWidget, &d3_state.rot_vec[1]);  
-    f3 = d3_get_float_rad_input (rotZinitWidget, &d3_state.rot_vec[2]);  
+    f1 = d3_get_float_rad_input (rotXinitWidget, &d3_state.rot_vec[0]);
+    f2 = d3_get_float_rad_input (rotYinitWidget, &d3_state.rot_vec[1]);
+    f3 = d3_get_float_rad_input (rotZinitWidget, &d3_state.rot_vec[2]);
 
-    f4 = d3_get_float_input (transXinitWidget, &d3_state.trans_vec[0]);  
-    f5 = d3_get_float_input (transYinitWidget, &d3_state.trans_vec[1]);  
-    f6 = d3_get_float_input (transZinitWidget, &d3_state.trans_vec[2]);  
+    f4 = d3_get_float_input (transXinitWidget, &d3_state.trans_vec[0]);
+    f5 = d3_get_float_input (transYinitWidget, &d3_state.trans_vec[1]);
+    f6 = d3_get_float_input (transZinitWidget, &d3_state.trans_vec[2]);
 
-    f7 = d3_get_float_input (scaleInitWidget, &d3_state.scale_vec[0]);  
+    f7 = d3_get_float_input (scaleInitWidget, &d3_state.scale_vec[0]);
 
-    f8 = d3_get_float_input (aspectWidget, &d3_state.unit_aspect);  
-    f9 = d3_get_float_input (linkWidget, &d3_state.link_scale);  
+    f8 = d3_get_float_input (aspectWidget, &d3_state.unit_aspect);
+    f9 = d3_get_float_input (linkWidget, &d3_state.link_scale);
 
-    f10 = d3_get_float_input (posTriggerWidget, &d3_state.pos_link_trigger);  
-    f11 = d3_get_float_input (negTriggerWidget, &d3_state.neg_link_trigger);  
+    f10 = d3_get_float_input (posTriggerWidget, &d3_state.pos_link_trigger);
+    f11 = d3_get_float_input (negTriggerWidget, &d3_state.neg_link_trigger);
 
     XtDestroyWidget (pannel);
 
     if (f1 || f2 || f3 || f3 || f5 || f6 || f7 || f8 || f9 || f10 || f11)
-         d3_drawNet ();
+        d3_drawNet ();
 }
 
 
@@ -165,16 +166,20 @@ void d3_createSetupPannel (Widget w, Widget button, caddr_t call_data)
     Widget dummy1, dummy2, dummy3, dummy4, dummy5, dummy6, dummy7, dummy8, dummy9;
 
     n = 0;
-    XtSetArg (arg[n], XtNwidth, &width); n++;
-    XtSetArg (arg[n], XtNheight, &height); n++;
+    XtSetArg (arg[n], XtNwidth, &width);
+    n++;
+    XtSetArg (arg[n], XtNheight, &height);
+    n++;
     XtGetValues (button, arg, (unsigned int) n);
 
     XtTranslateCoords (button, (Position) (width / 2), (Position) (height / 2),
                        &xPos, &yPos);
     n = 0;
 
-    XtSetArg(arg[n], XtNx, xPos); n++;
-    XtSetArg(arg[n], XtNy, yPos); n++;
+    XtSetArg(arg[n], XtNx, xPos);
+    n++;
+    XtSetArg(arg[n], XtNy, yPos);
+    n++;
 
     setupPannel = XtCreatePopupShell ("setup", transientShellWidgetClass,
                                       button, arg, (unsigned int) n);
@@ -185,170 +190,170 @@ void d3_createSetupPannel (Widget w, Widget button, caddr_t call_data)
 
     /* Title Widgets */
 
-    dummy1 = ui_xCreateLabelItem ("     ", pannel, 5 * d3_fontWidth, NULL, NULL); 
-    dummy2 = ui_xCreateLabelItem ("   ", pannel, 3 * d3_fontWidth, dummy1, NULL);  
+    dummy1 = ui_xCreateLabelItem ("     ", pannel, 5 * d3_fontWidth, NULL, NULL);
+    dummy2 = ui_xCreateLabelItem ("   ", pannel, 3 * d3_fontWidth, dummy1, NULL);
     init = ui_xCreateLabelItem ("  base   ", pannel, 9 * d3_fontWidth,
-                                dummy2, NULL); 
-    dummy3 = ui_xCreateLabelItem (" ", pannel, d3_fontWidth, init, NULL); 
+                                dummy2, NULL);
+    dummy3 = ui_xCreateLabelItem (" ", pannel, d3_fontWidth, init, NULL);
     step = ui_xCreateLabelItem ("   step  ", pannel, 9 * d3_fontWidth,
-                                 dummy3, NULL); 
+                                dummy3, NULL);
 
     /* Rotation Widgets */
 
     dummy4 = ui_xCreateLabelItem ("rot  ", pannel, 5 * d3_fontWidth,
-                                  NULL, dummy1); 
-    rot_x = ui_xCreateLabelItem (" X ", pannel, 3 * d3_fontWidth, dummy4, dummy1); 
+                                  NULL, dummy1);
+    rot_x = ui_xCreateLabelItem (" X ", pannel, 3 * d3_fontWidth, dummy4, dummy1);
     sprintf (buf, "%.4f", fmod (deg (d3_state.rot_vec[0]), 360.0));
     rotXinitWidget = ui_xCreateDialogItem ("rotXinitWidget", pannel,
-                                  buf, d3_numberWidth, rot_x, dummy1 );
-    dummy5 = ui_xCreateLabelItem (" ", pannel, 
+                                           buf, d3_numberWidth, rot_x, dummy1 );
+    dummy5 = ui_xCreateLabelItem (" ", pannel,
                                   d3_fontWidth, rotXinitWidget, dummy1);
     sprintf (buf, "%.4f", fmod (deg (d3_state.rot_step[0]), 360.0));
     rotXstepWidget = ui_xCreateDialogItem ("rotXstepWidget", pannel,
-                                  buf, d3_numberWidth, dummy5, dummy1);
-    dummy6 = ui_xCreateLabelItem ("    ", pannel, 5 * d3_fontWidth, NULL, dummy4); 
-    rot_y = ui_xCreateLabelItem (" Y ", pannel, 3 * d3_fontWidth, dummy6, dummy4); 
+                                           buf, d3_numberWidth, dummy5, dummy1);
+    dummy6 = ui_xCreateLabelItem ("    ", pannel, 5 * d3_fontWidth, NULL, dummy4);
+    rot_y = ui_xCreateLabelItem (" Y ", pannel, 3 * d3_fontWidth, dummy6, dummy4);
     sprintf (buf, "%.4f", fmod (deg (d3_state.rot_vec[1]), 360.0));
     rotYinitWidget = ui_xCreateDialogItem ("rotYinitWidget", pannel,
-                                  buf, d3_numberWidth, rot_y, dummy4);
+                                           buf, d3_numberWidth, rot_y, dummy4);
     dummy7 = ui_xCreateLabelItem (" ", pannel, d3_fontWidth,
-                                  rotYinitWidget, dummy4); 
+                                  rotYinitWidget, dummy4);
     sprintf (buf, "%.4f", fmod (deg (d3_state.rot_step[1]), 360.0));
-  rotYstepWidget = ui_xCreateDialogItem ("rotXstepWidget", pannel,
-                                  buf, d3_numberWidth, dummy7, dummy4);
+    rotYstepWidget = ui_xCreateDialogItem ("rotXstepWidget", pannel,
+                                           buf, d3_numberWidth, dummy7, dummy4);
 
-    dummy8 = ui_xCreateLabelItem ("    ", pannel, 5 * d3_fontWidth, NULL, dummy6); 
+    dummy8 = ui_xCreateLabelItem ("    ", pannel, 5 * d3_fontWidth, NULL, dummy6);
     rot_z = ui_xCreateLabelItem (" Z ", pannel, 3 * d3_fontWidth,
-                                  dummy8, dummy6 ); 
+                                 dummy8, dummy6 );
     sprintf (buf, "%.4f", fmod (deg (d3_state.rot_vec[2]), 360.0));
     rotZinitWidget = ui_xCreateDialogItem ("rotZinitWidget", pannel,
-                                  buf, d3_numberWidth, rot_z, dummy6);
+                                           buf, d3_numberWidth, rot_z, dummy6);
     dummy9 = ui_xCreateLabelItem (" ", pannel, d3_fontWidth,
                                   rotZinitWidget, dummy6);
     sprintf (buf, "%.4f", fmod (deg (d3_state.rot_step[2]), 360.0));
     rotZstepWidget = ui_xCreateDialogItem ("rotZstepWidget", pannel,
-                                  buf, d3_numberWidth, dummy9, dummy6);
+                                           buf, d3_numberWidth, dummy9, dummy6);
 
-/* Blank Line */
+    /* Blank Line */
 
     dummy1 = ui_xCreateLabelItem ("     ", pannel, 5 * d3_fontWidth,
-                                  NULL, dummy8); 
+                                  NULL, dummy8);
     dummy2 = ui_xCreateLabelItem ("   ", pannel, 3 * d3_fontWidth,
-                                  dummy1, dummy8);  
+                                  dummy1, dummy8);
     init = ui_xCreateLabelItem ("         ", pannel, 9 * d3_fontWidth,
-                                  dummy2, dummy8); 
-    dummy3 = ui_xCreateLabelItem (" ", pannel, d3_fontWidth, init, dummy8); 
+                                dummy2, dummy8);
+    dummy3 = ui_xCreateLabelItem (" ", pannel, d3_fontWidth, init, dummy8);
     step = ui_xCreateLabelItem ("         ", pannel, 9 * d3_fontWidth,
-                                  dummy3, dummy8); 
+                                dummy3, dummy8);
 
-/* Translation Widgets */
+    /* Translation Widgets */
 
     dummy4 = ui_xCreateLabelItem ("trans", pannel, 5 * d3_fontWidth,
-                                  NULL, dummy1); 
+                                  NULL, dummy1);
     trans_x = ui_xCreateLabelItem (" X ", pannel, 3 * d3_fontWidth,
-                                  dummy4, dummy1); 
+                                   dummy4, dummy1);
     sprintf (buf, "%.4f", d3_state.trans_vec[0]);
     transXinitWidget = ui_xCreateDialogItem ("transXinitWidget", pannel,
-                                  buf, d3_numberWidth, trans_x, dummy1);
+        buf, d3_numberWidth, trans_x, dummy1);
     dummy5 = ui_xCreateLabelItem (" ", pannel, d3_fontWidth,
                                   transXinitWidget, dummy1);
     sprintf (buf, "%.4f", d3_state.trans_step[0]);
     transXstepWidget = ui_xCreateDialogItem ("transXstepWidget", pannel,
-                                  buf, d3_numberWidth, dummy5, step);
+        buf, d3_numberWidth, dummy5, step);
 
-    dummy6 = ui_xCreateLabelItem ("    ", pannel, 5 * d3_fontWidth, NULL, dummy4); 
+    dummy6 = ui_xCreateLabelItem ("    ", pannel, 5 * d3_fontWidth, NULL, dummy4);
     trans_y = ui_xCreateLabelItem (" Y ", pannel, 3 * d3_fontWidth,
-                                  dummy6,dummy4); 
+                                   dummy6,dummy4);
     sprintf (buf, "%.4f", d3_state.trans_vec[1]);
     transYinitWidget = ui_xCreateDialogItem ("transYinitWidget", pannel,
-                                  buf, d3_numberWidth, trans_y, dummy4);
+        buf, d3_numberWidth, trans_y, dummy4);
     dummy7 = ui_xCreateLabelItem (" ", pannel, d3_fontWidth,
-                                  transXinitWidget, dummy4);  
+                                  transXinitWidget, dummy4);
     sprintf (buf, "%.4f", d3_state.trans_step[1]);
     transYstepWidget = ui_xCreateDialogItem ("transXstepWidget", pannel,
-                                  buf, d3_numberWidth, dummy7, dummy4);
+        buf, d3_numberWidth, dummy7, dummy4);
 
-    dummy8 = ui_xCreateLabelItem ("    ", pannel, 5 * d3_fontWidth, NULL, dummy6); 
+    dummy8 = ui_xCreateLabelItem ("    ", pannel, 5 * d3_fontWidth, NULL, dummy6);
     trans_z = ui_xCreateLabelItem (" Z ", pannel, 3 * d3_fontWidth,
-                                  dummy8, dummy6); 
+                                   dummy8, dummy6);
     sprintf (buf, "%.4f", d3_state.trans_vec[2]);
     transZinitWidget = ui_xCreateDialogItem ("transZinitWidget", pannel,
-                                  buf, d3_numberWidth, trans_z, dummy6);
+        buf, d3_numberWidth, trans_z, dummy6);
     dummy9 = ui_xCreateLabelItem (" ", pannel, d3_fontWidth,
                                   transZinitWidget, dummy6);
     sprintf (buf, "%.4f", d3_state.trans_step[2]);
     transZstepWidget = ui_xCreateDialogItem ("transZstepWidget", pannel,
-                                  buf, d3_numberWidth, dummy9, dummy6);
+        buf, d3_numberWidth, dummy9, dummy6);
 
-/* Blank Line */
+    /* Blank Line */
 
     dummy1 = ui_xCreateLabelItem ("     ", pannel, 5 * d3_fontWidth,
-                                  NULL, dummy8); 
+                                  NULL, dummy8);
     dummy2 = ui_xCreateLabelItem ("   ", pannel, 3 * d3_fontWidth,
-                                  dummy1, dummy8);  
+                                  dummy1, dummy8);
     init = ui_xCreateLabelItem ("         ", pannel, 9 * d3_fontWidth,
-                                  dummy2, dummy8); 
-    dummy3 = ui_xCreateLabelItem (" ", pannel, d3_fontWidth, init, dummy8); 
+                                dummy2, dummy8);
+    dummy3 = ui_xCreateLabelItem (" ", pannel, d3_fontWidth, init, dummy8);
     step = ui_xCreateLabelItem ("         ", pannel, 9 * d3_fontWidth,
-                                  dummy3, dummy8); 
+                                dummy3, dummy8);
 
-/* Scale Widgets */
+    /* Scale Widgets */
 
     dummy4 = ui_xCreateLabelItem ("scale", pannel, 5 * d3_fontWidth,
-                                  NULL, dummy1); 
+                                  NULL, dummy1);
     scale = ui_xCreateLabelItem ("   ", pannel, 3 * d3_fontWidth,
-                                  dummy4, dummy1); 
+                                 dummy4, dummy1);
     sprintf (buf, "%.4f", d3_state.scale_vec[0]);
     scaleInitWidget = ui_xCreateDialogItem ("scaleInitWidget", pannel,
-                                  buf, d3_numberWidth, scale, dummy1);
+                                            buf, d3_numberWidth, scale, dummy1);
     dummy5 = ui_xCreateLabelItem (" ", pannel, 1 * d3_fontWidth,
                                   scaleInitWidget, dummy1);
     sprintf (buf, "%.4f", d3_state.scale_step[0]);
     scaleStepWidget = ui_xCreateDialogItem ("scaleStepWidget", pannel,
-                                  buf, d3_numberWidth, dummy5, dummy1);
+                                            buf, d3_numberWidth, dummy5, dummy1);
 
-/* Blank Line */
+    /* Blank Line */
 
     dummy1 = ui_xCreateLabelItem ("     ", pannel, 5 * d3_fontWidth,
-                                  NULL, dummy4); 
+                                  NULL, dummy4);
     dummy2 = ui_xCreateLabelItem ("   ", pannel, 3 * d3_fontWidth,
-                                  dummy1, dummy4);  
+                                  dummy1, dummy4);
     init = ui_xCreateLabelItem ("         ", pannel, 9 * d3_fontWidth,
-                                  dummy2, dummy4); 
-    dummy3 = ui_xCreateLabelItem (" ", pannel, 1 * d3_fontWidth, init, dummy4); 
+                                dummy2, dummy4);
+    dummy3 = ui_xCreateLabelItem (" ", pannel, 1 * d3_fontWidth, init, dummy4);
     step = ui_xCreateLabelItem ("         ", pannel, 9 * d3_fontWidth,
-                                  dummy3, dummy4); 
+                                dummy3, dummy4);
 
-/* Aspect Widget */
+    /* Aspect Widget */
 
     aspect = ui_xCreateLabelItem ("units aspect", pannel, 16 * d3_fontWidth,
-                                  NULL, dummy1); 
+                                  NULL, dummy1);
     sprintf (buf, "%.4f", d3_state.unit_aspect);
     aspectWidget = ui_xCreateDialogItem ("aspectWidget", pannel,
-                                  buf, d3_numberWidth, aspect, dummy1);
-/* Link Scale Widget */
+                                         buf, d3_numberWidth, aspect, dummy1);
+    /* Link Scale Widget */
 
     link = ui_xCreateLabelItem ("links scale", pannel, 16 * d3_fontWidth,
-                                  NULL, aspect); 
+                                NULL, aspect);
     sprintf (buf, "%.4f", d3_state.link_scale);
     linkWidget = ui_xCreateDialogItem ("linkWidget", pannel,
-                                  buf, d3_numberWidth, link, aspect);
+                                       buf, d3_numberWidth, link, aspect);
 
-/* Positive Link Trigger Widget */
+    /* Positive Link Trigger Widget */
 
     posTrigger = ui_xCreateLabelItem ("links positive", pannel, 16 * d3_fontWidth,
-                                  NULL, link); 
+                                      NULL, link);
     sprintf (buf, "%.4f", d3_state.pos_link_trigger);
     posTriggerWidget = ui_xCreateDialogItem ("posTriggerWidget", pannel,
-                                  buf, d3_numberWidth, posTrigger, link);
+        buf, d3_numberWidth, posTrigger, link);
 
-/* Negative Link Trigger Widget */
+    /* Negative Link Trigger Widget */
 
     negTrigger = ui_xCreateLabelItem ("links negative", pannel, 16 * d3_fontWidth,
-                                  NULL, posTrigger); 
+                                      NULL, posTrigger);
     sprintf (buf, "%.4f", d3_state.neg_link_trigger);
     negTriggerWidget = ui_xCreateDialogItem ("negTriggerWidget", pannel,
-                                  buf, d3_numberWidth, negTrigger, posTrigger);
+        buf, d3_numberWidth, negTrigger, posTrigger);
 
     done = d3_xCreateButtonItem ("done", border, NULL, pannel);
 
@@ -356,7 +361,7 @@ void d3_createSetupPannel (Widget w, Widget button, caddr_t call_data)
 
     ui_checkWindowPosition(setupPannel);
     XtPopup (setupPannel, XtGrabExclusive);
-    ui_xDontResizeWidget(setupPannel); 
+    ui_xDontResizeWidget(setupPannel);
 
 }
 

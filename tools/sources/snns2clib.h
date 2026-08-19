@@ -20,9 +20,9 @@
 /* Recordtype for Lists (Sets) */
 
 typedef struct {
-  int place;			/* No of Elements wich can be hold in the list */
-  int no;			/* No of actual Elements in the list           */
-  int *values;			/* Pointer to the Elements                     */
+    int place;			/* No of Elements wich can be hold in the list */
+    int no;			/* No of actual Elements in the list           */
+    int *values;			/* Pointer to the Elements                     */
 } tList, *pList;
 
 #define NoOf(list) list->no

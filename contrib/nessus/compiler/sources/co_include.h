@@ -6,10 +6,10 @@
   PURPOSE           : contains include statements for files common to all compiler modules.
   NOTES             :
 
-  AUTHOR            : Thomas Korb 
+  AUTHOR            : Thomas Korb
   DATE              : 27.6.1991
 
-  CHANGED BY        : 
+  CHANGED BY        :
   IDENTIFICATION    : %W% %G%
   SCCS VERSION      : %I%
   LAST CHANGE       : %G%

@@ -15,7 +15,7 @@
 
     Copyright (c) 1990-1995  SNNS Group, IPVR, Univ. Stuttgart, FRG
     Copyright (c) 1996-1998  SNNS Group, WSI, Univ. Tuebingen, FRG
-             
+
 ******************************************************************************/
 
 
@@ -24,18 +24,18 @@
 
 
 extern void ui_list_buildList (struct SimpleListType *);
-extern void ui_list_setUnitValue (Widget, struct SimpleListType *, 
-				  XawListReturnStruct *);
+extern void ui_list_setUnitValue (Widget, struct SimpleListType *,
+                                  XawListReturnStruct *);
 extern char *ui_list_getFirstItem (int type);
 extern char *ui_list_getNextItem (int type);
 
 extern char  *ui_list_iotypes[];
 
-	/* number of list items */
+/* number of list items */
 extern int   ui_list_noOfSites;
 extern int   ui_list_noOfFTypeSites;
 
-	/* return values of the list panel */
+/* return values of the list panel */
 extern char   ui_list_returnName[];
 extern int    ui_list_returnIndex;
 

@@ -2,7 +2,7 @@
   FILE           : $Source: /projects/higgs1/SNNS/CVS/SNNS/xgui/sources/ui_controlP.h,v $
   SHORTNAME      : controlP.h
   SNNS VERSION   : 4.2
-  
+
   PURPOSE        : Header file of correspondent '.c' file
   NOTES          :
 
@@ -10,12 +10,12 @@
   DATE           : 18.7.1990
 
   CHANGED BY     : Michael Vogt, Guenter Mamier
-  RCS VERSION    : $Revision: 1.8 $ 
-  LAST CHANGE    : $Date: 1998/04/20 11:55:15 $  
+  RCS VERSION    : $Revision: 1.8 $
+  LAST CHANGE    : $Date: 1998/04/20 11:55:15 $
 
     Copyright (c) 1990-1995  SNNS Group, IPVR, Univ. Stuttgart, FRG
     Copyright (c) 1996-1998  SNNS Group, WSI, Univ. Tuebingen, FRG
-             
+
 ******************************************************************************/
 
 
@@ -33,8 +33,8 @@ extern void ui_rem_deleteNet (Widget w, caddr_t client_data, caddr_t call_data);
 extern void  ui_rem_stepsProc (Widget widget, Bool multiStepPressed, caddr_t call_data);
 extern void ui_rem_moveInPatternsProc (Widget w, int moveType, caddr_t call_data);
 extern void ui_rem_testProc (Widget w, XtPointer button, caddr_t call_data);
-extern void ui_rem_deleteAllPatternsProc (Widget w, XtPointer button, 
-					caddr_t call_data);
+extern void ui_rem_deleteAllPatternsProc (Widget w, XtPointer button,
+        caddr_t call_data);
 extern void ui_rem_modifyPatternProc (Widget w, XtPointer button, caddr_t call_data);
 extern void ui_rem_deletePatternProc (Widget w, XtPointer button, caddr_t call_data);
 extern void ui_rem_newPatternProc (Widget w, caddr_t call_data);
@@ -58,8 +58,8 @@ extern void ui_rem_useTestPattSet(Widget button, int setNo, caddr_t call_data);
 extern void ui_rem_delPattSet(Widget button, int setNo, caddr_t call_data);
 extern void ui_rem_updatePattList(void);
 extern void ui_rem_getSubPatPanel(void);
-extern void ui_rem_displayList(Widget w, 
-			       struct SimpleListType *listDescriptorPtr);
+extern void ui_rem_displayList(Widget w,
+                               struct SimpleListType *listDescriptorPtr);
 extern void ui_rem_setFunc(Widget widget,int sel, caddr_t call_data);
 
 

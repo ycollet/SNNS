@@ -4,12 +4,12 @@
   SNNS VERSION   : 4.2
 
   PURPOSE        : implements the realloc function
-  NOTES          : 
+  NOTES          :
 
   AUTHOR         : Jens Wieland
-  DATE           : 
+  DATE           :
 
-  CHANGED BY     : 
+  CHANGED BY     :
   RCS VERSION    : $Revision: 1.3 $
   LAST CHANGE    : $Date: 1998/02/25 15:34:39 $
 

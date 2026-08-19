@@ -4,12 +4,12 @@
   SNNS VERSION   : 4.2
 
   PURPOSE        : Functions to print out error messages and warnings
-  NOTES          : 
+  NOTES          :
 
   AUTHOR         : Jens Wieland
-  DATE           : 
+  DATE           :
 
-  CHANGED BY     : 
+  CHANGED BY     :
   RCS VERSION    : $Revision: 1.5 $
   LAST CHANGE    : $Date: 1998/05/01 11:21:45 $
 

@@ -60,35 +60,35 @@
 typedef int HistID;
 
 typedef struct _HistRecord {
-  /* history data */
+    /* history data */
 
-  /* some kind of garbage collector */
+    /* some kind of garbage collector */
 
-  /* write only structure read by history-functions */
+    /* write only structure read by history-functions */
 
-  HistID parent1, parent2;
+    HistID parent1, parent2;
 
-  int learnEpochs;
-  int firstEpochs;  /* sum of epochs; updated if any pruning takes place */
+    int learnEpochs;
+    int firstEpochs;  /* sum of epochs; updated if any pruning takes place */
 
-  float threshold;   /* threshold for pruning, added masch 13.05.94       */
+    float threshold;   /* threshold for pruning, added masch 13.05.94       */
 
-  /* information about the weights and what were done with them          */
-  int added;
-  int deleted;
-  int pruned;
-  int cleaned;
+    /* information about the weights and what were done with them          */
+    int added;
+    int deleted;
+    int pruned;
+    int cleaned;
 
-  /* information about the testing of the neural net */
-  int   testHit;
-  int   testMiss;
-  int   testNone;
-  int   testHam;
-  float testTss;
-  float testFitness;
+    /* information about the testing of the neural net */
+    int   testHit;
+    int   testMiss;
+    int   testNone;
+    int   testHam;
+    float testTss;
+    float testFitness;
 
-  float slots[20];
-  float crossFitness;
+    float slots[20];
+    float crossFitness;
 } HistRecord;
 
 /*--------------------------------------------------------------functions----*/

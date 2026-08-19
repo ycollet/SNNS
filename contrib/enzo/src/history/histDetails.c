@@ -78,96 +78,96 @@ static char        histFileName[MAX_FILENAME_LEN] = HISTORY_FILE_VALUE;
 /*-----------------------------------------------------------------functions-*/
 
 int histDetails_init( ModuleTableEntry *self, int msgc, char *msgv[] ) {
-  char fileName[MAX_FILENAME_LEN];
+    char fileName[MAX_FILENAME_LEN];
 
-  MODULE_KEY( HIST_Details_KEY );
+    MODULE_KEY( HIST_Details_KEY );
 
-  SEL_MSG( msgv[0] )
+    SEL_MSG( msgv[0] )
 
     MSG_CASE( GENERAL_INIT )   {
-    /* nothing to do */
-  }
-  MSG_CASE( EVOLUTION_INIT ) {
-    sprintf(fileName,"%s.fit",histFileName);
-    if( (hfpFit = fopen( fileName, "w" )) == NULL )
-      return( ERROR_FILEOPEN );
-    setlinebuf( hfpFit );
-    fprintf( hfpFit, OUTELEM_TEXT );
+        /* nothing to do */
+    }
+    MSG_CASE( EVOLUTION_INIT ) {
+        sprintf(fileName,"%s.fit",histFileName);
+        if( (hfpFit = fopen( fileName, "w" )) == NULL )
+            return( ERROR_FILEOPEN );
+        setlinebuf( hfpFit );
+        fprintf( hfpFit, OUTELEM_TEXT );
 
-    sprintf(fileName,"%s.popfit",histFileName);
-    if( (hfpPopfit = fopen( fileName, "w" )) == NULL )
-      return( ERROR_FILEOPEN );
-    setlinebuf( hfpPopfit );
-    fprintf( hfpPopfit, OUTPOP_TEXT );
-  }
+        sprintf(fileName,"%s.popfit",histFileName);
+        if( (hfpPopfit = fopen( fileName, "w" )) == NULL )
+            return( ERROR_FILEOPEN );
+        setlinebuf( hfpPopfit );
+        fprintf( hfpPopfit, OUTPOP_TEXT );
+    }
 
-  MSG_CASE( GENERAL_EXIT ) {
-    if( hfpFit )     fclose( hfpFit );
-    if( hfpPopfit )  fclose( hfpPopfit );
-  }
+    MSG_CASE( GENERAL_EXIT ) {
+        if( hfpFit )     fclose( hfpFit );
+        if( hfpPopfit )  fclose( hfpPopfit );
+    }
 
-  MSG_CASE( HISTORY_FILE    ) {
-    if( msgc > 1 ) strcpy ( histFileName,msgv[1] );
-  }
+    MSG_CASE( HISTORY_FILE    ) {
+        if( msgc > 1 ) strcpy ( histFileName,msgv[1] );
+    }
 
-  END_MSG;
+    END_MSG;
 
-  return( INIT_USED );
+    return( INIT_USED );
 }
 
 /*---------------------------------------------------------------------------*/
 
 int histDetails_work( PopID *parents, PopID *offsprings, PopID *ref ) {
-  NetID  net;
-  NetworkData *netData;
-  int pars = 0;
+    NetID  net;
+    NetworkData *netData;
+    int pars = 0;
 
-  static int   genCnt     = 0;          /* count no of generations */
-  float aveDetails = 0.0,
-    maxDetails = -INFINITY,
-    minDetails =  INFINITY;
+    static int   genCnt     = 0;          /* count no of generations */
+    float aveDetails = 0.0,
+          maxDetails = -INFINITY,
+          minDetails =  INFINITY;
 
 
-  FOR_ALL_PARENTS( net ) {
-    pars ++;
-    netData = GET_NET_DATA( net );
+    FOR_ALL_PARENTS( net ) {
+        pars ++;
+        netData = GET_NET_DATA( net );
 
-    aveDetails += netData->Details;
-    if( netData->Details > maxDetails ) {
-      maxDetails = netData->Details;
+        aveDetails += netData->Details;
+        if( netData->Details > maxDetails ) {
+            maxDetails = netData->Details;
+        }
+        if( netData->Details < minDetails ) {
+            minDetails = netData->Details;
+        }
     }
-    if( netData->Details < minDetails ) {
-      minDetails = netData->Details;
+
+    if( pars ) {
+        aveDetails /= pars;
+
+        fprintf( hfpPopfit, OUTPOP_FORMAT,
+                 genCnt, minDetails, maxDetails, aveDetails );
     }
-  }
 
-  if( pars ) {
-    aveDetails /= pars;
+    FOR_ALL_OFFSPRINGS( net ) {
+        netData = GET_NET_DATA( net );
+        fprintf( hfpFit, OUTELEM_FORMAT, netData->histID, netData->Details );
+    }
 
-    fprintf( hfpPopfit, OUTPOP_FORMAT,
-	     genCnt, minDetails, maxDetails, aveDetails );
-  }
+    genCnt++;
 
-  FOR_ALL_OFFSPRINGS( net ) {
-    netData = GET_NET_DATA( net );
-    fprintf( hfpFit, OUTELEM_FORMAT, netData->histID, netData->Details );
-  }
-
-  genCnt++;
-
-  return( MODULE_NO_ERROR );
+    return( MODULE_NO_ERROR );
 }
 
 /*---------------------------------------------------------------------------*/
 
 char *histDetails_errMsg( int err_code ) {
-  switch (err_code) {
-  case MODULE_NO_ERROR :
-    return ("histDetails : No Error found");
-  case ERROR_FILEOPEN :
-    return ("histDetails : Can't open history-file for writing");
-  case ERROR_MEM :
-    return ("histDetails : Memory excess");
-  }
-  return( "histDetails : Unknown error" );
+    switch (err_code) {
+    case MODULE_NO_ERROR :
+        return ("histDetails : No Error found");
+    case ERROR_FILEOPEN :
+        return ("histDetails : Can't open history-file for writing");
+    case ERROR_MEM :
+        return ("histDetails : Memory excess");
+    }
+    return( "histDetails : Unknown error" );
 }

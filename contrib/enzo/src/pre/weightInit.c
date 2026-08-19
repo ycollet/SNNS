@@ -68,60 +68,60 @@ static float weightProb      = 1.0;
 /*--------------------------------------------------------------------------*/
 
 int weightInit_init (ModuleTableEntry *self, int msgc, char *msgv[] ) {
-  MODULE_KEY( WEIGHT_INIT_KEY );
+    MODULE_KEY( WEIGHT_INIT_KEY );
 
-  SEL_MSG( msgv[0] )
+    SEL_MSG( msgv[0] )
 
     MSG_CASE( GENERAL_INIT    ) {
-    /* nothing to do */
-  }
-  MSG_CASE( GENERAL_EXIT    ) {
-    /* nothing to do */
-  }
-  MSG_CASE( EVOLUTION_INIT  ) {
-    /* nothing to do */
-  }
+        /* nothing to do */
+    }
+    MSG_CASE( GENERAL_EXIT    ) {
+        /* nothing to do */
+    }
+    MSG_CASE( EVOLUTION_INIT  ) {
+        /* nothing to do */
+    }
 
-  MSG_CASE( INIT_PROB      ) {
-    if( msgc > 1 )
-      weightProb = fabs( atof ( msgv[1] ));
-  }
+    MSG_CASE( INIT_PROB      ) {
+        if( msgc > 1 )
+            weightProb = fabs( atof ( msgv[1] ));
+    }
 
-  END_MSG;
+    END_MSG;
 
-  return ( INIT_USED );
+    return ( INIT_USED );
 }
 
 /*--------------------------------------------------------------------------*/
 
 int weightInit_work (PopID *parents, PopID *offsprings, PopID *reference) {
-  NetID  activeNet;
-  int s, t;
+    NetID  activeNet;
+    int s, t;
 
-  FOR_ALL_OFFSPRINGS( activeNet ) {
-    for( s = ksh_getFirstUnit(); s != 0; s = ksh_getNextUnit() ) {
-      for( t = ksh_getNextUnit(); t != 0; t = ksh_getNextUnit() ) {
-	if( ksh_isConnected( s ) && weightProb < RAND_01 ) {
-	  ksh_deleteLink();
-	}
-      }
+    FOR_ALL_OFFSPRINGS( activeNet ) {
+        for( s = ksh_getFirstUnit(); s != 0; s = ksh_getNextUnit() ) {
+            for( t = ksh_getNextUnit(); t != 0; t = ksh_getNextUnit() ) {
+                if( ksh_isConnected( s ) && weightProb < RAND_01 ) {
+                    ksh_deleteLink();
+                }
+            }
 
-      /* getNextUnit will get the succ of the current Unit */
-      ksh_setCurrentUnit( s );
+            /* getNextUnit will get the succ of the current Unit */
+            ksh_setCurrentUnit( s );
+        }
     }
-  }
 
-  return (MODULE_NO_ERROR);
+    return (MODULE_NO_ERROR);
 }
 
 /*--------------------------------------------------------------------------*/
 
 char *weightInit_errMsg (int err_code) {
-  switch ( err_code ) {
-  case MODULE_NO_ERROR :
-    return ("weightInit: No error found");
+    switch ( err_code ) {
+    case MODULE_NO_ERROR :
+        return ("weightInit: No error found");
 
-  }
+    }
 
-  return ("weightInit: unknown error");
+    return ("weightInit: unknown error");
 }

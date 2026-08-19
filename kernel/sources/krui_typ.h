@@ -480,7 +480,7 @@ REMARK: getUnitNoAtPosition is for downward compatibility only.
         Do not use this function in future applications.
 */
 
-int  krui_getUnitNoNearPosition( struct PosType  *position, int subnet_no ,
+int  krui_getUnitNoNearPosition( struct PosType  *position, int subnet_no,
                                  int range, int gridWidth );
 /*  Returns the unit no. near the given position and the specified
     subnet no or 0, if no unit exists at this position.

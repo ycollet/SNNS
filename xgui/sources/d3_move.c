@@ -15,7 +15,7 @@
 
     Copyright (c) 1990-1995  SNNS Group, IPVR, Univ. Stuttgart, FRG
     Copyright (c) 1996-1998  SNNS Group, WSI, Univ. Tuebingen, FRG
-             
+
 ******************************************************************************/
 #include <config.h>
 
@@ -58,41 +58,55 @@ static void d3_transform  (Widget w, int transformation, caddr_t call_data)
 {
     int i;
 
-    if (d3_freeze) 
+    if (d3_freeze)
         return;
     switch (transformation) {
-        case ROT_X_LEFT    : d3_state.rot_vec [0] -= d3_state.rot_step [0];
-                             break;
-        case ROT_X_RIGHT   : d3_state.rot_vec [0] += d3_state.rot_step [0];
-                             break;
-        case ROT_Y_LEFT    : d3_state.rot_vec [1] -= d3_state.rot_step [1];
-                             break;
-        case ROT_Y_RIGHT   : d3_state.rot_vec [1] += d3_state.rot_step [1];
-                             break;
-        case ROT_Z_LEFT    : d3_state.rot_vec [2] -= d3_state.rot_step [2];
-                             break;
-        case ROT_Z_RIGHT   : d3_state.rot_vec [2] += d3_state.rot_step [2];
-                              break;
-        case TRANS_X_LEFT  : d3_state.trans_vec [0] -= d3_state.trans_step [0];
-                             break;
-        case TRANS_X_RIGHT : d3_state.trans_vec [0] += d3_state.trans_step [0];
-                             break;
-        case TRANS_Y_LEFT  : d3_state.trans_vec [1] -= d3_state.trans_step [1];
-                             break;
-        case TRANS_Y_RIGHT : d3_state.trans_vec [1] += d3_state.trans_step [1];
-                             break;
-        case TRANS_Z_LEFT  : d3_state.trans_vec [2] -= d3_state.trans_step [2];
-                             break;
-        case TRANS_Z_RIGHT : d3_state.trans_vec [2] += d3_state.trans_step [2];
-                             break;
-        case SCALE_PLUS    : for (i=0; i<3; i++) {
-                                 d3_state.scale_vec [i] *= d3_state.scale_step [0]; 
-			     }
-                             break;
-        case SCALE_MINUS   : for (i=0; i<3; i++) {
-                                 d3_state.scale_vec [i] /= d3_state.scale_step [0]; 
-			     }
-                             break;
+    case ROT_X_LEFT    :
+        d3_state.rot_vec [0] -= d3_state.rot_step [0];
+        break;
+    case ROT_X_RIGHT   :
+        d3_state.rot_vec [0] += d3_state.rot_step [0];
+        break;
+    case ROT_Y_LEFT    :
+        d3_state.rot_vec [1] -= d3_state.rot_step [1];
+        break;
+    case ROT_Y_RIGHT   :
+        d3_state.rot_vec [1] += d3_state.rot_step [1];
+        break;
+    case ROT_Z_LEFT    :
+        d3_state.rot_vec [2] -= d3_state.rot_step [2];
+        break;
+    case ROT_Z_RIGHT   :
+        d3_state.rot_vec [2] += d3_state.rot_step [2];
+        break;
+    case TRANS_X_LEFT  :
+        d3_state.trans_vec [0] -= d3_state.trans_step [0];
+        break;
+    case TRANS_X_RIGHT :
+        d3_state.trans_vec [0] += d3_state.trans_step [0];
+        break;
+    case TRANS_Y_LEFT  :
+        d3_state.trans_vec [1] -= d3_state.trans_step [1];
+        break;
+    case TRANS_Y_RIGHT :
+        d3_state.trans_vec [1] += d3_state.trans_step [1];
+        break;
+    case TRANS_Z_LEFT  :
+        d3_state.trans_vec [2] -= d3_state.trans_step [2];
+        break;
+    case TRANS_Z_RIGHT :
+        d3_state.trans_vec [2] += d3_state.trans_step [2];
+        break;
+    case SCALE_PLUS    :
+        for (i=0; i<3; i++) {
+            d3_state.scale_vec [i] *= d3_state.scale_step [0];
+        }
+        break;
+    case SCALE_MINUS   :
+        for (i=0; i<3; i++) {
+            d3_state.scale_vec [i] /= d3_state.scale_step [0];
+        }
+        break;
     }
     d3_drawNet ();
 }
@@ -113,18 +127,28 @@ static void create_box_item (int height, int width, Widget parent, Widget left, 
 {
     int n;
     Arg arg[20];
-  
+
     n = 0;
-    XtSetArg(arg[n], XtNx, border);                        n++;
-    XtSetArg(arg[n], XtNy, border);                        n++;
-    XtSetArg(arg[n], XtNfromVert , left);                  n++;
-    XtSetArg(arg[n], XtNfromHoriz, top);                   n++;
-    XtSetArg(arg[n], XtNheight, height);                   n++;
-    XtSetArg(arg[n], XtNwidth, width);                     n++;
-    XtSetArg(arg[n], XtNleft  , XtChainLeft);              n++;
-    XtSetArg(arg[n], XtNright , XtChainRight);             n++;
-    XtSetArg(arg[n], XtNtop   , XtChainTop);               n++;
-    XtSetArg(arg[n], XtNbottom, XtChainBottom);            n++;
+    XtSetArg(arg[n], XtNx, border);
+    n++;
+    XtSetArg(arg[n], XtNy, border);
+    n++;
+    XtSetArg(arg[n], XtNfromVert, left);
+    n++;
+    XtSetArg(arg[n], XtNfromHoriz, top);
+    n++;
+    XtSetArg(arg[n], XtNheight, height);
+    n++;
+    XtSetArg(arg[n], XtNwidth, width);
+    n++;
+    XtSetArg(arg[n], XtNleft, XtChainLeft);
+    n++;
+    XtSetArg(arg[n], XtNright, XtChainRight);
+    n++;
+    XtSetArg(arg[n], XtNtop, XtChainTop);
+    n++;
+    XtSetArg(arg[n], XtNbottom, XtChainBottom);
+    n++;
     *box = XtCreateManagedWidget("box", boxWidgetClass, parent, arg, (unsigned int) n);
 }
 
@@ -146,11 +170,16 @@ static void create_scale_button (char *label, Widget parent, int xsize, int ysiz
     Arg arg[10];
 
     n = 0;
-    XtSetArg(arg[n], XtNx, border);                        n++;
-    XtSetArg(arg[n], XtNy, border);                        n++;
-    XtSetArg(arg[n], XtNheight, ysize);                       n++;
-    XtSetArg(arg[n], XtNwidth, xsize);                        n++;
-    XtSetArg(arg[n], XtNlabel, label);                       n++;
+    XtSetArg(arg[n], XtNx, border);
+    n++;
+    XtSetArg(arg[n], XtNy, border);
+    n++;
+    XtSetArg(arg[n], XtNheight, ysize);
+    n++;
+    XtSetArg(arg[n], XtNwidth, xsize);
+    n++;
+    XtSetArg(arg[n], XtNlabel, label);
+    n++;
     *button = XtCreateManagedWidget("button", commandWidgetClass, parent, arg, (unsigned int) n);
 
 }
@@ -175,17 +204,26 @@ static void create_move_label (char *label, Widget parent)
     int xwdth = 78;
 
     n = 0;
-    XtSetArg(arg[n], XtNborderWidth, 0); n++;
-    XtSetArg(arg[n], XtNwidth, xwdth);                       n++;  
-    XtSetArg(arg[n], XtNlabel, label);                       n++;
+    XtSetArg(arg[n], XtNborderWidth, 0);
+    n++;
+    XtSetArg(arg[n], XtNwidth, xwdth);
+    n++;
+    XtSetArg(arg[n], XtNlabel, label);
+    n++;
 
-    XtSetArg(arg[n], XtNfromVert , NULL);  n++;
-    XtSetArg(arg[n], XtNfromHoriz, NULL);  n++;
+    XtSetArg(arg[n], XtNfromVert, NULL);
+    n++;
+    XtSetArg(arg[n], XtNfromHoriz, NULL);
+    n++;
 
-    XtSetArg(arg[n], XtNleft  , XtChainLeft); n++;
-    XtSetArg(arg[n], XtNright , XtChainRight); n++;
-    XtSetArg(arg[n], XtNtop   , XtChainTop); n++;
-    XtSetArg(arg[n], XtNbottom, XtChainBottom); n++;
+    XtSetArg(arg[n], XtNleft, XtChainLeft);
+    n++;
+    XtSetArg(arg[n], XtNright, XtChainRight);
+    n++;
+    XtSetArg(arg[n], XtNtop, XtChainTop);
+    n++;
+    XtSetArg(arg[n], XtNbottom, XtChainBottom);
+    n++;
 
     label_widget = XtCreateManagedWidget("label", labelWidgetClass, parent, arg, (unsigned int) n);
 
@@ -210,27 +248,42 @@ static void create_move_item (char *label, Widget parent, Widget *le_widget, Wid
     Arg arg[10];
 
     n = 0;
-    XtSetArg(arg[n], XtNx, border);                        n++;
-    XtSetArg(arg[n], XtNy, border);                        n++;
-    XtSetArg(arg[n], XtNheight, button_size);              n++;
-    XtSetArg(arg[n], XtNwidth, button_size);               n++;
-    XtSetArg(arg[n], XtNlabel, "-");                       n++;
+    XtSetArg(arg[n], XtNx, border);
+    n++;
+    XtSetArg(arg[n], XtNy, border);
+    n++;
+    XtSetArg(arg[n], XtNheight, button_size);
+    n++;
+    XtSetArg(arg[n], XtNwidth, button_size);
+    n++;
+    XtSetArg(arg[n], XtNlabel, "-");
+    n++;
     *le_widget = XtCreateManagedWidget("le", commandWidgetClass, parent, arg, (unsigned int) n);
 
     n = 0;
-    XtSetArg(arg[n], XtNx, border);                        n++;
-    XtSetArg(arg[n], XtNy, border);                        n++;
-    XtSetArg(arg[n], XtNheight, button_size );             n++;
-    XtSetArg(arg[n], XtNwidth, 2 * button_size);           n++;
-    XtSetArg(arg[n], XtNlabel, label);                     n++;
+    XtSetArg(arg[n], XtNx, border);
+    n++;
+    XtSetArg(arg[n], XtNy, border);
+    n++;
+    XtSetArg(arg[n], XtNheight, button_size );
+    n++;
+    XtSetArg(arg[n], XtNwidth, 2 * button_size);
+    n++;
+    XtSetArg(arg[n], XtNlabel, label);
+    n++;
     label_widget = XtCreateManagedWidget("hot", labelWidgetClass, parent, arg, (unsigned int) n);
 
     n = 0;
-    XtSetArg(arg[n], XtNx, border);                        n++;
-    XtSetArg(arg[n], XtNy, border);                        n++;
-    XtSetArg(arg[n], XtNheight, button_size);              n++;
-    XtSetArg(arg[n], XtNwidth, button_size);               n++;
-    XtSetArg(arg[n], XtNlabel, "+");                       n++;
+    XtSetArg(arg[n], XtNx, border);
+    n++;
+    XtSetArg(arg[n], XtNy, border);
+    n++;
+    XtSetArg(arg[n], XtNheight, button_size);
+    n++;
+    XtSetArg(arg[n], XtNwidth, button_size);
+    n++;
+    XtSetArg(arg[n], XtNlabel, "+");
+    n++;
     *ge_widget = XtCreateManagedWidget("ge", commandWidgetClass, parent, arg, (unsigned int) n);
 
 }
@@ -256,7 +309,7 @@ static void create_rotatePannel (Widget rotate_widget)
     create_move_item (" X ", rotate_widget, &le_widget, &ge_widget);
     XtAddCallback(le_widget, XtNcallback, (XtCallbackProc) d3_transform, (caddr_t) ROT_X_LEFT);
     XtAddCallback(ge_widget, XtNcallback, (XtCallbackProc) d3_transform, (caddr_t) ROT_X_RIGHT);
- 
+
     create_move_item (" Y ", rotate_widget, &le_widget, &ge_widget);
     XtAddCallback(le_widget, XtNcallback, (XtCallbackProc) d3_transform, (caddr_t) ROT_Y_LEFT);
     XtAddCallback(ge_widget, XtNcallback, (XtCallbackProc) d3_transform, (caddr_t) ROT_Y_RIGHT);
@@ -265,7 +318,7 @@ static void create_rotatePannel (Widget rotate_widget)
     XtAddCallback(le_widget, XtNcallback, (XtCallbackProc) d3_transform, (caddr_t) ROT_Z_LEFT);
     XtAddCallback(ge_widget, XtNcallback, (XtCallbackProc) d3_transform, (caddr_t) ROT_Z_RIGHT);
 
-}  
+}
 
 
 /*****************************************************************************
@@ -288,7 +341,7 @@ static void create_transPannel (Widget trans_widget)
     create_move_item (" X ", trans_widget, &le_widget, &ge_widget);
     XtAddCallback(le_widget, XtNcallback, (XtCallbackProc) d3_transform, (caddr_t) TRANS_X_LEFT);
     XtAddCallback(ge_widget, XtNcallback, (XtCallbackProc) d3_transform, (caddr_t) TRANS_X_RIGHT);
- 
+
     create_move_item (" Y ", trans_widget, &le_widget, &ge_widget);
     XtAddCallback(le_widget, XtNcallback, (XtCallbackProc) d3_transform, (caddr_t) TRANS_Y_LEFT);
     XtAddCallback(ge_widget, XtNcallback, (XtCallbackProc) d3_transform, (caddr_t) TRANS_Y_RIGHT);
@@ -297,7 +350,7 @@ static void create_transPannel (Widget trans_widget)
     XtAddCallback(le_widget, XtNcallback, (XtCallbackProc) d3_transform, (caddr_t) TRANS_Z_LEFT);
     XtAddCallback(ge_widget, XtNcallback, (XtCallbackProc) d3_transform, (caddr_t) TRANS_Z_RIGHT);
 
-}  
+}
 
 
 /*****************************************************************************
@@ -351,7 +404,7 @@ void d3_createMovePannel (Widget parent)
 
     create_box_item (height, width, parent, trans, NULL, &scale);
     create_scalePannel (scale);
-}  
+}
 
 
 

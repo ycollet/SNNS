@@ -6,16 +6,16 @@
   PURPOSE        : Intermediate code (IC) functions for SNNS batch interpreter:
                    assignment, arithmetic and logical operators, jumps
 
-                   Pointers to these functions are inserted in the 
+                   Pointers to these functions are inserted in the
                    intermediate code table by the grammar
-		   and are executed during intermediate code 
+		   and are executed during intermediate code
 		   interpretation (run())
-  NOTES          : 
+  NOTES          :
 
   AUTHOR         : Jens Wieland
-  DATE           : 
+  DATE           :
 
-  CHANGED BY     : 
+  CHANGED BY     :
   RCS VERSION    : $Revision: 1.4 $
   LAST CHANGE    : $Date: 1998/02/25 15:34:31 $
 

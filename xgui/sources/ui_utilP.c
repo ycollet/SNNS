@@ -3,10 +3,10 @@
   SHORTNAME      : ui_utilP.ph
   SNNS VERSION   : 4.2
 
-  PURPOSE        : 
+  PURPOSE        :
   NOTES          :
 
-  AUTHOR         : Tilman Sommer 
+  AUTHOR         : Tilman Sommer
   DATE           : 18.5.1990
 
   CHANGED BY     : Sven Doering
@@ -49,16 +49,15 @@
   UPDATE   : 1.2.1990
 ******************************************************************************/
 
-Bool ui_isUnitVisibleInAnyDisplay(int unitNo)
-{
+Bool ui_isUnitVisibleInAnyDisplay(int unitNo) {
     struct Ui_DisplayType *dPtr;
-    
+
     dPtr = ui_displ_listPtr;
     while (dPtr != NULL) {
-	if ((krui_getUnitSubnetNo(unitNo) == dPtr->subNetNo) AND
-	    (krui_getUnitLayerNo(unitNo) BIT_AND dPtr->layers))
-	    return(TRUE);
-	dPtr = dPtr->nextPtr;
+        if ((krui_getUnitSubnetNo(unitNo) == dPtr->subNetNo) AND
+                (krui_getUnitLayerNo(unitNo) BIT_AND dPtr->layers))
+            return(TRUE);
+        dPtr = dPtr->nextPtr;
     }
     return(FALSE);
 }
@@ -76,10 +75,9 @@ Bool ui_isUnitVisibleInAnyDisplay(int unitNo)
 ******************************************************************************/
 
 void
-ui_checkError(krui_err error)
-{
+ui_checkError(krui_err error) {
     if ((ui_kernelError = error) != 0)
-	ui_tw_errorMessage(krui_error(error));
+        ui_tw_errorMessage(krui_error(error));
 }
 
 
@@ -96,8 +94,7 @@ ui_checkError(krui_err error)
 ******************************************************************************/
 
 Bool
-ui_krui_sitesExistInNetwork(void)
-{
+ui_krui_sitesExistInNetwork(void) {
     char *name, *funcName;
 
     return(krui_getFirstSiteTableEntry(&name, &funcName));
@@ -115,16 +112,15 @@ ui_krui_sitesExistInNetwork(void)
 ******************************************************************************/
 
 Bool
-ui_krui_setCurrentSite(int targetNo, char *siteName)
-{
+ui_krui_setCurrentSite(int targetNo, char *siteName) {
     (void) krui_setCurrentUnit(targetNo);    /* target */
     if (krui_getUnitInputType(targetNo) != SITES)
-	return(TRUE);
+        return(TRUE);
 
-    if ((siteName != NULL) AND strlen(siteName)) 
-	return((krui_setSite(siteName) == UI_SET_OK));
+    if ((siteName != NULL) AND strlen(siteName))
+        return((krui_setSite(siteName) == UI_SET_OK));
     else
-	return(FALSE); /* invalid site name */
+        return(FALSE); /* invalid site name */
 }
 
 
@@ -143,8 +139,7 @@ ui_krui_setCurrentSite(int targetNo, char *siteName)
 ******************************************************************************/
 
 void
-ui_krui_setCurrentLink(int sourceNo, int targetNo, char *siteName)
-{
+ui_krui_setCurrentLink(int sourceNo, int targetNo, char *siteName) {
     (void) krui_setCurrentUnit(targetNo);    /* target */
     (void) ui_krui_setCurrentSite(targetNo, siteName);
     (void) krui_isConnected(sourceNo);       /* sets current link */
@@ -154,42 +149,40 @@ ui_krui_setCurrentLink(int sourceNo, int targetNo, char *siteName)
 /*****************************************************************************
   FUNCTION : ui_correctName
 
-  PURPOSE  : replace all ' ', '\t' und '\n' with underscores ('_') 
+  PURPOSE  : replace all ' ', '\t' und '\n' with underscores ('_')
   NOTES    :
 
   UPDATE   : 27.9.1990
 ******************************************************************************/
 
-void ui_correctName(char *string)
-{
+void ui_correctName(char *string) {
     int j;
     if (string == NULL) return;
     /* replace white space with underscores */
     for (j=0; string[j] != '\0'; j++) {
-	if ((string[j] == ' ') OR
-	    (string[j] == '\t') OR
-	    (string[j] == '\n'))
-	    string[j] = '_';
+        if ((string[j] == ' ') OR
+                (string[j] == '\t') OR
+                (string[j] == '\n'))
+            string[j] = '_';
     }
 }
 
 /*****************************************************************************
   FUNCTION : ui_cutTrailingZeros
 
-  PURPOSE  : replace all trailing '0' (except after '.') 
-             with null character ('\0') 
+  PURPOSE  : replace all trailing '0' (except after '.')
+             with null character ('\0')
   NOTES    :
 
   UPDATE   : 27.9.1990
 ******************************************************************************/
 
-void ui_cutTrailingZeros(char *string)
-{
+void ui_cutTrailingZeros(char *string) {
     int j;
     if ((string == NULL) OR (strlen(string) < 2)) return;
     for (j = strlen(string)-1 ; ((j > 0) AND (string[j] != '.')) ; j--) {
-	if ((string[j] == '0') AND (string[j-1] != '.'))
-	    string[j] = '\0';
+        if ((string[j] == '0') AND (string[j-1] != '.'))
+            string[j] = '\0';
     }
 }
 
@@ -204,14 +197,13 @@ void ui_cutTrailingZeros(char *string)
 *****************************************************************************/
 
 struct PosType
-ui_utilGridToPix(struct Ui_DisplayType *displayPtr, struct PosType gridPos)
-{
+ui_utilGridToPix(struct Ui_DisplayType *displayPtr, struct PosType gridPos) {
     struct PosType  pixPos;
 
-    pixPos.x = displayPtr->gridSize * (gridPos.x - displayPtr->origin.x) + 
-	displayPtr->gridSize/2;
-    pixPos.y = displayPtr->gridSize * (gridPos.y - displayPtr->origin.y) + 
-	displayPtr->gridSize/2;
+    pixPos.x = displayPtr->gridSize * (gridPos.x - displayPtr->origin.x) +
+               displayPtr->gridSize/2;
+    pixPos.y = displayPtr->gridSize * (gridPos.y - displayPtr->origin.y) +
+               displayPtr->gridSize/2;
 
     return (pixPos);
 }
@@ -221,22 +213,21 @@ ui_utilGridToPix(struct Ui_DisplayType *displayPtr, struct PosType gridPos)
 /*****************************************************************************
   FUNCTION :                      ui_utilPixToGrid
 
-  PURPOSE  : transforms a pixel coordinate to a grid position 
+  PURPOSE  : transforms a pixel coordinate to a grid position
   RETURNS  : the corresponding grid position
   NOTES    : to be consistent use always this routine to do the translation
 *****************************************************************************/
 
 struct PosType
-ui_utilPixToGrid(struct Ui_DisplayType *displayPtr, struct PosType pixPos)
-{
+ui_utilPixToGrid(struct Ui_DisplayType *displayPtr, struct PosType pixPos) {
     struct PosType  gridPos;
 
     gridPos.x =  displayPtr->origin.x + (pixPos.x / displayPtr->gridSize);
     gridPos.y =  displayPtr->origin.y + (pixPos.y / displayPtr->gridSize);
     gridPos.z =  ui_actualZvalue;
-/*
-    gridPos.z =  0;
-*/
+    /*
+        gridPos.z =  0;
+    */
     return (gridPos);
 }
 
@@ -250,15 +241,14 @@ ui_utilPixToGrid(struct Ui_DisplayType *displayPtr, struct PosType pixPos)
 *****************************************************************************/
 
 
-void 
-ui_utilChangeFlag(FlagType *flag_word, FlagType flag)
-{
+void
+ui_utilChangeFlag(FlagType *flag_word, FlagType flag) {
     FlagType aux = *flag_word;
 
     if (ui_utilIsSet(aux, flag))
-	ui_utilResetFlag(aux,flag);
+        ui_utilResetFlag(aux,flag);
     else
-	ui_utilSetFlag(aux,flag);
+        ui_utilSetFlag(aux,flag);
     *flag_word = aux;
 }
 
@@ -268,17 +258,15 @@ ui_utilChangeFlag(FlagType *flag_word, FlagType flag)
   FUNCTION :                        ui_utilSgnInt
 
   PURPOSE  : calculates the signum function for integer arguments
-  RETURNS  : sgn(x)  
+  RETURNS  : sgn(x)
 *****************************************************************************/
 
 
 int
-ui_utilSgnInt(int x)
-{
+ui_utilSgnInt(int x) {
     if (x > 0) return(1);
-    else
-	if (x < 0) return(-1);
-	else return(0);
+    else if (x < 0) return(-1);
+    else return(0);
 }
 
 
@@ -292,13 +280,14 @@ ui_utilSgnInt(int x)
 *****************************************************************************/
 
 void
-ui_utilMax(short int *x1Ptr, short int *x2Ptr)
-{
+ui_utilMax(short int *x1Ptr, short int *x2Ptr) {
     short h;
 
     if (*x1Ptr < *x2Ptr) { /* x1 is not the maximum, so swap */
-	h = *x1Ptr;  *x1Ptr = *x2Ptr;   *x2Ptr = h; 
-    } 
+        h = *x1Ptr;
+        *x1Ptr = *x2Ptr;
+        *x2Ptr = h;
+    }
 }
 
 
@@ -309,14 +298,13 @@ ui_utilMax(short int *x1Ptr, short int *x2Ptr)
 
   PURPOSE  : Two pairs of coordinates are given describing a rectangle.
              They will be reassigned, that (x1,y1) is the upper left and
-	     (x2,y2) the lower right corner. 
+	     (x2,y2) the lower right corner.
   RETURNS  : call by reference --> (x1Ptr,y1Ptr,x2Ptr,y2Ptr)
   NOTES    : see ui_utilnormalize_coord()
 *****************************************************************************/
 
 void
-ui_utilNormalizeRect(struct PosType *pixPos1Ptr, struct PosType *pixPos2Ptr)
-{
+ui_utilNormalizeRect(struct PosType *pixPos1Ptr, struct PosType *pixPos2Ptr) {
     ui_utilMax(&(pixPos2Ptr->x), &(pixPos1Ptr->x));
     ui_utilMax(&(pixPos2Ptr->y), &(pixPos1Ptr->y));
 }
@@ -334,8 +322,7 @@ ui_utilNormalizeRect(struct PosType *pixPos1Ptr, struct PosType *pixPos2Ptr)
 
 
 struct PosType
-ui_utilPixUpperLeft(struct Ui_DisplayType *displayPtr, struct PosType gridPos)
-{
+ui_utilPixUpperLeft(struct Ui_DisplayType *displayPtr, struct PosType gridPos) {
     struct PosType  pixPos;
 
     pixPos    = ui_utilGridToPix(displayPtr, gridPos);
@@ -357,8 +344,7 @@ ui_utilPixUpperLeft(struct Ui_DisplayType *displayPtr, struct PosType gridPos)
 *****************************************************************************/
 
 struct PosType
-ui_utilPixLowerRight(struct Ui_DisplayType *displayPtr, struct PosType gridPos, short int extent)
-{
+ui_utilPixLowerRight(struct Ui_DisplayType *displayPtr, struct PosType gridPos, short int extent) {
     struct PosType  pixPos;
 
 

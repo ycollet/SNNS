@@ -58,15 +58,15 @@ static idCnt = 0;
 /*                                                                            */
 
 NetworkData *utils_getNewNetData( void ) {
-  NetworkData *nd;
+    NetworkData *nd;
 
-  nd = (NetworkData *) calloc(1, sizeof(NetworkData));
+    nd = (NetworkData *) calloc(1, sizeof(NetworkData));
 
-  if( nd ) {
-    nd->histID  = idCnt++;
-  }
+    if( nd ) {
+        nd->histID  = idCnt++;
+    }
 
-  return( nd );
+    return( nd );
 }
 
 /*                                                                            */

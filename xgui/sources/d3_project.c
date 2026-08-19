@@ -15,7 +15,7 @@
 
     Copyright (c) 1990-1995  SNNS Group, IPVR, Univ. Stuttgart, FRG
     Copyright (c) 1996-1998  SNNS Group, WSI, Univ. Tuebingen, FRG
-             
+
 ******************************************************************************/
 #include <config.h>
 
@@ -60,11 +60,11 @@ static void d3_closeProjectPannel (Widget w, Widget pannel, caddr_t call_data)
     temp_state.viewpoint [1] = ui_xFloatFromAsciiWidget (viewpointYwidget);
     temp_state.viewpoint [2] = ui_xFloatFromAsciiWidget (viewpointZwidget);
     XtDestroyWidget (pannel);
-    if (memcmp (&d3_state, &temp_state, 
+    if (memcmp (&d3_state, &temp_state,
                 sizeof (d3_state_type)) != 0) {
-         memcpy (&d3_state, &temp_state, 
-                 sizeof (d3_state_type)); 
-         d3_drawNet ();
+        memcpy (&d3_state, &temp_state,
+                sizeof (d3_state_type));
+        d3_drawNet ();
     }
 }
 
@@ -82,15 +82,16 @@ static void d3_closeProjectPannel (Widget w, Widget pannel, caddr_t call_data)
 static void setProjectToggleState (void)
 
 {
-    switch (temp_state.projection_mode)
-      {
-        case parallel: ui_xSetToggleState (parallelButton, TRUE);
-                       ui_xSetToggleState (centralButton, FALSE);
-                       break;
-        case central : ui_xSetToggleState (parallelButton, FALSE);
-                       ui_xSetToggleState (centralButton, TRUE);
-                       break;
-      }
+    switch (temp_state.projection_mode) {
+    case parallel:
+        ui_xSetToggleState (parallelButton, TRUE);
+        ui_xSetToggleState (centralButton, FALSE);
+        break;
+    case central :
+        ui_xSetToggleState (parallelButton, FALSE);
+        ui_xSetToggleState (centralButton, TRUE);
+        break;
+    }
 }
 
 
@@ -151,48 +152,52 @@ void d3_createProjectPannel (Widget w, Widget button, caddr_t call_data)
     Widget projectPannel, pannel, border, label, done;
 
     n = 0;
-    XtSetArg (arg[0], XtNwidth, &width); n++;
-    XtSetArg (arg[1], XtNheight, &height); n++;
+    XtSetArg (arg[0], XtNwidth, &width);
+    n++;
+    XtSetArg (arg[1], XtNheight, &height);
+    n++;
     XtGetValues (button, arg, (unsigned int) n);
 
     XtTranslateCoords (button, (Position) (width / 2), (Position) (height / 2), &xPos, &yPos);
 
     n = 0;
 
-    XtSetArg(arg[n], XtNx, xPos); n++;
-    XtSetArg(arg[n], XtNy, yPos); n++;
+    XtSetArg(arg[n], XtNx, xPos);
+    n++;
+    XtSetArg(arg[n], XtNy, yPos);
+    n++;
 
     projectPannel = XtCreatePopupShell ("projection", transientShellWidgetClass, button, arg, (unsigned int) n);
 
     border = XtCreateManagedWidget("border", boxWidgetClass,
                                    projectPannel, NULL, ZERO);
-    pannel = XtCreateManagedWidget("pannel", formWidgetClass, 
+    pannel = XtCreateManagedWidget("pannel", formWidgetClass,
                                    border, NULL, ZERO);
 
     parallelButton = d3_xCreateToggleItem ("parallel", pannel, NULL, NULL, NULL);
     centralButton = d3_xCreateToggleItem ("central", pannel, NULL,
-                                   parallelButton, NULL);
+                                          parallelButton, NULL);
 
     label = ui_xCreateLabelItem ("  Viewpoint  X", pannel, d3_fontWidth * 14,
-                                   NULL, centralButton); 
+                                 NULL, centralButton);
 
     sprintf (buf, "%.4f", d3_state.viewpoint[0]);
     viewpointXwidget = ui_xCreateDialogItem ("viewpointX", pannel,
-                                   buf, d3_numberWidth, label, centralButton);
+        buf, d3_numberWidth, label, centralButton);
 
     label = ui_xCreateLabelItem ("             Y", pannel,  d3_fontWidth * 14,
-                                   NULL, label); 
+                                 NULL, label);
 
     sprintf (buf, "%.4f", d3_state.viewpoint[1]);
     viewpointYwidget = ui_xCreateDialogItem ("viewpointY", pannel,
-                                buf, d3_numberWidth, label, viewpointXwidget);
+        buf, d3_numberWidth, label, viewpointXwidget);
 
     label = ui_xCreateLabelItem ("             Z", pannel, d3_fontWidth * 14,
-                                   NULL, label); 
+                                 NULL, label);
 
     sprintf (buf, "%.4f", d3_state.viewpoint[2]);
     viewpointZwidget = ui_xCreateDialogItem ("viewpointX", pannel,
-                                   buf, d3_numberWidth, label, viewpointYwidget);
+        buf, d3_numberWidth, label, viewpointYwidget);
 
     done = d3_xCreateButtonItem ("done", border, NULL, label);
 
@@ -202,13 +207,13 @@ void d3_createProjectPannel (Widget w, Widget button, caddr_t call_data)
     XtAddCallback (done, XtNcallback, (XtCallbackProc) d3_closeProjectPannel,
                    (Widget) projectPannel);
 
-    memcpy (&temp_state, &d3_state, sizeof (d3_state_type)); 
+    memcpy (&temp_state, &d3_state, sizeof (d3_state_type));
 
     setProjectToggleState ();
-  
+
     ui_checkWindowPosition(projectPannel);
     XtPopup (projectPannel, XtGrabExclusive);
-    ui_xDontResizeWidget(projectPannel); 
+    ui_xDontResizeWidget(projectPannel);
 
 }
 

@@ -15,7 +15,7 @@
 
     Copyright (c) 1990-1995  SNNS Group, IPVR, Univ. Stuttgart, FRG
     Copyright (c) 1996-1998  SNNS Group, WSI, Univ. Tuebingen, FRG
-             
+
 ******************************************************************************/
 #include <config.h>
 
@@ -66,7 +66,7 @@
 
 
 /*****************************************************************************
-  FUNCTION : d3_doneProc 
+  FUNCTION : d3_doneProc
 
   PURPOSE  : finishes the 3D View and closes all windows
   RETURNS  : void
@@ -98,7 +98,7 @@ static void d3_toggleFreezeButton (Widget w, Widget button, caddr_t call_data)
 
 {
     d3_freeze ^= 1;
-    ui_xSetToggleState (button, d3_freeze);    
+    ui_xSetToggleState (button, d3_freeze);
 }
 
 
@@ -114,17 +114,22 @@ static void d3_toggleFreezeButton (Widget w, Widget button, caddr_t call_data)
 static void d3_createButtonPannel (Widget parent)
 
 {
-    Widget box, setup, model, project, light, units, links; 
+    Widget box, setup, model, project, light, units, links;
     Widget freeze, display, done, box2, reset;
     int n;
     Arg arg[10];
 
     n = 0;
-    XtSetArg(arg[n], XtNwidth, 250);          n++;
-    XtSetArg(arg[n], XtNleft  , XtChainLeft); n++;
-    XtSetArg(arg[n], XtNright , XtChainLeft); n++;
-    XtSetArg(arg[n], XtNtop   , XtChainTop);  n++;
-    XtSetArg(arg[n], XtNbottom, XtChainTop);  n++;
+    XtSetArg(arg[n], XtNwidth, 250);
+    n++;
+    XtSetArg(arg[n], XtNleft, XtChainLeft);
+    n++;
+    XtSetArg(arg[n], XtNright, XtChainLeft);
+    n++;
+    XtSetArg(arg[n], XtNtop, XtChainTop);
+    n++;
+    XtSetArg(arg[n], XtNbottom, XtChainTop);
+    n++;
     box = XtCreateManagedWidget("box", boxWidgetClass, parent, arg, (unsigned int) n);
 
     setup = d3_xCreateButtonItem ("setup", box, NULL, NULL);
@@ -137,35 +142,40 @@ static void d3_createButtonPannel (Widget parent)
     freeze = d3_xCreateButtonItem ("freeze", box, reset, light);
 
     XtAddCallback (reset, XtNcallback, (XtCallbackProc) d3_resetDisplay, NULL);
-    XtAddCallback (project, XtNcallback, 
-		   (XtCallbackProc) d3_createProjectPannel, (caddr_t) project);
-    XtAddCallback (units, XtNcallback, 
-		   (XtCallbackProc) d3_createUnitPannel, (caddr_t) units);
-    XtAddCallback (links, XtNcallback, 
-		   (XtCallbackProc) d3_createLinkPannel, (caddr_t) links);
-    XtAddCallback (setup, XtNcallback, 
-		   (XtCallbackProc) d3_createSetupPannel, (caddr_t) setup);
-    XtAddCallback (model, XtNcallback, 
-		   (XtCallbackProc) d3_createModelPannel, (caddr_t) model);
-    XtAddCallback (light, XtNcallback, 
-		   (XtCallbackProc) d3_createLightPannel, (caddr_t) light);
-    XtAddCallback (freeze, XtNcallback, 
-		   (XtCallbackProc) d3_toggleFreezeButton, (caddr_t) freeze);
+    XtAddCallback (project, XtNcallback,
+                   (XtCallbackProc) d3_createProjectPannel, (caddr_t) project);
+    XtAddCallback (units, XtNcallback,
+                   (XtCallbackProc) d3_createUnitPannel, (caddr_t) units);
+    XtAddCallback (links, XtNcallback,
+                   (XtCallbackProc) d3_createLinkPannel, (caddr_t) links);
+    XtAddCallback (setup, XtNcallback,
+                   (XtCallbackProc) d3_createSetupPannel, (caddr_t) setup);
+    XtAddCallback (model, XtNcallback,
+                   (XtCallbackProc) d3_createModelPannel, (caddr_t) model);
+    XtAddCallback (light, XtNcallback,
+                   (XtCallbackProc) d3_createLightPannel, (caddr_t) light);
+    XtAddCallback (freeze, XtNcallback,
+                   (XtCallbackProc) d3_toggleFreezeButton, (caddr_t) freeze);
 
     n = 0;
-    XtSetArg(arg[n], XtNwidth, 50);                       n++;
-    XtSetArg(arg[n], XtNleft  , XtChainLeft); n++;
-    XtSetArg(arg[n], XtNright , XtChainLeft); n++;
-    XtSetArg(arg[n], XtNtop   , XtChainTop); n++;
-    XtSetArg(arg[n], XtNbottom, XtChainTop); n++;
-    box2 = XtCreateManagedWidget("box2", boxWidgetClass, parent, 
-				 arg, (unsigned int) n);
+    XtSetArg(arg[n], XtNwidth, 50);
+    n++;
+    XtSetArg(arg[n], XtNleft, XtChainLeft);
+    n++;
+    XtSetArg(arg[n], XtNright, XtChainLeft);
+    n++;
+    XtSetArg(arg[n], XtNtop, XtChainTop);
+    n++;
+    XtSetArg(arg[n], XtNbottom, XtChainTop);
+    n++;
+    box2 = XtCreateManagedWidget("box2", boxWidgetClass, parent,
+                                 arg, (unsigned int) n);
 
     display = d3_xCreateButtonItem ("display", box2, NULL, NULL);
     done = d3_xCreateButtonItem ("done2", box2, NULL, display);
 
-    XtAddCallback(display, XtNcallback, 
-		  (XtCallbackProc) d3_createDisplayWindow, NULL);
+    XtAddCallback(display, XtNcallback,
+                  (XtCallbackProc) d3_createDisplayWindow, NULL);
     XtAddCallback(done, XtNcallback, (XtCallbackProc) d3_doneProc, NULL);
 
     if (d3_state.model_mode == solid)
@@ -197,8 +207,8 @@ static void d3_createControlPannel (Widget parent)
   PURPOSE  : creates the control pannel
   RETURNS  : void
   NOTES    : !!! this is entry point from the XGUI !!!
-            the function is a callback from 
-               ui_xCreatePanel in module ui_main.c  
+            the function is a callback from
+               ui_xCreatePanel in module ui_main.c
 
   UPDATE   :
 ******************************************************************************/
@@ -211,32 +221,37 @@ void d3_displayGraphic (void)
     Cardinal     n;
     char         buf[40];
 
-    if (d3_controlIsReady){
-	XRaiseWindow(XtDisplay(d3_controlWidget), XtWindow(d3_controlWidget));
-       return;
+    if (d3_controlIsReady) {
+        XRaiseWindow(XtDisplay(d3_controlWidget), XtWindow(d3_controlWidget));
+        return;
     }
 
     sprintf (buf, "SNNS 3D-control");
-    n = 0;  
-    d3_controlWidget = XtCreatePopupShell (buf, topLevelShellWidgetClass, 
-                                           ui_toplevel, arg, n); 
+    n = 0;
+    d3_controlWidget = XtCreatePopupShell (buf, topLevelShellWidgetClass,
+                                           ui_toplevel, arg, n);
 
     n = 0;
-    XtSetArg (arg[n], XtNwidth, 300); n++;
-    XtSetArg (arg[n], XtNleft  , XtChainLeft); n++;
-    XtSetArg (arg[n], XtNright , XtChainRight); n++;
-    XtSetArg (arg[n], XtNtop   , XtChainTop); n++;
-    XtSetArg (arg[n], XtNbottom, XtChainBottom); n++;
+    XtSetArg (arg[n], XtNwidth, 300);
+    n++;
+    XtSetArg (arg[n], XtNleft, XtChainLeft);
+    n++;
+    XtSetArg (arg[n], XtNright, XtChainRight);
+    n++;
+    XtSetArg (arg[n], XtNtop, XtChainTop);
+    n++;
+    XtSetArg (arg[n], XtNbottom, XtChainBottom);
+    n++;
 
-    d3_frameWidget = XtCreateManagedWidget ("form", boxWidgetClass, 
+    d3_frameWidget = XtCreateManagedWidget ("form", boxWidgetClass,
                                             d3_controlWidget, arg, n);
     d3_createControlPannel (d3_frameWidget);
 
     ui_checkWindowPosition(d3_controlWidget);
     XtAddEventHandler(d3_frameWidget,KeyPressMask,FALSE,
-		      (XtEventHandler)ui_key_control,(Cardinal *) 0);
+                      (XtEventHandler)ui_key_control,(Cardinal *) 0);
     XtPopup (d3_controlWidget, XtGrabNone);
-    ui_xDontResizeWidget(d3_controlWidget); 
+    ui_xDontResizeWidget(d3_controlWidget);
 
     d3_controlIsReady = TRUE;
 }

@@ -140,16 +140,16 @@ typedef int   ModuleWorkFunction( PopID *parents,
 typedef char *ModuleErrFunction ( int err_code );
 
 typedef struct _ModuleTableEntry {
-  char *name;
+    char *name;
 
-  /*  ModuleInitFunction *initFct;    this doesn't work ... */
-  int (*initFct)( struct _ModuleTableEntry *self, int msgc, char *msgv[] );
+    /*  ModuleInitFunction *initFct;    this doesn't work ... */
+    int (*initFct)( struct _ModuleTableEntry *self, int msgc, char *msgv[] );
 
-  ModuleWorkFunction *workFct;
-  ModuleErrFunction  *errFct;
+    ModuleWorkFunction *workFct;
+    ModuleErrFunction  *errFct;
 
-  int type;
-  int flags;
+    int type;
+    int flags;
 
 } ModuleTableEntry;
 

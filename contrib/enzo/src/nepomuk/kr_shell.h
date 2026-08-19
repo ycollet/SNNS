@@ -86,7 +86,7 @@ extern int ksh_set_update_function( char *fname );
 
 /* sets update function and determines no of parameters */
 
-extern int ksh_set_init_function( char *fname , int *no_init_params);
+extern int ksh_set_init_function( char *fname, int *no_init_params);
 
 /* sets initialization function and determines no of parameters */
 
@@ -160,7 +160,7 @@ extern krui_err  ksh_setUnitActivation(int UnitNo,
 extern void      ksh_setUnitBias(int UnitNo, FlintTypeParam unit_bias);
 extern krui_err  ksh_setUnitFType(int unit_no, char *Ftype_symbol);
 extern void      ksh_setUnitInitialActivation(int UnitNo,
-					      FlintTypeParam unit_i_activation);
+        FlintTypeParam unit_i_activation);
 extern void      ksh_setUnitLayerNo(int UnitNo, int layer_no);
 extern krui_err  ksh_setUnitName(int unit_no, char *unit_name);
 extern krui_err  ksh_setUnitOutFunc(int unit_no, char *unitOutFuncName);

@@ -75,32 +75,32 @@ static float relearn = 1.0;
 /***************************************************************************/
 
 int relearn_init( ModuleTableEntry *self, int msgc, char *msgv[] ) {
-  float lrelearn;
+    float lrelearn;
 
-  MODULE_KEY( RELEARN_KEY );
+    MODULE_KEY( RELEARN_KEY );
 
-  SEL_MSG( msgv[0] )
+    SEL_MSG( msgv[0] )
 
     MSG_CASE( GENERAL_INIT    ) {
-    /* nothing to do */
-  }
-  MSG_CASE( GENERAL_EXIT    ) {
-    /* nothing to do */
-  }
-  MSG_CASE( EVOLUTION_INIT  ) {
-    /* nothing to do */
-  }
-  MSG_CASE( RELEARN_FACTOR  ) {
-    if( msgc > 1 ) {
-      lrelearn= (float) atof( msgv[1] );
-      if (( lrelearn > 0.0) && (lrelearn <10.0))
-	relearn = lrelearn;
+        /* nothing to do */
     }
-  }
+    MSG_CASE( GENERAL_EXIT    ) {
+        /* nothing to do */
+    }
+    MSG_CASE( EVOLUTION_INIT  ) {
+        /* nothing to do */
+    }
+    MSG_CASE( RELEARN_FACTOR  ) {
+        if( msgc > 1 ) {
+            lrelearn= (float) atof( msgv[1] );
+            if (( lrelearn > 0.0) && (lrelearn <10.0))
+                relearn = lrelearn;
+        }
+    }
 
-  END_MSG;
+    END_MSG;
 
-  return ( INIT_USED );
+    return ( INIT_USED );
 }
 
 /***************************************************************************/
@@ -113,51 +113,51 @@ int relearn_init( ModuleTableEntry *self, int msgc, char *msgv[] ) {
 /***************************************************************************/
 
 int relearn_work( PopID *parents, PopID *offsprings, PopID *reference ) {
-  NetID activeMember;
-  struct Unit *activeUnit;
-  struct Link *activeLink;
+    NetID activeMember;
+    struct Unit *activeUnit;
+    struct Link *activeLink;
 
-  /* using a Nepomuk-macro do step over all offspring-nets            */
+    /* using a Nepomuk-macro do step over all offspring-nets            */
 
-  FOR_ALL_OFFSPRINGS ( activeMember )
+    FOR_ALL_OFFSPRINGS ( activeMember )
 
-  {
-    if (kpm_setCurrentNet( activeMember ) != KPM_NO_ERROR) {
-      result = ERROR_ACTIVATE;
-      return ( ERROR );
+    {
+        if (kpm_setCurrentNet( activeMember ) != KPM_NO_ERROR) {
+            result = ERROR_ACTIVATE;
+            return ( ERROR );
+        }
+
+        /* Fast version of the relearnfunction                          */
+        /* uses special macros and internal data representation of SNNS */
+
+        FOR_ALL_UNITS( activeUnit ) {
+            activeUnit->bias *= relearn;
+            FOR_ALL_LINKS ( activeUnit, activeLink ) {
+                activeLink->weight *= relearn;
+            }
+        }
+
+        /* slower version for this problem
+           using the kernel-interface of SNNS
+
+           for( t = ksh_getFirstUnit(); t != 0; t = ksh_getNextUnit () )
+           {
+           ksh_setCurrentUnit( t );
+           weight = ksh_getUnitBias( t );
+           ksh_setUnitBias ( t , weight * relearn );
+
+           for( s = ksh_getFirstPredUnit(&weight);
+           s != 0;
+           s = ksh_getNextPredUnit(&weight))
+           {
+           ksh_setLinkWeight ( weight * relearn );
+           }
+           }
+
+        */
     }
 
-    /* Fast version of the relearnfunction                          */
-    /* uses special macros and internal data representation of SNNS */
-
-    FOR_ALL_UNITS( activeUnit ) {
-      activeUnit->bias *= relearn;
-      FOR_ALL_LINKS ( activeUnit, activeLink ) {
-	activeLink->weight *= relearn;
-      }
-    }
-
-    /* slower version for this problem
-       using the kernel-interface of SNNS
-
-       for( t = ksh_getFirstUnit(); t != 0; t = ksh_getNextUnit () )
-       {
-       ksh_setCurrentUnit( t );
-       weight = ksh_getUnitBias( t );
-       ksh_setUnitBias ( t , weight * relearn );
-
-       for( s = ksh_getFirstPredUnit(&weight);
-       s != 0;
-       s = ksh_getNextPredUnit(&weight))
-       {
-       ksh_setLinkWeight ( weight * relearn );
-       }
-       }
-
-    */
-  }
-
-  return( MODULE_NO_ERROR );
+    return( MODULE_NO_ERROR );
 }
 
 /***************************************************************************/
@@ -170,13 +170,13 @@ int relearn_work( PopID *parents, PopID *offsprings, PopID *reference ) {
 /***************************************************************************/
 
 char *relearn_errMsg(int err_code) {
-  switch (result) {
-  case 0 :
-    return ("relearn : No error found");
+    switch (result) {
+    case 0 :
+        return ("relearn : No error found");
 
-  case ERROR_ACTIVATE :
-    return ("relearn : Can't activate a offspring-net");
-  }
+    case ERROR_ACTIVATE :
+        return ("relearn : Can't activate a offspring-net");
+    }
 
-  return ("relearn : Unknown error, please consulte your systemadmin");
+    return ("relearn : Unknown error, please consulte your systemadmin");
 }

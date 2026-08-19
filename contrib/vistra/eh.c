@@ -1,7 +1,7 @@
 #include "xvis.h"
 
-static char *errorMessages[] =
-  { "DUMMY",                   /* error numbers start at 1 */
+static char *errorMessages[] = {
+    "DUMMY",                   /* error numbers start at 1 */
     "Not enough memory!",                           /*  1 */
     "Error reading format file!",                   /*  2 */
     "Format file too long!",                        /*  3 */
@@ -41,7 +41,7 @@ static char *errorMessages[] =
     "Program pca produced no correct LVQ format!",  /* 37 */
     "Cannot open output file of program pca!",      /* 38 */
     "Cannot get a temporary file name!",            /* 39 */
-  };
+};
 
 
 /*****************************************************************/
@@ -51,12 +51,12 @@ static char *errorMessages[] =
 /* die Widgets des Programms nicht kreiert sind, z.B. in der     */
 /* Initialisierungsphase oder bei Batch-Aufrufen.                */
 /*****************************************************************/
-void handleErr(int err)
-{ char buf[MAX_LENGTH_ERROR_MESSAGE];
+void handleErr(int err) {
+    char buf[MAX_LENGTH_ERROR_MESSAGE];
 
-  genErrorMessage(err, buf);
-  printf("\n%s", buf);
-  exit(err);
+    genErrorMessage(err, buf);
+    printf("\n%s", buf);
+    exit(err);
 }              /* handleErr */
 
 
@@ -66,15 +66,13 @@ void handleErr(int err)
 /* Die Funktion liest die globalen Variablen errorInfo und        */
 /* rowCount.                                                      */
 /******************************************************************/
-void genErrorMessage(int err, char *buf)
-{
-  switch(err)
-  {
+void genErrorMessage(int err, char *buf) {
+    switch(err) {
     case 8:
     case 9:
     case 10:
-             sprintf(buf, "Vistra warning: %s\n", errorMessages[err]);
-             break;
+        sprintf(buf, "Vistra warning: %s\n", errorMessages[err]);
+        break;
     case 4:
     case 11:
     case 12:
@@ -86,13 +84,15 @@ void genErrorMessage(int err, char *buf)
     case 23:
     case 32:
     case 34:
-             sprintf(buf, "Vistra error %d:  %s\n%s\n",
-                          err, errorMessages[err], errorInfo);
-             break;
-    case 5:  sprintf(buf, "Vistra error %d:  %s\nLine %ld:  %s\n",
-                          err, errorMessages[err], rowCount, errorInfo);
-             break;
-    default: sprintf(buf, "Vistra error %d:  %s\n", err, errorMessages[err]);
-             break;
-  }      /* switch */
+        sprintf(buf, "Vistra error %d:  %s\n%s\n",
+                err, errorMessages[err], errorInfo);
+        break;
+    case 5:
+        sprintf(buf, "Vistra error %d:  %s\nLine %ld:  %s\n",
+                err, errorMessages[err], rowCount, errorInfo);
+        break;
+    default:
+        sprintf(buf, "Vistra error %d:  %s\n", err, errorMessages[err]);
+        break;
+    }      /* switch */
 }        /* genErrorMessage */

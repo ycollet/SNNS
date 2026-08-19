@@ -15,7 +15,7 @@
 
     Copyright (c) 1990-1995  SNNS Group, IPVR, Univ. Stuttgart, FRG
     Copyright (c) 1996-1998  SNNS Group, WSI, Univ. Tuebingen, FRG
-             
+
 ******************************************************************************/
 #include <config.h>
 
@@ -79,7 +79,8 @@ static void d3_incZvalue (Widget w, Widget pannel, caddr_t call_data)
     ui_actualZvalue++;
     sprintf (buf, "%d", ui_actualZvalue);
     n = 0;
-    XtSetArg (arg[n], XtNstring, buf); n++;
+    XtSetArg (arg[n], XtNstring, buf);
+    n++;
     XtSetValues (pannel, arg, (unsigned int) n);
 }
 
@@ -104,7 +105,8 @@ static void d3_decZvalue (Widget w, Widget pannel, caddr_t call_data)
     ui_actualZvalue--;
     sprintf (buf, "%d", ui_actualZvalue);
     n = 0;
-    XtSetArg (arg[n], XtNstring, buf); n++;
+    XtSetArg (arg[n], XtNstring, buf);
+    n++;
     XtSetValues (pannel, arg, (unsigned int) n);
 }
 
@@ -114,7 +116,7 @@ static void d3_decZvalue (Widget w, Widget pannel, caddr_t call_data)
 
   PURPOSE  : creates the z-value pannel
   RETURNS  : void
-  NOTES    : 
+  NOTES    :
 
   UPDATE   :
 ******************************************************************************/
@@ -123,39 +125,44 @@ void d3_createZvaluePannel (Widget parent)
 
 {
 
-  static XtActionsRec  ActionRec [] = {{"d3_readZvalue", (XtActionProc) d3_readZvalue}};
-  XtTranslations Translation;
+    static XtActionsRec  ActionRec [] = {{"d3_readZvalue", (XtActionProc) d3_readZvalue}};
+    XtTranslations Translation;
 
-  Widget pannel, label, button, dummy, up, down;
-  int n;
-  Arg arg[10];
-  char buf[20];
+    Widget pannel, label, button, dummy, up, down;
+    int n;
+    Arg arg[10];
+    char buf[20];
 
-  n = 0;
+    n = 0;
 
-  XtSetArg(arg[n], XtNwidth, 250); n++;
-  XtSetArg(arg[n], XtNleft  , XtChainLeft); n++;
-  XtSetArg(arg[n], XtNright , XtChainLeft); n++;
-  XtSetArg(arg[n], XtNtop   , XtChainTop); n++;
-  XtSetArg(arg[n], XtNbottom, XtChainTop); n++;
-  pannel = XtCreateManagedWidget("pannel", formWidgetClass, parent, arg, (unsigned int) n);
+    XtSetArg(arg[n], XtNwidth, 250);
+    n++;
+    XtSetArg(arg[n], XtNleft, XtChainLeft);
+    n++;
+    XtSetArg(arg[n], XtNright, XtChainLeft);
+    n++;
+    XtSetArg(arg[n], XtNtop, XtChainTop);
+    n++;
+    XtSetArg(arg[n], XtNbottom, XtChainTop);
+    n++;
+    pannel = XtCreateManagedWidget("pannel", formWidgetClass, parent, arg, (unsigned int) n);
 
-  label = ui_xCreateLabelItem ("z-value ", pannel, d3_fontWidth * 7, NULL, NULL); 
-  sprintf (buf, "%d", ui_actualZvalue);
-  z_valueWidget = ui_xCreateDialogItem ("z_valueWidget", pannel, buf, d3_shortNumberWidth, label, NULL);
+    label = ui_xCreateLabelItem ("z-value ", pannel, d3_fontWidth * 7, NULL, NULL);
+    sprintf (buf, "%d", ui_actualZvalue);
+    z_valueWidget = ui_xCreateDialogItem ("z_valueWidget", pannel, buf, d3_shortNumberWidth, label, NULL);
 
-  button = d3_xCreateButtonItem ("ok", pannel, z_valueWidget, NULL);
-  dummy = ui_xCreateLabelItem (" ", pannel, d3_fontWidth, button, NULL); 
-  up = d3_xCreateButtonItem ("up", pannel, dummy, NULL);
-  down = d3_xCreateButtonItem ("down", pannel, up, NULL);
+    button = d3_xCreateButtonItem ("ok", pannel, z_valueWidget, NULL);
+    dummy = ui_xCreateLabelItem (" ", pannel, d3_fontWidth, button, NULL);
+    up = d3_xCreateButtonItem ("up", pannel, dummy, NULL);
+    down = d3_xCreateButtonItem ("down", pannel, up, NULL);
 
-  XtAddCallback (button, XtNcallback, (XtCallbackProc) d3_readZvalue, (caddr_t) z_valueWidget);
-  XtAddCallback (up, XtNcallback, (XtCallbackProc) d3_incZvalue, (caddr_t) z_valueWidget);
-  XtAddCallback (down, XtNcallback, (XtCallbackProc) d3_decZvalue, (caddr_t) z_valueWidget);
+    XtAddCallback (button, XtNcallback, (XtCallbackProc) d3_readZvalue, (caddr_t) z_valueWidget);
+    XtAddCallback (up, XtNcallback, (XtCallbackProc) d3_incZvalue, (caddr_t) z_valueWidget);
+    XtAddCallback (down, XtNcallback, (XtCallbackProc) d3_decZvalue, (caddr_t) z_valueWidget);
 
-  XtAppAddActions (ui_appContext, ActionRec, XtNumber (ActionRec));
-  Translation = XtParseTranslationTable ("<Key>Return: d3_readZvalue()");
-  XtOverrideTranslations (z_valueWidget, Translation);
+    XtAppAddActions (ui_appContext, ActionRec, XtNumber (ActionRec));
+    Translation = XtParseTranslationTable ("<Key>Return: d3_readZvalue()");
+    XtOverrideTranslations (z_valueWidget, Translation);
 
 }
 

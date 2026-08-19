@@ -5,15 +5,15 @@
 
   PURPOSE        : Argument list handling functions for the SNNS batch
                    interpreter:
-                   The argument list contains pointers to the symbol table 
+                   The argument list contains pointers to the symbol table
 		   positions of a function's arguments
 
-  NOTES          : 
+  NOTES          :
 
   AUTHOR         : Jens Wieland
-  DATE           : 
+  DATE           :
 
-  CHANGED BY     : 
+  CHANGED BY     :
   RCS VERSION    : $Revision: 1.4 $
   LAST CHANGE    : $Date: 1998/03/03 14:09:05 $
 
@@ -38,14 +38,13 @@
   FUNCTION : new_arglist
 
   PURPOSE  : initializes a new argument list
-  RETURNS  : 
-  NOTES    : 
+  RETURNS  :
+  NOTES    :
 
-  UPDATE   : 
+  UPDATE   :
 ******************************************************************************/
-void new_arglist(void)
-{
-  arg_list = ARG_NULL;
+void new_arglist(void) {
+    arg_list = ARG_NULL;
 }
 
 
@@ -58,40 +57,37 @@ void new_arglist(void)
   NOTES    : list is constructed 'backwards' because the grammar that
              fills in the list works from left to right
 
-  UPDATE   : 
+  UPDATE   :
 ******************************************************************************/
-arglist_type *add_to_arglist(St_ptr_type ident)
-{
-  arglist_type *new = arg_list;
+arglist_type *add_to_arglist(St_ptr_type ident) {
+    arglist_type *new = arg_list;
 
-  /* if list is empty, let it point to the newly malloc'ed element: */
-  if (arg_list == ARG_NULL)
-  {
-    arg_list = (arglist_type *) malloc(sizeof(arglist_type));
-    if (arg_list == ARG_NULL) err_prt(ERR_MEM);
+    /* if list is empty, let it point to the newly malloc'ed element: */
+    if (arg_list == ARG_NULL) {
+        arg_list = (arglist_type *) malloc(sizeof(arglist_type));
+        if (arg_list == ARG_NULL) err_prt(ERR_MEM);
 
-    arg_list->arg_ptr = ident;
-    arg_list->next = ARG_NULL;
-  }
-  else
-  /* list is not empty: */
-  {
-    /* advance new pointer to it's end: */
-    while (new->next != ARG_NULL) new = new->next;
+        arg_list->arg_ptr = ident;
+        arg_list->next = ARG_NULL;
+    } else
+        /* list is not empty: */
+    {
+        /* advance new pointer to it's end: */
+        while (new->next != ARG_NULL) new = new->next;
 
-    /* add new element to the end of the list: */
-    new->next = (arglist_type *) malloc(sizeof(arglist_type));
-    if (new->next == ARG_NULL) err_prt(ERR_MEM);
+        /* add new element to the end of the list: */
+        new->next = (arglist_type *) malloc(sizeof(arglist_type));
+        if (new->next == ARG_NULL) err_prt(ERR_MEM);
 
-    /* let new point to the new element: */
-    new = new->next;
+        /* let new point to the new element: */
+        new = new->next;
 
-    /* and fill it's fields: */
-    new->arg_ptr = ident;
-    new->next = ARG_NULL;
-  }
+        /* and fill it's fields: */
+        new->arg_ptr = ident;
+        new->next = ARG_NULL;
+    }
 
-  return arg_list;
+    return arg_list;
 }
 
 

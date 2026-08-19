@@ -11,7 +11,7 @@
   DATE           : 11.05.98
   VERSION        : 2.0
 
-  CHANGED BY     : 
+  CHANGED BY     :
   RCS VERSION    : $Revision: 2.13 $
   LAST CHANGE    : $Date: 1998/05/20 15:19:37 $
 
@@ -33,13 +33,12 @@
   FUNCTION : mysort
 
   PURPOSE  : comparison function for qsort
-  RETURNS  : 
+  RETURNS  :
   NOTES    :
 
-  UPDATE   : 
+  UPDATE   :
 ******************************************************************************/
-int mysort(const void *a, const void *b)
-{
+int mysort(const void *a, const void *b) {
     if( (int *)a < (int *)b )
         return -1;
     else if( (int *)a > (int *)b )
@@ -53,13 +52,12 @@ int mysort(const void *a, const void *b)
   FUNCTION :  main
 
   PURPOSE  : main (only) routine of this module
-  RETURNS  : 
+  RETURNS  :
   NOTES    :
 
-  UPDATE   : 
+  UPDATE   :
 ******************************************************************************/
-void main (int argc, char *argv[])
-{ 
+void main (int argc, char *argv[]) {
 
     int   pat_set, tot_pat_num;
     int   error, i, j, dummy, act_num;
@@ -70,51 +68,51 @@ void main (int argc, char *argv[])
     pattern_set_info   patt_info;
     pattern_descriptor descrip;
 
-  
+
     /* check for proper calling sequence */
-    if (argc != 4){  
-	fprintf(stderr, "usage: %s <no_file> <in_pat_file> <out_pat_file>\n",
-		argv[0]); 
-	exit;
+    if (argc != 4) {
+        fprintf(stderr, "usage: %s <no_file> <in_pat_file> <out_pat_file>\n",
+                argv[0]);
+        exit;
     }
 
     /* is number file readable ? */
-    if ((in_no_file = fopen(argv[1], "r")) == NULL) { 
-	fprintf(stderr, "error: can't read file %s\n", argv[1]) ;
-	exit;
+    if ((in_no_file = fopen(argv[1], "r")) == NULL) {
+        fprintf(stderr, "error: can't read file %s\n", argv[1]) ;
+        exit;
     }
-  
+
     /* load input pattern file */
-    if(krui_loadNewPatterns(argv[2],&pat_set) != 0 /*KRERR_NO_ERROR*/){
-	fprintf(stderr, "error: can't read file %s\n", argv[2]) ;
-	fclose (in_no_file) ;
-	return ;
+    if(krui_loadNewPatterns(argv[2],&pat_set) != 0 /*KRERR_NO_ERROR*/) {
+        fprintf(stderr, "error: can't read file %s\n", argv[2]) ;
+        fclose (in_no_file) ;
+        return ;
     }
     tot_pat_num = krui_getNoOfPatterns();
 
     /*check for virtual patterns */
-    if((error = krui_GetPatInfo(&patt_info, &descrip))< 0){
-	printf("found error %d when testing pattern set %d\n",error);
+    if((error = krui_GetPatInfo(&patt_info, &descrip))< 0) {
+        printf("found error %d when testing pattern set %d\n",error);
         exit;
     }
-    if(patt_info.class_distrib_active){
-	/* we do not want virtual patterns here */
-	virt_was_on = 1;
-	error = krui_useClassDistribution(FALSE);
+    if(patt_info.class_distrib_active) {
+        /* we do not want virtual patterns here */
+        virt_was_on = 1;
+        error = krui_useClassDistribution(FALSE);
     }
 
     /* check output pattern file */
     if ((out_pat_file = fopen(argv[3], "r")) != NULL) {
-	fclose(out_pat_file);
-	fprintf (stderr, "overwrite existing file %s (y/n) ? ", argv[3]) ;
-	if (getc(stdin) != 'y') exit; 
+        fclose(out_pat_file);
+        fprintf (stderr, "overwrite existing file %s (y/n) ? ", argv[3]) ;
+        if (getc(stdin) != 'y') exit;
     }
-    if ((out_pat_file = fopen(argv[3], "w")) == NULL){
-	fprintf(stderr, "error: can't create output file %s\n", argv[3]) ;
-	exit;
+    if ((out_pat_file = fopen(argv[3], "w")) == NULL) {
+        fprintf(stderr, "error: can't create output file %s\n", argv[3]) ;
+        exit;
     }
     fclose(out_pat_file);
-  
+
 
     /* check number of entries in the number file */
     while (fscanf(in_no_file, "%d", &dummy) == 1) no_of_sel_pat++ ;
@@ -122,8 +120,8 @@ void main (int argc, char *argv[])
     pat_no = (int *)calloc(no_of_sel_pat, sizeof(int));
 
     /* read and sort numbers of patterns to be selected */
-    for(i=0; i<no_of_sel_pat; i++){
-	fscanf(in_no_file, "%d", &pat_no[i]);
+    for(i=0; i<no_of_sel_pat; i++) {
+        fscanf(in_no_file, "%d", &pat_no[i]);
     }
     fflush(stdout);
     fclose(in_no_file);
@@ -131,28 +129,28 @@ void main (int argc, char *argv[])
 
     /* delete all pattern not mentioned in the list from the pattern set */
     act_num = tot_pat_num;
-    for(i=no_of_sel_pat-1; i>=0; i--){
+    for(i=no_of_sel_pat-1; i>=0; i--) {
 
-	/* ignore pattern numbers that are to big */
-	if( pat_no[i] > tot_pat_num) continue; 
+        /* ignore pattern numbers that are to big */
+        if( pat_no[i] > tot_pat_num) continue;
 
-	while(act_num > pat_no[i]){
-	    krui_setPatternNo(act_num);
-	    krui_deletePattern();
-	    act_num--;
-	}
-	act_num--;
+        while(act_num > pat_no[i]) {
+            krui_setPatternNo(act_num);
+            krui_deletePattern();
+            act_num--;
+        }
+        act_num--;
     }
 
-    /* if virtual patterns were used in the original file, we want to have 
+    /* if virtual patterns were used in the original file, we want to have
        them in the output file too */
-    if(virt_was_on){
-	error = krui_useClassDistribution(TRUE);
+    if(virt_was_on) {
+        error = krui_useClassDistribution(TRUE);
     }
 
     /* save all the left over patterns in the output file */
-    if((error=krui_saveNewPatterns(argv[3], pat_set)) != 0 /*KRERR_NO_ERROR*/){
-	fprintf(stderr, "error %d during writing file %s\n", error, argv[3]) ;
+    if((error=krui_saveNewPatterns(argv[3], pat_set)) != 0 /*KRERR_NO_ERROR*/) {
+        fprintf(stderr, "error %d during writing file %s\n", error, argv[3]) ;
     }
 
 }

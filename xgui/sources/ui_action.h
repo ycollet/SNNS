@@ -15,7 +15,7 @@
 
     Copyright (c) 1990-1995  SNNS Group, IPVR, Univ. Stuttgart, FRG
     Copyright (c) 1996-1998  SNNS Group, WSI, Univ. Tuebingen, FRG
-             
+
 ******************************************************************************/
 
 
@@ -47,16 +47,16 @@ extern void  ui_action_setUnitLayers (void);
 extern void  ui_action_unitSetDefaultType (void);
 
 
-extern int   ui_kernelError; 
-		/* used to store the error reported by kernel functions */
+extern int   ui_kernelError;
+/* used to store the error reported by kernel functions */
 
 extern short ui_actualZvalue;
 
 extern struct LinkAttributeType    ui_link;
-                  /* attributes of the link shown in the info panel */
+/* attributes of the link shown in the info panel */
 
 extern unsigned short ui_layerReturnValue;
-                  /* return value of the layer panel */
+/* return value of the layer panel */
 
 #endif /* _UI_ACTION_DEFINED_ */
 

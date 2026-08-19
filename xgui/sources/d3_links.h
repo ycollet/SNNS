@@ -3,10 +3,10 @@
   SHORTNAME      : links.h
   SNNS VERSION   : 4.2
 
-  PURPOSE        : header for d3_links.c 
+  PURPOSE        : header for d3_links.c
   NOTES          :
 
-  AUTHOR         : Ralf Huebner 
+  AUTHOR         : Ralf Huebner
   DATE           : 1.12.1991
 
   CHANGED BY     : Sven Doering
@@ -22,7 +22,7 @@
 
 extern void d3_createLinkPannel (Widget w, Widget button, caddr_t call_data);
 
-#endif 
+#endif
 
 
 

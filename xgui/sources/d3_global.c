@@ -3,7 +3,7 @@
   SHORTNAME      : global.c
   SNNS VERSION   : 4.2
 
-  PURPOSE        : global variables declaration  
+  PURPOSE        : global variables declaration
   NOTES          :
 
   AUTHOR         : Ralf Huebner

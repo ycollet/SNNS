@@ -15,7 +15,7 @@
 
     Copyright (c) 1990-1995  SNNS Group, IPVR, Univ. Stuttgart, FRG
     Copyright (c) 1996-1998  SNNS Group, WSI, Univ. Tuebingen, FRG
-             
+
 ******************************************************************************/
 
 
@@ -24,14 +24,14 @@
 
 
 
-#define MAX_CURVE_NO 50 
+#define MAX_CURVE_NO 50
 
 
 extern void o_createOszi (void);
 extern void o_InitCurve (void);
 extern void o_draw (struct ErrorValuesType net_error,
-		    struct ErrorValuesType test_net_error,
-		    int drawTest);
+                    struct ErrorValuesType test_net_error,
+                    int drawTest);
 
 
 extern Display *ui_display;
@@ -43,14 +43,14 @@ extern SCALE_VALUE_TYPE;
 extern MPoint;
 
 
-extern int           o_open; 	/* flag, which indicates whether graf 
+extern int           o_open; 	/* flag, which indicates whether graf
 				is open or not */
-extern int           o_PressPossible; /* flag : while drawing, pressing a 
+extern int           o_PressPossible; /* flag : while drawing, pressing a
 				button has no effect */
 
 extern long unsigned o_LearnStepCount; /* counts the learn steps */
 
-extern short   o_CurveLengths[]; /* array with the lengths of the 
+extern short   o_CurveLengths[]; /* array with the lengths of the
 				curves Curve1 and Curve2 */
 extern int     o_CurveNo; 		/* the number of visible curves on the graf */
 

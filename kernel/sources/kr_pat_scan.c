@@ -907,10 +907,9 @@ do_action:	/* This label is used only to access EOF actions. */
 #line 84 "kr_pat_scan.l"
             {
                 if (numbers_as_names) {
-                    yylval.name = strdup(yytext);
+                yylval.name = strdup(yytext);
                     return(NAME);
-                } else
-                {
+                } else {
                     yylval.value=atof((char *) yytext);
                     return(NUMBER);
                 }
@@ -1342,7 +1341,7 @@ register char *yy_bp;
         yy_cp += (int) (dest - source);
         yy_bp += (int) (dest - source);
         yy_current_buffer->yy_n_chars =
-            yy_n_chars = yy_current_buffer->yy_buf_size;
+        yy_n_chars = yy_current_buffer->yy_buf_size;
 
         if ( yy_cp < yy_current_buffer->yy_ch_buf + 2 )
             YY_FATAL_ERROR( "flex scanner push-back overflow" );

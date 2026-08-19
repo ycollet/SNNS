@@ -15,7 +15,7 @@
 
     Copyright (c) 1990-1995  SNNS Group, IPVR, Univ. Stuttgart, FRG
     Copyright (c) 1996-1998  SNNS Group, WSI, Univ. Tuebingen, FRG
-             
+
 ******************************************************************************/
 #include <config.h>
 
@@ -26,8 +26,8 @@
 #include "ui.h"
 #include "kr_ui.h"
 #include "ui_netGraph.h"
-#include "ui_xGraphic.h" 
-#include "ui_xWidgets.h"    
+#include "ui_xGraphic.h"
+#include "ui_xWidgets.h"
 /* ui_xGetDimensions */
 #include "ui_display.h"
 #include "ui_utilP.h"
@@ -38,7 +38,7 @@
 #include "ui_colEdit.h"
 
 #include "glob_typ.h"
-#include "d3_global.h"         
+#include "d3_global.h"
 #include "d3_draw.h"
 #include "d3_main.h"
 #include "ui_color.h"
@@ -51,32 +51,32 @@
 
   PURPOSE  : draw a link
   RETURNS  : void
-  NOTES    : 
+  NOTES    :
 
   UPDATE   :
 *****************************************************************************/
 
-void ui_net_drawLink (struct Ui_DisplayType *displayPtr, FlagType scope, 
-	int sourceNo, int targetNo, FlintType weight, Bool operation)
+void ui_net_drawLink (struct Ui_DisplayType *displayPtr, FlagType scope,
+                      int sourceNo, int targetNo, FlintType weight, Bool operation)
 
 {
     if (scope == UI_GLOBAL) {
-	struct Ui_DisplayType  *dPtr;
-	dPtr = ui_displ_listPtr;
-	while (dPtr != NULL) {
-	    /* all the same subnet number ? */
-	    if ((dPtr->subNetNo == krui_getUnitSubnetNo(sourceNo)) AND 
-		(krui_getUnitSubnetNo(sourceNo) == krui_getUnitSubnetNo(targetNo)))
-		if ((NOT dPtr->frozen) AND ui_utilIsSet(dPtr->flags,1)) /*!*/
-		    ui_drawLink(dPtr, sourceNo, targetNo, weight, operation);
-	    dPtr = dPtr->nextPtr;
-	}
+        struct Ui_DisplayType  *dPtr;
+        dPtr = ui_displ_listPtr;
+        while (dPtr != NULL) {
+            /* all the same subnet number ? */
+            if ((dPtr->subNetNo == krui_getUnitSubnetNo(sourceNo)) AND
+                    (krui_getUnitSubnetNo(sourceNo) == krui_getUnitSubnetNo(targetNo)))
+                if ((NOT dPtr->frozen) AND ui_utilIsSet(dPtr->flags,1)) /*!*/
+                    ui_drawLink(dPtr, sourceNo, targetNo, weight, operation);
+            dPtr = dPtr->nextPtr;
+        }
     } else
-	/* all the same subnet number ? */
-	if ((displayPtr != NULL) AND
-            (displayPtr->subNetNo == krui_getUnitSubnetNo(sourceNo)) AND 
-	    (krui_getUnitSubnetNo(sourceNo) == krui_getUnitSubnetNo(targetNo)))
-	       ui_drawLink(displayPtr, sourceNo, targetNo, weight, operation);
+        /* all the same subnet number ? */
+        if ((displayPtr != NULL) AND
+                (displayPtr->subNetNo == krui_getUnitSubnetNo(sourceNo)) AND
+                (krui_getUnitSubnetNo(sourceNo) == krui_getUnitSubnetNo(targetNo)))
+            ui_drawLink(displayPtr, sourceNo, targetNo, weight, operation);
 }
 
 
@@ -85,29 +85,29 @@ void ui_net_drawLink (struct Ui_DisplayType *displayPtr, FlagType scope,
 
   PURPOSE  : draw a unit
   RETURNS  : void
-  NOTES    : 
+  NOTES    :
 
   UPDATE   :
 *****************************************************************************/
 
-void ui_net_drawUnit (struct Ui_DisplayType *displayPtr, FlagType scope, 
-	int unitNo, Bool operation)
+void ui_net_drawUnit (struct Ui_DisplayType *displayPtr, FlagType scope,
+                      int unitNo, Bool operation)
 
 {
     if (scope == UI_GLOBAL) {
-	struct Ui_DisplayType *dPtr;
-	dPtr = ui_displ_listPtr;
-	while (dPtr != NULL) {
-	    /* all same subnet number like display? */
-	    if ((dPtr->subNetNo == krui_getUnitSubnetNo(unitNo))) 
-		if ((NOT dPtr->frozen) AND ui_utilIsSet(dPtr->flags,1)) /*!*/
-		    ui_drawUnit(dPtr, unitNo, operation);
-	    dPtr = dPtr->nextPtr;
-	}
+        struct Ui_DisplayType *dPtr;
+        dPtr = ui_displ_listPtr;
+        while (dPtr != NULL) {
+            /* all same subnet number like display? */
+            if ((dPtr->subNetNo == krui_getUnitSubnetNo(unitNo)))
+                if ((NOT dPtr->frozen) AND ui_utilIsSet(dPtr->flags,1)) /*!*/
+                    ui_drawUnit(dPtr, unitNo, operation);
+            dPtr = dPtr->nextPtr;
+        }
     } else
-	/* all same subnet number like display? */
-	if ((displayPtr->subNetNo == krui_getUnitSubnetNo(unitNo)))
-	    ui_drawUnit(displayPtr, unitNo, operation);
+        /* all same subnet number like display? */
+        if ((displayPtr->subNetNo == krui_getUnitSubnetNo(unitNo)))
+            ui_drawUnit(displayPtr, unitNo, operation);
 }
 
 
@@ -115,14 +115,14 @@ void ui_net_drawUnit (struct Ui_DisplayType *displayPtr, FlagType scope,
   FUNCTION : ui_net_drawAllLinksToUnit
 
   PURPOSE  : This routine draws all links of the specified unit.
-  RETURNS  : update of the graphic window  
+  RETURNS  : update of the graphic window
   NOTES    : operation can be either UI_ERASE or UI_DRAW
 
   UPDATE   :
 *****************************************************************************/
 
-void ui_net_drawAllLinksToUnit (struct Ui_DisplayType *displayPtr, 
-	FlagType scope, int unitNo, Bool operation)
+void ui_net_drawAllLinksToUnit (struct Ui_DisplayType *displayPtr,
+                                FlagType scope, int unitNo, Bool operation)
 
 {
     struct Ui_DisplayType  *dPtr;
@@ -133,12 +133,12 @@ void ui_net_drawAllLinksToUnit (struct Ui_DisplayType *displayPtr,
 
     blocked = TRUE;
     if (scope == UI_GLOBAL) {
-	dPtr = ui_displ_listPtr;
-	while (dPtr != NULL) {
-           if ((dPtr->setup).showLinkFlg)
-              blocked = FALSE;
-           dPtr = dPtr->nextPtr;
-	}
+        dPtr = ui_displ_listPtr;
+        while (dPtr != NULL) {
+            if ((dPtr->setup).showLinkFlg)
+                blocked = FALSE;
+            dPtr = dPtr->nextPtr;
+        }
     } else
         blocked = NOT ((displayPtr->setup).showLinkFlg);
 
@@ -148,24 +148,23 @@ void ui_net_drawAllLinksToUnit (struct Ui_DisplayType *displayPtr,
     (void) krui_setCurrentUnit(unitNo);
 
     if (krui_getUnitInputType(unitNo) == SITES) {
-	for (successful = krui_setFirstSite();
-	     successful; successful = krui_setNextSite()) {
-	    for(predUnit = krui_getFirstPredUnit(&weight);
-		predUnit > 0;
-		predUnit = krui_getNextPredUnit(&weight)) {
-		ui_net_drawLink(displayPtr, scope, predUnit, unitNo, 
-				weight, operation);
-	    }
-	}
-    } else /* direct links */
-      {
-	for(predUnit = krui_getFirstPredUnit(&weight);
-	    predUnit > 0;
-	    predUnit = krui_getNextPredUnit(&weight)) {
-	    ui_net_drawLink(displayPtr, scope, predUnit, unitNo, 
-			    weight, operation);
-	}
-      }
+        for (successful = krui_setFirstSite();
+                successful; successful = krui_setNextSite()) {
+            for(predUnit = krui_getFirstPredUnit(&weight);
+                    predUnit > 0;
+                    predUnit = krui_getNextPredUnit(&weight)) {
+                ui_net_drawLink(displayPtr, scope, predUnit, unitNo,
+                                weight, operation);
+            }
+        }
+    } else { /* direct links */
+        for(predUnit = krui_getFirstPredUnit(&weight);
+                predUnit > 0;
+                predUnit = krui_getNextPredUnit(&weight)) {
+            ui_net_drawLink(displayPtr, scope, predUnit, unitNo,
+                            weight, operation);
+        }
+    }
 }
 
 
@@ -181,8 +180,8 @@ void ui_net_drawAllLinksToUnit (struct Ui_DisplayType *displayPtr,
   UPDATE   :
 *****************************************************************************/
 
-void ui_net_drawAllLinksFromUnit (struct Ui_DisplayType *displayPtr, 
-	FlagType scope, int unitNo, FlagType operation)
+void ui_net_drawAllLinksFromUnit (struct Ui_DisplayType *displayPtr,
+                                  FlagType scope, int unitNo, FlagType operation)
 
 {
     Bool               successful;
@@ -191,14 +190,14 @@ void ui_net_drawAllLinksFromUnit (struct Ui_DisplayType *displayPtr,
 
     (void) krui_setCurrentUnit(unitNo);
 
-    successful = 
-	((targetNo = krui_getFirstSuccUnit(unitNo, &weight)) > 0);
+    successful =
+        ((targetNo = krui_getFirstSuccUnit(unitNo, &weight)) > 0);
 
     while (successful) {
-	ui_net_drawLink(displayPtr, scope, unitNo, targetNo, 
-			weight, operation);
-	successful = 
-	    ((targetNo = krui_getNextSuccUnit(&weight)) > 0);
+        ui_net_drawLink(displayPtr, scope, unitNo, targetNo,
+                        weight, operation);
+        successful =
+            ((targetNo = krui_getNextSuccUnit(&weight)) > 0);
     }
 }
 
@@ -215,8 +214,8 @@ void ui_net_drawAllLinksFromUnit (struct Ui_DisplayType *displayPtr,
   UPDATE   :
 *****************************************************************************/
 
-void ui_net_updateWhole (struct Ui_DisplayType *displayPtr, FlagType scope, 
-	int whatToDraw, Bool erase)
+void ui_net_updateWhole (struct Ui_DisplayType *displayPtr, FlagType scope,
+                         int whatToDraw, Bool erase)
 
 {
     Bool   successful;
@@ -224,34 +223,33 @@ void ui_net_updateWhole (struct Ui_DisplayType *displayPtr, FlagType scope,
 
     /*!*/
     if (krui_getNoOfUnits() < 1)
-	return;
+        return;
 
-    successful = 
-	((unitNo = krui_getFirstUnit()) > 0);
+    successful =
+        ((unitNo = krui_getFirstUnit()) > 0);
 
     if (successful) {
-	/* ui_can_setBusyCursor(); */
-	
-	while (successful) {
-	    if (whatToDraw == UI_DRAW_LINKS)
-		ui_net_drawAllLinksToUnit(displayPtr, scope, unitNo, erase);
-	    if (whatToDraw == UI_DRAW_UNITS)
-         	ui_net_drawUnit(displayPtr, scope, unitNo, erase);
-	    successful = 
-		((unitNo = krui_getNextUnit()) > 0);
-	} /* end while */
+        /* ui_can_setBusyCursor(); */
 
-	ui_printMessage("");    /* erase message */
-	/* ui_can_setNormalCursor(); */
+        while (successful) {
+            if (whatToDraw == UI_DRAW_LINKS)
+                ui_net_drawAllLinksToUnit(displayPtr, scope, unitNo, erase);
+            if (whatToDraw == UI_DRAW_UNITS)
+                ui_net_drawUnit(displayPtr, scope, unitNo, erase);
+            successful =
+                ((unitNo = krui_getNextUnit()) > 0);
+        } /* end while */
 
-    } else 	    
-	if (whatToDraw == UI_DRAW_UNITS) /* there are no units to draw ! */
-	    ui_printMessage("The network is empty!");
+        ui_printMessage("");    /* erase message */
+        /* ui_can_setNormalCursor(); */
+
+    } else if (whatToDraw == UI_DRAW_UNITS) /* there are no units to draw ! */
+        ui_printMessage("The network is empty!");
 
     if (whatToDraw == UI_DRAW_UNITS) {
         d3_drawNet ();
-	ui_displMapFromUpdate();
-	ui_displWeightsFromUpdate();
+        ui_displMapFromUpdate();
+        ui_displWeightsFromUpdate();
     }
 }
 
@@ -271,25 +269,25 @@ static void  ui_net_doClearWindow (struct Ui_DisplayType *displayPtr)
 {
     struct PosType pixPos1;
     struct PosType pixPos2;
- 	
+
     pixPos1.x = 0;
     pixPos1.y = 0;
 
-    ui_xGetDimensions(displayPtr->widget, 
-		      &(displayPtr->width), &(displayPtr->height));
-    
+    ui_xGetDimensions(displayPtr->widget,
+                      &(displayPtr->width), &(displayPtr->height));
+
     displayPtr->unitsInX = displayPtr->width  / displayPtr->gridSize;
     displayPtr->unitsInY = displayPtr->height / displayPtr->gridSize;
 
     pixPos2.x = displayPtr->width  - 1;
     pixPos2.y = displayPtr->height - 1;
-	
+
     XSetFunction(ui_display, ui_gc, GXcopy);
     XSetForeground(ui_display, ui_gc, ui_backgroundColor);
-    
+
     /* clear canvas */
-    ui_xDeleteRect(ui_display, displayPtr->drawable, 
-		   ui_gc, pixPos1, pixPos2); 
+    ui_xDeleteRect(ui_display, displayPtr->drawable,
+                   ui_gc, pixPos1, pixPos2);
 }
 
 
@@ -298,25 +296,25 @@ static void  ui_net_doClearWindow (struct Ui_DisplayType *displayPtr)
 
   PURPOSE  : clear specified window
   RETURNS  : void
-  NOTES    : 
+  NOTES    :
 
   UPDATE   :
 *****************************************************************************/
 
-static void ui_net_clearWindow (struct Ui_DisplayType *displayPtr, 
-	FlagType scope)
+static void ui_net_clearWindow (struct Ui_DisplayType *displayPtr,
+                                FlagType scope)
 
 {
     if (scope == UI_GLOBAL) {
-	struct Ui_DisplayType  *dPtr;
+        struct Ui_DisplayType  *dPtr;
 
-	dPtr = ui_displ_listPtr;
-	while (dPtr != NULL) {
-	    if (NOT dPtr->frozen) ui_net_doClearWindow(dPtr);
-	    dPtr = dPtr->nextPtr;
-	}	    
-    } else 
-	ui_net_doClearWindow(displayPtr);
+        dPtr = ui_displ_listPtr;
+        while (dPtr != NULL) {
+            if (NOT dPtr->frozen) ui_net_doClearWindow(dPtr);
+            dPtr = dPtr->nextPtr;
+        }
+    } else
+        ui_net_doClearWindow(displayPtr);
 }
 
 

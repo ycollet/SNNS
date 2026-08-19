@@ -547,7 +547,7 @@ static krui_err insertNewUnits(void) {
 
             /* Generate new unit */
             newUnit =
-                KernelErrorCode =
+            KernelErrorCode =
                     krui_copyUnit(lastInsertedUnitArray[i],INPUTS_AND_OUTPUTS);
             if(KernelErrorCode < 0) {
                 ERROR_CHECK;
@@ -881,7 +881,7 @@ static void generateTmpTopoPtrArray(void) {
     }
 
     tmp_array =
-        topo_ptr_array =
+    topo_ptr_array =
             (struct Unit **)calloc(NoOfInputUnits+5,sizeof(struct Unit *));
 
     *tmp_array = NULL;

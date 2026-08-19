@@ -84,127 +84,127 @@ static PatID crossPats   = NULL;
 /*-------------------------------------------------------------- functions ---*/
 
 int classes_init( ModuleTableEntry *self, int msgc, char *msgv[] ) {
-  MODULE_KEY( CLASSES_KEY );
+    MODULE_KEY( CLASSES_KEY );
 
-  SEL_MSG( msgv[0] )
+    SEL_MSG( msgv[0] )
 
     MSG_CASE( GENERAL_INIT    ) {
-    /* nothing to do */
-  }
-  MSG_CASE( GENERAL_EXIT    ) {
-    /* nothing to do */
-  }
-  MSG_CASE( EVOLUTION_INIT  ) {
-    /* First check whether the crosspatterns are loaded   */
-    if (crossPats == NULL)
-      crossPats = subul_getPatID( PATTERN_CROSS );
-  }
+        /* nothing to do */
+    }
+    MSG_CASE( GENERAL_EXIT    ) {
+        /* nothing to do */
+    }
+    MSG_CASE( EVOLUTION_INIT  ) {
+        /* First check whether the crosspatterns are loaded   */
+        if (crossPats == NULL)
+            crossPats = subul_getPatID( PATTERN_CROSS );
+    }
 
-  MSG_CASE( HIGH_VALUE ) {
-    if( msgc > 1 ) highDec = atof(msgv[1]);
-  }
-  MSG_CASE( LOW_VALUE )  {
-    if( msgc > 1 ) lowDec = atof(msgv[1]);
-  }
-  MSG_CASE( HIT_VALUE )  {
-    if (msgc > 1)  hitRating = (float) atof(msgv[1]);
-  }
-  MSG_CASE( MISS_VALUE ) {
-    if (msgc > 1) missRating = (float) atof(msgv[1]);
-  }
-  MSG_CASE( NONE_VALUE ) {
-    if (msgc > 1) noneRating = (float) atof(msgv[1]);
-  }
-  MSG_CASE( DISTANCE )   {
-    if (msgc > 1) dist = fabs( atof (msgv[1]));
-  }
+    MSG_CASE( HIGH_VALUE ) {
+        if( msgc > 1 ) highDec = atof(msgv[1]);
+    }
+    MSG_CASE( LOW_VALUE )  {
+        if( msgc > 1 ) lowDec = atof(msgv[1]);
+    }
+    MSG_CASE( HIT_VALUE )  {
+        if (msgc > 1)  hitRating = (float) atof(msgv[1]);
+    }
+    MSG_CASE( MISS_VALUE ) {
+        if (msgc > 1) missRating = (float) atof(msgv[1]);
+    }
+    MSG_CASE( NONE_VALUE ) {
+        if (msgc > 1) noneRating = (float) atof(msgv[1]);
+    }
+    MSG_CASE( DISTANCE )   {
+        if (msgc > 1) dist = fabs( atof (msgv[1]));
+    }
 
-  END_MSG;
+    END_MSG;
 
-  return( INIT_USED );
+    return( INIT_USED );
 }
 
 
 int classes_work ( PopID *parents, PopID *offsprings, PopID *reference ) {
-  NetID activeMember;
-  NetworkData *data;
-  float average;
-  int i, hit, miss, none, noPattern, result;
+    NetID activeMember;
+    NetworkData *data;
+    float average;
+    int i, hit, miss, none, noPattern, result;
 
-  /* activate the cross-patterns */
-  if( kpm_setCurrentPattern( crossPats ) != KPM_NO_ERROR ) {
-    return (ERROR_ACTIVATE_PAT);
-  }
-
-  ksh_readNetinfo();
-
-  average = (highDec + lowDec) / 2.0;
-
-  FOR_ALL_OFFSPRINGS( activeMember ) {
-    hit = miss = none = 0;
-
-    if( (data = GET_NET_DATA( activeMember )) == NULL ) {
-      return(ERROR_NO_DATA);
+    /* activate the cross-patterns */
+    if( kpm_setCurrentPattern( crossPats ) != KPM_NO_ERROR ) {
+        return (ERROR_ACTIVATE_PAT);
     }
 
-    for( noPattern = 1; noPattern <= ksh_no_patterns(); noPattern++) {
-      ksh_propagate_pattern(  noPattern);
-      ksh_get_target_pattern( noPattern);
+    ksh_readNetinfo();
 
-      result = NONE;
+    average = (highDec + lowDec) / 2.0;
 
-      for( i = 0; i < ksh_no_outputs(); i++ ) {
-	if     ( POS_CORRECT || NEG_CORRECT ) {
-	  result = HIT;
-	} else if( NO_DECISION                ) {
-	  result = NONE;
-	  break;
-	} else		                      {
-	  result = MISS;
-	  break;
-	}
-      }
+    FOR_ALL_OFFSPRINGS( activeMember ) {
+        hit = miss = none = 0;
 
-      switch( result ) {
-      case HIT:
-	hit++;
-	break;
-      case NONE:
-	none++;
-	break;
-      case MISS:
-	miss++;
-	break;
-      }
-    }
+        if( (data = GET_NET_DATA( activeMember )) == NULL ) {
+            return(ERROR_NO_DATA);
+        }
 
-    data->fitness += hit*hitRating + miss*missRating + none*noneRating;
-    data->histRec.testHit  = hit;
-    data->histRec.testNone = none;
-    data->histRec.testMiss = miss;
+        for( noPattern = 1; noPattern <= ksh_no_patterns(); noPattern++) {
+            ksh_propagate_pattern(  noPattern);
+            ksh_get_target_pattern( noPattern);
 
-  } /* endfor ALL_OFFSPRINGS */
+            result = NONE;
 
-  return( MODULE_NO_ERROR );
+            for( i = 0; i < ksh_no_outputs(); i++ ) {
+                if     ( POS_CORRECT || NEG_CORRECT ) {
+                    result = HIT;
+                } else if( NO_DECISION                ) {
+                    result = NONE;
+                    break;
+                } else		                      {
+                    result = MISS;
+                    break;
+                }
+            }
+
+            switch( result ) {
+            case HIT:
+                hit++;
+                break;
+            case NONE:
+                none++;
+                break;
+            case MISS:
+                miss++;
+                break;
+            }
+        }
+
+        data->fitness += hit*hitRating + miss*missRating + none*noneRating;
+        data->histRec.testHit  = hit;
+        data->histRec.testNone = none;
+        data->histRec.testMiss = miss;
+
+    } /* endfor ALL_OFFSPRINGS */
+
+    return( MODULE_NO_ERROR );
 }
 
 
 char *classes_errMsg( int err_code ) {
-  switch ( err_code ) {
+    switch ( err_code ) {
 
-  case MODULE_NO_ERROR :
-    return ("classes : No error found");
+    case MODULE_NO_ERROR :
+        return ("classes : No error found");
 
-  case ERROR_ACTIVATE_PAT :
-    return("classes : Can't activate crossvalidation pattern");
+    case ERROR_ACTIVATE_PAT :
+        return("classes : Can't activate crossvalidation pattern");
 
-  case ERROR_ACTIVATE_NET :
-    return ("classes : Can't activate an offspringnet");
+    case ERROR_ACTIVATE_NET :
+        return ("classes : Can't activate an offspringnet");
 
-  case ERROR_NO_DATA :
-    return ("classes : Can't get the networkdata");
+    case ERROR_NO_DATA :
+        return ("classes : Can't get the networkdata");
 
-  }
+    }
 
-  return("classes : Unknown error");
+    return("classes : Unknown error");
 }

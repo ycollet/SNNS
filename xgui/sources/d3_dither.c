@@ -31,8 +31,7 @@
 ******************************************************************************/
 
 
-int dither (int x, int y, float level)
-{
+int dither (int x, int y, float level) {
     return (level * size*size > dither_matrix[(x % size) + size * (y % size)]);
 }
 

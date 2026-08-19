@@ -7,7 +7,7 @@
   NOTES          :
 
   AUTHOR         : Ralf Huebner
-  DATE           : 
+  DATE           :
 
   CHANGED BY     : Sven Doering
   RCS VERSION    : $Revision: 2.6 $
@@ -24,6 +24,6 @@ extern void d3_select_font (int selected_font);
 extern void d3_get_font_size (int *x, int *y);
 extern void d3_draw_string (int xpos, int ypos, float zpos, char *s);
 
-#endif 
+#endif
 /* end of file */
 /* lines: 27 */

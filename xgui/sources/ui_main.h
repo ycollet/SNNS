@@ -15,7 +15,7 @@
 
     Copyright (c) 1990-1995  SNNS Group, IPVR, Univ. Stuttgart, FRG
     Copyright (c) 1996-1998  SNNS Group, WSI, Univ. Tuebingen, FRG
-             
+
 ******************************************************************************/
 
 
@@ -29,13 +29,13 @@ extern void main (int, char **);
 #define MAXPATHLEN  512
 #endif
 
-	/* path name (see file panel). Initial value by getwd() */
+/* path name (see file panel). Initial value by getwd() */
 extern char         ui_pathname[];
 
 extern XtAppContext ui_appContext;
 extern int ui_labelFontWidth;
 
-	/* label widgets of status info */
+/* label widgets of status info */
 extern Widget       ui_stat_posWidget;
 extern Widget       ui_stat_selNoWidget;
 extern Widget       ui_stat_flagsWidget;

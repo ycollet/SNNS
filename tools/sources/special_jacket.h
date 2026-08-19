@@ -3,15 +3,15 @@
   SHORTNAME      : special_jacket
   SNNS VERSION   : 4.2
 
-  PURPOSE        : Intermediate Code (IC) functions for the SNNS batch 
+  PURPOSE        : Intermediate Code (IC) functions for the SNNS batch
                    interpreter:
                    Special jacket functions
-  NOTES          : 
+  NOTES          :
 
   AUTHOR         : Jens Wieland
-  DATE           : 
+  DATE           :
 
-  CHANGED BY     : 
+  CHANGED BY     :
   RCS VERSION    : $Revision: 1.3 $
   LAST CHANGE    : $Date: 1998/02/25 15:34:57 $
 

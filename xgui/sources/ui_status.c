@@ -16,7 +16,7 @@
 
     Copyright (c) 1990-1995  SNNS Group, IPVR, Univ. Stuttgart, FRG
     Copyright (c) 1996-1998  SNNS Group, WSI, Univ. Tuebingen, FRG
-             
+
 ******************************************************************************/
 #include <config.h>
 
@@ -52,24 +52,24 @@ void ui_stat_displayStatus(struct PosType gridPos)
     char   string[40];
 
     if (ui_stat_oldFlags != ui_safetyFlg) {
-	if (ui_safetyFlg)
-	    sprintf(string,": safe");
-	else
-	    sprintf(string,": -   ");
-	ui_xSetLabel(ui_stat_flagsWidget,string);
-	ui_stat_oldFlags = ui_safetyFlg;
+        if (ui_safetyFlg)
+            sprintf(string,": safe");
+        else
+            sprintf(string,": -   ");
+        ui_xSetLabel(ui_stat_flagsWidget,string);
+        ui_stat_oldFlags = ui_safetyFlg;
     }
 
     if (ui_stat_oldNumberOfSelectedItems != ui_sel_numberOfSelectedItems) {
-	sprintf(string,": %-4d", ui_sel_numberOfSelectedItems);
-	ui_xSetLabel(ui_stat_selNoWidget,string);
-	ui_stat_oldNumberOfSelectedItems = ui_sel_numberOfSelectedItems;
+        sprintf(string,": %-4d", ui_sel_numberOfSelectedItems);
+        ui_xSetLabel(ui_stat_selNoWidget,string);
+        ui_stat_oldNumberOfSelectedItems = ui_sel_numberOfSelectedItems;
     }
 
     if (ui_utilAreDifferentPositions(gridPos, ui_stat_oldPos)) {
-	sprintf(string,"x:%-6d  y:%-6d",gridPos.x, gridPos.y);
-	ui_xSetLabel(ui_stat_posWidget,string);
-	ui_stat_oldPos = gridPos;
+        sprintf(string,"x:%-6d  y:%-6d",gridPos.x, gridPos.y);
+        ui_xSetLabel(ui_stat_posWidget,string);
+        ui_stat_oldPos = gridPos;
     }
 }
 

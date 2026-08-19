@@ -76,134 +76,134 @@ static PatID crossPats   = NULL;
 /*--------------------------------------------------------- functions -------*/
 
 int bestGuessHigh_init( ModuleTableEntry *self, int msgc, char *msgv[] ) {
-  MODULE_KEY( BEST_GUESS_KEY );
+    MODULE_KEY( BEST_GUESS_KEY );
 
-  SEL_MSG( msgv[0] )
+    SEL_MSG( msgv[0] )
 
     MSG_CASE( GENERAL_INIT   ) {
-    /* nothing to do */
-  }
-  MSG_CASE( GENERAL_EXIT   ) {
-    /* nothing to do */
-  }
-  MSG_CASE( EVOLUTION_INIT ) {
-    /* First check whether the crosspatterns are loaded   */
-    if (crossPats == NULL)
-      crossPats =  subul_getPatID( PATTERN_CROSS );
-  }
+        /* nothing to do */
+    }
+    MSG_CASE( GENERAL_EXIT   ) {
+        /* nothing to do */
+    }
+    MSG_CASE( EVOLUTION_INIT ) {
+        /* First check whether the crosspatterns are loaded   */
+        if (crossPats == NULL)
+            crossPats =  subul_getPatID( PATTERN_CROSS );
+    }
 
-  MSG_CASE( HIT_VALUE  ) {
-    if( msgc > 1 ) hitRating = (float) atof(msgv[1]);
-  }
-  MSG_CASE( MISS_VALUE ) {
-    if( msgc > 1 ) missRating = (float) atof(msgv[1]);
-  }
-  MSG_CASE( NONE_VALUE ) {
-    if( msgc > 1 ) noneRating = (float) atof(msgv[1]);
-  }
-  MSG_CASE( DIFF_DESC  ) {
-    if( msgc > 1 ) threshold  = fabs( atof(msgv[1]) );
-  }
-  MSG_CASE( DIFF_DIST  ) {
-    if( msgc > 1 ) distance   = fabs( atof(msgv[1]) );
-  }
+    MSG_CASE( HIT_VALUE  ) {
+        if( msgc > 1 ) hitRating = (float) atof(msgv[1]);
+    }
+    MSG_CASE( MISS_VALUE ) {
+        if( msgc > 1 ) missRating = (float) atof(msgv[1]);
+    }
+    MSG_CASE( NONE_VALUE ) {
+        if( msgc > 1 ) noneRating = (float) atof(msgv[1]);
+    }
+    MSG_CASE( DIFF_DESC  ) {
+        if( msgc > 1 ) threshold  = fabs( atof(msgv[1]) );
+    }
+    MSG_CASE( DIFF_DIST  ) {
+        if( msgc > 1 ) distance   = fabs( atof(msgv[1]) );
+    }
 
-  END_MSG;
+    END_MSG;
 
-  return( INIT_USED );
+    return( INIT_USED );
 }
 
 int bestGuessHigh_work ( PopID *parents, PopID *offsprings, PopID *reference ) {
-  NetID activeMember;
-  NetworkData *data;
-  int noPattern, noOutputs, out, target;
-  float maxtarget, maxout;
-  int hit, miss, none, noDesc;
-  int no_pattern;
+    NetID activeMember;
+    NetworkData *data;
+    int noPattern, noOutputs, out, target;
+    float maxtarget, maxout;
+    int hit, miss, none, noDesc;
+    int no_pattern;
 
-  /* activate the cross-patterns */
-  if (kpm_setCurrentPattern( crossPats ) != KPM_NO_ERROR) {
-    return (ERROR_ACTIVATE_PAT);
-  }
-
-  ksh_readNetinfo();                  /* kernel-shell-function to determine */
-  /* all needed values from SNNS        */
-
-  no_pattern = ksh_getNoOfPatterns();
-
-  FOR_ALL_OFFSPRINGS( activeMember ) {
-    hit = miss = none = noDesc = 0;
-
-    if ((data = GET_NET_DATA( activeMember )) == NULL) {
-      return (ERROR_NO_DATA);
+    /* activate the cross-patterns */
+    if (kpm_setCurrentPattern( crossPats ) != KPM_NO_ERROR) {
+        return (ERROR_ACTIVATE_PAT);
     }
 
-    for ( noPattern = 0; noPattern < no_pattern; noPattern++) {
-      maxout     = -INFINITY;
-      maxtarget  = -INFINITY;
+    ksh_readNetinfo();                  /* kernel-shell-function to determine */
+    /* all needed values from SNNS        */
 
-      ksh_propagate_pattern  ( noPattern + 1 );
-      ksh_get_target_pattern ( noPattern + 1 );
+    no_pattern = ksh_getNoOfPatterns();
 
-      for (noOutputs = 0; noOutputs < ksh_no_outputs(); noOutputs ++) {
-	if (ksh_netout(noOutputs) > (maxout+distance)) {
-	  maxout = ksh_netout(noOutputs);
-	  out    = noOutputs;
-	  noDesc = 0;
-	} else if (ksh_netout(noOutputs) > maxout) {
-	  maxout = ksh_netout(noOutputs);
-	  out    = noOutputs;
-	  noDesc = 1;
-	} else if (ksh_netout(noOutputs) > (maxout - distance)) {
-	  noDesc = 1;
-	}
+    FOR_ALL_OFFSPRINGS( activeMember ) {
+        hit = miss = none = noDesc = 0;
 
-	if (ksh_target(noOutputs) > maxtarget) {
-	  maxtarget = ksh_target(noOutputs);
-	  target    = noOutputs;
-	}
-      }
+        if ((data = GET_NET_DATA( activeMember )) == NULL) {
+            return (ERROR_NO_DATA);
+        }
 
-      /* After finding the outputs, now check if the answer was  */
-      /* right, false or none and change the fitness             */
+        for ( noPattern = 0; noPattern < no_pattern; noPattern++) {
+            maxout     = -INFINITY;
+            maxtarget  = -INFINITY;
 
-      if ((maxout  < threshold ) || (noDesc)) {
-	none++;
-      } else if ( target != out ) {
-	miss++;
-      } else {
-	hit++;
-      }
-    } /* endfor allpattern */
+            ksh_propagate_pattern  ( noPattern + 1 );
+            ksh_get_target_pattern ( noPattern + 1 );
 
-    data->fitness         += hit * hitRating + miss * missRating +
-      none * noneRating;
-    data->histRec.testHit     = hit;
-    data->histRec.testMiss    = miss;
-    data->histRec.testNone    = none;
-    data->histRec.testFitness = 100.0 * hit / (hit + miss + none);
+            for (noOutputs = 0; noOutputs < ksh_no_outputs(); noOutputs ++) {
+                if (ksh_netout(noOutputs) > (maxout+distance)) {
+                    maxout = ksh_netout(noOutputs);
+                    out    = noOutputs;
+                    noDesc = 0;
+                } else if (ksh_netout(noOutputs) > maxout) {
+                    maxout = ksh_netout(noOutputs);
+                    out    = noOutputs;
+                    noDesc = 1;
+                } else if (ksh_netout(noOutputs) > (maxout - distance)) {
+                    noDesc = 1;
+                }
 
-  } /* endfor ALL_OFFSPRINGS */
+                if (ksh_target(noOutputs) > maxtarget) {
+                    maxtarget = ksh_target(noOutputs);
+                    target    = noOutputs;
+                }
+            }
 
-  return( MODULE_NO_ERROR );
+            /* After finding the outputs, now check if the answer was  */
+            /* right, false or none and change the fitness             */
+
+            if ((maxout  < threshold ) || (noDesc)) {
+                none++;
+            } else if ( target != out ) {
+                miss++;
+            } else {
+                hit++;
+            }
+        } /* endfor allpattern */
+
+        data->fitness         += hit * hitRating + miss * missRating +
+                                 none * noneRating;
+        data->histRec.testHit     = hit;
+        data->histRec.testMiss    = miss;
+        data->histRec.testNone    = none;
+        data->histRec.testFitness = 100.0 * hit / (hit + miss + none);
+
+    } /* endfor ALL_OFFSPRINGS */
+
+    return( MODULE_NO_ERROR );
 }
 
 char *bestGuessHigh_errMsg( int err_code ) {
-  switch ( err_code) {
+    switch ( err_code) {
 
-  case MODULE_NO_ERROR :
-    return ("bestGuess : No error found");
+    case MODULE_NO_ERROR :
+        return ("bestGuess : No error found");
 
-  case ERROR_ACTIVATE_PAT :
-    return("bestGuess : Can't activate crossvalidation pattern");
+    case ERROR_ACTIVATE_PAT :
+        return("bestGuess : Can't activate crossvalidation pattern");
 
-  case ERROR_ACTIVATE_NET :
-    return ("bestGuess : Can't activate an offspringnet");
+    case ERROR_ACTIVATE_NET :
+        return ("bestGuess : Can't activate an offspringnet");
 
-  case ERROR_NO_DATA :
-    return ("bestGuess : Can't get the networkdata");
+    case ERROR_NO_DATA :
+        return ("bestGuess : Can't get the networkdata");
 
-  }
+    }
 
-  return("bestGuess : Unknown error");
+    return("bestGuess : Unknown error");
 }

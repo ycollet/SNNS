@@ -3,7 +3,7 @@
   SHORTNAME      : colEdit.c
   SNNS VERSION   : 4.2
 
-  PURPOSE        : functions to manipulate the text, background and 
+  PURPOSE        : functions to manipulate the text, background and
 		   selection color
   NOTES          : uses the fixed palette defined in ui_color.c
 
@@ -16,7 +16,7 @@
 
     Copyright (c) 1990-1995  SNNS Group, IPVR, Univ. Stuttgart, FRG
     Copyright (c) 1996-1998  SNNS Group, WSI, Univ. Tuebingen, FRG
-             
+
 ******************************************************************************/
 #include <config.h>
 
@@ -108,8 +108,8 @@ static void ui_getDisplayColors (void)
   UPDATE   :
 ******************************************************************************/
 
-static Widget ui_xCreateColButtonItem (Widget parent, unsigned long pixel, 
-	int xsize, int ysize, Widget left, Widget top)
+static Widget ui_xCreateColButtonItem (Widget parent, unsigned long pixel,
+                                       int xsize, int ysize, Widget left, Widget top)
 
 {
     Cardinal n;
@@ -117,17 +117,28 @@ static Widget ui_xCreateColButtonItem (Widget parent, unsigned long pixel,
     Arg	     args[15];
 
     n = 0;
-    XtSetArg(args[n], XtNinternalHeight, 1); n++;
-    XtSetArg(args[n], XtNinternalWidth , 1); n++;
-    XtSetArg(args[n], XtNfromVert , top);  n++;
-    XtSetArg(args[n], XtNfromHoriz, left);  n++;
-    XtSetArg(args[n], XtNleft  , XtChainLeft); n++;
-    XtSetArg(args[n], XtNright , XtChainLeft); n++;
-    XtSetArg(args[n], XtNtop   , XtChainTop); n++;
-    XtSetArg(args[n], XtNbottom, XtChainTop); n++;
-    XtSetArg(args[n], XtNwidth, xsize); n++;
-    XtSetArg(args[n], XtNheight, ysize); n++;
-    XtSetArg(args[n], XtNbackground, pixel); n++;
+    XtSetArg(args[n], XtNinternalHeight, 1);
+    n++;
+    XtSetArg(args[n], XtNinternalWidth, 1);
+    n++;
+    XtSetArg(args[n], XtNfromVert, top);
+    n++;
+    XtSetArg(args[n], XtNfromHoriz, left);
+    n++;
+    XtSetArg(args[n], XtNleft, XtChainLeft);
+    n++;
+    XtSetArg(args[n], XtNright, XtChainLeft);
+    n++;
+    XtSetArg(args[n], XtNtop, XtChainTop);
+    n++;
+    XtSetArg(args[n], XtNbottom, XtChainTop);
+    n++;
+    XtSetArg(args[n], XtNwidth, xsize);
+    n++;
+    XtSetArg(args[n], XtNheight, ysize);
+    n++;
+    XtSetArg(args[n], XtNbackground, pixel);
+    n++;
     w = XtCreateManagedWidget("", commandWidgetClass, parent, args, n);
     return(w);
 }
@@ -138,8 +149,8 @@ static Widget ui_xCreateColButtonItem (Widget parent, unsigned long pixel,
 
   PURPOSE  : creates the widgets for all colors
   RETURNS  : void
-  NOTES    : 
- 
+  NOTES    :
+
   UPDATE   :
 ******************************************************************************/
 
@@ -154,17 +165,17 @@ static void ui_createColWidgets (Widget parent)
         ix = i MOD UI_VERT_COLS;
         iy = i DIV UI_VERT_COLS;
         if (ix-1 < 0)
-           left = NULL;
+            left = NULL;
         else
-           left = ui_colWidget[iy * UI_VERT_COLS + ix - 1];
-           
+            left = ui_colWidget[iy * UI_VERT_COLS + ix - 1];
+
         if (iy-1 < 0)
-           top = NULL;
+            top = NULL;
         else
-           top = ui_colWidget[iy * UI_VERT_COLS - 1];
+            top = ui_colWidget[iy * UI_VERT_COLS - 1];
         pixel = ui_editColor[i];
         ui_colWidget[i] = ui_xCreateColButtonItem (parent, pixel,
-                         colWidgetXsize, colWidgetYsize, left, top);
+            colWidgetXsize, colWidgetYsize, left, top);
     }
 }
 
@@ -188,16 +199,24 @@ static Widget ui_createTestPannel (Widget parent, Widget left, Widget top)
     Arg	     args[15];
 
     n = 0;
-    XtSetArg(args[n], XtNheight, 72); n++; /* 58 */
-    XtSetArg(args[n], XtNwidth, 234); n++;
-    XtSetArg(args[n], XtNfromVert , top);  n++;
-    XtSetArg(args[n], XtNfromHoriz, left);  n++;
-    XtSetArg(args[n], XtNleft  , XtChainLeft); n++;
-    XtSetArg(args[n], XtNright , XtChainLeft); n++;
-    XtSetArg(args[n], XtNtop   , XtChainTop); n++;
-    XtSetArg(args[n], XtNbottom, XtChainTop); n++;
-    w = XtCreateManagedWidget("testPanel", boxWidgetClass, 
-                                        parent, args, n);
+    XtSetArg(args[n], XtNheight, 72);
+    n++; /* 58 */
+    XtSetArg(args[n], XtNwidth, 234);
+    n++;
+    XtSetArg(args[n], XtNfromVert, top);
+    n++;
+    XtSetArg(args[n], XtNfromHoriz, left);
+    n++;
+    XtSetArg(args[n], XtNleft, XtChainLeft);
+    n++;
+    XtSetArg(args[n], XtNright, XtChainLeft);
+    n++;
+    XtSetArg(args[n], XtNtop, XtChainTop);
+    n++;
+    XtSetArg(args[n], XtNbottom, XtChainTop);
+    n++;
+    w = XtCreateManagedWidget("testPanel", boxWidgetClass,
+                              parent, args, n);
     return(w);
 
 }
@@ -229,7 +248,7 @@ static void ui_redrawColorWindow (void)
     int i;
 
     XSetWindowBackground(ui_display, colWindow,
-               ui_editColor[ui_currentBackCol]);
+                         ui_editColor[ui_currentBackCol]);
     XClearWindow (ui_display, colWindow);
     for (i=0; i<7; i++) {
         XSetForeground(ui_display, colGC,
@@ -237,18 +256,18 @@ static void ui_redrawColorWindow (void)
         XFillRectangle(ui_display, colWindow, colGC,
                        xoffset + i*xspace, yoffset, (unsigned int) xsize,                              (unsigned int) ysize);
         XSetForeground(ui_display, colGC, ui_editColor[ui_currentTextCol]);
-        sprintf (buf, "u%d", i); 
+        sprintf (buf, "u%d", i);
         XDrawString(ui_display, colWindow, colGC,
-		       xoffset + i*xspace, yoffset-2, buf, (int) strlen(buf));
+                    xoffset + i*xspace, yoffset-2, buf, (int) strlen(buf));
     }
     for (i=0; i<7; i++) {
         XSetForeground(ui_display, colGC, ui_editColor[ui_currentSelCol]);
         XFillRectangle(ui_display, colWindow, colGC,
                        xoffset + i*xspace, yoffset+yspace, (unsigned int) xsize,                       (unsigned int) ysize);
         XSetForeground(ui_display, colGC, ui_editColor[ui_currentTextCol]);
-        sprintf (buf, "u%d", i+7); 
+        sprintf (buf, "u%d", i+7);
         XDrawString(ui_display, colWindow, colGC,
-		       xoffset + i*xspace, yoffset+yspace-2, buf, (int) strlen(buf));
+                    xoffset + i*xspace, yoffset+yspace-2, buf, (int) strlen(buf));
     }
 
 }
@@ -268,12 +287,15 @@ static void ui_colorUpdateProc (Widget w, int color, caddr_t call_data)
 
 {
     switch (currentSelection) {
-        case UI_SELECT_BACK_COLOR: ui_currentBackCol = color;
-                                   break;
-        case UI_SELECT_SEL_COLOR : ui_currentSelCol = color;
-                                   break;
-        case UI_SELECT_TEXT_COLOR: ui_currentTextCol = color;
-                                   break;
+    case UI_SELECT_BACK_COLOR:
+        ui_currentBackCol = color;
+        break;
+    case UI_SELECT_SEL_COLOR :
+        ui_currentSelCol = color;
+        break;
+    case UI_SELECT_TEXT_COLOR:
+        ui_currentTextCol = color;
+        break;
     }
     ui_redrawColorWindow();
 }
@@ -312,7 +334,7 @@ static void ui_colorWindowEventProc (Widget w, Display *display, XEvent *event)
 
 {
     if ((event->type == Expose) AND (event->xexpose.count == 0))
-        ui_redrawColorWindow();        
+        ui_redrawColorWindow();
 }
 
 
@@ -354,24 +376,28 @@ void ui_createColorEditPannel (Widget w, Widget button, caddr_t call_data)
     Widget cancel, colframe, testPannel;
 
     n = 0;
-    XtSetArg (arg[0], XtNwidth, &width); n++;
-    XtSetArg (arg[1], XtNheight, &height); n++;
+    XtSetArg (arg[0], XtNwidth, &width);
+    n++;
+    XtSetArg (arg[1], XtNheight, &height);
+    n++;
     XtGetValues (button, arg, (unsigned int) n);
 
     XtTranslateCoords (button, (Position) (width / 2), (Position) (height / 2), &xPos, &yPos);
 
     n = 0;
-    XtSetArg(arg[n], XtNx, xPos); n++;
-    XtSetArg(arg[n], XtNy, yPos); n++;
+    XtSetArg(arg[n], XtNx, xPos);
+    n++;
+    XtSetArg(arg[n], XtNy, yPos);
+    n++;
 
     colEditPannel = XtCreatePopupShell ("color edit", transientShellWidgetClass, button, arg, (unsigned int) n);
 
     border = XtCreateManagedWidget("border", boxWidgetClass,
                                    colEditPannel, NULL, ZERO);
-    pannel = XtCreateManagedWidget("pannel", formWidgetClass, 
+    pannel = XtCreateManagedWidget("pannel", formWidgetClass,
                                    border, NULL, ZERO);
-    colframe = XtCreateManagedWidget("colframe", formWidgetClass, 
-                                   pannel, NULL, ZERO);
+    colframe = XtCreateManagedWidget("colframe", formWidgetClass,
+                                     pannel, NULL, ZERO);
 
     ui_createColWidgets (colframe);
 
@@ -379,17 +405,17 @@ void ui_createColorEditPannel (Widget w, Widget button, caddr_t call_data)
     cancel = ui_xCreateButtonItem ("cancel", border, NULL, done);
 
     colorToggle[0] = ui_xCreateToggleItem ("text", pannel, NULL,
-                     NULL, colframe);
+                                           NULL, colframe);
     colorToggle[1] = ui_xCreateToggleItem ("background", pannel, NULL,
-                     NULL, colorToggle[0]);
-    
+                                           NULL, colorToggle[0]);
+
     colorToggle[2] = ui_xCreateToggleItem ("selection", pannel, NULL,
-                     NULL, colorToggle[1]);
-     
+                                           NULL, colorToggle[1]);
+
     ui_getDisplayColors();
- 
+
     testPannel = ui_createTestPannel(pannel, colorToggle[0], colframe);
- 
+
     XtAddCallback (done, XtNcallback, (XtCallbackProc) ui_closeColorEditPannel,
                    (caddr_t) colEditPannel);
     XtAddCallback (cancel, XtNcallback, (XtCallbackProc) ui_cancelColorEditPannel, (caddr_t) colEditPannel);
@@ -401,14 +427,14 @@ void ui_createColorEditPannel (Widget w, Widget button, caddr_t call_data)
     for (i=0; i<UI_MAX_EDIT_COLS; i++)
         XtAddCallback (ui_colWidget[i], XtNcallback,
                        (XtCallbackProc) ui_colorUpdateProc,
-		       (XtPointer) ((long)i));
+                       (XtPointer) ((long)i));
 
-    XtAddEventHandler (testPannel, ExposureMask, 
+    XtAddEventHandler (testPannel, ExposureMask,
                        FALSE, (XtEventHandler) ui_colorWindowEventProc, ui_display);
 
     ui_checkWindowPosition(colEditPannel);
     XtPopup (colEditPannel, XtGrabNone);
-    ui_xDontResizeWidget(colEditPannel); 
+    ui_xDontResizeWidget(colEditPannel);
 
     ui_setToggles(currentSelection, &currentSelection,
                   noOfColToggles, colorToggle);
@@ -417,7 +443,7 @@ void ui_createColorEditPannel (Widget w, Widget button, caddr_t call_data)
 
     colGC = XCreateGC (ui_display, colWindow, 0, 0);
     XSetFont (ui_display, colGC, ui_fontStruct->fid);
-    
+
     XtAppAddTimeOut (ui_appContext, 1000L, (XtTimerCallbackProc) ui_timerProc, NULL);
 
 }

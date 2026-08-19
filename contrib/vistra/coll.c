@@ -21,20 +21,19 @@ static struct Member *nodeAt(Collection, long);
 /* die Collection. Antworte NULL, wenn zuwenig      */
 /* Speicher zur Verfuegung steht.                   */
 /****************************************************/
-Collection newColl()
-{
-  Collection coll;
+Collection newColl() {
+    Collection coll;
 
-  coll = (Collection) malloc(sizeof(*coll));
-  if(coll)
-  { coll->count = 0L;
-    coll->first = NULL;
-    coll->last = NULL;
-    coll->lastVisited = NULL;
-    coll->lastIndex = 0;
-  }
+    coll = (Collection) malloc(sizeof(*coll));
+    if(coll) {
+        coll->count = 0L;
+        coll->first = NULL;
+        coll->last = NULL;
+        coll->lastVisited = NULL;
+        coll->lastIndex = 0;
+    }
 
-  return coll;
+    return coll;
 }          /* newColl */
 
 
@@ -43,61 +42,61 @@ Collection newColl()
 /* member an. Antworte coll, wenn dies gelingt,     */
 /* sonst NULL (kein freier Speicher).               */
 /****************************************************/
-Collection add(Collection coll, void *member)
-{
-  struct Member *new;
+Collection add(Collection coll, void *member) {
+    struct Member *new;
 
-  new = (struct Member *) malloc(sizeof(*new));
-  if(! new) return NULL;
-  else
-  { new->next = NULL;
-    new->data = member;
-    new->previous = coll->last;
-    if(coll->count)
-    { coll->last->next = new;
-      coll->last = new;
+    new = (struct Member *) malloc(sizeof(*new));
+    if(! new) return NULL;
+    else {
+        new->next = NULL;
+        new->data = member;
+        new->previous = coll->last;
+        if(coll->count) {
+            coll->last->next = new;
+            coll->last = new;
+        } else coll->first = coll->last = new;
+        coll->count++;
+        return coll;
     }
-    else coll->first = coll->last = new;
-    coll->count++;
-    return coll;
-  }
 }               /* add */
 
 
 /****************************************************/
 /****************************************************/
-static struct Member * locate(Collection coll, long offset, int start)
-{ struct Member *mp;
-  long i;
+static struct Member * locate(Collection coll, long offset, int start) {
+    struct Member *mp;
+    long i;
 
-  switch(start)
-  {
-    case FROM_CUR:   mp = coll->lastVisited;
-                     break;
-    case FROM_BEGIN: mp = coll->first;
-                     break;
-    case FROM_END:   mp = coll->last;
-                     break;
-  }
+    switch(start) {
+    case FROM_CUR:
+        mp = coll->lastVisited;
+        break;
+    case FROM_BEGIN:
+        mp = coll->first;
+        break;
+    case FROM_END:
+        mp = coll->last;
+        break;
+    }
 
-  if(offset >= 0L)
-    for(i = 1L; i <= offset; i++) mp = mp->next;
-  else
-    for(i = -1L; i >= offset; i--) mp = mp->previous;
-  return mp;
+    if(offset >= 0L)
+        for(i = 1L; i <= offset; i++) mp = mp->next;
+    else
+        for(i = -1L; i >= offset; i--) mp = mp->previous;
+    return mp;
 }                /* locate */
 
 
 /****************************************************/
 /* Antworte das pos-te Element der Collection coll. */
 /****************************************************/
-void *at(Collection coll, long pos)
-{ struct Member *mp;
+void *at(Collection coll, long pos) {
+    struct Member *mp;
 
-  mp = nodeAt(coll, pos);
-  coll->lastIndex = pos;
-  coll->lastVisited = mp;
-  return mp->data;
+    mp = nodeAt(coll, pos);
+    coll->lastIndex = pos;
+    coll->lastVisited = mp;
+    return mp->data;
 }            /* at */
 
 
@@ -106,55 +105,55 @@ void *at(Collection coll, long pos)
 /* durch elem. Der Speicher des bisherigen Elements */
 /* wird freigegeben.                                */
 /****************************************************/
-void put(Collection coll, long pos, void *elem)
-{ struct Member *mp;
+void put(Collection coll, long pos, void *elem) {
+    struct Member *mp;
 
-  mp = nodeAt(coll, pos);
-  free(mp->data);
-  mp->data = elem;
-  coll->lastIndex = pos;
-  coll->lastVisited = mp;
+    mp = nodeAt(coll, pos);
+    free(mp->data);
+    mp->data = elem;
+    coll->lastIndex = pos;
+    coll->lastVisited = mp;
 }            /* put */
 
 
 /****************************************************/
 /****************************************************/
-static struct Member *nodeAt(Collection coll, long pos)
-{ long distToFirst, distToLast, distToLastVisited;
-  struct Member *mp;
-  int selector;
+static struct Member *nodeAt(Collection coll, long pos) {
+    long distToFirst, distToLast, distToLastVisited;
+    struct Member *mp;
+    int selector;
 
-  distToLast = size(coll) - pos;
-  distToFirst = pos - 1L;
-  distToLastVisited = coll->lastIndex ? pos - coll->lastIndex : size(coll);
-  selector = min3(labs(distToLastVisited), distToFirst, distToLast);
-  switch(selector)
-  {
+    distToLast = size(coll) - pos;
+    distToFirst = pos - 1L;
+    distToLastVisited = coll->lastIndex ? pos - coll->lastIndex : size(coll);
+    selector = min3(labs(distToLastVisited), distToFirst, distToLast);
+    switch(selector) {
     case 1: /* die geringste Entfernung zu pos hat coll->lastIndex */
-            mp = locate(coll, distToLastVisited, FROM_CUR);
-            break;
+        mp = locate(coll, distToLastVisited, FROM_CUR);
+        break;
     case 2: /* pos hat zum Beginn der Collection coll geringsten Abstand */
-            mp = locate(coll, distToFirst, FROM_BEGIN);
-            break;
-    default: mp = locate(coll, - distToLast, FROM_END);
-             break;
-  }     /* switch */
+        mp = locate(coll, distToFirst, FROM_BEGIN);
+        break;
+    default:
+        mp = locate(coll, - distToLast, FROM_END);
+        break;
+    }     /* switch */
 
-  return mp;
+    return mp;
 }           /* nodeAt */
 
 
 /****************************************************/
 /* Loesche das erste Auftreten des Elements elem von*/
 /* coll. Es werden die Adressen verglichen.         */
-/* Antworte coll.                                   */ 
+/* Antworte coll.                                   */
 /****************************************************/
-Collection rmv(Collection coll, void *elem)
-{ long pos;
+Collection rmv(Collection coll, void *elem) {
+    long pos;
 
-  pos = indexOf(coll, elem);
-  if(pos > 0) removeAt(coll, pos);
-  return coll;
+    pos = indexOf(coll, elem);
+    if(pos > 0) removeAt(coll, pos);
+    return coll;
 }           /* rmv */
 
 
@@ -164,21 +163,21 @@ Collection rmv(Collection coll, void *elem)
 /* nicht freigegeben.                               */
 /* Antworte coll.                                   */
 /****************************************************/
-Collection removeAt(Collection coll, long pos)
-{ struct Member *toRemove, *pred, *succ;
+Collection removeAt(Collection coll, long pos) {
+    struct Member *toRemove, *pred, *succ;
 
-  toRemove = nodeAt(coll, pos);
-  pred = toRemove->previous;
-  succ = toRemove->next;
-  if(pred) pred->next = succ;
-  if(succ) succ->previous = pred;
-  if(pos == 1L) coll->first = succ;
-  if(pos == size(coll)) coll->last = pred;
-  coll->lastIndex = 0;
-  coll->lastVisited = NULL;
-  coll->count--;
-  free(toRemove);
-  return coll;
+    toRemove = nodeAt(coll, pos);
+    pred = toRemove->previous;
+    succ = toRemove->next;
+    if(pred) pred->next = succ;
+    if(succ) succ->previous = pred;
+    if(pos == 1L) coll->first = succ;
+    if(pos == size(coll)) coll->last = pred;
+    coll->lastIndex = 0;
+    coll->lastVisited = NULL;
+    coll->count--;
+    free(toRemove);
+    return coll;
 }               /* removeAt */
 
 
@@ -188,22 +187,22 @@ Collection removeAt(Collection coll, long pos)
 /* wird ebenfalls freigegeben.                      */
 /* Antworte coll.                                   */
 /****************************************************/
-Collection removeComplete(Collection coll, long pos)
-{ struct Member *toRemove, *pred, *succ;
+Collection removeComplete(Collection coll, long pos) {
+    struct Member *toRemove, *pred, *succ;
 
-  toRemove = nodeAt(coll, pos);
-  free(toRemove->data);
-  pred = toRemove->previous;
-  succ = toRemove->next;
-  if(pred) pred->next = succ;
-  if(succ) succ->previous = pred;
-  if(pos == 1L) coll->first = succ;
-  if(pos == size(coll)) coll->last = pred;
-  coll->lastIndex = 0;
-  coll->lastVisited = NULL;
-  coll->count--;
-  free(toRemove);
-  return coll;
+    toRemove = nodeAt(coll, pos);
+    free(toRemove->data);
+    pred = toRemove->previous;
+    succ = toRemove->next;
+    if(pred) pred->next = succ;
+    if(succ) succ->previous = pred;
+    if(pos == 1L) coll->first = succ;
+    if(pos == size(coll)) coll->last = pred;
+    coll->lastIndex = 0;
+    coll->lastVisited = NULL;
+    coll->count--;
+    free(toRemove);
+    return coll;
 }               /* removeComplete */
 
 
@@ -211,25 +210,25 @@ Collection removeComplete(Collection coll, long pos)
 /* Loesche alle Elemente von Position from bis      */
 /* Position to einschliesslich.                     */
 /****************************************************/
-Collection removeFromTo(Collection coll, long from, long to)
-{ struct Member *toRemove, *pred, *succ;
-  long i;
+Collection removeFromTo(Collection coll, long from, long to) {
+    struct Member *toRemove, *pred, *succ;
+    long i;
 
-  toRemove = nodeAt(coll, from);
-  pred = toRemove->previous;
-  for(i = from; i <= to; i++)
-  { succ = toRemove->next;
-    free(toRemove);
-    toRemove = succ;
-  }
-  if(pred) pred->next = succ;
-  if(succ) succ->previous = pred;
-  if(! pred) coll->first = succ;
-  if(! succ) coll->last = pred;
-  coll->lastIndex = 0;
-  coll->lastVisited = NULL;
-  coll->count -= to - from + 1;
-  return coll;
+    toRemove = nodeAt(coll, from);
+    pred = toRemove->previous;
+    for(i = from; i <= to; i++) {
+        succ = toRemove->next;
+        free(toRemove);
+        toRemove = succ;
+    }
+    if(pred) pred->next = succ;
+    if(succ) succ->previous = pred;
+    if(! pred) coll->first = succ;
+    if(! succ) coll->last = pred;
+    coll->lastIndex = 0;
+    coll->lastVisited = NULL;
+    coll->count -= to - from + 1;
+    return coll;
 }               /* removeFromTo */
 
 
@@ -237,10 +236,9 @@ Collection removeFromTo(Collection coll, long from, long to)
 /* Loesche die Collection coll. Fuehre vorher mit   */
 /* jedem Element von coll die Funktion func aus.    */
 /****************************************************/
-void freeDeep(Collection coll, void (*func)())
-{ 
-  if(notEmpty(coll)) freeFromTo(coll, 1L, size(coll), func);
-  free(coll);
+void freeDeep(Collection coll, void (*func)()) {
+    if(notEmpty(coll)) freeFromTo(coll, 1L, size(coll), func);
+    free(coll);
 }               /* freeDeep */
 
 
@@ -252,26 +250,26 @@ void freeDeep(Collection coll, void (*func)())
 /* Parameter erwartet und nichts (void) zurueck-    */
 /* liefert.                                         */
 /****************************************************/
-Collection freeFromTo(Collection coll, long from, long to, void (*func)())
-{ struct Member *toRemove, *pred, *succ;
-  long i;
+Collection freeFromTo(Collection coll, long from, long to, void (*func)()) {
+    struct Member *toRemove, *pred, *succ;
+    long i;
 
-  toRemove = nodeAt(coll, from);
-  pred = toRemove->previous;
-  for(i = from; i <= to; i++)
-  { succ = toRemove->next;
-    (*func)(toRemove->data);
-    free(toRemove);
-    toRemove = succ;
-  }
-  if(pred) pred->next = succ;
-  if(succ) succ->previous = pred;
-  if(! pred) coll->first = succ;
-  if(! succ) coll->last = pred;
-  coll->lastIndex = 0;
-  coll->lastVisited = NULL;
-  coll->count -= to - from + 1;
-  return coll;
+    toRemove = nodeAt(coll, from);
+    pred = toRemove->previous;
+    for(i = from; i <= to; i++) {
+        succ = toRemove->next;
+        (*func)(toRemove->data);
+        free(toRemove);
+        toRemove = succ;
+    }
+    if(pred) pred->next = succ;
+    if(succ) succ->previous = pred;
+    if(! pred) coll->first = succ;
+    if(! succ) coll->last = pred;
+    coll->lastIndex = 0;
+    coll->lastVisited = NULL;
+    coll->count -= to - from + 1;
+    return coll;
 }               /* freeFromTo */
 
 
@@ -284,14 +282,14 @@ Collection freeFromTo(Collection coll, long from, long to, void (*func)())
 /* Ist elem nicht in coll enthalten, so wird mit    */
 /* -1L geantwortet.                                 */
 /****************************************************/
-long indexOf(Collection coll, void *elem)
-{ long collSize, i;
+long indexOf(Collection coll, void *elem) {
+    long collSize, i;
 
-  collSize = size(coll);
-  for(i = 1L; i <= collSize; i++)
-    if(at(coll, i) == elem) return i;
+    collSize = size(coll);
+    for(i = 1L; i <= collSize; i++)
+        if(at(coll, i) == elem) return i;
 
-  return -1L;
+    return -1L;
 }               /* indexOf */
 
 
@@ -302,13 +300,13 @@ long indexOf(Collection coll, void *elem)
 /* gibt. Falls dies fuer kein Element von coll der  */
 /* Fall ist, so antworte -1L.                       */
 /****************************************************/
-long detectPos(Collection coll, void *search, Boolean (*equals)())
-{ long i, collSize = size(coll);
+long detectPos(Collection coll, void *search, Boolean (*equals)()) {
+    long i, collSize = size(coll);
 
-  for(i = 1L; i <= collSize; i++)
-    if( (*equals)(search, at(coll, i)) ) return i;
+    for(i = 1L; i <= collSize; i++)
+        if( (*equals)(search, at(coll, i)) ) return i;
 
-  return -1L;
+    return -1L;
 }               /* detectPos */
 
 
@@ -317,17 +315,17 @@ long detectPos(Collection coll, void *search, Boolean (*equals)())
 /* inclusive den Platz der Elemente von coll wieder */
 /* frei.                                            */
 /****************************************************/
-void freeCollAll(Collection coll)
-{ struct Member *mp, *hilf;
+void freeCollAll(Collection coll) {
+    struct Member *mp, *hilf;
 
-  mp = coll->first;
-  while(mp)
-  { hilf = mp;
-    mp = mp->next;
-    free(hilf->data);
-    free(hilf);
-  }
-  free(coll);
+    mp = coll->first;
+    while(mp) {
+        hilf = mp;
+        mp = mp->next;
+        free(hilf->data);
+        free(hilf);
+    }
+    free(coll);
 }            /* freeCollAll */
 
 
@@ -336,27 +334,25 @@ void freeCollAll(Collection coll)
 /* wieder frei. Der Speicherplatz fuer der Elemente */
 /* von coll bleibt jedoch allokiert.                */
 /****************************************************/
-void freeColl(Collection coll)
-{
-  struct Member *mp, *hilf;
+void freeColl(Collection coll) {
+    struct Member *mp, *hilf;
 
-  mp = coll->first;
-  while(mp)
-  { hilf = mp;
-    mp = mp->next;
-    free(hilf);
-  }
+    mp = coll->first;
+    while(mp) {
+        hilf = mp;
+        mp = mp->next;
+        free(hilf);
+    }
 
-  free(coll);
+    free(coll);
 }            /* freeColl */
 
 
 /****************************************************/
 /* Antworte die Anzahl der Elemente von coll.       */
 /****************************************************/
-long size(Collection coll)
-{
-  return coll == NULL ? 0 : coll->count;
+long size(Collection coll) {
+    return coll == NULL ? 0 : coll->count;
 }            /* size */
 
 
@@ -364,9 +360,8 @@ long size(Collection coll)
 /* Antworte true gdw. coll kein Element enthaelt,   */
 /* sonst false.
 /****************************************************/
-Boolean isEmpty(Collection coll)
-{
-  return coll->count == 0L;
+Boolean isEmpty(Collection coll) {
+    return coll->count == 0L;
 }            /* isEmpty */
 
 
@@ -374,9 +369,8 @@ Boolean isEmpty(Collection coll)
 /* Antworte true gdw. coll nicht leer ist, sonst    */
 /* false.                                           */
 /****************************************************/
-Boolean notEmpty(Collection coll)
-{
-  return coll->count != 0L;
+Boolean notEmpty(Collection coll) {
+    return coll->count != 0L;
 }            /* notEmpty */
 
 

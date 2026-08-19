@@ -31,13 +31,13 @@ extern void ui_col_init (void);
 
 extern unsigned long   ui_col_rangePixels[];
 
-	/* array to hold all colors for selection, text and background */
+/* array to hold all colors for selection, text and background */
 extern unsigned long ui_editColor[];
 extern float ui_editColorRGB[][3];
 extern Colormap ui_colormap;
 
 
-	/* default values */
+/* default values */
 extern int ui_initalBackgroundColorIndex;  /* index to ui_editColor */
 extern int ui_initalSelectionColorIndex;  /* index to ui_editColor */
 extern int ui_initalTextColorIndex;   /* index to ui_editColor */

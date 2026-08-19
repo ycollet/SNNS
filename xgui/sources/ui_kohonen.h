@@ -18,7 +18,7 @@
 
     Copyright (c) 1990-1995  SNNS Group, IPVR, Univ. Stuttgart, FRG
     Copyright (c) 1996-1998  SNNS Group, WSI, Univ. Tuebingen, FRG
-             
+
 ******************************************************************************/
 #ifndef _KO_MAIN_DEFINED_
 #define  _KO_MAIN_DEFINED_

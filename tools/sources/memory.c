@@ -4,12 +4,12 @@
   SNNS VERSION   : 4.2
 
   PURPOSE        : implements the realloc function
-  NOTES          : 
+  NOTES          :
 
   AUTHOR         : Jens Wieland
-  DATE           : 
+  DATE           :
 
-  CHANGED BY     : 
+  CHANGED BY     :
   RCS VERSION    : $Revision: 1.7 $
   LAST CHANGE    : $Date: 1998/03/13 16:51:01 $
 
@@ -41,22 +41,21 @@
   RETURNS  : pointer to new mem block
   NOTES    : frees the old mem block
 
-  UPDATE   : 
+  UPDATE   :
 ******************************************************************************/
-void *re_malloc(void *old_ptr, size_t old_size, size_t new_size)
-{
-  void *new_ptr;
+void *re_malloc(void *old_ptr, size_t old_size, size_t new_size) {
+    void *new_ptr;
 
-  /* allocate mem block of new size: */
-  new_ptr = malloc(new_size);
-  if (new_ptr == NULL) err_prt(ERR_MEM);
+    /* allocate mem block of new size: */
+    new_ptr = malloc(new_size);
+    if (new_ptr == NULL) err_prt(ERR_MEM);
 
-  /* copy old mem block to new mem block: */
-  memcpy(new_ptr, old_ptr, (new_size<old_size) ? new_size : old_size);
+    /* copy old mem block to new mem block: */
+    memcpy(new_ptr, old_ptr, (new_size<old_size) ? new_size : old_size);
 
-  /* free old mem block: */
-  free(old_ptr);
+    /* free old mem block: */
+    free(old_ptr);
 
-  return new_ptr;
+    return new_ptr;
 }
 

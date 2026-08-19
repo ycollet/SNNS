@@ -73,71 +73,71 @@ static char        histFileName[255] = HISTORY_FILE_VALUE;
 /*-----------------------------------------------------------------functions-*/
 
 int histInputs_init( ModuleTableEntry *self, int msgc, char *msgv[] ) {
-  char fileName[MAX_FILENAME_LEN];
+    char fileName[MAX_FILENAME_LEN];
 
-  MODULE_KEY( HIST_Inputs_KEY );
+    MODULE_KEY( HIST_Inputs_KEY );
 
-  SEL_MSG( msgv[0] )
+    SEL_MSG( msgv[0] )
 
     MSG_CASE( GENERAL_INIT ) {
-    /* nothing to do */
-  }
-  MSG_CASE( GENERAL_EXIT ) {
-    fclose(hfpWeight);
-  }
+        /* nothing to do */
+    }
+    MSG_CASE( GENERAL_EXIT ) {
+        fclose(hfpWeight);
+    }
 
-  MSG_CASE( EVOLUTION_INIT ) {
-    sprintf(fileName,"%s.%s",histFileName,EXTENSION);
-    if( (hfpWeight = fopen( fileName, "w" )) == NULL )
-      return( ERROR_FILEOPEN );
-    setlinebuf( hfpWeight );
-    fprintf(hfpWeight,OUTELEM_TEXT);
-  }
+    MSG_CASE( EVOLUTION_INIT ) {
+        sprintf(fileName,"%s.%s",histFileName,EXTENSION);
+        if( (hfpWeight = fopen( fileName, "w" )) == NULL )
+            return( ERROR_FILEOPEN );
+        setlinebuf( hfpWeight );
+        fprintf(hfpWeight,OUTELEM_TEXT);
+    }
 
-  MSG_CASE( HISTORY_FILE ) {
-    if( msgc > 1 ) strcpy ( histFileName, msgv[1] );
-  }
+    MSG_CASE( HISTORY_FILE ) {
+        if( msgc > 1 ) strcpy ( histFileName, msgv[1] );
+    }
 
-  END_MSG;
+    END_MSG;
 
-  return( INIT_USED );
+    return( INIT_USED );
 }
 
 /*---------------------------------------------------------------------------*/
 
 int histInputs_work( PopID *parents, PopID *offsprings, PopID *ref ) {
-  NetID  net;
-  NetworkData *netData;
-  int k;
+    NetID  net;
+    NetworkData *netData;
+    int k;
 
-  FOR_ALL_OFFSPRINGS( net ) {
-    netData = (NetworkData *) kpm_getNetData( net );
+    FOR_ALL_OFFSPRINGS( net ) {
+        netData = (NetworkData *) kpm_getNetData( net );
 
-    fprintf(hfpWeight,OUTELEM_FORMAT,netData->histID);
+        fprintf(hfpWeight,OUTELEM_FORMAT,netData->histID);
 
-    for ( k = ksh_getFirstUnit(); k != 0; k = ksh_getNextUnit()) {
-      if(ksh_getUnitTType( k ) == INPUT) {
-	if ( subul_deadInputUnit( k ) )
-	  fprintf(hfpWeight," D ");
-	else
-	  fprintf(hfpWeight," X ");
-      }
+        for ( k = ksh_getFirstUnit(); k != 0; k = ksh_getNextUnit()) {
+            if(ksh_getUnitTType( k ) == INPUT) {
+                if ( subul_deadInputUnit( k ) )
+                    fprintf(hfpWeight," D ");
+                else
+                    fprintf(hfpWeight," X ");
+            }
+        }
+
+        fprintf(hfpWeight,"\n");
     }
 
-    fprintf(hfpWeight,"\n");
-  }
-
-  return( MODULE_NO_ERROR );
+    return( MODULE_NO_ERROR );
 }
 
 /*---------------------------------------------------------------------------*/
 
 char *histInputs_errMsg( int err_code ) {
-  switch (err_code) {
-  case MODULE_NO_ERROR :
-    return ("histInput : No Error found");
-  case ERROR_FILEOPEN :
-    return ("histInput : Can't open history-file for writing");
-  }
-  return( "histFitness : Unknown error" );
+    switch (err_code) {
+    case MODULE_NO_ERROR :
+        return ("histInput : No Error found");
+    case ERROR_FILEOPEN :
+        return ("histInput : Can't open history-file for writing");
+    }
+    return( "histFitness : Unknown error" );
 }

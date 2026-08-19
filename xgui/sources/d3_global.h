@@ -2,23 +2,23 @@
   FILE           : $Source: /projects/higgs1/SNNS/CVS/SNNS/xgui/sources/d3_global.h,v $
   SHORTNAME      : global.ph
   SNNS VERSION   : 4.2
- 
+
   PURPOSE        : type definitions and global defines
   NOTES          : all global types are defined here
                    this is the only module for global variables
                    most varaibles are initilized
                    the default values could be changed here
- 
+
   AUTHOR         : Ralf Huebner
   DATE           : 1.12.1991
- 
+
   CHANGED BY     : Sven Doering, Niels Mache
   RCS VERSION    : $Revision: 2.6 $
   LAST CHANGE    : $Date: 1998/02/25 15:20:10 $
- 
+
     Copyright (c) 1990-1995  SNNS Group, IPVR, Univ. Stuttgart, FRG
     Copyright (c) 1996-1998  SNNS Group, WSI, Univ. Tuebingen, FRG
- 
+
 ******************************************************************************/
 #ifndef _D3GLOBAL_DEFINED_
 #define _D3GLOBAL_DEFINED_
@@ -45,7 +45,7 @@
 
 
 /*****************************************************************************
-   
+
                              type definitions
 
 ******************************************************************************/
@@ -70,7 +70,7 @@ typedef struct {                   /* unit_mode               */
     int size;                      /* show value as size      */
     int color;                     /* show value as color     */
     int top_label;                 /* show value on top label */
-    int bottom_label;              /* show value bottom label */ 
+    int bottom_label;              /* show value bottom label */
 } d3_unit_mode_type;
 
 
@@ -107,14 +107,14 @@ typedef struct {
 
 
 typedef struct {                             /* WINDOW */
-     int x0, y0;                             /* xmin and ymin */
-     int x1, y1;                             /* xmax and ymax */
+    int x0, y0;                             /* xmin and ymin */
+    int x1, y1;                             /* xmax and ymax */
 } d3_window_type;
 
 
-struct d3_unitPtrDef {                       /* linear list type      */ 
-     int unitNo;                             /* key                   */
-     struct d3_unitPtrDef *next;             /* pointer to next item  */
+struct d3_unitPtrDef {                       /* linear list type      */
+    int unitNo;                             /* key                   */
+    struct d3_unitPtrDef *next;             /* pointer to next item  */
 };
 
 
@@ -122,7 +122,7 @@ typedef struct d3_unitPtrDef d3_unitPtrType;
 
 
 /*****************************************************************************
-   
+
                              mode definitions
 
 ******************************************************************************/
@@ -179,7 +179,7 @@ typedef struct d3_unitPtrDef d3_unitPtrType;
 
 
 /*****************************************************************************
-   
+
                                  makros
 
 ******************************************************************************/
@@ -198,7 +198,7 @@ typedef struct d3_unitPtrDef d3_unitPtrType;
 
 
 /*****************************************************************************
-   
+
                             global defines
 
 ******************************************************************************/
@@ -216,7 +216,7 @@ typedef struct d3_unitPtrDef d3_unitPtrType;
 #define fnt5x7    2
 
 
-/* transformations */ 
+/* transformations */
 
 
 #define ROT_X_LEFT     0
@@ -295,7 +295,7 @@ extern cube d3_e_cube;
 
 
 
-#endif 
+#endif
 
 /* end of file */
 /* lines: */

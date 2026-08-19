@@ -3,20 +3,20 @@
   SHORTNAME      : snns_intfce
   SNNS VERSION   : 4.2
 
-  PURPOSE        : Interface between Batchman's jacket function calls (via 
+  PURPOSE        : Interface between Batchman's jacket function calls (via
                    the symbol table) and SNNS-kernel calls
 
   NOTES          : This file is provided for future extensions of Batchman
-                   and has *no semantic purpose* in this version. The 
-                   intention is to set up a clearly defined entry point 
-                   between the batch language processing and the SNNS-kernel. 
+                   and has *no semantic purpose* in this version. The
+                   intention is to set up a clearly defined entry point
+                   between the batch language processing and the SNNS-kernel.
                    Instead of adressing the kernel, XGUI callback
                    functions can be executed from here.
 
   AUTHOR         : Jens Wieland
-  DATE           : 
+  DATE           :
 
-  CHANGED BY     : 
+  CHANGED BY     :
   RCS VERSION    : $Revision: 1.10 $
   LAST CHANGE    : $Date: 1998/04/20 11:48:12 $
 

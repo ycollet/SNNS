@@ -656,8 +656,8 @@ void    krm_releaseUnit(int UnitNo) {
 ******************************************************************************/
 static	void	krm_releaseUnitArrays(void) {
     NoOfAllocUnits = FreeUnitIndex =
-                         NoOfUnits = NoOfInputUnits = NoOfOutputUnits =
-                                         NoOfHiddenUnits = MaxUnitNo = 0;
+    NoOfUnits = NoOfInputUnits = NoOfOutputUnits =
+    NoOfHiddenUnits = MaxUnitNo = 0;
 
     if (unit_array != NULL)  {
         free( (char *) unit_array );
@@ -723,7 +723,7 @@ krui_err  krm_allocUnitTopoArray(int N) {
     if (topo_ptr_array != NULL) {
         /*  reallocate array for topologic sorting  */
         topo_ptr_array = (TopoPtrArray) realloc( (char *) topo_ptr_array,
-                         (unsigned) (N * TOPO_PTR_SIZE) );
+            (unsigned) (N * TOPO_PTR_SIZE) );
     } else {
         /*  allocate new array for topologic sorting  */
         topo_ptr_array = (TopoPtrArray) calloc((unsigned int) N, TOPO_PTR_SIZE);
@@ -1269,7 +1269,7 @@ struct SiteTable    *krm_STableSymbolSearch(char *site_symbol) {
     if (STable_array == NULL)
         return( NULL );     /*  there are no site-table entries */
 
-    if ( (n_ptr = krm_NTableSymbolSearch( site_symbol , SITE_SYM ) ) == NULL)
+    if ( (n_ptr = krm_NTableSymbolSearch( site_symbol, SITE_SYM ) ) == NULL)
         return( NULL );     /*  symbol dosn't exist */
 
 

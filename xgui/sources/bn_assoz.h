@@ -9,7 +9,7 @@
   AUTHOR         : Guenter Mamier
   DATE           : February 11 1994
 
-  CHANGED BY     : 
+  CHANGED BY     :
   RCS VERSION    : $Revision: 2.6 $
   LAST CHANGE    : $Date: 1998/02/25 15:19:37 $
 

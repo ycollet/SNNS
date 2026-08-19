@@ -15,7 +15,7 @@
 
     Copyright (c) 1990-1995  SNNS Group, IPVR, Univ. Stuttgart, FRG
     Copyright (c) 1996-1998  SNNS Group, WSI, Univ. Tuebingen, FRG
-             
+
 ******************************************************************************/
 
 
@@ -42,8 +42,8 @@ extern void ui_info_listAllTargetUnits (Widget, int, caddr_t);
 extern void ui_info_listAllSourceUnits (Widget, int, caddr_t);
 extern void ui_info_listAllSites (Widget, int, caddr_t);
 extern void ui_info_listAllLinksToCurrentSite (Widget, int, caddr_t);
-extern void ui_info_setUnitItems (struct UnitWidgetType, 
-	struct UnitAttributeType);
+extern void ui_info_setUnitItems (struct UnitWidgetType,
+                                  struct UnitAttributeType);
 extern void ui_info_storeAttributes (int, struct UnitAttributeType);
 extern void ui_info_initUnitStruct(struct UnitAttributeType *unit);
 extern void ui_info_getDisplayedUnitAttributes(struct UnitWidgetType *,
@@ -52,7 +52,7 @@ extern void ui_info_showPredOfTargetUnit(int, FlintType);
 extern void ui_info_makeUnitInfoPanelConsistent(void);
 
 
-	/* widgets of all data fields in the info panel */
+/* widgets of all data fields in the info panel */
 extern struct UnitWidgetType ui_targetWidgets, ui_sourceWidgets;
 extern struct LinkWidgetType ui_linkWidgets;
 

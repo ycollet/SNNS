@@ -23,7 +23,7 @@
 extern void d3_insertUnit (d3_unitPtrType **, int);
 extern void d3_displayUnitList (d3_unitPtrType *);
 
-#endif 
+#endif
 
 /* end of file */
 /* lines: */

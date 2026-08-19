@@ -45,14 +45,13 @@
   FUNCTION : d3_draw_wireframeLine
 
   PURPOSE  : draws a link for the wireframe model
-  RETURNS  : 
+  RETURNS  :
   NOTES    :
 
 ******************************************************************************/
 
 
-void d3_draw_wireframeLine (float *v1, float *v2)
-{
+void d3_draw_wireframeLine (float *v1, float *v2) {
     int xp1, yp1, xp2, yp2;
 
     xp1 = floor (v1[0] + 0.5);
@@ -69,7 +68,7 @@ void d3_draw_wireframeLine (float *v1, float *v2)
   FUNCTION : d3_draw_wireframeCube
 
   PURPOSE  : draws a unit for the wireframe model
-  RETURNS  : 
+  RETURNS  :
   NOTES    :
 
 ******************************************************************************/
@@ -77,16 +76,15 @@ void d3_draw_wireframeLine (float *v1, float *v2)
 
 
 /* void d3_draw_wireframeCube (float (*c)[4]) */
-void d3_draw_wireframeCube (cube c)
-{
+void d3_draw_wireframeCube (cube c) {
     int i, xp1, yp1, xp2, yp2;
 
     for (i=0; i<ANZ_LINES; i++) {
-         xp1 = c [d3_cube_lines [i][0]][0];
-         yp1 = c [d3_cube_lines [i][0]][1];
-         xp2 = c [d3_cube_lines [i][1]][0];
-         yp2 = c [d3_cube_lines [i][1]][1];
-         d3_drawLine (xp1, yp1, xp2, yp2);
+        xp1 = c [d3_cube_lines [i][0]][0];
+        yp1 = c [d3_cube_lines [i][0]][1];
+        xp2 = c [d3_cube_lines [i][1]][0];
+        yp2 = c [d3_cube_lines [i][1]][1];
+        d3_drawLine (xp1, yp1, xp2, yp2);
     }
 }
 
@@ -98,14 +96,13 @@ void d3_draw_wireframeCube (cube c)
   FUNCTION : d3_draw_solidLine
 
   PURPOSE  : draws a link for the solid model
-  RETURNS  : 
+  RETURNS  :
   NOTES    :
 
 ******************************************************************************/
 
 
-void d3_draw_solidLine (vector v1, vector v2)
-{
+void d3_draw_solidLine (vector v1, vector v2) {
     int xp, yp, i;
     float my, my_step, dx, dy, zp;
     vector v, w;
@@ -125,13 +122,13 @@ void d3_draw_solidLine (vector v1, vector v2)
             v[i] = v1[i] + my * w[i];
         xp = (int) (v[0]+0.5);
         yp = (int) (v[1]+0.5);
-        if ((xp >= d3_clipWindow.x0) && (yp >= d3_clipWindow.y0) 
-          && (yp < d3_clipWindow.y1) && (xp < d3_clipWindow.x1)) {
+        if ((xp >= d3_clipWindow.x0) && (yp >= d3_clipWindow.y0)
+                && (yp < d3_clipWindow.y1) && (xp < d3_clipWindow.x1)) {
             d3_readZbuffer (xp, yp, &zp);
             if (v[2] < zp) {
                 d3_putPixel (xp, yp);
                 d3_writeZbuffer (xp, yp, v[2]);
-	    }
+            }
         }
         my += my_step;
     }
@@ -144,7 +141,7 @@ void d3_draw_solidLine (vector v1, vector v2)
   FUNCTION : d3_draw_solidCube
 
   PURPOSE  : draws a unit for the solid model
-  RETURNS  : 
+  RETURNS  :
   NOTES    :
   UPDATE   : 3.3.93  shading for activation
 
@@ -152,8 +149,7 @@ void d3_draw_solidLine (vector v1, vector v2)
 
 
 
-void d3_draw_solidCube (cube c, vector vp, vector lp, int unit_no)
-{
+void d3_draw_solidCube (cube c, vector vp, vector lp, int unit_no) {
     int pi, vi;
     d3_polygon_type p;
     unsigned long color;
@@ -163,8 +159,8 @@ void d3_draw_solidCube (cube c, vector vp, vector lp, int unit_no)
 
     for (pi=0; pi<6; pi++) {
         d3_normalVector (normal, c[d3_vertex_index[pi][0]],
-                                 c[d3_vertex_index[pi][1]],
-                                 c[d3_vertex_index[pi][2]]);
+                         c[d3_vertex_index[pi][1]],
+                         c[d3_vertex_index[pi][2]]);
 
         if (d3_state.unit_mode.color == nothing_on) {
             d3_shadeIntens (&d3_intens, c[d3_vertex_index[pi][0]], normal, lp);

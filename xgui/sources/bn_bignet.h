@@ -3,10 +3,10 @@
   SHORTNAME      : bn_bignet
   SNNS VERSION   : 4.2
 
-  PURPOSE        : 
+  PURPOSE        :
   NOTES          :
 
-  AUTHOR         : Michael Schmalzl  
+  AUTHOR         : Michael Schmalzl
   DATE           : 1.4.1990
 
   CHANGED BY     : Sven Doering, Kai-Uwe Herrmann
@@ -22,11 +22,11 @@
 
 extern void bn_createBignet (void);
 extern int calculate_x_begin(int *new_x_begin, int *old_x_begin,
-			     int *x_max, int width, int pos);
+                             int *x_max, int width, int pos);
 extern int calculate_y_begin(int *absolute_y_max, int *relative_y_max,
-			     int *y_offset, int height, int pos);
+                             int *y_offset, int height, int pos);
 
 extern Widget ff_baseWidget;
-#endif 
+#endif
 /* end of file */
 /* lines:  */

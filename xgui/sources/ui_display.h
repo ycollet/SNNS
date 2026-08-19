@@ -33,14 +33,14 @@ extern int      ui_displ_numberOfItems;       /* number of created items */
 
 extern void             ui_displ_initDisplayList(void);
 extern void             ui_displ_freeItem(struct Ui_DisplayType *displayPtr);
-	/* free it */
+/* free it */
 extern void             ui_displ_resetList(void);     /* free al items */
 extern struct Ui_DisplayType  *ui_displ_getFreeItem(void);   /* create */
 extern Bool             ui_displ_isSomeWhereToShowWeights(void);
 extern Bool             ui_displ_isSomeWhereToShowValues(void);
-extern void             ui_displ_freezeDisplay(Widget w, 
-                                struct Ui_DisplayType *displayPtr, 
-                                caddr_t call_data);
+extern void             ui_displ_freezeDisplay(Widget w,
+        struct Ui_DisplayType *displayPtr,
+        caddr_t call_data);
 
 
 

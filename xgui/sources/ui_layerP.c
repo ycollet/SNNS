@@ -17,7 +17,7 @@
 
     Copyright (c) 1990-1995  SNNS Group, IPVR, Univ. Stuttgart, FRG
     Copyright (c) 1996-1998  SNNS Group, WSI, Univ. Tuebingen, FRG
-             
+
 ******************************************************************************/
 #include <config.h>
 
@@ -49,7 +49,7 @@ void ui_layer_initLayerNames(void)
     int i;
 
     for (i=0; i<MAX_NO_LAYERS; i++) {
-	sprintf(&ui_layerNames[i][0],"LAYER %2d",i+1);
+        sprintf(&ui_layerNames[i][0],"LAYER %2d",i+1);
     }
 }
 
@@ -70,16 +70,16 @@ void ui_layer_setLayerNames(void)
     int   i;
     int   flagWord = 0;
     int   bit = 1;
-    
+
     for (i=0; i<MAX_NO_LAYERS; i++) {
-	ui_xStringFromAsciiWidget(ui_layerNameWidgets[i], 
-				  &ui_layerNames[i][0], MAX_NAME_LENGTH);
-	if (ui_xGetToggleState(ui_layerButtonWidgets[i]))
-	    ui_utilSetFlag(flagWord, bit);
-	bit *= 2;
+        ui_xStringFromAsciiWidget(ui_layerNameWidgets[i],
+                                  &ui_layerNames[i][0], MAX_NAME_LENGTH);
+        if (ui_xGetToggleState(ui_layerButtonWidgets[i]))
+            ui_utilSetFlag(flagWord, bit);
+        bit *= 2;
     }
     ui_layerReturnValue = (unsigned short) flagWord;
-}    
+}
 
 
 

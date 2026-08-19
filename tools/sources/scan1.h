@@ -3,7 +3,7 @@
   SHORTNAME      : scan1
   SNNS VERSION   : 4.2
 
-  PURPOSE        : Scanner 1 for SNNS batch interpreter 
+  PURPOSE        : Scanner 1 for SNNS batch interpreter
 
                    For translation with flex lexical analyzer generator
 
@@ -11,9 +11,9 @@
                    See grammar file gram1.y for the reason why.
 
   AUTHOR         : Jens Wieland
-  DATE           : 
+  DATE           :
 
-  CHANGED BY     : 
+  CHANGED BY     :
   SCCS VERSION   : $Revision: 1.3 $
   LAST CHANGE    : $Date: 1998/02/25 15:34:46 $
 

@@ -3,16 +3,16 @@
   SHORTNAME      : backpatch
   SNNS VERSION   : 4.2
 
-  PURPOSE        : SNNS batch interpreter 
+  PURPOSE        : SNNS batch interpreter
                    Functions to perform backpatching of jump targets
 		   in intermediate code
 
-  NOTES          : 
+  NOTES          :
 
   AUTHOR         : Jens Wieland
-  DATE           : 
+  DATE           :
 
-  CHANGED BY     : 
+  CHANGED BY     :
   RCS VERSION    : $Revision: 1.3 $
   LAST CHANGE    : $Date: 1998/02/25 15:34:13 $
 
@@ -21,9 +21,9 @@
 
 ******************************************************************************/
 
-struct bp_list{
-  Ic_ptr_type ic_pc;
-  struct bp_list *next;
+struct bp_list {
+    Ic_ptr_type ic_pc;
+    struct bp_list *next;
 };
 
 typedef struct bp_list bp_list;

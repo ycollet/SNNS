@@ -15,7 +15,7 @@
 
     Copyright (c) 1990-1995  SNNS Group, IPVR, Univ. Stuttgart, FRG
     Copyright (c) 1996-1998  SNNS Group, WSI, Univ. Tuebingen, FRG
-             
+
 ******************************************************************************/
 
 
@@ -45,24 +45,24 @@ extern void ui_loadFileFromCommandLine (void);
 extern void ui_parseCmdLine (int, char *[]);
 
 
-	/* Handles of popup shells. Used by ui_popupDone() */
+/* Handles of popup shells. Used by ui_popupDone() */
 extern Widget ui_popControl, ui_popInfo, ui_popResult;
 
-	/* message widget in the control panel */
+/* message widget in the control panel */
 extern Widget ui_controlMessageWidget;
 
-	/* widgets of jog/random weights panel */
+/* widgets of jog/random weights panel */
 extern Widget  ui_highLimitWidget, ui_lowLimitWidget, ui_correlationLimitWidget;
 
-	/* widget of message displayed when the 
-	bubble of a slider in the setup panel was moved */
+/* widget of message displayed when the
+bubble of a slider in the setup panel was moved */
 extern Widget  ui_setupSliderMessage;
 
 extern GC             ui_gc;         /* xgui graphic context */
-extern XFontStruct   *ui_fontStruct; 
+extern XFontStruct   *ui_fontStruct;
 extern int            ui_screen;     /* X screen */
 
-	/* display for with the setup panel was displayed */
+/* display for with the setup panel was displayed */
 extern struct Ui_DisplayType  *ui_set_displayPtr; /* for xgui */
 
 extern Display       *ui_display;    /* for X */
@@ -70,19 +70,19 @@ extern Display       *ui_display;    /* for X */
 extern Widget  ui_toplevel;
 extern Widget  ui_message;  /* message in the manager panel */
 
-	/* shell widgets of info, control, setup and file panel */
+/* shell widgets of info, control, setup and file panel */
 extern Widget  ui_infoPanel, ui_setupPanel;
 
-	/* widgets in the setup panel */
+/* widgets in the setup panel */
 extern Widget  ui_set_gridWidthWidget, ui_set_originXWidget;
 extern Widget  ui_set_originYWidget;
 extern Widget  ui_set_subnetWidget;
 extern Widget  ui_set_zWidget;
 
-	/* panel created yes or no */
+/* panel created yes or no */
 extern Bool    ui_setupIsCreated;
 
-	/* data displayed in the file panel */
+/* data displayed in the file panel */
 extern char    ui_edit_actFuncName[];
 extern char    ui_edit_outFuncName[];
 extern char    ui_edit_FTypeName[];

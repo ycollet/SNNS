@@ -62,57 +62,57 @@ void ui_xCreateLayerPanel (Widget parent)
     char   buf[80];
     int    flagWord = ui_layerStartValue;
     int    bit = 1;
-    
+
     int  fontWidth = 8;
 
     int  labelWidth  =  9 * fontWidth;
-    int  nameWidth   = 25 * fontWidth;  
+    int  nameWidth   = 25 * fontWidth;
 
 
 
-/***************************************************************************/
+    /***************************************************************************/
 
-    ui_layerPanel = 
-	XtCreateManagedWidget("lPanel", formWidgetClass, parent, NULL, ZERO);
+    ui_layerPanel =
+        XtCreateManagedWidget("lPanel", formWidgetClass, parent, NULL, ZERO);
 
 
-/*****************************  HEAD LINE  *********************************/
+    /*****************************  HEAD LINE  *********************************/
 
     nrLabel =
-	ui_xCreateLabelItem("layer", ui_layerPanel, labelWidth,  
-			    NULL, NULL);
+        ui_xCreateLabelItem("layer", ui_layerPanel, labelWidth,
+                            NULL, NULL);
     ui_xSetResize(nrLabel, TRUE);
 
     label = nrLabel;
 
     nameLabel =
-	ui_xCreateLabelItem("name", ui_layerPanel, nameWidth,  
-			    nrLabel, NULL);
+        ui_xCreateLabelItem("name", ui_layerPanel, nameWidth,
+                            nrLabel, NULL);
 
-/*****************************  LINES  *************************************/
+    /*****************************  LINES  *************************************/
 
     for (i=0; i<MAX_NO_LAYERS; i++) {
 
-	oldLabel = label;
-	sprintf(buf,"%2d",i+1);
-	label = 
-	    ui_xCreateLabelItem(buf, ui_layerPanel, labelWidth, NULL, label); 
-	ui_xSetResize(label, TRUE);
+        oldLabel = label;
+        sprintf(buf,"%2d",i+1);
+        label =
+            ui_xCreateLabelItem(buf, ui_layerPanel, labelWidth, NULL, label);
+        ui_xSetResize(label, TRUE);
 
-	ui_layerNameWidgets[i] =
-	    ui_xCreateDialogItem("layerName", ui_layerPanel, 
-				 &ui_layerNames[i][0], nameWidth, 
-				 nrLabel, oldLabel);
+        ui_layerNameWidgets[i] =
+            ui_xCreateDialogItem("layerName", ui_layerPanel,
+                                 &ui_layerNames[i][0], nameWidth,
+                                 nrLabel, oldLabel);
 
-	ui_layerButtonWidgets[i] =
-	    ui_xCreateToggleItem("on", ui_layerPanel, NULL, 
-				 ui_layerNameWidgets[i], oldLabel);
-	ui_xSetToggleState(ui_layerButtonWidgets[i], 
-			   ui_utilIsSet(flagWord, bit));
-	bit *= 2;
+        ui_layerButtonWidgets[i] =
+            ui_xCreateToggleItem("on", ui_layerPanel, NULL,
+                                 ui_layerNameWidgets[i], oldLabel);
+        ui_xSetToggleState(ui_layerButtonWidgets[i],
+                           ui_utilIsSet(flagWord, bit));
+        bit *= 2;
     }
 
-/***************************************************************************/
+    /***************************************************************************/
 
     XawFormDoLayout(ui_layerPanel, True);
 }

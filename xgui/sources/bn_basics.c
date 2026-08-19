@@ -53,8 +53,7 @@
 void bn_basics_createART(int model, Widget *baseWidget,int *already_open,
                          Widget unitWidget[], Widget rowWidget[],
                          XtCallbackProc   CreateCallbackProc,
-                         XtCallbackProc   DoneCallbackProc )
-{
+                         XtCallbackProc   DoneCallbackProc ) {
     Widget      artpanel, artform, button, dummy1x, dummy1y;
     Widget      dummy2x, dummy3, dummy4, dummy5;
     Arg		args[10];
@@ -66,88 +65,88 @@ void bn_basics_createART(int model, Widget *baseWidget,int *already_open,
     int         i;
     char        Name[4][20];
     char        ModelName[20];
-    
+
     switch (model) {
     case ART1_MODEL:
-	sprintf(ModelName,"ART 1");
-	Width = 314;
-	Height = 103;
-	NoOfDialogRows = 2;
-	strcpy(Name[0],"F1 layer: ");
-	strcpy(Name[1],"F2 layer: ");
-	break;
+        sprintf(ModelName,"ART 1");
+        Width = 314;
+        Height = 103;
+        NoOfDialogRows = 2;
+        strcpy(Name[0],"F1 layer: ");
+        strcpy(Name[1],"F2 layer: ");
+        break;
     case ART2_MODEL:
-	sprintf(ModelName,"ART 2");
-	Width = 314;
-	Height = 124;
-	NoOfDialogRows = 2;
-	strcpy(Name[0],"F1 layer: ");
-	strcpy(Name[1],"F2 layer: ");
-	break;
+        sprintf(ModelName,"ART 2");
+        Width = 314;
+        Height = 124;
+        NoOfDialogRows = 2;
+        strcpy(Name[0],"F1 layer: ");
+        strcpy(Name[1],"F2 layer: ");
+        break;
     case ARTMAP_MODEL:
-	sprintf(ModelName,"ARTMAP");
-	Width = 314;
-	Height = 149;
-	NoOfDialogRows = 4;
-	strcpy(Name[0],"F1a layer: ");
-	strcpy(Name[1],"F2a layer: ");
-	strcpy(Name[2],"F1b layer: ");
-	strcpy(Name[3],"F2b layer: ");
-	break;
+        sprintf(ModelName,"ARTMAP");
+        Width = 314;
+        Height = 149;
+        NoOfDialogRows = 4;
+        strcpy(Name[0],"F1a layer: ");
+        strcpy(Name[1],"F2a layer: ");
+        strcpy(Name[2],"F1b layer: ");
+        strcpy(Name[3],"F2b layer: ");
+        break;
     default:
-	*baseWidget = NULL;
-	*already_open = 0;
-	return;
+        *baseWidget = NULL;
+        *already_open = 0;
+        return;
     } /*switch*/
 
     if(*already_open) {
-	XRaiseWindow (XtDisplay (*baseWidget), XtWindow (*baseWidget));
-	return;
+        XRaiseWindow (XtDisplay (*baseWidget), XtWindow (*baseWidget));
+        return;
     }
 
     sprintf(buf,"SNNS BigNet (%s)", ModelName);
-       
 
-    *baseWidget = 
-	XtCreatePopupShell(buf, topLevelShellWidgetClass, ui_toplevel,
-			   args, n);
+
+    *baseWidget =
+        XtCreatePopupShell(buf, topLevelShellWidgetClass, ui_toplevel,
+                           args, n);
 
     artform = XtCreateManagedWidget("box", boxWidgetClass, *baseWidget, args,n);
     artpanel = XtCreateManagedWidget("form", formWidgetClass, artform, NULL, 0);
 
-       
+
     /* Headings */
     dummy1y = dummy1x =
-	ui_xCreateLabelItem (" ",artpanel, colwidth*8, NULL, NULL);
-    dummy2x = ui_xCreateLabelItem ("No. of units", artpanel, colwidth*8, 
-				   dummy1x, NULL);
-    dummy3 = ui_xCreateLabelItem ("No. of rows", artpanel, colwidth*8, 
-				  dummy2x, NULL);
+                  ui_xCreateLabelItem (" ",artpanel, colwidth*8, NULL, NULL);
+    dummy2x = ui_xCreateLabelItem ("No. of units", artpanel, colwidth*8,
+                                   dummy1x, NULL);
+    dummy3 = ui_xCreateLabelItem ("No. of rows", artpanel, colwidth*8,
+                                  dummy2x, NULL);
 
     /* dialog rows */
     for (i=0; i<NoOfDialogRows; i++) {
 
-	dummy3 = 
+        dummy3 =
             ui_xCreateLabelItem (Name[i], artpanel, colwidth*8, NULL, dummy1y);
-	dummy4 = ui_xCreateLabelItem (" ", artpanel, 2*8, dummy1x,dummy1y);
-	unitWidget[i] = 
+        dummy4 = ui_xCreateLabelItem (" ", artpanel, 2*8, dummy1x,dummy1y);
+        unitWidget[i] =
             ui_xCreateDialogItem (" ", artpanel, "",  6*8, dummy4, dummy1y);
-	dummy5 = ui_xCreateLabelItem (" ", artpanel, 2*8, dummy2x, dummy1y);
-	rowWidget[i]  = dummy1y = 
-            ui_xCreateDialogItem (" ", artpanel, "",  6*8, dummy5, dummy1y);
-         
+        dummy5 = ui_xCreateLabelItem (" ", artpanel, 2*8, dummy2x, dummy1y);
+        rowWidget[i]  = dummy1y =
+                            ui_xCreateDialogItem (" ", artpanel, "",  6*8, dummy5, dummy1y);
+
     } /*for*/
-       
+
     dummy3 = dummy5;
 
     /* buttons have to be defined by calling procedure */
     button = ui_xCreateButtonItem ("create_net", artform, NULL, dummy3);
-    XtAddCallback (button, XtNcallback, CreateCallbackProc, NULL); 
+    XtAddCallback (button, XtNcallback, CreateCallbackProc, NULL);
     button = ui_xCreateButtonItem ("done", artform, button, dummy3);
-    XtAddCallback (button, XtNcallback,DoneCallbackProc, NULL); 
+    XtAddCallback (button, XtNcallback,DoneCallbackProc, NULL);
 
     ui_checkWindowPosition(*baseWidget);
-    XtPopup (*baseWidget, XtGrabNone); 
+    XtPopup (*baseWidget, XtGrabNone);
     ui_xDontResizeWidget (*baseWidget);
 
     *already_open = 1;
@@ -165,15 +164,14 @@ void bn_basics_createART(int model, Widget *baseWidget,int *already_open,
 
   UPDATE   : 20.1.1993
 ******************************************************************************/
-void bn_basics_refresh (void)
-{
+void bn_basics_refresh (void) {
 
-   ui_sel_resetList();
-   ui_net_completeRefresh(ui_currentDisplay,2);
-   ui_stat_displayStatus(ui_gridPosMouse);
-   strcpy(ui_filenameNET,"SNNS_NET");
-   strcpy(ui_filenameSLNET,"SNNS_NET");
-   ui_file_updateShellLabels();
+    ui_sel_resetList();
+    ui_net_completeRefresh(ui_currentDisplay,2);
+    ui_stat_displayStatus(ui_gridPosMouse);
+    strcpy(ui_filenameNET,"SNNS_NET");
+    strcpy(ui_filenameSLNET,"SNNS_NET");
+    ui_file_updateShellLabels();
 
 }
 
@@ -189,25 +187,24 @@ void bn_basics_refresh (void)
 
   UPDATE   : 20.1.1993
 ******************************************************************************/
-int bn_basics_check_existingNetwork (void)
-{
+int bn_basics_check_existingNetwork (void) {
 
-  if (krui_getNoOfUnits()) { /* There is an existing network */
+    if (krui_getNoOfUnits()) { /* There is an existing network */
 
-     if ( ! ui_confirmYes ("Create will erase current network. Create?")) {
-        return 0;
-     } else {
-        krui_deleteNet();
+        if ( ! ui_confirmYes ("Create will erase current network. Create?")) {
+            return 0;
+        } else {
+            krui_deleteNet();
+            return 1;
+        } /*if*/
+
+    } else { /* There is no existing network */
+
         return 1;
-     } /*if*/
 
-  } else { /* There is no existing network */
+    } /*if*/
 
-      return 1;
-
-  } /*if*/
-
-} 
+}
 
 
 
@@ -224,14 +221,14 @@ void bn_basics_getValues (int NoOfLayers, int units[], int rows[],
                           Widget unitWidget[], Widget rowWidget[])
 
 {
-   int i;
+    int i;
 
-   for (i=0; i<NoOfLayers; i++) {
-      units[i] = ui_xIntFromAsciiWidget(unitWidget[i]);
-      rows[i]  = ui_xIntFromAsciiWidget(rowWidget[i]);
-   } /*for*/
+    for (i=0; i<NoOfLayers; i++) {
+        units[i] = ui_xIntFromAsciiWidget(unitWidget[i]);
+        rows[i]  = ui_xIntFromAsciiWidget(rowWidget[i]);
+    } /*for*/
 
-   return;
+    return;
 
 }
 
@@ -250,33 +247,33 @@ void bn_basics_getValues (int NoOfLayers, int units[], int rows[],
 int bn_basics_checkValues (int NoOfLayers, int units[], int rows[])
 
 {
-   int  i;
-   char buf[80];
+    int  i;
+    char buf[80];
 
-   for (i=0; i<NoOfLayers; i++) {
+    for (i=0; i<NoOfLayers; i++) {
 
-     if (units[i] < 1) {
-        sprintf (buf,"Number of units has to be greater than 0 in line %d!",i+1);
-        ui_confirmOk (buf);
-        return 0;
-     } /*if*/
+        if (units[i] < 1) {
+            sprintf (buf,"Number of units has to be greater than 0 in line %d!",i+1);
+            ui_confirmOk (buf);
+            return 0;
+        } /*if*/
 
-     if (rows[i] < 1) {
-        sprintf (buf,"Number of rows has to be greater than 0 in line %d!",i+1);
-        ui_confirmOk (buf);
-        return 0;
-     } /*if*/
+        if (rows[i] < 1) {
+            sprintf (buf,"Number of rows has to be greater than 0 in line %d!",i+1);
+            ui_confirmOk (buf);
+            return 0;
+        } /*if*/
 
-     if (units[i] < rows[i]) {
-        sprintf(buf,
-                "Number of rows must not be greater\nthan number of units in line %d!",
-                i+1);
-        ui_confirmOk (buf);
-        return 0;
-     } /*if*/
+        if (units[i] < rows[i]) {
+            sprintf(buf,
+                    "Number of rows must not be greater\nthan number of units in line %d!",
+                    i+1);
+            ui_confirmOk (buf);
+            return 0;
+        } /*if*/
 
-   } /*for*/
+    } /*for*/
 
-   return 1;
+    return 1;
 
-} 
+}

@@ -75,75 +75,75 @@ static FILE *hfp;
 /*---------------------------------------------------------------------------*/
 
 int histSimple_init( ModuleTableEntry *self, int msgc, char *msgv[] ) {
-  char filename[MAX_FILENAME_LEN];
+    char filename[MAX_FILENAME_LEN];
 
-  MODULE_KEY( HIST_SIMPLE_KEY );
+    MODULE_KEY( HIST_SIMPLE_KEY );
 
-  SEL_MSG( msgv[0] )
+    SEL_MSG( msgv[0] )
 
     MSG_CASE( GENERAL_INIT   ) {
-    /* nothing to do */
-  }
-  MSG_CASE( GENERAL_EXIT   ) {
-    if( hfp )  fclose( hfp );
-  }
+        /* nothing to do */
+    }
+    MSG_CASE( GENERAL_EXIT   ) {
+        if( hfp )  fclose( hfp );
+    }
 
-  MSG_CASE( EVOLUTION_INIT ) {
-    sprintf( filename, "%s.%s", histfile, FILE_EXTENSION);
-    if( (hfp = fopen( filename, "w" )) == NULL )
-      return( HISTFILE_OPEN_ERR );
-    setlinebuf( hfp );
-    fprintf( hfp, OUT_TEXT );
-  }
+    MSG_CASE( EVOLUTION_INIT ) {
+        sprintf( filename, "%s.%s", histfile, FILE_EXTENSION);
+        if( (hfp = fopen( filename, "w" )) == NULL )
+            return( HISTFILE_OPEN_ERR );
+        setlinebuf( hfp );
+        fprintf( hfp, OUT_TEXT );
+    }
 
-  MSG_CASE( HISTORY_FILE )    {
-    if( msgc > 1 ) histfile = strdup( msgv[1] );
-  }
+    MSG_CASE( HISTORY_FILE )    {
+        if( msgc > 1 ) histfile = strdup( msgv[1] );
+    }
 
-  END_MSG;
+    END_MSG;
 
-  return( INIT_USED );
+    return( INIT_USED );
 }
 
 /*---------------------------------------------------------------------------*/
 
 int histSimple_work( PopID *parents, PopID *offsprings, PopID *ref ) {
-  static int generationCnt = 0;
+    static int generationCnt = 0;
 
-  NetID  net;
-  NetworkData *netData;
-  int dummy, weights;
+    NetID  net;
+    NetworkData *netData;
+    int dummy, weights;
 
-  generationCnt++;
+    generationCnt++;
 
-  FOR_ALL_OFFSPRINGS( net ) {
-    netData = GET_NET_DATA( net );
+    FOR_ALL_OFFSPRINGS( net ) {
+        netData = GET_NET_DATA( net );
 
-    ksh_getNetInfo( &dummy, &weights, &dummy, &dummy );
-    fprintf( hfp, OUT_FORMAT , netData->histID,
-	     generationCnt,
-	     netData->histRec.parent1,
-	     netData->fitness,
-	     netData->histRec.firstEpochs,
-	     netData->histRec.learnEpochs,
-	     netData->tss,
-	     netData->histRec.testTss,
-	     netData->histRec.testHam,
-	     ksh_getNoOfUnits(),
-	     weights                        );
-  }
+        ksh_getNetInfo( &dummy, &weights, &dummy, &dummy );
+        fprintf( hfp, OUT_FORMAT, netData->histID,
+                 generationCnt,
+                 netData->histRec.parent1,
+                 netData->fitness,
+                 netData->histRec.firstEpochs,
+                 netData->histRec.learnEpochs,
+                 netData->tss,
+                 netData->histRec.testTss,
+                 netData->histRec.testHam,
+                 ksh_getNoOfUnits(),
+                 weights                        );
+    }
 
-  return( MODULE_NO_ERROR );
+    return( MODULE_NO_ERROR );
 }
 
 /*---------------------------------------------------------------------------*/
 
 char *histSimple_errMsg( int err_code ) {
-  static int err_cnt = 4;
-  static char *err_msg[] = {
-    "no error (history)", "unknown error (history)",
-    "memory excess in module history", "can't open history-file"
-  };
+    static int err_cnt = 4;
+    static char *err_msg[] = {
+        "no error (history)", "unknown error (history)",
+        "memory excess in module history", "can't open history-file"
+    };
 
-  return( err_msg[ err_code < err_cnt ? err_code : MODULE_UNKNOWN_ERR ] );
+    return( err_msg[ err_code < err_cnt ? err_code : MODULE_UNKNOWN_ERR ] );
 }

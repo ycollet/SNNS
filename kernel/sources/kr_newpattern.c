@@ -1092,7 +1092,7 @@ krui_err kr_npui_setClass(char *classname) {
 
   UPDATE   :
 ******************************************************************************/
-int  kr_np_pattern(int mode ,int mode1 ,int pattern_no) {
+int  kr_np_pattern(int mode,int mode1,int pattern_no) {
     int return_code;
     int new_pattern;
     np_pattern_set_info info;
@@ -3026,11 +3026,11 @@ static krui_err kr_np_ValidateInfo(int pat_set) {
 
             for (j=0; j < p->pub.input_dim; j++) {
                 (np_info[pat_set].pub.in_max_dim_sizes)[j] = (np_info[pat_set].pub.in_min_dim_sizes)[j] =
-                            (p -> pub.input_dim_sizes)[j];
+                        (p -> pub.input_dim_sizes)[j];
             }
             for (j=0; j < p->pub.output_dim; j++) {
                 (np_info[pat_set].pub.out_max_dim_sizes)[j] = (np_info[pat_set].pub.out_min_dim_sizes)[j] =
-                            (p -> pub.output_dim_sizes)[j];
+                        (p -> pub.output_dim_sizes)[j];
             }
         }
 

@@ -15,7 +15,7 @@
 
     Copyright (c) 1990-1995  SNNS Group, IPVR, Univ. Stuttgart, FRG
     Copyright (c) 1996-1998  SNNS Group, WSI, Univ. Tuebingen, FRG
-             
+
 ******************************************************************************/
 
 
@@ -40,7 +40,7 @@ extern void  ui_edit_newFType (Widget, struct SimpleListType *, caddr_t);
 extern void  ui_edit_deleteFType (Widget, struct SimpleListType *, caddr_t);
 
 
-	/* widgets in the edit panels */
+/* widgets in the edit panels */
 extern Widget ui_edit_siteFuncNameWidget;
 extern Widget ui_edit_siteNameWidget;
 extern Widget ui_edit_actFuncNameWidget;
@@ -48,11 +48,11 @@ extern Widget ui_edit_outFuncNameWidget;
 extern Widget ui_edit_ftypeNameWidget;
 
 
-	/* the following values are available after */
-	/* the call of ui_list_buildList */
+/* the following values are available after */
+/* the call of ui_list_buildList */
 extern int   ui_list_noOfFtypes;     /* no of ftypes reported by the kernel */
 
-	/* names */
+/* names */
 extern char    ui_edit_siteName[];
 extern char    ui_edit_siteFuncName[];
 

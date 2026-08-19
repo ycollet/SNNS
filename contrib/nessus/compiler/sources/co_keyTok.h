@@ -6,10 +6,10 @@
   PURPOSE           : Keyword token numbers of nessus (constants defined in co_tokens.h).
   NOTES             :
 
-  AUTHOR            : Thomas Korb 
+  AUTHOR            : Thomas Korb
   DATE              : 27.6.1991
 
-  CHANGED BY        : 
+  CHANGED BY        :
   IDENTIFICATION    : %W% %G%
   SCCS VERSION      : %I%
   LAST CHANGE       : %G%

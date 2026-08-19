@@ -102,7 +102,7 @@ float RbfSquareOfNorm(RbfFloatMatrix *m) {
 
     for (i = m->rows -1 ; i>=0; i--) {
         for (j = m->columns -1 ; j>=0; j--)
-            norm += RbfMatrixGetValue(m, i ,j )*RbfMatrixGetValue(m, i, j);
+            norm += RbfMatrixGetValue(m, i,j )*RbfMatrixGetValue(m, i, j);
     };
     return norm ;
 }

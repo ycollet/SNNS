@@ -6,10 +6,10 @@
   PURPOSE           : header file for co_main.c
   NOTES             :
 
-  AUTHOR            : Thomas Korb 
+  AUTHOR            : Thomas Korb
   DATE              : 27.6.1991
 
-  CHANGED BY        : 
+  CHANGED BY        :
   IDENTIFICATION    : %W% %G%
   SCCS VERSION      : %I%
   LAST CHANGE       : %G%
@@ -32,7 +32,7 @@ extern void srand48();
 
 /* macros to deal with program parameters */
 #define isfloat(x,y) (sscanf(x, "%f", &y) != 0) /* TRUE if string x contains a float no. */
-                                                          /* float no. is returned in y  */
+/* float no. is returned in y  */
 
 /* counter of current input line (see Tokens.l, Syntax.y) */
 extern int yylineno;

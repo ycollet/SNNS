@@ -16,7 +16,7 @@
 
     Copyright (c) 1990-1995  SNNS Group, IPVR, Univ. Stuttgart, FRG
     Copyright (c) 1996-1998  SNNS Group, WSI, Univ. Tuebingen, FRG
-             
+
 ******************************************************************************/
 
 
@@ -28,7 +28,7 @@
 
 extern void  ui_set_showProc(Widget w, int value, caddr_t call_data);
 extern void  ui_set_getSetupData(Widget widget, int toggleNumber, caddr_t call_data);
-extern void  ui_thumbed(Widget widget, int trigger, XtPointer top_ptr); 
+extern void  ui_thumbed(Widget widget, int trigger, XtPointer top_ptr);
 extern void  ui_scrolled(Widget widget, caddr_t label_ptr, XtPointer value_ptr);
 extern void  ui_set_assignLayers(Widget w, caddr_t client_data, caddr_t call_data);
 extern void  ui_set_colorProc(Widget w, int value, caddr_t call_data);

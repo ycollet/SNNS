@@ -25,10 +25,10 @@
 
 
 extern void ui_xCreateInfoPanel(Widget parent);
-	/* the parent widget of the new form widget */
+/* the parent widget of the new form widget */
 
 extern struct UnitAttributeType  ui_sourceUnit, ui_targetUnit;
-	/* attributes of source/target unit in the info panel */
+/* attributes of source/target unit in the info panel */
 
 
 

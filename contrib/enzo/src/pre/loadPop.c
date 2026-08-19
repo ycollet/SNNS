@@ -72,31 +72,31 @@ static char filename[MAX_FILENAME_LEN] = "";
 /*---------------------------------------------------------------------------*/
 
 int loadPop_init( ModuleTableEntry *self, int msgc, char *msgv[] ) {
-  MODULE_KEY( LOAD_POP_KEY );
+    MODULE_KEY( LOAD_POP_KEY );
 
-  SEL_MSG( msgv[0] )
+    SEL_MSG( msgv[0] )
 
     MSG_CASE( GENERAL_INIT    ) {
-    /* nothing to do */
-  }
-  MSG_CASE( GENERAL_EXIT    ) {
-    /* nothing to do */
-  }
-  MSG_CASE( EVOLUTION_INIT  ) {
-    /* nothing to do */
-  }
+        /* nothing to do */
+    }
+    MSG_CASE( GENERAL_EXIT    ) {
+        /* nothing to do */
+    }
+    MSG_CASE( EVOLUTION_INIT  ) {
+        /* nothing to do */
+    }
 
-  MSG_CASE( NET_NAME   )    {
-    if( msgc > 1 )
-      strcpy( fileName , msgv[1] );
-  }
-  MSG_CASE( POP_SIZE )      {
-    if ( msgc > 1)
-      popsize = atoi( msgv[1] );
-  }
-  END_MSG;
+    MSG_CASE( NET_NAME   )    {
+        if( msgc > 1 )
+            strcpy( fileName, msgv[1] );
+    }
+    MSG_CASE( POP_SIZE )      {
+        if ( msgc > 1)
+            popsize = atoi( msgv[1] );
+    }
+    END_MSG;
 
-  return( INIT_USED );
+    return( INIT_USED );
 }
 
 /*---------------------------------------------------------------------------*/
@@ -105,32 +105,32 @@ int loadPop_init( ModuleTableEntry *self, int msgc, char *msgv[] ) {
 /*---------------------------------------------------------------------------*/
 
 int loadPop_work( PopID *parents, PopID *offsprings, PopID *reference ) {
-  int i;
-  NetworkData *data;
-  NetID net;
+    int i;
+    NetworkData *data;
+    NetID net;
 
-  /* First step is to load the reference-net        */
+    /* First step is to load the reference-net        */
 
-  data = utils_getNewNetData();
-  sprintf( filename, "%s_ref.net", fileName);
-  if ((net = kpm_loadNet( filename, data)) == NULL) {
-    return ( ERROR_LOAD );
-  }
-  kpm_setPopMember( net, *reference );
-
-  /* Afterwards try to load populationsize nets for the parent-population */
-
-  for ( i = 0; i < popsize; i++) {
     data = utils_getNewNetData();
-    sprintf( filename, "%s_%04d.net", fileName,i);
+    sprintf( filename, "%s_ref.net", fileName);
     if ((net = kpm_loadNet( filename, data)) == NULL) {
-      if( i > 0 ) break;
-      return ( ERROR_LOAD );
+        return ( ERROR_LOAD );
     }
-    kpm_setPopMember ( net, *offsprings);
-  }
+    kpm_setPopMember( net, *reference );
 
-  return( MODULE_NO_ERROR );
+    /* Afterwards try to load populationsize nets for the parent-population */
+
+    for ( i = 0; i < popsize; i++) {
+        data = utils_getNewNetData();
+        sprintf( filename, "%s_%04d.net", fileName,i);
+        if ((net = kpm_loadNet( filename, data)) == NULL) {
+            if( i > 0 ) break;
+            return ( ERROR_LOAD );
+        }
+        kpm_setPopMember ( net, *offsprings);
+    }
+
+    return( MODULE_NO_ERROR );
 }
 
 /*---------------------------------------------------------------------------*/
@@ -139,15 +139,15 @@ int loadPop_work( PopID *parents, PopID *offsprings, PopID *reference ) {
 /*---------------------------------------------------------------------------*/
 
 char *loadPop_errMsg( int err_code ) {
-  static char msg[MAX_ERR_MSG_LEN];
-  switch ( err_code ) {
-  case MODULE_NO_ERROR :
-    return ("loadPop : No error found");
+    static char msg[MAX_ERR_MSG_LEN];
+    switch ( err_code ) {
+    case MODULE_NO_ERROR :
+        return ("loadPop : No error found");
 
-  case ERROR_LOAD :
-    sprintf(msg,"loadPop : Can't load the net %s",filename);
-    return ( msg );
-  }
+    case ERROR_LOAD :
+        sprintf(msg,"loadPop : Can't load the net %s",filename);
+        return ( msg );
+    }
 
-  return ("loadPop : Unknown error");
+    return ("loadPop : Unknown error");
 }

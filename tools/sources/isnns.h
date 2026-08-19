@@ -36,8 +36,7 @@
 #define C_HELP 6
 #define C_SAVE 7
 
-typedef struct
-{
+typedef struct {
     char *c_string;
     int c;
 } c_entry;
@@ -49,13 +48,13 @@ c_entry c_table[] = {
     { "learn", C_LEARN },
     { "quit", C_QUIT },
     { "help", C_HELP },
-    { "save", C_SAVE }	
+    { "save", C_SAVE }
 };
 
 static int c_table_no = 7;
 
 /* end private definition section */
 
-#endif 
+#endif
 
 

@@ -9,8 +9,8 @@
   AUTHOR         : Tobias Soyez
   DATE           : 09.11.1993
 
-  CHANGED BY     : 
-  RCS VERSION    : $Revision: 2.6 $ 
+  CHANGED BY     :
+  RCS VERSION    : $Revision: 2.6 $
   LAST CHANGE    : $Date: 1998/02/25 15:19:23 $
 
     Copyright (c) 1990-1995  SNNS Group, IPVR, Univ. Stuttgart, FRG
@@ -27,7 +27,7 @@ extern void bn_create_jordan (void) ;
 extern void bn_create_elman  (void) ;
 
 
-#endif 
+#endif
 
 
 /*****************************************************************************

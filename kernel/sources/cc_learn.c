@@ -121,7 +121,7 @@ krui_err cc_initVariables(float* ParameterInArray,
 float cc_calculateCorrelation(int StartPattern, int EndPattern, int counter) {
     int s,o,n;
     double highScore, unchangedhighScore, scoreBuffer;
-    float bestSpecialUnitScore = -0.1 ,
+    float bestSpecialUnitScore = -0.1,
           bestSpecialUnitUnchangedScore=0.0;
     struct Unit *SpecialUnitPtr = NULL,*OutputUnitPtr;
     int start, end;
@@ -176,22 +176,22 @@ krui_err cc_GetTrainFunctions(int learnFunc) {
     switch(learnFunc) {
     case BACKPROP:
         cc_SpecialUnitUpdate =
-            cc_OutputUnitUpdate = BackPropOfflinePart;
+        cc_OutputUnitUpdate = BackPropOfflinePart;
         break;
     case BACKPROP_ONLINE:
         cc_SpecialUnitUpdate =
-            cc_OutputUnitUpdate = OnlineBackPropOfflinePart;
+        cc_OutputUnitUpdate = OnlineBackPropOfflinePart;
         cc_propagateOutputUnitsBackward  = cc_propagateOutputOnlineCase;
         cc_propagateSpecialUnitsBackward = cc_propagateSpecialOnlineCase;
         break;
     case QUICKPROP:
         cc_SpecialUnitUpdate =
-            cc_OutputUnitUpdate = QuickPropOfflinePart;
+        cc_OutputUnitUpdate = QuickPropOfflinePart;
 
         break;
     case RPROP:
         cc_SpecialUnitUpdate =
-            cc_OutputUnitUpdate = RPropOfflinePart;
+        cc_OutputUnitUpdate = RPropOfflinePart;
 
         break;
     default:
@@ -232,7 +232,7 @@ void cc_trainSpecialUnits(int maxNoOfCovarianceUpdateCycles,
         cc_calculateSpecialUnitActivation(StartPattern,EndPattern);
         newHighScore = cc_calculateCorrelation(StartPattern,EndPattern,counter);
         KernelErrorCode = cc_getPatternParameter(StartPattern, EndPattern,
-                          &start, &end, &n);
+            &start, &end, &n);
         ERROR_CHECK_WRC;
         (*cc_propagateSpecialUnitsBackward)(start, end, n, counter,
                                             param1, param2, param3);
@@ -374,7 +374,7 @@ void cc_calculateOutputUnitError(int StartPattern,int EndPattern) {
                                             ((UnitPtr->act_func == ACT_Custom_Python) ?
                                              kr_PythonActFunction(UnitPtr->python_act_func,
                                                      UnitPtr) :
-                                             (UnitPtr->act_func) (UnitPtr)) ,p);
+                                             (UnitPtr->act_func) (UnitPtr)),p);
             OUTPUT_UNIT_SUM_ERROR[o] +=
                 (OutputUnitError[p][o] =
                      (UnitPtr->Out.output-(*out_pat++))*
@@ -421,7 +421,7 @@ void cc_calculateSpecialUnitActivation(int StartPattern, int EndPattern) {
                                             ((specialUnitPtr->act_deriv_func == ACT_DERIV_Custom_Python) ?
                                              kr_PythonActFunction(specialUnitPtr->python_act_deriv_func,
                                                      specialUnitPtr) :
-                                             (specialUnitPtr->act_deriv_func) (specialUnitPtr)) ,p);
+                                             (specialUnitPtr->act_deriv_func) (specialUnitPtr)),p);
             SpecialUnitSumAct[s] +=
                 SpecialUnitAct[p][s] = specialUnitPtr->Out.output;
             FOR_ALL_OUTPUT_UNITS(outputUnitPtr,o) {
@@ -853,8 +853,8 @@ krui_err cc_generateHiddenUnit(int GroupNo) {
     KernelErrorCode=cc_actualizeLayerlist(bestSpecialUnitPtr,LayerOfNewUnit);
     ERROR_CHECK;
     LastInsertedHiddenUnit=
-        CurrentUnit =
-            KernelErrorCode =
+    CurrentUnit =
+    KernelErrorCode =
                 kr_copyUnit(ONLY_INPUTS,GET_UNIT_NO(bestSpecialUnitPtr));
     if(KernelErrorCode < 0)  return(KernelErrorCode);
 

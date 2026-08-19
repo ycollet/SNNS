@@ -3,7 +3,7 @@
   SHORTNAME      : ic_snns
   SNNS VERSION   : 4.2
 
-  PURPOSE        : Intermediate Code (IC) functions for the SNNS batch 
+  PURPOSE        : Intermediate Code (IC) functions for the SNNS batch
                    interpreter:
                    function calls to the SNNS-Kernel function interface
 
@@ -11,9 +11,9 @@
                                   IC: intermediate code
 
   AUTHOR         : Jens Wieland
-  DATE           : 
+  DATE           :
 
-  CHANGED BY     : 
+  CHANGED BY     :
   RCS VERSION    : $Revision: 1.10 $
   LAST CHANGE    : $Date: 1998/04/20 11:48:09 $
 
@@ -47,7 +47,7 @@ extern void pruneTrainNet(arglist_type *arglist);
 extern void pruneNetNow(arglist_type *arglist);
 extern void delCandUnits(arglist_type *arglist);
 extern void setActFunc(arglist_type *arglist);
- 
+
 extern void loadPattern(arglist_type *arglist);
 extern void setPattern(arglist_type *arglist);
 extern void delPattern(arglist_type *arglist);

@@ -84,43 +84,43 @@ static int      refInputUnits, refNoOfUnits, refNoOfLinks;
 /*                                                                            */
 
 int topologyRating_init( ModuleTableEntry *self, int msgc, char *msgv[] ) {
-  MODULE_KEY( LEARN_SNNS_KEY );
+    MODULE_KEY( LEARN_SNNS_KEY );
 
-  SEL_MSG( msgv[0] )
+    SEL_MSG( msgv[0] )
 
     MSG_CASE( GENERAL_INIT   ) {
-    /* nothing to do */
-  }
-  MSG_CASE( GENERAL_EXIT   ) {
-    /* nothing to do */
-  }
-  MSG_CASE( EVOLUTION_INIT ) {
-    if( kpm_popFirstMember( *REFERENCE ) == NULL )
-      return( ERROR_NO_REFNET );
-
-    refInputUnits = ksh_getNoOfTTypeUnits( INPUT );
-    refNoOfUnits  = ksh_getNoOfUnits();
-    GET_NO_OF_LINKS( refNoOfLinks );
-    if( refNoOfLinks == 0 || refNoOfUnits == 0 || refInputUnits == 0 ) {
-      return ( ERROR_ILLEGALREF );
+        /* nothing to do */
     }
-  }
+    MSG_CASE( GENERAL_EXIT   ) {
+        /* nothing to do */
+    }
+    MSG_CASE( EVOLUTION_INIT ) {
+        if( kpm_popFirstMember( *REFERENCE ) == NULL )
+            return( ERROR_NO_REFNET );
 
-  MSG_CASE( WEIGHT_RATING ) {
-    if( msgc > 1 )
-      weightrating = (float) atof( msgv[1] );
-  }
-  MSG_CASE( UNIT_RATING   ) {
-    if( msgc > 1)
-      unitrating = (float) atof( msgv[1] );
-  }
-  MSG_CASE( INPUT_RATING  ) {
-    if( msgc > 1)
-      inputrating = (float) atof( msgv[1] );
-  }
-  END_MSG;
+        refInputUnits = ksh_getNoOfTTypeUnits( INPUT );
+        refNoOfUnits  = ksh_getNoOfUnits();
+        GET_NO_OF_LINKS( refNoOfLinks );
+        if( refNoOfLinks == 0 || refNoOfUnits == 0 || refInputUnits == 0 ) {
+            return ( ERROR_ILLEGALREF );
+        }
+    }
 
-  return ( INIT_USED );
+    MSG_CASE( WEIGHT_RATING ) {
+        if( msgc > 1 )
+            weightrating = (float) atof( msgv[1] );
+    }
+    MSG_CASE( UNIT_RATING   ) {
+        if( msgc > 1)
+            unitrating = (float) atof( msgv[1] );
+    }
+    MSG_CASE( INPUT_RATING  ) {
+        if( msgc > 1)
+            inputrating = (float) atof( msgv[1] );
+    }
+    END_MSG;
+
+    return ( INIT_USED );
 }
 
 /*                                                                            */
@@ -135,33 +135,33 @@ int topologyRating_init( ModuleTableEntry *self, int msgc, char *msgv[] ) {
 /*                                                                            */
 
 int topologyRating_work( PopID *parents, PopID *offsprings, PopID *reference ) {
-  NetworkData *data;
-  NetID activeMember;
-  int i, input, deadInput, noOfLinks;
+    NetworkData *data;
+    NetID activeMember;
+    int i, input, deadInput, noOfLinks;
 
-  FOR_ALL_OFFSPRINGS (activeMember) {
-    if( (data = kpm_getNetData( activeMember )) == NULL ) {
-      return( ERROR_NETDATA );
+    FOR_ALL_OFFSPRINGS (activeMember) {
+        if( (data = kpm_getNetData( activeMember )) == NULL ) {
+            return( ERROR_NETDATA );
+        }
+
+        input = 0;
+        deadInput = 0;
+
+        for( i = ksh_getFirstUnit(); i != 0; i = ksh_getNextUnit() ) {
+            if( ksh_getUnitTType( i ) == INPUT ) {
+                input++;
+                if( subul_deadInputUnit( i ) ) deadInput++;
+            }
+        }
+
+        if( input > 0 ) data->fitness += inputrating*(input- deadInput)/input;
+
+        GET_NO_OF_LINKS( noOfLinks );
+        data->fitness +=    unitrating   * ksh_getNoOfUnits() / refNoOfUnits
+                            + weightrating * noOfLinks           / refNoOfLinks;
     }
 
-    input = 0;
-    deadInput = 0;
-
-    for( i = ksh_getFirstUnit(); i != 0; i = ksh_getNextUnit() ) {
-      if( ksh_getUnitTType( i ) == INPUT ) {
-	input++;
-	if( subul_deadInputUnit( i ) ) deadInput++;
-      }
-    }
-
-    if( input > 0 ) data->fitness += inputrating*(input- deadInput)/input;
-
-    GET_NO_OF_LINKS( noOfLinks );
-    data->fitness +=    unitrating   * ksh_getNoOfUnits() / refNoOfUnits
-      + weightrating * noOfLinks           / refNoOfLinks;
-  }
-
-  return( MODULE_NO_ERROR );
+    return( MODULE_NO_ERROR );
 }
 
 /*                                                                            */
@@ -174,18 +174,18 @@ int topologyRating_work( PopID *parents, PopID *offsprings, PopID *reference ) {
 /*                                                                            */
 
 char *topologyRating_errMsg(int err_code) {
-  switch( err_code ) {
-  case MODULE_NO_ERROR:
-    return( "topoRating: No Error found" );
-  case ERROR_NO_REFNET:
-    return( "topoRating: Can't get reference net" );
-  case ERROR_NETDATA:
-    return( "topoRating: Can't get offspring data" );
-  case ERROR_ILLEGALREF:
-    return( "topoRating: Illegal reference net: no links or no units");
-  }
+    switch( err_code ) {
+    case MODULE_NO_ERROR:
+        return( "topoRating: No Error found" );
+    case ERROR_NO_REFNET:
+        return( "topoRating: Can't get reference net" );
+    case ERROR_NETDATA:
+        return( "topoRating: Can't get offspring data" );
+    case ERROR_ILLEGALREF:
+        return( "topoRating: Illegal reference net: no links or no units");
+    }
 
-  return ( "topologyRating : Unknown error" );
+    return ( "topologyRating : Unknown error" );
 }
 
 /*                                                                            */

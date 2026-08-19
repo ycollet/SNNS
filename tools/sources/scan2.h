@@ -3,7 +3,7 @@
   SHORTNAME      : scan2
   SNNS VERSION   : 4.2
 
-  PURPOSE        : Scanner 2 for SNNS batch interpreter 
+  PURPOSE        : Scanner 2 for SNNS batch interpreter
                    scans the output of a shell command
 
 		   For translation with flex lexical analyzer generator
@@ -12,9 +12,9 @@
                    in order to avoid name conflicts with the other scanners.
 
   AUTHOR         : Jens Wieland
-  DATE           : 
+  DATE           :
 
-  CHANGED BY     : 
+  CHANGED BY     :
   SCCS VERSION   : $Revision: 1.3 $
   LAST CHANGE    : $Date: 1998/02/25 15:34:47 $
 

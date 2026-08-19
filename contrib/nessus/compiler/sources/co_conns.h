@@ -6,10 +6,10 @@
   PURPOSE           : header file for co_conns.c
   NOTES             :
 
-  AUTHOR            : Thomas Korb 
+  AUTHOR            : Thomas Korb
   DATE              : 27.6.1991
 
-  CHANGED BY        : 
+  CHANGED BY        :
   IDENTIFICATION    : %W% %G%
   SCCS VERSION      : %I%
   LAST CHANGE       : %G%
@@ -22,8 +22,8 @@
 #include "co_include.h"
 
 extern short Structures;   /* is set while structures are beeing parsed - needed to */
-			   /* supress redefinition of connection messages in */
-			   /* map-defined structures (IRREGULAR) */
+/* supress redefinition of connection messages in */
+/* map-defined structures (IRREGULAR) */
 
 extern char *nst;          /* NULL string for lint */
 

@@ -6,10 +6,10 @@
   PURPOSE           : Body of header file for co_pFuncs.c.
   NOTES             :
 
-  AUTHOR            : Thomas Korb 
+  AUTHOR            : Thomas Korb
   DATE              : 27.6.1991
 
-  CHANGED BY        : 
+  CHANGED BY        :
   IDENTIFICATION    : %W% %G%
   SCCS VERSION      : %I%
   LAST CHANGE       : %G%
@@ -40,10 +40,11 @@ extern ParserStackType *yylval, *yyval, yyv[];
 extern int yychar, yynerrs, yyerrflag;
 
 /**** global variable declarations for recursive  lex calls */
-struct yysvf { 
-	struct yywork *yystoff;
-	struct yysvf *yyother;
-	int *yystops;};
+struct yysvf {
+    struct yywork *yystoff;
+    struct yysvf *yyother;
+    int *yystops;
+};
 
 extern char *SC_ActChr, *SC_InputStream;
 extern int yyprevious, *yyfnd, yytchar, yymorfg, yyleng;

@@ -3,13 +3,13 @@
   SHORTNAME         : parser
   VERSION           : 2.0
 
-  PURPOSE           : header file for co_parser.c 
+  PURPOSE           : header file for co_parser.c
   NOTES             :
 
-  AUTHOR            : Thomas Korb 
+  AUTHOR            : Thomas Korb
   DATE              : 27.6.1991
 
-  CHANGED BY        : 
+  CHANGED BY        :
   IDENTIFICATION    : %W% %G%
   SCCS VERSION      : %I%
   LAST CHANGE       : %G%
@@ -27,13 +27,13 @@ extern char *nst;               /* is always NULL - supress lint error message *
 extern ParserStackType *psNULL; /* is always NULL - supress lint error message */
 extern short Topology;          /* TRUE <=> parsing topology definition and evaluation still in progress */
 extern short Functions;         /* TRUE <=> parsing function definitions and translation  still in progress */
-                                /* Topology and Functions are needed to decide if expressions must be */
-			        /* evaluated, rather than translated into C functions. After a fatal error */
-			        /* Topology == Functions == FALSE. */
+/* Topology and Functions are needed to decide if expressions must be */
+/* evaluated, rather than translated into C functions. After a fatal error */
+/* Topology == Functions == FALSE. */
 extern short RightSide;         /* true if yyparse is parsing the right side of a statement or while parsing */
-                                /* constants or structures */
+/* constants or structures */
 extern short Structures;        /* is set while structures are beeing parsed - needed to supress */
-			        /* redefinition of connection messages in map-defined structures (IRREGULAR) */
+/* redefinition of connection messages in map-defined structures (IRREGULAR) */
 extern SymTabType *SymTabPtr;   /* pointer to upper sumbol table on stack (iner ssubnet) */
 
 extern short InitMode;          /* parser states to control execution of loops and conditional  statements */

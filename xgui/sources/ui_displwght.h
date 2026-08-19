@@ -6,8 +6,8 @@
   PURPOSE        : Header file of correspondent '.c' file
   NOTES          :
 
-  AUTHOR         : Guenter Mamier 
-  DATE           : 14.01.92 
+  AUTHOR         : Guenter Mamier
+  DATE           : 14.01.92
 
   CHANGED BY     : Sven Doering
   RCS VERSION    : $Revision: 2.6 $

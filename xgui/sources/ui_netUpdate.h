@@ -15,20 +15,20 @@
 
     Copyright (c) 1990-1995  SNNS Group, IPVR, Univ. Stuttgart, FRG
     Copyright (c) 1996-1998  SNNS Group, WSI, Univ. Tuebingen, FRG
-             
+
 ******************************************************************************/
 
 
 #ifndef _UI_NETUPDATE_DEFINED_
 #define _UI_NETUPDATE_DEFINED_
 
-extern void ui_net_drawLink (struct Ui_DisplayType *, FlagType, int, int, 
-			     FlintType, Bool);
+extern void ui_net_drawLink (struct Ui_DisplayType *, FlagType, int, int,
+                             FlintType, Bool);
 extern void ui_net_drawUnit (struct Ui_DisplayType *, FlagType, int, Bool);
-extern void ui_net_drawAllLinksToUnit (struct Ui_DisplayType *, FlagType, 
-				       int, Bool);
-extern void ui_net_drawAllLinksFromUnit (struct Ui_DisplayType *, FlagType, 
-					 int, FlagType);
+extern void ui_net_drawAllLinksToUnit (struct Ui_DisplayType *, FlagType,
+                                       int, Bool);
+extern void ui_net_drawAllLinksFromUnit (struct Ui_DisplayType *, FlagType,
+        int, FlagType);
 extern void ui_net_updateWhole (struct Ui_DisplayType *, FlagType, int, Bool);
 extern void ui_net_completeRefresh (struct Ui_DisplayType *, FlagType);
 

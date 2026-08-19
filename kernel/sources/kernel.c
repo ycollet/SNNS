@@ -2604,7 +2604,7 @@ void    kr_updateUnitOutputs(void) {
             unit_ptr->Out.output = unit_ptr->act;
         else if(unit_ptr->out_func == OUT_Custom_Python)
             unit_ptr->Out.output = kr_PythonOutFunction(unit_ptr->python_out_func,
-                                   unit_ptr->act);
+                unit_ptr->act);
         else
             unit_ptr->Out.output = (*unit_ptr->out_func) (unit_ptr->act);
     }
@@ -2701,8 +2701,8 @@ GROUP: Functions default presettings
 ******************************************************************************/
 
 void	kr_getUnitDefaults(FlintType *act, FlintType *bias, int *ttflags,
-                           int *subnet_no, int *layer_no, char **act_func,
-                           char **out_func) {
+                         int *subnet_no, int *layer_no, char **act_func,
+                         char **out_func) {
     static char  activation_func[FUNCTION_NAME_MAX_LEN],
            output_func[FUNCTION_NAME_MAX_LEN];
 
@@ -3394,7 +3394,7 @@ krui_err  kr_topoSort(int topo_sorting_mode) {
 
     /*  clear error codes  */
     topo_msg.no_of_cycles = topo_msg.no_of_dead_units =
-                                topo_msg.dest_error_unit = topo_msg.src_error_unit = 0;
+    topo_msg.dest_error_unit = topo_msg.src_error_unit = 0;
     topo_msg.error_code = KRERR_NO_ERROR;
 
     switch (topo_sorting_mode) {
@@ -3459,8 +3459,8 @@ int  kr_topoCheck(void) {
     bool      o_units;
 
     topo_msg.no_of_cycles = topo_msg.no_of_dead_units =
-                                topo_msg.dest_error_unit = topo_msg.src_error_unit =
-                                            topo_msg.no_of_layers = 0;
+    topo_msg.dest_error_unit = topo_msg.src_error_unit =
+    topo_msg.no_of_layers = 0;
     topo_msg.error_code = KernelErrorCode = KRERR_NO_ERROR;
 
     if (NoOfUnits == 0) {
@@ -3947,7 +3947,7 @@ krui_err  kr_xyTransTable(int op, int *x, int *y, int z) {
             if (transTablePtr == NULL)  {
                 if ((new_transTable =
                             (struct TransTable *) realloc( (void *) transTable,
-                                    sizeof(struct TransTable) * (transTableSize + 1) )) == NULL)  {
+                                sizeof(struct TransTable) * (transTableSize + 1) )) == NULL)  {
                     KernelErrorCode = KRERR_INSUFFICIENT_MEM;
                     return( KRERR_INSUFFICIENT_MEM );
                 }

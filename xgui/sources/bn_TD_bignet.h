@@ -3,13 +3,13 @@
   SHORTNAME      : bn_TD_bignet
   SNNS VERSION   : 4.2
 
-  PURPOSE        : 
+  PURPOSE        :
   NOTES          :
 
   AUTHOR         : Guenter Mamier
   DATE           : 09.02.93
 
-  CHANGED BY     : 
+  CHANGED BY     :
   RCS VERSION    : $Revision: 2.6 $
   LAST CHANGE    : $Date: 1998/02/25 15:19:26 $
 
@@ -22,7 +22,7 @@
 
 void bn_create_TD_Bignet (void);
 
-#endif 
+#endif
 /* end of file */
 /* lines: 27 */
 

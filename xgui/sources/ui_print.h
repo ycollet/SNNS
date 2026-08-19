@@ -15,7 +15,7 @@
 
     Copyright (c) 1990-1995  SNNS Group, IPVR, Univ. Stuttgart, FRG
     Copyright (c) 1996-1998  SNNS Group, WSI, Univ. Tuebingen, FRG
-             
+
 ******************************************************************************/
 
 
@@ -35,7 +35,7 @@
 
 #define HEADER_COMPILE
 
-	/* number of radio buttons in a group */
+/* number of radio buttons in a group */
 #define noOfFmtToggles     2
 #define noOfPaperToggles   3
 #define noOfDestToggles    2

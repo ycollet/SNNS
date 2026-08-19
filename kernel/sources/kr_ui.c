@@ -432,16 +432,16 @@ FlintType  krui_getUnitActivation(int UnitNo) {
 
     if KERNEL_STANDARD {
     return( kr_getUnitValues( UnitNo, SEL_UNIT_ACT ) );
-    } else  {
+} else  {
 
 #ifdef MASPAR_KERNEL
 
-        return( krff_getUnitValues( UnitNo, SEL_UNIT_ACT ) );
+    return( krff_getUnitValues( UnitNo, SEL_UNIT_ACT ) );
 
 #else
 
-        KernelErrorCode = KRERR_NO_MASPAR_KERNEL;
-        return( 0.0 );
+    KernelErrorCode = KRERR_NO_MASPAR_KERNEL;
+    return( 0.0 );
 
 #endif
     }
@@ -578,15 +578,15 @@ krui_err  krui_setUnitOutput(int unit_no, FlintTypeParam unit_output) {
 
     if KERNEL_STANDARD  {
     kr_setUnitValues( unit_no, SEL_UNIT_OUT, unit_output );
-    } else  {
+} else  {
 
 #ifdef MASPAR_KERNEL
 
-        krff_setUnitValues( unit_no, SEL_UNIT_OUT, unit_output );
+    krff_setUnitValues( unit_no, SEL_UNIT_OUT, unit_output );
 
 #else
 
-        KernelErrorCode = KRERR_NO_MASPAR_KERNEL;
+    KernelErrorCode = KRERR_NO_MASPAR_KERNEL;
 
 #endif
     }
@@ -607,16 +607,16 @@ FlintType  krui_getUnitBias(int UnitNo) {
 
     if KERNEL_STANDARD  {
     return( kr_getUnitValues( UnitNo, SEL_UNIT_BIAS ) );
-    } else  {
+} else  {
 
 #ifdef MASPAR_KERNEL
 
-        return( krff_getUnitValues( UnitNo, SEL_UNIT_BIAS ) );
+    return( krff_getUnitValues( UnitNo, SEL_UNIT_BIAS ) );
 
 #else
 
-        KernelErrorCode = KRERR_NO_MASPAR_KERNEL;
-        return( 0.0 );
+    KernelErrorCode = KRERR_NO_MASPAR_KERNEL;
+    return( 0.0 );
 
 #endif
     }
@@ -635,15 +635,15 @@ void  krui_setUnitBias(int UnitNo, FlintTypeParam unit_bias) {
 
     if KERNEL_STANDARD  {
     kr_setUnitValues( UnitNo, SEL_UNIT_BIAS, unit_bias );
-    } else  {
+} else  {
 
 #ifdef MASPAR_KERNEL
 
-        krff_setUnitValues( UnitNo, SEL_UNIT_BIAS, unit_bias );
+    krff_setUnitValues( UnitNo, SEL_UNIT_BIAS, unit_bias );
 
 #else
 
-        KernelErrorCode = KRERR_NO_MASPAR_KERNEL;
+    KernelErrorCode = KRERR_NO_MASPAR_KERNEL;
 
 #endif
     }
@@ -661,16 +661,16 @@ FlintType  krui_getUnitValueA(int UnitNo) {
 
     if KERNEL_STANDARD  {
     return( kr_getUnitValues( UnitNo, SEL_UNIT_VALA ) );
-    } else  {
+} else  {
 
 #ifdef MASPAR_KERNEL
 
-        return( krff_getUnitValues( UnitNo, SEL_UNIT_VALA ) );
+    return( krff_getUnitValues( UnitNo, SEL_UNIT_VALA ) );
 
 #else
 
-        KernelErrorCode = KRERR_NO_MASPAR_KERNEL;
-        return( 0.0 );
+    KernelErrorCode = KRERR_NO_MASPAR_KERNEL;
+    return( 0.0 );
 
 #endif
     }
@@ -690,15 +690,15 @@ void  krui_setUnitValueA(int UnitNo, FlintTypeParam unit_valueA) {
 
     if KERNEL_STANDARD  {
     kr_setUnitValues( UnitNo, SEL_UNIT_VALA, unit_valueA );
-    } else  {
+} else  {
 
 #ifdef MASPAR_KERNEL
 
-        krff_setUnitValues( UnitNo, SEL_UNIT_VALA, unit_valueA );
+    krff_setUnitValues( UnitNo, SEL_UNIT_VALA, unit_valueA );
 
 #else
 
-        KernelErrorCode = KRERR_NO_MASPAR_KERNEL;
+    KernelErrorCode = KRERR_NO_MASPAR_KERNEL;
 
 #endif
     }
@@ -1694,14 +1694,14 @@ krui_err  krui_createFTypeEntry(char *Ftype_symbol, char *act_func_name,
         return( KernelErrorCode );
 
     if ((Ftype_entry = krm_FtypeCreateEntry( Ftype_symbol
-                       ,(OutFuncPtr) out_func
-                       ,(ActFuncPtr) act_func
-                       ,(ActDerivFuncPtr) act_deriv_func
-                       ,(ActDerivFuncPtr) act_2_deriv_func
-                       ,kr_findPythonFunction(out_func_name,OUT_FUNC)
-                       ,kr_findPythonFunction(act_func_name, ACT_FUNC)
-                       ,kr_findPythonFunction(act_func_name,ACT_DERIV_FUNC)
-                       ,kr_findPythonFunction(act_func_name,ACT_2_DERIV_FUNC)
+        ,(OutFuncPtr) out_func
+        ,(ActFuncPtr) act_func
+        ,(ActDerivFuncPtr) act_deriv_func
+        ,(ActDerivFuncPtr) act_2_deriv_func
+        ,kr_findPythonFunction(out_func_name,OUT_FUNC)
+        ,kr_findPythonFunction(act_func_name, ACT_FUNC)
+        ,kr_findPythonFunction(act_func_name,ACT_DERIV_FUNC)
+        ,kr_findPythonFunction(act_func_name,ACT_2_DERIV_FUNC)
                                            )) == NULL)
         return( KernelErrorCode );
 
@@ -1720,7 +1720,7 @@ krui_err  krui_createFTypeEntry(char *Ftype_symbol, char *act_func_name,
             return( KernelErrorCode );
         }
 
-        if (krm_FtypeAddSite( Ftype_entry , STable_entry ) == NULL) {
+        if (krm_FtypeAddSite( Ftype_entry, STable_entry ) == NULL) {
             /*  memory alloc failed */
             krm_releaseFtypeEntry( Ftype_entry );
             return( KernelErrorCode );
@@ -2000,7 +2000,7 @@ krui_err  krui_changeSiteTableEntry(char *old_site_name, char *new_site_name,
         return( KernelErrorCode );
     }
 
-    (void) krm_STableChangeEntry( stbl_ptr1 , new_site_name , site_func_ptr );
+    (void) krm_STableChangeEntry( stbl_ptr1, new_site_name, site_func_ptr );
     return( KernelErrorCode );
 }
 
@@ -2397,14 +2397,14 @@ int  krui_getFirstPredUnit(FlintType *strength) {
 
 
     if KERNEL_STANDARD  {
-    return(kr_getPredecessorUnit(FIRST, strength ,&dummy1,&dummy2,&dummy3));
-    } else {
+    return(kr_getPredecessorUnit(FIRST, strength,&dummy1,&dummy2,&dummy3));
+} else {
 
 #ifdef MASPAR_KERNEL
-        return( krff_getPredecessorUnit( FIRST, strength ) );
+    return( krff_getPredecessorUnit( FIRST, strength ) );
 #else
-        KernelErrorCode = KRERR_NO_MASPAR_KERNEL;
-        return( KernelErrorCode );
+    KernelErrorCode = KRERR_NO_MASPAR_KERNEL;
+    return( KernelErrorCode );
 #endif
 
     }
@@ -2427,14 +2427,14 @@ int  krui_getFirstPredUnit(FlintType *strength) {
 int  krui_getFirstPredUnitAndData(FlintType *strength,float *val_a,
                                   float *val_b, float *val_c) {
     if KERNEL_STANDARD  {
-    return( kr_getPredecessorUnit( FIRST, strength ,val_a ,val_b ,val_c ) );
-    } else {
+    return( kr_getPredecessorUnit( FIRST, strength,val_a,val_b,val_c ) );
+} else {
 
 #ifdef MASPAR_KERNEL
-        return( krff_getPredecessorUnit( FIRST, strength ) );
+    return( krff_getPredecessorUnit( FIRST, strength ) );
 #else
-        KernelErrorCode = KRERR_NO_MASPAR_KERNEL;
-        return( KernelErrorCode );
+    KernelErrorCode = KRERR_NO_MASPAR_KERNEL;
+    return( KernelErrorCode );
 #endif
 
     }
@@ -2458,14 +2458,14 @@ int  krui_getNextPredUnit(FlintType *strength) {
     float dummy1,dummy2,dummy3;
 
     if KERNEL_STANDARD  {
-    return(kr_getPredecessorUnit(NEXT, strength ,&dummy1,&dummy2,&dummy3));
-    } else {
+    return(kr_getPredecessorUnit(NEXT, strength,&dummy1,&dummy2,&dummy3));
+} else {
 
 #ifdef MASPAR_KERNEL
-        return( krff_getPredecessorUnit( NEXT, strength ) );
+    return( krff_getPredecessorUnit( NEXT, strength ) );
 #else
-        KernelErrorCode = KRERR_NO_MASPAR_KERNEL;
-        return( KernelErrorCode );
+    KernelErrorCode = KRERR_NO_MASPAR_KERNEL;
+    return( KernelErrorCode );
 #endif
 
     }
@@ -2490,13 +2490,13 @@ int  krui_getNextPredUnitAndData(FlintType *strength,float *val_a,
 
     if KERNEL_STANDARD  {
     return(kr_getPredecessorUnit( NEXT, strength, val_a, val_b, val_c ) );
-    } else {
+} else {
 
 #ifdef MASPAR_KERNEL
-        return( krff_getPredecessorUnit( NEXT, strength ) );
+    return( krff_getPredecessorUnit( NEXT, strength ) );
 #else
-        KernelErrorCode = KRERR_NO_MASPAR_KERNEL;
-        return( KernelErrorCode );
+    KernelErrorCode = KRERR_NO_MASPAR_KERNEL;
+    return( KernelErrorCode );
 #endif
 
     }
@@ -2521,13 +2521,13 @@ int  krui_getCurrentPredUnit(FlintType *strength) {
     if KERNEL_STANDARD  {
     return(kr_getPredecessorUnit(CURRENT, strength, &dummy1, &dummy2,
     &dummy3 ) );
-    } else {
+} else {
 
 #ifdef MASPAR_KERNEL
-        return( krff_getPredecessorUnit( CURRENT, strength ) );
+    return( krff_getPredecessorUnit( CURRENT, strength ) );
 #else
-        KernelErrorCode = KRERR_NO_MASPAR_KERNEL;
-        return( KernelErrorCode );
+    KernelErrorCode = KRERR_NO_MASPAR_KERNEL;
+    return( KernelErrorCode );
 #endif
 
     }
@@ -2553,13 +2553,13 @@ int  krui_getFirstSuccUnit(int source_unit_no, FlintType *weight) {
 
     if KERNEL_STANDARD  {
     return( kr_getSuccessorUnit( FIRST, source_unit_no, weight ) );
-    } else {
+} else {
 
 #ifdef MASPAR_KERNEL
-        return( krff_getSuccessorUnit( FIRST, source_unit_no, weight ) );
+    return( krff_getSuccessorUnit( FIRST, source_unit_no, weight ) );
 #else
-        KernelErrorCode = KRERR_NO_MASPAR_KERNEL;
-        return( KernelErrorCode );
+    KernelErrorCode = KRERR_NO_MASPAR_KERNEL;
+    return( KernelErrorCode );
 #endif
 
     }
@@ -2582,13 +2582,13 @@ int  krui_getNextSuccUnit(FlintType *weight) {
 
     if KERNEL_STANDARD  {
     return( kr_getSuccessorUnit( NEXT, 0, weight ) );
-    } else {
+} else {
 
 #ifdef MASPAR_KERNEL
-        return( krff_getSuccessorUnit( NEXT, 0, weight ) );
+    return( krff_getSuccessorUnit( NEXT, 0, weight ) );
 #else
-        KernelErrorCode = KRERR_NO_MASPAR_KERNEL;
-        return( KernelErrorCode );
+    KernelErrorCode = KRERR_NO_MASPAR_KERNEL;
+    return( KernelErrorCode );
 #endif
 
     }
@@ -2648,13 +2648,13 @@ bool  krui_areConnectedWeight(int source_unit_no, int target_unit_no,
                               FlintType *weight) {
     if KERNEL_STANDARD  {
     return( kr_areConnected( source_unit_no, target_unit_no, weight ) );
-    } else {
+} else {
 
 #ifdef MASPAR_KERNEL
-        return( krff_areConnected( source_unit_no, target_unit_no, weight ) );
+    return( krff_areConnected( source_unit_no, target_unit_no, weight ) );
 #else
-        KernelErrorCode = KRERR_NO_MASPAR_KERNEL;
-        return( FALSE );
+    KernelErrorCode = KRERR_NO_MASPAR_KERNEL;
+    return( FALSE );
 #endif
 
     }
@@ -2678,13 +2678,13 @@ bool  krui_isConnected(int source_unit_no) {
 
     if KERNEL_STANDARD  {
     return( kr_isConnected( source_unit_no, &weight ) );
-    } else {
+} else {
 
 #ifdef MASPAR_KERNEL
-        return( krff_isConnected( source_unit_no, &weight ) );
+    return( krff_isConnected( source_unit_no, &weight ) );
 #else
-        KernelErrorCode = KRERR_NO_MASPAR_KERNEL;
-        return( FALSE );
+    KernelErrorCode = KRERR_NO_MASPAR_KERNEL;
+    return( FALSE );
 #endif
 
     }
@@ -2704,13 +2704,13 @@ FlintType  krui_getLinkWeight(void) {
 
     if KERNEL_STANDARD  {
     return( kr_getLinkWeight() );
-    } else {
+} else {
 
 #ifdef MASPAR_KERNEL
-        return( krff_getLinkWeight() );
+    return( krff_getLinkWeight() );
 #else
-        KernelErrorCode = KRERR_NO_MASPAR_KERNEL;
-        return( 0.0 );
+    KernelErrorCode = KRERR_NO_MASPAR_KERNEL;
+    return( 0.0 );
 #endif
 
     }
@@ -2729,12 +2729,12 @@ void  krui_setLinkWeight(FlintTypeParam weight) {
 
     if KERNEL_STANDARD  {
     kr_setLinkWeight( weight );
-    } else {
+} else {
 
 #ifdef MASPAR_KERNEL
-        krff_setLinkWeight( weight );
+    krff_setLinkWeight( weight );
 #else
-        KernelErrorCode = KRERR_NO_MASPAR_KERNEL;
+    KernelErrorCode = KRERR_NO_MASPAR_KERNEL;
 #endif
 
     }
@@ -2763,13 +2763,13 @@ krui_err  krui_createLink(int source_unit_no, FlintTypeParam weight) {
 
     if KERNEL_STANDARD  {
     return( kr_createLink( source_unit_no, weight ) );
-    } else {
+} else {
 
 #ifdef MASPAR_KERNEL
-        return( krff_createLink( source_unit_no, weight ) );
+    return( krff_createLink( source_unit_no, weight ) );
 #else
-        KernelErrorCode = KRERR_NO_MASPAR_KERNEL;
-        return( KernelErrorCode );
+    KernelErrorCode = KRERR_NO_MASPAR_KERNEL;
+    return( KernelErrorCode );
 #endif
 
     }
@@ -2797,14 +2797,14 @@ struct Link*  krui_createLinkWithAdditionalParameters(int source_unit_no,
     if KERNEL_STANDARD  {
     return( kr_createLinkWithAdditionalParameters(source_unit_no, weight,
     val_a, val_b, val_c ) );
-    } else {
+} else {
 
 #ifdef MASPAR_KERNEL
-        KernelErrorCode=krff_createLink( source_unit_no, weight )
+    KernelErrorCode=krff_createLink( source_unit_no, weight )
                         return( NULL );
 #else
-        KernelErrorCode = KRERR_NO_MASPAR_KERNEL;
-        return( NULL );
+    KernelErrorCode = KRERR_NO_MASPAR_KERNEL;
+    return( NULL );
 #endif
 
     }
@@ -2889,12 +2889,12 @@ void  krui_jogWeights(FlintTypeParam minus, FlintTypeParam plus) {
 
     if KERNEL_STANDARD  {
     kr_jogWeights( minus, plus );
-    } else {
+} else {
 
 #ifdef MASPAR_KERNEL
-        krff_jogWeights( minus, plus );
+    krff_jogWeights( minus, plus );
 #else
-        KernelErrorCode = KRERR_NO_MASPAR_KERNEL;
+    KernelErrorCode = KRERR_NO_MASPAR_KERNEL;
 #endif
 
     }
@@ -2969,7 +2969,7 @@ float krui_getVariance (void) {
     KernelErrorCode = KRERR_NO_ERROR;
 
     KernelErrorCode = kr_initSubPatternOrder(0,kr_np_pattern(PATTERN_GET_NUMBER,
-                      0, 0) - 1);
+        0, 0) - 1);
     if(KernelErrorCode != KRERR_NO_ERROR) {
         free (OutputUnitSumVariance);
         free (OutputUnitVariance);
@@ -3277,7 +3277,7 @@ krui_err krui_trainNetwork(NetLearnParameters *parameters) {
 
 
     noOfStoredErrors =0;
-    for(i = 0 , dotraining = TRUE , error = KRERR_NO_ERROR;
+    for(i = 0, dotraining = TRUE, error = KRERR_NO_ERROR;
             dotraining && i < parameters->noOfEpochs && error == KRERR_NO_ERROR;
             i++) {
 
@@ -3696,7 +3696,7 @@ krui_err  krui_getPatternNo(void) {
 ******************************************************************************/
 krui_err  krui_deletePattern(void) {
 
-    return( kr_np_pattern( PATTERN_DELETE, 0 , 0 ) );
+    return( kr_np_pattern( PATTERN_DELETE, 0, 0 ) );
 }
 
 
@@ -3711,7 +3711,7 @@ krui_err  krui_deletePattern(void) {
 ******************************************************************************/
 krui_err  krui_modifyPattern(void) {
 
-    return( kr_np_pattern( PATTERN_MODIFY, 0 , 0 ) );
+    return( kr_np_pattern( PATTERN_MODIFY, 0, 0 ) );
 }
 
 

@@ -3,7 +3,7 @@
   SHORTNAME      : ui.h
   SNNS VERSION   : 4.2
 
-  PURPOSE        : general header file 
+  PURPOSE        : general header file
   NOTES          : This file is to include in all ui_*.c files.
                    There is another "general" include file for use of files
 	            using X.
@@ -114,16 +114,16 @@ struct SelectionType {
     int                      subNetNo;
     int                      unitNo;   /* and unit no.          */
     int                      copyNo;   /* no of new created copy */
-                                       /* Used during structure copy */
+    /* Used during structure copy */
     int                      flags;
-  	/* bit  0 - selected
-	   bit  1 - reserved. not used. last operation failed for 
-	            this unit. 
+    /* bit  0 - selected
+       bit  1 - reserved. not used. last operation failed for
+                this unit.
            bit  3 - UI_ALREADY_MOVED
-	   bit  4 - UI_ALREADY_REVERSED
-	   The last two bits are used to remember whether this unit was
-	   already touched by a move or reverse operation. */
-}; 
+       bit  4 - UI_ALREADY_REVERSED
+       The last two bits are used to remember whether this unit was
+       already touched by a move or reverse operation. */
+};
 
 
 /* unit (info panel) */
@@ -195,7 +195,7 @@ struct HelpType {
     int             no;
     Bool            unmapped;
     struct HelpType *nextPtr;
-}; 
+};
 
 
 /* lists */
@@ -216,23 +216,23 @@ are taken from the kernel file glob_typ.h. The other constants are
 starting with a value of 20 to be open for further extesions of the
 kernel. */
 
-#define UI_LIST_OUT_FUNC    1 
-#define UI_LIST_ACT_FUNC    2 
-#define UI_LIST_SITE_FUNC   3 
-#define UI_LIST_LEARN_FUNC  4 
-#define UI_LIST_UPDATE_FUNC 5 
-#define UI_LIST_INIT_FUNC   6 
+#define UI_LIST_OUT_FUNC    1
+#define UI_LIST_ACT_FUNC    2
+#define UI_LIST_SITE_FUNC   3
+#define UI_LIST_LEARN_FUNC  4
+#define UI_LIST_UPDATE_FUNC 5
+#define UI_LIST_INIT_FUNC   6
 #define UI_LIST_PRUN_FUNC   10
 #define UI_LIST_FF_LEARN_FUNC  0x0404
 #define UI_LIST_REMAP_FUNC  12
 
-#define UI_LIST_IOTYPE         20 
+#define UI_LIST_IOTYPE         20
 #define UI_LIST_SITE           21
-#define UI_LIST_FTYPE_SITE     22 
-#define UI_LIST_UNIT_SITE      23 
-#define UI_LIST_FTYPE_OUT_FUNC 24 
-#define UI_LIST_FTYPE_ACT_FUNC 25 
-#define UI_LIST_FTYPE_NAME     26 
+#define UI_LIST_FTYPE_SITE     22
+#define UI_LIST_UNIT_SITE      23
+#define UI_LIST_FTYPE_OUT_FUNC 24
+#define UI_LIST_FTYPE_ACT_FUNC 25
+#define UI_LIST_FTYPE_NAME     26
 #define UI_LIST_FTYPE          27
 
 
@@ -316,19 +316,19 @@ struct Ui_DisplayType {
     int                   unitsInY;
     Bool                  frozen;          /* no update in this display */
     Bool                  raster;          /* draw points on positions - not used*/
-    Bool                  refreshNeeded;   /* a refresh is needed 
+    Bool                  refreshNeeded;   /* a refresh is needed
 					      Used after command: Graphic Direction.
 					      move and copy actions need now a full
 					      refresh */
     int                   subNetNo;        /* visible in this display */
     struct SetupDataType  setup;           /* all setup datas */
-    FlagType              flags;          
+    FlagType              flags;
     unsigned short        layers;          /* visible in this display */
     FlagType              updateType;
-                          /* can be:
-			        UI_ALWAYS_FULL  = draw everything
-				UI_INTELLIGENT  = decide what is better
-				*/
+    /* can be:
+    UI_ALWAYS_FULL  = draw everything
+    UI_INTELLIGENT  = decide what is better
+    			*/
     struct Ui_DisplayType  *nextPtr;
 };
 
@@ -345,12 +345,12 @@ struct Ui_DisplayType {
 #define UI_NO_INIT_PARAMS   5
 #define UI_NO_REMAP_PARAMS   5
 /* !!!!!! ATTENTION !!!!!
-   When changing the following value, always make sure that 
+   When changing the following value, always make sure that
    NO_OF_LEARN_PARAMS = UI_NO_LEARN_PARAMS + UI_NO_OF_CASCADE_PARAMS
    remains true!! NO_OF_LEARN_PARAMS is declared in kernel/sources/glob_typ.h
-   Also note, that the file kernel/sources/cc_mac.h assumes that 
-   NO_OF_LEARN_PARAMS >= 27 !!!!! 
-*/ 
+   Also note, that the file kernel/sources/cc_mac.h assumes that
+   NO_OF_LEARN_PARAMS >= 27 !!!!!
+*/
 #define UI_NO_OF_CASCADE_PARAMS 23
 
 #define UI_STEPS         1
@@ -435,7 +435,7 @@ struct InfoCallLayerStruct {
 
 #define  UI_WHITE_COLOR 0
 #define  UI_BLACK_COLOR 1
-             /* pixel unset or set */
+/* pixel unset or set */
 
 #define  UI_ERASE_BOTTOM  2  /* signal to erase the text at unit bottom */
 #define  UI_DRAW          1  /* signal to draw a unit/link  */
@@ -452,8 +452,8 @@ struct InfoCallLayerStruct {
 
 #define  UI_UNIT_SIZE        16
 
-                        /* the graphic view to a unit is max 16x16 pixels */
-                        
+/* the graphic view to a unit is max 16x16 pixels */
+
 /****************************************************************************/
 /* key_ui.c */
 
@@ -543,7 +543,7 @@ struct InfoCallLayerStruct {
 #define  UI_STATE_UNITS                  2
 #define  UI_STATE_LINKS                  3
 #define  UI_STATE_FLAG                   4
-#define  UI_STATE_LINKS_MAKE             5   
+#define  UI_STATE_LINKS_MAKE             5
 #define  UI_STATE_UNITS_COPY             6
 #define  UI_STATE_LINKS_COPY             7
 #define  UI_STATE_LINKS_DELETE           8

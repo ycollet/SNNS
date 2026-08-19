@@ -15,7 +15,7 @@
 
     Copyright (c) 1990-1995  SNNS Group, IPVR, Univ. Stuttgart, FRG
     Copyright (c) 1996-1998  SNNS Group, WSI, Univ. Tuebingen, FRG
-             
+
 ******************************************************************************/
 
 
@@ -25,16 +25,16 @@
 
 
 
-extern void   ui_xDeleteRect(Display *displ, Drawable d, GC gc, 
-		struct PosType pixPos1, struct PosType pixPos2); 
-extern void   ui_xDrawBox(Display *displ, Drawable d, GC gc, struct PosType pixPos1, 
-		struct PosType pixPos2); 
-extern void   ui_xDrawCrossBox(Display *displ, Drawable d, GC gc, 
-		struct PosType pixPos1, struct PosType pixPos2);
-extern void   ui_xDrawLine(Display *displ, Drawable d, GC gc, struct PosType pixPos1, 
-		struct PosType pixPos2); 
-extern void   ui_xDrawTriangle(Display *displ, Drawable d, GC gc, 
-		struct PosType pixPos1, struct PosType pixPos2);
+extern void   ui_xDeleteRect(Display *displ, Drawable d, GC gc,
+                             struct PosType pixPos1, struct PosType pixPos2);
+extern void   ui_xDrawBox(Display *displ, Drawable d, GC gc, struct PosType pixPos1,
+                          struct PosType pixPos2);
+extern void   ui_xDrawCrossBox(Display *displ, Drawable d, GC gc,
+                               struct PosType pixPos1, struct PosType pixPos2);
+extern void   ui_xDrawLine(Display *displ, Drawable d, GC gc, struct PosType pixPos1,
+                           struct PosType pixPos2);
+extern void   ui_xDrawTriangle(Display *displ, Drawable d, GC gc,
+                               struct PosType pixPos1, struct PosType pixPos2);
 extern void   ui_xDrawPoint(Display *displ, Drawable d, GC gc, struct PosType pixPos1);
 extern void   ui_xToggleBackingStore (Boolean toggle, Display *display, Window window);
 

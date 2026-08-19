@@ -6,7 +6,7 @@
   PURPOSE        : private header file of correspondent '.c' file
   NOTES          :
 
-  AUTHOR         : Tilman Sommer 
+  AUTHOR         : Tilman Sommer
   DATE           : 18.5.1990
 
   CHANGED BY     : Sven Doering
@@ -44,7 +44,7 @@ extern void             ui_utilMax(short int *x1Ptr, short int *x2Ptr);
 extern void             ui_utilNormalizeRect(struct PosType *pixPos1Ptr, struct PosType *pixPos2Ptr);
 /*extern void             ui_utilNormalizeCoord();*/
 
-#endif 
+#endif
 
 
 /* end of file */

@@ -15,7 +15,7 @@
 
     Copyright (c) 1990-1995  SNNS Group, IPVR, Univ. Stuttgart, FRG
     Copyright (c) 1996-1998  SNNS Group, WSI, Univ. Tuebingen, FRG
-             
+
 ******************************************************************************/
 #include <config.h>
 
@@ -37,7 +37,7 @@
 
   PURPOSE  : calculate the light intensity for a given polygon
   RETURNS  : -1.0 <= intensity <= 1.0
-  NOTES    : 
+  NOTES    :
 
   UPDATE   :
 ******************************************************************************/
@@ -45,24 +45,24 @@
 void d3_shadeIntens (float *intens, float *v1, float *normal, float *lp)
 
 {
-     vector lv;
-     float cos_a;
-     int i;
+    vector lv;
+    float cos_a;
+    int i;
 
-     for (i=0; i<3; i++)
-         lv[i] = v1[i] + lp[i];
-     lv[3] = sqrt (lv[0]*lv[0] + lv[1]*lv[1] + lv[2]*lv[2]);
+    for (i=0; i<3; i++)
+        lv[i] = v1[i] + lp[i];
+    lv[3] = sqrt (lv[0]*lv[0] + lv[1]*lv[1] + lv[2]*lv[2]);
 
-     cos_a = (normal[0] * lv[0] + normal[1] * lv[1] + normal[2] * lv[2]) /
-             (normal[3] * lv[3]);
+    cos_a = (normal[0] * lv[0] + normal[1] * lv[1] + normal[2] * lv[2]) /
+            (normal[3] * lv[3]);
 
-     *intens = d3_state.light.Ia * d3_state.light.Ka;
-     if (cos_a < 0.0)
-         *intens -= d3_state.light.Ip * d3_state.light.Kd * cos_a;
-     if (*intens > 1.0)
-         *intens = 1.0;
-     if (*intens < -1.0)
-         *intens = -1.0;
+    *intens = d3_state.light.Ia * d3_state.light.Ka;
+    if (cos_a < 0.0)
+        *intens -= d3_state.light.Ip * d3_state.light.Kd * cos_a;
+    if (*intens > 1.0)
+        *intens = 1.0;
+    if (*intens < -1.0)
+        *intens = -1.0;
 }
 
 

@@ -77,40 +77,40 @@ static float    maxTss           =   0.5;
 /*--------------------------------------------------------------------------*/
 
 int learnRating_init( ModuleTableEntry *self, int msgc, char *msgv[] ) {
-  MODULE_KEY( LEARNRATING_KEY );
+    MODULE_KEY( LEARNRATING_KEY );
 
-  SEL_MSG( msgv[0] )
+    SEL_MSG( msgv[0] )
 
     MSG_CASE( GENERAL_INIT   ) {
-    /* nothing to do */
-  }
-  MSG_CASE( GENERAL_EXIT   ) {
-    /* nothing to do */
-  }
-  MSG_CASE( EVOLUTION_INIT ) {
-    /* nothing to do */
-  }
+        /* nothing to do */
+    }
+    MSG_CASE( GENERAL_EXIT   ) {
+        /* nothing to do */
+    }
+    MSG_CASE( EVOLUTION_INIT ) {
+        /* nothing to do */
+    }
 
-  MSG_CASE( NOLEARN_RATING ) {
-    if( msgc > 1 )
-      nolearnRating = (float) atof( msgv[1] );
-  }
-  MSG_CASE( EPOCH_RATING   ) {
-    if( msgc > 1)
-      epochRating = (float) atof( msgv[1] );
-  }
-  MSG_CASE( TSS_RATING     ) {
-    if( msgc > 1)
-      tssRating = (float) atof( msgv[1] );
-  }
+    MSG_CASE( NOLEARN_RATING ) {
+        if( msgc > 1 )
+            nolearnRating = (float) atof( msgv[1] );
+    }
+    MSG_CASE( EPOCH_RATING   ) {
+        if( msgc > 1)
+            epochRating = (float) atof( msgv[1] );
+    }
+    MSG_CASE( TSS_RATING     ) {
+        if( msgc > 1)
+            tssRating = (float) atof( msgv[1] );
+    }
 
-  MSG_CASE( MAX_TSS        ) {
-    if( msgc > 1)
-      maxTss = (float) atof( msgv[1] );
-  }
-  END_MSG;
+    MSG_CASE( MAX_TSS        ) {
+        if( msgc > 1)
+            maxTss = (float) atof( msgv[1] );
+    }
+    END_MSG;
 
-  return ( INIT_USED );
+    return ( INIT_USED );
 }
 
 /*--------------------------------------------------------------------------*/
@@ -129,22 +129,22 @@ int learnRating_init( ModuleTableEntry *self, int msgc, char *msgv[] ) {
 /*--------------------------------------------------------------------------*/
 
 int learnRating_work( PopID *parents, PopID *offsprings, PopID *reference ) {
-  NetID        activeMember;
-  NetworkData  *ndata;
+    NetID        activeMember;
+    NetworkData  *ndata;
 
-  FOR_ALL_OFFSPRINGS ( activeMember ) {
-    if ((ndata = kpm_getNetData( activeMember )) == NULL) {
-      return ( ERROR_NETDATA);
+    FOR_ALL_OFFSPRINGS ( activeMember ) {
+        if ((ndata = kpm_getNetData( activeMember )) == NULL) {
+            return ( ERROR_NETDATA);
+        }
+
+        if (ndata->tss > maxTss)
+            ndata->fitness += nolearnRating;
+
+        ndata->fitness += epochRating * ndata->epochs
+                          + tssRating   * ndata->tss;
     }
 
-    if (ndata->tss > maxTss)
-      ndata->fitness += nolearnRating;
-
-    ndata->fitness += epochRating * ndata->epochs
-      + tssRating   * ndata->tss;
-  }
-
-  return( MODULE_NO_ERROR );
+    return( MODULE_NO_ERROR );
 }
 
 /***************************************************************************/
@@ -158,15 +158,15 @@ int learnRating_work( PopID *parents, PopID *offsprings, PopID *reference ) {
 
 char *learnRating_errMsg(int err_code) {
 
-  switch (err_code) {
-  case MODULE_NO_ERROR :
-    return ( "learnRating : No Error found" );
+    switch (err_code) {
+    case MODULE_NO_ERROR :
+        return ( "learnRating : No Error found" );
 
-  case ERROR_NETDATA :
-    return ("learnRating : Can't get the data of an offspring-net");
+    case ERROR_NETDATA :
+        return ("learnRating : Can't get the data of an offspring-net");
 
-  }
+    }
 
-  return ( "learnRating : Unknown error" );
+    return ( "learnRating : Unknown error" );
 
 }

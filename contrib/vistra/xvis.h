@@ -21,25 +21,25 @@
 #define V_EQUAL                    0         /*          "             */
 #define PI                         3.141592
 #define NUM_COLORS                 100
-                                /* Anzahl versch. Farbstufen */
+/* Anzahl versch. Farbstufen */
 #define NUM_GRAYS                  50
-                                /* Anzahl versch. Graustufen */
+/* Anzahl versch. Graustufen */
 #define MAX_LENGTH_ERROR_MESSAGE   512
-                                /* Max. Laenge einer Fehlermeldung */
+/* Max. Laenge einer Fehlermeldung */
 #define MAX_LENGTH_ERRORINFO       256
-                                /* Max. Laenge der globalen Var. errorInfo */
+/* Max. Laenge der globalen Var. errorInfo */
 #define MAX_LENGTH_TOKENVAL        1024
-                                /* Max. Laenge der globalen Var. tokenval */
+/* Max. Laenge der globalen Var. tokenval */
 #define CLASS_MAXLEN               80
-                                /* Max. Laenge eines Klassen-Namens */
+/* Max. Laenge eines Klassen-Namens */
 #define CLASS_SCANF_FORMAT         "%80s"
-                                /* scanf()-Format zum Lesen von Klassen */
+/* scanf()-Format zum Lesen von Klassen */
 #define NO_BUCKETS                 100
-                                /* Anzahl Buckets fuer Klassen-Namen-Hashing */
+/* Anzahl Buckets fuer Klassen-Namen-Hashing */
 #define FORMAT_DIR_ENVVAR          "VISTRAFORMATS"
-                                /* Namen der Environment Variable, die das */
-                                /* Directory angibt, in dem die FDL-Format */
-                                /* Dateien zu finden sind.                 */
+/* Namen der Environment Variable, die das */
+/* Directory angibt, in dem die FDL-Format */
+/* Dateien zu finden sind.                 */
 #define FORMAT_EXTENSION           ".fmt"
 #define TEMP_DIR                   "/tmp/"
 
@@ -85,77 +85,77 @@
 typedef float Number;
 
 enum Token {
-  inputDim,
-  outputDim,
-  numPatterns,
-  input,
-  output,
-  class,
-  questionMark,
-  newLine,
-  writeNewLine,
-  aString,
-  asterisk,
-  altBegin,
-  altEnd,
-  or,
-  loopBegin,
-  loopEnd,
-  unknownControl,
-  endOfString,
-  nil
+    inputDim,
+    outputDim,
+    numPatterns,
+    input,
+    output,
+    class,
+    questionMark,
+    newLine,
+    writeNewLine,
+    aString,
+    asterisk,
+    altBegin,
+    altEnd,
+    or,
+    loopBegin,
+    loopEnd,
+    unknownControl,
+    endOfString,
+    nil
 };
 
 struct Member {
-  void *data;
-  struct Member *next;
-  struct Member *previous;
+    void *data;
+    struct Member *next;
+    struct Member *previous;
 };
 
 struct CollType {
-  long count;
-  struct Member *first;
-  struct Member *last;
-  struct Member *lastVisited;
-  long lastIndex;
+    long count;
+    struct Member *first;
+    struct Member *last;
+    struct Member *lastVisited;
+    long lastIndex;
 };
 typedef struct CollType * Collection;
 typedef Collection VecColl;
 
 struct VectorType {
-  long dimensions;
-  Number *elements;
+    long dimensions;
+    Number *elements;
 };
 typedef struct VectorType * Vector;
 
 struct FormatType {
-  char *contents;
-  char *pos;
+    char *contents;
+    char *pos;
 };
 typedef struct FormatType * Format;
 
 struct Node {
-  char *name;
-  struct Node *next;
+    char *name;
+    struct Node *next;
 };
 
 struct SymtabType {
-  struct Node **buckets;
-  long numBuckets;
-  Collection order;
+    struct Node **buckets;
+    long numBuckets;
+    Collection order;
 };
 typedef struct SymtabType * Symtab;
 
 struct PatternsType {
-  long count;
-  long inputDims;
-  long outputDims;
-  VecColl inputs;
-  VecColl outputs;
-  Collection classes;
-  Collection classNos;
-  long classCount;
-  Symtab symtab;
+    long count;
+    long inputDims;
+    long outputDims;
+    VecColl inputs;
+    VecColl outputs;
+    Collection classes;
+    Collection classNos;
+    long classCount;
+    Symtab symtab;
 };
 typedef struct PatternsType * Patterns;
 
@@ -168,66 +168,66 @@ typedef struct {
     int y;
     unsigned width;
     unsigned height;
-  } CoordSystem;
+} CoordSystem;
 
 typedef unsigned long PixelNo;
 
 typedef struct {
-	  float mult;
-	  float add;
-        } ScaleOp;
+    float mult;
+    float add;
+} ScaleOp;
 
 typedef struct {
-          Number lowest;
-          Number highest;
-        } Range;
+    Number lowest;
+    Number highest;
+} Range;
 
 enum Graphic {
-   proj2D = 0,
-   histo = 1,
-   poly = 2,
-   clrMat = 3,
-   grayMat = 4,
-   noKind = 5, 
+    proj2D = 0,
+    histo = 1,
+    poly = 2,
+    clrMat = 3,
+    grayMat = 4,
+    noKind = 5,
 };
 
 typedef struct {
-   Widget shell;
-   Widget commForm;
-   Widget infoForm;
-   Widget core;
-   unsigned displayed;
-   Boolean input;
-   enum Graphic kind;
-   Pixmap pm;
-   unsigned pmWidth;
-   unsigned pmHeight;
-   unsigned curWidth;
-   float size;
-   unsigned widthPerVector;
-   unsigned heightPerVector;
-   Number minInputs;
-   Number maxInputs;
-   Number minOutputs;
-   Number maxOutputs;
-   time_t patVersion;
-   int arg1;
-   int arg2; 
- } * GW;
+    Widget shell;
+    Widget commForm;
+    Widget infoForm;
+    Widget core;
+    unsigned displayed;
+    Boolean input;
+    enum Graphic kind;
+    Pixmap pm;
+    unsigned pmWidth;
+    unsigned pmHeight;
+    unsigned curWidth;
+    float size;
+    unsigned widthPerVector;
+    unsigned heightPerVector;
+    Number minInputs;
+    Number maxInputs;
+    Number minOutputs;
+    Number maxOutputs;
+    time_t patVersion;
+    int arg1;
+    int arg2;
+} * GW;
 
 typedef struct {
-  Widget shell;
-  Widget rowTitles;
-  Widget *colTitles;
-  Widget *cols;
-  Widget scrollVert;
-  Widget scrollHoriz;
-  unsigned firstRow;
-  unsigned firstCol;
-  unsigned visRows;
-  unsigned visCols;
-  unsigned usedRows;
-  unsigned usedCols;
+    Widget shell;
+    Widget rowTitles;
+    Widget *colTitles;
+    Widget *cols;
+    Widget scrollVert;
+    Widget scrollHoriz;
+    unsigned firstRow;
+    unsigned firstCol;
+    unsigned visRows;
+    unsigned visCols;
+    unsigned usedRows;
+    unsigned usedCols;
 } * SSW;
 
 /*---------------------------------------------------------------------*/
@@ -271,11 +271,11 @@ void fileIn(Patterns, Format, FILE *);         /* error gesetzt */
 void fileOut(Patterns, Format, FILE *);        /* error gesetzt */
 void freePatterns(Patterns);
 unsigned removePatterns(Patterns, unsigned, unsigned);
-                                               /* error gesetzt */
+/* error gesetzt */
 unsigned removeCols(Patterns, Boolean, unsigned, unsigned);
-                                               /* error gesetzt */
+/* error gesetzt */
 void removeDimList(Patterns, Boolean, long *, long);
-                                               /* error gesetzt */
+/* error gesetzt */
 void randomize(Patterns, Vector);              /* error gesetzt */
 long num(Patterns);
 VecColl inputs(Patterns);

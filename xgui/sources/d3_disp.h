@@ -26,7 +26,7 @@ extern void d3_createDisplayWindow (void);
 extern Widget d3_displayMainWidget;
 extern void d3_eventProc (Widget w, Display *display, XEvent *event);
 
-#endif 
-             
+#endif
+
 /* end of file */
 /* lines: */

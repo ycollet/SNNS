@@ -6,7 +6,7 @@
   PURPOSE        : Header file of correspondent '.c' file
   NOTES          :
 
-  AUTHOR         : Guenter Mamier 
+  AUTHOR         : Guenter Mamier
   DATE           : 29.01.92
 
   CHANGED BY     : Sven Doering

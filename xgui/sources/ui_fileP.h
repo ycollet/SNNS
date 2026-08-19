@@ -10,12 +10,12 @@
   DATE           : 22.5.1990
 
   CHANGED BY     : Michael Vogt, Guenter Mamier
-  RCS VERSION    : $Revision: 2.8 $ 
-  LAST CHANGE    : $Date: 1998/02/25 15:21:48 $  
+  RCS VERSION    : $Revision: 2.8 $
+  LAST CHANGE    : $Date: 1998/02/25 15:21:48 $
 
     Copyright (c) 1990-1995  SNNS Group, IPVR, Univ. Stuttgart, FRG
     Copyright (c) 1996-1998  SNNS Group, WSI, Univ. Tuebingen, FRG
-             
+
 ******************************************************************************/
 
 
@@ -39,7 +39,7 @@ extern Bool ui_fileExist (char [], FlagType);
 extern void ui_file_updateShellLabels (void);
 
 
-	/* widgets of all input fields in the file panel */
+/* widgets of all input fields in the file panel */
 extern Widget ui_fileTXT;
 extern Widget ui_filePAT;
 extern Widget ui_fileCFG;
@@ -59,7 +59,7 @@ extern FILE   *ui_textFilePtr;          /* file ptr of log file */
 
 extern int    NO_OF_PATTERN_SETS;
 extern int    CURR_PATTERN_SET;
-extern int    CURR_TEST_PATTERN_SET;   
+extern int    CURR_TEST_PATTERN_SET;
 extern char   *PATTERN_SET_FILE[];
 
 #endif /* _UI_FILEP_DEFINED_ */

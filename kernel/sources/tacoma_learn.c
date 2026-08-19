@@ -133,22 +133,22 @@ krui_err tac_initVariables(float* ParameterInArray,
     switch(LEARNING_FUNCTION) {
     case BACKPROP:
         cc_SpecialUnitUpdate =
-            cc_OutputUnitUpdate = BackPropOfflinePart;
+        cc_OutputUnitUpdate = BackPropOfflinePart;
         break;
     case BACKPROP_ONLINE:
         cc_SpecialUnitUpdate =
-            cc_OutputUnitUpdate = OnlineBackPropOfflinePart;
+        cc_OutputUnitUpdate = OnlineBackPropOfflinePart;
         cc_propagateOutputUnitsBackward  = cc_propagateOutputOnlineCase;
         cc_propagateSpecialUnitsBackward = tac_propagateSpecialOnlineCase;
         break;
     case QUICKPROP:
         cc_SpecialUnitUpdate =
-            cc_OutputUnitUpdate = QuickPropOfflinePart;
+        cc_OutputUnitUpdate = QuickPropOfflinePart;
 
         break;
     case RPROP:
         cc_SpecialUnitUpdate =
-            cc_OutputUnitUpdate = RPropOfflinePart;
+        cc_OutputUnitUpdate = RPropOfflinePart;
 
         break;
     default:
@@ -433,7 +433,7 @@ krui_err tac_generateNewUnit(int UnitNo,int LayerNo,int StartPattern,int EndPatt
                 &&(tac_connect(UnitNo,UnitPtr,StartPattern,EndPattern,&Correlation))) {
             ERROR_CHECK;
             NewLink=kr_createLinkWithAdditionalParameters(GET_UNIT_NO(UnitPtr),
-                    cc_generateRandomNo(TAC_MAX_VALUE), 0.0, 0.0, 0.0);
+                cc_generateRandomNo(TAC_MAX_VALUE), 0.0, 0.0, 0.0);
             ERROR_CHECK;
             if(!IS_INPUT_UNIT(UnitPtr)) {
                 PRINTF(
@@ -1205,7 +1205,7 @@ void tac_propagateXiRi(struct Unit* SpecialUnitPtr,
   UPDATE   : 5.2.93
 ******************************************************************************/
 void tac_propagateXiRiOnlineCase(struct Unit* SpecialUnitPtr,
-                                 int p,int s,float SummedDeltaS,double nMinus1Divn ,float eta,float mu, float dummy)
+                                 int p,int s,float SummedDeltaS,double nMinus1Divn,float eta,float mu, float dummy)
 
 {
     struct Unit* SecondSpecUnitPtr;

@@ -46,10 +46,9 @@
   RETURNS  : void
   NOTES    :
 
-  UPDATE   : 
+  UPDATE   :
 ******************************************************************************/
-static void kohonen_rem_displayLayerNumber(void)
-{
+static void kohonen_rem_displayLayerNumber(void) {
     char  buf[50];
 
     if (NOT kohonen_open) return;
@@ -65,59 +64,58 @@ static void kohonen_rem_displayLayerNumber(void)
   RETURNS  : void
   NOTES    :
 
-  UPDATE   : 
+  UPDATE   :
 ******************************************************************************/
-static void kohonen_rem_moveLayerProc(Widget w, int moveType, caddr_t call_data)
-{
-  int  temp;
-  Bool doMove = FALSE;
+static void kohonen_rem_moveLayerProc(Widget w, int moveType, caddr_t call_data) {
+    int  temp;
+    Bool doMove = FALSE;
 
-  if (krui_getNoOfInputUnits() == 0) {
-    ui_confirmOk("No input units defined!");
-    return;
-  }
-  if (!ui_controlIsCreated) {
-    ui_confirmOk("Please create control panel first !"); 
-    return;
-  }
+    if (krui_getNoOfInputUnits() == 0) {
+        ui_confirmOk("No input units defined!");
+        return;
+    }
+    if (!ui_controlIsCreated) {
+        ui_confirmOk("Please create control panel first !");
+        return;
+    }
 
-  switch(moveType) {
-  case UI_JUMP:
-    temp = ui_xIntFromAsciiWidget(ui_LayerWidget);
-    if ((temp>0) AND (temp<= krui_getNoOfInputUnits())) {
-      noOfCurrentLayer = temp;
-      kohonen_rem_displayLayerNumber();
-      doMove = TRUE;
-    } else ui_confirmOk("Layer goto: invalid number!");
-    break;
-  case UI_FIRST:
-    if (noOfCurrentLayer!=1) {
-      noOfCurrentLayer = 1;
-      kohonen_rem_displayLayerNumber();
-      doMove = TRUE;
+    switch(moveType) {
+    case UI_JUMP:
+        temp = ui_xIntFromAsciiWidget(ui_LayerWidget);
+        if ((temp>0) AND (temp<= krui_getNoOfInputUnits())) {
+            noOfCurrentLayer = temp;
+            kohonen_rem_displayLayerNumber();
+            doMove = TRUE;
+        } else ui_confirmOk("Layer goto: invalid number!");
+        break;
+    case UI_FIRST:
+        if (noOfCurrentLayer!=1) {
+            noOfCurrentLayer = 1;
+            kohonen_rem_displayLayerNumber();
+            doMove = TRUE;
+        }
+        break;
+    case UI_LAST:
+        if (noOfCurrentLayer != krui_getNoOfInputUnits()) {
+            noOfCurrentLayer = krui_getNoOfInputUnits();
+            kohonen_rem_displayLayerNumber();
+            doMove = TRUE;
+        }
+        break;
+    case UI_NEXT:
+        if (++noOfCurrentLayer > krui_getNoOfInputUnits())
+            noOfCurrentLayer = 1;
+        kohonen_rem_displayLayerNumber();
+        doMove = TRUE;
+        break;
+    case UI_PREVIOUS:
+        if (--noOfCurrentLayer < 1)
+            noOfCurrentLayer = krui_getNoOfInputUnits();
+        kohonen_rem_displayLayerNumber();
+        doMove = TRUE;
+        break;
     }
-    break;
-  case UI_LAST:
-    if (noOfCurrentLayer != krui_getNoOfInputUnits()) {
-      noOfCurrentLayer = krui_getNoOfInputUnits();
-      kohonen_rem_displayLayerNumber();
-      doMove = TRUE;
-    }
-    break;
-  case UI_NEXT:
-    if (++noOfCurrentLayer > krui_getNoOfInputUnits()) 
-      noOfCurrentLayer = 1;
-    kohonen_rem_displayLayerNumber();
-    doMove = TRUE;
-    break;
-  case UI_PREVIOUS:
-    if (--noOfCurrentLayer < 1)
-      noOfCurrentLayer = krui_getNoOfInputUnits(); 
-    kohonen_rem_displayLayerNumber();
-    doMove = TRUE;
-    break;
-  }
-  if (doMove) ui_rem_stepsProc(NULL, TRUE, NULL);
+    if (doMove) ui_rem_stepsProc(NULL, TRUE, NULL);
 }
 
 
@@ -128,30 +126,28 @@ static void kohonen_rem_moveLayerProc(Widget w, int moveType, caddr_t call_data)
   RETURNS  : void
   NOTES    :
 
-  UPDATE   : 
+  UPDATE   :
 ******************************************************************************/
-static void kohonen_tree(void)
-{
+static void kohonen_tree(void) {
     if (!ui_controlIsCreated) {
-	ui_confirmOk("Please create control panel first !"); 
-	return;
+        ui_confirmOk("Please create control panel first !");
+        return;
     }
     krui_spanning_tree();
-    ui_net_completeRefresh(ui_currentDisplay, UI_GLOBAL); 
+    ui_net_completeRefresh(ui_currentDisplay, UI_GLOBAL);
 }
 
 
 /*****************************************************************************
   FUNCTION : kohonen_doneProc
 
-  PURPOSE  : callback function of the done-buttom. 
+  PURPOSE  : callback function of the done-buttom.
 
   NOTES    :
 
-  UPDATE   : 
+  UPDATE   :
 ******************************************************************************/
-static void kohonen_doneProc(void)
-{
+static void kohonen_doneProc(void) {
     XtDestroyWidget(kohonen_mainWidget);
     kohonen_open= 0;
 }
@@ -163,10 +159,9 @@ static void kohonen_doneProc(void)
   PURPOSE  : create the Kohonen window
   NOTES    :
 
-  UPDATE   : 
+  UPDATE   :
 ******************************************************************************/
-void kohonen_createWindow (void)
-{
+void kohonen_createWindow (void) {
     Widget       button,done,box,form,kohonenLabel;
     Cardinal     n;
     Arg          arg[25];
@@ -175,23 +170,23 @@ void kohonen_createWindow (void)
     int fontWidth = 8;
     int titelWidth  =  7 * fontWidth;
     int numberWidth = 10 * fontWidth;
-  
+
     if (!ui_controlIsCreated) {
-	ui_confirmOk("Please create control panel first !"); 
-	return;
+        ui_confirmOk("Please create control panel first !");
+        return;
     }
 
     if (kohonen_open) {
-	XRaiseWindow (XtDisplay (kohonen_mainWidget), 
-		      XtWindow (kohonen_mainWidget));
-	return;
+        XRaiseWindow (XtDisplay (kohonen_mainWidget),
+                      XtWindow (kohonen_mainWidget));
+        return;
     }
 
     kohonen_open= 1;
     sprintf(buf, "SNNS Kohonen Window");
-    n = 0;  
+    n = 0;
     kohonen_mainWidget= XtCreatePopupShell(buf,topLevelShellWidgetClass,
-					   ui_toplevel,arg,n); 
+                                           ui_toplevel,arg,n);
     box = XtCreateManagedWidget("box",boxWidgetClass,kohonen_mainWidget,arg,n);
     form= XtCreateManagedWidget("connt", formWidgetClass, box, arg, n);
 
@@ -199,40 +194,40 @@ void kohonen_createWindow (void)
 
     kohonenLabel = ui_xCreateLabelItem("LAYER", form, titelWidth, NULL, NULL);
     sprintf(buf,"%d",1);
-    ui_LayerWidget = ui_xCreateDialogItem("Layers", form, 
-			     buf, numberWidth, kohonenLabel, NULL);
+    ui_LayerWidget = ui_xCreateDialogItem("Layers", form,
+                                          buf, numberWidth, kohonenLabel, NULL);
 
     button = ui_xCreateButtonItem("goto", form, ui_LayerWidget, NULL);
-    XtAddCallback (button, XtNcallback, (XtCallbackProc) 
-		   kohonen_rem_moveLayerProc, (caddr_t) UI_JUMP);
+    XtAddCallback (button, XtNcallback, (XtCallbackProc)
+                   kohonen_rem_moveLayerProc, (caddr_t) UI_JUMP);
 
     button = ui_xCreateButtonItem("first", form, button, NULL);
-    XtAddCallback (button, XtNcallback, (XtCallbackProc) 
-		   kohonen_rem_moveLayerProc, (caddr_t) UI_FIRST);
+    XtAddCallback (button, XtNcallback, (XtCallbackProc)
+                   kohonen_rem_moveLayerProc, (caddr_t) UI_FIRST);
 
     button = ui_xCreateButtonItem("prev", form, button, NULL);
-    XtAddCallback (button, XtNcallback, (XtCallbackProc) 
-		   kohonen_rem_moveLayerProc, (caddr_t) UI_PREVIOUS);
+    XtAddCallback (button, XtNcallback, (XtCallbackProc)
+                   kohonen_rem_moveLayerProc, (caddr_t) UI_PREVIOUS);
 
     button = ui_xCreateButtonItem("next", form, button, NULL);
-    XtAddCallback (button, XtNcallback, (XtCallbackProc) 
-		   kohonen_rem_moveLayerProc, (caddr_t) UI_NEXT);
+    XtAddCallback (button, XtNcallback, (XtCallbackProc)
+                   kohonen_rem_moveLayerProc, (caddr_t) UI_NEXT);
 
     button = ui_xCreateButtonItem("last", form, button, NULL);
-    XtAddCallback (button, XtNcallback, (XtCallbackProc) 
-		   kohonen_rem_moveLayerProc, (caddr_t) UI_LAST);
+    XtAddCallback (button, XtNcallback, (XtCallbackProc)
+                   kohonen_rem_moveLayerProc, (caddr_t) UI_LAST);
 
     button = ui_xCreateButtonItem("STree", form, button, NULL);
-    XtAddCallback (button, XtNcallback, (XtCallbackProc) 
-		   kohonen_tree, kohonenLabel);
+    XtAddCallback (button, XtNcallback, (XtCallbackProc)
+                   kohonen_tree, kohonenLabel);
 
     XtAddEventHandler(form,KeyPressMask,FALSE,
-		      (XtEventHandler)ui_key_control,(Cardinal *) 0);
+                      (XtEventHandler)ui_key_control,(Cardinal *) 0);
     XawFormDoLayout(form, TRUE);
 
     done= ui_xCreateButtonItem("done", box, NULL, NULL);
-    XtAddCallback(done,XtNcallback,(XtCallbackProc)kohonen_doneProc,NULL); 
+    XtAddCallback(done,XtNcallback,(XtCallbackProc)kohonen_doneProc,NULL);
 
     XtPopup (kohonen_mainWidget, XtGrabNone);
 
-}  
+}

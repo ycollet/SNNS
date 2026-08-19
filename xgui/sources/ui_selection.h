@@ -15,7 +15,7 @@
 
     Copyright (c) 1990-1995  SNNS Group, IPVR, Univ. Stuttgart, FRG
     Copyright (c) 1996-1998  SNNS Group, WSI, Univ. Tuebingen, FRG
-             
+
 ******************************************************************************/
 
 
@@ -28,17 +28,17 @@
 extern void ui_sel_msgNumber (void);
 extern void ui_sel_initSelectionList (void);
 extern struct SelectionType *ui_sel_lookForItem (int unitNo);
-extern struct SelectionType *ui_sel_lookForSelectedItem 
-					(struct SelectionType *);
+extern struct SelectionType *ui_sel_lookForSelectedItem
+(struct SelectionType *);
 extern void ui_sel_drawBoxes (struct Ui_DisplayType *,FlagType,struct PosType);
-extern void ui_sel_selectOne (struct Ui_DisplayType *, FlagType, int, 
-					struct PosType);
-extern void ui_sel_unselectOne (struct Ui_DisplayType *, FlagType, int, 
-					struct PosType);
-extern void ui_sel_selectRect (struct Ui_DisplayType *, FlagType, 
-					struct PosType, struct PosType);
-extern void ui_sel_unselectRect (struct Ui_DisplayType *, FlagType, 
-					struct PosType, struct PosType);
+extern void ui_sel_selectOne (struct Ui_DisplayType *, FlagType, int,
+                              struct PosType);
+extern void ui_sel_unselectOne (struct Ui_DisplayType *, FlagType, int,
+                                struct PosType);
+extern void ui_sel_selectRect (struct Ui_DisplayType *, FlagType,
+                               struct PosType, struct PosType);
+extern void ui_sel_unselectRect (struct Ui_DisplayType *, FlagType,
+                                 struct PosType, struct PosType);
 extern void ui_sel_reshowItems (struct Ui_DisplayType *, FlagType);
 extern void ui_sel_checkList (struct Ui_DisplayType *, FlagType);
 extern void ui_sel_unselectAll (struct Ui_DisplayType *, FlagType);

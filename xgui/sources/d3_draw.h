@@ -33,7 +33,7 @@ extern int **d3_cube_lines;
 extern int **d3_vertex_index;
 
 
-#endif 
+#endif
 
 /* end of file */
 /* lines: */

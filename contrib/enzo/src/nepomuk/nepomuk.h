@@ -80,32 +80,32 @@
 /* free and used nets additionally are linked via a simple list */
 
 typedef struct _PopNet {
-  int used;
-  int subPop;
+    int used;
+    int subPop;
 
-  struct _PopNet *freeSucc;
-  struct _PopNet *usedSucc;
+    struct _PopNet *freeSucc;
+    struct _PopNet *usedSucc;
 
-  memNet snnsNet;   /* this is the structure returned from krm_getNet() */
+    memNet snnsNet;   /* this is the structure returned from krm_getNet() */
 
-  void *userData;
+    void *userData;
 
 } PopNet;
 
 /* the patterns are organized exactly like the nets */
 
 typedef struct _PopPat {
-  int used;
-  int subPop;
+    int used;
+    int subPop;
 
-  struct _PopPat *freeSucc;
-  struct _PopPat *usedSucc;
+    struct _PopPat *freeSucc;
+    struct _PopPat *usedSucc;
 
-  memPat snnsPat;  /* this is the structure returned from krm_getPat() */
+    memPat snnsPat;  /* this is the structure returned from krm_getPat() */
 
-  char *name;
+    char *name;
 
-  void *userData;
+    void *userData;
 
 } PopPat;
 
@@ -120,57 +120,57 @@ typedef int (*CmpFct)( NetID id_1, NetID id_2 );   /* cf. strcmp() */
 /* a net from SNNS; be careful when using them, they mai be stripped someday  */
 
 typedef struct {
-  /* everything worth knowing about an unit */
+    /* everything worth knowing about an unit */
 
-  int number;
+    int number;
 
-  char *name,
-    *outFuncName,
-    *actFuncName,
-    *FTypeName;
+    char *name,
+         *outFuncName,
+         *actFuncName,
+         *FTypeName;
 
-  FlintType activation,
-    initAct,
-    output,
-    bias;
+    FlintType activation,
+              initAct,
+              output,
+              bias;
 
-  int  subnetNo,
-    layerNo;
+    int  subnetNo,
+         layerNo;
 
-  struct PosType    position;
+    struct PosType    position;
 
-  int TType,
-    frozen,
-    inputType;
+    int TType,
+        frozen,
+        inputType;
 
 } UnitDescr;
 
 typedef struct {
-  /* everything worth knowing about a weight */
+    /* everything worth knowing about a weight */
 
-  FlintType strength;
-  int source, target;
+    FlintType strength;
+    int source, target;
 
 } WeightDescr;
 
 typedef struct {
-  /* Default values for units */
-  int       no_of_units,
-    no_of_links;
-  FlintType act, bias;
-  int       io_type,
-    subnet_no,
-    layer_no;
-  char     *act_func,
-    *out_func;
+    /* Default values for units */
+    int       no_of_units,
+              no_of_links;
+    FlintType act, bias;
+    int       io_type,
+              subnet_no,
+              layer_no;
+    char     *act_func,
+             *out_func;
 
-  /* net description vectors */
+    /* net description vectors */
 
-  /* the units are numbered from 0 to no_of_units-1 */
-  /* this is NOT the SNNS-unit-number; you'll have to subtract one */
-  UnitDescr   *units;
+    /* the units are numbered from 0 to no_of_units-1 */
+    /* this is NOT the SNNS-unit-number; you'll have to subtract one */
+    UnitDescr   *units;
 
-  WeightDescr *weights;
+    WeightDescr *weights;
 
 } NetDescr;
 

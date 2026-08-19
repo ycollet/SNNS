@@ -71,79 +71,79 @@ static char        histFileName[255] = HISTORY_FILE_VALUE;
 /*-----------------------------------------------------------------functions-*/
 
 int histWeights_init( ModuleTableEntry *self, int msgc, char *msgv[] ) {
-  char fileName[MAX_FILENAME_LEN];
+    char fileName[MAX_FILENAME_LEN];
 
-  MODULE_KEY( HIST_WEIGHTS_KEY );
+    MODULE_KEY( HIST_WEIGHTS_KEY );
 
-  SEL_MSG( msgv[0] )
+    SEL_MSG( msgv[0] )
 
     MSG_CASE( GENERAL_INIT ) {
-    /* nothing to do */
-  }
-  MSG_CASE( GENERAL_EXIT ) {
-    fclose(hfpWeight);
-  }
+        /* nothing to do */
+    }
+    MSG_CASE( GENERAL_EXIT ) {
+        fclose(hfpWeight);
+    }
 
-  MSG_CASE( EVOLUTION_INIT ) {
-    sprintf(fileName,"%s.%s",histFileName,EXTENSION);
-    if( (hfpWeight = fopen( fileName, "w" )) == NULL )
-      return( ERROR_FILEOPEN );
-    setlinebuf( hfpWeight );
-    fprintf(hfpWeight,OUTELEM_TEXT);
-  }
+    MSG_CASE( EVOLUTION_INIT ) {
+        sprintf(fileName,"%s.%s",histFileName,EXTENSION);
+        if( (hfpWeight = fopen( fileName, "w" )) == NULL )
+            return( ERROR_FILEOPEN );
+        setlinebuf( hfpWeight );
+        fprintf(hfpWeight,OUTELEM_TEXT);
+    }
 
 
-  MSG_CASE( HISTORY_FILE ) {
-    if( msgc > 1 ) strcpy ( histFileName, msgv[1] );
-  }
+    MSG_CASE( HISTORY_FILE ) {
+        if( msgc > 1 ) strcpy ( histFileName, msgv[1] );
+    }
 
-  END_MSG;
+    END_MSG;
 
-  return( INIT_USED );
+    return( INIT_USED );
 }
 
 /*---------------------------------------------------------------------------*/
 
 int histWeights_work( PopID *parents, PopID *offsprings, PopID *ref ) {
-  NetID  net;
-  NetworkData *netData;
-  int weights;
-  int hiddenUnits,inputUnits;   /* masch 4.94 */
-  int k;
+    NetID  net;
+    NetworkData *netData;
+    int weights;
+    int hiddenUnits,inputUnits;   /* masch 4.94 */
+    int k;
 
-  FOR_ALL_OFFSPRINGS( net ) {
-    netData = (NetworkData *) kpm_getNetData( net );
-    hiddenUnits = inputUnits = 0;
+    FOR_ALL_OFFSPRINGS( net ) {
+        netData = (NetworkData *) kpm_getNetData( net );
+        hiddenUnits = inputUnits = 0;
 
-    for ( k = ksh_getFirstUnit(); k != 0; k = ksh_getNextUnit()) {
-      if((ksh_getUnitTType( k ) == INPUT) && (!subul_deadInputUnit( k )))
-	inputUnits++;
-      else if (ksh_getUnitTType( k ) == HIDDEN)
-	hiddenUnits++;
-    }     /* masch 4.94 */
+        for ( k = ksh_getFirstUnit(); k != 0; k = ksh_getNextUnit()) {
+            if((ksh_getUnitTType( k ) == INPUT) && (!subul_deadInputUnit( k )))
+                inputUnits++;
+            else if (ksh_getUnitTType( k ) == HIDDEN)
+                hiddenUnits++;
+        }     /* masch 4.94 */
 
-    GET_NO_OF_LINKS( weights );
-    fprintf(hfpWeight,OUTELEM_FORMAT,netData->histID,weights,
-	    netData->histRec.added,
-	    netData->histRec.deleted,
-	    netData->histRec.pruned,
-	    netData->histRec.cleaned,
-	    netData->histRec.threshold,/*masch 5.94*/
-	    hiddenUnits,               /*masch 5.94*/
-	    inputUnits);               /*masch 5.94*/
-  }
+        GET_NO_OF_LINKS( weights );
+        fprintf(hfpWeight,OUTELEM_FORMAT,netData->histID,weights,
+                netData->histRec.added,
+                netData->histRec.deleted,
+                netData->histRec.pruned,
+                netData->histRec.cleaned,
+                netData->histRec.threshold,/*masch 5.94*/
+                hiddenUnits,               /*masch 5.94*/
+                inputUnits);               /*masch 5.94*/
+    }
 
-  return( MODULE_NO_ERROR );
+    return( MODULE_NO_ERROR );
 }
 
 /*---------------------------------------------------------------------------*/
 
 char *histWeights_errMsg( int err_code ) {
-  switch (err_code) {
-  case MODULE_NO_ERROR :
-    return ("histFitness : No Error found");
-  case ERROR_FILEOPEN :
-    return ("histFitness : Can't open history-file for writing");
-  }
-  return( "histFitness : Unknown error" );
+    switch (err_code) {
+    case MODULE_NO_ERROR :
+        return ("histFitness : No Error found");
+    case ERROR_FILEOPEN :
+        return ("histFitness : Can't open history-file for writing");
+    }
+    return( "histFitness : Unknown error" );
 }

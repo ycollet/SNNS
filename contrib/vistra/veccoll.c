@@ -5,18 +5,16 @@
 /*******************************************************/
 /* Antworte die Anzahl der Zeilenvektoren von vc.      */
 /*******************************************************/
-long numberOfRows(VecColl vc)
-{
-  return size(vc);
+long numberOfRows(VecColl vc) {
+    return size(vc);
 }         /* numberOfRows */
 
 
 /*******************************************************/
 /* Antworte die Anzahl der Spaltenvektoren von vc.     */
 /*******************************************************/
-long numberOfCols(VecColl vc)
-{
-  return dims((Vector) at(vc, 1));
+long numberOfCols(VecColl vc) {
+    return dims((Vector) at(vc, 1));
 }         /* numberOfCols */
 
 
@@ -26,17 +24,17 @@ long numberOfCols(VecColl vc)
 /* steigender Folge ins Feld lp und setze ans Ende eine*/
 /* 0.                                                  */
 /*******************************************************/
-unsigned constCols(VecColl vc, long *lp)
-{ long i, nvecs, ndims;
-  unsigned count;
+unsigned constCols(VecColl vc, long *lp) {
+    long i, nvecs, ndims;
+    unsigned count;
 
-  nvecs = size(vc);
-  ndims = numberOfCols(vc);
-  for(count = 0, i = 1L; i <= ndims; i++)
-    if(dimMin(vc, i) == dimMax(vc, i)) lp[count++] = i;
-  lp[count] = 0;
+    nvecs = size(vc);
+    ndims = numberOfCols(vc);
+    for(count = 0, i = 1L; i <= ndims; i++)
+        if(dimMin(vc, i) == dimMax(vc, i)) lp[count++] = i;
+    lp[count] = 0;
 
-  return count;  
+    return count;
 }         /* constCols */
 
 
@@ -44,15 +42,15 @@ unsigned constCols(VecColl vc, long *lp)
 /* Antworte den Mittelwert der Elemente aller Vektoren,*/
 /* die durch vc gegeben sind.                          */
 /*******************************************************/
-Number overallAvg(VecColl vc)
-{ long i, numVectors;
-  Number sum = 0;
+Number overallAvg(VecColl vc) {
+    long i, numVectors;
+    Number sum = 0;
 
-  numVectors = size(vc);
-  for(i = 1L; i <= numVectors; i++)
-    sum += avg((Vector) at(vc, i));
+    numVectors = size(vc);
+    for(i = 1L; i <= numVectors; i++)
+        sum += avg((Vector) at(vc, i));
 
-  return sum / numVectors;
+    return sum / numVectors;
 }          /* overallAvg */
 
 
@@ -60,15 +58,15 @@ Number overallAvg(VecColl vc)
 /* Antworte das kleinste Element aller Vektoren        */
 /* aus vc.                                             */
 /*******************************************************/
-Number overallMin(VecColl vc)
-{ long numVectors, i;
-  Number answer;
+Number overallMin(VecColl vc) {
+    long numVectors, i;
+    Number answer;
 
-  numVectors = size(vc);
-  answer = minimum((Vector) at(vc, 1));
-  for(i = 2L; i <= numVectors; i++)
-    answer = min(answer, minimum((Vector) at(vc, i)));
-  return answer;
+    numVectors = size(vc);
+    answer = minimum((Vector) at(vc, 1));
+    for(i = 2L; i <= numVectors; i++)
+        answer = min(answer, minimum((Vector) at(vc, i)));
+    return answer;
 }          /* overallMin */
 
 
@@ -76,41 +74,41 @@ Number overallMin(VecColl vc)
 /* Antworte das groesste Element aller Vektoren        */
 /* aus vc.                                             */
 /*******************************************************/
-Number overallMax(VecColl vc)
-{ long numVectors, i;
-  Number answer;
+Number overallMax(VecColl vc) {
+    long numVectors, i;
+    Number answer;
 
-  numVectors = size(vc);
-  answer = maximum((Vector) at(vc, 1));
-  for(i = 2L; i <= numVectors; i++)
-    answer = max(answer, maximum((Vector) at(vc, i)));
-  return answer;
+    numVectors = size(vc);
+    answer = maximum((Vector) at(vc, 1));
+    for(i = 2L; i <= numVectors; i++)
+        answer = max(answer, maximum((Vector) at(vc, i)));
+    return answer;
 }          /* overallMax */
 
 
 /*******************************************************/
 /* Antworte die globale Standardabweichung von vc.     */
 /*******************************************************/
-Number overallStddev(VecColl vc)
-{ long i, j, nvecs, ncols;
-  unsigned long nnums;
-  double totalAvg, totalVar, sum;
-  Vector v;
+Number overallStddev(VecColl vc) {
+    long i, j, nvecs, ncols;
+    unsigned long nnums;
+    double totalAvg, totalVar, sum;
+    Vector v;
 
-  nvecs = size(vc);
-  ncols = numberOfCols(vc);
-  nnums = (unsigned long) nvecs * (unsigned long) ncols;
-  totalAvg = overallAvg(vc);
+    nvecs = size(vc);
+    ncols = numberOfCols(vc);
+    nnums = (unsigned long) nvecs * (unsigned long) ncols;
+    totalAvg = overallAvg(vc);
 
-  totalVar = 0;
-  for(i = 1L; i <= nvecs; i++)
-  { sum = 0;
-    v = (Vector) at(vc, i);
-    for(j = 1L; j <= ncols; j++) sum += square(atDim(v, j) - totalAvg);
-    totalVar += sum / nnums;
-  }
+    totalVar = 0;
+    for(i = 1L; i <= nvecs; i++) {
+        sum = 0;
+        v = (Vector) at(vc, i);
+        for(j = 1L; j <= ncols; j++) sum += square(atDim(v, j) - totalAvg);
+        totalVar += sum / nnums;
+    }
 
-  return sqrt(totalVar);
+    return sqrt(totalVar);
 }          /* overallStddev */
 
 
@@ -118,15 +116,15 @@ Number overallStddev(VecColl vc)
 /* Antworte den Mittelwert der dim-ten Elemente aller  */
 /* Vektoren, die durch vc gegeben sind.                */
 /*******************************************************/
-Number dimAvg(VecColl vc, long dim)
-{ long i, numVectors;
-  Number sum = 0;
+Number dimAvg(VecColl vc, long dim) {
+    long i, numVectors;
+    Number sum = 0;
 
-  numVectors = size(vc);
-  for(i = 1L; i <= numVectors; i++)
-    sum += atDim((Vector) at(vc, i), dim);
+    numVectors = size(vc);
+    for(i = 1L; i <= numVectors; i++)
+        sum += atDim((Vector) at(vc, i), dim);
 
-  return sum / numVectors;
+    return sum / numVectors;
 }          /* dimAvg */
 
 
@@ -134,16 +132,16 @@ Number dimAvg(VecColl vc, long dim)
 /* Antworte das kleinste Element, das irgendein Vektor */
 /* aus vc in der Dimension dim enthaelt.               */
 /*******************************************************/
-Number dimMin(VecColl vc, long dim)
-{ long i, numVectors;
-  Number answer;
+Number dimMin(VecColl vc, long dim) {
+    long i, numVectors;
+    Number answer;
 
-  numVectors = size(vc);
-  answer = atDim((Vector) at(vc, 1L), dim);
-  for(i = 2L; i <= numVectors; i++)
-    answer = min(answer, atDim((Vector) at(vc, i), dim));
+    numVectors = size(vc);
+    answer = atDim((Vector) at(vc, 1L), dim);
+    for(i = 2L; i <= numVectors; i++)
+        answer = min(answer, atDim((Vector) at(vc, i), dim));
 
-  return answer;
+    return answer;
 }          /* dimMin */
 
 
@@ -151,16 +149,16 @@ Number dimMin(VecColl vc, long dim)
 /* Antworte das groesste Element, das irgendein Vektor */
 /* aus vc in der Dimension dim enthaelt.               */
 /*******************************************************/
-Number dimMax(VecColl vc, long dim)
-{ long i, numVectors;
-  Number answer;
+Number dimMax(VecColl vc, long dim) {
+    long i, numVectors;
+    Number answer;
 
-  numVectors = size(vc);
-  answer = atDim((Vector) at(vc, 1L), dim);
-  for(i = 2L; i <= numVectors; i++)
-    answer = max(answer, atDim((Vector) at(vc, i), dim));
+    numVectors = size(vc);
+    answer = atDim((Vector) at(vc, 1L), dim);
+    for(i = 2L; i <= numVectors; i++)
+        answer = max(answer, atDim((Vector) at(vc, i), dim));
 
-  return answer;
+    return answer;
 }          /* dimMax */
 
 
@@ -175,11 +173,12 @@ void collectRows(vc, vecFunc, v)
 VecColl vc;
 Number (*vecFunc)();
 Vector v;
-{ long numVectors, i;
+{
+    long numVectors, i;
 
-  numVectors = size(vc);
-  for(i = 1L; i <= numVectors; i++)
-    putDim(v, i, (*vecFunc)((Vector) at(vc, i)));
+    numVectors = size(vc);
+    for(i = 1L; i <= numVectors; i++)
+        putDim(v, i, (*vecFunc)((Vector) at(vc, i)));
 }        /* collectRows */
 
 
@@ -194,18 +193,19 @@ void collectCols(vc, vecFunc, v)
 VecColl vc;
 Number (*vecFunc)();
 Vector v;
-{ Vector col;
-  long i, numCols;
+{
+    Vector col;
+    long i, numCols;
 
-  numCols = numberOfCols(vc);
-  if(! (col = newVector(size(vc)))) handleErr(1);
+    numCols = numberOfCols(vc);
+    if(! (col = newVector(size(vc)))) handleErr(1);
 
-  for(i = 1L; i <= numCols; i++)
-  { colVec(vc, i, col);
-    putDim(v, i, (*vecFunc)(col));
-  }
+    for(i = 1L; i <= numCols; i++) {
+        colVec(vc, i, col);
+        putDim(v, i, (*vecFunc)(col));
+    }
 
-  freeVector(col);
+    freeVector(col);
 }        /* collectRows */
 
 
@@ -217,11 +217,12 @@ Vector v;
 void doRows(vc, vecFunc)
 VecColl vc;
 void (*vecFunc)();
-{ long i, numVectors;
+{
+    long i, numVectors;
 
-  numVectors = numberOfRows(vc);
-  for(i = 1L; i <= numVectors; i++)
-    (*vecFunc)((Vector) at(vc, i));
+    numVectors = numberOfRows(vc);
+    for(i = 1L; i <= numVectors; i++)
+        (*vecFunc)((Vector) at(vc, i));
 }        /* doRows */
 
 
@@ -231,12 +232,12 @@ void (*vecFunc)();
 /* der Anzahl Zeilen von vc sein. Eine Ueberpruefung   */
 /* findet nicht statt.                                 */
 /*******************************************************/
-void colVec(VecColl vc, long dim, Vector v)
-{ long numVectors, i;
+void colVec(VecColl vc, long dim, Vector v) {
+    long numVectors, i;
 
-  numVectors = size(vc);
-  for(i = 1L; i <= numVectors; i++)
-    putDim(v, i, atDim((Vector) at(vc, i), dim));
+    numVectors = size(vc);
+    for(i = 1L; i <= numVectors; i++)
+        putDim(v, i, atDim((Vector) at(vc, i), dim));
 }         /* colVec */
 
 
@@ -247,25 +248,28 @@ void colVec(VecColl vc, long dim, Vector v)
 /* Die Rechenart ist durch Character c gegeben.          */
 /* Erlaubte Werte von c: '+', '-', '*' oder '/'.         */
 /*********************************************************/
-void compScalarsRow(VecColl vc, Vector v, char c)
-{ long numVectors, i;
+void compScalarsRow(VecColl vc, Vector v, char c) {
+    long numVectors, i;
 
-  numVectors = size(vc);
-  switch(c)
-  {
-    case '+': for(i = 1L; i <= numVectors; i++)
-                addConst((Vector) at(vc, i), atDim(v, i));
-              break;
-    case '-': for(i = 1L; i <= numVectors; i++)
-                addConst((Vector) at(vc, i), - atDim(v, i));
-              break;
-    case '*': for(i = 1L; i <= numVectors; i++)
-                multiply((Vector) at(vc, i), atDim(v, i));
-              break;
-    case '/': for(i = 1L; i <= numVectors; i++)
-                multiply((Vector) at(vc, i), 1 / atDim(v, i));
-              break;
-  }       /* switch */
+    numVectors = size(vc);
+    switch(c) {
+    case '+':
+        for(i = 1L; i <= numVectors; i++)
+            addConst((Vector) at(vc, i), atDim(v, i));
+        break;
+    case '-':
+        for(i = 1L; i <= numVectors; i++)
+            addConst((Vector) at(vc, i), - atDim(v, i));
+        break;
+    case '*':
+        for(i = 1L; i <= numVectors; i++)
+            multiply((Vector) at(vc, i), atDim(v, i));
+        break;
+    case '/':
+        for(i = 1L; i <= numVectors; i++)
+            multiply((Vector) at(vc, i), 1 / atDim(v, i));
+        break;
+    }       /* switch */
 }         /* compScalarsRow */
 
 
@@ -276,25 +280,28 @@ void compScalarsRow(VecColl vc, Vector v, char c)
 /* Die Rechenart ist durch Character c gegeben.          */
 /* Erlaubte Werte von c: '+', '-', '*' oder '/'.         */
 /*********************************************************/
-void compScalarsCol(VecColl vc, Vector v, char c)
-{ long numVectors, i;
+void compScalarsCol(VecColl vc, Vector v, char c) {
+    long numVectors, i;
 
-  numVectors = size(vc);
-  switch(c)
-  {
-    case '+': for(i = 1L; i <= numVectors; i++)
-                addVector((Vector) at(vc, i), v);
-              break;
-    case '-': for(i = 1L; i <= numVectors; i++)
-                subVector((Vector) at(vc, i), v);
-              break;
-    case '*': for(i = 1L; i <= numVectors; i++)
-                multVector((Vector) at(vc, i), v);
-              break;
-    case '/': for(i = 1L; i <= numVectors; i++)
-                divVector((Vector) at(vc, i), v);
-              break;
-  }       /* switch */
+    numVectors = size(vc);
+    switch(c) {
+    case '+':
+        for(i = 1L; i <= numVectors; i++)
+            addVector((Vector) at(vc, i), v);
+        break;
+    case '-':
+        for(i = 1L; i <= numVectors; i++)
+            subVector((Vector) at(vc, i), v);
+        break;
+    case '*':
+        for(i = 1L; i <= numVectors; i++)
+            multVector((Vector) at(vc, i), v);
+        break;
+    case '/':
+        for(i = 1L; i <= numVectors; i++)
+            divVector((Vector) at(vc, i), v);
+        break;
+    }       /* switch */
 }         /* compScalarsCol */
 
 
@@ -302,21 +309,21 @@ void compScalarsCol(VecColl vc, Vector v, char c)
 /* Skaliere alle Elemente von vc auf den Werte-     */
 /* bereich von from bis to.                         */
 /****************************************************/
-void scaleAll(VecColl vc, Number from, Number to, ScaleOp *sop)
-{ Range old, new;
-  long numVectors, i;
+void scaleAll(VecColl vc, Number from, Number to, ScaleOp *sop) {
+    Range old, new;
+    long numVectors, i;
 
-  /* Berechne den bisherigen Wertebereich */
-  old.lowest = overallMin(vc);
-  old.highest = overallMax(vc);
+    /* Berechne den bisherigen Wertebereich */
+    old.lowest = overallMin(vc);
+    old.highest = overallMax(vc);
 
-  new.lowest = from;
-  new.highest = to;
+    new.lowest = from;
+    new.highest = to;
 
-  getScaleOp(sop, old, new);
-  numVectors = size(vc);
-  for(i = 1L; i <= numVectors; i++)
-    scaleVec((Vector) at(vc, i), *sop);
+    getScaleOp(sop, old, new);
+    numVectors = size(vc);
+    for(i = 1L; i <= numVectors; i++)
+        scaleVec((Vector) at(vc, i), *sop);
 }          /* scaleAll */
 
 
@@ -325,22 +332,22 @@ void scaleAll(VecColl vc, Number from, Number to, ScaleOp *sop)
 /* Fast Fourier Transformation durch.                */
 /* Variable error wird gesetzt.                      */
 /*****************************************************/
-void fftRows(VecColl vc)
-{ double *real, *imag;
-  long nrows, ncols, i;
+void fftRows(VecColl vc) {
+    double *real, *imag;
+    long nrows, ncols, i;
 
-  nrows = numberOfRows(vc);
-  ncols = numberOfCols(vc);
-  if(! (real = (double *) malloc(ncols * sizeof(*real)))) error(1);
-  if(! (imag = (double *) malloc(ncols * sizeof(*imag))))
-  { free(real);
-    error(1);
-  }
+    nrows = numberOfRows(vc);
+    ncols = numberOfCols(vc);
+    if(! (real = (double *) malloc(ncols * sizeof(*real)))) error(1);
+    if(! (imag = (double *) malloc(ncols * sizeof(*imag)))) {
+        free(real);
+        error(1);
+    }
 
-  for(i = 1L; i <= nrows; i++)
-    fft((Vector) at(vc, i), real, imag);
+    for(i = 1L; i <= nrows; i++)
+        fft((Vector) at(vc, i), real, imag);
 
-  error = 0;
+    error = 0;
 }
 
 
@@ -348,9 +355,8 @@ void fftRows(VecColl vc)
 /* Entferne alle Zeilenvektoren von vc von Zeile     */
 /* from bis Zeile to einschliesslich.                */
 /*****************************************************/
-void removeRowRange(VecColl vc, unsigned from, unsigned to)
-{
-  freeFromTo(vc, from, to, freeVector);
+void removeRowRange(VecColl vc, unsigned from, unsigned to) {
+    freeFromTo(vc, from, to, freeVector);
 }          /* removeRowRange */
 
 
@@ -359,16 +365,16 @@ void removeRowRange(VecColl vc, unsigned from, unsigned to)
 /* from bis Spalte to einschliesslich.               */
 /* Variable error wird gesetzt.                      */
 /*****************************************************/
-void removeColRange(VecColl vc, unsigned from, unsigned to)
-{ unsigned numVectors, i;
-  
-  numVectors = size(vc);
-  for(i = 1; i <= numVectors; i++)
-  { removeDimRange((Vector) at(vc, i), from, to);
-    if(error) return;
-  }
+void removeColRange(VecColl vc, unsigned from, unsigned to) {
+    unsigned numVectors, i;
 
-  error = 0;
+    numVectors = size(vc);
+    for(i = 1; i <= numVectors; i++) {
+        removeDimRange((Vector) at(vc, i), from, to);
+        if(error) return;
+    }
+
+    error = 0;
 }          /* removeColRange */
 
 
@@ -376,9 +382,8 @@ void removeColRange(VecColl vc, unsigned from, unsigned to)
 /* Ersetze den Inhalt des row-ten Zeilenvektors durch */
 /* den Inhalt von v.                                  */
 /******************************************************/
-void replaceRow(VecColl vc, unsigned row, Vector v)
-{
-  copyVec((Vector) at(vc, row), v);
+void replaceRow(VecColl vc, unsigned row, Vector v) {
+    copyVec((Vector) at(vc, row), v);
 }          /* replaceRow */
 
 
@@ -386,12 +391,12 @@ void replaceRow(VecColl vc, unsigned row, Vector v)
 /* Ersetze den Inhalt des col-ten Spaltenvektors durch*/
 /* den Inhalt von v.                                  */
 /******************************************************/
-void replaceCol(VecColl vc, unsigned col, Vector v)
-{ unsigned nrows, i;
+void replaceCol(VecColl vc, unsigned col, Vector v) {
+    unsigned nrows, i;
 
-  nrows = size(vc);
-  for(i = 1; i <= nrows; i++)
-    putDim((Vector) at(vc, i), col, atDim(v, i));
+    nrows = size(vc);
+    for(i = 1; i <= nrows; i++)
+        putDim((Vector) at(vc, i), col, atDim(v, i));
 }          /* replaceCol */
 
 
@@ -400,14 +405,14 @@ void replaceCol(VecColl vc, unsigned col, Vector v)
 /* Spaltenvektors von vc nach buf.                    */
 /* Jedes Element steht in einer Zeile des Strings.    */
 /******************************************************/
-void colAsStringVert(VecColl vc, long col, long from, long to, char *buf)
-{ long i;
+void colAsStringVert(VecColl vc, long col, long from, long to, char *buf) {
+    long i;
 
-  for(i = from; i <= to; i++)
-  { sprintf(buf, NUMBER_FORMAT_NL, atDim((Vector) at(vc, i), col));
-    buf += NUMBER_STR_LENGTH + SIZEOF_NL;
-  }
-  *(--buf) = '\0';
+    for(i = from; i <= to; i++) {
+        sprintf(buf, NUMBER_FORMAT_NL, atDim((Vector) at(vc, i), col));
+        buf += NUMBER_STR_LENGTH + SIZEOF_NL;
+    }
+    *(--buf) = '\0';
 }          /* colAsStringVert */
 
 
@@ -418,44 +423,44 @@ void colAsStringVert(VecColl vc, long col, long from, long to, char *buf)
 /* covMatrix uebergeben werden.                       */
 /* Variable error wird gesetzt.                       */
 /******************************************************/
-void covariance(VecColl vc, Number **covMatrix)
-{ int i, j, k;
-  int n = (int) numberOfCols(vc);
-  int m = (int) numberOfRows(vc);
-  Number *mean;
-  Vector vec;
+void covariance(VecColl vc, Number **covMatrix) {
+    int i, j, k;
+    int n = (int) numberOfCols(vc);
+    int m = (int) numberOfRows(vc);
+    Number *mean;
+    Vector vec;
 
-  /* berechne die Mittelwerte der einzelnen Spalten (Dimensionen) */
-  if(! (mean = (Number *) malloc(sizeof(*mean) * n))) error(1);
-  for(i = 0; i < n; i++)
-    mean[i] = dimAvg(vc, (long) i+1);
-
-  /* initialisiere covMatrix */
-  for(i = 0; i < n; i++)
-    for(j = 0; j <= i; j++)
-      covMatrix[i][j] = 0.0;
-
-  /* berechne eine Haelfte der Matrix */
-  for(k = 0; k < m; k++)
-  { vec = (Vector) at(vc, k+1);
-  
+    /* berechne die Mittelwerte der einzelnen Spalten (Dimensionen) */
+    if(! (mean = (Number *) malloc(sizeof(*mean) * n))) error(1);
     for(i = 0; i < n; i++)
-      for(j = 0; j <= i; j++)
-        covMatrix[i][j] += (atDim(vec, i+1) - mean[i]) *
-                           (atDim(vec, j+1) - mean[j]);
-  }
+        mean[i] = dimAvg(vc, (long) i+1);
 
-  /* spiegel die Matrix an der Diagonalen */
-  for(i = 0; i < n; i++)
-  { for(j = 0; j < i; j++)
-    { covMatrix[i][j] /= m;
-      covMatrix[j][i] = covMatrix[i][j];
+    /* initialisiere covMatrix */
+    for(i = 0; i < n; i++)
+        for(j = 0; j <= i; j++)
+            covMatrix[i][j] = 0.0;
+
+    /* berechne eine Haelfte der Matrix */
+    for(k = 0; k < m; k++) {
+        vec = (Vector) at(vc, k+1);
+
+        for(i = 0; i < n; i++)
+            for(j = 0; j <= i; j++)
+                covMatrix[i][j] += (atDim(vec, i+1) - mean[i]) *
+                                   (atDim(vec, j+1) - mean[j]);
     }
-    covMatrix[i][i] /= m;
-  }
 
-  free(mean);
-  error = 0;  
+    /* spiegel die Matrix an der Diagonalen */
+    for(i = 0; i < n; i++) {
+        for(j = 0; j < i; j++) {
+            covMatrix[i][j] /= m;
+            covMatrix[j][i] = covMatrix[i][j];
+        }
+        covMatrix[i][i] /= m;
+    }
+
+    free(mean);
+    error = 0;
 }          /* covariance */
 
 

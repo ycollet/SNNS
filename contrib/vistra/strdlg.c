@@ -1,31 +1,31 @@
 /*************************************************************/
 /* Antworte eine neue Popupshell fuer eine Dialog Widget.    */
 /*************************************************************/
-static Widget createStrDlgShell(Widget parent)
-{ static Widget answer, strDlgButtonCancel;
+static Widget createStrDlgShell(Widget parent) {
+    static Widget answer, strDlgButtonCancel;
 
-  answer = XtVaCreatePopupShell(
-      "vistra dialog", transientShellWidgetClass, parent,
-      XtNallowShellResize, TRUE,
-      NULL);
-  strDlg = XtVaCreateManagedWidget(
-      "strDlg", dialogWidgetClass, answer,
-      NULL);
+    answer = XtVaCreatePopupShell(
+                 "vistra dialog", transientShellWidgetClass, parent,
+                 XtNallowShellResize, TRUE,
+                 NULL);
+    strDlg = XtVaCreateManagedWidget(
+                 "strDlg", dialogWidgetClass, answer,
+                 NULL);
 
-  XtVaSetValues(XtNameToWidget(strDlg, "label"),
-      XtNresizable, TRUE, NULL);
-  strDlgButtonOk = XtVaCreateManagedWidget(
-      "strDlgButtonOk", commandWidgetClass, strDlg,
-      XtNresizable, TRUE,
-      NULL);
-  strDlgButtonCancel = XtVaCreateManagedWidget(
-      "strDlgButtonCancel", commandWidgetClass, strDlg,
-      XtNlabel, "cancel",
-      XtNresizable, TRUE,
-      NULL);
-  XtAddCallback(strDlgButtonCancel, XtNcallback, popdown, answer);
+    XtVaSetValues(XtNameToWidget(strDlg, "label"),
+                  XtNresizable, TRUE, NULL);
+    strDlgButtonOk = XtVaCreateManagedWidget(
+                         "strDlgButtonOk", commandWidgetClass, strDlg,
+                         XtNresizable, TRUE,
+                         NULL);
+    strDlgButtonCancel = XtVaCreateManagedWidget(
+                             "strDlgButtonCancel", commandWidgetClass, strDlg,
+                             XtNlabel, "cancel",
+                             XtNresizable, TRUE,
+                             NULL);
+    XtAddCallback(strDlgButtonCancel, XtNcallback, popdown, answer);
 
-  return answer;
+    return answer;
 }       /* createStrDlgShell */
 
 
@@ -42,24 +42,25 @@ static void popupStrDlg(w, title, defaultValue, buttonLabel, callback)
 Widget w;
 char *title, *defaultValue, *buttonLabel;
 void (*callback)();
-{ Position x, y;
+{
+    Position x, y;
 
-  XtVaSetValues(strDlg,
-      XtNlabel, title,
-      XtNvalue, defaultValue,
-      NULL);
-  XtOverrideTranslations(XtNameToWidget(strDlg, "value"), textTransl);
-  XtRemoveAllCallbacks(strDlgButtonOk, XtNcallback);
-  XtAddCallback(strDlgButtonOk, XtNcallback, (XtCallbackProc) callback, strDlg);
-  XtVaSetValues(strDlgButtonOk,
-      XtNlabel, buttonLabel,
-      NULL);
+    XtVaSetValues(strDlg,
+                  XtNlabel, title,
+                  XtNvalue, defaultValue,
+                  NULL);
+    XtOverrideTranslations(XtNameToWidget(strDlg, "value"), textTransl);
+    XtRemoveAllCallbacks(strDlgButtonOk, XtNcallback);
+    XtAddCallback(strDlgButtonOk, XtNcallback, (XtCallbackProc) callback, strDlg);
+    XtVaSetValues(strDlgButtonOk,
+                  XtNlabel, buttonLabel,
+                  NULL);
 
-  getPopupPosition(w, &x, &y);
-  XtVaSetValues(strDlgShell,
-      XtNx, x, XtNy, y, NULL);
+    getPopupPosition(w, &x, &y);
+    XtVaSetValues(strDlgShell,
+                  XtNx, x, XtNy, y, NULL);
 
-  XtPopup(strDlgShell, XtGrabNonexclusive);
+    XtPopup(strDlgShell, XtGrabNonexclusive);
 }       /* popupStrDlg */
 
 

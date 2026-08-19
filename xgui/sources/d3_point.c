@@ -15,7 +15,7 @@
 
     Copyright (c) 1990-1995  SNNS Group, IPVR, Univ. Stuttgart, FRG
     Copyright (c) 1996-1998  SNNS Group, WSI, Univ. Tuebingen, FRG
-             
+
 ******************************************************************************/
 #include <config.h>
 
@@ -56,7 +56,7 @@ void d3_putPixel (int xp, int yp)
     points[point_count].y = (short) yp;
     point_count++;
     if (point_count == POINT_BLOCK_SIZE) {
-        XDrawPoints (d3_display, d3_window, d3_gc, points, 
+        XDrawPoints (d3_display, d3_window, d3_gc, points,
                      point_count, 0);
         point_count = 0;
     }
@@ -76,7 +76,7 @@ void d3_putPixel (int xp, int yp)
 void d3_flushPixels (void)
 
 {
-    XDrawPoints (d3_display, d3_window, d3_gc, points, 
+    XDrawPoints (d3_display, d3_window, d3_gc, points,
                  point_count, 0);
     point_count = 0;
 }
@@ -122,7 +122,7 @@ void d3_putColPixel (int xp, int yp)
             color = WhitePixel (d3_display, d3_screen);
         else
             color = BlackPixel (d3_display, d3_screen);
-        XSetForeground(d3_display, d3_gc, color); 
+        XSetForeground(d3_display, d3_gc, color);
     }
     XDrawPoint (d3_display, d3_window, d3_gc, xp, yp);
 }

@@ -15,7 +15,7 @@
 
     Copyright (c) 1990-1995  SNNS Group, IPVR, Univ. Stuttgart, FRG
     Copyright (c) 1996-1998  SNNS Group, WSI, Univ. Tuebingen, FRG
-             
+
 ******************************************************************************/
 
 
@@ -26,7 +26,7 @@ extern void ui_mw_eventProc (Widget, struct Ui_DisplayType *, XEvent *);
 extern void ui_can_MapEventProc (Widget,  struct Ui_DisplayType *, XEvent *);
 
 extern unsigned long   *ui_col_mainCells[];
-extern struct PosType  ui_pixPosMouse, ui_gridPosMouse; /* current mouse 
+extern struct PosType  ui_pixPosMouse, ui_gridPosMouse; /* current mouse
 			  				   position */
 
 

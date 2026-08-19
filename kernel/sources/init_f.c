@@ -860,7 +860,7 @@ krui_err  RbfInitNetwork(int start_pat, int end_pat, float i_bias,
             h_unit_ptr -> act = h_unit_ptr -> Out.output =
                                     ((h_unit_ptr->act_func == ACT_Custom_Python) ?
                                      kr_PythonActFunction(h_unit_ptr->python_act_func,
-                                             h_unit_ptr) :
+                                         h_unit_ptr) :
                                      (h_unit_ptr->act_func) (h_unit_ptr)) ;
 
             /* store it into the symmetric matrix: */
@@ -1046,7 +1046,7 @@ void RbfKohonenConvexInit(int start_pattern,int end_pattern,float alpha_start,
 
         /* compute the necessary sub patterns */
         KernelErrorCode = kr_initSubPatternOrder(start_pattern,
-                          end_pattern);
+            end_pattern);
         if(KernelErrorCode != KRERR_NO_ERROR) {
             if (KernelErrorCode == KRERR_NP_NO_TRAIN_SCHEME)
                 KernelErrorCode = KRERR_NP_WORKAROUND;
@@ -1247,7 +1247,7 @@ krui_err RbfKohonenInit(int start_pattern, int end_pattern, float learn_rate, in
     for (; count > 0; count--) {
         /* compute the necessary sub patterns */
         KernelErrorCode = kr_initSubPatternOrder(start_pattern,
-                          end_pattern);
+            end_pattern);
         if(KernelErrorCode != KRERR_NO_ERROR) {
             if (KernelErrorCode == KRERR_NP_NO_TRAIN_SCHEME)
                 KernelErrorCode = KRERR_NP_WORKAROUND;
@@ -2115,13 +2115,12 @@ krui_err INIT_SOM_Weights_const(float *parameterArray, int NoOfParams) {
   UPDATE   :
 ******************************************************************************/
 
-krui_err  INIT_JE_Weights (float *parameterArray, int NoOfParams)
-{
+krui_err  INIT_JE_Weights (float *parameterArray, int NoOfParams) {
     register unsigned short   flags    ;
     register struct   Link   *link_ptr ;
     register struct   Site   *site_ptr ;
     register struct   Unit   *unit_ptr ;
-    FlintType                 range     , min_weight, max_weight ;
+    FlintType                 range, min_weight, max_weight ;
     FlintType                 srl_weight, rec_weight, con_iact   ;
 
 
@@ -2495,8 +2494,7 @@ krui_err   PseudoInv(RbfFloatMatrix *source, int NoOfColumns, RbfFloatMatrix *ta
                     RbfMatrixSetValue(target, 0, i, RbfMatrixGetValue(source, i, 0)/qnorm);
                 else
                     RbfMatrixSetValue(target, 0, i, RbfMatrixGetValue(source, i, 0));
-        }
-    else {
+        } else {
         /* recursion */
         ret_code = PseudoInv(source, NoOfColumns - 1, target);
         if (ret_code != KRERR_NO_ERROR)
@@ -2587,7 +2585,7 @@ krui_err   PseudoInv(RbfFloatMatrix *source, int NoOfColumns, RbfFloatMatrix *ta
                 RbfMatrixSetValue(target, i, j, RbfMatrixGetValue(&PP, i, j));
         };
         for (j = (PP.columns -1) ; j>=0; j--)
-            RbfMatrixSetValue(target, PP.rows , j, RbfMatrixGetValue(&pT, 0, j));
+            RbfMatrixSetValue(target, PP.rows, j, RbfMatrixGetValue(&pT, 0, j));
 
         /* free matrices */
 

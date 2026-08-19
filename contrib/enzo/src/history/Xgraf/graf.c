@@ -60,7 +60,7 @@ char *start_graf(char  *name, int  x_size, int  y_size, int  x_pos, int  y_pos) 
     sprintf(window_start_string,
             "xgraf -Wl %50s -WL %50s -Ws %d %d -Wp %d %d",
             name, name, x_size, y_size, x_pos, y_pos);
-    pfp = (FILE *) popen(window_start_string , "w");
+    pfp = (FILE *) popen(window_start_string, "w");
     achsen_ur_x = 0;	/*Initializing for enabling painting without */
     achsen_ur_y = y_size;	/*using setcoord_graf()                      */
     scale_x = 1.0;
@@ -175,10 +175,10 @@ void axis_graf(char  *x_text, char  *y_text) {
     float ordinate, main_ordinate_dist_units;
 
     /* x-axis */
-    line_graf(x_coord_min ,  0.0, x_coord_max , 0.0);
+    line_graf(x_coord_min,  0.0, x_coord_max, 0.0);
 
     /* x-label */
-    pixel_text_graf((int)(achsen_ur_x+x_coord_max*scale_x-25) ,
+    pixel_text_graf((int)(achsen_ur_x+x_coord_max*scale_x-25),
                     (int)(achsen_ur_y+49),
                     x_text);
 
@@ -219,7 +219,7 @@ void axis_graf(char  *x_text, char  *y_text) {
 
 
     /* y-axis */
-    line_graf(0.0, y_coord_min , 0.0, y_coord_max);
+    line_graf(0.0, y_coord_min, 0.0, y_coord_max);
 
     /* y-label */
     pixel_text_graf((int)(achsen_ur_x-38),

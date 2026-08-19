@@ -1531,8 +1531,7 @@ static float Backprop_weightdecay (int pattern_no, int sub_pat_no,
 
                 /* adjust prevLinkPtr */
                 prevLinkPtr = linkPtr;
-            }
-        else
+            } else
             /* the unit has sites  */
             for (sitePtr = unitPtr->sites;
                     sitePtr != NULL;
@@ -1605,8 +1604,7 @@ static float Backprop_weightdecay (int pattern_no, int sub_pat_no,
 
                 /* adjust prevLinkPtr */
                 prevLinkPtr = linkPtr;
-            }
-        else
+            } else
             /* the unit has sites  */
             for (sitePtr = unitPtr->sites;
                     sitePtr != NULL;
@@ -2832,7 +2830,7 @@ static float propagateNet_CPN(int pattern_no, int sub_pat_no, float alpha,
         unit_ptr->Out.output = unit_ptr->act =
                                    ((unit_ptr->act_func == ACT_Custom_Python) ?
                                     kr_PythonActFunction(unit_ptr->python_act_func,
-                                            unit_ptr) :
+                                        unit_ptr) :
                                     (*unit_ptr->act_func) (unit_ptr)) ;
 
         devit = *out_pat++ - unit_ptr->Out.output;    /* calculate devitation */
@@ -3417,7 +3415,7 @@ krui_err  RbfLearnForward(int pattern_no, int sub_pat_no) {
         unit_ptr->act = unit_ptr->Out.output =
                             ((unit_ptr->act_func == ACT_Custom_Python) ?
                              kr_PythonActFunction(unit_ptr->python_act_func,
-                                     unit_ptr) :
+                                 unit_ptr) :
                              (*unit_ptr->act_func) (unit_ptr)) ;
 
         unit_ptr->value_c = 0.0;
@@ -3434,7 +3432,7 @@ krui_err  RbfLearnForward(int pattern_no, int sub_pat_no) {
         unit_ptr->act = unit_ptr->Out.output =
                             ((unit_ptr->act_func == ACT_Custom_Python) ?
                              kr_PythonActFunction(unit_ptr->python_act_func,
-                                     unit_ptr) :
+                                 unit_ptr) :
                              (unit_ptr->act_func) (unit_ptr)) ;
         unit_ptr->value_a = *current_out_pattern++ - unit_ptr->act;
     }
@@ -3490,7 +3488,7 @@ float RbfLearnAdjustDelta(float para_center, float para_bias,
         w2_error = w_error = (curr_unit->value_a) *
                              ((curr_unit->act_deriv_func == ACT_DERIV_Custom_Python) ?
                               kr_PythonActFunction(curr_unit->python_act_deriv_func,
-                                      curr_unit) :
+                                  curr_unit) :
                               (curr_unit->act_deriv_func) (curr_unit)) ;
 
         /* sum up the learning error:				 */
@@ -3565,13 +3563,13 @@ float RbfLearnAdjustDelta(float para_center, float para_bias,
                 curr_unit->bias += para_bias * curr_unit->value_c *
                                    ((curr_unit->act_deriv_func == ACT_DERIV_Custom_Python) ?
                                     kr_PythonActFunction(curr_unit->python_act_deriv_func,
-                                            curr_unit) :
+                                        curr_unit) :
                                     (*curr_unit->act_deriv_func) (curr_unit)) ;
 #else
             curr_unit->value_b += curr_unit->value_c *
                                   ((curr_unit->act_deriv_func == ACT_DERIV_Custom_Python) ?
                                    kr_PythonActFunction(curr_unit->python_act_deriv_func,
-                                           curr_unit) :
+                                       curr_unit) :
                                    (curr_unit->act_deriv_func) (curr_unit)) ;
 #endif
         }
@@ -3830,8 +3828,8 @@ krui_err LEARN_RBF(int start_pattern, int end_pattern,
             fehler_zaehler++;
 #else
         NET_ERROR(OutParameter) += RbfLearnAdjustDelta(para_center,
-                                   para_bias, para_weight, para_pain, para_momentum,
-                                   para_delta_max, learn_mask);
+            para_bias, para_weight, para_pain, para_momentum,
+            para_delta_max, learn_mask);
 #endif
     }
 
@@ -5771,7 +5769,7 @@ static krui_err adjust_ART1_weights(double beta, TopoPtrArray comp_ptr,
 
         if (link_ptr->to->lln == ART1_CMP_LAY) {
             link_ptr->weight = (FlintType)ART1_ADJUST_LINK_CMP_REC(link_ptr->to,
-                               beta,sum_ck);
+                beta,sum_ck);
         }/* if */
     }/* FOR_ALL_LINKS */
 
@@ -6520,8 +6518,8 @@ static krui_err adjust_ARTMAP_weights(double beta_a, double beta_b,
     FOR_ALL_LINKS(winner_ptr_a, link_ptr) {
         if (link_ptr->to->lln == ARTMAP_CMPa_LAY) {
             link_ptr->weight = (FlintType)ART1_ADJUST_LINK_CMP_REC(link_ptr->to,
-                               beta_a,
-                               sum_ck);
+                beta_a,
+                sum_ck);
         }/* if */
     }/* FOR_ALL_LINKS */
 
@@ -6558,8 +6556,8 @@ static krui_err adjust_ARTMAP_weights(double beta_a, double beta_b,
     FOR_ALL_LINKS(winner_ptr_b, link_ptr) {
         if (link_ptr->to->lln == ARTMAP_CMPb_LAY) {
             link_ptr->weight = (FlintType)ART1_ADJUST_LINK_CMP_REC(link_ptr->to,
-                               beta_b,
-                               sum_ck);
+                beta_b,
+                sum_ck);
         }/* if */
     }/* FOR_ALL_LINKS */
 
@@ -6857,7 +6855,7 @@ static float initOldDeltas(int pattern_no, int sub_pat_no) {
         /* BPTT uses sum_j ( o_j - t_j )^2 as error function => -2.0 * ... */
         delta = -2.0 * devit * (((unit_ptr->act_deriv_func == ACT_DERIV_Custom_Python) ?
                                  kr_PythonActFunction(unit_ptr->python_act_deriv_func,
-                                         unit_ptr) :
+                                     unit_ptr) :
                                  (unit_ptr->act_deriv_func) (unit_ptr)) );
 
         /* Initdelta, Step 2: upstream propagation of gradients for backprop */
@@ -7985,8 +7983,8 @@ static krui_err check_je_network (void)
              return value      :   kernel error code
   UPDATE   :
 ******************************************************************************/
-krui_err  LEARN_JE_Backprop (int     start_pattern    , int  end_pattern ,
-                             float  *parameterInArray , int  NoOfInParams,
+krui_err  LEARN_JE_Backprop (int     start_pattern, int  end_pattern,
+                             float  *parameterInArray, int  NoOfInParams,
                              float **parameterOutArray, int *NoOfOutParams)
 
 {
@@ -8054,8 +8052,8 @@ krui_err  LEARN_JE_Backprop (int     start_pattern    , int  end_pattern ,
              return value      :   kernel error code
   UPDATE   :
 ******************************************************************************/
-krui_err  TEST_JE_Backprop (int     start_pattern    , int  end_pattern ,
-                            float  *parameterInArray , int  NoOfInParams,
+krui_err  TEST_JE_Backprop (int     start_pattern, int  end_pattern,
+                            float  *parameterInArray, int  NoOfInParams,
                             float **parameterOutArray, int *NoOfOutParams)
 
 {
@@ -8333,8 +8331,8 @@ krui_err LEARN_JE_BackpropMomentum(int start_pattern, int end_pattern,
              return value      :   kernel error code
   UPDATE   :
 ******************************************************************************/
-krui_err  LEARN_JE_Quickprop (int     start_pattern    , int  end_pattern ,
-                              float  *parameterInArray , int  NoOfInParams,
+krui_err  LEARN_JE_Quickprop (int     start_pattern, int  end_pattern,
+                              float  *parameterInArray, int  NoOfInParams,
                               float **parameterOutArray, int *NoOfOutParams)
 
 {
@@ -8412,8 +8410,8 @@ krui_err  LEARN_JE_Quickprop (int     start_pattern    , int  end_pattern ,
              return value      :   kernel error code
   UPDATE   :
 ******************************************************************************/
-krui_err  LEARN_JE_Rprop    (int     start_pattern    , int  end_pattern ,
-                             float  *parameterInArray , int  NoOfInParams,
+krui_err  LEARN_JE_Rprop    (int     start_pattern, int  end_pattern,
+                             float  *parameterInArray, int  NoOfInParams,
                              float **parameterOutArray, int *NoOfOutParams)
 
 {
@@ -8500,8 +8498,8 @@ krui_err  LEARN_JE_Rprop    (int     start_pattern    , int  end_pattern ,
              return value      :   kernel error code
   UPDATE   : 03.03.95 Joachim Danz
 ******************************************************************************/
-krui_err  TEST_JE_Rprop    (int     start_pattern    , int  end_pattern ,
-                            float  *parameterInArray , int  NoOfInParams,
+krui_err  TEST_JE_Rprop    (int     start_pattern, int  end_pattern,
+                            float  *parameterInArray, int  NoOfInParams,
                             float **parameterOutArray, int *NoOfOutParams)
 
 {

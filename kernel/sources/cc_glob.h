@@ -26,8 +26,8 @@
 extern void      cc_printHeadline(char* s,int Length);
 extern float     cc_getErr (int StartPattern, int EndPattern);
 extern void      cc_LayerCorrectnessTest(float* ParameterInArray,
-					 int StartPattern,
-					 int EndPattern);
+        int StartPattern,
+        int EndPattern);
 extern krui_err  cc_freeStorage(int StartPattern, int EndPattern, int flag);
 extern krui_err  cc_deleteAllSpecialAndAllHiddenUnits(void);
 extern krui_err  cc_allocateStorage(int StartPattern, int EndPattern,
@@ -35,7 +35,7 @@ extern krui_err  cc_allocateStorage(int StartPattern, int EndPattern,
 extern void      cc_initActivationArrays(void);
 extern FlintType cc_generateRandomNo(float maxValue);
 extern void      cc_getActivationsForActualPattern(int SubPatterNo,int First,
-						   int* pat,int* sub);
+        int* pat,int* sub);
 extern void      cc_initOutputUnits(void);
 extern krui_err  cc_getPatternParameter(int StartPattern, int Endpattern,
                                         int* start, int* end, int* n);
@@ -64,8 +64,8 @@ extern int cc_backfittingOnOff;
 extern int cc_MaxSpecialUnitNo;
 extern int cc_modification;
 extern struct Unit  **FirstInputUnitPtr,**FirstHiddenUnitPtr,
-                    **FirstOutputUnitPtr,**FirstSpecialUnitPtr,
-                    *bestSpecialUnitPtr;
+           **FirstOutputUnitPtr,**FirstSpecialUnitPtr,
+           *bestSpecialUnitPtr;
 
 extern float **OutputUnitError;
 extern float **SpecialUnitAct;

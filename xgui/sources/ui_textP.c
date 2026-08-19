@@ -15,7 +15,7 @@
 
     Copyright (c) 1990-1995  SNNS Group, IPVR, Univ. Stuttgart, FRG
     Copyright (c) 1996-1998  SNNS Group, WSI, Univ. Tuebingen, FRG
-             
+
 ******************************************************************************/
 #include <config.h>
 
@@ -55,20 +55,20 @@ void ui_tw_errorMessage(char *message)
     cptr = error;
     i = 0;
     while (*cptr != '\0') {
-       cptr++;
-       i++;
-       if (i == best_len) {
-           temp = cptr;
-           while (*temp != ' ')
-               temp--;
-           *temp = '\n';
-           i = (int) (cptr - temp);
-       }
+        cptr++;
+        i++;
+        if (i == best_len) {
+            temp = cptr;
+            while (*temp != ' ')
+                temp--;
+            *temp = '\n';
+            i = (int) (cptr - temp);
+        }
     }
     ui_confirmOk (error);
     if (ui_textFilePtr != NULL) {
-	fprintf(ui_textFilePtr, "%s\n", message);
-	fflush(ui_textFilePtr);
+        fprintf(ui_textFilePtr, "%s\n", message);
+        fflush(ui_textFilePtr);
     }
 }
 
@@ -88,8 +88,8 @@ void ui_tw_printMessage(char *message)
 {
     printf(message);
     if (ui_textFilePtr != NULL) {
-	fprintf(ui_textFilePtr, message);
-	fflush(ui_textFilePtr);
+        fprintf(ui_textFilePtr, message);
+        fflush(ui_textFilePtr);
     }
 }
 

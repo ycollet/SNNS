@@ -82,45 +82,45 @@ static int   no_initParams = 4;
 /*--------------------------------------------------------------------------*/
 
 int initPop_init (ModuleTableEntry *self, int msgc, char *msgv[] ) {
-  int i;
+    int i;
 
-  MODULE_KEY( INIT_POP_KEY );
+    MODULE_KEY( INIT_POP_KEY );
 
-  SEL_MSG( msgv[0] )
+    SEL_MSG( msgv[0] )
 
     MSG_CASE( GENERAL_INIT    ) {
-    /* nothing to do */
-  }
-  MSG_CASE( GENERAL_EXIT    ) {
-    /* nothing to do */
-  }
-  MSG_CASE( EVOLUTION_INIT  ) {
-    /* nothing to do */
-  }
-
-  MSG_CASE( POP_SIZE        ) {
-    if( msgc > 1 )
-      population_size = atoi( msgv[1] );
-  }
-  MSG_CASE( NETWORK         ) {
-    if( msgc > 1 )
-      strcpy( fileName, msgv[1] );
-  }
-
-  MSG_CASE( INIT_FUNCTION   ) {
-    if( msgc > 1 )
-      strcpy( initFct, msgv[1] );
-  }
-
-
-  MSG_CASE( INIT_PARAMS    ) {
-    for( i=0; i<5 && i<(msgc-1); i++ ) {
-      initParams[i] = atof( msgv[i+1] );
+        /* nothing to do */
     }
-  }
-  END_MSG;
+    MSG_CASE( GENERAL_EXIT    ) {
+        /* nothing to do */
+    }
+    MSG_CASE( EVOLUTION_INIT  ) {
+        /* nothing to do */
+    }
 
-  return ( INIT_USED );
+    MSG_CASE( POP_SIZE        ) {
+        if( msgc > 1 )
+            population_size = atoi( msgv[1] );
+    }
+    MSG_CASE( NETWORK         ) {
+        if( msgc > 1 )
+            strcpy( fileName, msgv[1] );
+    }
+
+    MSG_CASE( INIT_FUNCTION   ) {
+        if( msgc > 1 )
+            strcpy( initFct, msgv[1] );
+    }
+
+
+    MSG_CASE( INIT_PARAMS    ) {
+        for( i=0; i<5 && i<(msgc-1); i++ ) {
+            initParams[i] = atof( msgv[i+1] );
+        }
+    }
+    END_MSG;
+
+    return ( INIT_USED );
 }
 
 /*--------------------------------------------------------------------------*/
@@ -136,54 +136,54 @@ int initPop_init (ModuleTableEntry *self, int msgc, char *msgv[] ) {
 /*--------------------------------------------------------------------------*/
 
 int initPop_work (PopID *parents, PopID *offsprings, PopID *reference) {
-  NetID refNet, activeNet;
-  NetworkData *data;
-  int i,dummy;
-  char unitname[15];
+    NetID refNet, activeNet;
+    NetworkData *data;
+    int i,dummy;
+    char unitname[15];
 
-  /* starting with the reference net, the only member of its subpopulation */
-  /* Set the net active for SNNS via Nepomuk and then load the net         */
+    /* starting with the reference net, the only member of its subpopulation */
+    /* Set the net active for SNNS via Nepomuk and then load the net         */
 
-  /* first load refNet; need not to be equal to the net to start with */
-  data = utils_getNewNetData();
-  if( (refNet = kpm_loadNet( fileName, data )) == NULL ) {
-    return ( ERROR_NOT_LOAD_REF );
-  }
-  kpm_setPopMember ( refNet, *reference);
+    /* first load refNet; need not to be equal to the net to start with */
+    data = utils_getNewNetData();
+    if( (refNet = kpm_loadNet( fileName, data )) == NULL ) {
+        return ( ERROR_NOT_LOAD_REF );
+    }
+    kpm_setPopMember ( refNet, *reference);
 
-  /* Setting for all existing units the unitno. as the unitname       */
-  /* with a leading "a"                                               */
-  /* This identification is needed everythere, you are searching for  */
-  /* corrosponding units in different neural networks                 */
+    /* Setting for all existing units the unitno. as the unitname       */
+    /* with a leading "a"                                               */
+    /* This identification is needed everythere, you are searching for  */
+    /* corrosponding units in different neural networks                 */
 
-  for ( i = ksh_getFirstUnit(); i != 0; i = ksh_getNextUnit()) {
-    sprintf(unitname,"a%d",i);
-    ksh_setUnitName(i, unitname);
-  }
-
-  /* Copying the information from the reference-net to all members of  */
-  /* the offspring-subpopulation                                       */
-
-  for ( i = 0; i < population_size; i++) {
-    data = utils_getNewNetData ();
-    if( (activeNet = kpm_copyNet( refNet , data )) == NULL) {
-      return ( ERROR_NOT_COPY_NET );
+    for ( i = ksh_getFirstUnit(); i != 0; i = ksh_getNextUnit()) {
+        sprintf(unitname,"a%d",i);
+        ksh_setUnitName(i, unitname);
     }
 
-    kpm_setPopMember( activeNet, *offsprings );
-    kpm_setCurrentNet( activeNet );
+    /* Copying the information from the reference-net to all members of  */
+    /* the offspring-subpopulation                                       */
 
-    /* the clean version of initialize a net */
+    for ( i = 0; i < population_size; i++) {
+        data = utils_getNewNetData ();
+        if( (activeNet = kpm_copyNet( refNet, data )) == NULL) {
+            return ( ERROR_NOT_COPY_NET );
+        }
 
-    if (ksh_set_init_function(initFct,&no_initParams) != KRERR_NO_ERROR)
-      return ( ERROR_INIT_FCT );
+        kpm_setPopMember( activeNet, *offsprings );
+        kpm_setCurrentNet( activeNet );
 
-    if( ksh_initializeNet(initParams,no_initParams) != KRERR_NO_ERROR )
-      return ( ERROR_CANT_INIT_NET );
-    ksh_set_init_function(EMPTY_INIT_FUNC,&dummy);
-  }
+        /* the clean version of initialize a net */
 
-  return (MODULE_NO_ERROR);
+        if (ksh_set_init_function(initFct,&no_initParams) != KRERR_NO_ERROR)
+            return ( ERROR_INIT_FCT );
+
+        if( ksh_initializeNet(initParams,no_initParams) != KRERR_NO_ERROR )
+            return ( ERROR_CANT_INIT_NET );
+        ksh_set_init_function(EMPTY_INIT_FUNC,&dummy);
+    }
+
+    return (MODULE_NO_ERROR);
 }
 
 /*--------------------------------------------------------------------------*/
@@ -194,27 +194,27 @@ int initPop_work (PopID *parents, PopID *offsprings, PopID *reference) {
 /*--------------------------------------------------------------------------*/
 
 char *initPop_errMsg (int err_code) {
-  static char error[MAX_ERR_MSG_LEN];
-  switch ( err_code ) {
-  case MODULE_NO_ERROR :
-    return ("initPop: No error found");
+    static char error[MAX_ERR_MSG_LEN];
+    switch ( err_code ) {
+    case MODULE_NO_ERROR :
+        return ("initPop: No error found");
 
-  case ERROR_NOT_COPY_NET :
-    return ("initPop: Can't copy a net to the parent population via Nepomuk");
+    case ERROR_NOT_COPY_NET :
+        return ("initPop: Can't copy a net to the parent population via Nepomuk");
 
-  case ERROR_NOT_LOAD_REF :
-    sprintf(error,"initPop: Can't load reference-net: %s via Nepomuk",
-	    fileName);
-    return( error );
+    case ERROR_NOT_LOAD_REF :
+        sprintf(error,"initPop: Can't load reference-net: %s via Nepomuk",
+                fileName);
+        return( error );
 
-  case   ERROR_INIT_FCT :
-    sprintf(error,"initPop: Can't activate the initfunction %s",initFct);
-    return ( error );
+    case   ERROR_INIT_FCT :
+        sprintf(error,"initPop: Can't activate the initfunction %s",initFct);
+        return ( error );
 
-  case ERROR_CANT_INIT_NET :
-    return ("initPop: Can't initialize net with SNNS");
+    case ERROR_CANT_INIT_NET :
+        return ("initPop: Can't initialize net with SNNS");
 
-  }
+    }
 
-  return ("initPop: unknown error");
+    return ("initPop: unknown error");
 }

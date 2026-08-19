@@ -1,12 +1,12 @@
 /*****************************************************************************
   FILE           : $Source: /projects/higgs1/SNNS/CVS/SNNS/xgui/sources/ui_xWidgets.h,v $
-  SHORTNAME      : xWidgets 
+  SHORTNAME      : xWidgets
   SNNS VERSION   : 4.2
 
   PURPOSE        : Private Header file of correspondent '.c' file
   NOTES          :
 
-  AUTHOR         : Tilman Sommer 
+  AUTHOR         : Tilman Sommer
   DATE           : 13.7.1990
 
   CHANGED BY     : Sven Doering
@@ -36,8 +36,8 @@ extern Widget   ui_xCreateLabelItem(char *name,Widget parent,Dimension width,Wid
 extern Widget   ui_xCreateFrameLabelItem(char *name,Widget parent,Dimension width,Widget left,Widget top);
 
 extern Widget ui_xCreateFrameLabelItemCentered (char *name, Widget parent,
-						Dimension width,
-						Widget left, Widget top);
+        Dimension width,
+        Widget left, Widget top);
 
 extern Widget   ui_xCreateDialogItem(char *name,Widget parent,char *contents,Dimension  width,Widget left,Widget top);     /* AsciiText string edit */
 extern Widget   ui_xCreateButtonItem(char *name,Widget parent,Widget left,Widget top);

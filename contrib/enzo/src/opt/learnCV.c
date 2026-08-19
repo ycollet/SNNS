@@ -93,55 +93,55 @@ static char  tmpFileName[MAX_FILENAME_LEN]  = "enzo.tmp";
 /*---------------------------------------------------------------------------*/
 
 int learnCV_init( ModuleTableEntry *self, int msgc, char *msgv[] ) {
-  int i;
+    int i;
 
-  MODULE_KEY( LEARN_SNNS_KEY );
+    MODULE_KEY( LEARN_SNNS_KEY );
 
-  SEL_MSG( msgv[0] )
+    SEL_MSG( msgv[0] )
 
     MSG_CASE( GENERAL_INIT    ) {
-    /* nothing to do */
-  }
-  MSG_CASE( GENERAL_EXIT    ) {
-    /* nothing to do */
-  }
-  MSG_CASE( EVOLUTION_INIT  ) {
-    /* nothing to do */
-  }
-
-  MSG_CASE( LEARN_FCT       ) {
-    if( msgc > 1 )
-      strcpy( learnfct, msgv[1] );
-  }
-
-  MSG_CASE( MAX_EPOCHS      ) {
-    if( msgc > 1 )
-      maxEpochs = atoi( msgv[1] );
-  }
-  MSG_CASE( CV_EPOCHS       ) {
-    if( msgc > 1 )
-      cvEpochs = atoi( msgv[1] );
-  }
-  MSG_CASE( SHUFFLE         ) {
-    if( msgc > 1 )
-      shuffleFlag = FLAG_VALUE( msgv[1] );
-  }
-  MSG_CASE( WRITE           ) {
-    if( msgc > 1)
-      writeFlag = FLAG_VALUE( msgv[1] );
-  }
-  MSG_CASE( TMP_FILE        ) {
-    if (msgc > 1)
-      strcpy( tmpFileName , msgv[1] );
-  }
-  MSG_CASE( LEARN_PARAMS    ) {
-    for( i=0; i< 5 && i<(msgc-1); i++ ) {
-      learnParam[i] = atof( msgv[i+1] );
+        /* nothing to do */
     }
-  }
-  END_MSG;
+    MSG_CASE( GENERAL_EXIT    ) {
+        /* nothing to do */
+    }
+    MSG_CASE( EVOLUTION_INIT  ) {
+        /* nothing to do */
+    }
 
-  return ( INIT_USED );
+    MSG_CASE( LEARN_FCT       ) {
+        if( msgc > 1 )
+            strcpy( learnfct, msgv[1] );
+    }
+
+    MSG_CASE( MAX_EPOCHS      ) {
+        if( msgc > 1 )
+            maxEpochs = atoi( msgv[1] );
+    }
+    MSG_CASE( CV_EPOCHS       ) {
+        if( msgc > 1 )
+            cvEpochs = atoi( msgv[1] );
+    }
+    MSG_CASE( SHUFFLE         ) {
+        if( msgc > 1 )
+            shuffleFlag = FLAG_VALUE( msgv[1] );
+    }
+    MSG_CASE( WRITE           ) {
+        if( msgc > 1)
+            writeFlag = FLAG_VALUE( msgv[1] );
+    }
+    MSG_CASE( TMP_FILE        ) {
+        if (msgc > 1)
+            strcpy( tmpFileName, msgv[1] );
+    }
+    MSG_CASE( LEARN_PARAMS    ) {
+        for( i=0; i< 5 && i<(msgc-1); i++ ) {
+            learnParam[i] = atof( msgv[i+1] );
+        }
+    }
+    END_MSG;
+
+    return ( INIT_USED );
 }
 
 /*---------------------------------------------------------------------------*/
@@ -156,93 +156,93 @@ int learnCV_init( ModuleTableEntry *self, int msgc, char *msgv[] ) {
 /*---------------------------------------------------------------------------*/
 
 int learnCV_work( PopID *parents, PopID *offsprings, PopID *reference ) {
-  NetworkData *data;
+    NetworkData *data;
 
-  NetID activeMember;
+    NetID activeMember;
 
-  int   noLearnParam;
-  int   OutParams;
-  float *return_values;
-  int   epochs,i;
-  float last[4],tss, skalar,average;
+    int   noLearnParam;
+    int   OutParams;
+    float *return_values;
+    int   epochs,i;
+    float last[4],tss, skalar,average;
 
-  if (learnPattern == NULL)
-    learnPattern = subul_getPatID( PATTERN_LEARN );
+    if (learnPattern == NULL)
+        learnPattern = subul_getPatID( PATTERN_LEARN );
 
-  if (crossPattern == NULL)
-    crossPattern = subul_getPatID( PATTERN_CROSS );
+    if (crossPattern == NULL)
+        crossPattern = subul_getPatID( PATTERN_CROSS );
 
-  /* sets learning patterns */
+    /* sets learning patterns */
 
-  if( (kpm_setCurrentPattern( learnPattern )) != KPM_NO_ERROR ) {
-    return( ERROR_PAT );
-  }
-
-  /* the learning routine */
-  /* get the first net of the offspring-population */
-
-  FOR_ALL_OFFSPRINGS( activeMember ) {
-    data = ( kpm_getNetData( activeMember ));
-
-    if( kpm_setCurrentNet( activeMember) != KPM_NO_ERROR ) {
-      return ( ERROR_ACTIVATE );
+    if( (kpm_setCurrentPattern( learnPattern )) != KPM_NO_ERROR ) {
+        return( ERROR_PAT );
     }
 
-    if( ( ksh_setLearnFunc(learnfct)) != KRERR_NO_ERROR ) {
-      return ( ERROR_LEARN );
+    /* the learning routine */
+    /* get the first net of the offspring-population */
+
+    FOR_ALL_OFFSPRINGS( activeMember ) {
+        data = ( kpm_getNetData( activeMember ));
+
+        if( kpm_setCurrentNet( activeMember) != KPM_NO_ERROR ) {
+            return ( ERROR_ACTIVATE );
+        }
+
+        if( ( ksh_setLearnFunc(learnfct)) != KRERR_NO_ERROR ) {
+            return ( ERROR_LEARN );
+        }
+
+        /* sets learning function and determines no of parameters */
+
+        ksh_getFuncParamInfo( ksh_getLearnFunc(), LEARN_FUNC,
+                              &noLearnParam, &OutParams );
+
+        for (i = 0; i < 4; i++)
+            last[i] = -INFINITY;
+        average = -INFINITY;
+
+        for( epochs = 0; (epochs < maxEpochs) && (average < skalar); epochs++ ) {
+            ksh_learnAllPatterns( learnParam, noLearnParam,
+                                  &return_values, &OutParams );
+            tss = return_values[0];
+
+            /* determine the Tss for the crossPatterns                  */
+            /* afterwards print the whole information in the tmp-file      */
+
+            if ((epochs % cvEpochs) == 0) {
+                kpm_setCurrentPattern( crossPattern );
+                ksh_readNetinfo();
+                skalar = 0.0;
+                for ( i = 1; i <= ksh_no_patterns(); i++) {
+                    ksh_propagate_pattern  ( i );
+                    ksh_get_target_pattern ( i );
+
+                    skalar += ksh_netout(0) * ksh_target(0);
+                }
+
+                kpm_setCurrentPattern( learnPattern );
+
+                average = 0;
+                for (i=0; i<3; i++) {
+                    last[i]  = last[i+1];
+                    average += last[i] * 0.25;
+                }
+                last[3]  = skalar;
+                average += skalar * 0.25;
+
+            }
+
+            if( signal_evolution ) break;
+        }
+
+        data->epochs             += epochs;
+        data->histRec.learnEpochs = epochs;
+        data->tss                 = tss;
+        data->histRec.testTss     = skalar;
+
     }
 
-    /* sets learning function and determines no of parameters */
-
-    ksh_getFuncParamInfo( ksh_getLearnFunc(), LEARN_FUNC,
-			  &noLearnParam, &OutParams );
-
-    for (i = 0; i < 4; i++)
-      last[i] = -INFINITY;
-    average = -INFINITY;
-
-    for( epochs = 0; (epochs < maxEpochs) && (average < skalar); epochs++ ) {
-      ksh_learnAllPatterns( learnParam, noLearnParam,
-			    &return_values, &OutParams );
-      tss = return_values[0];
-
-      /* determine the Tss for the crossPatterns                  */
-      /* afterwards print the whole information in the tmp-file      */
-
-      if ((epochs % cvEpochs) == 0) {
-	kpm_setCurrentPattern( crossPattern );
-	ksh_readNetinfo();
-	skalar = 0.0;
-	for ( i = 1; i <= ksh_no_patterns(); i++) {
-	  ksh_propagate_pattern  ( i );
-	  ksh_get_target_pattern ( i );
-
-	  skalar += ksh_netout(0) * ksh_target(0);
-	}
-
-	kpm_setCurrentPattern( learnPattern );
-
-	average = 0;
-	for (i=0; i<3; i++) {
-	  last[i]  = last[i+1];
-	  average += last[i] * 0.25;
-	}
-	last[3]  = skalar;
-	average += skalar * 0.25;
-
-      }
-
-      if( signal_evolution ) break;
-    }
-
-    data->epochs             += epochs;
-    data->histRec.learnEpochs = epochs;
-    data->tss                 = tss;
-    data->histRec.testTss     = skalar;
-
-  }
-
-  return( MODULE_NO_ERROR );
+    return( MODULE_NO_ERROR );
 }
 
 /*---------------------------------------------------------------------------*/
@@ -255,26 +255,26 @@ int learnCV_work( PopID *parents, PopID *offsprings, PopID *reference ) {
 /*---------------------------------------------------------------------------*/
 
 char *learnCV_errMsg(int err_code) {
-  static char msg[MAX_ERR_MSG_LEN];
+    static char msg[MAX_ERR_MSG_LEN];
 
-  switch ( err_code ) {
-  case MODULE_NO_ERROR :
-    return ( "learnCV : No Error found" );
+    switch ( err_code ) {
+    case MODULE_NO_ERROR :
+        return ( "learnCV : No Error found" );
 
-  case ERROR_PAT :
-    return ("learnCV : Can't set the learnpattern via Nepomuk");
+    case ERROR_PAT :
+        return ("learnCV : Can't set the learnpattern via Nepomuk");
 
-  case ERROR_CROSSPAT :
-    return ("learnCV : Can't set the crosspattern via Nepomuk");
+    case ERROR_CROSSPAT :
+        return ("learnCV : Can't set the crosspattern via Nepomuk");
 
-  case ERROR_LEARN :
-    sprintf(msg,"learnCV : Can't activate the SNNS-learnfucntion %s",
-	    learnfct);
-    return ( msg );
+    case ERROR_LEARN :
+        sprintf(msg,"learnCV : Can't activate the SNNS-learnfucntion %s",
+                learnfct);
+        return ( msg );
 
-  case ERROR_ACTIVATE :
-    return ("learnCV : Can't activate a offspring-net");
-  }
+    case ERROR_ACTIVATE :
+        return ("learnCV : Can't activate a offspring-net");
+    }
 
-  return ( "learnCV : Unknown error" );
+    return ( "learnCV : Unknown error" );
 }

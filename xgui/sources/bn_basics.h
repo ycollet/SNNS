@@ -3,13 +3,13 @@
   SHORTNAME      : bn_basics
   SNNS VERSION   : 4.2
 
-  PURPOSE        : 
+  PURPOSE        :
   NOTES          :
 
   AUTHOR         : Kai-Uwe Herrmann
   DATE           : 15.1.1993
 
-  CHANGED BY     : 
+  CHANGED BY     :
   RCS VERSION    : $Revision: 2.7 $
   LAST CHANGE    : $Date: 1998/02/25 15:19:40 $
 
@@ -39,6 +39,6 @@ extern void bn_basics_getValues (int NoOfLayers, int units[], int rows[],
                                  Widget unitWidget[], Widget rowWidget[]);
 extern int bn_basics_checkValues (int NoOfLayers, int units[], int rows[]);
 
-#endif 
+#endif
 /* end of file */
 /* lines:  */

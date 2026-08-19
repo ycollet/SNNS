@@ -10,12 +10,12 @@
   DATE           : 20.7.1990
 
   CHANGED BY     : Michael Vogt, Guenter Mamier
-  RCS VERSION    : $Revision: 1.9 $ 
-  LAST CHANGE    : $Date: 1998/02/25 15:21:24 $  
+  RCS VERSION    : $Revision: 1.9 $
+  LAST CHANGE    : $Date: 1998/02/25 15:21:24 $
 
     Copyright (c) 1990-1995  SNNS Group, IPVR, Univ. Stuttgart, FRG
     Copyright (c) 1996-1998  SNNS Group, WSI, Univ. Tuebingen, FRG
-             
+
 ******************************************************************************/
 
 
@@ -38,10 +38,10 @@ extern Widget    ui_controlPanel;
 extern Widget    ui_numberOfStepsWidget, ui_numberOfStepsDoneWidget;
 extern Widget    ui_numberOfCyclesWidget, ui_numberOfPatternWidget;
 extern Widget    ui_showModeLabel;
-extern Widget    ui_showTestPattFile; 
+extern Widget    ui_showTestPattFile;
 extern Widget    ui_showPattFile;
 extern Widget    REM_UFileMenu;
-extern Widget    REM_UTestFileMenu; 
+extern Widget    REM_UTestFileMenu;
 extern Widget    REM_DFileMenu;
 extern Widget    in_dim_widgets[];
 extern Widget    out_dim_widgets[];
@@ -53,7 +53,7 @@ extern Widget    subOPatSizeW[];
 extern Widget    subOPatPosW[];
 extern Widget    DELPattFileWidget[];
 extern Widget    USEPattFileWidget[];
-extern Widget    USETestPattFileWidget[];  
+extern Widget    USETestPattFileWidget[];
 extern Widget    ui_learnParameterWidgets[];
 extern Widget    ui_updateParameterWidgets[];
 extern Widget    ui_initParameterWidgets[];

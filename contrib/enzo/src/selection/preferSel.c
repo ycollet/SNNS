@@ -133,7 +133,7 @@ int preferSel_work( PopID *parents, PopID *offsprings, PopID *reference ) {
                 if( pData->selectedPattern ) {
                     oData->selThresh = pData->selThresh;
                     oData->selectedPattern = (int *) calloc( no_of_patterns,
-                                             sizeof( int )   );
+                        sizeof( int )   );
                     if( !oData->selectedPattern ) {
                         return( PAT_MEM_ERROR );
                     }

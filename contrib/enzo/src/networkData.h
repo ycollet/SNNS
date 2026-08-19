@@ -56,21 +56,21 @@
 /*------------------------------------------------------------------ types ---*/
 
 typedef struct {
-  HistID histID;                   /* unique id for history-recording       */
-  HistRecord histRec;              /* collector for history informations    */
-  /* write only!                           */
+    HistID histID;                   /* unique id for history-recording       */
+    HistRecord histRec;              /* collector for history informations    */
+    /* write only!                           */
 
-  NetID parent1, parent2;          /* No. of parents, from the parentpop.   */
+    NetID parent1, parent2;          /* No. of parents, from the parentpop.   */
 
-  int epochs;                      /* Sum of needed epochs to learn         */
-  /* includes epochs after pruning etc.    */
-  float fitness;
+    int epochs;                      /* Sum of needed epochs to learn         */
+    /* includes epochs after pruning etc.    */
+    float fitness;
 
-  float tss;                       /* Error after last learning             */
+    float tss;                       /* Error after last learning             */
 
-  float  selThresh;                /* threshold for pattern selection       */
-  int   *selectedPattern;          /* pointer to selected patterns          */
-  /* no space allocated!                   */
+    float  selThresh;                /* threshold for pattern selection       */
+    int   *selectedPattern;          /* pointer to selected patterns          */
+    /* no space allocated!                   */
 
 } NetworkData;
 

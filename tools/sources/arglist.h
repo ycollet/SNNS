@@ -5,15 +5,15 @@
 
   PURPOSE        : Argument list handling functions for the SNNS batch
                    interpreter:
-                   The argument list contains pointers to the symbol table 
+                   The argument list contains pointers to the symbol table
 		   positions of a function's arguments
 
-  NOTES          : 
+  NOTES          :
 
   AUTHOR         : Jens Wieland
-  DATE           : 
+  DATE           :
 
-  CHANGED BY     : 
+  CHANGED BY     :
   RCS VERSION    : $Revision: 1.3 $
   LAST CHANGE    : $Date: 1998/02/25 15:34:11 $
 

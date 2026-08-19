@@ -4,7 +4,7 @@
   SNNS VERSION   : 4.2
 
   PURPOSE        : header for d3_main.c
-  NOTES          : all functions will be exported 
+  NOTES          : all functions will be exported
 
   AUTHOR         : Ralf Huebner
   DATE           : 1.12.1991
@@ -15,7 +15,7 @@
 
     Copyright (c) 1990-1995  SNNS Group, IPVR, Univ. Stuttgart, FRG
     Copyright (c) 1996-1998  SNNS Group, WSI, Univ. Tuebingen, FRG
-             
+
 ******************************************************************************/
 
 

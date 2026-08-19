@@ -38,27 +38,29 @@
   FUNCTION : d3_select_font
 
   PURPOSE  : select a font
-  RETURNS  : 
+  RETURNS  :
   NOTES    : set width and height of the font
 
 ******************************************************************************/
 
 
-void d3_select_font (int selected_font)
-{
+void d3_select_font (int selected_font) {
     switch (selected_font) {
-       case fnt5x7:  font = font5x7; 
-                     width = font5x7_width;
-                     height = font5x7_height;
-                     break;
-       case fnt5x8:  font = font5x8; 
-                     width = font5x8_width;
-                     height = font5x8_height;
-                     break;
-       default:      font = font8x14; 
-                     width = font8x14_width;
-                     height = font8x14_height;
-                     break;
+    case fnt5x7:
+        font = font5x7;
+        width = font5x7_width;
+        height = font5x7_height;
+        break;
+    case fnt5x8:
+        font = font5x8;
+        width = font5x8_width;
+        height = font5x8_height;
+        break;
+    default:
+        font = font8x14;
+        width = font8x14_width;
+        height = font8x14_height;
+        break;
     }
 
 }
@@ -77,8 +79,7 @@ void d3_select_font (int selected_font)
 ******************************************************************************/
 
 
-void d3_get_font_size (int *x, int *y)
-{
+void d3_get_font_size (int *x, int *y) {
     *x = width;
     *y = height;
 }
@@ -89,30 +90,29 @@ void d3_get_font_size (int *x, int *y)
   FUNCTION : draw_char
 
   PURPOSE  : draws the charcter c at (xpos, ypos)
-  RETURNS  : 
+  RETURNS  :
   NOTES    :
 
 ******************************************************************************/
 
 
-static void draw_char (int xpos, int ypos, unsigned char ch)
-{
-     int xsize, ysize, index, dx, dy;
-     unsigned char b;
+static void draw_char (int xpos, int ypos, unsigned char ch) {
+    int xsize, ysize, index, dx, dy;
+    unsigned char b;
 
 
-     xsize = width - 1;
-     ysize = height - 1;
-     index = height * ch;
+    xsize = width - 1;
+    ysize = height - 1;
+    index = height * ch;
 
-     for (dy=0; dy<=ysize; dy++) {
-         b = font[index];
-         for (dx=0; dx<=xsize; dx++) {
-             if ((b >> (7-dx)) & 0x01)
-                 d3_putPixel (xpos+dx, ypos+dy);
-         }
-         index++;
-     }
+    for (dy=0; dy<=ysize; dy++) {
+        b = font[index];
+        for (dx=0; dx<=xsize; dx++) {
+            if ((b >> (7-dx)) & 0x01)
+                d3_putPixel (xpos+dx, ypos+dy);
+        }
+        index++;
+    }
 }
 
 
@@ -121,42 +121,41 @@ static void draw_char (int xpos, int ypos, unsigned char ch)
   FUNCTION : draw_zbuffered_char
 
   PURPOSE  : draws the z-bufferd charcter c at (xpos, ypos, zpos)
-  RETURNS  : 
+  RETURNS  :
   NOTES    :
 
 ******************************************************************************/
 
 
 
-static void draw_zbuffered_char (int xpos, int ypos, float zpos, unsigned char ch)
-{
-     int xsize, ysize, index, dx, dy, xp, yp;
-     float zp;
-     unsigned char b;
+static void draw_zbuffered_char (int xpos, int ypos, float zpos, unsigned char ch) {
+    int xsize, ysize, index, dx, dy, xp, yp;
+    float zp;
+    unsigned char b;
 
 
-     xsize = width - 1;
-     ysize = height - 1;
-     index = height * ch;
+    xsize = width - 1;
+    ysize = height - 1;
+    index = height * ch;
 
-     for (dy=0; dy<=ysize; dy++) {
-         b = font[index];
-         for (dx=0; dx<=xsize; dx++) {
-             if ((b >> (7-dx)) & 0x01) {
-                 xp = xpos + dx;
-                 yp = ypos + dy;
-                 if ((xp >= d3_clipWindow.x0) && (yp >= d3_clipWindow.y0) 
-                     && (yp < d3_clipWindow.y1) && (xp < d3_clipWindow.x1)) {
-                     d3_readZbuffer (xp, yp, &zp);
-                     if (zpos < zp) {
-                         d3_putPixel(xp, yp);
-                         d3_writeZbuffer (xp, yp, zpos);
-		     }
-                 }
-	     }
-         }
-         index++;
-     }
+    for (dy=0; dy<=ysize; dy++) {
+        b = font[index];
+        for (dx=0; dx<=xsize; dx++) {
+            if ((b >> (7-dx)) & 0x01) {
+                xp = xpos + dx;
+                yp = ypos + dy;
+                if ((xp >= d3_clipWindow.x0) && (yp >= d3_clipWindow.y0)
+                        && (yp < d3_clipWindow.y1) && (xp < d3_clipWindow.x1)) {
+                    d3_readZbuffer (xp, yp, &zp);
+                    if (zpos < zp) {
+                        d3_putPixel(xp, yp);
+                        d3_writeZbuffer (xp, yp, zpos);
+                    }
+                }
+            }
+        }
+        index++;
+    }
 }
 
 
@@ -165,27 +164,25 @@ static void draw_zbuffered_char (int xpos, int ypos, float zpos, unsigned char c
   FUNCTION : d3_draw_string
 
   PURPOSE  : draws a string
-  RETURNS  : 
+  RETURNS  :
   NOTES    : check wether z buffering is active
 
 ******************************************************************************/
 
 
 
-void d3_draw_string (int xpos, int ypos, float zpos, char *s)
-{
+void d3_draw_string (int xpos, int ypos, float zpos, char *s) {
     d3_setBlackColor ();
     if (d3_state.model_mode == solid)
         for (; *s!='\0'; s++) {
-           draw_zbuffered_char (xpos, ypos, zpos, *s);
-           xpos += width + 1;
-	}
-    else
+            draw_zbuffered_char (xpos, ypos, zpos, *s);
+            xpos += width + 1;
+        } else
         for (; *s!='\0'; s++) {
-           draw_char (xpos, ypos, *s);
-           xpos += width + 1;
-	}
-    
+            draw_char (xpos, ypos, *s);
+            xpos += width + 1;
+        }
+
 }
 
 

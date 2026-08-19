@@ -15,7 +15,7 @@
 
     Copyright (c) 1990-1995  SNNS Group, IPVR, Univ. Stuttgart, FRG
     Copyright (c) 1996-1998  SNNS Group, WSI, Univ. Tuebingen, FRG
-             
+
 ******************************************************************************/
 #include <config.h>
 
@@ -57,11 +57,11 @@ static void d3_closeUnitPannel (Widget w, Widget pannel, caddr_t call_data)
 
 {
     XtDestroyWidget (pannel);
-    if (memcmp (&d3_state.unit_mode, &temp_unit_mode, 
+    if (memcmp (&d3_state.unit_mode, &temp_unit_mode,
                 sizeof (d3_unit_mode_type)) != 0) {
-         memcpy (&d3_state.unit_mode, &temp_unit_mode, 
-                 sizeof (d3_unit_mode_type)); 
-         d3_drawNet ();
+        memcpy (&d3_state.unit_mode, &temp_unit_mode,
+                sizeof (d3_unit_mode_type));
+        d3_drawNet ();
     }
 }
 
@@ -88,42 +88,54 @@ static void d3_setUnitMode (Widget w, int mode, caddr_t call_data)
     nameflag = numflag = zflag = noneflag = FALSE;
     toggled_unit_mode = mode;
     switch (mode) {
-        case activation_on  : activflag = TRUE;
-                              break;    
-        case init_act_on    : initflag = TRUE;
-                              break;    
-        case output_on      : outflag = TRUE;
-                              break;    
-        case bias_on        : biasflag = TRUE;
-                              break;    
-        case name_on        : nameflag = TRUE;
-                              break;    
-        case number_on      : numflag = TRUE;
-                              break;    
-        case zvalue_on      : zflag = TRUE;
-                              break;    
-        case nothing_on     : noneflag = TRUE;
-                              break;    
+    case activation_on  :
+        activflag = TRUE;
+        break;
+    case init_act_on    :
+        initflag = TRUE;
+        break;
+    case output_on      :
+        outflag = TRUE;
+        break;
+    case bias_on        :
+        biasflag = TRUE;
+        break;
+    case name_on        :
+        nameflag = TRUE;
+        break;
+    case number_on      :
+        numflag = TRUE;
+        break;
+    case zvalue_on      :
+        zflag = TRUE;
+        break;
+    case nothing_on     :
+        noneflag = TRUE;
+        break;
     }
-    ui_xSetToggleState (activation, activflag);    
-    ui_xSetToggleState (initact, initflag);    
-    ui_xSetToggleState (output, outflag);    
-    ui_xSetToggleState (bias, biasflag);    
-    ui_xSetToggleState (name, nameflag);    
-    ui_xSetToggleState (number, numflag);    
-    ui_xSetToggleState (zvalue, zflag);    
-    ui_xSetToggleState (nothing, noneflag);    
+    ui_xSetToggleState (activation, activflag);
+    ui_xSetToggleState (initact, initflag);
+    ui_xSetToggleState (output, outflag);
+    ui_xSetToggleState (bias, biasflag);
+    ui_xSetToggleState (name, nameflag);
+    ui_xSetToggleState (number, numflag);
+    ui_xSetToggleState (zvalue, zflag);
+    ui_xSetToggleState (nothing, noneflag);
     switch (selected_unit_mode) {
-        case select_size      : temp_unit_mode.size = mode;
-                                break;
-        case select_color     : if (d3_state.color_mode == mono_mode)
-                                   break;
-                                temp_unit_mode.color = mode;
-                                break;
-        case select_toplabel  : temp_unit_mode.top_label = mode;
-                                break;
-        case select_bottlabel : temp_unit_mode.bottom_label = mode;
-                                break;
+    case select_size      :
+        temp_unit_mode.size = mode;
+        break;
+    case select_color     :
+        if (d3_state.color_mode == mono_mode)
+            break;
+        temp_unit_mode.color = mode;
+        break;
+    case select_toplabel  :
+        temp_unit_mode.top_label = mode;
+        break;
+    case select_bottlabel :
+        temp_unit_mode.bottom_label = mode;
+        break;
     }
 }
 
@@ -144,29 +156,33 @@ static void d3_selectUnitMode (Widget w, int selected, caddr_t call_data)
     Boolean sizeflag, colorflag, toplabelflag, bottlabelflag;
 
     if ((d3_state.color_mode == mono_mode) && (selected == select_color)) {
-         ui_xSetToggleState (color, FALSE);    
-         return;
+        ui_xSetToggleState (color, FALSE);
+        return;
     }
     sizeflag = colorflag = toplabelflag = bottlabelflag = FALSE;
     selected_unit_mode = selected;
     switch (selected) {
-        case select_size      : sizeflag = TRUE;
-                                d3_setUnitMode (w, temp_unit_mode.size, NULL);
-                                break;
-        case select_color     : colorflag = TRUE;
-                                d3_setUnitMode (w, temp_unit_mode.color, NULL);
-                                break;
-        case select_toplabel  : toplabelflag = TRUE;
-                                d3_setUnitMode (w, temp_unit_mode.top_label, NULL);
-                                break;
-        case select_bottlabel : bottlabelflag = TRUE;
-                                d3_setUnitMode (w, temp_unit_mode.bottom_label, NULL);
-                                break;
+    case select_size      :
+        sizeflag = TRUE;
+        d3_setUnitMode (w, temp_unit_mode.size, NULL);
+        break;
+    case select_color     :
+        colorflag = TRUE;
+        d3_setUnitMode (w, temp_unit_mode.color, NULL);
+        break;
+    case select_toplabel  :
+        toplabelflag = TRUE;
+        d3_setUnitMode (w, temp_unit_mode.top_label, NULL);
+        break;
+    case select_bottlabel :
+        bottlabelflag = TRUE;
+        d3_setUnitMode (w, temp_unit_mode.bottom_label, NULL);
+        break;
     }
-    ui_xSetToggleState (size, sizeflag);    
-    ui_xSetToggleState (color, colorflag);    
-    ui_xSetToggleState (toplabel, toplabelflag);    
-    ui_xSetToggleState (bottlabel, bottlabelflag);    
+    ui_xSetToggleState (size, sizeflag);
+    ui_xSetToggleState (color, colorflag);
+    ui_xSetToggleState (toplabel, toplabelflag);
+    ui_xSetToggleState (bottlabel, bottlabelflag);
 }
 
 
@@ -191,23 +207,27 @@ void d3_createUnitPannel (Widget w, Widget button, caddr_t call_data)
     static Boolean first_call = TRUE;
 
     n = 0;
-    XtSetArg (arg[n], XtNwidth, &width); n++;
-    XtSetArg (arg[n], XtNheight, &height); n++;
+    XtSetArg (arg[n], XtNwidth, &width);
+    n++;
+    XtSetArg (arg[n], XtNheight, &height);
+    n++;
     XtGetValues (button, arg, (unsigned int) n);
 
-    XtTranslateCoords (button, 
-       (Position) (width / 2), (Position) (height / 2), &xPos, &yPos);
+    XtTranslateCoords (button,
+                       (Position) (width / 2), (Position) (height / 2), &xPos, &yPos);
 
     n = 0;
 
-    XtSetArg(arg[n], XtNx, xPos); n++;
-    XtSetArg(arg[n], XtNy, yPos); n++;
+    XtSetArg(arg[n], XtNx, xPos);
+    n++;
+    XtSetArg(arg[n], XtNy, yPos);
+    n++;
 
-    unitPannel = XtCreatePopupShell ("units", transientShellWidgetClass, 
-        button, arg, (unsigned int) n);
+    unitPannel = XtCreatePopupShell ("units", transientShellWidgetClass,
+                                     button, arg, (unsigned int) n);
 
     border = XtCreateManagedWidget("border", boxWidgetClass,
-        unitPannel, NULL, ZERO);
+                                   unitPannel, NULL, ZERO);
 
     pannel1 = XtCreateManagedWidget("pannel1", boxWidgetClass, border, NULL, ZERO);
 
@@ -217,7 +237,7 @@ void d3_createUnitPannel (Widget w, Widget button, caddr_t call_data)
     bottlabel = d3_xCreateToggleItem ("bottlabel", pannel1, NULL, NULL, NULL);
 
     XtAddCallback(size, XtNcallback, (XtCallbackProc) d3_selectUnitMode, (caddr_t) select_size);
-      XtAddCallback(color, XtNcallback, (XtCallbackProc) d3_selectUnitMode, (caddr_t) select_color);
+    XtAddCallback(color, XtNcallback, (XtCallbackProc) d3_selectUnitMode, (caddr_t) select_color);
     XtAddCallback(toplabel, XtNcallback, (XtCallbackProc) d3_selectUnitMode, (caddr_t) select_toplabel);
     XtAddCallback(bottlabel, XtNcallback, (XtCallbackProc) d3_selectUnitMode, (caddr_t) select_bottlabel);
 
@@ -246,21 +266,21 @@ void d3_createUnitPannel (Widget w, Widget button, caddr_t call_data)
     done = d3_xCreateButtonItem ("done", border, NULL, NULL);
     XtAddCallback(done, XtNcallback, (XtCallbackProc) d3_closeUnitPannel, (caddr_t) unitPannel);
 
-    memcpy (&temp_unit_mode, &d3_state.unit_mode, 
-            sizeof (d3_unit_mode_type)); 
+    memcpy (&temp_unit_mode, &d3_state.unit_mode,
+            sizeof (d3_unit_mode_type));
 
     if (first_call) {
-         selected_unit_mode = select_size;
-         toggled_unit_mode = temp_unit_mode.size;
-         first_call = FALSE;
+        selected_unit_mode = select_size;
+        toggled_unit_mode = temp_unit_mode.size;
+        first_call = FALSE;
     }
 
     d3_selectUnitMode (pannel1, selected_unit_mode, NULL);
     d3_setUnitMode (pannel1, toggled_unit_mode, NULL);
-  
+
     ui_checkWindowPosition(unitPannel);
     XtPopup (unitPannel, XtGrabExclusive);
-    ui_xDontResizeWidget(unitPannel); 
+    ui_xDontResizeWidget(unitPannel);
 }
 
 

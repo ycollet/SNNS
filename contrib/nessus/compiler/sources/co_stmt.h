@@ -6,10 +6,10 @@
   PURPOSE           : Header file for co_stmt.c
   NOTES             :
 
-  AUTHOR            : Thomas Korb 
+  AUTHOR            : Thomas Korb
   DATE              : 27.6.1991
 
-  CHANGED BY        : 
+  CHANGED BY        :
   IDENTIFICATION    : %W% %G%
   SCCS VERSION      : %I%
   LAST CHANGE       : %G%
@@ -29,6 +29,6 @@ extern char *nst;          /* is always NULL - for lint */
 
 
 extern short RightSide;    /* TRUE <=> 1) parsing right side of an assignment statement */
-                           /*          2) parsing constant or structure definition section */
+/*          2) parsing constant or structure definition section */
 
 extern short AbortLoop;    /* TRUE <=> cannot execute loop body (semantic errors)  */

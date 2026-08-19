@@ -39,16 +39,14 @@
 
 ******************************************************************************/
 
-void d3_insertUnit (d3_unitPtrType **list, int num)
-{
+void d3_insertUnit (d3_unitPtrType **list, int num) {
     d3_unitPtrType *new_elem;
 
     new_elem = (d3_unitPtrType *) malloc (sizeof (d3_unitPtrType));
-    if (new_elem == NULL)
-      {
-         fprintf (stdout, "D3-Error: Not Enough Memory\n\n");
-         return;
-      }
+    if (new_elem == NULL) {
+        fprintf (stdout, "D3-Error: Not Enough Memory\n\n");
+        return;
+    }
     new_elem->unitNo = num;
     new_elem->next = *list;
     *list = new_elem;
@@ -60,17 +58,15 @@ void d3_insertUnit (d3_unitPtrType **list, int num)
   FUNCTION : d3_displayUnitList
 
   PURPOSE  : writes a list to stdout
-  RETURNS  : 
+  RETURNS  :
   NOTES    :
 
 ******************************************************************************/
-void d3_displayUnitList (d3_unitPtrType  *list)
-{
-    while (list != NULL)
-      {
+void d3_displayUnitList (d3_unitPtrType  *list) {
+    while (list != NULL) {
         fprintf (stdout, "%7d", list->unitNo);
         list = list->next;
-      }
+    }
     fprintf (stdout, "\n");
 }
 

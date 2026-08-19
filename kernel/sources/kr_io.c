@@ -312,7 +312,7 @@ static void  krio_stringLimits(void) {
     unit_no = krui_getFirstUnit();
 
     neg1 = neg2 = neg3 = is_subnet_info =
-                             is_layer_info = FALSE;
+    is_layer_info = FALSE;
     i1 = i2 = i3 = 0;
 
     do  {
@@ -406,7 +406,7 @@ static krui_err  krio_fmtShapeing(int choose_me) {
         sprintf( fmt_hdr1, fmt, formats[ 0 ] );
         mstrcat( fmt_hdr1, formats[ 5 ], "\n", (char *) 0 );
 
-        mstrcpy( fmt_hdr2 ,krio_repchar( '-', len + 2 ), "|", (char *) 0 );
+        mstrcpy( fmt_hdr2,krio_repchar( '-', len + 2 ), "|", (char *) 0 );
 
         len = Max( site_func_len, strlen( formats[ 6 ] ));
         mstrcat( fmt_hdr2, krio_repchar( '-', len + 2 ), "\n", (char *) 0 );
@@ -874,7 +874,7 @@ static krui_err  krio_writeTypeDefinitions(void) {
 ******************************************************************************/
 
 static char  *getTType(int st) {
-    static char   *ttype[] = { "-", "i", "o", "d", "h", "s" ,
+    static char   *ttype[] = { "-", "i", "o", "d", "h", "s",
                                "si", "so", "sh", "sd"
                              };
 

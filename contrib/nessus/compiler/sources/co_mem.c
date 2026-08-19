@@ -3,10 +3,10 @@
   SHORTNAME         : mem
   VERSION           : 2.0
 
-  PURPOSE           : 
+  PURPOSE           :
   NOTES             :
 
-  AUTHOR            : Thomas Korb 
+  AUTHOR            : Thomas Korb
   DATE              : 27.6.1991
 
   CHANGED BY        : contains functions for memory management
@@ -27,20 +27,19 @@
  Returns: &char
 *****************************************************************************************/
 char *M_alloc(s)
-     register unsigned s;
+register unsigned s;
 {
-  char *Sp;
+    char *Sp;
 
-  if(Sp = malloc(s)) {
-    HeapSize += s;
-    MaxHeapSize = (HeapSize > MaxHeapSize) ? HeapSize : MaxHeapSize;
-    return Sp;
-  }
-  else {
-    (void) printf("out of space, allocated memory %l B. Stopped.\n", HeapSize);
-    exit(OutOfSpace);
-    return NULL;
-  }
+    if(Sp = malloc(s)) {
+        HeapSize += s;
+        MaxHeapSize = (HeapSize > MaxHeapSize) ? HeapSize : MaxHeapSize;
+        return Sp;
+    } else {
+        (void) printf("out of space, allocated memory %l B. Stopped.\n", HeapSize);
+        exit(OutOfSpace);
+        return NULL;
+    }
 }
 
 
@@ -52,15 +51,14 @@ char *M_alloc(s)
  Returns: int
 *****************************************************************************************/
 M_free(s)
-     register char * s;
+register char * s;
 {
-  if( ! s) {
-    (void) printf("******bug: NULL string in M_free\n");
-    exit(Bug);
-  }
-  else
-    (void) free(s);
-  return 0;
+    if( ! s) {
+        (void) printf("******bug: NULL string in M_free\n");
+        exit(Bug);
+    } else
+        (void) free(s);
+    return 0;
 }
 
 
@@ -74,8 +72,8 @@ M_free(s)
  Returns: void.
 *****************************************************************************************/
 void M_SetHeapSize(s)
-     unsigned s;
+unsigned s;
 {
-  HeapSize += s;
-  MaxHeapSize = (HeapSize > MaxHeapSize) ? HeapSize : MaxHeapSize;
+    HeapSize += s;
+    MaxHeapSize = (HeapSize > MaxHeapSize) ? HeapSize : MaxHeapSize;
 }

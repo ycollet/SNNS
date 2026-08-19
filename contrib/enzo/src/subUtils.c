@@ -73,62 +73,62 @@
 /*                                                                            */
 
 krui_err subul_createNet( int layers, int neurons[], int shortcuts ) {
-  int i, j, k;
-  int no_of_units = 0;
-  int unitCnt;
+    int i, j, k;
+    int no_of_units = 0;
+    int unitCnt;
 
-  struct PosType unit_pos;
+    struct PosType unit_pos;
 
-  krui_err ret_code;
+    krui_err ret_code;
 
-  if( neurons[     0    ] == 0 ) return( KRERR_NO_INPUT_UNITS  );
-  if( neurons[layers - 1] == 0 ) return( KRERR_NO_OUTPUT_UNITS );
+    if( neurons[     0    ] == 0 ) return( KRERR_NO_INPUT_UNITS  );
+    if( neurons[layers - 1] == 0 ) return( KRERR_NO_OUTPUT_UNITS );
 
-  for( i = 0; i < layers; i++ )  no_of_units += neurons[i];
+    for( i = 0; i < layers; i++ )  no_of_units += neurons[i];
 
-  ERRCHK( ret_code = ksh_allocateUnits( no_of_units ) );
+    ERRCHK( ret_code = ksh_allocateUnits( no_of_units ) );
 
-  /* --- create units --- */
-  unit_pos.x = 3;
-  for ( j = 0, unit_pos.x = 3; j < layers; j++, unit_pos.x += OFFSET ) {
-    for (i = 1; i <= neurons[ j ]; i++) {
-      if( (k = ksh_createDefaultUnit()) < 0 ) ERRCHK( k );
+    /* --- create units --- */
+    unit_pos.x = 3;
+    for ( j = 0, unit_pos.x = 3; j < layers; j++, unit_pos.x += OFFSET ) {
+        for (i = 1; i <= neurons[ j ]; i++) {
+            if( (k = ksh_createDefaultUnit()) < 0 ) ERRCHK( k );
 
-      if( j == 0 )
-	ret_code = ksh_setUnitTType( k, INPUT );
-      else if( j == layers-1 )
-	ret_code = ksh_setUnitTType( k, HIDDEN );
-      else
-	ret_code = ksh_setUnitTType( k, OUTPUT );
+            if( j == 0 )
+                ret_code = ksh_setUnitTType( k, INPUT );
+            else if( j == layers-1 )
+                ret_code = ksh_setUnitTType( k, HIDDEN );
+            else
+                ret_code = ksh_setUnitTType( k, OUTPUT );
 
-      ERRCHK( ret_code );
+            ERRCHK( ret_code );
 
-      ERRCHK( ret_code = ksh_setUnitOutFunc( k, DEFAULT_OUT_FUNC ) );
-      ERRCHK( ret_code = ksh_setUnitActFunc( k, DEFAULT_ACT_FUNC ) );
+            ERRCHK( ret_code = ksh_setUnitOutFunc( k, DEFAULT_OUT_FUNC ) );
+            ERRCHK( ret_code = ksh_setUnitActFunc( k, DEFAULT_ACT_FUNC ) );
 
-      unit_pos.y = i;
-      ksh_setUnitPosition( k, &unit_pos );
+            unit_pos.y = i;
+            ksh_setUnitPosition( k, &unit_pos );
+        }
     }
-  }
 
-  /* --- create links --- */
-  unitCnt = no_of_units;
-  for ( j = 1; j < layers; j++ ) {
-    unitCnt -= neurons[layers - j];
+    /* --- create links --- */
+    unitCnt = no_of_units;
+    for ( j = 1; j < layers; j++ ) {
+        unitCnt -= neurons[layers - j];
 
-    for ( k = unitCnt + 1; k <= unitCnt + neurons[layers-j];  k++ ) {
-      ERRCHK( ret_code  = ksh_setCurrentUnit( k ) );
+        for ( k = unitCnt + 1; k <= unitCnt + neurons[layers-j];  k++ ) {
+            ERRCHK( ret_code  = ksh_setCurrentUnit( k ) );
 
-      for ( i  = (shortcuts ? 1 : unitCnt-neurons[layers-j-1]+1 );
-	    i <= unitCnt; i++ ) {
-	ERRCHK( ksh_createLink( i, 0.0 ) );
-      }
+            for ( i  = (shortcuts ? 1 : unitCnt-neurons[layers-j-1]+1 );
+                    i <= unitCnt; i++ ) {
+                ERRCHK( ksh_createLink( i, 0.0 ) );
+            }
+        }
     }
-  }
 
-  ERRCHK( ret_code = ksh_setLearnFunc( DEFAULT_LEARN_FUNC ) );
+    ERRCHK( ret_code = ksh_setLearnFunc( DEFAULT_LEARN_FUNC ) );
 
-  return( KRERR_NO_ERROR );
+    return( KRERR_NO_ERROR );
 }
 
 /*                                                                            */
@@ -142,17 +142,17 @@ krui_err subul_createNet( int layers, int neurons[], int shortcuts ) {
 /*                                                                            */
 
 int subul_netcmp( NetID id_1, NetID id_2 ) {
-  NetworkData *d1, *d2;
-  float diff;
+    NetworkData *d1, *d2;
+    float diff;
 
-  d1 = kpm_getNetData( id_1 );
-  d2 = kpm_getNetData( id_2 );
+    d1 = kpm_getNetData( id_1 );
+    d2 = kpm_getNetData( id_2 );
 
-  diff = d1->fitness-d2->fitness;
+    diff = d1->fitness-d2->fitness;
 
-  if     ( diff > 0 ) return(  1 );
-  else if( diff < 0 ) return( -1 );
-  else                return(  0 );
+    if     ( diff > 0 ) return(  1 );
+    else if( diff < 0 ) return( -1 );
+    else                return(  0 );
 }
 
 /*                                                                            */
@@ -164,18 +164,18 @@ int subul_netcmp( NetID id_1, NetID id_2 ) {
 /*                                                                            */
 
 int subul_deadInputUnit( int unit ) {
-  FlintType dummy;
-  int curr, ret;
+    FlintType dummy;
+    int curr, ret;
 
-  curr = ksh_getCurrentUnit();
+    curr = ksh_getCurrentUnit();
 
-  if(    ksh_getUnitTType( unit ) == INPUT
-	 && ksh_getFirstSuccUnit( unit, &dummy ) == 0 ) {
-    ret = TRUE;
-  } else ret = FALSE;
+    if(    ksh_getUnitTType( unit ) == INPUT
+            && ksh_getFirstSuccUnit( unit, &dummy ) == 0 ) {
+        ret = TRUE;
+    } else ret = FALSE;
 
-  ksh_setCurrentUnit( curr );
-  return( ret );
+    ksh_setCurrentUnit( curr );
+    return( ret );
 }
 
 /*                                                                            */
@@ -186,13 +186,13 @@ int subul_deadInputUnit( int unit ) {
 /*                                                                            */
 
 PatID subul_getPatID( char *name) {
-  PatID actPat,retPat= NULL;
-  for ( actPat = kpm_getFirstPat(); actPat != NULL;
-	actPat = kpm_getNextPat( actPat )) {
-    if (!strcmp(kpm_getPatName( actPat ),name))
-      retPat = actPat;
-  }
-  return ( retPat );
+    PatID actPat,retPat= NULL;
+    for ( actPat = kpm_getFirstPat(); actPat != NULL;
+            actPat = kpm_getNextPat( actPat )) {
+        if (!strcmp(kpm_getPatName( actPat ),name))
+            retPat = actPat;
+    }
+    return ( retPat );
 }
 
 /*                                                                            */

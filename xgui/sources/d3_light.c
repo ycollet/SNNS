@@ -40,17 +40,16 @@
 #include "d3_light.ph"
 
 /*****************************************************************************
-  FUNCTION : d3_closeLightPannel 
+  FUNCTION : d3_closeLightPannel
 
   PURPOSE  : close the project pannel
-  RETURNS  : 
+  RETURNS  :
   NOTES    :
 
 ******************************************************************************/
 
 
-static void d3_closeLightPannel (Widget w, Widget pannel, caddr_t call_data)
-{
+static void d3_closeLightPannel (Widget w, Widget pannel, caddr_t call_data) {
     temp_state.light.position[0] = ui_xFloatFromAsciiWidget (lightXwidget);
     temp_state.light.position[1] = ui_xFloatFromAsciiWidget (lightYwidget);
     temp_state.light.position[2] = ui_xFloatFromAsciiWidget (lightZwidget);
@@ -61,11 +60,11 @@ static void d3_closeLightPannel (Widget w, Widget pannel, caddr_t call_data)
     temp_state.light.Ip = ui_xFloatFromAsciiWidget (lightIpWidget);
     temp_state.light.Kd = ui_xFloatFromAsciiWidget (lightKdWidget);
     XtDestroyWidget (pannel);
-    if (memcmp (&d3_state, &temp_state, 
+    if (memcmp (&d3_state, &temp_state,
                 sizeof (d3_state_type)) != 0) {
-         memcpy (&d3_state, &temp_state, 
-                 sizeof (d3_state_type)); 
-         d3_drawNet ();
+        memcpy (&d3_state, &temp_state,
+                sizeof (d3_state_type));
+        d3_drawNet ();
     }
 
 }
@@ -77,7 +76,7 @@ static void d3_closeLightPannel (Widget w, Widget pannel, caddr_t call_data)
   FUNCTION : d3_createLightPannel
 
   PURPOSE  : creates the light pannel
-  RETURNS  : 
+  RETURNS  :
   NOTES    :
 
 ******************************************************************************/
@@ -85,8 +84,7 @@ static void d3_closeLightPannel (Widget w, Widget pannel, caddr_t call_data)
 
 
 
-void d3_createLightPannel (Widget w, Widget button, caddr_t call_data)
-{
+void d3_createLightPannel (Widget w, Widget button, caddr_t call_data) {
     int n;
     Arg arg[10];
     char buf[20];
@@ -96,43 +94,47 @@ void d3_createLightPannel (Widget w, Widget button, caddr_t call_data)
     Widget labelA, labelI, labelR;
 
     n = 0;
-    XtSetArg (arg[n], XtNwidth, &width); n++;
-    XtSetArg (arg[n], XtNheight, &height); n++;
+    XtSetArg (arg[n], XtNwidth, &width);
+    n++;
+    XtSetArg (arg[n], XtNheight, &height);
+    n++;
     XtGetValues (button, arg, (unsigned int) n);
 
-    XtTranslateCoords (button, (Position) (width / 2), (Position) (height / 2), 
+    XtTranslateCoords (button, (Position) (width / 2), (Position) (height / 2),
                        &xPos, &yPos);
 
 
     n = 0;
 
-    XtSetArg(arg[n], XtNx, xPos); n++;
-    XtSetArg(arg[n], XtNy, yPos); n++;
+    XtSetArg(arg[n], XtNx, xPos);
+    n++;
+    XtSetArg(arg[n], XtNy, yPos);
+    n++;
 
-    lightPannel = XtCreatePopupShell ("light", transientShellWidgetClass, 
+    lightPannel = XtCreatePopupShell ("light", transientShellWidgetClass,
                                       button, arg, (unsigned int) n);
 
-    border = XtCreateManagedWidget("border", boxWidgetClass, 
+    border = XtCreateManagedWidget("border", boxWidgetClass,
                                    lightPannel, NULL, ZERO);
     pannel = XtCreateManagedWidget("pannel", formWidgetClass, border, NULL, ZERO);
 
-    labelX = ui_xCreateLabelItem ("  Light Source  X", pannel, d3_fontWidth * 17, 
-                                  NULL, NULL); 
+    labelX = ui_xCreateLabelItem ("  Light Source  X", pannel, d3_fontWidth * 17,
+                                  NULL, NULL);
 
     sprintf (buf, "%.4f", d3_state.light.position[0]);
     lightXwidget = ui_xCreateDialogItem ("lightX", pannel, buf, d3_numberWidth,                                          labelX, NULL);
-    labelY = ui_xCreateLabelItem ("                Y", pannel, d3_fontWidth * 17, 
-                                  NULL, labelX); 
+    labelY = ui_xCreateLabelItem ("                Y", pannel, d3_fontWidth * 17,
+                                  NULL, labelX);
 
     sprintf (buf, "%.4f", d3_state.light.position[1]);
-    lightYwidget = ui_xCreateDialogItem ("lightY", pannel, buf, d3_numberWidth, 
+    lightYwidget = ui_xCreateDialogItem ("lightY", pannel, buf, d3_numberWidth,
                                          labelY, labelX);
 
-    labelZ = ui_xCreateLabelItem ("                Z", pannel, d3_fontWidth * 17, 
-                                  NULL, labelY); 
+    labelZ = ui_xCreateLabelItem ("                Z", pannel, d3_fontWidth * 17,
+                                  NULL, labelY);
 
     sprintf (buf, "%.4f", d3_state.light.position[2]);
-    lightZwidget = ui_xCreateDialogItem ("lightZ", pannel, buf, d3_numberWidth, 
+    lightZwidget = ui_xCreateDialogItem ("lightZ", pannel, buf, d3_numberWidth,
                                          labelZ, labelY);
 
 
@@ -142,35 +144,35 @@ void d3_createLightPannel (Widget w, Widget button, caddr_t call_data)
     labelI = ui_xCreateLabelItem ("      Intensity", pannel, d3_fontWidth * 15,
                                   NULL, labelA);
     sprintf (buf, "%.4f", d3_state.light.Ia);
-    lightIaWidget = ui_xCreateDialogItem ("lightIa", pannel, buf, d3_numberWidth, 
-                                          labelI, labelA);  
+    lightIaWidget = ui_xCreateDialogItem ("lightIa", pannel, buf, d3_numberWidth,
+                                          labelI, labelA);
 
-    labelR = ui_xCreateLabelItem ("     Reflection", pannel, d3_fontWidth * 15, 
+    labelR = ui_xCreateLabelItem ("     Reflection", pannel, d3_fontWidth * 15,
                                   NULL, labelI);
     sprintf (buf, "%.4f", d3_state.light.Ka);
-    lightKaWidget = ui_xCreateDialogItem ("lightKa", pannel, buf, d3_numberWidth, 
-                                          labelR, labelI);  
+    lightKaWidget = ui_xCreateDialogItem ("lightKa", pannel, buf, d3_numberWidth,
+                                          labelR, labelI);
 
-    labelA = ui_xCreateLabelItem ("  Diffuse Light", pannel, d3_fontWidth * 14, 
+    labelA = ui_xCreateLabelItem ("  Diffuse Light", pannel, d3_fontWidth * 14,
                                   NULL, labelR);
 
-    labelI = ui_xCreateLabelItem ("      Intensity", pannel, d3_fontWidth * 15, 
+    labelI = ui_xCreateLabelItem ("      Intensity", pannel, d3_fontWidth * 15,
                                   NULL, labelA);
     sprintf (buf, "%.4f", d3_state.light.Ip);
     lightIpWidget = ui_xCreateDialogItem ("lightIp", pannel, buf, d3_numberWidth,
-                                          labelI, labelA);  
+                                          labelI, labelA);
 
     labelR = ui_xCreateLabelItem ("     Reflection", pannel, d3_fontWidth * 15,
                                   NULL, labelI);
     sprintf (buf, "%.4f", d3_state.light.Kd);
     lightKdWidget = ui_xCreateDialogItem ("lightKd", pannel, buf, d3_numberWidth,
-                                           labelR, labelI);  
+                                          labelR, labelI);
 
     done = d3_xCreateButtonItem ("done", border, NULL, lightIaWidget);
 
     XtAddCallback (done, XtNcallback, (XtCallbackProc) d3_closeLightPannel, (Widget) lightPannel);
 
-    memcpy (&temp_state, &d3_state, sizeof (d3_state_type)); 
+    memcpy (&temp_state, &d3_state, sizeof (d3_state_type));
 
 
     ui_checkWindowPosition(lightPannel);

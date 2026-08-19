@@ -36,41 +36,41 @@
 /* Tokens.  */
 #ifndef YYTOKENTYPE
 # define YYTOKENTYPE
-   /* Put the tokens into the symbol table, so that GDB and other debuggers
-      know about them.  */
-   enum yytokentype {
-     FOR = 258,
-     TO = 259,
-     DO = 260,
-     ENDFOR = 261,
-     IF = 262,
-     THEN = 263,
-     ELSE = 264,
-     ENDIF = 265,
-     WHILE = 266,
-     ENDWHILE = 267,
-     REPEAT = 268,
-     UNTIL = 269,
-     BREAK = 270,
-     CONTINUE = 271,
-     Delimiter = 272,
-     Identifier = 273,
-     Assignment = 274,
-     AND = 275,
-     OR = 276,
-     EQOP = 277,
-     NEQOP = 278,
-     LEQOP = 279,
-     GEQOP = 280,
-     DIV = 281,
-     MOD = 282,
-     EXP = 283,
-     LOG = 284,
-     LN = 285,
-     SQRT = 286,
-     NOT = 287,
-     SIGN = 288
-   };
+/* Put the tokens into the symbol table, so that GDB and other debuggers
+   know about them.  */
+enum yytokentype {
+    FOR = 258,
+    TO = 259,
+    DO = 260,
+    ENDFOR = 261,
+    IF = 262,
+    THEN = 263,
+    ELSE = 264,
+    ENDIF = 265,
+    WHILE = 266,
+    ENDWHILE = 267,
+    REPEAT = 268,
+    UNTIL = 269,
+    BREAK = 270,
+    CONTINUE = 271,
+    Delimiter = 272,
+    Identifier = 273,
+    Assignment = 274,
+    AND = 275,
+    OR = 276,
+    EQOP = 277,
+    NEQOP = 278,
+    LEQOP = 279,
+    GEQOP = 280,
+    DIV = 281,
+    MOD = 282,
+    EXP = 283,
+    LOG = 284,
+    LN = 285,
+    SQRT = 286,
+    NOT = 287,
+    SIGN = 288
+};
 #endif
 /* Tokens.  */
 #define FOR 258
@@ -111,17 +111,19 @@
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 typedef union YYSTYPE
 #line 64 "gram1.y"
-{ struct {        /* bison doesn't know struct as a token type */
-  St_ptr_type stp;       /* symbol table pointer */
-                         /* 2 backpatch target lists: */
-  bp_list *brk;          /* #1 contains positions of break statements */
-  bp_list *cont;         /* #2 contains positions of continue statements */
-  Ic_ptr_type tmp;       /* instruction # temp buffer for local backpatching */
-  arglist_type *arglist; /* pointer to an argument list */
-} t; }
+{
+    struct {        /* bison doesn't know struct as a token type */
+        St_ptr_type stp;       /* symbol table pointer */
+        /* 2 backpatch target lists: */
+        bp_list *brk;          /* #1 contains positions of break statements */
+        bp_list *cont;         /* #2 contains positions of continue statements */
+        Ic_ptr_type tmp;       /* instruction # temp buffer for local backpatching */
+        arglist_type *arglist; /* pointer to an argument list */
+    } t;
+}
 /* Line 1489 of yacc.c.  */
 #line 124 "y.tab.h"
-	YYSTYPE;
+YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1
 # define YYSTYPE_IS_TRIVIAL 1

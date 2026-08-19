@@ -4,12 +4,12 @@
   SNNS VERSION   : 4.2
 
   PURPOSE        : Symbol table (ST) for SNNS batch interpreter
-  NOTES          : 
+  NOTES          :
 
   AUTHOR         : Jens Wieland
-  DATE           : 
+  DATE           :
 
-  CHANGED BY     : 
+  CHANGED BY     :
   RCS VERSION    : $Revision: 1.5 $
   LAST CHANGE    : $Date: 1998/02/25 15:35:00 $
 
@@ -33,28 +33,29 @@ typedef int St_ptr_type;    /* ST index; points to ST entries */
 
 /*****************************************************************************
   the argument pointer list:
-  linked list of ST pointers which point to 
+  linked list of ST pointers which point to
   the arguments for a function call in a user program:
 ******************************************************************************/
-struct arglist_type { 
-                      St_ptr_type arg_ptr;        /* points to ST entry */
-		      struct arglist_type *next;  /* link field */
-		    };
+struct arglist_type {
+    St_ptr_type arg_ptr;        /* points to ST entry */
+    struct arglist_type *next;  /* link field */
+};
 typedef struct arglist_type arglist_type;
 
 #define ARG_NULL (arglist_type *) 0
 
 
 /* function type for jacket function: */
-typedef void (*Jacket_fct_ptr)(arglist_type *); 
+typedef void (*Jacket_fct_ptr)(arglist_type *);
 
 /* type of value of a ST member: */
-typedef union { Int_type int_val;
-                Bool_type bool_val;
-                Real_type real_val;
-		String_type string_val;
-		Jacket_fct_ptr fct_val;
-              } Val_type;    
+typedef union {
+    Int_type int_val;
+    Bool_type bool_val;
+    Real_type real_val;
+    String_type string_val;
+    Jacket_fct_ptr fct_val;
+} Val_type;
 
 
 

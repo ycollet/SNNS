@@ -57,63 +57,63 @@
 #define MAX_DEL_UNITS 200
 
 int cleanup_init( ModuleTableEntry *self, int msgc, char *msgv[] ) {
-  MODULE_KEY( CLEANUP_KEY );
+    MODULE_KEY( CLEANUP_KEY );
 
-  SEL_MSG( msgv[0] )
+    SEL_MSG( msgv[0] )
 
     MSG_CASE( GENERAL_INIT    ) {
-    /* nothing to do */
-  }
-  MSG_CASE( GENERAL_EXIT    ) {
-    /* nothing to do */
-  }
-  MSG_CASE( EVOLUTION_INIT )  {
-    /* nothing to do */
-  }
+        /* nothing to do */
+    }
+    MSG_CASE( GENERAL_EXIT    ) {
+        /* nothing to do */
+    }
+    MSG_CASE( EVOLUTION_INIT )  {
+        /* nothing to do */
+    }
 
-  END_MSG;
+    END_MSG;
 
-  return( INIT_USED );
+    return( INIT_USED );
 }
 
 int cleanup_work( PopID *parents, PopID *offsprings, PopID *ref ) {
-  NetID     net;
-  int cnt, u_no;
-  int       delList[MAX_DEL_UNITS];
-  FlintType dummy;
-  NetworkData *netData;
+    NetID     net;
+    int cnt, u_no;
+    int       delList[MAX_DEL_UNITS];
+    FlintType dummy;
+    NetworkData *netData;
 
-  FOR_ALL_OFFSPRINGS( net ) {
-    cnt = 0;
-    for( u_no = ksh_getFirstUnit(); u_no != 0; u_no = ksh_getNextUnit() ) {
-      if(    ksh_getUnitTType( u_no ) != OUTPUT
-	     && ksh_getUnitTType( u_no ) != INPUT ) {
-	if(    ksh_getUnitInputType( u_no ) == NO_INPUTS
-	       || ksh_getFirstSuccUnit( u_no, &dummy ) == 0  ) {
-	  delList[cnt++] = u_no;
-	}
-	/* getFirstSuccUnit makes the succUnit current */
-	/* after setting the unit u_no current, getNextUnit will work */
-	ksh_setCurrentUnit( u_no );
-      }
+    FOR_ALL_OFFSPRINGS( net ) {
+        cnt = 0;
+        for( u_no = ksh_getFirstUnit(); u_no != 0; u_no = ksh_getNextUnit() ) {
+            if(    ksh_getUnitTType( u_no ) != OUTPUT
+                    && ksh_getUnitTType( u_no ) != INPUT ) {
+                if(    ksh_getUnitInputType( u_no ) == NO_INPUTS
+                        || ksh_getFirstSuccUnit( u_no, &dummy ) == 0  ) {
+                    delList[cnt++] = u_no;
+                }
+                /* getFirstSuccUnit makes the succUnit current */
+                /* after setting the unit u_no current, getNextUnit will work */
+                ksh_setCurrentUnit( u_no );
+            }
+        }
+
+        ksh_deleteUnitList( cnt, delList );
+        netData = GET_NET_DATA(net);
+        netData->histRec.cleaned = cnt;
     }
 
-    ksh_deleteUnitList( cnt, delList );
-    netData = GET_NET_DATA(net);
-    netData->histRec.cleaned = cnt;
-  }
-
-  return( MODULE_NO_ERROR );
+    return( MODULE_NO_ERROR );
 }
 
 char *cleanup_errMsg( int err_code ) {
-  /* supply the caller with some information about an error */
+    /* supply the caller with some information about an error */
 
-  static int   err_cnt   = 2;   /* number of recognized errors */
-  static char *err_msg[] = {
-    "no error (cleanup)", "unknown error (cleanup)",
-    "specific error message -- not used"
-  };
+    static int   err_cnt   = 2;   /* number of recognized errors */
+    static char *err_msg[] = {
+        "no error (cleanup)", "unknown error (cleanup)",
+        "specific error message -- not used"
+    };
 
-  return( err_msg[ err_code < err_cnt ? err_code : MODULE_UNKNOWN_ERR ] );
+    return( err_msg[ err_code < err_cnt ? err_code : MODULE_UNKNOWN_ERR ] );
 }

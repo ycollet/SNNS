@@ -15,7 +15,7 @@
 
     Copyright (c) 1990-1995  SNNS Group, IPVR, Univ. Stuttgart, FRG
     Copyright (c) 1996-1998  SNNS Group, WSI, Univ. Tuebingen, FRG
-             
+
 ******************************************************************************/
 
 
@@ -26,7 +26,7 @@ extern void ui_xCreateFilePanel (Widget);
 
 extern Widget    ui_filePanel;
 
-	/* strings storing the data of all input fields */
+/* strings storing the data of all input fields */
 extern Bool      ui_fileIsCreated; /* file panel created yes or no */
 
 

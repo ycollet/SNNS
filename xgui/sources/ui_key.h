@@ -15,7 +15,7 @@
 
     Copyright (c) 1990-1995  SNNS Group, IPVR, Univ. Stuttgart, FRG
     Copyright (c) 1996-1998  SNNS Group, WSI, Univ. Tuebingen, FRG
-             
+
 ******************************************************************************/
 
 
@@ -27,16 +27,16 @@
 
 extern void ui_key_popMenu (struct Ui_DisplayType *displayPtr);
 extern void ui_key_init (void);
-extern void ui_can_KEventProc (Widget w, struct Ui_DisplayType *displayPtr, 
-				XEvent *event);
+extern void ui_can_KEventProc (Widget w, struct Ui_DisplayType *displayPtr,
+                               XEvent *event);
 extern void ui_key_control(Widget w, Cardinal n, XEvent *event);
 
 extern StateType  ui_key_currentState,
-    	ui_key_returnUnitState;  /* dito from state UNIT */
+       ui_key_returnUnitState;  /* dito from state UNIT */
 
 extern struct PosType  ui_key_eventPos;     /* position of current event */
 extern int             ui_key_unitNo;    /* unit at this position, else ZERO */
-				/* current key event */
+/* current key event */
 extern Bool              ui_safetyFlg; /* safety on of off */
 extern FlagType          ui_key_linksToHandle; /* which links are to handle:
                                            UI_ALL (input and output)
@@ -44,7 +44,7 @@ extern FlagType          ui_key_linksToHandle; /* which links are to handle:
 extern FlagType          ui_key_action; /* used for MOVE and COPY to tell the
                                     mouse event handler the selected action */
 
-extern Bool            ui_outlineActive; /* waiting for a 
+extern Bool            ui_outlineActive; /* waiting for a
 						destination position */
 
 

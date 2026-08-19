@@ -179,10 +179,10 @@ krui_err kr_topoCheckJE (void)
 
 
     topo_msg.no_of_cycles     =
-        topo_msg.no_of_dead_units =
-            topo_msg.dest_error_unit  =
-                topo_msg.src_error_unit   =
-                    topo_msg.no_of_layers     = 0 ;
+    topo_msg.no_of_dead_units =
+    topo_msg.dest_error_unit  =
+    topo_msg.src_error_unit   =
+    topo_msg.no_of_layers     = 0 ;
     topo_msg.error_code       = KernelErrorCode = KRERR_NO_ERROR ;
 
 

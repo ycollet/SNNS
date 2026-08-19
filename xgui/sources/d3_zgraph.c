@@ -15,7 +15,7 @@
 
     Copyright (c) 1990-1995  SNNS Group, IPVR, Univ. Stuttgart, FRG
     Copyright (c) 1996-1998  SNNS Group, WSI, Univ. Tuebingen, FRG
-             
+
 ******************************************************************************/
 #include <config.h>
 
@@ -52,14 +52,14 @@
 int d3_initZbuffer (void)
 
 {
-   d3_getRootSizes ((unsigned int *) &zbuffer_xsize, (unsigned int *) &zbuffer_ysize);
+    d3_getRootSizes ((unsigned int *) &zbuffer_xsize, (unsigned int *) &zbuffer_ysize);
 
-   if (!zbuffer_isInit) {
+    if (!zbuffer_isInit) {
         zbuffer = (float *) malloc (zbuffer_xsize * zbuffer_ysize * sizeof (float));
         if (zbuffer == NULL) {
             fprintf (stderr, "Error allocating zbuffer");
             return (FALSE);
-	}
+        }
         zbuffer_isInit = TRUE;
     }
     d3_clearZbuffer ();
@@ -80,11 +80,11 @@ int d3_initZbuffer (void)
 void d3_clearZbuffer (void)
 
 {
-  float  *zbuf_ptr, *limit;
+    float  *zbuf_ptr, *limit;
 
-  limit = zbuffer + zbuffer_ysize * zbuffer_ysize;
-  for (zbuf_ptr = zbuffer; zbuf_ptr < limit; zbuf_ptr++)
-    *zbuf_ptr = MAXFLOAT;
+    limit = zbuffer + zbuffer_ysize * zbuffer_ysize;
+    for (zbuf_ptr = zbuffer; zbuf_ptr < limit; zbuf_ptr++)
+        *zbuf_ptr = MAXFLOAT;
 }
 
 
@@ -102,9 +102,9 @@ void d3_readZbuffer (int x, int y, float *z)
 
 {
     if ((x >= 0) && (x < zbuffer_xsize) && (y >= 0) && (y < zbuffer_ysize))
-         *z = *(zbuffer + y*zbuffer_ysize + x);
+        *z = *(zbuffer + y*zbuffer_ysize + x);
     else {
-         *z = 0.0;
+        *z = 0.0;
     }
 }
 

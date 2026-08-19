@@ -58,9 +58,9 @@ static int histIDcnt = 0;
 /*----------------------------------------------------------functions--------*/
 
 HistID hist_newHistID( void ) {
-  return( histIDcnt++ );
+    return( histIDcnt++ );
 }
 
 HistID hist_maxHistID( void ) {
-  return( histIDcnt );
+    return( histIDcnt );
 }

@@ -3,13 +3,13 @@
   SHORTNAME      : bn_bighop
   SNNS VERSION   : 4.2
 
-  PURPOSE        : 
+  PURPOSE        :
   NOTES          :
 
-  AUTHOR         : Christine Bagdi 
+  AUTHOR         : Christine Bagdi
   DATE           : 27.5.1993
 
-  CHANGED BY     : 
+  CHANGED BY     :
   RCS VERSION    : $Revision: 2.6 $
   LAST CHANGE    : $Date: 1998/02/25 15:19:43 $
 
@@ -24,6 +24,6 @@
 extern void bn_createBigHop (void);
 
 
-#endif 
+#endif
 /* end of file */
 /* lines:  */

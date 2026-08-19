@@ -9,21 +9,21 @@ static void freeList(struct Node *);
 /* Buckets fuer offenes Hashing benutzen. Die       */
 /* Variable error wird gesetzt.                     */
 /****************************************************/
-Symtab newSymtab(long buckets)
-{ Symtab answer;
-  long i;
+Symtab newSymtab(long buckets) {
+    Symtab answer;
+    long i;
 
-  answer = (Symtab) malloc(sizeof(*answer));
-  if(answer == NULL) error(1);
-  answer->buckets = (struct Node **) malloc(sizeof(struct Node *) * buckets);
-  if(answer->buckets == NULL) error(1);
-  for(i = 0L; i < buckets; i++)
-    answer->buckets[i] = NULL;
-  if(! (answer->order = newColl())) error(1);
-  answer->numBuckets = buckets;
+    answer = (Symtab) malloc(sizeof(*answer));
+    if(answer == NULL) error(1);
+    answer->buckets = (struct Node **) malloc(sizeof(struct Node *) * buckets);
+    if(answer->buckets == NULL) error(1);
+    for(i = 0L; i < buckets; i++)
+        answer->buckets[i] = NULL;
+    if(! (answer->order = newColl())) error(1);
+    answer->numBuckets = buckets;
 
-  error = 0;
-  return answer;
+    error = 0;
+    return answer;
 }               /* newSymtab */
 
 
@@ -33,14 +33,14 @@ Symtab newSymtab(long buckets)
 /* Klassen-Namen freigegeben. Zeiger auf diese       */
 /* duerfen von nun an nicht mehr verwendet werden.   */
 /*****************************************************/
-void freeSymtab(Symtab st)
-{ long i;
+void freeSymtab(Symtab st) {
+    long i;
 
-  freeCollAll(st->order);
-  for(i = 0L; i < st->numBuckets; i++)
-    freeList(st->buckets[i]);
-  free(st->buckets);
-  free(st);
+    freeCollAll(st->order);
+    for(i = 0L; i < st->numBuckets; i++)
+        freeList(st->buckets[i]);
+    free(st->buckets);
+    free(st);
 }               /* freeSymtab */
 
 
@@ -50,9 +50,8 @@ void freeSymtab(Symtab st)
 /* der Reihenfolge, in der die Symbole zu st hinzu-  */
 /* gefuegt wurden.                                   */
 /*****************************************************/
-Collection sequence(Symtab st)
-{
-  return st->order;
+Collection sequence(Symtab st) {
+    return st->order;
 }               /* sequence */
 
 
@@ -60,9 +59,8 @@ Collection sequence(Symtab st)
 /* Antworte die Anzahl verschiedener Symbole, die in */
 /* st enthalten sind.                                */
 /*****************************************************/
-unsigned numSymbols(Symtab st)
-{
-  return size(st->order);
+unsigned numSymbols(Symtab st) {
+    return size(st->order);
 }              /* numSymbols */
 
 
@@ -70,15 +68,14 @@ unsigned numSymbols(Symtab st)
 /* Gebe den Speicher fuer die Liste, die bei node    */
 /* beginnt, frei.                                    */
 /*****************************************************/
-static void freeList(struct Node *node)
-{ struct Node *toFree;
+static void freeList(struct Node *node) {
+    struct Node *toFree;
 
-  while(node)
-  {
-    toFree = node;
-    node = node->next;
-    free(toFree);
-  }
+    while(node) {
+        toFree = node;
+        node = node->next;
+        free(toFree);
+    }
 }            /* freeList */
 
 
@@ -92,28 +89,28 @@ static void freeList(struct Node *node)
 /* soll.                                             */
 /* Variable error wird gesetzt.                      */
 /*****************************************************/
-char *addSymbol(Symtab st, char *sym)
-{ long hash_val;
-  struct Node *newNode;
-  char *symCopy;
+char *addSymbol(Symtab st, char *sym) {
+    long hash_val;
+    struct Node *newNode;
+    char *symCopy;
 
-  symCopy = locateSymbol(st, sym);
-  if(symCopy == NULL)
-  {                     /* sym ist noch nicht in der Symboltabelle */
-    newNode = (struct Node *) malloc(sizeof(*newNode));
-    if(newNode == NULL) error(1);
-    if(! (symCopy = my_strdup(sym))) error(1);
-    hash_val = strhash(sym, st->numBuckets);
-    newNode->name = symCopy;
-    /* fuege newNode am Anfang ein */
-    newNode->next = st->buckets[hash_val];
-    st->buckets[hash_val] = newNode;
-    /* haenge sym ans Ende der order-Liste */
-    if(! add(st->order, symCopy)) error(1);
-  }
+    symCopy = locateSymbol(st, sym);
+    if(symCopy == NULL) {
+        /* sym ist noch nicht in der Symboltabelle */
+        newNode = (struct Node *) malloc(sizeof(*newNode));
+        if(newNode == NULL) error(1);
+        if(! (symCopy = my_strdup(sym))) error(1);
+        hash_val = strhash(sym, st->numBuckets);
+        newNode->name = symCopy;
+        /* fuege newNode am Anfang ein */
+        newNode->next = st->buckets[hash_val];
+        st->buckets[hash_val] = newNode;
+        /* haenge sym ans Ende der order-Liste */
+        if(! add(st->order, symCopy)) error(1);
+    }
 
-  error = 0;
-  return symCopy;
+    error = 0;
+    return symCopy;
 }               /* addSymbol */
 
 
@@ -121,12 +118,12 @@ char *addSymbol(Symtab st, char *sym)
 /* Antworte einen Hash-Wert zwischen 0 und           */
 /* maxValue - 1 fuer String str.                     */
 /*****************************************************/
-static long strhash(char *str, long maxValue)
-{ int count = 0;
-  int sum = 0;
+static long strhash(char *str, long maxValue) {
+    int count = 0;
+    int sum = 0;
 
-  while(count <= 3 && str[count]) sum += str[count++];
-  return sum % maxValue;
+    while(count <= 3 && str[count]) sum += str[count++];
+    return sum % maxValue;
 }               /* strhash */
 
 
@@ -135,16 +132,15 @@ static long strhash(char *str, long maxValue)
 /* in der Symboltabelle st enthalten ist, sonst      */
 /* NULL.                                             */
 /*****************************************************/
-char * locateSymbol(Symtab st, char *sym)
-{ struct Node *node;
+char * locateSymbol(Symtab st, char *sym) {
+    struct Node *node;
 
-  node = st->buckets[strhash(sym, st->numBuckets)];
-  while(node)
-  {
-    if(! strcmp(sym, node->name)) return node->name;
-    node = node->next;
-  }
-  return NULL;
+    node = st->buckets[strhash(sym, st->numBuckets)];
+    while(node) {
+        if(! strcmp(sym, node->name)) return node->name;
+        node = node->next;
+    }
+    return NULL;
 }               /* locateSymbol */
 
 
@@ -156,13 +152,13 @@ char * locateSymbol(Symtab st, char *sym)
 /* werden vorher eliminiert.                         */
 /* Setze Variable error.                             */
 /*****************************************************/
-void fprintSymbols(Symtab st, FILE *f)
-{ long num, i;
+void fprintSymbols(Symtab st, FILE *f) {
+    long num, i;
 
-  num = size(st->order);
-  for(i = 1L; i <= num; i++)
-    if(fprintf(f, "%s\n", (char *) at(st->order, i)) < 0) error(15);
-  error = 0;
+    num = size(st->order);
+    for(i = 1L; i <= num; i++)
+        if(fprintf(f, "%s\n", (char *) at(st->order, i)) < 0) error(15);
+    error = 0;
 }              /* fprintSymbols */
 
 
@@ -174,30 +170,30 @@ void fprintSymbols(Symtab st, FILE *f)
 /* enthalten sind oder nicht.                         */
 /* Variable error wird gesetzt.                       */
 /******************************************************/
-Symtab readSymtab(FILE *f)
-{ Symtab answer;
-  char *log;
-  Collection lines;
-  long len, i, nlines;
+Symtab readSymtab(FILE *f) {
+    Symtab answer;
+    char *log;
+    Collection lines;
+    long len, i, nlines;
 
-  len = flen(f);
-  if(error) return;
-  if(! (log = (char *) malloc((unsigned) len + 5))) error(1);
-  diskToStr(f, log);
-  if(! (lines = tokens(log, "\n"))) error(1);
-
-  answer = newSymtab(NO_BUCKETS);
-  if(error) return;
-
-  nlines = size(lines);
-  for(i = 1L; i <= nlines; i++)
-  { addSymbol(answer, (char *) at(lines, i));
+    len = flen(f);
     if(error) return;
-  }     /* for */
+    if(! (log = (char *) malloc((unsigned) len + 5))) error(1);
+    diskToStr(f, log);
+    if(! (lines = tokens(log, "\n"))) error(1);
 
-  free(log);
-  freeColl(lines);
-  error = 0;
-  return answer;
+    answer = newSymtab(NO_BUCKETS);
+    if(error) return;
+
+    nlines = size(lines);
+    for(i = 1L; i <= nlines; i++) {
+        addSymbol(answer, (char *) at(lines, i));
+        if(error) return;
+    }     /* for */
+
+    free(log);
+    freeColl(lines);
+    error = 0;
+    return answer;
 }         /* readSymtab */
 

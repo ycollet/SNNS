@@ -15,7 +15,7 @@
 
     Copyright (c) 1990-1995  SNNS Group, IPVR, Univ. Stuttgart, FRG
     Copyright (c) 1996-1998  SNNS Group, WSI, Univ. Tuebingen, FRG
-             
+
 ******************************************************************************/
 #include <config.h>
 
@@ -58,13 +58,15 @@ static void setModelToggleState (void)
 
 {
     switch (temp_state.model_mode) {
-        case wire_frame: ui_xSetToggleState (wireButton, TRUE);
-                         ui_xSetToggleState (solidButton, FALSE);
-                         break;
-        case solid     : ui_xSetToggleState (wireButton, FALSE);
-                         ui_xSetToggleState (solidButton, TRUE);
-                         break;
-      }
+    case wire_frame:
+        ui_xSetToggleState (wireButton, TRUE);
+        ui_xSetToggleState (solidButton, FALSE);
+        break;
+    case solid     :
+        ui_xSetToggleState (wireButton, FALSE);
+        ui_xSetToggleState (solidButton, TRUE);
+        break;
+    }
 }
 
 
@@ -82,11 +84,11 @@ static void d3_closeModelPannel (Widget w, Widget pannel, caddr_t call_data)
 
 {
     XtDestroyWidget (pannel);
-    if (memcmp (&d3_state, &temp_state, 
+    if (memcmp (&d3_state, &temp_state,
                 sizeof (d3_state_type)) != 0) {
-         memcpy (&d3_state, &temp_state, 
-                 sizeof (d3_state_type)); 
-         d3_drawNet ();
+        memcpy (&d3_state, &temp_state,
+                sizeof (d3_state_type));
+        d3_drawNet ();
     }
 }
 
@@ -105,7 +107,7 @@ static void setModelWire (void)
 
 {
     temp_state.model_mode = wire_frame;
-    setModelToggleState (); 
+    setModelToggleState ();
     d3_freeZbuffer ();
 }
 
@@ -150,21 +152,25 @@ void d3_createModelPannel (Widget w, Widget button, caddr_t call_data)
     Widget modelPannel, border, pannel, doneButton;
 
     n = 0;
-    XtSetArg (arg[n], XtNwidth, &width);   n++;
-    XtSetArg (arg[n], XtNheight, &height); n++;
+    XtSetArg (arg[n], XtNwidth, &width);
+    n++;
+    XtSetArg (arg[n], XtNheight, &height);
+    n++;
     XtGetValues (button, arg, (unsigned int) n);
-    XtTranslateCoords (button, (Position) (width / 2), (Position) (height / 2), 
+    XtTranslateCoords (button, (Position) (width / 2), (Position) (height / 2),
                        &xPos, &yPos);
 
     n = 0;
-    XtSetArg(arg[n], XtNx, xPos); n++;
-    XtSetArg(arg[n], XtNy, yPos); n++;
-    modelPannel = XtCreatePopupShell ("model", transientShellWidgetClass, 
+    XtSetArg(arg[n], XtNx, xPos);
+    n++;
+    XtSetArg(arg[n], XtNy, yPos);
+    n++;
+    modelPannel = XtCreatePopupShell ("model", transientShellWidgetClass,
                                       button, arg, (unsigned int) n);
 
-    border = XtCreateManagedWidget("border", boxWidgetClass, 
+    border = XtCreateManagedWidget("border", boxWidgetClass,
                                    modelPannel, NULL, ZERO);
-    pannel = XtCreateManagedWidget("pannel", boxWidgetClass, 
+    pannel = XtCreateManagedWidget("pannel", boxWidgetClass,
                                    border, NULL, ZERO);
 
     wireButton = d3_xCreateToggleItem ("wire", pannel, NULL, NULL, NULL);
@@ -173,16 +179,16 @@ void d3_createModelPannel (Widget w, Widget button, caddr_t call_data)
 
     XtAddCallback (wireButton, XtNcallback, (XtCallbackProc) setModelWire, NULL);
     XtAddCallback (solidButton, XtNcallback, (XtCallbackProc)setModelSolid, NULL);
-    XtAddCallback (doneButton, XtNcallback, (XtCallbackProc)d3_closeModelPannel, 
+    XtAddCallback (doneButton, XtNcallback, (XtCallbackProc)d3_closeModelPannel,
                    (Widget) modelPannel);
 
-    memcpy (&temp_state, &d3_state, sizeof (d3_state_type)); 
+    memcpy (&temp_state, &d3_state, sizeof (d3_state_type));
 
     setModelToggleState ();
 
     ui_checkWindowPosition(modelPannel);
     XtPopup (modelPannel, XtGrabExclusive);
-    ui_xDontResizeWidget(modelPannel); 
+    ui_xDontResizeWidget(modelPannel);
 }
 
 

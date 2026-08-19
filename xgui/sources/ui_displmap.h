@@ -6,15 +6,15 @@
   PURPOSE        : Header file of correspondent '.c' file
   NOTES          :
 
-  AUTHOR         : Christian Wehrfritz 
-  DATE           : 20.05.94 
+  AUTHOR         : Christian Wehrfritz
+  DATE           : 20.05.94
 
-  CHANGED BY     : 
-  IDENTIFICATION : 
+  CHANGED BY     :
+  IDENTIFICATION :
   SCCS VERSION   : 0.1
-  LAST CHANGE    : 
+  LAST CHANGE    :
 
-             
+
 
 ******************************************************************************/
 

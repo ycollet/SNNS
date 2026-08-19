@@ -85,110 +85,110 @@ static FILE   *psf;
 static int genSize = POP_SIZE_VALUE;
 
 int ancestry_init( ModuleTableEntry *self, int msgc, char *msgv[] ) {
-  char filename[MAX_FILENAME_LEN];
+    char filename[MAX_FILENAME_LEN];
 
 
-  MODULE_KEY( ANCESTRY_KEY );
+    MODULE_KEY( ANCESTRY_KEY );
 
-  SEL_MSG( msgv[0] )
+    SEL_MSG( msgv[0] )
 
     MSG_CASE( GENERAL_INIT    ) {
-    /* nothing to do */
-  }
-  MSG_CASE( GENERAL_EXIT    ) {
-    if( hfp ) fclose( hfp );
-  }
-  MSG_CASE( EVOLUTION_INIT  ) {
-    sprintf( filename, "%s.%s", histfile, EXTENSION );
-    if( (hfp = fopen( filename, "w" )) == NULL )
-      return( HISTFILE_OPEN_ERROR );
-    setlinebuf( hfp );
-    fprintf( hfp, OUT_TEXT );
-
-    if( PS ) {
-      genList = (HistID *) calloc( genSize+1, sizeof( HistID ) );
-      sprintf( filename, "%s.%s", histfile, PS_EXTENSION );
-      if( (psf = fopen( filename, "w" )) == NULL )
-	return( PSFILE_OPEN_ERROR );
-      setlinebuf( psf );
-      fprintf( psf, PS_HEADER );
+        /* nothing to do */
     }
-  }
+    MSG_CASE( GENERAL_EXIT    ) {
+        if( hfp ) fclose( hfp );
+    }
+    MSG_CASE( EVOLUTION_INIT  ) {
+        sprintf( filename, "%s.%s", histfile, EXTENSION );
+        if( (hfp = fopen( filename, "w" )) == NULL )
+            return( HISTFILE_OPEN_ERROR );
+        setlinebuf( hfp );
+        fprintf( hfp, OUT_TEXT );
 
-  MSG_CASE( HISTORY_FILE ) {
-    if( msgc > 1 ) strcpy( histfile, msgv[1] );
-  }
-  MSG_CASE( PS_OUTPUT    ) {
-    if( msgc > 1 ) PS  = FLAG_VALUE( msgv[1] );
-  }
-  MSG_CASE( POP_SIZE     ) {
-    if( msgc > 1 ) genSize   = atoi( msgv[1] );
-  }
+        if( PS ) {
+            genList = (HistID *) calloc( genSize+1, sizeof( HistID ) );
+            sprintf( filename, "%s.%s", histfile, PS_EXTENSION );
+            if( (psf = fopen( filename, "w" )) == NULL )
+                return( PSFILE_OPEN_ERROR );
+            setlinebuf( psf );
+            fprintf( psf, PS_HEADER );
+        }
+    }
 
-  END_MSG;
+    MSG_CASE( HISTORY_FILE ) {
+        if( msgc > 1 ) strcpy( histfile, msgv[1] );
+    }
+    MSG_CASE( PS_OUTPUT    ) {
+        if( msgc > 1 ) PS  = FLAG_VALUE( msgv[1] );
+    }
+    MSG_CASE( POP_SIZE     ) {
+        if( msgc > 1 ) genSize   = atoi( msgv[1] );
+    }
 
-  return( INIT_USED );
+    END_MSG;
+
+    return( INIT_USED );
 }
 
 int ancestry_work( PopID *parents, PopID *offsprings, PopID *ref ) {
-  NetID net;
-  NetworkData *netData;
-  static int genCnt = 0;
-  static int x, y = 0, i;
+    NetID net;
+    NetworkData *netData;
+    static int genCnt = 0;
+    static int x, y = 0, i;
 
-  if( genCnt ) {
-    if( PS && genCnt > 1 ) {
-      x = 0;
-      FOR_ALL_PARENTS( net ) {
-	netData = GET_NET_DATA( net );
-	fprintf( psf, "%04d %04d popel\n", x, y );
+    if( genCnt ) {
+        if( PS && genCnt > 1 ) {
+            x = 0;
+            FOR_ALL_PARENTS( net ) {
+                netData = GET_NET_DATA( net );
+                fprintf( psf, "%04d %04d popel\n", x, y );
 
-	for( i=0; i<genSize && genList[i] != 0; i++ ) {
-	  if( genList[i] == netData->histID ) {
-	    fprintf( psf, "%04d %04d %04d %04d myself\n",
-		     x,   y,   i, y-1             );
-	    break;
-	  }
-	}
+                for( i=0; i<genSize && genList[i] != 0; i++ ) {
+                    if( genList[i] == netData->histID ) {
+                        fprintf( psf, "%04d %04d %04d %04d myself\n",
+                                 x,   y,   i, y-1             );
+                        break;
+                    }
+                }
 
-	if( i >= genSize )
-	  for( i=0; i<genSize && genList[i] != 0; i++ ) {
-	    if( genList[i] == netData->histRec.parent1 ) {
-	      fprintf( psf, "%04d %04d %04d %04d parent\n",
-		       x,   y,   i, y-1             );
-	    }
-	  }
+                if( i >= genSize )
+                    for( i=0; i<genSize && genList[i] != 0; i++ ) {
+                        if( genList[i] == netData->histRec.parent1 ) {
+                            fprintf( psf, "%04d %04d %04d %04d parent\n",
+                                     x,   y,   i, y-1             );
+                        }
+                    }
 
-	x++;
-      }
-      y++;
+                x++;
+            }
+            y++;
+        }
+
+        fprintf( hfp, "%3d\t ", genCnt );
+        i = 0;
+        FOR_ALL_PARENTS( net ) {
+            netData = GET_NET_DATA( net );
+            if( PS ) genList[ i ] = netData->histID;
+            i++;
+            fprintf( hfp, "%4d ", netData->histID );
+        }
+        fprintf( hfp, "\n" );
     }
 
-    fprintf( hfp, "%3d\t ", genCnt );
-    i = 0;
-    FOR_ALL_PARENTS( net ) {
-      netData = GET_NET_DATA( net );
-      if( PS ) genList[ i ] = netData->histID;
-      i++;
-      fprintf( hfp, "%4d ", netData->histID );
-    }
-    fprintf( hfp, "\n" );
-  }
+    genCnt++;
 
-  genCnt++;
-
-  return( MODULE_NO_ERROR );
+    return( MODULE_NO_ERROR );
 }
 
 char *ancestry_errMsg( int err_code ) {
-  /* supply the caller with some information about an error */
+    /* supply the caller with some information about an error */
 
-  static int   err_cnt   = 4;   /* number of recognized errors */
-  static char *err_msg[] = {
-    "no error (ancestry)", "unknown error (ancestry)",
-    "Can't open history File (ancestry)", "Can't open PS-file (ancestry)",
-    "specific error message -- not used"
-  };
+    static int   err_cnt   = 4;   /* number of recognized errors */
+    static char *err_msg[] = {
+        "no error (ancestry)", "unknown error (ancestry)",
+        "Can't open history File (ancestry)", "Can't open PS-file (ancestry)",
+        "specific error message -- not used"
+    };
 
-  return( err_msg[ err_code < err_cnt ? err_code : MODULE_UNKNOWN_ERR ] );
+    return( err_msg[ err_code < err_cnt ? err_code : MODULE_UNKNOWN_ERR ] );
 }

@@ -15,7 +15,7 @@
 
     Copyright (c) 1990-1995  SNNS Group, IPVR, Univ. Stuttgart, FRG
     Copyright (c) 1996-1998  SNNS Group, WSI, Univ. Tuebingen, FRG
-             
+
 ******************************************************************************/
 #include <config.h>
 
@@ -63,8 +63,8 @@ void ui_xDrawPoint(Display *displ, Drawable d, GC gc, struct PosType pixPos1)
 void ui_xDrawLine(Display *displ, Drawable d, GC gc, struct PosType pixPos1, struct PosType pixPos2)
 
 {
-    XDrawLine(displ, d, gc, 
-	      pixPos1.x, pixPos1.y, pixPos2.x, pixPos2.y);
+    XDrawLine(displ, d, gc,
+              pixPos1.x, pixPos1.y, pixPos2.x, pixPos2.y);
 }
 
 
@@ -92,7 +92,7 @@ void ui_xDrawTriangle(Display *displ, Drawable d, GC gc, struct PosType pixPos1,
     int              npts[1];
 
     npts[0] = 3;
-    
+
     /* the coordinates of an arrow pointing in direction of the x axis */
     /* arrow length is 4 pixels, arrow width is 4 pixels */
     /* 0,0 is the endpoint of the arrow */
@@ -102,48 +102,48 @@ void ui_xDrawTriangle(Display *displ, Drawable d, GC gc, struct PosType pixPos1,
     vlist_triangle[1].y =  -2;
     vlist_triangle[2].x = - 4;
     vlist_triangle[2].y =   2;
-    
+
     /* do some calculations needed to perform the graphic rotation */
     vectorX      = pixPos2.x - pixPos1.x;
     vectorY      = pixPos2.y - pixPos1.y;
     vectorLength = sqrt((vectorX * vectorX) + (vectorY * vectorY));
-    
+
     angleCos = 1.0 * vectorX / vectorLength;
     angleSin = sqrt(1.0 - (angleCos * angleCos));
     if (vectorY < 0) angleSin = - angleSin;
-    
+
     for (i=1; i<3; i++) { /* graphic transformation: rotation angle */
-	/* Don't transform the center-point (0,0) of the arrow */
-	/* store new x coordinate in vtx temporarly */
-	vtx =
-	    angleCos * vlist_triangle[i].x
-		- angleSin * vlist_triangle[i].y;
-	vlist_triangle[i].y = 
-	    angleCos * vlist_triangle[i].y 
-		+ angleSin * vlist_triangle[i].x;
-	vlist_triangle[i].x = 
-	    vtx; /* now update x coordinate too */
+        /* Don't transform the center-point (0,0) of the arrow */
+        /* store new x coordinate in vtx temporarly */
+        vtx =
+            angleCos * vlist_triangle[i].x
+            - angleSin * vlist_triangle[i].y;
+        vlist_triangle[i].y =
+            angleCos * vlist_triangle[i].y
+            + angleSin * vlist_triangle[i].x;
+        vlist_triangle[i].x =
+            vtx; /* now update x coordinate too */
     }
-    
-    
+
+
     /* draw arrow */
     /* pw_polygon_2(ui_pw,
-       pixPos2.x, pixPos2.y, 
-       nbds, npts, vlist_triangle, 
+       pixPos2.x, pixPos2.y,
+       nbds, npts, vlist_triangle,
        raster_op, NULL, 0,0); */
- /*   for (i=0; i<3; i++)
-	XDrawLine(displ, d, gc, 
-		  (vlist_triangle[i].x + pixPos2.x),
-		  (vlist_triangle[i].y + pixPos2.y), 
-		  (vlist_triangle[(i+1) MOD 3].x + pixPos2.x),
-		  (vlist_triangle[(i+1) MOD 3].y + pixPos2.y));
- */
+    /*   for (i=0; i<3; i++)
+    XDrawLine(displ, d, gc,
+    	  (vlist_triangle[i].x + pixPos2.x),
+    	  (vlist_triangle[i].y + pixPos2.y),
+    	  (vlist_triangle[(i+1) MOD 3].x + pixPos2.x),
+    	  (vlist_triangle[(i+1) MOD 3].y + pixPos2.y));
+    */
     for (i=1; i<3; i++)
-	XDrawLine(displ, d, gc, 
-		  (vlist_triangle[0].x + pixPos2.x),
-		  (vlist_triangle[0].y + pixPos2.y), 
-		  (vlist_triangle[i].x + pixPos2.x),
-		  (vlist_triangle[i].y + pixPos2.y));
+        XDrawLine(displ, d, gc,
+                  (vlist_triangle[0].x + pixPos2.x),
+                  (vlist_triangle[0].y + pixPos2.y),
+                  (vlist_triangle[i].x + pixPos2.x),
+                  (vlist_triangle[i].y + pixPos2.y));
 }
 
 
@@ -160,11 +160,11 @@ void ui_xDrawTriangle(Display *displ, Drawable d, GC gc, struct PosType pixPos1,
 void ui_xDrawBox(Display *displ, Drawable d, GC gc, struct PosType pixPos1, struct PosType pixPos2)
 
 {
-    int   xt1, yt1, xt2, yt2; 
+    int   xt1, yt1, xt2, yt2;
 
     ui_utilNormalizeRect(&pixPos1,&pixPos2);
     xt1 = pixPos1.x;
-    yt1 = pixPos1.y; 
+    yt1 = pixPos1.y;
     xt2 = pixPos2.x;
     yt2 = pixPos2.y;
 
@@ -181,7 +181,7 @@ void ui_xDrawBox(Display *displ, Drawable d, GC gc, struct PosType pixPos1, stru
 
   PURPOSE  : draws a box with a cross inside on a canvas, 1 pixel thick
   RETURNS  : void
-  NOTES    : 
+  NOTES    :
 
   UPDATE   :
 *****************************************************************************/
@@ -189,7 +189,7 @@ void ui_xDrawBox(Display *displ, Drawable d, GC gc, struct PosType pixPos1, stru
 void ui_xDrawCrossBox(Display *displ, Drawable d, GC gc, struct PosType pixPos1, struct PosType pixPos2)
 
 {
-    int             xt1, yt1, xt2, yt2; 
+    int             xt1, yt1, xt2, yt2;
     struct PosType  pos1,pos2;
 
     ui_utilNormalizeRect(&pixPos1,&pixPos2);
@@ -200,20 +200,20 @@ void ui_xDrawCrossBox(Display *displ, Drawable d, GC gc, struct PosType pixPos1,
 
     /* draw the Box */
     ui_xDrawBox(displ, d, gc, pixPos1, pixPos2);
-    ui_xDrawBox(displ, d, gc, pos1   , pos2);
+    ui_xDrawBox(displ, d, gc, pos1, pos2);
 
-    /* draw the Cross */    
+    /* draw the Cross */
     xt1 = pixPos1.x;
-    yt1 = pixPos1.y; 
+    yt1 = pixPos1.y;
     xt2 = pixPos2.x;
     yt2 = pixPos2.y;
 
     /* (xt1,yt1) is the upper left, (xt2,yt2) is the bottom right coordinate */
 
     if ((xt2-xt1 >= 2) AND (yt2-yt1 >= 2)) {
-	/* big enough to draw a cross */
-	XDrawLine(displ, d, gc, xt1, yt1, xt2, yt2);
-	XDrawLine(displ, d, gc, xt2, yt1, xt1, yt2);
+        /* big enough to draw a cross */
+        XDrawLine(displ, d, gc, xt1, yt1, xt2, yt2);
+        XDrawLine(displ, d, gc, xt2, yt1, xt1, yt2);
     }
 #ifdef DEBUG
     XFlush(ui_display);
@@ -238,7 +238,7 @@ void ui_xDeleteRect(Display *displ, Drawable d, GC gc, struct PosType pixPos1, s
 
     ui_utilNormalizeRect(&pixPos1, &pixPos2);
 
-    width  = (Dimension) pixPos2.x - pixPos1.x + 1; 
+    width  = (Dimension) pixPos2.x - pixPos1.x + 1;
     height = (Dimension) pixPos2.y - pixPos1.y + 1;
 
     XFillRectangle(displ, d, gc, pixPos1.x, pixPos1.y, (unsigned int) width, (unsigned int) height);
@@ -250,7 +250,7 @@ void ui_xDeleteRect(Display *displ, Drawable d, GC gc, struct PosType pixPos1, s
 
   PURPOSE  : toggels the the Backing Store Attibute in a X Window
   RETURNS  : void
-  NOTES    : 
+  NOTES    :
 
   UPDATE   : 23.04.1992
 ******************************************************************************/
@@ -270,7 +270,7 @@ void ui_xToggleBackingStore (Boolean toggle, Display *display, Window window)
     }
     XChangeWindowAttributes(display, window,
                             CWBackingStore | CWSaveUnder, &wa);
-#endif       
+#endif
 }
 
 

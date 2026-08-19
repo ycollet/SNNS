@@ -241,7 +241,7 @@ typedef struct {
     struct np_symtab *mysym;   /* pointer to my symbol table entry */
 } np_pattern_descriptor;
 
-extern int  kr_np_pattern(int mode ,int mode1 ,int pattern_no);
+extern int  kr_np_pattern(int mode,int mode1,int pattern_no);
 /*****************************************************************************
 multiple pattern handling functions depending on mode and mode1
 *****************************************************************************/

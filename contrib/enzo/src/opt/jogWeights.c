@@ -73,37 +73,37 @@ static FlintType jogLimit = 0.01;
 /***************************************************************************/
 
 int jogWeights_init( ModuleTableEntry *self, int msgc, char *msgv[] ) {
-  MODULE_KEY( JOGWEIGHTS_KEY );
+    MODULE_KEY( JOGWEIGHTS_KEY );
 
-  SEL_MSG( msgv[0] )
+    SEL_MSG( msgv[0] )
 
     MSG_CASE( GENERAL_INIT    ) {
-    /* nothing to do */
-  }
-  MSG_CASE( GENERAL_EXIT    ) {
-    /* nothing to do */
-  }
-  MSG_CASE( EVOLUTION_INIT  ) {
-    /* nothing to do */
-  }
-  MSG_CASE( JOGWEIGHTS_FACTOR  ) {
-    if( msgc > 1 ) {
-      jogLimit = (FlintType) atof( msgv[1] );
+        /* nothing to do */
     }
-  }
-  END_MSG;
+    MSG_CASE( GENERAL_EXIT    ) {
+        /* nothing to do */
+    }
+    MSG_CASE( EVOLUTION_INIT  ) {
+        /* nothing to do */
+    }
+    MSG_CASE( JOGWEIGHTS_FACTOR  ) {
+        if( msgc > 1 ) {
+            jogLimit = (FlintType) atof( msgv[1] );
+        }
+    }
+    END_MSG;
 
-  return ( INIT_USED );
+    return ( INIT_USED );
 }
 
 int jogWeights_work( PopID *parents, PopID *offsprings, PopID *reference ) {
-  NetID activeMember;
+    NetID activeMember;
 
-  FOR_ALL_OFFSPRINGS ( activeMember ) {
-    ksh_jogWeights( -jogLimit, jogLimit );
-  }
+    FOR_ALL_OFFSPRINGS ( activeMember ) {
+        ksh_jogWeights( -jogLimit, jogLimit );
+    }
 
-  return( MODULE_NO_ERROR );
+    return( MODULE_NO_ERROR );
 }
 
 /***************************************************************************/
@@ -116,13 +116,13 @@ int jogWeights_work( PopID *parents, PopID *offsprings, PopID *reference ) {
 /***************************************************************************/
 
 char *jogWeights_errMsg(int err_code) {
-  switch (result) {
-  case 0 :
-    return ("jogWeights : No error found");
+    switch (result) {
+    case 0 :
+        return ("jogWeights : No error found");
 
-  case ERROR_ACTIVATE :
-    return ("jogWeights : Can't activate a offspring-net");
-  }
+    case ERROR_ACTIVATE :
+        return ("jogWeights : Can't activate a offspring-net");
+    }
 
-  return ("jogWeights : Unknown error, please consulte your systemadmin");
+    return ("jogWeights : Unknown error, please consulte your systemadmin");
 }

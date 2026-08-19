@@ -47,56 +47,54 @@
   FUNCTION : d3_eventProc
 
   PURPOSE  : this is the event handler of the display window
-  RETURNS  : 
+  RETURNS  :
   NOTES    :
 
 ******************************************************************************/
 
 
-void d3_eventProc (Widget w, Display *display, XEvent *event)
-{
-/*
-    static int doExpose = TRUE;
-*/
-    switch (event->type)
-      {
-        case MapNotify:
-               break;    
-        case UnmapNotify:
-               break;
-        case Expose:
-	       while (XCheckWindowEvent(display, XtWindow(w), ExposureMask, 
-					event))
-		   /* do nothing */;
-	       d3_drawNet();
-/*
-               if (event->xexpose.count == 0)
-                 {
-                   if (doExpose)
-                     {
-                       d3_drawNet ();
-                     }
-                   else
-                     { 
-                       doExpose = TRUE;
-                     }
-                 }
-*/
-               break;
-        case VisibilityNotify:
-               break;
-        case ConfigureNotify:
-               d3_recenter_window (event->xconfigure.width, 
-                                  event->xconfigure.height);
-               d3_drawNet ();
-/*
-               doExpose = FALSE;
-*/
-               break;
-        case CirculateNotify:
-               break;
-        
-      }
+void d3_eventProc (Widget w, Display *display, XEvent *event) {
+    /*
+        static int doExpose = TRUE;
+    */
+    switch (event->type) {
+    case MapNotify:
+        break;
+    case UnmapNotify:
+        break;
+    case Expose:
+        while (XCheckWindowEvent(display, XtWindow(w), ExposureMask,
+                                 event))
+            /* do nothing */;
+        d3_drawNet();
+        /*
+                       if (event->xexpose.count == 0)
+                         {
+                           if (doExpose)
+                             {
+                               d3_drawNet ();
+                             }
+                           else
+                             {
+                               doExpose = TRUE;
+                             }
+                         }
+        */
+        break;
+    case VisibilityNotify:
+        break;
+    case ConfigureNotify:
+        d3_recenter_window (event->xconfigure.width,
+                            event->xconfigure.height);
+        d3_drawNet ();
+        /*
+                       doExpose = FALSE;
+        */
+        break;
+    case CirculateNotify:
+        break;
+
+    }
 }
 
 
@@ -107,15 +105,14 @@ void d3_eventProc (Widget w, Display *display, XEvent *event)
   FUNCTION : d3_createDisplayWindow
 
   PURPOSE  : creates the display window
-  RETURNS  : 
+  RETURNS  :
   NOTES    :
 
 ******************************************************************************/
 
 
 
-void d3_createDisplayWindow (void)
-{
+void d3_createDisplayWindow (void) {
     Widget       d3_frameWidget, d3_displayWidget;
     Arg          arg[25];
     Cardinal     n;
@@ -127,29 +124,31 @@ void d3_createDisplayWindow (void)
 
     sprintf (buf, "SNNS 3D-display");
 
-    n = 0;  
-    d3_displayMainWidget = XtCreatePopupShell (buf, topLevelShellWidgetClass, 
-                                               ui_toplevel, NULL, ZERO); 
-    d3_frameWidget = XtCreateManagedWidget ("form", formWidgetClass, 
+    n = 0;
+    d3_displayMainWidget = XtCreatePopupShell (buf, topLevelShellWidgetClass,
+        ui_toplevel, NULL, ZERO);
+    d3_frameWidget = XtCreateManagedWidget ("form", formWidgetClass,
                                             d3_displayMainWidget, NULL, ZERO);
 
-    n = 0;  
-    XtSetArg (arg[n], XtNwidth, d3_displayXsize); n++;
-    XtSetArg (arg[n], XtNheight, d3_displayYsize); n++;
-    d3_displayWidget = XtCreateManagedWidget("display", boxWidgetClass, 
-                                             d3_frameWidget, arg, n);
+    n = 0;
+    XtSetArg (arg[n], XtNwidth, d3_displayXsize);
+    n++;
+    XtSetArg (arg[n], XtNheight, d3_displayYsize);
+    n++;
+    d3_displayWidget = XtCreateManagedWidget("display", boxWidgetClass,
+        d3_frameWidget, arg, n);
 
-    XtAddEventHandler (d3_displayWidget, StructureNotifyMask | ExposureMask, 
+    XtAddEventHandler (d3_displayWidget, StructureNotifyMask | ExposureMask,
                        FALSE, (XtEventHandler) d3_eventProc, ui_display);
 
     ui_checkWindowPosition(d3_displayMainWidget);
     XtPopup (d3_displayMainWidget, XtGrabNone);
-    XtAddEventHandler (d3_displayWidget, StructureNotifyMask | ExposureMask, 
+    XtAddEventHandler (d3_displayWidget, StructureNotifyMask | ExposureMask,
                        FALSE, (XtEventHandler) d3_eventProc, ui_display);
     XtAddEventHandler(d3_displayWidget,KeyPressMask,FALSE,
-		      (XtEventHandler)ui_key_control,(Cardinal *) 0);
+                      (XtEventHandler)ui_key_control,(Cardinal *) 0);
 
-    d3_display = ui_display; 
+    d3_display = ui_display;
     d3_window = XtWindow (d3_displayWidget);
     d3_gc = XCreateGC (d3_display, d3_window, ZERO, NULL);
     d3_screen = DefaultScreen (d3_display);
