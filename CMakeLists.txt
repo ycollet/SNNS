@@ -285,7 +285,7 @@ install(FILES man/man1/analyze.1
 install(DIRECTORY examples/
         DESTINATION ${CMAKE_INSTALL_DATADIR}/${PACKAGE_NAME}/examples)
 
-install(FILES help.hdoc Readme Readme.bugs Readme.license Readme.linux Readme.install
+install(FILES help.hdoc README.md Readme.bugs Readme.license Readme.linux Readme.install
         DESTINATION ${CMAKE_INSTALL_DATADIR}/${PACKAGE_NAME}/doc)
 
 install(FILES default.cfg
