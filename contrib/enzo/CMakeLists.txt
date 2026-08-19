@@ -101,10 +101,10 @@ add_executable(enzo ${ENZO_SRCS})
 target_link_libraries(enzo kernel func pre kernel func nepomuk kernel func stop selection mutation crossover opt eval history survival post m)
 
 install(TARGETS enzo
-        DESTINATION bin)
+        DESTINATION ${CMAKE_INSTALL_BINDIR})
 
 install(FILES doc/enzo.ps
-        DESTINATION share/snns/doc)
+        DESTINATION ${CMAKE_INSTALL_DATADIR}/${PACKAGE_NAME}/doc)
 
 install(FILES README.ENZO
-        DESTINATION share/snns/doc)
+        DESTINATION ${CMAKE_INSTALL_DATADIR}/${PACKAGE_NAME}/doc)

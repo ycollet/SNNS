@@ -118,4 +118,4 @@ target_link_libraries(xgui ${X11_SM_LIB} ${X11_ICE_LIB} ${X11_Xmu_LIB} ${X11_Xt_
 target_link_libraries(xgui ${XAW3D_LIB})
 
 install(TARGETS xgui
-        DESTINATION bin)
+        DESTINATION ${CMAKE_INSTALL_BINDIR})

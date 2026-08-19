@@ -15,4 +15,4 @@ add_executable(vistra ${VISTRA_SRCS})
 target_link_libraries(vistra Xaw Xt Xmu Xext X11 m) # fwf Dir
 
 install(TARGETS vistra
-        DESTINATION bin)
+        DESTINATION ${CMAKE_INSTALL_BINDIR})

@@ -23,3 +23,6 @@ set_target_properties(krui PROPERTIES
 # CMAKE_INSTALL_PREFIX (Python3_SITEARCH is an absolute path outside it).
 install(TARGETS krui DESTINATION ${Python3_SITEARCH}/snns)
 install(FILES snns/__init__.py snns/util.py DESTINATION ${Python3_SITEARCH}/snns)
+
+install(DIRECTORY examples/
+        DESTINATION ${CMAKE_INSTALL_DATADIR}/${PACKAGE_NAME}/python/examples)

@@ -37,6 +37,8 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH}
                       ${CMAKE_SOURCE_DIR}/cmake)
 
+include(GNUInstallDirs)
+
 Enable_Testing()
 
 #------------------------------------------------------------
@@ -278,16 +280,16 @@ install(FILES man/man1/analyze.1
               man/man1/snns2c.1
               man/man1/td_bignet.1
               man/man1/xgui.1
-        DESTINATION man/man1)
+        DESTINATION ${CMAKE_INSTALL_MANDIR}/man1)
 
 install(DIRECTORY examples/
-        DESTINATION share/snns/examples)
+        DESTINATION ${CMAKE_INSTALL_DATADIR}/${PACKAGE_NAME}/examples)
 
-install(FILES help.hdoc Readme Readme.bugs Readme.licence Readme.linux
-        DESTINATION share/snns/doc)
+install(FILES help.hdoc Readme Readme.bugs Readme.license Readme.linux Readme.install
+        DESTINATION ${CMAKE_INSTALL_DATADIR}/${PACKAGE_NAME}/doc)
 
 install(FILES default.cfg
-        DESTINATION share/snns/conf)
+        DESTINATION ${CMAKE_INSTALL_DATADIR}/${PACKAGE_NAME}/conf)
 
 #
 # Packaging

@@ -118,52 +118,52 @@ target_link_libraries(mkpat m)
 
 
 install(TARGETS snns2c
-        DESTINATION bin)
+        DESTINATION ${CMAKE_INSTALL_BINDIR})
 
 install(TARGETS pat_sel
-        DESTINATION bin)
+        DESTINATION ${CMAKE_INSTALL_BINDIR})
 
 install(TARGETS netlearn
-        DESTINATION bin)
+        DESTINATION ${CMAKE_INSTALL_BINDIR})
 
 install(TARGETS td_bignet
-        DESTINATION bin)
+        DESTINATION ${CMAKE_INSTALL_BINDIR})
 
 install(TARGETS ff_bignet
-        DESTINATION bin)
+        DESTINATION ${CMAKE_INSTALL_BINDIR})
 
 install(TARGETS netperf
-        DESTINATION bin)
+        DESTINATION ${CMAKE_INSTALL_BINDIR})
 
 install(TARGETS snnsbat
-        DESTINATION bin)
+        DESTINATION ${CMAKE_INSTALL_BINDIR})
 
 install(TARGETS feedback-gennet
-        DESTINATION bin)
+        DESTINATION ${CMAKE_INSTALL_BINDIR})
 
 install(TARGETS convert2snns
-        DESTINATION bin)
+        DESTINATION ${CMAKE_INSTALL_BINDIR})
 
 install(TARGETS isnns
-        DESTINATION bin)
+        DESTINATION ${CMAKE_INSTALL_BINDIR})
 
 install(TARGETS linknets
-        DESTINATION bin)
+        DESTINATION ${CMAKE_INSTALL_BINDIR})
 
 install(TARGETS batchman
-        DESTINATION bin)
+        DESTINATION ${CMAKE_INSTALL_BINDIR})
 
 install(TARGETS analyze
-        DESTINATION bin)
+        DESTINATION ${CMAKE_INSTALL_BINDIR})
 
 install(TARGETS pat_sel_simple
-        DESTINATION bin)
+        DESTINATION ${CMAKE_INSTALL_BINDIR})
 
 install(TARGETS mkhead
-        DESTINATION bin)
+        DESTINATION ${CMAKE_INSTALL_BINDIR})
 
 install(TARGETS mkout
-        DESTINATION bin)
+        DESTINATION ${CMAKE_INSTALL_BINDIR})
 
 install(TARGETS mkpat
-        DESTINATION bin)
+        DESTINATION ${CMAKE_INSTALL_BINDIR})
