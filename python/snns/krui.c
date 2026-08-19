@@ -36,7 +36,7 @@ extern krui_err (*kr_getPythonFuncInfoHook)(int mode, struct FuncInfoDescriptor 
 
 static PyObject *make_exception(krui_err err)
 {
-	if(err > 0) return PyInt_FromLong(err);
+	if(err > 0) return PyLong_FromLong(err);
 	PyErr_SetString(PyExc_RuntimeError, krui_error(err));
 	return NULL;
 }
@@ -48,7 +48,7 @@ snns_int_arg_with_err(PyObject *arg, int_arg_with_err_func func)
 {
 	long num;
 	krui_err err;
-	num = PyInt_AsLong(arg);
+	num = PyLong_AsLong(arg);
 	if(PyErr_Occurred()) return NULL;
 	err = func(num);
 	if(err) {
@@ -64,7 +64,7 @@ snns_string_arg_with_err(PyObject *arg, string_arg_with_err_func func)
 {
 	char *text=NULL;
 	krui_err err;
-	text = PyString_AsString(arg);
+	text = (char *)PyUnicode_AsUTF8(arg);
 	if(text) {
 		if((err=func(text))) {
 			return make_exception(err);
@@ -80,52 +80,52 @@ wrap_pattern_set_info(pattern_set_info *ps, char *attr)
 	int i, failures=0;
 
 	if(!strcmp(attr,"number_of_pattern")) {
-		ret = PyInt_FromLong(ps->number_of_pattern);
+		ret = PyLong_FromLong(ps->number_of_pattern);
 	} else if(!strcmp(attr,"virtual_no_of_pattern")) {
-		ret = PyInt_FromLong(ps->virtual_no_of_pattern);
+		ret = PyLong_FromLong(ps->virtual_no_of_pattern);
 	} else if(!strcmp(attr,"output_present")) {
-		ret = PyInt_FromLong(ps->output_present);
+		ret = PyLong_FromLong(ps->output_present);
 	} else if(!strcmp(attr,"fixed_fixsizes")) {
-		ret = PyInt_FromLong(ps->fixed_fixsizes);
+		ret = PyLong_FromLong(ps->fixed_fixsizes);
 	} else if(!strcmp(attr,"in_fixsize")) {
-		ret = PyInt_FromLong(ps->in_fixsize);
+		ret = PyLong_FromLong(ps->in_fixsize);
 	} else if(!strcmp(attr,"out_fixsize")) {
-		ret = PyInt_FromLong(ps->out_fixsize);
+		ret = PyLong_FromLong(ps->out_fixsize);
 	} else if(!strcmp(attr,"in_max_dim_sizes")) {
 		if((ret = PyTuple_New(ps->in_number_of_dims)))
 		for(i=0; i < ps->in_number_of_dims; ++i) {
 			failures += PyTuple_SetItem(ret, i,
-					PyInt_FromLong(ps->in_max_dim_sizes[i]));
+					PyLong_FromLong(ps->in_max_dim_sizes[i]));
 		}
 	} else if(!strcmp(attr,"out_max_dim_sizes")) {
 		if((ret = PyTuple_New(ps->out_number_of_dims)))
 		for(i=0; i < ps->out_number_of_dims; ++i) {
 			failures += PyTuple_SetItem(ret, i,
-					PyInt_FromLong(ps->out_max_dim_sizes[i]));
+					PyLong_FromLong(ps->out_max_dim_sizes[i]));
 		}
 	} else if(!strcmp(attr,"in_min_dim_sizes")) {
 		if((ret = PyTuple_New(ps->in_number_of_dims)))
 		for(i=0; i < ps->in_number_of_dims; ++i) {
 			failures += PyTuple_SetItem(ret, i,
-					PyInt_FromLong(ps->in_min_dim_sizes[i]));
+					PyLong_FromLong(ps->in_min_dim_sizes[i]));
 		}
 	} else if(!strcmp(attr,"out_min_dim_sizes")) {
 		if((ret = PyTuple_New(ps->out_number_of_dims)))
 		for(i=0; i < ps->out_number_of_dims; ++i) {
 			failures += PyTuple_SetItem(ret, i,
-					PyInt_FromLong(ps->out_min_dim_sizes[i]));
+					PyLong_FromLong(ps->out_min_dim_sizes[i]));
 		}
 	} else if(!strcmp(attr,"class_names")) {
 		if((ret = PyTuple_New(ps->classes)))
 		for(i=0; i < ps->classes; ++i) {
 			failures += PyTuple_SetItem(ret, i,
-				PyString_FromString(ps->class_names[i]));
+				PyUnicode_FromString(ps->class_names[i]));
 		}		
 	} else if(!strcmp(attr,"class_redistribution")) {
 		if((ret = PyTuple_New(ps->classes)))
 		for(i=0; i < ps->classes; ++i) {
 			failures += PyTuple_SetItem(ret, i,
-				PyInt_FromLong(ps->class_redistribution[i]));
+				PyLong_FromLong(ps->class_redistribution[i]));
 		}		
 	} else if(!strcmp(attr,"remap_params")) {
 		if((ret = PyTuple_New(ps->no_of_remap_params)))
@@ -134,9 +134,9 @@ wrap_pattern_set_info(pattern_set_info *ps, char *attr)
 				PyFloat_FromDouble(ps->remap_params[i]));
 		}		
 	} else if(!strcmp(attr,"class_distrib_active")) {
-		return PyInt_FromLong(ps->class_distrib_active);
+		return PyLong_FromLong(ps->class_distrib_active);
 	} else if(!strcmp(attr,"remap_function")) {
-		return PyString_FromString(ps->remap_function ? ps->remap_function : "");
+		return PyUnicode_FromString(ps->remap_function ? ps->remap_function : "");
 	} else {
 		PyErr_Format(PyExc_AttributeError,"don't have a %s attribute",attr);	
 	}	
@@ -153,20 +153,20 @@ wrap_pattern_descriptor(pattern_descriptor *pd, char *attr)
 		if((ret = PyTuple_New(pd->input_dim)))
 		for(i=0; i < pd->input_dim; ++i) {
 			failures += PyTuple_SetItem(ret, i,
-					PyInt_FromLong(pd->input_dim_sizes[i]));
+					PyLong_FromLong(pd->input_dim_sizes[i]));
 		}
 	} else if(!strcmp(attr,"input_fixsize")) {
-		ret = PyInt_FromLong(pd->input_fixsize);
+		ret = PyLong_FromLong(pd->input_fixsize);
 	} else if(!strcmp(attr,"output_dim_sizes")) {
 		if((ret = PyTuple_New(pd->output_dim)))
 		for(i=0; i < pd->output_dim; ++i) {
 			failures += PyTuple_SetItem(ret, i,
-					PyInt_FromLong(pd->output_dim_sizes[i]));
+					PyLong_FromLong(pd->output_dim_sizes[i]));
 		}
 	} else if(!strcmp(attr,"output_fixsize")) {
-		ret = PyInt_FromLong(pd->output_fixsize);
+		ret = PyLong_FromLong(pd->output_fixsize);
 	} else if(!strcmp(attr,"my_class")) {
-		ret = PyInt_FromLong(pd->my_class);
+		ret = PyLong_FromLong(pd->my_class);
 	} else {
 		PyErr_Format(PyExc_AttributeError, "don't have a %s attribute",attr);
 	}
@@ -189,72 +189,40 @@ typedef struct {
 static PyObject *
 pattern_set_info_getattr(PyObject *o, PyObject *attrname)
 {
-	return wrap_pattern_set_info(&((snns_pattern_set_info_object *)o)->psi,PyString_AsString(attrname));	
+	return wrap_pattern_set_info(&((snns_pattern_set_info_object *)o)->psi,(char *)PyUnicode_AsUTF8(attrname));	
 }
 
 static PyObject *
 pattern_descriptor_getattr(PyObject *o, PyObject *attrname)
 {
-	return wrap_pattern_descriptor(&((snns_pattern_descriptor_object *)o)->pd,PyString_AsString(attrname));	
+	return wrap_pattern_descriptor(&((snns_pattern_descriptor_object *)o)->pd,(char *)PyUnicode_AsUTF8(attrname));	
 }
 
 static PyTypeObject snns_pattern_set_info_type = {
-    PyObject_HEAD_INIT(NULL)
-    0,                         /*ob_size*/
-    "krui.pattern_set_info",   /*tp_name*/
-    sizeof(snns_pattern_set_info_object), /*tp_basicsize*/
-    0,                         /*tp_itemsize*/
-    0,                         /*tp_dealloc*/
-    0,                         /*tp_print*/
-    0,                         /*tp_getattr*/
-    0,                         /*tp_setattr*/
-    0,                         /*tp_compare*/
-    0,                         /*tp_repr*/
-    0,                         /*tp_as_number*/
-    0,                         /*tp_as_sequence*/
-    0,                         /*tp_as_mapping*/
-    0,                         /*tp_hash */
-    0,                         /*tp_call*/
-    0,                         /*tp_str*/
-    pattern_set_info_getattr,                         /*tp_getattro*/
-    0,                         /*tp_setattro*/
-    0,                         /*tp_as_buffer*/
-    Py_TPFLAGS_DEFAULT,        /*tp_flags*/
-    "equivalent of the pattern_set_info struct",           /* tp_doc */
+    PyVarObject_HEAD_INIT(NULL, 0)
+    .tp_name = "krui.pattern_set_info",
+    .tp_basicsize = sizeof(snns_pattern_set_info_object),
+    .tp_getattro = pattern_set_info_getattr,
+    .tp_flags = Py_TPFLAGS_DEFAULT,
+    .tp_doc = "equivalent of the pattern_set_info struct",
 };
 
 static PyTypeObject snns_pattern_descriptor_type = {
-    PyObject_HEAD_INIT(NULL)
-    0,                         /*ob_size*/
-    "krui.pattern_descriptor",   /*tp_name*/
-    sizeof(snns_pattern_descriptor_object), /*tp_basicsize*/
-    0,                         /*tp_itemsize*/
-    0,                         /*tp_dealloc*/
-    0,                         /*tp_print*/
-    0,                         /*tp_getattr*/
-    0,                         /*tp_setattr*/
-    0,                         /*tp_compare*/
-    0,                         /*tp_repr*/
-    0,                         /*tp_as_number*/
-    0,                         /*tp_as_sequence*/
-    0,                         /*tp_as_mapping*/
-    0,                         /*tp_hash */
-    0,                         /*tp_call*/
-    0,                         /*tp_str*/
-    pattern_descriptor_getattr,                         /*tp_getattro*/
-    0,                         /*tp_setattro*/
-    0,                         /*tp_as_buffer*/
-    Py_TPFLAGS_DEFAULT,        /*tp_flags*/
-    "equivalent of the pattern_descriptor struct",           /* tp_doc */
+    PyVarObject_HEAD_INIT(NULL, 0)
+    .tp_name = "krui.pattern_descriptor",
+    .tp_basicsize = sizeof(snns_pattern_descriptor_object),
+    .tp_getattro = pattern_descriptor_getattr,
+    .tp_flags = Py_TPFLAGS_DEFAULT,
+    .tp_doc = "equivalent of the pattern_descriptor struct",
 };
 
 static PyObject *
 snns_error(PyObject *self, PyObject *arg)
 {
 	int num;
-	num = (int)PyInt_AsLong(arg);
+	num = (int)PyLong_AsLong(arg);
 	if(PyErr_Occurred()) return NULL;
-	return PyString_FromString(krui_error(num));
+	return PyUnicode_FromString(krui_error(num));
 }
 
 static PyObject *
@@ -284,7 +252,7 @@ snns_loadNet(PyObject *self, PyObject *name)
 	char *netname=NULL;
 	char *filename;
 	krui_err err;
-	if((filename = PyString_AsString(name))) {
+	if((filename = (char *)PyUnicode_AsUTF8(name))) {
 		if((err=krui_loadNet(filename,&netname))) {
 			return make_exception(err);
 		}
@@ -320,7 +288,7 @@ snns_getSymbolTable(PyObject *self, PyObject *arg)
 	if(!ret) return NULL;
 	if(krui_getFirstSymbolTableEntry(&name,&val))
 	do {
-		PyDict_SetItemString(ret,name,PyInt_FromLong(val));
+		PyDict_SetItemString(ret,name,PyLong_FromLong(val));
 	} while(krui_getNextSymbolTableEntry(&name,&val));
 	if(PyErr_Occurred()) return NULL;
 	return ret;
@@ -337,7 +305,7 @@ static PyObject *
 snns_setSeedNo(PyObject *self, PyObject *arg)
 {
 	long num;
-	num = PyInt_AsLong(arg);
+	num = PyLong_AsLong(arg);
 	if(PyErr_Occurred()) return NULL;
 	krui_setSeedNo(num);
 	return Py_BuildValue("");
@@ -449,7 +417,7 @@ snns_allocNewPatternSet(PyObject *self, PyObject *arg)
 	if((err = krui_allocNewPatternSet(&i))) {
 		return make_exception(err);
 	}
-	return PyInt_FromLong(i);
+	return PyLong_FromLong(i);
 }
 
 static PyObject *
@@ -464,28 +432,28 @@ snns_getNoOfTTypeUnits(PyObject *self, PyObject *arg)
 {
 	int no;
 	int parm;
-	parm = PyInt_AsLong(arg);
+	parm = PyLong_AsLong(arg);
 	if(PyErr_Occurred()) return NULL;
 	no = krui_getNoOfTTypeUnits(parm);
-	return PyInt_FromLong(no);
+	return PyLong_FromLong(no);
 }
 
 static PyObject *
 snns_getLearnFunc(PyObject *self, PyObject *arg)
 {
-	return PyString_FromString(krui_getLearnFunc());
+	return PyUnicode_FromString(krui_getLearnFunc());
 }
 
 static PyObject *
 snns_getFFLearnFunc(PyObject *self, PyObject *arg)
 {
-	return PyString_FromString(krui_getFFLearnFunc());
+	return PyUnicode_FromString(krui_getFFLearnFunc());
 }
 
 static PyObject *
 snns_getPrunFunc(PyObject *self, PyObject *arg)
 {
-	return PyString_FromString(krui_getPrunFunc());
+	return PyUnicode_FromString(krui_getPrunFunc());
 }
 
 
@@ -498,7 +466,7 @@ snns_setLearnFunc(PyObject *self, PyObject *name)
 static PyObject *
 snns_getInitialisationFunc(PyObject *self, PyObject *arg)
 {
-	return PyString_FromString(krui_getInitialisationFunc());
+	return PyUnicode_FromString(krui_getInitialisationFunc());
 }
 
 static PyObject *
@@ -510,7 +478,7 @@ snns_setInitialisationFunc(PyObject *self, PyObject *name)
 static PyObject *
 snns_getUpdateFunc(PyObject *self, PyObject *arg)
 {
-	return PyString_FromString(krui_getUpdateFunc());
+	return PyUnicode_FromString(krui_getUpdateFunc());
 }
 
 static PyObject *
@@ -538,7 +506,7 @@ snns_loadNewPatterns(PyObject *self, PyObject *arg)
 	krui_err err;
 	int setno;
 
-	fn = PyString_AsString(arg);
+	fn = (char *)PyUnicode_AsUTF8(arg);
 	if(fn && (err=krui_loadNewPatterns(fn,&setno))) {
 		return make_exception(err);
 	}
@@ -633,7 +601,7 @@ build_int_tuple(int *array, size_t size)
 	ret = PyTuple_New(size);
 	if(!ret) return NULL;
 	for(i=0; i < size; ++i) {
-		PyTuple_SetItem(ret,i,PyInt_FromLong(array[i]));
+		PyTuple_SetItem(ret,i,PyLong_FromLong(array[i]));
 	}
 	if(PyErr_Occurred()) return NULL;
 	return ret;
@@ -649,7 +617,7 @@ bool fill_int_array(PyObject *seq, int *array)
 {
 	int i;
 	for(i=0; i < PySequence_Size(seq); ++i) {
-		array[i]=PyInt_AsLong(PySequence_GetItem(seq,i));	
+		array[i]=PyLong_AsLong(PySequence_GetItem(seq,i));	
 	}
 	if(PyErr_Occurred()) return FALSE;
 	return TRUE;
@@ -668,7 +636,7 @@ snns_GetShapeOfSubPattern(PyObject *self, PyObject *args)
 	pattern_descriptor patdes;
 	PyObject *insizet, *inpost, *outsizet, *outpost;
 
-	num = PyInt_AsLong(args);
+	num = PyLong_AsLong(args);
 	if(PyErr_Occurred()) return NULL;
 	
 	err = krui_GetPatInfo(&setinf, &patdes);
@@ -755,12 +723,12 @@ static bool prep_subpat_arrays(PyObject *args,
 		return FALSE;
 	}
 	for(i=0; i < PySequence_Size(insizet); ++i) {
-		insize[i] = PyInt_AsLong(PySequence_GetItem(insizet,i));
-		inparm[i] = PyInt_AsLong(PySequence_GetItem(inparmt,i));
+		insize[i] = PyLong_AsLong(PySequence_GetItem(insizet,i));
+		inparm[i] = PyLong_AsLong(PySequence_GetItem(inparmt,i));
 	}
 	for(i=0; i < PySequence_Size(outsizet); ++i) {
-		outsize[i] = PyInt_AsLong(PySequence_GetItem(outsizet,i));
-		outparm[i] = PyInt_AsLong(PySequence_GetItem(outparmt,i));
+		outsize[i] = PyLong_AsLong(PySequence_GetItem(outsizet,i));
+		outparm[i] = PyLong_AsLong(PySequence_GetItem(outparmt,i));
 	}
 	if(PyErr_Occurred()) return FALSE;
 	return TRUE;
@@ -786,7 +754,7 @@ snns_DefTrainSubPat(PyObject *self, PyObject *args)
 	if((err = krui_DefTrainSubPat(insize,outsize,instep,outstep,&max_n_pos))) {
 		return make_exception(err);
 	}
-	return PyInt_FromLong(max_n_pos);
+	return PyLong_FromLong(max_n_pos);
 }
 
 static PyObject *
@@ -831,7 +799,7 @@ snns_AlignSubPat(PyObject *self, PyObject *args)
 	if(fill_int_array(inpost,inpos) && fill_int_array(outpost,outpos)) {	
 		err = krui_AlignSubPat(inpos,outpos,&no);
 		if(err) return make_exception(err);
-		return PyInt_FromLong(no);
+		return PyLong_FromLong(no);
 	}
 	return NULL;
 }
@@ -1071,7 +1039,7 @@ snns_initializeNet(PyObject *self, PyObject *arg)
 static PyObject *
 snns_getNoOfFunctions(PyObject *self, PyObject *arg)
 {
-	return PyInt_FromLong(krui_getNoOfFunctions());
+	return PyLong_FromLong(krui_getNoOfFunctions());
 }
 
 static PyObject *
@@ -1079,7 +1047,7 @@ snns_getFuncInfo(PyObject *self, PyObject *arg)
 {
 	int funcno,functype;
 	char *funcname;
-	funcno = PyInt_AsLong(arg);
+	funcno = PyLong_AsLong(arg);
 	if(PyErr_Occurred()) return NULL;
 	krui_getFuncInfo(funcno, &funcname, &functype);
 	return Py_BuildValue("(si)",funcname,functype);
@@ -1091,7 +1059,7 @@ snns_isFunction(PyObject *self, PyObject *args)
 	char *name;
 	int functype;
 	if(!PyArg_ParseTuple(args, "si",&name, &functype)) return NULL;
-	return PyInt_FromLong(krui_isFunction(name,functype));
+	return PyLong_FromLong(krui_isFunction(name,functype));
 }
 
 static PyObject *
@@ -1109,22 +1077,22 @@ snns_getFuncParamInfo(PyObject *self, PyObject *args)
 static PyObject *
 snns_setFirstFTypeEntry(PyObject *self, PyObject *args)
 {
-	return PyInt_FromLong(krui_setFirstFTypeEntry());
+	return PyLong_FromLong(krui_setFirstFTypeEntry());
 }
 
 static PyObject *
 snns_setNextFTypeEntry(PyObject *self, PyObject *args)
 {
-	return PyInt_FromLong(krui_setNextFTypeEntry());
+	return PyLong_FromLong(krui_setNextFTypeEntry());
 }
 
 static PyObject *
 snns_setFTypeEntry(PyObject *self, PyObject *args)
 {
 	char *ftypename;
-	ftypename = PyString_AsString(args);
+	ftypename = (char *)PyUnicode_AsUTF8(args);
 	if(PyErr_Occurred()) return NULL;
-	return PyInt_FromLong(krui_setFTypeEntry(ftypename));
+	return PyLong_FromLong(krui_setFTypeEntry(ftypename));
 }
 
 static PyObject *
@@ -1132,7 +1100,7 @@ snns_getFTypeName(PyObject *self, PyObject *args)
 {
 	char *ftype;
 	ftype = krui_getFTypeName();
-	if(ftype) return PyString_FromString(krui_getFTypeName());
+	if(ftype) return PyUnicode_FromString(krui_getFTypeName());
 	else return Py_BuildValue("");
 }
 
@@ -1147,7 +1115,7 @@ snns_getFTypeActFuncName(PyObject *self, PyObject *args)
 {
 	char *funcname;
 	funcname = krui_getFTypeActFuncName();
-	if(funcname) return PyString_FromString(funcname);
+	if(funcname) return PyUnicode_FromString(funcname);
 	else return Py_BuildValue("");
 }
 
@@ -1162,7 +1130,7 @@ snns_getFTypeOutFuncName(PyObject *self, PyObject *args)
 {
 	char *funcname;
 	funcname = krui_getFTypeOutFuncName();
-	if(funcname) return PyString_FromString(funcname);
+	if(funcname) return PyUnicode_FromString(funcname);
 	else return Py_BuildValue("");
 }
 
@@ -1175,13 +1143,13 @@ snns_setFTypeOutFunc(PyObject *self, PyObject *args)
 static PyObject *
 snns_setFirstFTypeSite(PyObject *self, PyObject *args)
 {
-	return PyInt_FromLong(krui_setFirstFTypeSite());
+	return PyLong_FromLong(krui_setFirstFTypeSite());
 }
 
 static PyObject *
 snns_setNextFTypeSite(PyObject *self, PyObject *args)
 {
-	return PyInt_FromLong(krui_setNextFTypeSite());
+	return PyLong_FromLong(krui_setNextFTypeSite());
 }
 
 static PyObject *
@@ -1189,7 +1157,7 @@ snns_getFTypeSiteName(PyObject *self, PyObject *args)
 {
 	char *funcname;
 	funcname = krui_getFTypeSiteName();
-	if(funcname) return PyString_FromString(funcname);
+	if(funcname) return PyUnicode_FromString(funcname);
 	else return Py_BuildValue("");
 }
 
@@ -1204,7 +1172,7 @@ snns_deleteFTypeEntry(PyObject *self, PyObject *args)
 {
 	char *ftypename;
 	krui_err err;
-	ftypename = PyString_AsString(args);
+	ftypename = (char *)PyUnicode_AsUTF8(args);
 	if(PyErr_Occurred()) return NULL;
 	err = krui_deleteFTypeEntry(ftypename);
 	if(err) return make_exception(err);
@@ -1226,7 +1194,7 @@ snns_createFTypeEntry(PyObject *self, PyObject *args)
 		nameslist = PyMem_New(char *, numsites);
 		if(!nameslist) return NULL;
 		for(i=0; i < numsites; ++i) {
-			nameslist[i]=PyString_AsString(PySequence_GetItem(sitenames,i));
+			nameslist[i]=(char *)PyUnicode_AsUTF8(PySequence_GetItem(sitenames,i));
 		}
 	}
 	err = krui_createFTypeEntry(ftypename,actfuncname,outfuncname,
@@ -1291,7 +1259,7 @@ snns_getFirstSuccUnit(PyObject *self, PyObject *args)
 {
 	FlintType strength;
 	int ret,unit;
-	unit = PyInt_AsLong(args);
+	unit = PyLong_AsLong(args);
 	if(PyErr_Occurred()) return NULL;
 	ret = krui_getFirstSuccUnit(unit,&strength);
 	return Py_BuildValue("(if)",ret,strength);
@@ -1310,10 +1278,10 @@ static PyObject *
 snns_isConnected(PyObject *self, PyObject *args)
 {
 	int ret,unit;
-	unit = PyInt_AsLong(args);
+	unit = PyLong_AsLong(args);
 	if(PyErr_Occurred()) return NULL;
 	ret = krui_isConnected(unit);
-	return PyInt_FromLong(ret);
+	return PyLong_FromLong(ret);
 }
 
 static PyObject *
@@ -1372,7 +1340,7 @@ snns_createLinkWithAdditionalParameters(PyObject *self, PyObject *args)
 static PyObject *
 snns_getErrorCode(PyObject *self, PyObject *args)
 {
-	return PyInt_FromLong(krui_getErrorCode());
+	return PyLong_FromLong(krui_getErrorCode());
 }
 
 static PyObject *
@@ -1461,9 +1429,9 @@ snns_getSiteTable(PyObject *self, PyObject *args)
 	if(!dict) return NULL;
 	ret = krui_getFirstSiteTableEntry(&a,&b);
 	if(!ret) return Py_BuildValue("{}");
-	if(PyDict_SetItemString(dict, a, PyString_FromString(b)) == -1) return NULL;
+	if(PyDict_SetItemString(dict, a, PyUnicode_FromString(b)) == -1) return NULL;
 	while(krui_getNextSiteTableEntry(&a,&b)) {
-		if(PyDict_SetItemString(dict, a, PyString_FromString(b)) == -1) return NULL;
+		if(PyDict_SetItemString(dict, a, PyUnicode_FromString(b)) == -1) return NULL;
 	}
 	if(PyErr_Occurred()) return NULL;
 	return dict;
@@ -1473,10 +1441,10 @@ static PyObject *
 snns_getSiteTableFuncName(PyObject *self, PyObject *args)
 {	
 	char *a,*b;
-	a = PyString_AsString(args);
+	a = (char *)PyUnicode_AsUTF8(args);
 	if(PyErr_Occurred()) return NULL;
 	b = krui_getSiteTableFuncName(a);
-	if(b) return PyString_FromString(b);
+	if(b) return PyUnicode_FromString(b);
 	else return Py_BuildValue("");
 }	
 
@@ -1486,7 +1454,7 @@ snns_setFirstSite(PyObject *self, PyObject *args)
 	int ret;
 	ret = krui_setFirstSite();
 	if(ret < 0) return make_exception(ret);
-	return PyInt_FromLong(ret);
+	return PyLong_FromLong(ret);
 }	
 
 static PyObject *
@@ -1495,7 +1463,7 @@ snns_setNextSite(PyObject *self, PyObject *args)
 	int ret;
 	ret = krui_setNextSite();
 	if(ret < 0) return make_exception(ret);
-	return PyInt_FromLong(ret);
+	return PyLong_FromLong(ret);
 }	
 
 static PyObject *
@@ -1515,7 +1483,7 @@ snns_getSiteFuncName(PyObject *self, PyObject *args)
 {
 	char *ret;
 	ret = krui_getSiteFuncName();
-	if(ret) return PyString_FromString(ret);
+	if(ret) return PyUnicode_FromString(ret);
 	else return Py_BuildValue("");
 }	
 
@@ -1524,7 +1492,7 @@ snns_getSiteName(PyObject *self, PyObject *args)
 {
 	char *ret;
 	ret = krui_getSiteName();
-	if(ret) return PyString_FromString(ret);
+	if(ret) return PyUnicode_FromString(ret);
 	else return Py_BuildValue("");
 }
 
@@ -1543,37 +1511,37 @@ snns_addSite(PyObject *self, PyObject *args)
 static PyObject *
 snns_deleteSite(PyObject *self, PyObject *args)
 {	
-	return PyInt_FromLong(krui_deleteSite());
+	return PyLong_FromLong(krui_deleteSite());
 }	
 
 static PyObject *
 snns_getNoOfUnits(PyObject *self, PyObject *args)
 {	
-	return PyInt_FromLong(krui_getNoOfUnits());
+	return PyLong_FromLong(krui_getNoOfUnits());
 }	
 
 static PyObject *
 snns_getNoOfSpecialInputUnits(PyObject *self, PyObject *args)
 {	
-	return PyInt_FromLong(krui_getNoOfSpecialInputUnits());
+	return PyLong_FromLong(krui_getNoOfSpecialInputUnits());
 }	
 
 static PyObject *
 snns_getNoOfSpecialOutputUnits(PyObject *self, PyObject *args)
 {	
-	return PyInt_FromLong(krui_getNoOfSpecialOutputUnits());
+	return PyLong_FromLong(krui_getNoOfSpecialOutputUnits());
 }	
 
 static PyObject *
 snns_getFirstUnit(PyObject *self, PyObject *args)
 {	
-	return PyInt_FromLong(krui_getFirstUnit());
+	return PyLong_FromLong(krui_getFirstUnit());
 }	
 
 static PyObject *
 snns_getNextUnit(PyObject *self, PyObject *args)
 {	
-	return PyInt_FromLong(krui_getNextUnit());
+	return PyLong_FromLong(krui_getNextUnit());
 }	
 
 static PyObject *
@@ -1585,7 +1553,7 @@ snns_setCurrentUnit(PyObject *self, PyObject *args)
 static PyObject *
 snns_getCurrentUnit(PyObject *self, PyObject *args)
 {	
-	return PyInt_FromLong(krui_getCurrentUnit());
+	return PyLong_FromLong(krui_getCurrentUnit());
 }	
 
 typedef char * (*snns_int_arg_char_ret_func)(int);
@@ -1595,10 +1563,10 @@ snns_int_arg_char_ret(PyObject *arg, snns_int_arg_char_ret_func func)
 {
 	int i;
 	char *ret;
-	i = PyInt_AsLong(arg);
+	i = PyLong_AsLong(arg);
 	if(PyErr_Occurred()) return NULL;
 	ret = func(i);
-	if(ret) return PyString_FromString(ret);
+	if(ret) return PyUnicode_FromString(ret);
 	else return Py_BuildValue("");
 }	
 
@@ -1632,15 +1600,15 @@ static PyObject *
 snns_searchUnitName(PyObject *self, PyObject *args)
 {	
 	char *a;
-	a = PyString_AsString(args);
+	a = (char *)PyUnicode_AsUTF8(args);
 	if(PyErr_Occurred()) return NULL;
-	return PyInt_FromLong(krui_searchUnitName(a));
+	return PyLong_FromLong(krui_searchUnitName(a));
 }	
 
 static PyObject *
 snns_searchNextUnitName(PyObject *self, PyObject *args)
 {	
-	return PyInt_FromLong(krui_searchNextUnitName());
+	return PyLong_FromLong(krui_searchNextUnitName());
 }	
 
 static PyObject *
@@ -1677,7 +1645,7 @@ static PyObject *
 snns_getUnitActivation(PyObject *self, PyObject *args)
 {	
 	int i;
-	i = PyInt_AsLong(args);
+	i = PyLong_AsLong(args);
 	if(PyErr_Occurred()) return NULL;
 	return PyFloat_FromDouble(krui_getUnitActivation(i));
 }	
@@ -1686,7 +1654,7 @@ static PyObject *
 snns_getUnitInitialActivation(PyObject *self, PyObject *args)
 {	
 	int i;
-	i = PyInt_AsLong(args);
+	i = PyLong_AsLong(args);
 	if(PyErr_Occurred()) return NULL;
 	return PyFloat_FromDouble(krui_getUnitInitialActivation(i));
 }	
@@ -1695,7 +1663,7 @@ static PyObject *
 snns_getUnitOutput(PyObject *self, PyObject *args)
 {	
 	int i;
-	i = PyInt_AsLong(args);
+	i = PyLong_AsLong(args);
 	if(PyErr_Occurred()) return NULL;
 	return PyFloat_FromDouble(krui_getUnitOutput(i));
 }	
@@ -1704,7 +1672,7 @@ static PyObject *
 snns_getUnitBias(PyObject *self, PyObject *args)
 {	
 	int i;
-	i = PyInt_AsLong(args);
+	i = PyLong_AsLong(args);
 	if(PyErr_Occurred()) return NULL;
 	return PyFloat_FromDouble(krui_getUnitBias(i));
 }	
@@ -1759,20 +1727,20 @@ static PyObject *
 snns_getUnitSubnetNo(PyObject *self, PyObject *args)
 {
 	int ret,unit;
-	unit = PyInt_AsLong(args);
+	unit = PyLong_AsLong(args);
 	if(PyErr_Occurred()) return NULL;
 	ret = krui_getUnitSubnetNo(unit);
-	return PyInt_FromLong(ret);
+	return PyLong_FromLong(ret);
 }
 
 static PyObject *
 snns_getUnitLayerNo(PyObject *self, PyObject *args)
 {
 	int ret,unit;
-	unit = PyInt_AsLong(args);
+	unit = PyLong_AsLong(args);
 	if(PyErr_Occurred()) return NULL;
 	ret = krui_getUnitLayerNo(unit);
-	return PyInt_FromLong(ret);
+	return PyLong_FromLong(ret);
 }
 
 static bool short_check(int i)
@@ -1816,13 +1784,13 @@ static bool fillPosType(PyObject *arg, struct PosType *pos)
 		 "Expecting three values for a position definition");
 		 return FALSE;
 	}
-	i = PyInt_AsLong(PySequence_GetItem(arg,0));
+	i = PyLong_AsLong(PySequence_GetItem(arg,0));
 	if(!short_check(i)) return FALSE;
 	pos->x = i;
-	i = PyInt_AsLong(PySequence_GetItem(arg,1));
+	i = PyLong_AsLong(PySequence_GetItem(arg,1));
 	if(!short_check(i)) return FALSE;
 	pos->y = i;
-	i = PyInt_AsLong(PySequence_GetItem(arg,2));
+	i = PyLong_AsLong(PySequence_GetItem(arg,2));
 	if(!short_check(i)) return FALSE;
 	pos->z = i;
 	return TRUE;
@@ -1839,7 +1807,7 @@ snns_getUnitPosition(PyObject *self, PyObject *args)
 {
 	int unit;
 	struct PosType pos;
-	unit = PyInt_AsLong(args);
+	unit = PyLong_AsLong(args);
 	if(PyErr_Occurred()) return NULL;
 	krui_getUnitPosition(unit, &pos);
 	return buildPosType(&pos);
@@ -1865,7 +1833,7 @@ snns_getUnitNoAtPosition(PyObject *self, PyObject *args)
 	PyObject *seq;
 	if(!PyArg_ParseTuple(args,"Oi",&seq, &net) ||
 	   !short_check(net) || !fillPosType(seq,&pos)) return NULL;
-	return PyInt_FromLong(krui_getUnitNoAtPosition(&pos,net));   
+	return PyLong_FromLong(krui_getUnitNoAtPosition(&pos,net));   
 }
 
 static PyObject *
@@ -1876,7 +1844,7 @@ snns_getUnitNoNearPosition(PyObject *self, PyObject *args)
 	PyObject *seq;
 	if(!PyArg_ParseTuple(args,"Oiii",&seq, &net,&range,&width) ||
 	   !short_check(net) || !fillPosType(seq,&pos)) return NULL;
-	return PyInt_FromLong(krui_getUnitNoNearPosition(&pos,net,range,width));   
+	return PyLong_FromLong(krui_getUnitNoNearPosition(&pos,net,range,width));   
 }
 
 static PyObject *
@@ -1908,30 +1876,30 @@ static PyObject *
 snns_getUnitTType(PyObject *self, PyObject *args)
 {
 	int ret,unit;
-	unit = PyInt_AsLong(args);
+	unit = PyLong_AsLong(args);
 	if(PyErr_Occurred()) return NULL;
 	ret = krui_getUnitTType(unit);
-	return PyInt_FromLong(ret);
+	return PyLong_FromLong(ret);
 }
 
 static PyObject *
 snns_isUnitFrozen(PyObject *self, PyObject *args)
 {
 	int ret,unit;
-	unit = PyInt_AsLong(args);
+	unit = PyLong_AsLong(args);
 	if(PyErr_Occurred()) return NULL;
 	ret = krui_isUnitFrozen(unit);
-	return PyInt_FromLong(ret);
+	return PyLong_FromLong(ret);
 }
 
 static PyObject *
 snns_getUnitInputType(PyObject *self, PyObject *args)
 {
 	int ret,unit;
-	unit = PyInt_AsLong(args);
+	unit = PyLong_AsLong(args);
 	if(PyErr_Occurred()) return NULL;
 	ret = krui_getUnitInputType(unit);
-	return PyInt_FromLong(ret);
+	return PyLong_FromLong(ret);
 }
 
 static PyObject *
@@ -1951,7 +1919,7 @@ snns_getUnitValueA(PyObject *self, PyObject *args)
 {
 	int unit;
 	double ret;
-	unit = PyInt_AsLong(args);
+	unit = PyLong_AsLong(args);
 	if(PyErr_Occurred()) return NULL;
 	ret = krui_getUnitValueA(unit);
 	return PyFloat_FromDouble(ret);
@@ -1984,7 +1952,7 @@ snns_createDefaultUnit(PyObject *self, PyObject *args)
 	int ret;
 	ret = krui_createDefaultUnit();
 	if(ret < 0) return make_exception(ret);
-	else return PyInt_FromLong(ret);
+	else return PyLong_FromLong(ret);
 }
 
 static PyObject *
@@ -1996,7 +1964,7 @@ snns_createUnit(PyObject *self, PyObject *args)
 	if(!PyArg_ParseTuple(args,"sssff",&uname,&fname,&actname,&a,&b)) return NULL;
 	ret=krui_createUnit(uname,fname,actname,a,b);
 	if(ret < 0) return make_exception(ret);
-	else return PyInt_FromLong(ret);
+	else return PyLong_FromLong(ret);
 }
 
 static PyObject *
@@ -2012,7 +1980,7 @@ snns_copyUnit(PyObject *self, PyObject *args)
 	if(!PyArg_ParseTuple(args,"ii",&a,&b)) return NULL;
 	ret = krui_copyUnit(a,b);
 	if(ret < 0) return make_exception(ret);
-	else return PyInt_FromLong(ret);
+	else return PyLong_FromLong(ret);
 }
 
 static PyObject *
@@ -2020,11 +1988,11 @@ snns_createFTypeUnit(PyObject *self, PyObject *args)
 {
 	int ret;
 	char *name;
-	name = PyString_AsString(args);
+	name = (char *)PyUnicode_AsUTF8(args);
 	if(PyErr_Occurred()) return NULL;
 	ret = krui_createFTypeUnit(name);
 	if(ret < 0) return make_exception(ret);
-	else return PyInt_FromLong(ret);
+	else return PyLong_FromLong(ret);
 }
 
 static PyObject *
@@ -2831,8 +2799,8 @@ static PyObject *funcdict, *utildict;
 static PyObject *getCustomFunction(char *funcname, int functype)
 {
 	PyObject *func;
-	func = PyDict_GetItem(funcdict, PyString_FromString(funcname));
-	if(!func || ! (func = PyDict_GetItem(func, PyInt_FromLong(functype)))) {
+	func = PyDict_GetItem(funcdict, PyUnicode_FromString(funcname));
+	if(!func || ! (func = PyDict_GetItem(func, PyLong_FromLong(functype)))) {
 		fputs("Called function not registered, this should "
 	                "not happen!\n",stderr);
 		return 0;		
@@ -2876,7 +2844,7 @@ static FlintType ActFunctionCaller(PyObject *func, struct Unit *unit_ptr)
 static int getNoOfFuncs()
 {
 	int num=0;
-	int i=0, j;
+	Py_ssize_t i=0, j;
 	PyObject *key, *value, *key2, *value2;
 	while(PyDict_Next(funcdict, &i, &key, &value)) {
 		j=0;
@@ -2927,10 +2895,18 @@ static krui_err getFuncInfo(int mode, struct FuncInfoDescriptor *desc)
 	return ret;
 }
 
+static struct PyModuleDef kruimodule = {
+	PyModuleDef_HEAD_INIT,
+	"krui",
+	"SNNS kernel interface",
+	-1,
+	MylibMethods
+};
+
 PyMODINIT_FUNC
-initkrui(void)
+PyInit_krui(void)
 {
-	char *moduledoc = 
+	char *moduledoc =
 	"This module provides all functions and constants of the SNNS kernel.\n"
 	"Please note that it is not part of SNNS but distributed seperately.\n"
 	"\n"
@@ -3033,36 +3009,39 @@ initkrui(void)
 	kr_getPythonFuncInfoHook = getFuncInfo;
 	kr_getNoOfPythonFunctionsHook = getNoOfFuncs;
 
-	utilmod = PyImport_Import(PyString_FromString("snns.util"));
-	if(!utilmod) return;
+	utilmod = PyImport_Import(PyUnicode_FromString("snns.util"));
+	if(!utilmod) return NULL;
 	utildict = PyModule_GetDict(utilmod);
 	funcdict = PyDict_GetItemString(utildict, "custom_functions");
-	if(!funcdict) return;
-	m = Py_InitModule3("krui", MylibMethods,"SNNS kernel interface");
+	if(!funcdict) return NULL;
+	m = PyModule_Create(&kruimodule);
+	if(!m) return NULL;
 	for(cip=thingtypes; cip->name; ++cip) {
-		PyModule_AddObject(m,cip->name,PyInt_FromLong(cip->value));	
+		PyModule_AddObject(m,cip->name,PyLong_FromLong(cip->value));	
 	}
 
-	PyModule_AddObject(m,"__doc__", PyString_FromString(moduledoc));
+	PyModule_AddObject(m,"__doc__", PyUnicode_FromString(moduledoc));
 
 	snns_pattern_set_info_type.tp_new = PyType_GenericNew;
-	if (PyType_Ready(&snns_pattern_set_info_type) < 0) return;
+	if (PyType_Ready(&snns_pattern_set_info_type) < 0) return NULL;
 	Py_INCREF(&snns_pattern_set_info_type);
 	
 	for(txt=patsetinfodoc; *txt; txt+=2) {
 		PyDict_SetItemString(snns_pattern_set_info_type.tp_dict,
-		 txt[0], PyString_FromString(txt[1]));
+		 txt[0], PyUnicode_FromString(txt[1]));
 	}
 	
 	PyModule_AddObject(m,"pattern_set_info",(PyObject *)&snns_pattern_set_info_type);
 
 	snns_pattern_descriptor_type.tp_new = PyType_GenericNew;
-	if (PyType_Ready(&snns_pattern_descriptor_type) < 0) return;
+	if (PyType_Ready(&snns_pattern_descriptor_type) < 0) return NULL;
 	Py_INCREF(&snns_pattern_descriptor_type);
 
 	for(txt=patdesdoc; *txt; txt+=2) {
 		PyDict_SetItemString(snns_pattern_descriptor_type.tp_dict,
-		 txt[0], PyString_FromString(txt[1]));
+		 txt[0], PyUnicode_FromString(txt[1]));
 	}
 	PyModule_AddObject(m,"pattern_descriptor",(PyObject *)&snns_pattern_descriptor_type);
+
+	return m;
 }

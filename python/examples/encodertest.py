@@ -7,7 +7,7 @@ krui.setLearnFunc('Std_Backpropagation')
 krui.setUpdateFunc('Topological_Order')
 krui.setUnitDefaults(1,0,krui.INPUT,0,1,'Act_Logistic','Out_Identity')
 
-print "Creating the network out of thin air"
+print("Creating the network out of thin air")
 
 # build the input layer
 pos = [0,0,0]
@@ -46,7 +46,7 @@ for i in range(1,9) :
 	for src in hidden :
 		krui.createLink(src,0)
 
-print "Creating patterns"
+print("Creating patterns")
 
 krui.deleteAllPatterns()
 patset = krui.allocNewPatternSet()
@@ -60,15 +60,15 @@ krui.initializeNet(-1,1)
 krui.shufflePatterns(1)
 krui.DefTrainSubPat()
 
-print "Training"
+print("Training")
 
 i=0
 while i < 50000 :
 	res = krui.learnAllPatterns(0.2,0)
-	if not i % 5000 : print "Error in learning cycle %d:" % i, res[0]
+	if not i % 5000 : print("Error in learning cycle %d:" % i, res[0])
 	i = i + 1
 
-print "Writing pyencoder.pat"
+print("Writing pyencoder.pat")
 krui.saveNewPatterns('pyencoder.pat',patset)
-print "Writing pyencoder.net"
+print("Writing pyencoder.net")
 krui.saveNet('pyencoder.net','pyencoder')

@@ -28,3 +28,7 @@
 *.DS_Store
 *.swp
 *.out
+# Python build artifacts
+__pycache__/
+*.pyc
+python/build/

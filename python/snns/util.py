@@ -111,9 +111,9 @@ def internalGetFuncInfo(mode, number, funcname, functype, numberin, numberout, f
 			retnumberin, retnumberout, retfunc = res[2]
 		except:
 			retnumber = 0
-			print "Could not determine function's name"
+			print("Could not determine function's name")
 	else :
-		print "No such search mode"
-		raise ValueError, "bad search mode"
+		print("No such search mode")
+		raise ValueError("bad search mode")
 	return (retnumber,rettype,retname,retnumberin,retnumberout, retfunc)
 	

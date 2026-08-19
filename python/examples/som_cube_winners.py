@@ -19,5 +19,5 @@ for pat in range(1,patnum+1) :
 			results.append((krui.getUnitActivation(unit),unit))
 	bestact, bestunit = min(results)
 	rawpos = krui.getUnitPosition(bestunit)[:2]
-	print "Pattern", pat, "Act", bestact, "Unit", bestunit, 
-	print "Grid Position", (rawpos[0]-4, rawpos[1]) 
+	print("Pattern", pat, "Act", bestact, "Unit", bestunit, end=' ') 
+	print("Grid Position", (rawpos[0]-4, rawpos[1])) 
