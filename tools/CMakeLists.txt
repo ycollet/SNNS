@@ -1,10 +1,10 @@
 include_directories(${CMAKE_SOURCE_DIR}/kernel/sources
                     ${CMAKE_BINARY_DIR}
                     ${CMAKE_SOURCE_DIR}
-		    sources)
+                    sources)
 
 set(TOOLS_SOURCES_C sources/analyze.c
-		    sources/pat_sel_simple.c
+                    sources/pat_sel_simple.c
                     sources/mkhead.c
                     sources/mkout.c
                     sources/mkpat.c)
@@ -54,16 +54,16 @@ set(LINKNETS_SRCS  sources/linknets.c
                    sources/snns2clib.c)
 
 set(BATCHMAN_SRCS sources/batchman.c
-		  sources/icopjmp.c
-		  sources/ictab.c
-		  sources/symtab.c
-		  sources/backpatch.c
-		  sources/memory.c
-		  sources/ic_snns.c
-		  sources/error.c
-		  sources/arglist.c
-		  sources/snns_intfce.c
-		  sources/special_jacket.c)
+                  sources/icopjmp.c
+                  sources/ictab.c
+                  sources/symtab.c
+                  sources/backpatch.c
+                  sources/memory.c
+                  sources/ic_snns.c
+                  sources/error.c
+                  sources/arglist.c
+                  sources/snns_intfce.c
+                  sources/special_jacket.c)
 
 find_package(BISON REQUIRED)
 find_package(FLEX  REQUIRED)
@@ -100,8 +100,8 @@ add_executable(linknets ${LINKNETS_SRCS})
 target_link_libraries(linknets kernel func m)
 add_executable(batchman ${BATCHMAN_SRCS}
                         ${CMAKE_BINARY_DIR}/gram1.tab.c
-			${CMAKE_BINARY_DIR}/lex.yyz.c
-			${CMAKE_BINARY_DIR}/lex.yyy.c)
+                        ${CMAKE_BINARY_DIR}/lex.yyz.c
+                        ${CMAKE_BINARY_DIR}/lex.yyy.c)
 
 target_link_libraries(batchman kernel func m)
 

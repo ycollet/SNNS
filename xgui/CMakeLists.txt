@@ -3,7 +3,7 @@ include_directories(sources
                     ${CMAKE_SOURCE_DIR}/kernel/sources
                     ${CMAKE_SOURCE_DIR}/tools/sources
                     ${CMAKE_BINARY_DIR}
-		    ${CMAKE_SOURCE_DIR})
+                    ${CMAKE_SOURCE_DIR})
 
 set(BN3DSOURCES_C sources/net_analyzer.c
                   sources/d3_xUtils.c

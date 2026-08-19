@@ -1,6 +1,6 @@
 include_directories(${CMAKE_SOURCE_DIR}/kernel/sources
                     ${CMAKE_SOURCE_DIR}/contrib/enzo/src
-		    ${CMAKE_SOURCE_DIR}/contrib/enzo/src/nepomuk
+                    ${CMAKE_SOURCE_DIR}/contrib/enzo/src/nepomuk
                     ${CMAKE_BINARY_DIR})
 
 set(ENZO_CROSSOVER_SRCS src/crossover/implant.c
@@ -79,12 +79,12 @@ set(ENZO_PRE_SRCS src/pre/genpopNepomuk.c
 add_library(pre STATIC ${ENZO_PRE_SRCS})
 
 set(ENZO_SELECTION_SRCS src/selection/uniformSel.c
-			src/selection/preferSel.c)
+                        src/selection/preferSel.c)
 
 add_library(selection STATIC ${ENZO_SELECTION_SRCS})
 
 set(ENZO_STOP_SRCS src/stop/stopIt.c
-		   src/stop/stopErr.c)
+                   src/stop/stopErr.c)
 
 add_library(stop STATIC ${ENZO_STOP_SRCS})
 

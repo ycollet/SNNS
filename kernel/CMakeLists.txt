@@ -10,15 +10,15 @@ set(KERNELSOURCES_C    sources/kernel.c
                        sources/kr_amap.c
                        sources/kr_newpattern.c
                        sources/kr_JordElm.c
-		       sources/kr_rand.c)
+                       sources/kr_rand.c)
 
 set(USR_FUNC_SOURCES_C sources/func_tbl.c
                        sources/init_f.c
                        sources/kr_td.c
                        sources/kr_funcs.c
-		       sources/learn_f.c
-		       sources/prun_f.c
-		       sources/tbl_func.c
+                       sources/learn_f.c
+                       sources/prun_f.c
+                       sources/tbl_func.c
                        sources/trans_f.c
                        sources/update_f.c
                        sources/remap_f.c
@@ -32,7 +32,7 @@ set(USR_FUNC_SOURCES_C sources/func_tbl.c
                        sources/tacoma_learn.c
                        sources/dlvq_learn.c
                        sources/stochastic_learn_f.c
-		       sources/scaled_conj_grad.c)
+                       sources/scaled_conj_grad.c)
 
 set(UTILITY_SOURCES_C  sources/make_tbl.c
                        sources/calc_err.c)
@@ -45,7 +45,7 @@ find_package(FLEX  REQUIRED)
 
 bison_target(kr_pat_parse ${KERNELSOURCES_YACC} ${CMAKE_BINARY_DIR}/kr_pat_scan.c
              COMPILE_FLAGS "-d -t -y -p pp"
-	     DEFINES_FILE ${CMAKE_BINARY_DIR}/y.tab.h)
+             DEFINES_FILE ${CMAKE_BINARY_DIR}/y.tab.h)
 flex_target(kr_pat_scan ${KERNELSOURCES_LEX}    ${CMAKE_BINARY_DIR}/kr_pat_parse.c)
 add_flex_bison_dependency(kr_pat_scan kr_pat_parse)
 
@@ -55,7 +55,7 @@ include_directories(${CMAKE_BINARY_DIR}
 
 add_library(kernel STATIC ${KERNELSOURCES_C}
                           ${BISON_kr_pat_parse_OUTPUTS}
-			  ${FLEX_kr_pat_scan_OUTPUTS})
+                          ${FLEX_kr_pat_scan_OUTPUTS})
 
 if (SNNS_ENABLE_ENZO)
   set_target_properties(kernel PROPERTIES COMPILE_DEFINITIONS "__ENZO__")
