@@ -54,9 +54,8 @@ include_directories(${CMAKE_BINARY_DIR}
                     sources)
 
 add_library(kernel STATIC ${KERNELSOURCES_C}
-                          ${BISON_kr_par_parse_OUTPUTS}
-			  ${CMAKE_BINARY_DIR}/kr_pat_scan.c
-			  ${CMAKE_BINARY_DIR}/kr_pat_parse.c)
+                          ${BISON_kr_pat_parse_OUTPUTS}
+			  ${FLEX_kr_pat_scan_OUTPUTS})
 
 if (SNNS_ENABLE_ENZO)
   set_target_properties(kernel PROPERTIES COMPILE_DEFINITIONS "__ENZO__")

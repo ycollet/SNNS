@@ -404,6 +404,7 @@ extern krui_err  kr_xyTransTable(int op, int *x, int *y, int z);
 /* Re-routing python provided functions */
 
 FlintType kr_PythonOutFunction(PyObject *func, FlintType activation);
+FlintType kr_PythonActFunction(PyObject *func, struct Unit *unit_ptr);
 PyObject *kr_findPythonFunction(char *name, int type);
 int kr_getNoOfPythonFunctions();
 krui_err kr_getPythonFuncInfo(int mode, struct FuncInfoDescriptor *descr);

@@ -1,7 +1,8 @@
-cmake_minimum_required(VERSION 3.0.2)
+cmake_minimum_required(VERSION 3.5)
 
 project(SNNS)
 
+option(SNNS_ENABLE_XGUI   "Enable the compilation of the X11 GUI (requires X11/Xaw)" ON)
 option(SNNS_ENABLE_ENZO   "Enable the compilation of ENZO"   OFF)
 option(SNNS_ENABLE_NESSUS "Enable the compilation of Nessus" OFF)
 option(SNNS_ENABLE_VISTRA "Enable the compilation of Vistra" OFF)
@@ -131,9 +132,7 @@ endif ()
 
 # Manage coverage via lcov automatically
 
-# Manage coverage via lcov automatically
-
-if (KL_COMPILE_COVERAGE AND NOT (CMAKE_BUILD_TYPE STREQUAL "DEBUG"))
+if (COIN_COMPILE_COVERAGE AND NOT (CMAKE_BUILD_TYPE STREQUAL "DEBUG"))
   message(FATAL_ERROR "Warning: to enable coverage, you must compile in DEBUG mode")
 endif ()
 
@@ -176,9 +175,11 @@ endif ()
 
 # End of coverage
 
-include(FindPkgConfig)
+if (SNNS_ENABLE_XGUI)
+  include(FindPkgConfig)
 
-pkg_check_modules(XAW REQUIRED xaw7)
+  pkg_check_modules(XAW REQUIRED xaw7)
+endif ()
 
 include(CheckIncludeFile)
 
@@ -228,8 +229,9 @@ include(CheckFunctionExists)
 set(CMAKE_REQUIRED_LIBRARIES m)
 check_function_exists(getcwd HAVE_GETCWD)
 check_function_exists(lrand48 HAVE_LRAND48)
-check_function_exists(strdup HAVE_LRAND48)
-check_function_exists(alloca HAVE_ALLOCA)
+check_function_exists(strdup HAVE_STRDUP)
+include(CheckSymbolExists)
+check_symbol_exists(alloca "alloca.h" HAVE_ALLOCA)
 check_function_exists(qsort HAVE_QSORT)
 
 find_program(HAVE_XGRABSC xgrabsc)
@@ -252,7 +254,9 @@ configure_file(${CMAKE_SOURCE_DIR}/cmake/config.h.cmake ${CMAKE_BINARY_DIR}/conf
 
 subdirs(kernel)
 subdirs(tools)
-subdirs(xgui)
+if (SNNS_ENABLE_XGUI)
+  subdirs(xgui)
+endif ()
 if (SNNS_ENABLE_ENZO)
   subdirs(contrib/enzo)
 endif ()

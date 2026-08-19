@@ -87,7 +87,7 @@ add_library(xgui2 STATIC ${XGUISOURCES2_C})
 add_library(3d STATIC ${BN3DSOURCES_C})
 
 find_library(XAW3D_LIB NAME Xaw3d)
-if (NOT "${XAW3D_LIB}" MATCHES "NOTFOUND")
+if ("${XAW3D_LIB}" MATCHES "NOTFOUND")
   message(FATAL_ERROR "Xaw3D not found. Package required")
 endif ()
 

@@ -54,7 +54,6 @@ set(LINKNETS_SRCS  sources/linknets.c
                    sources/snns2clib.c)
 
 set(BATCHMAN_SRCS sources/batchman.c
-                  sources/gram1.tab.c
 		  sources/icopjmp.c
 		  sources/ictab.c
 		  sources/symtab.c

@@ -44,7 +44,7 @@
 #cmakedefine HAVE_LRAND48
 
 /* Define if you have the strdup function.  */
-#cmakedefine HAVE_STRDUP
+#cmakedefine01 HAVE_STRDUP
 
 /* Define if you have the <dirent.h> header file.  */
 #cmakedefine HAVE_DIRENT_H
