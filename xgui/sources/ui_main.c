@@ -26,6 +26,9 @@
 #endif
 #include <sys/param.h>
 #include <stdio.h>
+#ifdef HAVE_UNISTD_H
+#include <unistd.h>
+#endif
 
 #include <X11/Shell.h>
 #include <X11/cursorfont.h>

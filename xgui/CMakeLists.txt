@@ -86,12 +86,13 @@ add_library(xgui1 STATIC ${XGUISOURCES1_C})
 add_library(xgui2 STATIC ${XGUISOURCES2_C})
 add_library(3d STATIC ${BN3DSOURCES_C})
 
-find_library(XAW3D_LIB NAME Xaw3d)
+find_library(XAW3D_LIB NAMES Xaw3d)
 if ("${XAW3D_LIB}" MATCHES "NOTFOUND")
   message(FATAL_ERROR "Xaw3D not found. Package required")
 endif ()
 
 find_package(X11 REQUIRED)
+include_directories(${X11_INCLUDE_DIR})
 if (NOT X11_SM_FOUND)
   message(FATAL_ERROR "X11_SM not found. Package required")
 endif ()
@@ -113,8 +114,8 @@ endif ()
 
 add_executable(xgui sources/ui_main.c)
 target_link_libraries(xgui xgui1 xgui2 3d kernel func m)
-target_link_libraries(xgui SM ICE Xmu Xt Xext X11)
-target_link_libraries(xgui Xaw3d)
+target_link_libraries(xgui ${X11_SM_LIB} ${X11_ICE_LIB} ${X11_Xmu_LIB} ${X11_Xt_LIB} ${X11_Xext_LIB} ${X11_X11_LIB})
+target_link_libraries(xgui ${XAW3D_LIB})
 
 install(TARGETS xgui
         DESTINATION bin)

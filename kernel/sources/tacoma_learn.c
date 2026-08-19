@@ -462,7 +462,7 @@ krui_err tac_generateNewUnit(int UnitNo,int LayerNo,int StartPattern,int EndPatt
   UPDATE   : 30.03.96 <Juergen Gatter>
 ******************************************************************************/
 
-krui_err tac_initXiAndRis(StartPattern,EndPattern) {
+krui_err tac_initXiAndRis(int StartPattern, int EndPattern) {
     int p,i;
     int start,end,n,pat,sub;
     float* MaxXI,*MinXI,*SumXI;

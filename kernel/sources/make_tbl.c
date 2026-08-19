@@ -16,6 +16,7 @@ VERSION : $Revision: 2.5 $  $Date: 1998/03/03 14:08:50 $
 #include <config.h>
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <math.h>
 
 

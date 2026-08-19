@@ -175,12 +175,6 @@ endif ()
 
 # End of coverage
 
-if (SNNS_ENABLE_XGUI)
-  include(FindPkgConfig)
-
-  pkg_check_modules(XAW REQUIRED xaw7)
-endif ()
-
 include(CheckIncludeFile)
 
 check_include_file("alloca.h"   HAVE_ALLOCA_H)

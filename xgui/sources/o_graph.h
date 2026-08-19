@@ -38,11 +38,6 @@ extern Display *ui_display;
 extern Widget   ui_toplevel;
 
 
-extern SCALE_VALUE_TYPE;
-
-extern MPoint;
-
-
 extern int           o_open; 	/* flag, which indicates whether graf
 				is open or not */
 extern int           o_PressPossible; /* flag : while drawing, pressing a
