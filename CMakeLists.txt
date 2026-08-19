@@ -2,10 +2,11 @@ cmake_minimum_required(VERSION 3.5)
 
 project(SNNS)
 
-option(SNNS_ENABLE_XGUI   "Enable the compilation of the X11 GUI (requires X11/Xaw)" ON)
-option(SNNS_ENABLE_ENZO   "Enable the compilation of ENZO"   OFF)
-option(SNNS_ENABLE_NESSUS "Enable the compilation of Nessus" OFF)
-option(SNNS_ENABLE_VISTRA "Enable the compilation of Vistra" OFF)
+option(SNNS_ENABLE_XGUI              "Enable the compilation of the X11 GUI (requires X11/Xaw)" ON)
+option(SNNS_ENABLE_ENZO              "Enable the compilation of ENZO"   OFF)
+option(SNNS_ENABLE_NESSUS            "Enable the compilation of Nessus" OFF)
+option(SNNS_ENABLE_VISTRA            "Enable the compilation of Vistra" OFF)
+option(SNNS_ENABLE_PYTHON_INTERFACE  "Enable building the Python interface to the SNNS kernel" OFF)
 
 # Compilation options
 option(ENABLE_SHARED_LIBRARIES       "Build libraries as shared libraries" OFF)
@@ -259,6 +260,9 @@ if (SNNS_ENABLE_NESSUS)
 endif ()
 if (SNNS_ENABLE_VISTRA)
   subdirs(contrib/vistra)
+endif ()
+if (SNNS_ENABLE_PYTHON_INTERFACE)
+  subdirs(python)
 endif ()
 
 #
