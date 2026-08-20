@@ -1320,7 +1320,7 @@ foreach_head
 	: FOREACH loop_var_list
 		{ if(Topology && Execute) { 
 		    RightSide = FALSE;
-		    LOOP_InitForeachLoop($1, $1);      /* initialize and lock loop variable */
+		    LOOP_InitForeachLoop();      /* initialize and lock loop variable */
 		  }
 		  $$ = psNULL;
 		}

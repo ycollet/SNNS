@@ -42,7 +42,7 @@ void CF_IncludeNewFunctions()
  Returns: void..
  Side effects: Modifies lists of functions.
 *****************************************************************************************/
-CF_MarkFunction(Function, FuncType)
+void CF_MarkFunction(Function, FuncType)
 ParserStackType *Function;
 SymbolType FuncType;
 {

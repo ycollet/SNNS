@@ -99,7 +99,10 @@ ErrorStackType *ER_PopErrorStack() {
  Purpose: Print error messages on terminal and into an eventual listing file.
  Returns: void
 *****************************************************************************************/
-void ER_ListErrors(LineNo, FileName) {
+void ER_ListErrors(LineNo, FileName)
+int LineNo;
+char *FileName;
+{
     while(ER_Errors) {    /* print error messages  until stack is empty */
         if( ! SymTabPtr) {
             (void) printf("\"%s\"(%d): %s", "******", LineNo, ER_Errors->Type);   /* screen */

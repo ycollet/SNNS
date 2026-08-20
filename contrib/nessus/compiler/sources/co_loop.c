@@ -54,7 +54,7 @@ static TokenStackType *LastToken = NULL;       /* pointer  to last token which h
 short MissingSemi = FALSE;                /* TRUE <==> parser expects ';' between loops */
 short NestingDepth = 0;
 short ExitMode = FALSE;                    /* TRUE <==> AbortLoop && begin of new stmt. */
-ForeachWaitFlag = FALSE;           /* TRUE <==> do not yet initialize new loop variable */
+short ForeachWaitFlag = FALSE;           /* TRUE <==> do not yet initialize new loop variable */
 
 
 

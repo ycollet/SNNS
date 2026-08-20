@@ -22,13 +22,6 @@
 #include "co_include.h"
 
 
-/* declaration for time function */
-extern long time();
-
-/* declaration for random generator intialization */
-extern void srand48();
-
-
 
 /* macros to deal with program parameters */
 #define isfloat(x,y) (sscanf(x, "%f", &y) != 0) /* TRUE if string x contains a float no. */

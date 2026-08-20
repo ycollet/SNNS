@@ -131,7 +131,7 @@ SiteListType *SiteList = NULL;               /* top of sites stack*/
  Purpose: main function of nessus compiler, calls parser and output functions
  Returns: void
 *****************************************************************************************/
-void main(ArgCtr, ArgVector)
+int main(ArgCtr, ArgVector)
 int ArgCtr;         /* number of arguments */
 char *ArgVector[];  /* vector of argument strings */
 {

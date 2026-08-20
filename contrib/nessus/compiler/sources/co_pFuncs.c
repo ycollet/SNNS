@@ -42,113 +42,22 @@ ParserStackType *NetArgStack;                       /* stack of program attribut
 ParserStackType *XAdd;                            /* to transform subnet positions */
 ParserStackType *YAdd;
 {
-    int val;                                             /* holds result value of yyparse */
-    short Temp_Topology;                     /* save variable "Topology" of outer program */
-    int Temp_yylineno;                              /* save line no. of outer source file */
-    char *FName;                       /* will hold physical  name of  subnet source file */
-
-    ParserStackType *Temp_yylval, *Temp_yyval;
-    ParserStackType *Temp_yyv[YYMAXDEPTH], *New_yyv;                      /* static parse */
-    int Temp_yychar, Temp_yynerrs, Temp_yyerrflag;             /* variables must be saved */
-
-    register int i;
-
-    char *Temp_ActChr, *Temp_InputStream, *Temp_yysptr;                 /* static scanner */
-    struct yysvf **Temp_yylsp, **Temp_yyolsp, *Temp_yyestate;  /* variables must be saved */
-    struct yywork *Temp_yytop;
-    char *Temp_yytext, *Temp_yysbuf; /* *Temp_yylstate[] */
-    int Temp_yyprevious, Temp_yyfnd, Temp_yytchar, Temp_yymorfg, Temp_yyleng;
-
-    STMT_GetIdValue(InFile);
-    if( ! XAdd || XAdd->ytype != Undef && XAdd->ytype != INTEGER) {
-        ER_StackError("type mismatch: x position for subnet expected\n",Serious, nst,nst,nst);
-        XAdd->yvalue->intval = 0;
-    } else
-        XCenter += XAdd->yvalue->intval;
-    if( ! YAdd || YAdd->ytype != Undef && YAdd->ytype != INTEGER) {
-        ER_StackError("type mismatch: y position for subnet expected\n",Serious, nst,nst,nst);
-        YAdd->yvalue->intval = 0;
-    } else
-        YCenter += YAdd->yvalue->intval;
-    if(InFile->ytype != SIMPLESTRING  && InFile->ytype != LONGSTRING &&
-            InFile->ytype != FILEVAL ) {
-        ER_StackError("type mismatch: name of nessus source file expected\n",Serious, nst,nst,nst);
-        val = TRUE;
-    } else {
-        FName = (InFile->ytype == FILEVAL) ? InFile->yvalue->fileval->FileName :
-                InFile->yvalue->string;
-        if(SC_PutInputStack(FName)) {                         /* begin to scan new input file */
-            PA_ProgramArguments = NetArgStack;         /* string of program or subnet arguments */
-            ListDepth ++;                       /* increment subnet depth (initialized with -1) */
-            Structures = FALSE;                                  /* reset environment variables */
-            XCenter += XAdd->yvalue->intval;
-            YCenter += YAdd->yvalue->intval;
-            Temp_yylval = yylval;
-            Temp_yyval = yyval;
-            Temp_yychar = yychar;
-            Temp_yynerrs = yynerrs;
-            Temp_yyerrflag = yyerrflag;
-            (void) memcpy((char*) Temp_yyv, (char*) yyv, YYMAXDEPTH *  sizeof(ParserStackType *));
-            Temp_yylineno = yylineno;
-            Temp_yytchar = yytchar;
-            Temp_yymorfg = yymorfg;
-            Temp_yyleng = yyleng;
-            Temp_yytext = STR_Save(yytext);
-            yylineno = 1;  /* reset global counter of input lines */
-            Temp_ActChr = SC_ActChr;
-            Temp_InputStream = SC_InputStream;
-            Temp_yysptr = yysptr;
-            Temp_yysbuf = M_alloc((unsigned) YYLMAX);
-            Temp_yysbuf = memcpy(Temp_yysbuf, yysbuf, YYLMAX);
-            Temp_yyfnd = (yyfnd) ? *yyfnd : 0;
-            SC_ActChr = NULL;
-            Temp_InputStream = SC_InputStream;
-            yysptr = yysbuf;
-            Temp_yylsp = yylsp;
-            Temp_yyolsp = yyolsp;
-            Temp_yyestate = yyestate;
-            Temp_yyprevious  = yyprevious;
-            Temp_Topology = Topology;                  /* there have been fatal syntax errors - */
-            Topology = TRUE;
-            NewInput = TRUE;  /* set input variable for scanner i/o-management */
-            val = yyparse();                                    /* parse subnet definition file */
-            if(ListDepth-- > 0)    /* file has defined a subnet - there must be others on stack */
-                SC_PopInputStack();              /* remove parsed input file from stack of inputs */
-            Structures = TRUE;                                   /* reset environment variables */
-            (void) memcpy((char*) yyv, (char*) Temp_yyv, YYMAXDEPTH *  sizeof(ParserStackType *));
-            yylval = Temp_yylval;
-            yyval = Temp_yyval;
-            yychar = Temp_yychar;
-            (void) memcpy(yysbuf, Temp_yysbuf, YYLMAX);
-            yytchar = Temp_yytchar;
-            yymorfg = Temp_yymorfg;
-            yyleng = Temp_yyleng;
-            yynerrs = Temp_yynerrs;
-            yyerrflag = Temp_yyerrflag;
-            yylineno = Temp_yylineno;
-            SC_ActChr = Temp_ActChr;
-            SC_InputStream = Temp_InputStream;
-            yysptr = Temp_yysptr;
-            yylsp = Temp_yylsp;
-            yyolsp = Temp_yyolsp;
-            yyestate = Temp_yyestate;
-            XCenter -= XAdd->yvalue->intval;
-            YCenter -= YAdd->yvalue->intval;
-            if(yyfnd) *yyfnd = Temp_yyfnd;
-            *yyfnd = Temp_yyfnd;
-            strcpy(yytext, Temp_yytext);
-            yyprevious = Temp_yyprevious;
-            XCenter -= XAdd->yvalue->intval;
-            YCenter -= YAdd->yvalue->intval;
-            Topology = Temp_Topology;
-            NewInput = FALSE;
-        } else
-            val = TRUE;                                          /* error: recursive subnets  */
-    }
+    /* This originally implemented recursive/nested parsing of a subnet
+       definition file mid-parse, by manually saving and restoring the
+       internal global parser/scanner state (yyval, yychar, yysptr,
+       yylsp, struct yysvf/yywork, etc.) of the original AT&T/Berkeley
+       yacc and lex this file was written against. Modern GNU Bison and
+       Flex don't expose that internal state at all - their generated
+       parsers use local variables with a different structure entirely
+       - so this technique cannot work with the current toolchain.
+       Nested subnet includes (SUBNET ... AT ...) are unsupported until
+       this is redesigned around a reentrant parser. */
+    ER_StackError("nested subnet includes are not supported in this build\n",
+                  Fatal, nst, nst, nst);
     PA_FreeParserStack(XAdd);
     PA_FreeParserStack(YAdd);
     PA_FreeParserStack(InFile);
-    return val;
+    return TRUE;
 }
 
 
@@ -246,7 +155,7 @@ ParserStackType *PA_GetUndefString() {
  NOTE: copied from Schreiner, Friedman: Introduction to Compiler Construction with UNIX,
        (C) 1985 Prentice-Hall, pp. 235-239. Modified.
 *****************************************************************************************/
-yyNewerror(s,t)
+void yyNewerror(s,t)
 register char *s, *t;
 {
     extern int yynerrs;

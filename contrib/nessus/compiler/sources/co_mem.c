@@ -50,7 +50,7 @@ register unsigned s;
  Purpose: Same as free, with error control and exit.
  Returns: int
 *****************************************************************************************/
-M_free(s)
+int M_free(s)
 register char * s;
 {
     if( ! s) {

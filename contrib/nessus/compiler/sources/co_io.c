@@ -1074,6 +1074,7 @@ ParserStackType *MSep, *LSep;       /* separators (domain/range and between line
 *****************************************************************************************/
 char *FI_MarkSep(Low, Up, State, MapSep, LineSep)
 char *Low, *Up;                   /* lower and upper bound of input buffer section */
+int State;
 ParserStackType *MapSep,  *LineSep;       /* domain/range or line separator string */
 {
     char *Sep;                           /* expected separator string (MapSep or LineSep) */

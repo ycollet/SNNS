@@ -1,3 +1,5 @@
+%option noyywrap
+
 %{
 /*****************************************************************************
   FILE              : Tokens.l
@@ -20,7 +22,7 @@
 ******************************************************************************/
 
 #include "co_scanner.h"
-#define getc() SC_NextSymb()
+#define getc(f) SC_NextSymb()
 #define DIM(x) (sizeof x / sizeof x[0])
 #define YYERRCODE 256
 #define LIST(x) SC_List(yytext, x)

@@ -268,7 +268,7 @@ int Position;
  Side effects: Modifies UNoLength.
 *****************************************************************************************/
 void OUT_UNoLength() {
-    register MaxNo;
+    register int MaxNo;
     MaxNo = UnitCtr;
     for(UNoLength = 0; MaxNo > 0; UNoLength ++, MaxNo /= 10)
         ;
@@ -512,7 +512,7 @@ FILE *FilePtr;
 void OUT_PrintUnitSection(FilePtr)
 FILE *FilePtr;
 {
-    register i;
+    register int i;
     register char *Format,            /* format for entries */
              *Header;            /* format for header */
 
@@ -553,7 +553,7 @@ FILE *FilePtr;
 void OUT_UnitSep(FilePtr)
 FILE *FilePtr;
 {
-    register i;
+    register int i;
     for(i=0; i<UNoLength; i++)                   /* print upper separation line of section */
         (void) fprintf(FilePtr, "%c", '-');
     (void) fprintf(FilePtr, "%s", "-|-");
@@ -986,7 +986,7 @@ register int Index;                          /* index of current unit in structu
 void OUT_ConnSep(FilePtr)
 FILE *FilePtr;
 {
-    register i;
+    register int i;
     for(i=0; i < UNoLength; i++)
         (void) fprintf(FilePtr, "-");
     (void) fprintf(FilePtr, "-|-");

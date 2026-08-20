@@ -27,4 +27,9 @@
 
 /**** extern random functions ****/
 extern double drand48();
-extern void srand();
+
+/* Bison (invoked with -p pp for Syntax.y) renames its exposed globals
+   from yy* to pp* (e.g. yylval -> pplval). Code outside the generated
+   parser/scanner still refers to the plain yylval name; redirect it to
+   the real symbol bison actually emits. */
+#define yylval pplval
