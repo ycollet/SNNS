@@ -336,7 +336,6 @@ snns_deletePattern(PyObject *self, PyObject *arg)
 static PyObject *
 snns_deleteAllPatterns(PyObject *self, PyObject *arg)
 {
-	krui_err err;
 	krui_deleteAllPatterns();
 	return Py_BuildValue("");
 }
@@ -654,7 +653,6 @@ snns_GetShapeOfSubPattern(PyObject *self, PyObject *args)
 static PyObject *
 snns_setClassDistribution(PyObject *self, PyObject *args)
 {
-	int num;
 	PyObject *ret=NULL, *tmp=NULL;
 	int *entries=NULL;
 	pattern_set_info setinf;
@@ -742,7 +740,7 @@ snns_DefTrainSubPat(PyObject *self, PyObject *args)
 		outsize[MAX_NO_OF_VAR_O_DIM],
 		outstep[MAX_NO_OF_VAR_O_DIM];
 	krui_err err;
-	int i,max_n_pos;
+	int max_n_pos;
 
 	memset(insize,0,sizeof(insize));
 	memset(instep,0,sizeof(instep));
@@ -765,7 +763,6 @@ snns_DefShowSubPat(PyObject *self, PyObject *args)
 		outsize[MAX_NO_OF_VAR_O_DIM],
 		outpos[MAX_NO_OF_VAR_O_DIM];
 	krui_err err;
-	int i;
 	memset(insize,0,sizeof(insize));
 	memset(inpos,0,sizeof(inpos));
 	memset(outsize,0,sizeof(outsize));
@@ -1692,7 +1689,6 @@ snns_setUnitActivation(PyObject *self, PyObject *args)
 static PyObject *
 snns_setUnitInitialActivation(PyObject *self, PyObject *args)
 {
-	krui_err err;
 	int i;
 	double d;
 	if(!PyArg_ParseTuple(args,"id",&i,&d)) return NULL;
@@ -1703,7 +1699,6 @@ snns_setUnitInitialActivation(PyObject *self, PyObject *args)
 static PyObject *
 snns_setUnitBias(PyObject *self, PyObject *args)
 {
-	krui_err err;
 	int i;
 	double d;
 	if(!PyArg_ParseTuple(args,"id",&i,&d)) return NULL;
@@ -1934,16 +1929,6 @@ snns_setUnitTType(PyObject *self, PyObject *args)
 	err = krui_setUnitTType(a,b);
 	if(err) return make_exception(err);
 	else return Py_BuildValue("");
-}
-
-static PyObject *
-snns_setUnitValueA(PyObject *self, PyObject *args)
-{
-	int a;
-	double d;
-	if(!PyArg_ParseTuple(args,"if",&a,&d)) return NULL;
-	krui_setUnitValueA(a,d);
-	return Py_BuildValue("");
 }
 
 static PyObject *
@@ -2915,7 +2900,7 @@ PyInit_krui(void)
 	"\n"
 	"If you feel you have to do so because this documentation is unclear,\n"
 	"please contact the author of this extension.";
-	PyObject *m,*dict, *utilmod;
+	PyObject *m, *utilmod;
 	charintpair thingtypes[]= {
 		/* Unit Types */
 		{"UNKNOWN",UNKNOWN},

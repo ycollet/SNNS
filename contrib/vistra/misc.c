@@ -210,7 +210,7 @@ Boolean atEndNl(FILE *f) {
 /**************************************************/
 char *matAsString(Number **mat, unsigned rows, unsigned cols) {
     unsigned i, j, lineLength;
-    char *answer, *cp, buf[NUMBER_STR_LENGTH + 1];
+    char *answer, *cp;
 
     lineLength = NUM_OF_PATS_STR_MAXLEN + cols * (NUMBER_STR_LENGTH + 2) + 1;
     if(! (answer = (char *) malloc((rows + 2) * lineLength + 1)))

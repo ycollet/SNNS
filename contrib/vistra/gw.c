@@ -92,7 +92,6 @@ static GW openGW(Widget parent, char *title) {
            gwNext, gwPrevious, gwGrow, gwShrink, gwFirst, gwLast,
            gwFillUp, gwRedisplay, gwClose, gwHisto, gwPoly,
            gw2DProj, gwGrayMat, gwClrMat;
-    char buf[10];
 
     if(! (answer = (GW) malloc(sizeof(*answer)))) return NULL;
 
@@ -652,7 +651,6 @@ Widget w;
 XtPointer client_data, garbage;
 {
     GW gw = (GW) client_data;
-    long pos;
 
     rmv(openGWs, gw);
     freeGW(gw);
@@ -727,7 +725,6 @@ XtPointer client_data, garbage;
 {
     GW gw = (GW) client_data;
     unsigned maxNr = (unsigned) num(pats);
-    char buf[10];
 
     if(gw->displayed >= maxNr)
         gw->displayed = 1;
@@ -744,7 +741,6 @@ XtPointer client_data, garbage;
 {
     GW gw = (GW) client_data;
     unsigned maxNr = (unsigned) num(pats);
-    char buf[10];
 
     gw->displayed = min(gw->displayed, maxNr);
     gw->displayed = (gw->displayed == 1 ? maxNr : gw->displayed - 1);
@@ -773,7 +769,6 @@ XtPointer client_data, garbage;
 {
     GW gw = (GW) client_data;
     unsigned maxNr = (unsigned) num(pats);
-    char buf[10];
 
     gw->displayed = maxNr;
     updateGW(gw);
@@ -817,7 +812,6 @@ XtPointer client_data, garbage;
 {
     GW gw = (GW) client_data;
     unsigned previous = gw->curWidth;
-    char buf[10];
 
     gw->curWidth = (unsigned) max(gw->curWidth+1,
                                   (1 + GW_GROW_FACTOR) * gw->curWidth);
@@ -837,7 +831,6 @@ XtPointer client_data, garbage;
 {
     GW gw = (GW) client_data;
     unsigned previous = gw->curWidth;
-    char buf[10];
 
     gw->curWidth = (unsigned) min((float) gw->curWidth / (1 + GW_GROW_FACTOR),
                                   gw->curWidth - 1);
@@ -859,7 +852,6 @@ XtPointer client_data, garbage;
     unsigned previous = gw->curWidth;
     String sizeVal;
     unsigned percentage;
-    char buf[10];
 
     XtVaGetValues(XtNameToWidget(gw->commForm, "gwResizeText"),
                   XtNstring, &sizeVal, NULL);
@@ -902,7 +894,6 @@ Widget w;
 XtPointer client_data, garbage;
 {
     GW gw = (GW) client_data;
-    char buf[10];
 
     gw->kind = histo;
     gw->curWidth = max(gwWidths[(int) histo][0],
@@ -921,7 +912,6 @@ Widget w;
 XtPointer client_data, garbage;
 {
     GW gw = (GW) client_data;
-    char buf[10];
 
     gw->kind = poly;
     gw->curWidth = max(gwWidths[(int) poly][0],

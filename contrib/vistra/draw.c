@@ -103,7 +103,7 @@ static PixelNo grayPixel(Number n, Range r) {
     XColor xcol;
     int grayindex;
     Boolean ret;
-    double v, red, green, blue;
+    double v;
 
     /* if(monochrome) return BlackPixel(display ,screen); */
     /* Compute the color intensity on a scale of 0.0 - 1.0 */
@@ -335,7 +335,7 @@ static void drawHistogram(GW gw, Vector v, Range rangeY, PixelNo color) {
 /********************************************************/
 static unsigned drawHistogrammes(GW gw, VecColl vc, Range rangeY,
                                  PixelNo color) {
-    unsigned i, answer, numVectors, numDims, posX, posY;
+    unsigned i, answer, numVectors, numDims;
     Range rangeX;
     CoordSystem cs;
     Number markX_High, markX_Low, markY_High, markY_Low;
@@ -392,7 +392,6 @@ Vector v;
 {
     XPoint *points;
     long v_dims, i;
-    Number elem;
 
     v_dims = dims(v);
     points = (XPoint *) malloc(v_dims * sizeof(XPoint));
@@ -453,7 +452,7 @@ static void drawPolyLine(GW gw, Vector v, Range rangeY, PixelNo color) {
 /* Sets the global variable error.                      */
 /********************************************************/
 static unsigned drawPolyLines(GW gw, VecColl vc, Range rangeY, PixelNo color) {
-    unsigned i, answer, numVectors, numDims, posX, posY;
+    unsigned i, answer, numVectors, numDims;
     Range rangeX;
     CoordSystem cs;
     Number markX_High, markX_Low, markY_High, markY_Low;

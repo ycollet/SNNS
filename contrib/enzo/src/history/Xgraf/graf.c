@@ -170,7 +170,6 @@ char  text[10];
 /************************************************************************/
 
 void axis_graf(char  *x_text, char  *y_text) {
-    int  i;
     int main_ordinate_dist_pixels;
     float ordinate, main_ordinate_dist_units;
 

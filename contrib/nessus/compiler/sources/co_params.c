@@ -37,7 +37,6 @@ ParserStackType *ArgPtr;                             /* stack of program argumen
 {
     register ParserStackType *ActId;                       /* points to actual identifier */
     register ParserStackType *ActVal;                           /* points to actual value */
-    register ParserStackType *Diff;
 
     for(ActId=ListPtr, ActVal=ArgPtr; ActId && ActVal; ActId=ActId->ynext, ActVal=ActVal->ynext)
         PA_UpdateParameter(ActId->yvalue->var, ActVal);

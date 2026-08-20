@@ -155,7 +155,6 @@ enum Token lookUpNextDesc(Format f, long pos) {
 /**************************************************/
 enum Token nextToken(Format f) {
     char *p2;                  /* string pointer for tokenval */
-    int index;
     Boolean whitespace;        /* TRUE iff only white space has been read so far */
     enum Token found;
     char *cp1, *cp2;

@@ -23,12 +23,6 @@
 
 #define YYSTYPE ParserStackPType                      /* data type for parser value stack */
 
-static short PA_StackTokenFlg = FALSE;    /* true for first scan of a FOR (FOREACH)  loop */
-static short PA_Loop = FALSE;                /* true for repetitive pseudo-scans of loops */
-
-static short PA_Nested = 0;                                         /* counts nested [] ! */
-static short PA_ReadEnable = FALSE;      /* true <=> read is an expression (proced. part) */
-
 short ConstantSection;/* true <=> parsing constant, types, structures, or variable decls. */
 
 %}

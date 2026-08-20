@@ -102,7 +102,7 @@ static XrmOptionDescRec options[] = {
 /* Sets the global variable error.                  */
 /****************************************************/
 static void initialize(int argc, char **argv) {
-    Format readFmt, writeFmt;
+    Format readFmt;
     char *suffix, *format_dir;
     char decTest[] = "N01";
 
@@ -345,7 +345,7 @@ Collection names, fmts;
 {
     DIR *dirp;
     struct dirent *dp;
-    char *ext, *fmtName;
+    char *ext;
     unsigned len, lenExt;
 
     if(! (dirp = opendir(dirname))) {

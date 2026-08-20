@@ -174,7 +174,6 @@ int learnSNNS_work( PopID *parents, PopID *offsprings, PopID *reference ) {
     int   epochs;
     float tss, testTss;
     int ham;
-    char  fileName[MAX_FILENAME_LEN];
     FILE  *output;
 
     if (learnPattern == NULL)

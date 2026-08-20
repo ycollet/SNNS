@@ -194,7 +194,6 @@ XtCallbackProc up1_cb, down1_cb, up2_cb, down2_cb, ok_cb, cancel_cb;
 XtPointer ok_data, cancel_data;
 {
     Position x, y;
-    char buf[20];
 
     getPopupPosition(w, &x, &y);
     XtVaSetValues(int2DlgShell,

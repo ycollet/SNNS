@@ -75,7 +75,6 @@ void randomize(Patterns p, Vector v) {
     Collection randClasses, randClassNos, randVec, vColl;
     long i, index;
     double randNum;
-    Number *newElems;
 
     if(! (randInputs = newColl())) error(1);
     if(! (randOutputs = newColl())) error(1);
@@ -135,7 +134,7 @@ void randomize(Patterns p, Vector v) {
 /* Sets the global variable error.          */
 /********************************************/
 unsigned removePatterns(Patterns p, unsigned from, unsigned to) {
-    unsigned i, firstToRemove, lastToRemove, numToRemove;
+    unsigned firstToRemove, lastToRemove, numToRemove;
     unsigned answer = 0;
 
     if(from <= to && from <= p->count && to >= 1) {
@@ -402,7 +401,7 @@ static char *printStatVals(char *cp, VecColl vc) {
 /* error.                                   */
 /********************************************/
 void writeSymtab(Patterns p, FILE *f) {
-    long i, nvecs, diffVecs, nclassNos;
+    long i, nvecs, diffVecs;
     Collection set;
     Vector v;
 

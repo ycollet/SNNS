@@ -75,8 +75,6 @@ static Collection toks;
 /**************************************************/
 void interpret(Collection coll, Patterns p) {
     long ncomms;
-    Collection toks;
-    char *copy;
 
     /* Initialization */
     pats = p;

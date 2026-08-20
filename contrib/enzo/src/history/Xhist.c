@@ -124,7 +124,6 @@ int Xhist_work( PopID *parents, PopID *offsprings, PopID *ref ) {
     NetID  net;
     NetworkData *netData;
 
-    char text[64];
     int  pars = 0, weights, dummy;
 
     float        aveFitness =  0.0,

@@ -470,7 +470,9 @@ static void ui_initEditCols (void) {
 ******************************************************************************/
 void ui_colVar_init (void) {
     Display *dpy;
+#ifdef DEBUG_COLOR
     char vc[30], buf[255];
+#endif
 
     dpy  = XtDisplay(ui_toplevel);
     ui_col_visual = XDefaultVisual(dpy, DefaultScreen(dpy));

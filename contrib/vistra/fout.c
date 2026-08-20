@@ -159,7 +159,6 @@ static Boolean writeNextList(Boolean bodyExecuted) {
 /***************************************************/
 static void writeDescList() {
     Vector vec;
-    char *str;
 
     while(isDesc(tok)) {
         switch(tok) {

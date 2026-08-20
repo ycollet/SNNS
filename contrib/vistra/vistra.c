@@ -122,7 +122,6 @@ static void loadPatterns(Widget, XtPointer, XtPointer);
 static void writePatterns(Widget, XtPointer, XtPointer);
 static void loadSymbols(Widget, XtPointer, XtPointer);
 static void writeSymbols(Widget, XtPointer, XtPointer);
-static void changeFormat(Widget, XtPointer, XtPointer);
 static void scaleVectors(Widget, XtPointer, XtPointer);
 static void removeVectors(Widget, XtPointer, XtPointer);
 static void removeDimensions(Widget, XtPointer, XtPointer);
@@ -145,7 +144,6 @@ static void popdownSwapSSW(Widget, XtPointer, XtPointer);
 #ifdef XFWF_FILE_SELECTION
 static void popdownFileSelector(Widget, XtPointer, XtPointer);
 #endif
-static void destroyTextWindow(Widget, XtPointer, XtPointer);
 static void scrollVertical(Widget, XtPointer, XtPointer);
 static void scrollHorizontal(Widget, XtPointer, XtPointer);
 static void jumpVertical(Widget, XtPointer, XtPointer);
@@ -419,7 +417,6 @@ XtPointer client_data, garbage;
 {
     char *value, *suffix, *format_name;
     FILE *f;
-    long pos;
     Format writeFmt;
 
     XtPopdown(strDlgShell);
@@ -560,7 +557,6 @@ XtPointer client_data, garbage;
 {
     Vector vec;
     VecColl edited = editedVecColl(pats);
-    Dimension width, h;
 
     vec = scalarVec();
     if(error) {
@@ -1327,7 +1323,6 @@ XtPointer garbage;
 /***************************************************************************/
 static void showMenuSelect(Widget w, XtPointer client_data, XtPointer garbage) {
     int itemNo = (int) client_data;
-    unsigned numDims = (unsigned) numCols(pats);
     GW gw;
 
     switch(itemNo) {
@@ -1361,7 +1356,7 @@ static void showMenuSelect(Widget w, XtPointer client_data, XtPointer garbage) {
     case 2: { /* Covariance matrix */
         char *contents, buf[60];
         Number **cov;
-        unsigned i, j, ndims = (unsigned) numCols(pats);
+        unsigned i, ndims = (unsigned) numCols(pats);
         Position x, y;
 
         if(! (cov = (Number **) malloc(ndims * sizeof(*cov)))) {
@@ -1737,16 +1732,6 @@ XtPointer client_data, garbage;
 
 
 /*************************************************************/
-/*************************************************************/
-static void destroyTextWindow(w, client_data, garbage)
-Widget w;
-XtPointer client_data, garbage;
-{
-    XtDestroyWidget((Widget) client_data);
-}       /* destroyTextWindow */
-
-
-/*************************************************************/
 /* Called as soon as a button is released after having been  */
 /* pressed over the vertical scrollbar.                       */
 /* pos contains the relative pointer position in pixels.     */
@@ -1885,7 +1870,6 @@ XtPointer client_data, percent;
 /*************************************************************/
 static void xhandleErr(int err) {
     static char message[MAX_LENGTH_ERROR_MESSAGE];
-    Position x, y;
 
     /* if there is not enough memory: terminate the program */
     if(err == 1) handleErr(err);

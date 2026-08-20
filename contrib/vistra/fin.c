@@ -4,7 +4,6 @@ static Boolean exitAlt;            /*   "         "         alternatives   */
 static Boolean matchDescList(void);               /* sets error */
 static Boolean matchDesc(enum Token, char *); /* sets error */
 static Boolean matchString(char *);
-static Boolean matchAsterisk();
 static Boolean matchQuestionMark(void);
 static Boolean matchNewLine(void);
 static Boolean matchLong(long);
@@ -30,7 +29,7 @@ static void readClassName(char *);            /* sets error */
 /********************************************************/
 void fileIn(Patterns pttrns, Format form, FILE *f) {
     enum Token firstDesc, descAfter;
-    long curPos, beginningOfLoop, endOfLoop;
+    long beginningOfLoop, endOfLoop;
     Boolean matched, altDone;
     char saveVal[MAX_LENGTH_TOKENVAL];
 
@@ -207,8 +206,6 @@ static Boolean matchDescList() {
         case class:
                     next = lookUp(format);
             if(isDesc(next)) {
-                char c;
-
                 skipWhiteSpace(patternFile);
                 if(fgetc(patternFile) == EOF) matched = FALSE;
                 else {
@@ -619,8 +616,6 @@ static void doAsterisk() {
 /* newlines read.                                */
 /************************************************/
 static void doQuestionMark() {
-    char c;
-
     skipSpaceAndCountNl(patternFile);
     if(fgetc(patternFile) == EOF) {
         error = 5;

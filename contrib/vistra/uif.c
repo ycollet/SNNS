@@ -2,8 +2,6 @@
 /* Sets the global variable error.                  */
 /****************************************************/
 static void fillPatternView() {
-    Dimension width, height;
-
     if(! hasOutputs(pats) && inOutSwitch == EDIT_OUTPUT) {
         XtRemoveAllCallbacks(inputToggle, XtNcallback);
         XtRemoveAllCallbacks(outputToggle, XtNcallback);

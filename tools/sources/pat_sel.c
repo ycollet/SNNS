@@ -60,7 +60,7 @@ int mysort(const void *a, const void *b) {
 void main (int argc, char *argv[]) {
 
     int   pat_set, tot_pat_num;
-    int   error, i, j, dummy, act_num;
+    int   error, i, dummy, act_num;
     int   *pat_no;
     int   virt_was_on = 0, no_of_sel_pat = 0;
     FILE  *in_no_file;

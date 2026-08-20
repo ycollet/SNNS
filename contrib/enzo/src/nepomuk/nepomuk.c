@@ -159,16 +159,6 @@ static void ulf_net_free( NetID id ) {
     }
 }
 
-static void print_net_list( void ) {
-    /* for debugging only */
-    NetID p;
-
-    for( p = firstUsedNet; p != NULL; p = p->usedSucc ) {
-        printf( "%p->", p );
-    }
-    printf( "NULL\n" );
-}
-
 static PatID ulf_pat_alloc( void ) {
     PatID id;
 
@@ -183,25 +173,6 @@ static PatID ulf_pat_alloc( void ) {
     firstUsedPat = id;
 
     return id;
-}
-
-static void ulf_pat_free( PatID id ) {
-    PatID pred;
-
-    if( VALID_PAT(id) && id->used ) {
-        id->used = FALSE;
-        id->freeSucc = firstFreePat;
-        firstFreePat = id;
-
-        if( firstUsedPat == id ) firstUsedPat = id->usedSucc;
-        else {
-            for( pred = firstUsedPat; pred->usedSucc != id;
-                    pred = pred->usedSucc );
-
-            pred->usedSucc = id->usedSucc;
-            id->usedSucc = NULL;
-        }
-    }
 }
 
 /* --- utility-functions ---------------------------------------------------- */
@@ -879,8 +850,6 @@ PatID kpm_getFirstPat( void ) {
 }
 
 PatID kpm_getNextPat( PatID id ) {
-    PatID p_id;
-
     if( !VALID_PAT( id ) ) return( NULL );
 
     return( id->usedSucc );

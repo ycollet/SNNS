@@ -89,7 +89,7 @@ void lvqRead(Patterns p, FILE *f, Boolean inVecs) {
     long i, vecCount, ndims;
     Number n;
     Vector v;
-    char buf[CLASS_MAXLEN + 1], *copy;
+    char buf[CLASS_MAXLEN + 1];
 
     rowCount = 1L;
     skipSpaceAndCountNl(f);

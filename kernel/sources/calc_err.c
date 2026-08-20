@@ -77,7 +77,7 @@ double	x;
 
 int  main() {
     double  x, step, y1, y2, devit;
-    int	  i, nl_cycle;
+    int	  i;
 
     devit = 0.0;
     step = (PLUS_INFINITE_BORDER - MINUS_INFINITE_BORDER) / (double) CALC_STEPS;
