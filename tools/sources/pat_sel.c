@@ -73,13 +73,13 @@ void main (int argc, char *argv[]) {
     if (argc != 4) {
         fprintf(stderr, "usage: %s <no_file> <in_pat_file> <out_pat_file>\n",
                 argv[0]);
-        exit;
+        exit(1);
     }
 
     /* is number file readable ? */
     if ((in_no_file = fopen(argv[1], "r")) == NULL) {
         fprintf(stderr, "error: can't read file %s\n", argv[1]) ;
-        exit;
+        exit(1);
     }
 
     /* load input pattern file */
@@ -93,7 +93,7 @@ void main (int argc, char *argv[]) {
     /*check for virtual patterns */
     if((error = krui_GetPatInfo(&patt_info, &descrip))< 0) {
         printf("found error %d when testing pattern set %d\n",error);
-        exit;
+        exit(1);
     }
     if(patt_info.class_distrib_active) {
         /* we do not want virtual patterns here */
@@ -105,11 +105,11 @@ void main (int argc, char *argv[]) {
     if ((out_pat_file = fopen(argv[3], "r")) != NULL) {
         fclose(out_pat_file);
         fprintf (stderr, "overwrite existing file %s (y/n) ? ", argv[3]) ;
-        if (getc(stdin) != 'y') exit;
+        if (getc(stdin) != 'y') exit(1);
     }
     if ((out_pat_file = fopen(argv[3], "w")) == NULL) {
         fprintf(stderr, "error: can't create output file %s\n", argv[3]) ;
-        exit;
+        exit(1);
     }
     fclose(out_pat_file);
 
