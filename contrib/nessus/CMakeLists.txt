@@ -33,6 +33,7 @@ add_flex_bison_dependency(nessus_scan nessus_parse)
 add_executable(nessus ${COMPOBJECTS}
                       ${CMAKE_BINARY_DIR}/co_parser.c
                       ${CMAKE_BINARY_DIR}/co_scanner.c)
+target_link_libraries(nessus m)
 
 #file(STRINGS ${CMAKE_BINARY_DIR}/co_parser.c TEMP1 REGEX "# define YYMAXDEPTH")
 #file(STRINGS ${CMAKE_BINARY_DIR}/co_parser.c TEMP2 REGEX "# define YLMAX")
