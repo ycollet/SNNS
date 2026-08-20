@@ -1941,13 +1941,13 @@ SymTabLineType *Id;                         /* & Symbol table entry for identifi
     } else if(NewEntry < ListEnd)                                   /* table not full yet */
         *(NewEntry++) = Id;                 /* insert entry at actual position */
     else  {    /* table is full - copy all entries into bigger table and insert new entry */
-        NewEntry = NetComponents;                                        /*  save old table */
-        NoNetComponents += IncrNetComp;
+        int OldNoNetComponents = NoNetComponents;                        /*  save old length */
+        NoNetComponents *= 2;    /* geometric growth for amortized O(N) reallocation */
         /* increment table length  and allocate table of new size */
         NetComponents = (SymTabLineType **) realloc((char *) NetComponents,
             (unsigned) sizeof(SymTabLineType *) *
             NoNetComponents);
-        NewEntry = NetComponents + NoNetComponents - IncrNetComp;        /* next free entry */
+        NewEntry = NetComponents + OldNoNetComponents;        /* next free entry */
         ListEnd = NetComponents + NoNetComponents;                     /* mark end of table */
         *(NewEntry++) = Id;                 /* insert entry at actual position */
     }

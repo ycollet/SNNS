@@ -175,8 +175,15 @@ int Sup;           /* prime returned must be < Sup */
 short SYM_IsPrime(Prime)
 short Prime;
 {
-    register short Div;
-    for(Div = Prime-1; Div > 1; Div --)
+    register int Div;                  /* int to avoid overflow in Div*Div */
+    if(Prime < 2)
+        return TRUE;                   /* preserve original behaviour for degenerate args */
+    if(Prime == 2)
+        return TRUE;
+    if( !(Prime % 2))
+        return FALSE;                  /* even numbers > 2 are not prime */
+    /* only odd divisors up to sqrt(Prime) need to be tested */
+    for(Div = 3; Div * Div <= Prime; Div += 2)
         if( !(Prime % Div))
             return FALSE;
     return TRUE;
@@ -319,17 +326,19 @@ SymTabType *Tab;                       /* actual symbol table */
         /* sufficient insertions since last density check - calculate new density */
         Tab->Insertions = 0;                     /* reset counter of insertions */
         if(Tab->ActEntries > Tab->ActLength * ExpandDensity) {
-            /* expand symbol table - it is increased by SymTabAdd lines */
-            Tab->ActPrime = SYM_GetNewPrime((int) (Tab->ActLength += SymTabAdd));
-            SYM_AllocSpace += SymTabAdd;          /* increase counter of allocated symTab space */
+            /* expand symbol table - geometric growth for amortized O(N) rehashing */
+            float OldLength = Tab->ActLength;     /* remember old length before growth */
+            Tab->ActLength *= 2;
+            Tab->ActPrime = SYM_GetNewPrime((int) Tab->ActLength);
+            SYM_AllocSpace += Tab->ActLength - OldLength;  /* increase counter of allocated symTab space */
 #ifdef SCANTEST
             (void) printf("old symbol table, density %f: , collisions %d \n\n",
-                          Tab->ActEntries/(Tab->ActLength-SymTabAdd), SYM_Collisions);
-            SYM_PrintTab(Tab, (int) (Tab->ActLength-SymTabAdd));
+                          Tab->ActEntries/OldLength, SYM_Collisions);
+            SYM_PrintTab(Tab, (int) OldLength);
             SYM_Collisions = 0;                   /* collisions counted for each table size */
 #endif
             /* build new symbol table, entries of old table are copied */
-            Tab->SymTab = SYM_ExpandTab(Tab, Tab->SymTab, (int) (Tab->ActLength-SymTabAdd), (int) Tab->ActLength);
+            Tab->SymTab = SYM_ExpandTab(Tab, Tab->SymTab, (int) OldLength, (int) Tab->ActLength);
 #ifdef SCANTEST
             (void) printf("\n\nnew symbol table:  density %f: , collisions %d \n\n",
                           Tab->ActEntries/(Tab->ActLength), SYM_Collisions);

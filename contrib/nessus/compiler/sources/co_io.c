@@ -240,10 +240,11 @@ register int Entries;        /* integers read before - used to return result val
         for(; Lower < Upper && ! ISINTCOMP(*Lower); Lower++)
             if(*Lower == '\n') IOLine ++;                    /* look for begin of next digit */
         if(Lower < Upper) {                                 /* begin of a new integer found */
-            if( !(Entries <= *LenPtr)) {      /* must expand array, expand by FileArrayExpand */
-                (*LenPtr) += FileArrayExpand;
+            if( !(Entries <= *LenPtr)) {      /* must expand array, geometric growth */
+                int OldLen = *LenPtr;
+                (*LenPtr) *= 2;
                 /* FI_IntCopy expands array, old array is removed, returns ptr. to new array */
-                *IntFieldPtr = FI_IntCopy(*IntFieldPtr, (*LenPtr)-FileArrayExpand, *LenPtr);
+                *IntFieldPtr = FI_IntCopy(*IntFieldPtr, OldLen, *LenPtr);
                 ActElem = (*IntFieldPtr)+Entries-1;       /* reset pointer to next free element */
             }
             if(sscanf(Lower, "%d", ActElem) < 0) {
@@ -314,10 +315,11 @@ int *LenPtr;                                /* actual pointer to array of intege
         (void) printf("******FATAL: background input buffer too small, input ignored\n");
         return ActFront;
     }
-    if( ! (Entries <= *LenPtr)) {          /* must expand array, expand by FileArrayExpand */
-        (*LenPtr) += FileArrayExpand;
+    if( ! (Entries <= *LenPtr)) {          /* must expand array, geometric growth */
+        int OldLen = *LenPtr;
+        (*LenPtr) *= 2;
         /* FI_IntCopy expands array, old array is removed, returns ptr. to new array */
-        *IntFieldPtr = FI_IntCopy(*IntFieldPtr, (*LenPtr)-FileArrayExpand, *LenPtr);
+        *IntFieldPtr = FI_IntCopy(*IntFieldPtr, OldLen, *LenPtr);
         IntPos = (*IntFieldPtr)+Entries;        /* reset pointer to next free element */
     }
     /* read integer - check if there's been an i/o-error */
@@ -458,10 +460,11 @@ register int Entries;          /* floats read before - used to return result val
         for(; Lower < Upper && ! ISFLOATCOMP(*Lower); Lower++)
             if(*Lower == '\n') IOLine ++;                    /* look for begin of next digit */
         if(Lower < Upper) {                                 /* begin of a new integer found */
-            if( ! (Entries <= *LenPtr)) {     /* must expand array, expand by FileArrayExpand */
-                (*LenPtr) += FileArrayExpand;
+            if( ! (Entries <= *LenPtr)) {     /* must expand array, geometric growth */
+                int OldLen = *LenPtr;
+                (*LenPtr) *= 2;
                 /* FI_FloatCopy expands array, old array is removed, returns ptr. to new array */
-                *FloatFieldPtr = FI_FloatCopy(*FloatFieldPtr, (*LenPtr)-FileArrayExpand, *LenPtr);
+                *FloatFieldPtr = FI_FloatCopy(*FloatFieldPtr, OldLen, *LenPtr);
                 ActElem = (*FloatFieldPtr)+Entries - 1;   /* reset pointer to next free element */
             }
             if(sscanf(Lower, "%f", ActElem) < 0) {
@@ -532,10 +535,11 @@ int *LenPtr;                                  /* actual pointer to array of floa
         (void) printf("******FATAL: background input buffer too small, input ignored\n");
         return ActFront;
     }
-    if( ! (Entries <= *LenPtr)) {        /* must expand array, expand by FileArrayExpand */
-        (*LenPtr) += FileArrayExpand;
+    if( ! (Entries <= *LenPtr)) {        /* must expand array, geometric growth */
+        int OldLen = *LenPtr;
+        (*LenPtr) *= 2;
         /* FI_FloatCopy expands array, old array is removed, returns ptr. to new array */
-        *FloatFieldPtr = FI_FloatCopy(*FloatFieldPtr, (*LenPtr)-FileArrayExpand, *LenPtr);
+        *FloatFieldPtr = FI_FloatCopy(*FloatFieldPtr, OldLen, *LenPtr);
         FloatPos = (*FloatFieldPtr)+Entries;        /* reset pointer to next free element */
     }
     for(ActBack = Back; *ActBack; ActBack++)
@@ -679,10 +683,11 @@ register int Entries;         /* strings read before - used to return result val
         for(; Lower < Upper && ! ISSTRINGCOMP(*Lower); Lower++)
             if(*Lower == '\n') IOLine ++;                   /* look for begin of next string */
         if(Lower < Upper) {                                  /* begin of a new string found */
-            if( ! (Entries <= *LenPtr)) {       /* must expand array, expand by FileArrayExpand */
-                (*LenPtr) += FileArrayExpand;
+            if( ! (Entries <= *LenPtr)) {       /* must expand array, geometric growth */
+                int OldLen = *LenPtr;
+                (*LenPtr) *= 2;
                 /* FI_StringCopy expands array, old array is removed, returns ptr. to new array */
-                *StringFieldPtr = FI_StringCopy(*StringFieldPtr, (*LenPtr)-FileArrayExpand, *LenPtr);
+                *StringFieldPtr = FI_StringCopy(*StringFieldPtr, OldLen, *LenPtr);
                 ActElem = (*StringFieldPtr)+Entries - 1;  /* reset pointer to next free element */
             }
             for(End = Lower; End <= Upper && ISSTRINGCOMP(*End); End++)
@@ -761,10 +766,11 @@ int *LenPtr;                                  /* actual pointer to array of stri
         return ActFront;
     }
     /* read string - check if there's been an i/o-error */
-    if( ! (Entries <= *LenPtr)) {       /* must expand array, expand by FileArrayExpand */
-        (*LenPtr) += FileArrayExpand;
+    if( ! (Entries <= *LenPtr)) {       /* must expand array, geometric growth */
+        int OldLen = *LenPtr;
+        (*LenPtr) *= 2;
         /* FI_StringCopy expands array, old array is removed, returns ptr. to new array */
-        *StringFieldPtr = FI_StringCopy(*StringFieldPtr, (*LenPtr)-FileArrayExpand, *LenPtr);
+        *StringFieldPtr = FI_StringCopy(*StringFieldPtr, OldLen, *LenPtr);
         StringPos = (*StringFieldPtr)+Entries - 1;  /* reset pointer to next free element */
     }
     *StringPos = STR_Save(Back);                            /* copy input into array value */
@@ -1146,7 +1152,7 @@ ParserStackType *MSep, *LSep;                                 /* separator strin
     } else {                                        /* end of map line, generate new line */
         (*LNo) ++;
         if(*LNo > *LMax) {           /* allocated maap lines have been filled, expand array */
-            (*LMax) += AddMapLines;                  /* increment ctr. of allocated map lines */
+            (*LMax) *= 2;                  /* geometric growth of allocated map lines */
 
             Head->mLines = (MapLineType *)
                            realloc((char *) Head->mLines, (unsigned) (*LMax) * sizeof(MapLineType));

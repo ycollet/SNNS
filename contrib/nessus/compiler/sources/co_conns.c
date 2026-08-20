@@ -309,7 +309,7 @@ ConnectionType *OldTable;
         return;                                            /* not necessary to expand table */
     else {                        /* expand new table, allocate new ConnectionType record */
         NewTable = (ConnectionType *) M_alloc(sizeof(ConnectionType));
-        NewTable->Size = OldTable->Size + ExpandTarget;                /* new size of table */
+        NewTable->Size = OldTable->Size * 2;    /* geometric growth for amortized O(N) rehashing */
         NewTable->Prime = SYM_GetNewPrime((int) NewTable->Size);        /* new mod value */
         NewTable->Entries = OldTable->Entries;
         NewTable->Targets = (TargetUnitType *) M_alloc((unsigned) (sizeof(TargetUnitType) *
@@ -354,7 +354,7 @@ TargetSiteType *OldSite;
         return OldSite;                                    /* not necessary to expand table */
     else {                        /* expand new table, allocate new TargetSiteType record */
         NewSite = (TargetSiteType *) M_alloc(sizeof(TargetSiteType));
-        NewSite->tInput.Size = OldSite->tInput.Size + ExpandSource;       /* new size */
+        NewSite->tInput.Size = OldSite->tInput.Size * 2;    /* geometric growth for amortized O(N) rehashing */
         NewSite->tInput.Prime = SYM_GetNewPrime((int) NewSite->tInput.Size);  /* new mod */
         NewSite->tInput.Entries = OldSite->tInput.Entries;  /* is incremented by CONN_LookUpSource */
         NewSite->tNext = OldSite->tNext;
