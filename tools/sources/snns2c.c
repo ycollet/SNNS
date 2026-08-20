@@ -65,7 +65,14 @@
 #define MIN(a, b) ( (a < b) ? (a) : (b) )
 
 /* Macro for releasing memory of units and layers */
-#define FREE_ALL freeUnits(Units); freeLayers(Layers); free(TDNN_prot);
+#define FREE_ALL freeUnits(Units); freeLayers(Layers); free(TDNN_prot); \
+                 free(unitIndexMap); unitIndexMap = NULL;
+
+/* Prebuilt map from SNNS unit number to the index in the global Units[] array.
+   searchUnit() uses it (when non-NULL) to avoid a linear rescan of the whole
+   unit array on every lookup. */
+static int *unitIndexMap = NULL;   /* unit number -> index in Units[] (-1 = none) */
+static int  unitIndexMax  = -1;    /* largest unit number covered by the map */
 
 /* Status (Error) Codes : OK = 0 (NO Error), ERR = 1, ...  */
 typedef enum { OK, ERR, CANT_ADD, CANT_LOAD, MEM_ERR,
@@ -380,12 +387,51 @@ int get_Prototype_Unit(int UnitNr) {
 pUnit searchUnit(int UnitNr, pUnit globalUnits, int *index) {
     pUnit unit;
 
+    /* Fast path: resolve through the prebuilt number->index map when it is
+       available. It is only built once the Units[] array is final, so during
+       earlier phases (e.g. divideNet) the linear scan below is used. */
+    if (unitIndexMap != NULL) {
+        int idx = (UnitNr >= 0 && UnitNr <= unitIndexMax) ? unitIndexMap[UnitNr] : -1;
+        if (idx < 0) return (NULL);
+        *index = idx;
+        return (globalUnits + idx);
+    }
+
     *index = 0;
     for (unit = globalUnits; unit->number > 0; unit++, (*index)++) {
         if (unit->number == UnitNr) return (unit);
     }
 
     return(NULL);
+}
+
+
+/****************************************************************************
+  void buildUnitIndexMap(pUnit Units, int NoOfUnits)
+  ---------------------------------------------------------------------------
+  builds the number->index lookup map used by searchUnit(). Must be called
+  once the Units[] array is final (numbers assigned, count settled).
+****************************************************************************/
+static void buildUnitIndexMap(pUnit Units, int NoOfUnits) {
+    int i;
+
+    free(unitIndexMap);
+    unitIndexMap = NULL;
+    unitIndexMax = -1;
+
+    for (i = 0; i < NoOfUnits; i++)
+        if (Units[i].number > unitIndexMax)
+            unitIndexMax = Units[i].number;
+
+    if (unitIndexMax < 0) return;              /* no units, keep linear fallback */
+
+    unitIndexMap = malloc((unitIndexMax + 1) * sizeof(int));
+    if (unitIndexMap == NULL) return;          /* fall back to linear searchUnit */
+
+    for (i = 0; i <= unitIndexMax; i++)
+        unitIndexMap[i] = -1;
+    for (i = 0; i < NoOfUnits; i++)
+        unitIndexMap[Units[i].number] = i;
 }
 
 
@@ -677,7 +723,9 @@ int prepareCpnUnits(pUnit globalUnits, pLayer globalLayers) {
         for(sourceNr = 0; sourceNr < NoOf(dest->sources); sourceNr++) {
             pUnit source = searchUnit(element(dest->sources,sourceNr), globalUnits, &dummy);
             if (source == NULL) return (NO_CPN);
+#ifdef debug
             printUnit(source);
+#endif
             source->dest[memberNr] = dest->weights[sourceNr];
             source->NoOfDest = NoOf(OutputLayer->members);
         }
@@ -2144,6 +2192,11 @@ int main(int argc, char **argv) {
         Units[nr].index = nr;
     }
     NoOfUnits = nr;
+
+    /* The Units[] array is now final: build the number->index map so the
+       searchUnit() calls below (CPN weight copying, TDNN renumbering and net
+       writing) run in O(1) instead of rescanning the array every time. */
+    buildUnitIndexMap(Units, NoOfUnits);
 
 #ifdef debug
     for(nr = 0; nr < NoOfLayers; printLayer(Layers + nr++) );

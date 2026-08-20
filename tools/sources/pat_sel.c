@@ -39,12 +39,11 @@
   UPDATE   :
 ******************************************************************************/
 int mysort(const void *a, const void *b) {
-    if( (int *)a < (int *)b )
-        return -1;
-    else if( (int *)a > (int *)b )
-        return 1;
-    else
-        return 0;
+    int ia = *(const int *)a;
+    int ib = *(const int *)b;
+
+    /* ascending order of the pointed-to pattern numbers */
+    return (ia > ib) - (ia < ib);
 }
 
 

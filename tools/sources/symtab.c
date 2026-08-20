@@ -38,6 +38,74 @@
 #endif
 
 /*****************************************************************************
+  FUNCTION : st_hashval
+
+  PURPOSE  : compute a hash value for a symbol name (djb2)
+  RETURNS  : the hash value
+  NOTES    : internal helper for the name->index hash index
+
+  UPDATE   :
+******************************************************************************/
+static unsigned long st_hashval(const char *name) {
+    unsigned long h = 5381UL;
+    unsigned char c;
+
+    while ((c = (unsigned char) *name++) != 0)
+        h = ((h << 5) + h) + c;         /* h * 33 + c */
+
+    return h;
+}
+
+
+/*****************************************************************************
+  FUNCTION : st_hash_put
+
+  PURPOSE  : insert the st[] entry at index idx into the hash index
+  RETURNS  :
+  NOTES    : open addressing with linear probing; the name field of st[idx]
+             must already be set
+
+  UPDATE   :
+******************************************************************************/
+static void st_hash_put(St_ptr_type idx) {
+    size_t mask = st_hash_size - 1;
+    size_t h = (size_t) (st_hashval(st[idx].name) & mask);
+
+    while (st_hash[h] != ST_NULL)
+        h = (h + 1) & mask;
+
+    st_hash[h] = idx;
+}
+
+
+/*****************************************************************************
+  FUNCTION : st_hash_build
+
+  PURPOSE  : (re)allocates the hash index at new_size slots and re-inserts
+             all existing symbol table entries
+  RETURNS  :
+  NOTES    : new_size must be a power of two; frees the old hash index
+
+  UPDATE   :
+******************************************************************************/
+static void st_hash_build(size_t new_size) {
+    size_t i;
+    St_ptr_type idx;
+
+    free(st_hash);                      /* free(NULL) is safe */
+    st_hash = malloc(new_size * sizeof (St_ptr_type));
+    if (st_hash == NULL) err_prt(ERR_MEM);
+
+    st_hash_size = new_size;
+    for (i = 0; i < st_hash_size; i++)
+        st_hash[i] = ST_NULL;
+
+    for (idx = 0; idx < st_pos; idx++)
+        st_hash_put(idx);
+}
+
+
+/*****************************************************************************
   FUNCTION : st_init
 
   PURPOSE  : allocates memory for the symbol table
@@ -54,6 +122,10 @@ void st_init(void) {
 
     st = malloc(st_size * sizeof (St_type));
     if (st == NULL) err_prt(ERR_MEM);
+
+    /* start with an empty table and a fresh hash index: */
+    st_pos = 0;
+    st_hash_build((size_t) ST_HASH_INIT);
 
     /* insert constants, built-in variables and functions here:
 
@@ -317,8 +389,9 @@ St_ptr_type st_insert(const char *name) {
 
     /* allocate new memory if necessary: */
     if(st_pos == st_size) {
-        /* increase the size of st: */
-        new_st_size = st_size + ST_SIZE_ADD;
+        /* increase the size of st multiplicatively (double) so that the total
+           copying cost across all growths stays amortized O(1) per insert: */
+        new_st_size = st_size * 2;
         /* reallocate memory with self-made realloc-function: */
         st = re_malloc(st,
                        (size_t) (st_size * sizeof (St_type)),
@@ -332,7 +405,7 @@ St_ptr_type st_insert(const char *name) {
 
     /* insert name in the ST name field: */
     st[st_pos].name = malloc(strlen(name) + 1);
-    if (st == NULL) err_prt(ERR_MEM);
+    if (st[st_pos].name == NULL) err_prt(ERR_MEM);
 
     strcpy(st[st_pos].name, name);
 
@@ -340,6 +413,14 @@ St_ptr_type st_insert(const char *name) {
     st[st_pos].type = UNKNOWN;
     /* let it be read-write: */
     st[st_pos].read_only = FALSE;
+
+    /* keep the hash index load factor below 3/4; double it (rehashing the
+       existing entries) before it gets too full: */
+    if ((size_t) (st_pos + 1) * 4 >= st_hash_size * 3)
+        st_hash_build(st_hash_size * 2);
+
+    /* register the new entry in the hash index: */
+    st_hash_put(st_pos);
 
     return st_pos ++;
 }
@@ -355,12 +436,21 @@ St_ptr_type st_insert(const char *name) {
   UPDATE   :
 ******************************************************************************/
 St_ptr_type st_lookup(const char *name) {
-    St_ptr_type tmp = 0;
+    size_t mask, h;
+    St_ptr_type idx;
 
-    while ((tmp < st_pos) && (strcmp(name, st[tmp].name) != 0)) tmp++;
+    if (st_hash == NULL) return ST_NULL;   /* table not initialised yet */
 
-    if (tmp < st_pos) return tmp;
-    else return ST_NULL;
+    mask = st_hash_size - 1;
+    h = (size_t) (st_hashval(name) & mask);
+
+    /* probe linearly until the name or an empty slot is found: */
+    while ((idx = st_hash[h]) != ST_NULL) {
+        if (strcmp(name, st[idx].name) == 0) return idx;
+        h = (h + 1) & mask;
+    }
+
+    return ST_NULL;
 }
 
 

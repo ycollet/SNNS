@@ -431,6 +431,20 @@ static void create_snns_unit(void)
         x_begin = calculate_x_begin(&new_x_begin,&old_x_begin,
                                     &x_max,width,pos);
 
+        /* The connection type depends only on plane_no, which is constant for
+           the whole plane, so scan the link-definitions list just once here
+           instead of rescanning it for every unit in the width x height loop. */
+        connection_type = 0;
+        found = FALSE;
+        TD_LINK_Element = TD_LINK_first_element;
+        do {
+            if (TD_LINK_Element->TARGET.plane == plane_no) {
+                connection_type=TD_LINK_Element->type_of_connection;
+                found = TRUE;
+            }
+            TD_LINK_Element=TD_LINK_Element->next;
+        } while ((TD_LINK_Element != NULL) && (!found));
+
         for(y=0; y<height; y++) {
             for(x=0; x<width; x++) {
                 unit_no = krui_createUnit("td", "Out_Identity",
@@ -445,17 +459,6 @@ static void create_snns_unit(void)
                     fprintf(stderr, "%s", krui_error(ret));
                     exit(1);
                 }
-
-                connection_type = 0;
-                found = FALSE;
-                TD_LINK_Element = TD_LINK_first_element;
-                do {
-                    if (TD_LINK_Element->TARGET.plane == plane_no) {
-                        connection_type=TD_LINK_Element->type_of_connection;
-                        found = TRUE;
-                    }
-                    TD_LINK_Element=TD_LINK_Element->next;
-                } while ((TD_LINK_Element != NULL) && (!found));
 
                 unit_ptr->TD.target_offset = -y*width;
                 unit_ptr->TD.source_offset = 0;

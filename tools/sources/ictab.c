@@ -82,8 +82,9 @@ void inc_ic_pos(void) {
     if (ic_pos == ictab_size-1) {
         D( printf("re_malloc ictab\n"); )
 
-        /* increase the size of ictab: */
-        new_ictab_size = ictab_size + ICTAB_SIZE_ADD;
+        /* increase the size of ictab multiplicatively (double) to keep the
+           total copying cost of the growing tables amortized O(M): */
+        new_ictab_size = ictab_size * 2;
 
         /* reallocate memory with self-made realloc-function: */
         ic_list = re_malloc(ic_list,

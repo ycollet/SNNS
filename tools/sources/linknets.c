@@ -1006,6 +1006,8 @@ int create_and_save_network(char *NetFileName, pUnit Units, int NoOfUnits) {
     int i, j;
     krui_err krerr;
     pUnit suP;
+    pUnit *byNumber;    /* unit number -> unit pointer index */
+    int   maxNumber;    /* largest unit number in the array */
 
     struct PosType unitpos;
 
@@ -1026,20 +1028,42 @@ int create_and_save_network(char *NetFileName, pUnit Units, int NoOfUnits) {
         krui_setUnitPosition(Units[i].kernel_nr, &unitpos);
     }
 
+    /* Build a number->unit index once, so the link save loop below does not
+       have to linearly rescan the whole unit array (getpUnit) for every link
+       of every unit. Unit numbers are non-negative and bounded, so a direct
+       lookup array indexed by unit number is the simplest and fastest map. */
+    maxNumber = -1;
+    for (i=0; i<NoOfUnits; i++)
+        if (Units[i].number > maxNumber)
+            maxNumber = Units[i].number;
+
+    byNumber = (pUnit *) calloc(maxNumber + 1, sizeof(pUnit));  /* NULL init */
+    if (!byNumber) {
+        checkErr(MEM_ERR);
+        return MEM_ERR;
+    }
+    for (i=0; i<NoOfUnits; i++)
+        byNumber[Units[i].number] = &Units[i];
+
     for (i=0; i<NoOfUnits; i++) {
         if (Units[i].sources) {
             if ((krerr=krui_setCurrentUnit(Units[i].kernel_nr)) != KRERR_NO_ERROR)
                 KR_ERROR_RETURN(krerr);
             for (j=0; j<Units[i].sources->no; j++) {
-                suP = getpUnit(Units, NoOfUnits, Units[i].sources->values[j]);
-                if (!suP)
+                int sn = Units[i].sources->values[j];
+                suP = (sn >= 0 && sn <= maxNumber) ? byNumber[sn] : NULL;
+                if (!suP) {
+                    free(byNumber);
                     return ERR;
+                }
                 if ((krerr=krui_createLink(suP->kernel_nr,
                                            Units[i].weights[j])) != KRERR_NO_ERROR)
                     KR_ERROR_RETURN(krerr);
             }
         }
     }
+
+    free(byNumber);
 
     if ((krerr=krui_saveNet(NetFileName, "snnslinknet")) != KRERR_NO_ERROR)
         KR_ERROR_RETURN(krerr);

@@ -98,6 +98,8 @@ char *newtmp(void);
 
 /* begin private definition section */
 
+#define ST_HASH_INIT 256      /* initial size of the name->index hash index
+				         (must be a power of two) */
 #define ST_SIZE_ADD 100       /* number of ST entries allocated at first and
 			         increment size of ST memory reallocation */
 #define TMP_STR     "tmp"     /* suffix of temporary variable names */
@@ -119,7 +121,17 @@ static St_type *st = NULL;              /* the symbol table */
 static St_ptr_type st_pos = 0;          /* the pointer to the entries */
 static size_t st_size = ST_SIZE_ADD;    /* and the current size */
 
+/* Hash index over the (append-only) symbol table: st_hash[h] holds an index
+   into st[] (or ST_NULL for an empty slot). The dense st[] array keeps every
+   entry at a fixed position, so the St_ptr_type handles returned by
+   st_insert/st_lookup stay valid even when the hash index is rebuilt. */
+static St_ptr_type *st_hash = NULL;     /* name -> st[] index hash index */
+static size_t st_hash_size = 0;         /* size of st_hash (power of two) */
+
 static void st_out(void);
+static unsigned long st_hashval(const char *name);
+static void st_hash_put(St_ptr_type idx);
+static void st_hash_build(size_t new_size);
 
 /* end private definition section */
 
