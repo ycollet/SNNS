@@ -3604,7 +3604,7 @@ GROUP: other functions
 ******************************************************************************/
 
 float kr_NA_Error(int currentPattern, int error_unit, int error, bool ave) {
-    register struct   Unit *unit_ptr, *error_unit_ptr ;
+    register struct   Unit *unit_ptr, *error_unit_ptr = NULL ;
     register Patterns       out_pat  ;
     register float          error_lin, error_sqr, error_su, devit ;
     int                     pattern_no, sub_pat_no;

@@ -561,6 +561,7 @@ bool  kram_AllMapUnitsActive (void) {
         if ((*topo_ptr)->act < 0.9) {
             return (FALSE);
         } /*if*/
+        topo_ptr++;
     } /*while*/
 
     return (TRUE);

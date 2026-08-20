@@ -290,12 +290,12 @@ static void pr_mag_processLink (struct Unit *unit_ptr, struct Link *link_ptr)
 {
 
     if ((pr_candidateLink == NULL) ||
-            (abs (link_ptr->weight) < pr_candidateSaliency))
+            (fabs (link_ptr->weight) < pr_candidateSaliency))
         /* found first or least important link so far */
     {
         pr_candidateTargetUnit = unit_ptr;
         pr_candidateLink = link_ptr;
-        pr_candidateSaliency = abs (link_ptr->weight);
+        pr_candidateSaliency = fabs (link_ptr->weight);
     }
 
 }
