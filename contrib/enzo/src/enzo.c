@@ -105,9 +105,9 @@ static ModuleTableEntry preTable       [MAX_LTABLE_ENTRIES],
 
 /* poulations for the GA to work with                                         */
 
-static PopID parents    = NULL,
-             offsprings = NULL,
-             reference  = NULL;  /* contains the max. network                 */
+static PopID parents    = 0,
+             offsprings = 0,
+             reference  = 0;  /* contains the max. network                 */
 
 static FILE *lfp;      /* log-file-pointer */
 
@@ -192,7 +192,7 @@ static void broadcast_message( char *msg, int ignore_active, void *data ) {
     }
 }
 
-void catch_signal( void ) {
+void catch_signal( int sig ) {
     enzo_logprint( "\n\ncought a signal, stopping evolution!\n\n" );
     signal_evolution = TRUE;
     return;

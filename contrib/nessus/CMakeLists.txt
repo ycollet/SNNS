@@ -26,7 +26,7 @@ find_package(FLEX  REQUIRED)
 
 bison_target(nessus_parse compiler/sources/Syntax.y ${CMAKE_BINARY_DIR}/co_parser.c
              COMPILE_FLAGS "-d -t -y -p pp"
-             DEFINES_FILE ${CMAKE_BINARY_DIR}/y.tab.h)
+             DEFINES_FILE ${CMAKE_BINARY_DIR}/nessus_y.tab.h)
 flex_target(nessus_scan compiler/sources/Tokens.l ${CMAKE_BINARY_DIR}/co_scanner.c)
 add_flex_bison_dependency(nessus_scan nessus_parse)
 

@@ -31,6 +31,7 @@
 
 #include "kr_typ.h"	 /*  Kernel Types and Constants  */
 #include "kernel.h"
+#include "kr_ui.h"	 /*  SNNS-Kernel User Interface Function Prototypes  */
 #include "kr_const.h"	 /*  Constant Declarators for SNNS-Kernel  */
 #include "kr_def.h"	 /*  Default Values  */
 

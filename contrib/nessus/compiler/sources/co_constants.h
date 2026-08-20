@@ -22,7 +22,7 @@
 #include <ctype.h>
 #include <math.h>
 #include <stdio.h>
-#include <malloc.h>
+#include <stdlib.h>
 #include <string.h>
 //#include <struct.h>
 #include <time.h>

@@ -45,8 +45,8 @@ static Widget   *class_LabelW, class_newLab,
                 class_box, class_onOffW[2];
 
 static void class_doneProc(Widget w, Widget kill_it, caddr_t call_data);
-static void class_onOffProc(Widget w, int value, caddr_t call_data);
-static void class_defProc(Widget w, int value, caddr_t call_data);
+static void class_onOffProc(Widget w, bool value, caddr_t call_data);
+static void class_defProc(Widget w, bool value, caddr_t call_data);
 static void create_classBody(pattern_set_info patt_info);
 
 /* end private definition section */

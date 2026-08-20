@@ -97,6 +97,7 @@ extern int ksh_propagate_pattern( int patno  );
 */
 
 extern void ksh_get_epoch_error ( float *tss, int *thamdis );
+extern void ksh_get_pattern_error ( int patno, float *pss, int *phamdis );
 extern void ksh_get_target_pattern ( int patno );
 
 /************************************************************/

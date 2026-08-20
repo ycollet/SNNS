@@ -344,13 +344,13 @@ snns_deleteAllPatterns(PyObject *self, PyObject *arg)
 static PyObject *
 snns_shufflePatterns(PyObject *self, PyObject *arg)
 {
-	return snns_int_arg_with_err(arg,krui_shufflePatterns);
+	return snns_int_arg_with_err(arg,(int_arg_with_err_func)krui_shufflePatterns);
 }
 
 static PyObject *
 snns_shuffleSubPatterns(PyObject *self, PyObject *arg)
 {
-	return snns_int_arg_with_err(arg,krui_shuffleSubPatterns);
+	return snns_int_arg_with_err(arg,(int_arg_with_err_func)krui_shuffleSubPatterns);
 }
 
 static PyObject *
@@ -852,7 +852,7 @@ snns_deletePatSet(PyObject *self, PyObject *arg)
 static PyObject *
 snns_useClassDistribution(PyObject *self, PyObject *arg)
 {
-	return snns_int_arg_with_err(arg,krui_useClassDistribution);
+	return snns_int_arg_with_err(arg,(int_arg_with_err_func)krui_useClassDistribution);
 }
 
 static PyObject *

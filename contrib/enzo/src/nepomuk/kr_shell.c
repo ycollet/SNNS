@@ -58,7 +58,6 @@
 #include <sys/times.h>
 #include <sys/utsname.h>
 #include <math.h>
-#include <malloc.h>
 
 #include "glob_typ.h"
 
@@ -69,7 +68,7 @@
 #include "kernel.h"       /*  kernel function prototypes  */
 #include "kr_mac.h"       /*  Kernel Macros   */
 #include "enzo_mem_typ.h" /*  PutNet and GetNet data structures */
-/*#include "enzo_mem_ext.h"*/ /*  PutNet and GetNet functionality */
+#include "kr_mem.h"       /*  PutNet and GetNet functionality (krm_*) */
 
 #include "kr_shell.h"
 

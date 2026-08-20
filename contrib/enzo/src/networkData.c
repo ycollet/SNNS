@@ -50,7 +50,7 @@
 
 #include "enzo.h"
 
-static idCnt = 0;
+static int idCnt = 0;
 
 /* --- netData_getNewNetData() ---------------------------------------------- */
 /*                                                                            */
