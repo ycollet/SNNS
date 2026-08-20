@@ -130,27 +130,34 @@ int getIndexAlive() {
 /*---------------------------------------------------------------------------*/
 
 int areConnectedInRef ( int unit1, int  unit2) {
-    NetID activeNet;
     char *name1, *name2;
-    int ref1,ref2;
-    int rv = FALSE;
-    float weight;
+    int ref1 = 0, ref2 = 0;
+    int i;
 
+    /* name1/name2 are read from the CURRENT (offspring) net.               */
     name1 = ksh_getUnitName(unit1);
     name2 = ksh_getUnitName(unit2);
 
-    activeNet = kpm_getCurrentNet ();
-    kpm_setCurrentNet ( refNet );
+    /* Resolve the corresponding reference-net unit numbers and the         */
+    /* connectivity directly from refDesc, which is a fixed snapshot of     */
+    /* refNet. This avoids swapping refNet into the kernel (a full network  */
+    /* copy) twice on every call, which happened once per (pred,succ) pair. */
+    for (i = 0; i < refDesc.no_of_units; i++) {
+        if (name1 && refDesc.units[i].name &&
+                strcmp(refDesc.units[i].name, name1) == 0)
+            ref1 = refDesc.units[i].number;
+        if (name2 && refDesc.units[i].name &&
+                strcmp(refDesc.units[i].name, name2) == 0)
+            ref2 = refDesc.units[i].number;
+    }
 
-    ref1 = ksh_searchUnitName (name1);
-    ref2 = ksh_searchUnitName (name2);
+    if (ref1 && ref2)
+        for (i = 0; i < refDesc.no_of_links; i++)
+            if (refDesc.weights[i].source == ref1 &&
+                    refDesc.weights[i].target == ref2)
+                return ( TRUE );
 
-    if ((ref1) && (ref2) && (ksh_areConnectedWeight( ref1, ref2, &weight)))
-        rv = TRUE;
-
-    kpm_setCurrentNet (activeNet);
-
-    return ( rv );
+    return ( FALSE );
 }
 
 /*---------- deleteUnitWithBypass -------------------------------------------*/
@@ -331,11 +338,17 @@ void setSNNSUnitInformations (int unit_no, int index) {
 
 int createAllNewLinks ( int unit_no, int index ) {
     int i,unit2, add = 0;
-    char *uname;
+    int *refMap;
+
+    /* Map reference-net units to offspring unit numbers once, instead of a  */
+    /* linear ksh_searchUnitName() scan for every relevant link.             */
+    refMap = (int *) malloc( sizeof(int) * refDesc.no_of_units );
+    for (i = 0; i < refDesc.no_of_units; i++)
+        refMap[i] = ksh_searchUnitName( refDesc.units[i].name );
+
     for (i = 0; i < refDesc.no_of_links; i++) {
         if (refDesc.weights[i].target == (index+1) ) {
-            uname = refDesc.units[ refDesc.weights[i].source - 1 ].name;
-            unit2 = ksh_searchUnitName(uname);
+            unit2 = refMap[ refDesc.weights[i].source - 1 ];
 
             /* only source-units can be dead inputunits                */
             if ((!unit2) || subul_deadInputUnit (unit2))  /*corrected masch 5.94*/
@@ -345,8 +358,7 @@ int createAllNewLinks ( int unit_no, int index ) {
             ksh_createLink( unit2, RANDOM ( -range, range ));
             add ++;
         } else if (refDesc.weights[i].source == (index + 1)) {
-            uname = refDesc.units[refDesc.weights[i].target -1].name;
-            unit2 = ksh_searchUnitName(uname);
+            unit2 = refMap[ refDesc.weights[i].target - 1 ];
             if (!unit2)
                 continue;
             ksh_setCurrentUnit ( unit2 );
@@ -354,6 +366,7 @@ int createAllNewLinks ( int unit_no, int index ) {
             add++;
         }
     } /*endfor all links */
+    free( refMap );
     return ( add );
 }
 
@@ -453,13 +466,11 @@ int mutUnits_work( PopID *parents, PopID *offsprings, PopID *reference ) {
 
     FOR_ALL_OFFSPRINGS ( activeMember ) {
         data = kpm_getNetData ( activeMember );
-        kpm_getNetDescr (activeMember, &activeDesc );
         add = delete = byp = 0;
 
         /* First test if a mutation takes place                         */
 
         if (RAND_01 > prob) {
-            kpm_freeNetDescr ( &activeDesc );
             continue;
         }
 
@@ -468,7 +479,6 @@ int mutUnits_work( PopID *parents, PopID *offsprings, PopID *reference ) {
             unit_no = getDeletedUnitIndex ( &index );
 
             if (index == -1) {
-                kpm_freeNetDescr ( &activeDesc );
                 continue;
             }
             /* check if the added unit is an inputunit (exist) or not    */
@@ -483,6 +493,11 @@ int mutUnits_work( PopID *parents, PopID *offsprings, PopID *reference ) {
         } /* endif add unit */
 
         else {
+            /* The net description is only needed by getIndexAlive() in   */
+            /* this branch, so fetch (and free) it here instead of for    */
+            /* every offspring.                                           */
+            kpm_getNetDescr (activeMember, &activeDesc );
+
             maxIndex = getIndexAlive();
             if (!maxIndex) {
                 kpm_freeNetDescr ( &activeDesc );
@@ -510,9 +525,9 @@ int mutUnits_work( PopID *parents, PopID *offsprings, PopID *reference ) {
             else
 
                 delete = deleteUnit (index);
-        }
 
-        kpm_freeNetDescr ( &activeDesc );
+            kpm_freeNetDescr ( &activeDesc );
+        }
 
     } /* endfor FOR ALL OFFSPRINGS */
 

@@ -120,7 +120,20 @@ int linCross_work( PopID *parents, PopID *offsprings, PopID *reference ) {
     float weight1, weight2;
     int i, in1, in2;
     int source1, source2, target1, target2;
-    char *uname1,*uname2;
+    int *offMap, *par2Map;
+    int *in2buf;
+    float *w2buf;
+
+    /* Per-reference-unit lookup maps (offspring and parent2), plus buffers  */
+    /* holding parent2's connection info for every relevant link. These let  */
+    /* us make parent2 current only ONCE per offspring (instead of two full  */
+    /* network swaps per INPUT->OUTPUT link) and avoid a fresh linear        */
+    /* ksh_searchUnitName() scan for every link.                             */
+
+    offMap  = (int *)   malloc( sizeof(int)   * refDesc.no_of_units );
+    par2Map = (int *)   malloc( sizeof(int)   * refDesc.no_of_units );
+    in2buf  = (int *)   malloc( sizeof(int)   * refDesc.no_of_links );
+    w2buf   = (float *) malloc( sizeof(float) * refDesc.no_of_links );
 
     /* using a Nepomuk-macro to step over all offspring-nets            */
 
@@ -128,48 +141,65 @@ int linCross_work( PopID *parents, PopID *offsprings, PopID *reference ) {
 
     {
         if (kpm_setCurrentNet( activeMember ) != KPM_NO_ERROR) {
+            free( offMap );
+            free( par2Map );
+            free( in2buf );
+            free( w2buf );
             return ( ERROR_ACTIVATE );
         }
 
         data = kpm_getNetData ( activeMember );
 
-        /* Just testing all links from the reference-net                */
+        /* --- Pass 1: collect parent2's connection info in a single swap --- */
+
+        kpm_setCurrentNet( data->parent2 );
+
+        for (i = 0; i < refDesc.no_of_units; i++)
+            par2Map[i] = ksh_searchUnitName( refDesc.units[i].name );
+
+        for (i = 0; i < refDesc.no_of_links; i++) {
+            in2buf[i] = 0;
+            if ((refDesc.units[ refDesc.weights[i].source-1 ].TType == INPUT) &&
+                    (refDesc.units[ refDesc.weights[i].target-1 ].TType == OUTPUT)) {
+                source2 = par2Map[ refDesc.weights[i].source - 1 ];
+                target2 = par2Map[ refDesc.weights[i].target - 1 ];
+                if ( ksh_areConnectedWeight ( source2, target2, &weight2 ) ) {
+                    in2buf[i] = 1;
+                    w2buf[i]  = weight2;
+                }
+            }
+        }
+
+        /* --- Pass 2: apply the crossover on the offspring (single swap) --- */
+
+        kpm_setCurrentNet( activeMember );
+
+        for (i = 0; i < refDesc.no_of_units; i++)
+            offMap[i] = ksh_searchUnitName( refDesc.units[i].name );
 
         for (i = 0; i < refDesc.no_of_links; i++) {
 
             if ((refDesc.units[ refDesc.weights[i].source-1 ].TType == INPUT) &&
                     (refDesc.units[ refDesc.weights[i].target-1 ].TType == OUTPUT)) {
-                in1 = in2 = 0;
-                uname1 = refDesc.units[ refDesc.weights[i].source - 1 ].name;
-                uname2 = refDesc.units[ refDesc.weights[i].target - 1 ].name;
+                in1 = 0;
+                source1 = offMap[ refDesc.weights[i].source - 1 ];
+                target1 = offMap[ refDesc.weights[i].target - 1 ];
 
-                /* Testing Connection in parent1                          */
-
-                source1 = ksh_searchUnitName(uname1);
-                target1 = ksh_searchUnitName(uname2);
+                /* Testing Connection in parent1 (the offspring itself);     */
+                /* this also sets the current unit/link for the operations   */
+                /* below, so no redundant re-test is needed.                 */
 
                 if ( ksh_areConnectedWeight ( source1, target1, &weight1 ) )
                     in1 = 1;
 
-                /* Testing Connection in in parent2                        */
-
-                kpm_setCurrentNet( data->parent2 );
-
-                source2 = ksh_searchUnitName(uname1);
-                target2 = ksh_searchUnitName(uname2);
-
-                if ( ksh_areConnectedWeight ( source2, target2, &weight2 ) )
-                    in2 = 1;
-
-                kpm_setCurrentNet( activeMember );
+                in2     = in2buf[i];
+                weight2 = w2buf[i];
 
                 if (in1 && in2) {
-                    ksh_areConnectedWeight ( source1, target1, &weight1 );
                     ksh_setLinkWeight ( (weight1+weight2) * 0.5);
                 }
 
                 else if (in1 && !in2 && (RAND_01 > probCross)) {
-                    ksh_areConnectedWeight ( source1, target1, &weight1 );
                     ksh_deleteLink ();
                 }
 
@@ -183,6 +213,11 @@ int linCross_work( PopID *parents, PopID *offsprings, PopID *reference ) {
         } /* endfor ALL LINKS */
 
     } /* endfor FOR ALL OFFSPRINGS */
+
+    free( offMap );
+    free( par2Map );
+    free( in2buf );
+    free( w2buf );
 
     return( MODULE_NO_ERROR );
 }

@@ -147,7 +147,13 @@ int simpleMut_work( PopID *parents, PopID *offsprings, PopID *reference ) {
     int i;
     int del,add;
     int unit1,unit2;
-    char *uname1,*uname2;
+    int *refMap;
+
+    /* Map each reference-net unit (by index) to the corresponding unit    */
+    /* number in the current offspring, built once per offspring instead   */
+    /* of a fresh linear ksh_searchUnitName() scan for every link.         */
+
+    refMap = (int *) malloc( sizeof(int) * refDesc.no_of_units );
 
     /* using a Nepomuk-macro to step over all offspring-nets            */
 
@@ -155,24 +161,25 @@ int simpleMut_work( PopID *parents, PopID *offsprings, PopID *reference ) {
 
     {
         if (kpm_setCurrentNet( activeMember ) != KPM_NO_ERROR) {
+            free( refMap );
             return ( ERROR_ACTIVATE );
         }
 
         add = del = 0;
         data = kpm_getNetData ( activeMember );
 
+        for (i = 0; i < refDesc.no_of_units; i++)
+            refMap[i] = ksh_searchUnitName( refDesc.units[i].name );
+
         /* Just testing all links from the reference-net                */
 
         for (i = 0; i < refDesc.no_of_links; i++) {
-            /* Search via the unitname the corrosponding units in the    */
-            /* offspring-net                                             */
+            /* Look up the corrosponding units in the offspring-net via  */
+            /* the precomputed reference-unit map.                       */
             /* Be careful : Unitno. don't match Untino. in links !!      */
 
-            uname1 = refDesc.units[ refDesc.weights[i].source - 1 ].name;
-            uname2 = refDesc.units[ refDesc.weights[i].target - 1 ].name;
-
-            unit1 = ksh_searchUnitName(uname1);
-            unit2 = ksh_searchUnitName(uname2);
+            unit1 = refMap[ refDesc.weights[i].source - 1 ];
+            unit2 = refMap[ refDesc.weights[i].target - 1 ];
 
             /* If one of the two units doesn't exist then nothing can    */
             /* happen to the connection.                                 */
@@ -216,6 +223,8 @@ int simpleMut_work( PopID *parents, PopID *offsprings, PopID *reference ) {
         data->histRec.deleted += del;
 
     } /* endfor FOR ALL OFFSPRINGS */
+
+    free( refMap );
 
     return( MODULE_NO_ERROR );
 }

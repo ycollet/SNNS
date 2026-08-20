@@ -129,7 +129,7 @@ int distClass_work ( PopID *parents, PopID *offsprings, PopID *reference ) {
     NetID activeMember;
     NetworkData *data;
     float dist;
-    int i, j, hit, miss, none, noPattern, cnt;
+    int i, j, hit, miss, none, noPattern, cnt, no_out;
 
     if( kpm_setCurrentPattern( testPats ) != KPM_NO_ERROR ) {
         return( ERR_NO_TEST_PATS );
@@ -148,14 +148,16 @@ int distClass_work ( PopID *parents, PopID *offsprings, PopID *reference ) {
             return( ERR_NO_DATA );
         }
 
+        no_out = ksh_no_outputs();   /* constant for this net; cache it */
 
         for( noPattern = 1; noPattern <= cnt; noPattern++) {
             ksh_propagate_pattern ( noPattern);
             ksh_get_target_pattern( noPattern);
 
             dist = 0.0;
-            for( i = 0; i < ksh_no_outputs(); i++ ) {
-                dist += (ksh_target(i)-ksh_netout(i))*(ksh_target(i)-ksh_netout(i));
+            for( i = 0; i < no_out; i++ ) {
+                float t = ksh_target(i), o = ksh_netout(i);
+                dist += (t-o)*(t-o);
             }
 
             if( dist == 0.0 ) {
@@ -167,11 +169,12 @@ int distClass_work ( PopID *parents, PopID *offsprings, PopID *reference ) {
                 continue;
             }
 
-            for( i = 0; i < ksh_no_outputs()
+            for( i = 0; i < no_out
                     && dist > radius;  i++ ) { /* for_all_classes */
                 dist = 0.0;
-                for( j = 0; j < ksh_no_outputs(); j++ ) {
-                    dist += (DELTA(i,j)-ksh_netout(j))*(DELTA(i,j)-ksh_netout(j));
+                for( j = 0; j < no_out; j++ ) {
+                    float d = DELTA(i,j)-ksh_netout(j);
+                    dist += d*d;
                 }
             }
             if( dist < radius ) {

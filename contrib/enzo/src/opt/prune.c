@@ -98,6 +98,8 @@ int prune_work( PopID *parents, PopID *offsprings, PopID *ref ) {
     NetworkData *netData;
     int pruned;
     float th;
+    int  *predbuf;
+    int   npred, k;
 
     if( epochCnt < threshEnd )
         th = threshStart + (thresh - threshStart) * (epochCnt/ (float) threshEnd);
@@ -111,22 +113,31 @@ int prune_work( PopID *parents, PopID *offsprings, PopID *ref ) {
 
         netData->histRec.firstEpochs += netData->histRec.learnEpochs;
 
-        /* note that every connection is checked twice!                        */
+        /* For every unit t, only walk its actual input (predecessor) links   */
+        /* instead of testing all unit pairs (O(units+links) vs O(units^2)).  */
+        /* The small-weight predecessors are collected first, then deleted,   */
+        /* since deleting a link while iterating the predecessor list would   */
+        /* invalidate the kernel's internal link iterator.                    */
+
+        predbuf = (int *) malloc( sizeof(int) * (ksh_getNoOfUnits() + 1) );
 
         for( t = ksh_getFirstUnit(); t != 0; t = ksh_getNextUnit() ) {
-            for( s = ksh_getFirstUnit(); s != 0; s = ksh_getNextUnit() ) {
-                /* s becomes current unit */
-                if( ksh_isConnected( t ) ) { /* connection between (s,t) */
-                    weight = ksh_getLinkWeight();
-                    if( (weight < 0 ? -weight : weight) < th ) {
-                        ksh_deleteLink();
-                        pruned++;
-                    }
+            ksh_setCurrentUnit( t );
+            npred = 0;
+            for( s = ksh_getFirstPredUnit( &weight ); s != 0;
+                    s = ksh_getNextPredUnit( &weight ) ) {
+                if( (weight < 0 ? -weight : weight) < th )
+                    predbuf[ npred++ ] = s;   /* source of link s->t */
+            }
+            for( k = 0; k < npred; k++ ) {
+                if( ksh_isConnected( predbuf[k] ) ) { /* sets current link */
+                    ksh_deleteLink();
+                    pruned++;
                 }
             }
-            ksh_setCurrentUnit( t );  /* getNextUnit() will find the right    */
-            /*  successor again                     */
         }
+
+        free( predbuf );
 
         netData->histRec.pruned    = pruned;
         netData->histRec.threshold = th;

@@ -424,42 +424,41 @@ kpm_err kpm_saveNet( NetID id, char *filename, char *netname ) {
 /* --- kpm_sortNets --------------------------------------------------------- */
 /*                                                                            */
 
+static CmpFct kpm_sort_cmp = NULL;   /* used by kpm_sort_qcmp during a sort */
+
+static int kpm_sort_qcmp( const void *a, const void *b ) {
+    NetID na = *(NetID const *) a;
+    NetID nb = *(NetID const *) b;
+
+    return kpm_sort_cmp( na, nb );
+}
+
 void kpm_sortNets( CmpFct netcmp ) {
-    PopNet *s, *sorted, *last, *net, *l;
+    PopNet *p;
+    NetID  *arr;
+    int     n, i;
 
     if( netcmp == NULL || firstUsedNet == NULL ) return;
 
-    sorted = last = firstUsedNet;
+    /* Collect the used-list into an array, sort it in O(N log N) via qsort  */
+    /* (instead of the former O(N^2) insertion sort), then relink in order. */
 
-    firstUsedNet = firstUsedNet->usedSucc;
-    sorted->usedSucc = NULL; /* End of the sorted list */
+    for( n = 0, p = firstUsedNet; p != NULL; p = p->usedSucc ) n++;
 
-    while( firstUsedNet != NULL ) {
-        net = firstUsedNet;
-        firstUsedNet = firstUsedNet->usedSucc;
+    arr = (NetID *) malloc( n * sizeof(NetID) );
+    if( arr == NULL ) return;   /* leave the list untouched on OOM */
 
-        s = sorted;
-        last->usedSucc = net;
-        l = NULL;
+    for( i = 0, p = firstUsedNet; p != NULL; p = p->usedSucc ) arr[i++] = p;
 
-        while( netcmp( net, s ) > 0 )	{
-            l = s;
-            s = s->usedSucc;
-        }
+    kpm_sort_cmp = netcmp;
+    qsort( arr, n, sizeof(NetID), kpm_sort_qcmp );
+    kpm_sort_cmp = NULL;
 
-        if( s == net ) 	{
-            s->usedSucc = NULL;
-            last = s;
-        } else {
-            last->usedSucc = NULL;
-            net->usedSucc = s;
+    for( i = 0; i < n - 1; i++ ) arr[i]->usedSucc = arr[i+1];
+    arr[n-1]->usedSucc = NULL;
+    firstUsedNet = arr[0];
 
-            if( l != NULL ) l->usedSucc = net;
-            else            sorted      = net;
-        }
-    }
-
-    firstUsedNet = sorted;
+    free( arr );
 }
 
 /*                                                                            */
@@ -751,6 +750,36 @@ NetID kpm_popNextMember( PopID p_id, NetID n_id ) {
                 n_id = n_id->usedSucc ) /* just search */;
         kpm_setCurrentNet( n_id );
         return( n_id );   /* which is NULL in case of not existance */
+    } else return( NULL );
+}
+
+/*                                                                            */
+/* -------------------------------------------------------------------------- */
+
+/* --- kpm_popFirst/NextMemberNC -------------------------------------------- */
+/*                                                                            */
+/*   Like kpm_popFirst/NextMember, but do NOT make the returned net current   */
+/*   (`NC' = no current). Useful for merely counting or indexing a            */
+/*   population without paying a full network copy per step.                  */
+/*                                                                            */
+
+NetID kpm_popFirstMemberNC( PopID p_id ) {
+    NetID n_id;
+
+    if( VALID_POP( p_id ) ) {
+        for( n_id = firstUsedNet;
+                n_id != NULL && n_id->subPop != p_id;
+                n_id = n_id->usedSucc ) /* just search */;
+        return( n_id );
+    } else return( NULL );
+}
+
+NetID kpm_popNextMemberNC( PopID p_id, NetID n_id ) {
+    if( VALID_POP( p_id ) && VALID_NET( n_id ) && n_id->used ) {
+        for( n_id = n_id->usedSucc;
+                n_id != NULL && n_id->subPop != p_id;
+                n_id = n_id->usedSucc ) /* just search */;
+        return( n_id );
     } else return( NULL );
 }
 

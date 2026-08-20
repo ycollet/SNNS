@@ -104,11 +104,14 @@ int preferSel_work( PopID *parents, PopID *offsprings, PopID *reference ) {
 
     off_cnt = 0;
 
-    /* First determine the size of the actual parent population   */
+    /* First determine the size of the actual parent population.          */
+    /* Walk the population list directly (no per-step kpm_setCurrentNet,  */
+    /* which would deep-copy a whole net in/out of the kernel).           */
 
-    FOR_ALL_PARENTS( net )  {
+    for( net = kpm_popFirstMemberNC( *parents );
+            net != NULL;
+            net = kpm_popNextMemberNC( *parents, net ) )
         popsize++;
-    }
 
 
     if( popsize == 0 )    return( ERROR_NO_PARENTS );
@@ -121,33 +124,39 @@ int preferSel_work( PopID *parents, PopID *offsprings, PopID *reference ) {
             index = (int) (pow (RAND_01, preferfactor) * popsize);
         } while (index >= popsize);
 
+        /* Index into the population without swapping nets into the kernel. */
         i = 0;
-        FOR_ALL_PARENTS( net ) {
-            if( i == index ) {
-                oData = utils_getNewNetData();
-                pData = kpm_getNetData( net );
-                oData->histRec.parent1 = pData->histID;
-                oData->parent1         = net;           /* masch 13.05.94 */
+        net = kpm_popFirstMemberNC( *parents );
+        while( net != NULL && i < index ) {
+            net = kpm_popNextMemberNC( *parents, net );
+            i++;
+        }
 
-                /* if there are selected patterns copy them to the offspring */
-                if( pData->selectedPattern ) {
-                    oData->selThresh = pData->selThresh;
-                    oData->selectedPattern = (int *) calloc( no_of_patterns,
-                        sizeof( int )   );
-                    if( !oData->selectedPattern ) {
-                        return( PAT_MEM_ERROR );
-                    }
-                    osp = oData->selectedPattern;
-                    psp = pData->selectedPattern;
-                    for(  k=0; (osp[k] = psp[k]) != 0; k++ ) /* nix */;
+        if( net != NULL ) {
+            /* Only the actually selected parent is made current. */
+            kpm_setCurrentNet( net );
+
+            oData = utils_getNewNetData();
+            pData = kpm_getNetData( net );
+            oData->histRec.parent1 = pData->histID;
+            oData->parent1         = net;           /* masch 13.05.94 */
+
+            /* if there are selected patterns copy them to the offspring */
+            if( pData->selectedPattern ) {
+                oData->selThresh = pData->selThresh;
+                oData->selectedPattern = (int *) calloc( no_of_patterns,
+                    sizeof( int )   );
+                if( !oData->selectedPattern ) {
+                    return( PAT_MEM_ERROR );
                 }
+                osp = oData->selectedPattern;
+                psp = pData->selectedPattern;
+                for(  k=0; (osp[k] = psp[k]) != 0; k++ ) /* nix */;
+            }
 
-                offspring = kpm_copyNet( net, oData );
-                kpm_setPopMember( offspring, *offsprings );
-                off_cnt++;
-                break;
-            } else
-                i++;
+            offspring = kpm_copyNet( net, oData );
+            kpm_setPopMember( offspring, *offsprings );
+            off_cnt++;
         }
     }
 

@@ -361,6 +361,10 @@ extern PopID kpm_getPopID( NetID id );
 extern NetID kpm_popFirstMember( PopID p_id );
 extern NetID kpm_popNextMember ( PopID p_id, NetID n_id );
 
+/* variants that do not make the returned net the current SNNS net */
+extern NetID kpm_popFirstMemberNC( PopID p_id );
+extern NetID kpm_popNextMemberNC ( PopID p_id, NetID n_id );
+
 /*                                                                            */
 /* -------------------------------------------------------------------------- */
 

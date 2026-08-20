@@ -70,7 +70,6 @@ static NetID         refNet;
 static NetDescr      refDesc;     /* Pointer to the description of the       */
 /* reference net, not the net itself       */
 
-static NetDescr      activeDesc;
 static float         prob      = 0.5;
 static float         split     = 0.5;
 static float         range     = 0.5;
@@ -149,11 +148,17 @@ static int getDeletedUnitIndex () {
 
 static int createAllNewLinks ( int unit_no ) {
     int i,unit2, add = 0;
-    char *uname;
+    int *refMap;
+
+    /* Map reference-net units to offspring unit numbers once, instead of a  */
+    /* linear ksh_searchUnitName() scan for every matching link.             */
+    refMap = (int *) malloc( sizeof(int) * refDesc.no_of_units );
+    for (i = 0; i < refDesc.no_of_units; i++)
+        refMap[i] = ksh_searchUnitName( refDesc.units[i].name );
+
     for (i = 0; i < refDesc.no_of_links; i++) {
         if (refDesc.weights[i].source == unit_no) {
-            uname = refDesc.units[refDesc.weights[i].target -1].name;
-            unit2 = ksh_searchUnitName(uname);
+            unit2 = refMap[ refDesc.weights[i].target - 1 ];
             if (!unit2)
                 continue;
             ksh_setCurrentUnit ( unit2 );
@@ -161,6 +166,7 @@ static int createAllNewLinks ( int unit_no ) {
             add++;
         }
     } /*endfor all links */
+    free( refMap );
     return ( add );
 }
 
@@ -242,12 +248,10 @@ int mutInputs_work( PopID *parents, PopID *offsprings, PopID *reference ) {
     {
 
         data = kpm_getNetData ( activeMember );
-        kpm_getNetDescr (activeMember, &activeDesc );
 
         /* First test if a mutation takes place                         */
 
         if (RAND_01 > prob) {
-            kpm_freeNetDescr ( &activeDesc );
             continue;
         }
 
@@ -256,7 +260,6 @@ int mutInputs_work( PopID *parents, PopID *offsprings, PopID *reference ) {
             unit_no = getDeletedUnitIndex ();
 
             if (unit_no == -1) {
-                kpm_freeNetDescr ( &activeDesc );
                 continue;
             }
             /* check if the added unit is an inputunit (exist) or not    */
@@ -268,14 +271,11 @@ int mutInputs_work( PopID *parents, PopID *offsprings, PopID *reference ) {
         else {
             unit_no = getIndexAlive();
             if (unit_no == -1) {
-                kpm_freeNetDescr ( &activeDesc );
                 continue;
             }
             ksh_setCurrentUnit( unit_no );
             ksh_deleteAllOutputLinks();
         }
-
-        kpm_freeNetDescr ( &activeDesc );
 
     } /* endfor FOR ALL OFFSPRINGS */
 
