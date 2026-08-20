@@ -104,6 +104,8 @@ char *addSymbol(Symtab st, char *sym) {
         st->buckets[hash_val] = newNode;
         /* append sym to the end of the order list */
         if(! add(st->order, symCopy)) errorR(1,NULL);
+        /* record the 1-based position of symCopy in the order list */
+        newNode->index = size(st->order);
     }
 
     error = 0;
@@ -139,6 +141,26 @@ char * locateSymbol(Symtab st, char *sym) {
     }
     return NULL;
 }               /* locateSymbol */
+
+
+/*****************************************************/
+/* Return the 1-based position of the symbol sym in  */
+/* the order list of st (i.e. the index that         */
+/* sequence(st) would yield via indexOf). Returns    */
+/* -1L if sym is not contained in st.                */
+/* This is the hashed equivalent of                  */
+/* indexOf(sequence(st), sym).                       */
+/*****************************************************/
+long symbolIndex(Symtab st, char *sym) {
+    struct Node *node;
+
+    node = st->buckets[strhash(sym, st->numBuckets)];
+    while(node) {
+        if(! strcmp(sym, node->name)) return node->index;
+        node = node->next;
+    }
+    return -1L;
+}               /* symbolIndex */
 
 
 /*****************************************************/

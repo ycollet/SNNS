@@ -1,6 +1,7 @@
 #include "xvis.h"
 #include <ctype.h>
 #include <time.h>
+#include <math.h>
 
 static FILE *patternFile;          /* pattern file being processed */
 static Format format;
@@ -14,9 +15,109 @@ static long inCount, outCount, classCount;
 static long numPats;               /* number of patterns */
 
 /* Private function headers */
-static long classNoOfVec(Collection, Vector);
-static void addMapping(Collection, Vector, long);  /* sets error */
 static char *printStatVals(char *, VecColl);
+
+/*
+ * A small open-hashing table that maps output Vectors to class numbers,
+ * used to speed up the O(n * distinctClasses) linear scans that were
+ * previously performed by genClassNosFromVectors() and writeSymtab().
+ *
+ * The hash function agrees with the vector equality test used elsewhere
+ * (vcmp()/veq(), i.e. element-wise numeric equality): two vectors that
+ * vcmp() considers V_EQUAL always land in the same bucket, so collisions
+ * are the only thing that ever separates them and those are resolved by a
+ * vcmp() comparison inside the bucket. The hash is derived from the numeric
+ * (not bit-level) vector contents, so numerically equal values such as
+ * -0.0 and 0.0 hash identically, matching veq(). Non-finite hash sums
+ * (NaN/Inf) are routed to a single fixed bucket to stay consistent.
+ */
+struct VecHashNode {
+    Vector vec;
+    long no;
+    struct VecHashNode *next;
+};
+
+struct VecHash {
+    struct VecHashNode **buckets;
+    long numBuckets;
+};
+
+static long vecHashBuckets(long n) {
+    long b = 16L;
+    while(b < n) b <<= 1;         /* smallest power of two >= max(16, n) */
+    return b;
+}
+
+static long vecHashOf(Vector v, long numBuckets) {
+    double s = 0.0;
+    long i, dim = dims(v);
+    union { double d; unsigned long long u; } conv;
+    unsigned long long h;
+
+    for(i = 1L; i <= dim; i++)
+        s += (double) atDim(v, i) * (double) i;
+    if(! isfinite(s)) return 0L;              /* NaN / Inf -> fixed bucket */
+    conv.d = s;
+    h = conv.u;
+    h ^= h >> 32;
+    h ^= h >> 16;
+    return (long) (h & (unsigned long long) (numBuckets - 1L));
+}
+
+static struct VecHash *newVecHash(long n) {
+    struct VecHash *h;
+    long nb = vecHashBuckets(n), i;
+
+    if(! (h = (struct VecHash *) malloc(sizeof(*h)))) return NULL;
+    h->numBuckets = nb;
+    if(! (h->buckets =
+              (struct VecHashNode **) malloc(sizeof(struct VecHashNode *) * nb))) {
+        free(h);
+        return NULL;
+    }
+    for(i = 0L; i < nb; i++) h->buckets[i] = NULL;
+    return h;
+}
+
+static void freeVecHash(struct VecHash *h) {
+    long i;
+    struct VecHashNode *n, *tmp;
+
+    for(i = 0L; i < h->numBuckets; i++) {
+        n = h->buckets[i];
+        while(n) {
+            tmp = n;
+            n = n->next;
+            free(tmp);
+        }
+    }
+    free(h->buckets);
+    free(h);
+}
+
+/* Returns the class number stored for v, or -1L if v is not present. */
+static long vecHashLookup(struct VecHash *h, Vector v) {
+    struct VecHashNode *n = h->buckets[vecHashOf(v, h->numBuckets)];
+
+    while(n) {
+        if(vcmp(v, n->vec) == V_EQUAL) return n->no;
+        n = n->next;
+    }
+    return -1L;
+}
+
+/* Inserts the mapping v -> no. Returns 0 on success, -1 on out of memory. */
+static int vecHashInsert(struct VecHash *h, Vector v, long no) {
+    long b = vecHashOf(v, h->numBuckets);
+    struct VecHashNode *n = (struct VecHashNode *) malloc(sizeof(*n));
+
+    if(! n) return -1;
+    n->vec = v;
+    n->no = no;
+    n->next = h->buckets[b];
+    h->buckets[b] = n;
+    return 0;
+}
 
 #include "fin.c"
 #include "fout.c"
@@ -71,59 +172,129 @@ void srand48(long);
 /* Sets the global variable error.                     */
 /*******************************************************/
 void randomize(Patterns p, Vector v) {
-    VecColl randInputs, randOutputs;
-    Collection randClasses, randClassNos, randVec, vColl;
-    long i, index;
-    double randNum;
+    VecColl randInputs = NULL, randOutputs = NULL;
+    Collection randClasses = NULL, randClassNos = NULL, vColl = NULL;
+    void **inArr = NULL, **outArr = NULL, **clsArr = NULL, **noArr = NULL;
+    Number **vArr = NULL, *vVals = NULL;
+    long *perm = NULL;
+    long n, i, k;
+    Boolean outs, names;
 
-    if(! (randInputs = newColl())) error(1);
-    if(! (randOutputs = newColl())) error(1);
-    if(! (randClasses = newColl())) error(1);
-    if(! (randClassNos = newColl())) error(1);
-    if(v) {
-        if(! (vColl = asColl(v))) error(1);
-        if(! (randVec = newColl())) error(1);
+    n = p->count;
+    outs = hasOutputs(p);
+    names = hasClassNames(p);
+
+    if(n <= 0L) {
+        error = 0;
+        return;
     }
 
+    /*
+     * Rather than repeatedly picking a random index and removing it from
+     * the live collections (which resets the cursor cache and makes every
+     * subsequent at() an O(n) traversal, i.e. O(n^2) overall), copy each
+     * collection into a plain array with a single cache-friendly
+     * sequential pass, build one random permutation with Fisher-Yates,
+     * and rebuild the collections from the permuted arrays via O(1)
+     * tail-insert add() calls.
+     */
+    perm  = (long *)   malloc((size_t) n * sizeof(*perm));
+    inArr = (void **)  malloc((size_t) n * sizeof(*inArr));
+    noArr = (void **)  malloc((size_t) n * sizeof(*noArr));
+    if(outs)  outArr = (void **) malloc((size_t) n * sizeof(*outArr));
+    if(names) clsArr = (void **) malloc((size_t) n * sizeof(*clsArr));
+    if(! perm || ! inArr || ! noArr ||
+            (outs && ! outArr) || (names && ! clsArr)) goto oom;
+
+    if(! (randInputs = newColl())) goto oom;
+    if(! (randClassNos = newColl())) goto oom;
+    if(outs && ! (randOutputs = newColl())) goto oom;
+    if(names && ! (randClasses = newColl())) goto oom;
+
+    if(v) {
+        if(! (vColl = asColl(v))) goto oom;
+        vArr  = (Number **) malloc((size_t) n * sizeof(*vArr));
+        vVals = (Number *)  malloc((size_t) n * sizeof(*vVals));
+        if(! vArr || ! vVals) goto oom;
+    }
+
+    /* single sequential (cursor-cache friendly) pass into the arrays */
+    for(i = 0L; i < n; i++) {
+        inArr[i] = at(p->inputs, i + 1L);
+        noArr[i] = at(p->classNos, i + 1L);
+        if(outs)  outArr[i] = at(p->outputs, i + 1L);
+        if(names) clsArr[i] = at(p->classes, i + 1L);
+    }
+    if(v)
+        for(i = 0L; i < n; i++) vArr[i] = (Number *) at(vColl, i + 1L);
+
+    /* build the identity permutation, then Fisher-Yates shuffle it */
+    for(i = 0L; i < n; i++) perm[i] = i;
     srand48((long) time(NULL));
-    for(i = p->count; i >= 1; i--) {
-        /* generate random number between 0.0 and 1.0 */
-        randNum = drand48();
-        index = min(((long) (randNum * i)) + 1L, i);
-        if(! add(randInputs, at(p->inputs, index))) error(1);
-        removeAt(p->inputs, index);
-        if(! add(randClassNos, at(p->classNos, index))) error(1);
-        removeAt(p->classNos, index);
-        if(hasOutputs(p)) {
-            if(! add(randOutputs, at(p->outputs, index))) error(1);
-            removeAt(p->outputs, index);
-        }
-        if(hasClassNames(p)) {
-            if(! add(randClasses, at(p->classes, index))) error(1);
-            removeAt(p->classes, index);
-        }
-        if(v) {
-            if(! add(randVec, at(vColl, index))) error(1);
-            removeAt(vColl, index);
-        }
-    }        /* for */
-
-    freeColl(p->inputs);
-    freeColl(p->classNos);
-    freeColl(p->outputs);
-    freeColl(p->classes);
-    if(v) {
-        copyFromColl(v, randVec);
-        freeColl(vColl);
-        freeColl(randVec);
+    for(i = n - 1L; i >= 1L; i--) {
+        long j = (long) (drand48() * (double) (i + 1L));
+        long tmp;
+        if(j > i) j = i;               /* guard against drand48() == 1.0 */
+        tmp = perm[i];
+        perm[i] = perm[j];
+        perm[j] = tmp;
     }
 
+    /* rebuild the collections in permuted order (same perm keeps them aligned) */
+    for(k = 0L; k < n; k++) {
+        long idx = perm[k];
+        if(! add(randInputs, inArr[idx])) goto oom;
+        if(! add(randClassNos, noArr[idx])) goto oom;
+        if(outs  && ! add(randOutputs, outArr[idx])) goto oom;
+        if(names && ! add(randClasses, clsArr[idx])) goto oom;
+    }
+    if(v) {
+        for(k = 0L; k < n; k++) vVals[k] = *vArr[perm[k]];
+        for(k = 0L; k < n; k++) putDim(v, k + 1L, vVals[k]);
+    }
+
+    /* replace the old collections; element memory is retained (freeColl) */
+    freeColl(p->inputs);
     p->inputs = randInputs;
-    p->outputs = randOutputs;
-    p->classes = randClasses;
+    freeColl(p->classNos);
     p->classNos = randClassNos;
+    if(outs) {
+        freeColl(p->outputs);
+        p->outputs = randOutputs;
+    }
+    if(names) {
+        freeColl(p->classes);
+        p->classes = randClasses;
+    }
+
+    if(v) {
+        freeColl(vColl);
+        free(vArr);
+        free(vVals);
+    }
+    free(perm);
+    free(inArr);
+    free(noArr);
+    if(outArr) free(outArr);
+    if(clsArr) free(clsArr);
 
     error = 0;
+    return;
+
+oom:
+    if(randInputs)   freeColl(randInputs);
+    if(randOutputs)  freeColl(randOutputs);
+    if(randClasses)  freeColl(randClasses);
+    if(randClassNos) freeColl(randClassNos);
+    if(vColl) freeColl(vColl);
+    free(perm);
+    free(inArr);
+    free(noArr);
+    if(outArr) free(outArr);
+    if(clsArr) free(clsArr);
+    if(vArr)  free(vArr);
+    if(vVals) free(vVals);
+    error(1);
 }          /* randomize */
 
 
@@ -371,21 +542,63 @@ char *statString(Patterns p, char *fn) {
 /********************************************/
 /********************************************/
 static char *printStatVals(char *cp, VecColl vc) {
+    long nvecs, ncols, i, j;
+    unsigned long nnums;
+    Number omin, omax, vmin, vmax, avgSum, overallAvgVal, stddev;
+    double totalAvg, totalVar, s;
+    Vector vec;
+
+    /*
+     * Compute overall minimum, maximum and average in a single pass over
+     * the collection (was 3 separate passes), then the overall standard
+     * deviation in one further pass reusing the average already computed
+     * (overallStddev() used to recompute overallAvg() itself, so this
+     * replaces 5-6 traversals with 2). The numeric formulas and the float
+     * accumulation used by overallMin/Max/Avg/Stddev are preserved exactly.
+     */
+    nvecs = size(vc);
+    ncols = numberOfCols(vc);
+    nnums = (unsigned long) nvecs * (unsigned long) ncols;
+
+    vec = (Vector) at(vc, 1L);
+    omin = minimum(vec);
+    omax = maximum(vec);
+    avgSum = 0;
+    for(i = 1L; i <= nvecs; i++) {
+        vec = (Vector) at(vc, i);
+        vmin = minimum(vec);
+        vmax = maximum(vec);
+        omin = min(omin, vmin);
+        omax = max(omax, vmax);
+        avgSum += avg(vec);
+    }
+    overallAvgVal = avgSum / nvecs;      /* same value overallAvg() yields */
+    totalAvg = overallAvgVal;
+
+    totalVar = 0;
+    for(i = 1L; i <= nvecs; i++) {
+        s = 0;
+        vec = (Vector) at(vc, i);
+        for(j = 1L; j <= ncols; j++) s += square(atDim(vec, j) - totalAvg);
+        totalVar += s / nnums;
+    }
+    stddev = sqrt(totalVar);             /* rounded to Number, as before */
+
     sprintf(cp, "Overall minimum:     ");
     cp += ROW_TITLE_LEN;
-    sprintf(cp, NUMBER_FORMAT_L_NL, overallMin(vc));
+    sprintf(cp, NUMBER_FORMAT_L_NL, omin);
     cp += NUMBER_STR_LENGTH + SIZEOF_NL;
     sprintf(cp, "Overall maximum:     ");
     cp += ROW_TITLE_LEN;
-    sprintf(cp, NUMBER_FORMAT_L_NL, overallMax(vc));
+    sprintf(cp, NUMBER_FORMAT_L_NL, omax);
     cp += NUMBER_STR_LENGTH + SIZEOF_NL;
     sprintf(cp, "Overall average:     ");
     cp += ROW_TITLE_LEN;
-    sprintf(cp, NUMBER_FORMAT_L_NL, overallAvg(vc));
+    sprintf(cp, NUMBER_FORMAT_L_NL, overallAvgVal);
     cp += NUMBER_STR_LENGTH + SIZEOF_NL;
     sprintf(cp, "Overall std.dev.:    ");
     cp += ROW_TITLE_LEN;
-    sprintf(cp, NUMBER_FORMAT_L_NL, overallStddev(vc));
+    sprintf(cp, NUMBER_FORMAT_L_NL, stddev);
     cp += NUMBER_STR_LENGTH + SIZEOF_NL;
     sprintf(cp, "\n");
     cp += SIZEOF_NL;
@@ -403,6 +616,7 @@ static char *printStatVals(char *cp, VecColl vc) {
 void writeSymtab(Patterns p, FILE *f) {
     long i, nvecs, diffVecs;
     Collection set;
+    struct VecHash *seen;
     Vector v;
 
     if(hasClassNames(p)) {
@@ -412,14 +626,32 @@ void writeSymtab(Patterns p, FILE *f) {
         if(hasOutputs(p)) {
             if(! (set = newColl())) error(1);
             nvecs = size(p->outputs);
+            /*
+             * Use a hashed set to detect duplicate output vectors in O(1)
+             * instead of the former O(n) detectPos() scan. The ordered
+             * "set" collection still records first-occurrence order so the
+             * output written below is identical to before.
+             */
+            if(! (seen = newVecHash(nvecs))) {
+                freeColl(set);
+                error(1);
+            }
             for(i = 1L; i <= nvecs; i++) {
                 v = (Vector) at(p->outputs, i);
-                if(detectPos(set, v, (Boolean(*)(void*,void*))veq) == -1L)
-                    if(! add(set, v)) {
+                if(vecHashLookup(seen, v) == -1L) {
+                    if(vecHashInsert(seen, v, 1L) != 0) {
+                        freeVecHash(seen);
                         freeColl(set);
                         error(1);
                     }
+                    if(! add(set, v)) {
+                        freeVecHash(seen);
+                        freeColl(set);
+                        error(1);
+                    }
+                }
             }     /* for */
+            freeVecHash(seen);
             diffVecs = size(set);
             for(i = 1L; i <= diffVecs; i++) {
                 if(fprintVector((Vector) at(set, i), f) != 0) {
@@ -502,7 +734,13 @@ void genClassNosFromNames(Patterns p) {
     numClasses = size(classes(p));
     for(i = 1L; i <= numClasses; i++) {
         if(! (classNo = (long *) malloc(sizeof(*classNo)))) error(1);
-        *classNo = indexOf(namesOrder, at(classes(p), i));
+        /*
+         * The class name at position i is a canonical pointer owned by the
+         * symtab, so its 1-based position in sequence(symtab) is exactly
+         * what indexOf(namesOrder, ...) used to return by a linear scan.
+         * symbolIndex() looks it up through the symtab hash in O(1).
+         */
+        *classNo = symbolIndex(p->symtab, (char *) at(classes(p), i));
         if(! add(clsnos, classNo)) error(1);
     }        /* for */
 
@@ -520,68 +758,49 @@ void genClassNosFromNames(Patterns p) {
 void genClassNosFromVectors(Patterns p) {
     long *classNo, numVectors, i, noCount = 0L;
     Vector v;
-    Collection map;
-
-    if(! (map = newColl())) error(1);
-    freeCollAll(classNos(p));
-    if(! (p->classNos = newColl())) error(1);
+    struct VecHash *map;
 
     numVectors = size(outputs(p));
+    if(! (map = newVecHash(numVectors))) error(1);
+    freeCollAll(classNos(p));
+    if(! (p->classNos = newColl())) {
+        freeVecHash(map);
+        error(1);
+    }
+
     for(i = 1L; i <= numVectors; i++) {
-        if(! (classNo = (long *) malloc(sizeof(*classNo)))) error(1);
+        if(! (classNo = (long *) malloc(sizeof(*classNo)))) {
+            freeVecHash(map);
+            error(1);
+        }
         v = (Vector) at(outputs(p), i);
-        *classNo = classNoOfVec(map, v);
+        /*
+         * O(1) hashed lookup instead of the former linear map scan. The
+         * hash agrees with vcmp()/veq(), and first-seen order is preserved
+         * exactly: the first occurrence of a distinct vector gets the next
+         * consecutive number, identical to the old linear-scan behaviour.
+         */
+        *classNo = vecHashLookup(map, v);
         if(*classNo == -1L) {
             /* vector v occurs for the first time at position i */
             *classNo = ++noCount;
-            addMapping(map, v, *classNo);
-            if(error) return;
+            if(vecHashInsert(map, v, *classNo) != 0) {
+                free(classNo);
+                freeVecHash(map);
+                error(1);
+            }
         }     /* if */
-        if(! add(classNos(p), classNo)) error(1);
+        if(! add(classNos(p), classNo)) {
+            free(classNo);
+            freeVecHash(map);
+            error(1);
+        }
     }       /* for */
 
-    freeCollAll(map);             /* also frees the memory of the mapping structures */
+    freeVecHash(map);
     p->classCount = noCount;
     error = 0;
 }         /* genClassNosFromVectors */
-
-
-struct Mapping {                /* needed by classNoOfVec()        */
-    Vector vec;                   /* and addMapping().                */
-    long no;
-};
-
-/****************************************************/
-/* Returns the class number of the output vector v. */
-/* If v has not yet been assigned a class in coll,  */
-/* returns -1L.                                     */
-/****************************************************/
-static long classNoOfVec(Collection coll, Vector v) {
-    long index;
-    struct Mapping *m;
-
-    for(index = 1L; index <= size(coll); index++) {
-        m = (struct Mapping *) at(coll, index);
-        if(vcmp(v, m->vec) == V_EQUAL) return m->no;
-    }
-    return -1L;
-}        /* classNoOfVec */
-
-
-/****************************************************/
-/* Adds the mapping of vector v to class number     */
-/* classNo to the collection coll.                  */
-/* Sets the global variable error.                  */
-/****************************************************/
-static void addMapping(Collection coll, Vector v, long classNo) {
-    struct Mapping *m;
-
-    m = (struct Mapping *) malloc(sizeof(*m));
-    if(m == NULL) error(1);
-    m->vec = v;
-    m->no = classNo;
-    if(! add(coll, m)) error(1);
-}        /* addMapping */
 
 
 /******************************************************/

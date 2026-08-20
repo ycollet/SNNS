@@ -142,6 +142,7 @@ typedef struct FormatType * Format;
 
 struct Node {
     char *name;
+    long index;               /* 1-based position of name in the order list */
     struct Node *next;
 };
 
@@ -383,6 +384,7 @@ char *addSymbol(Symtab, char *);                        /* sets error */
 unsigned numSymbols(Symtab);
 Collection sequence(Symtab);
 char *locateSymbol(Symtab, char *);
+long symbolIndex(Symtab, char *);
 Symtab readSymtab(FILE *);                              /* sets error */
 void fprintSymbols(Symtab, FILE *);
 
