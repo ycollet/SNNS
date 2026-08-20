@@ -333,7 +333,12 @@ GROUP: Global Datatypes
 
 #################################################*/
 
+#if !defined(__cplusplus) && !(defined(__STDC_VERSION__) && __STDC_VERSION__ >= 202311L)
+/* C23 and C++ make bool a keyword/builtin type; only alias it to int
+   on older C standards, where the kernel's TRUE/FALSE (plain 0/1 ints)
+   need bool to behave as a plain integer type. */
 typedef int     bool;
+#endif
 typedef float   FlintType;
 typedef int     krui_err;
 

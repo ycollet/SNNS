@@ -1,45 +1,15 @@
-# cmake/modules/TestSignalType.cmake
+# cmake/TestSignalType.cmake
 #
-# Test for the return type of signal defined in <signal.h>
+# Sets RETSIGTYPE, the return type of signal handlers passed to signal().
 #
-# Copyright (C) 2006  Andrew Ross
-#
-# This file is part of PLplot.
-#
-# PLplot is free software; you can redistribute it and/or modify
-# it under the terms of the GNU Library General Public License as published
-# by the Free Software Foundation; version 2 of the License.
-#
-# PLplot is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU Library General Public License for more details.
-#
-# You should have received a copy of the GNU Library General Public License
-# along with the file PLplot; if not, write to the Free Software
-# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA
+# This used to run a try_compile() probe (see git history) for an
+# ambiguity between pre-POSIX Unix variants where some declared signal
+# handlers as returning int and others void. POSIX settled on void
+# decades ago, and every target this project actually builds for
+# (glibc/Linux, macOS/BSD libc) uses it unconditionally. The old probe
+# relied on re-declaring signal() with an obsolescent K&R-style empty
+# parameter list, which strict C23 compilers now reject outright as a
+# conflicting declaration - always falling through to the wrong "int"
+# answer instead of reporting the real, unambiguous value.
 
-# If signal.h defines signal as returning a pointer to a function 
-# returning void RETSIGTYPE is defined as void. Otherwise RETSIGTYPE is
-# defined as int.
-
-if (NOT DEFINED CMAKE_TEST_SIGNAL_TYPE)
-  message(STATUS "Check for signal return type in <signal.h>")
-  try_compile(CMAKE_TEST_SIGNAL_TYPE
-    ${CMAKE_BINARY_DIR}
-    ${CMAKE_SOURCE_DIR}/cmake/TestSignalType.c
-    OUTPUT_VARIABLE OUTPUT)
-  if (CMAKE_TEST_SIGNAL_TYPE)
-    message(STATUS "Check for signal handler return type type void  - found")
-    set(RETSIGTYPE void CACHE INTERNAL "Signal return type")
-    file(APPEND ${CMAKE_BINARY_DIR}/CMakeFiles/CMakeOutput.log
-      "Determining if signal handler return type is void passed with "
-      "the following output:\n${OUTPUT}\n\n")
-  else ()
-    message(STATUS "Check for signal handler return type type void  - not found")
-    set(RETSIGTYPE int CACHE INTERNAL "Signal return type")
-    file(APPEND ${CMAKE_BINARY_DIR}/CMakeFiles/CMakeError.log
-      "Determining if signal handler return type is void failed with "
-      "the following output:\n${OUTPUT}\n\n")
-  endif ()
-endif ()
+set(RETSIGTYPE void CACHE INTERNAL "Signal return type")
