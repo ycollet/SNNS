@@ -286,6 +286,26 @@ static void ui_map_event(Widget w, Display *display, XEvent *event) {
 
 
 /*****************************************************************************
+  FUNCTION : ui_map_gridCells
+
+  PURPOSE  : upper bound on the number of grid cells sampled by the display
+             loops (used to size the strength cache).
+  NOTES    : deliberately over-estimates by a couple of cells so that float
+             rounding in the drawing loops can never overrun the cache.
+  RETURNS  : number of cells
+  UPDATE   :
+******************************************************************************/
+static int ui_map_gridCells(void) {
+    int cols = (int)((MAP_xMax - MAP_xMin) / MAP_scaleX) + 2;
+    int rows = (int)((MAP_yMax - MAP_yMin) / MAP_scaleY) + 2;
+
+    if (cols < 1) cols = 1;
+    if (rows < 1) rows = 1;
+    return (cols * rows);
+}
+
+
+/*****************************************************************************
   FUNCTION : ui_dispMapBW
 
   PURPOSE  : Program to display the MAPs of the network in black and white
@@ -298,10 +318,25 @@ static void ui_displMapBW(void) {
     int xx,yy,xc=0,yc=0;
     uint dx,dy;
     FlintType save_act1,save_act2;
+    int  cacheIdx = 0;
+    int  needCompute = !MAP_cacheValid;
 
     /* save unit activations */
     save_act1 = krui_getUnitActivation(MAP_xUnit);
     save_act2 = krui_getUnitActivation(MAP_yUnit);
+
+    /* (re)allocate the strength cache if it has to be recomputed */
+    if (needCompute) {
+        int cells = ui_map_gridCells();
+        if (cells != MAP_cacheCells) {
+            FlintType *tmp = (FlintType *)
+                realloc(MAP_strengthCache, cells * sizeof(FlintType));
+            if (tmp != NULL) {
+                MAP_strengthCache = tmp;
+                MAP_cacheCells    = cells;
+            }
+        }
+    }
 
     /* clear the window */
     XSetForeground(ui_display, MAP_GRAPH_gc[0],
@@ -314,10 +349,19 @@ static void ui_displMapBW(void) {
     /* draw the MAP squares */
     for (this_y=MAP_yMin; this_y<MAP_yMax; this_y+=MAP_scaleY) {
         for (this_x=MAP_xMin; this_x<MAP_xMax; this_x+=MAP_scaleX) {
-            krui_setUnitActivation(MAP_xUnit, this_x);
-            krui_setUnitActivation(MAP_yUnit, this_y);
-            krui_updateNet(NULL,(int)NULL);
-            strength = krui_getUnitOutput(MAP_outputUnit);
+            if ((!needCompute) AND (MAP_strengthCache != NULL) AND
+                    (cacheIdx < MAP_cacheCells)) {
+                strength = MAP_strengthCache[cacheIdx];
+            } else {
+                krui_setUnitActivation(MAP_xUnit, this_x);
+                krui_setUnitActivation(MAP_yUnit, this_y);
+                krui_updateNet(NULL,(int)NULL);
+                strength = krui_getUnitOutput(MAP_outputUnit);
+                if (needCompute AND (MAP_strengthCache != NULL) AND
+                        (cacheIdx < MAP_cacheCells))
+                    MAP_strengthCache[cacheIdx] = strength;
+            }
+            cacheIdx++;
             dx = dy =
                      abs(18*(strength-MAP_minWght)/(MAP_maxWght-MAP_minWght)-9);
             xx = (int)(xc*MAP_BW_squaresizeX)+20;
@@ -334,6 +378,10 @@ static void ui_displMapBW(void) {
         yc++;
         xc=0;
     }
+
+    /* the cache now holds valid data (if it could be allocated) */
+    if (needCompute AND (MAP_strengthCache != NULL))
+        MAP_cacheValid = 1;
 
     /* restore unit activations */
     krui_setUnitActivation(MAP_xUnit,save_act1);
@@ -357,10 +405,25 @@ static void ui_displMapCOL(void) {
     int xx,yy,xc=0,yc=0;
     uint dx,dy;
     FlintType save_act1,save_act2;
+    int  cacheIdx = 0;
+    int  needCompute = !MAP_cacheValid;
 
     /* save unit activations */
     save_act1 = krui_getUnitActivation(MAP_xUnit);
     save_act2 = krui_getUnitActivation(MAP_yUnit);
+
+    /* (re)allocate the strength cache if it has to be recomputed */
+    if (needCompute) {
+        int cells = ui_map_gridCells();
+        if (cells != MAP_cacheCells) {
+            FlintType *tmp = (FlintType *)
+                realloc(MAP_strengthCache, cells * sizeof(FlintType));
+            if (tmp != NULL) {
+                MAP_strengthCache = tmp;
+                MAP_cacheCells    = cells;
+            }
+        }
+    }
 
     /* clear the window */
     XSetForeground(ui_display, MAP_GRAPH_gc[20],
@@ -374,10 +437,19 @@ static void ui_displMapCOL(void) {
     dy = MAP_squaresizeY;
     for (this_y=MAP_yMin; this_y<MAP_yMax; this_y+=MAP_scaleY) {
         for (this_x=MAP_xMin; this_x<MAP_xMax; this_x+=MAP_scaleX) {
-            krui_setUnitActivation(MAP_xUnit, this_x);
-            krui_setUnitActivation(MAP_yUnit, this_y);
-            krui_updateNet(NULL,(int)NULL);
-            strength = krui_getUnitOutput(MAP_outputUnit);
+            if ((!needCompute) AND (MAP_strengthCache != NULL) AND
+                    (cacheIdx < MAP_cacheCells)) {
+                strength = MAP_strengthCache[cacheIdx];
+            } else {
+                krui_setUnitActivation(MAP_xUnit, this_x);
+                krui_setUnitActivation(MAP_yUnit, this_y);
+                krui_updateNet(NULL,(int)NULL);
+                strength = krui_getUnitOutput(MAP_outputUnit);
+                if (needCompute AND (MAP_strengthCache != NULL) AND
+                        (cacheIdx < MAP_cacheCells))
+                    MAP_strengthCache[cacheIdx] = strength;
+            }
+            cacheIdx++;
             xx = (int)(xc*MAP_squaresizeX - 0.5*MAP_squaresizeX)+20;
             yy = (int)(yc*MAP_squaresizeY - 0.5*MAP_squaresizeY)+20;
 
@@ -392,6 +464,10 @@ static void ui_displMapCOL(void) {
         yc++;
         xc=0;
     }
+
+    /* the cache now holds valid data (if it could be allocated) */
+    if (needCompute AND (MAP_strengthCache != NULL))
+        MAP_cacheValid = 1;
 
     /* restore unit activations */
     krui_setUnitActivation(MAP_xUnit,save_act1);
@@ -412,6 +488,9 @@ static void ui_displMapCOL(void) {
 void ui_displMapFromUpdate(void) {
 
     if( !MAP_WINDOW_created )return;
+
+    /* the network was updated => sampled outputs are stale */
+    MAP_cacheValid = 0;
 
     if(ui_col_monochromeMode) {
         ui_displMapBW();
@@ -482,6 +561,22 @@ static void ui_map_zoom_out(Widget w) {
 ******************************************************************************/
 static void ui_map_close(Widget dummy, Widget w, caddr_t call_data) {
     XtDestroyWidget(w);
+    if (MAP_GRAPH_gc_created) {
+        if (ui_col_monochromeMode) {
+            XFreeGC(ui_display, MAP_GRAPH_gc[0]);
+        } else {
+            int n;
+            for (n = 0; n <= 20; n++)
+                XFreeGC(ui_display, MAP_GRAPH_gc[n]);
+        }
+        MAP_GRAPH_gc_created = 0;
+    }
+    if (MAP_strengthCache != NULL) {
+        free(MAP_strengthCache);
+        MAP_strengthCache = NULL;
+    }
+    MAP_cacheCells = 0;
+    MAP_cacheValid = 0;
     MAP_WINDOW_created = 0;
     MAP_gridWidth = 0;
 }
@@ -673,6 +768,9 @@ static void ui_map_close_setup(Widget dummy, Widget w, caddr_t call_data) {
     MAP_minWght    = (float)ui_xFloatFromAsciiWidget(out_min);
 
 
+    /* the sampling (units/ranges) changed => cached outputs are stale */
+    MAP_cacheValid = 0;
+
     /* update display according to the new values */
     if(ui_col_colorDisplay) {
         MAP_scaleX = ((MAP_xMax-MAP_xMin) / MAP_viewsizeX) * MAP_squaresizeX;
@@ -767,27 +865,33 @@ static void ui_map_geometry(int zoom_fact) {
     maxstepsY = (int) (MAP_yMax-MAP_yMin)/MAP_scaleY;
 
 
-    /* set the necessary xlib environment variables */
+    /* set the necessary xlib environment variables.                       *
+     * The GCs and their (zoom-independent) colors are created only once   *
+     * per window; recreating them on every Expose/zoom leaked one GC per  *
+     * call on the X server and cost 21 round-trips each time.             */
 
-    if(ui_col_monochromeMode) {
-        /* this is a  B&W terminal */
-        MAP_GRAPH_gc[0]  = XCreateGC(ui_display,MAP_GRAPH_win,0,0);
-    } else {
-        /* this is a color terminal */
-        for(n=0; n<=20; n++)
-            MAP_GRAPH_gc[n] = XCreateGC(ui_display,MAP_GRAPH_win,0,0);
+    if (!MAP_GRAPH_gc_created) {
+        if(ui_col_monochromeMode) {
+            /* this is a  B&W terminal */
+            MAP_GRAPH_gc[0]  = XCreateGC(ui_display,MAP_GRAPH_win,0,0);
+        } else {
+            /* this is a color terminal */
+            for(n=0; n<=20; n++)
+                MAP_GRAPH_gc[n] = XCreateGC(ui_display,MAP_GRAPH_win,0,0);
 
-        /* set the foreground and background colors */
-        for(n=0; n<10; n++) {
-            XSetForeground(ui_display,MAP_GRAPH_gc[n],
-                           (uint) ui_col_rangePixels[(int)(n*1.7)]);
-            XSetBackground(ui_display,MAP_GRAPH_gc[n],
-                           WhitePixel(ui_display,MAP_GRAPH_screen));
-            XSetForeground(ui_display,MAP_GRAPH_gc[10+n],
-                           (uint)  ui_col_rangePixels[(int)(15+n*1.7)]);
-            XSetBackground(ui_display,MAP_GRAPH_gc[10+n],
-                           WhitePixel(ui_display,MAP_GRAPH_screen));
+            /* set the foreground and background colors */
+            for(n=0; n<10; n++) {
+                XSetForeground(ui_display,MAP_GRAPH_gc[n],
+                               (uint) ui_col_rangePixels[(int)(n*1.7)]);
+                XSetBackground(ui_display,MAP_GRAPH_gc[n],
+                               WhitePixel(ui_display,MAP_GRAPH_screen));
+                XSetForeground(ui_display,MAP_GRAPH_gc[10+n],
+                               (uint)  ui_col_rangePixels[(int)(15+n*1.7)]);
+                XSetBackground(ui_display,MAP_GRAPH_gc[10+n],
+                               WhitePixel(ui_display,MAP_GRAPH_screen));
+            }
         }
+        MAP_GRAPH_gc_created = 1;
     }
 
 

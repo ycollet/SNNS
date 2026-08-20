@@ -67,10 +67,46 @@ void ui_sel_msgNumber (void)
 void ui_sel_initSelectionList (void)
 
 {
+    int i;
+
     ui_sel_numberOfItems          = 0;
     ui_sel_numberOfSelectedItems  = 0;
     ui_sel_listPtr                = NULL;
     ui_sel_freeListPtr            = NULL;
+
+    /* drop any stale index entries (list is reset here) */
+    for (i = 0; i < ui_sel_indexSize; i++)
+        ui_sel_index[i] = NULL;
+}
+
+
+/*****************************************************************************
+  FUNCTION : ui_sel_indexEnsure
+
+  PURPOSE  : make sure the selection index can hold an entry for unitNo
+  RETURNS  : void
+  NOTES    : On allocation failure the index keeps its old size; unit numbers
+             beyond the current size are handled by a linear fallback scan in
+             ui_sel_lookForItem, so correctness is preserved either way.
+
+  UPDATE   :
+*****************************************************************************/
+
+static void ui_sel_indexEnsure (int unitNo)
+
+{
+    if (unitNo >= ui_sel_indexSize) {
+        int    i, newSize = unitNo + 64;
+        struct SelectionType **newIdx =
+            (struct SelectionType **) realloc(ui_sel_index,
+                    newSize * sizeof(struct SelectionType *));
+        if (newIdx == NULL)
+            return;
+        for (i = ui_sel_indexSize; i < newSize; i++)
+            newIdx[i] = NULL;
+        ui_sel_index     = newIdx;
+        ui_sel_indexSize = newSize;
+    }
 }
 
 
@@ -120,6 +156,11 @@ struct SelectionType *ui_sel_lookForItem (int unitNo)
 {
     struct SelectionType  *selPtr;
 
+    /* O(1) lookup via the index when the unit number is in range */
+    if ((unitNo >= 0) AND (unitNo < ui_sel_indexSize))
+        return (ui_sel_index[unitNo]);
+
+    /* fallback: linear scan (index could not be grown for this unitNo) */
     selPtr = ui_sel_listPtr;
     while ((selPtr != NULL) AND ((*selPtr).unitNo != unitNo))
         selPtr = (*selPtr).nextPtr;
@@ -171,6 +212,12 @@ static void ui_sel_freeItem (struct SelectionType *selectionPtr)
 
 {
     struct SelectionType  *selPtr;
+    int                    un = selectionPtr->unitNo;
+
+    /* keep the index in sync: drop this unit's entry */
+    if ((un >= 0) AND (un < ui_sel_indexSize) AND
+            (ui_sel_index[un] == selectionPtr))
+        ui_sel_index[un] = NULL;
 
     if (ui_sel_listPtr == selectionPtr) { /* is first element */
         ui_sel_listPtr        = selectionPtr->nextPtr;
@@ -369,6 +416,11 @@ static void ui_sel_doActionSelect (struct Ui_DisplayType *displayPtr,
     (*selPtr).unitNo   = unitNo;
     (*selPtr).gridPos  = gridPos;
     (*selPtr).subNetNo = displayPtr->subNetNo;
+
+    /* keep the index in sync: record this unit's list item */
+    ui_sel_indexEnsure(unitNo);
+    if ((unitNo >= 0) AND (unitNo < ui_sel_indexSize))
+        ui_sel_index[unitNo] = selPtr;
 
     ui_sel_numberOfSelectedItems += 1;
 

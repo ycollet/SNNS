@@ -232,13 +232,12 @@ static bool get_size_vector (vector v, int unitNo)
 
   UPDATE   :
 ******************************************************************************/
-static char *get_label_string (int label, int unitNo)
+static void get_label_string (int label, int unitNo, char *str)
 
 {
-    char *fmt_string = "%.3f", *str;
+    char *fmt_string = "%.3f";
     struct PosType pos;
 
-    str = malloc (255);
     switch (label) {
     case activation_on :
         sprintf (str, fmt_string,
@@ -272,8 +271,6 @@ static char *get_label_string (int label, int unitNo)
         sprintf (str, "%s", "nothing");
         break;
     }
-    return (str);
-
 }
 
 
@@ -292,14 +289,14 @@ static void d3_labelUnit (cube c, int unitNo, int vert, int label,
 {
     int x, y;
     float z;
-    char *label_string;
+    char label_string[255];
 
     x = c[vert][0];
     y = c[vert][1];
     z = c[vert][2];
     if (toplabel_flag)
         y = y - d3_fontYsize;
-    label_string = get_label_string (label, unitNo);
+    get_label_string (label, unitNo, label_string);
     d3_draw_string (x, y, z, label_string);
 }
 
@@ -378,12 +375,11 @@ static void calc_transformed_cube (matrix unit_trans_mat,
                                    matrix world_center_mat,
                                    matrix unit_scale_mat,
                                    matrix unit_activ_mat,
-                                   matrix world_scale_mat,
-                                   matrix world_trans_mat,
+                                   matrix world_mat,
                                    vector viewpoint, cube transformed_cube)
 
 {
-    matrix trans_mat, scale_mat, unit_mat, world_mat, global_mat;
+    matrix trans_mat, scale_mat, unit_mat, global_mat;
     cube c1, c2;
     int i,j;
 
@@ -395,7 +391,6 @@ static void calc_transformed_cube (matrix unit_trans_mat,
     d3_multMatrix (trans_mat, world_center_mat, unit_trans_mat);
     d3_multMatrix (scale_mat, unit_activ_mat, unit_scale_mat);
     d3_multMatrix (unit_mat, trans_mat, scale_mat);
-    d3_multMatrix (world_mat, world_trans_mat, world_scale_mat);
     d3_multMatrix (global_mat, world_mat, unit_mat);
 
     unit_transformation (c1, global_mat);
@@ -422,7 +417,7 @@ static void draw_units (void)
 {
     cube transformed_cube;
     vector min, max, center, p, unit_scale, activ_vec, vp, lp;
-    matrix world_center_mat, world_scale_mat, world_trans_mat;
+    matrix world_center_mat, world_scale_mat, world_trans_mat, world_mat;
     matrix unit_scale_mat, unit_trans_mat, unit_activ_mat;
     int act_unit, i, top_vert_index, bott_vert_index, do_draw;
 
@@ -439,6 +434,9 @@ static void draw_units (void)
     d3_scaleMatrix (unit_scale_mat, unit_scale);
     d3_scaleMatrix (world_scale_mat, d3_state.scale_vec);
     d3_transMatrix (world_trans_mat, d3_state.trans_vec);
+    /* world_mat is frame-constant; compute it once here instead of
+       recomputing it per unit inside calc_transformed_cube */
+    d3_multMatrix (world_mat, world_trans_mat, world_scale_mat);
 
     get_label_vert_indices(d3_state.rot_vec, &top_vert_index, &bott_vert_index);
 
@@ -450,8 +448,8 @@ static void draw_units (void)
         d3_scaleMatrix (unit_activ_mat, activ_vec);
         calc_transformed_cube (unit_trans_mat, world_center_mat,
                                unit_scale_mat,
-                               unit_activ_mat, world_scale_mat,
-                               world_trans_mat, vp, transformed_cube);
+                               unit_activ_mat, world_mat,
+                               vp, transformed_cube);
         insert_center_vector (transformed_cube, act_unit);
         if (do_draw) {
             if (d3_state.model_mode == wire_frame)
@@ -528,14 +526,16 @@ static void draw_links (void)
 
     act_unit = krui_getFirstUnit ();
     while (act_unit != 0) {
+        /* act_unit's center is invariant across the predecessor loop,
+           so fetch it once here instead of every iteration */
+        krui_getUnitCenters (act_unit, d3_currentDisplay, &start_vec);
+        v1[0] = start_vec->x;
+        v1[1] = start_vec->y;
+        v1[2] = start_vec->z;
+        v1[3] = 0.0;
         pred_unit = krui_getFirstPredUnit (&str);
         while (pred_unit != 0) {
-            krui_getUnitCenters (act_unit, d3_currentDisplay, &start_vec);
             krui_getUnitCenters (pred_unit, d3_currentDisplay, &end_vec);
-            v1[0] = start_vec->x;
-            v1[1] = start_vec->y;
-            v1[2] = start_vec->z;
-            v1[3] = 0.0;
             v2[0] = end_vec->x;
             v2[1] = end_vec->y;
             v2[2] = end_vec->z;

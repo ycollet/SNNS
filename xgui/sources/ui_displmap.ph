@@ -41,10 +41,20 @@ static void       ui_map_zoom_in(Widget w);
 static void       ui_map_zoom_out(Widget w);
 static void       ui_map_grid(int type);
 static void       ui_map_geometry(int zoom_fact);
+static int        ui_map_gridCells(void);
 
 /* local  variables for Xlib */
 static GC         MAP_GRAPH_gc[21];        /* local grapic context   */
+static int        MAP_GRAPH_gc_created = 0; /* GCs created once flag  */
 static Window     MAP_GRAPH_win;           /* w. where func is drawn */
+
+/* cache of the sampled network output for every grid cell. Computing a  *
+ * cell requires a full krui_updateNet() forward pass, so we keep the    *
+ * results and only recompute them when the network or the sampling      *
+ * (ranges/units) actually change - not on a mere Expose or a zoom.      */
+static FlintType *MAP_strengthCache = NULL;
+static int        MAP_cacheCells = 0;      /* allocated cells        */
+static int        MAP_cacheValid = 0;      /* cache holds valid data */
 static int        MAP_GRAPH_screen;        /* screen for drawwindow  */
 
 

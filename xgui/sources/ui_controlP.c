@@ -1021,13 +1021,13 @@ static Boolean ui_rem_performLearn (int learnType)
         break;
     }
 
-    ui_displWeightsFromUpdate();
     if ((ui_numberOfWorkCycles == ui_numberOfLearnCycles) or
             (ui_numberOfWorkCycles == 0) or
             (ui_numberOfLearnCycles <= 10) or
             (((ui_numberOfWorkCycles+1) MOD (ui_numberOfLearnCycles DIV 10)) == 0)) {
         ui_tw_printMessage("Train");
         ui_rem_printLearnInfo(ui_errorArray);
+        ui_displWeightsFromUpdate();
     }
 
     /* initialize error_values */

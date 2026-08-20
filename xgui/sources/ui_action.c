@@ -1599,6 +1599,24 @@ void ui_action_linksSet (void)
 
 
 /*****************************************************************************
+  FUNCTION : ui_action_intCmp
+
+  PURPOSE  : compare two ints (for qsort / bsearch)
+  RETURNS  : <0, 0 or >0
+  NOTES    :
+*****************************************************************************/
+
+static int ui_action_intCmp (const void *a, const void *b)
+
+{
+    int ia = *(const int *)a;
+    int ib = *(const int *)b;
+
+    return ((ia > ib) - (ia < ib));
+}
+
+
+/*****************************************************************************
   FUNCTION : ui_action_unitsDelete
 
   PURPOSE  : Delete all selected units.
@@ -1699,25 +1717,54 @@ void ui_action_unitsDelete (void)
     ui_info_makeUnitInfoPanelConsistent();
     ui_sel_msgNumber();
 
-    /* if all units in a z-layer are deleted then clear table entry*/
-    unitPtr = unitList;
-    while (unitPtr != NULL) {
-        clearEntry = TRUE;
-        act_unit = krui_getFirstUnit ();
-        while (act_unit != 0)  {
-            krui_getUnitPosition (act_unit, &unitPos);
-            if (unitPos.z == unitPtr->unitNo) {
-                clearEntry = FALSE;
-                break;
+    /* if all units in a z-layer are deleted then clear table entry.       *
+     * Collect the z-values of the remaining units in a single O(N) pass   *
+     * and sort them, then test each candidate layer with bsearch, giving  *
+     * O(N log N + L log N) instead of O(L*N).                             */
+    {
+        int  remaining = krui_getNoOfUnits();
+        int *zValues   = (remaining > 0)
+                         ? (int *) malloc(remaining * sizeof(int)) : NULL;
+        int  zCount    = 0;
+
+        if (zValues != NULL) {
+            act_unit = krui_getFirstUnit();
+            while (act_unit != 0) {
+                krui_getUnitPosition(act_unit, &unitPos);
+                zValues[zCount++] = unitPos.z;
+                act_unit = krui_getNextUnit();
             }
-            act_unit = krui_getNextUnit ();
+            qsort(zValues, zCount, sizeof(int), ui_action_intCmp);
         }
 
-        if (clearEntry) {
-            x=y=0;
-            krui_xyTransTable( OP_TRANSTABLE_SET, &x, &y, unitPtr->unitNo );
+        unitPtr = unitList;
+        while (unitPtr != NULL) {
+            if (zValues != NULL) {
+                clearEntry = (bsearch(&unitPtr->unitNo, zValues, zCount,
+                                      sizeof(int), ui_action_intCmp) == NULL);
+            } else {
+                /* fallback: rescan the network (allocation failed) */
+                clearEntry = TRUE;
+                act_unit = krui_getFirstUnit();
+                while (act_unit != 0) {
+                    krui_getUnitPosition(act_unit, &unitPos);
+                    if (unitPos.z == unitPtr->unitNo) {
+                        clearEntry = FALSE;
+                        break;
+                    }
+                    act_unit = krui_getNextUnit();
+                }
+            }
+
+            if (clearEntry) {
+                x = y = 0;
+                krui_xyTransTable(OP_TRANSTABLE_SET, &x, &y, unitPtr->unitNo);
+            }
+            unitPtr = unitPtr->next;
         }
-        unitPtr = unitPtr->next;
+
+        if (zValues != NULL)
+            free(zValues);
     }
     d3_drawNet ();
 

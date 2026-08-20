@@ -48,13 +48,13 @@ static void unit_transformation (cube c, matrix m);
 static void get_net_extrema (vector min, vector max);
 static void insert_center_vector (cube c, int unit);
 static bool get_size_vector (vector v, int unitNo);
-static char *get_label_string (int label, int unitNo);
+static void get_label_string (int label, int unitNo, char *str);
 static void d3_labelUnit (cube c, int unitNo, int vert, int label, bool toplabel_flag);
 static int get_vert_index (cube c, vector corner);
 static void get_label_vert_indices (vector rot_vec, int *top_index, int *bott_index);
 static void calc_transformed_cube (matrix unit_trans_mat, matrix world_center_mat,
                                    matrix unit_scale_mat, matrix unit_activ_mat,
-                                   matrix world_scale_mat, matrix world_trans_mat, 
+                                   matrix world_mat,
                                    vector viewpoint, cube transformed_cube);
 static void draw_units (void);
 static void d3_labelLink (vector v1, vector v2, float *weight);

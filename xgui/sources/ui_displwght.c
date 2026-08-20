@@ -324,6 +324,19 @@ static void ui_displWeightsCOL(void) {
     XSetForeground(ui_display, dwght_gc, BlackPixel(ui_display,dwght_screen));
     XSetBackground(ui_display, dwght_gc, WhitePixel(ui_display,dwght_screen));
 
+    /* precompute one GC per color bucket once, so that the per-link inner  *
+     * loop only has to pick a ready-made GC instead of issuing an          *
+     * XSetForeground round-trip for every single link.                     */
+    if (!dwght_col_gc_created) {
+        int c;
+        for (c = 0; c <= 30; c++) {
+            dwght_col_gc[c] = XCreateGC(ui_display, dwght_win, 0, 0);
+            XSetForeground(ui_display, dwght_col_gc[c],
+                           (uint) ui_col_rangePixels[c]);
+        }
+        dwght_col_gc_created = 1;
+    }
+
 
     /* draw the weight squares */
 
@@ -338,8 +351,8 @@ static void ui_displWeightsCOL(void) {
                 color = 30 * (strength-minWght)/(maxWght-minWght);
                 if(color > 30)color = 30;
                 if(color < 0)color = 0;
-                XSetForeground(ui_display,dwght_gc,(uint)ui_col_rangePixels[color]);
-                XFillRectangle(ui_display, dwght_pix, dwght_gc, xx, yy, dx, dy);
+                XFillRectangle(ui_display, dwght_pix, dwght_col_gc[color],
+                               xx, yy, dx, dy);
             } while( (pred=krui_getNextPredUnit(&strength)) != 0);
         }
     } while((next=krui_getNextUnit()) != 0);
@@ -372,6 +385,12 @@ void ui_displWeightsFromUpdate(void) {
         /* New network was loaded with different # of units *
          * ==> new viewport has to be created               */
         XtDestroyWidget(WEIGHT_GRAPH_mainwidget);
+        if (dwght_col_gc_created) {
+            int c;
+            for (c = 0; c <= 30; c++)
+                XFreeGC(ui_display, dwght_col_gc[c]);
+            dwght_col_gc_created = 0;
+        }
         old_maxunits = maxunits;
         WEIGHT_WINDOW_created = 0;
         WEIGHT_viewsize   = 400;
@@ -403,6 +422,12 @@ void ui_displWeightsFromUpdate(void) {
 static void ui_wght_close(Widget dummy, Widget w, caddr_t call_data) {
     XtDestroyWidget(w);
     XFreePixmap(ui_display,dwght_pix);
+    if (dwght_col_gc_created) {
+        int c;
+        for (c = 0; c <= 30; c++)
+            XFreeGC(ui_display, dwght_col_gc[c]);
+        dwght_col_gc_created = 0;
+    }
     WEIGHT_WINDOW_created = 0;
     WEIGHT_gridWidth = 0;
     old_maxunits = 0;

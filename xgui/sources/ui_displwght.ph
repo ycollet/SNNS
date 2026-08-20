@@ -45,6 +45,8 @@ static void       ui_wght_geometry(int zoom_fact);
 
 /* global variables for this file */
 static GC         dwght_gc;            /* local grapic context   */
+static GC         dwght_col_gc[31];    /* one GC per color bucket (0..30) */
+static int        dwght_col_gc_created = 0;
 static Window     dwght_win;           /* window where func is drawn */
 static Pixmap     dwght_pix;           /* pixmap where func is drawn */
 static int        dwght_depth;         /* color depth of pixmap */

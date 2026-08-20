@@ -60,13 +60,17 @@ void ui_net_drawLink (struct Ui_DisplayType *displayPtr, FlagType scope,
                       int sourceNo, int targetNo, FlintType weight, Bool operation)
 
 {
+    /* subnet numbers are invariant across all displays for this call */
+    int sourceSubNo = krui_getUnitSubnetNo(sourceNo);
+    int targetSubNo = krui_getUnitSubnetNo(targetNo);
+
     if (scope == UI_GLOBAL) {
         struct Ui_DisplayType  *dPtr;
         dPtr = ui_displ_listPtr;
         while (dPtr != NULL) {
             /* all the same subnet number ? */
-            if ((dPtr->subNetNo == krui_getUnitSubnetNo(sourceNo)) AND
-                    (krui_getUnitSubnetNo(sourceNo) == krui_getUnitSubnetNo(targetNo)))
+            if ((dPtr->subNetNo == sourceSubNo) AND
+                    (sourceSubNo == targetSubNo))
                 if ((NOT dPtr->frozen) AND ui_utilIsSet(dPtr->flags,1)) /*!*/
                     ui_drawLink(dPtr, sourceNo, targetNo, weight, operation);
             dPtr = dPtr->nextPtr;
@@ -74,8 +78,8 @@ void ui_net_drawLink (struct Ui_DisplayType *displayPtr, FlagType scope,
     } else
         /* all the same subnet number ? */
         if ((displayPtr != NULL) AND
-                (displayPtr->subNetNo == krui_getUnitSubnetNo(sourceNo)) AND
-                (krui_getUnitSubnetNo(sourceNo) == krui_getUnitSubnetNo(targetNo)))
+                (displayPtr->subNetNo == sourceSubNo) AND
+                (sourceSubNo == targetSubNo))
             ui_drawLink(displayPtr, sourceNo, targetNo, weight, operation);
 }
 
@@ -94,19 +98,22 @@ void ui_net_drawUnit (struct Ui_DisplayType *displayPtr, FlagType scope,
                       int unitNo, Bool operation)
 
 {
+    /* subnet number is invariant across all displays for this call */
+    int unitSubNo = krui_getUnitSubnetNo(unitNo);
+
     if (scope == UI_GLOBAL) {
         struct Ui_DisplayType *dPtr;
         dPtr = ui_displ_listPtr;
         while (dPtr != NULL) {
             /* all same subnet number like display? */
-            if ((dPtr->subNetNo == krui_getUnitSubnetNo(unitNo)))
+            if ((dPtr->subNetNo == unitSubNo))
                 if ((NOT dPtr->frozen) AND ui_utilIsSet(dPtr->flags,1)) /*!*/
                     ui_drawUnit(dPtr, unitNo, operation);
             dPtr = dPtr->nextPtr;
         }
     } else
         /* all same subnet number like display? */
-        if ((displayPtr->subNetNo == krui_getUnitSubnetNo(unitNo)))
+        if ((displayPtr->subNetNo == unitSubNo))
             ui_drawUnit(displayPtr, unitNo, operation);
 }
 

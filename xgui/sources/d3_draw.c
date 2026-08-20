@@ -157,6 +157,11 @@ void d3_draw_solidCube (cube c, vector vp, vector lp, int unit_no) {
     float col_val;
     static long shades[6] = {0, -2, 2, 0, -2, 2};
 
+    /* the color value depends only on the unit, not on the face, so fetch it
+       once here instead of once per face inside the loop */
+    if (d3_state.unit_mode.color != nothing_on)
+        d3_getColorValue (d3_state.unit_mode.color, unit_no, &col_val);
+
     for (pi=0; pi<6; pi++) {
         d3_normalVector (normal, c[d3_vertex_index[pi][0]],
                          c[d3_vertex_index[pi][1]],
@@ -166,7 +171,6 @@ void d3_draw_solidCube (cube c, vector vp, vector lp, int unit_no) {
             d3_shadeIntens (&d3_intens, c[d3_vertex_index[pi][0]], normal, lp);
             color = d3_intens_to_grayval (d3_intens);
         } else {
-            d3_getColorValue (d3_state.unit_mode.color, unit_no, &col_val);
             color = (long) d3_value_to_color (col_val) + 3 + shades[pi];
         }
         d3_setColor (color);

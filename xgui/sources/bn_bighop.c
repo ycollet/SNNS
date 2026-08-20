@@ -374,24 +374,25 @@ static void make_links(void)
     weight = 1.0;
 
     for ((mainUnit_Ptr) = krui_getFirstUnit();
-            (mainUnit_Ptr) <= krui_getNoOfUnits(); (mainUnit_Ptr)++)
+            (mainUnit_Ptr) <= krui_getNoOfUnits(); (mainUnit_Ptr)++) {
 
         /* main loop  self connections too  */
+
+        /* set the current (target) unit once per main unit, not per link:
+           the network was just built empty by create_net_PROC (krui_deleteNet
+           immediately precedes this), so no duplicate links can exist yet and
+           the krui_isConnected() guard is unnecessary. */
+        krui_setCurrentUnit(mainUnit_Ptr);
 
         for ((unit_ptr) =  krui_getFirstUnit();
                 (unit_ptr) <= krui_getNoOfUnits(); (unit_ptr)++) {
 
-
             /* inner loop */
-            /*if (NOT (unit_ptr == mainUnit_Ptr)) {  not the same entry !! */
 
-            krui_setCurrentUnit(mainUnit_Ptr);
-            if (NOT krui_isConnected(unit_ptr)) {
-                krui_createLink(unit_ptr, weight);
-                krui_setLinkWeight(weight);
-
-            }
+            krui_createLink(unit_ptr, weight);
+            krui_setLinkWeight(weight);
         }
+    }
 }
 
 

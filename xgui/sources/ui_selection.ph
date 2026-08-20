@@ -68,6 +68,13 @@ static struct SelectionType *ui_sel_freeListPtr;/* pointer to first free item*/
 static int            ui_sel_numberOfItems;     /* number of created items */
 static int ui_selectionSize = UI_UNIT_SIZE;
 
+/* index of the selection list by unit number for O(1) lookups.        *
+ * ui_sel_index[unitNo] points to the list item selecting that unit or *
+ * NULL. Unit numbers >= ui_sel_indexSize fall back to a linear scan,  *
+ * so the index degrades gracefully if it cannot be grown.             */
+static struct SelectionType **ui_sel_index = NULL;
+static int            ui_sel_indexSize = 0;
+
 
 /* end private definition section */
 
