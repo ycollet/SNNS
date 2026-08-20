@@ -1226,15 +1226,24 @@ krui_err PRUNE_Skeletonization (int pattern)
   RETURNS  : kernel error code
 ******************************************************************************/
 
-static krui_err pr_nc_calc_stddev (int pattern, struct Unit *this_unit_ptr) {
+/*****************************************************************************
+  FUNCTION : pr_nc_calc_means
+  PURPOSE  : calculates the mean output of each unit (stored in value_b).
+             This value does not depend on 'this_unit_ptr'/pr_Pass, so it
+             only needs to be computed once per pruning iteration instead
+             of being redone (via a full forward-propagation sweep over all
+             patterns) on every call to pr_nc_calc_stddev.
+  RETURNS  : kernel error code
+******************************************************************************/
+
+static krui_err pr_nc_calc_means (int pattern) {
     struct Unit *unit_ptr;
     int pattern_no, sub_pat_no, no_of_patterns;
 
-    /* initialize value_b and value_c of each unit */
+    /* initialize value_b of each unit */
     FOR_ALL_UNITS (unit_ptr)
     if (! IS_SPECIAL_UNIT (unit_ptr)) {
         unit_ptr->value_b = 0;
-        unit_ptr->value_c = 0;
     }
 
     /* compute the necessary sub patterns */
@@ -1261,6 +1270,20 @@ static krui_err pr_nc_calc_stddev (int pattern, struct Unit *this_unit_ptr) {
     FOR_ALL_UNITS (unit_ptr)
     if (! IS_SPECIAL_UNIT (unit_ptr))
         unit_ptr->value_b /= (float) no_of_patterns;
+
+    return (KRERR_NO_ERROR);
+}
+
+static krui_err pr_nc_calc_stddev (int pattern, struct Unit *this_unit_ptr) {
+    struct Unit *unit_ptr;
+    int pattern_no, sub_pat_no, no_of_patterns;
+
+    /* initialize value_c of each unit; value_b (the mean) is computed once
+       by pr_nc_calc_means and reused here */
+    FOR_ALL_UNITS (unit_ptr)
+    if (! IS_SPECIAL_UNIT (unit_ptr)) {
+        unit_ptr->value_c = 0;
+    }
 
     /* compute the necessary sub patterns */
     if (pattern == PR_ALL_PATTERNS)        /* all patterns */
@@ -1561,6 +1584,12 @@ krui_err PRUNE_Noncontributing (int pattern) {
 
     /* Looking for unit to prune */
     pr_Pass = PR_CONST;
+
+    /* the mean output of each unit does not depend on pr_Pass/this_unit_ptr,
+       so compute it once here instead of recomputing it (via a full
+       forward-propagation sweep) on every pr_nc_calc_stddev call below */
+    KernelErrorCode = pr_nc_calc_means (pattern);
+    if (KernelErrorCode != KRERR_NO_ERROR) return (KernelErrorCode);
 
     KernelErrorCode = pr_nc_calc_stddev (pattern, NULL);
     if (KernelErrorCode != KRERR_NO_ERROR) return (KernelErrorCode);

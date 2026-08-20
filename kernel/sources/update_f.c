@@ -2016,15 +2016,22 @@ krui_err  UPDATE_FixAct_Hop(float *parameterArray, int NoOfParams) {
     ACT_FUNC_DEFS    /* defines link- and site-pointer */
     register int            i;
     int                     NoOfOnes, where;
-    struct Unit            **unitsToUpdate;
-    FlintType              *netInputArray;
+    static struct Unit    **unitsToUpdate = NULL;
+    static FlintType       *netInputArray = NULL;
+    static int              allocatedNoOfOnes = 0;
 
 
     NoOfOnes = parameterArray[0]; /* the fixed Number of 1 */
 
-    /* init netInputArray and unitsToUpdate */
-    netInputArray = (FlintType *) calloc(NoOfOnes, sizeof(FlintType));
-    unitsToUpdate = (struct Unit * *) calloc(NoOfOnes, sizeof( struct Unit *));
+    /* (re)allocate netInputArray and unitsToUpdate only when the requested
+       size changes, instead of on every call */
+    if (NoOfOnes != allocatedNoOfOnes) {
+        free(netInputArray);
+        free(unitsToUpdate);
+        netInputArray = (FlintType *) calloc(NoOfOnes, sizeof(FlintType));
+        unitsToUpdate = (struct Unit * *) calloc(NoOfOnes, sizeof( struct Unit *));
+        allocatedNoOfOnes = NoOfOnes;
+    }
     for(i=0; i<= NoOfOnes-1; i++) {
         unitsToUpdate[i] = NULL;
         netInputArray[i] = -9e37;
@@ -2050,6 +2057,18 @@ krui_err  UPDATE_FixAct_Hop(float *parameterArray, int NoOfParams) {
        the netInputArray and if a higher netinput occures, it replaces the
        lowest value in the array ) */
 
+    /* get the min of netInputArray, i.e. the worst netinput value already
+           computed */
+
+    min = netInputArray[0];
+    where = 0;
+    for(i = 1; i <= NoOfOnes - 1; i++) {
+        if( netInputArray[i] < min) {
+            min = netInputArray[i];
+            where = i;
+        }
+    }
+
     FOR_ALL_UNITS(unit_ptr) {
         /* get the netInput of this unit */
         sum =  0.0;
@@ -2060,24 +2079,23 @@ krui_err  UPDATE_FixAct_Hop(float *parameterArray, int NoOfParams) {
             while (GET_NEXT_LINK);
         }
 
-        /* get the min of netInputArray, i.e. the worst netinput value already
-               computed */
-
-        min = netInputArray[0];
-        where = 0;
-        for(i = 1; i <= NoOfOnes - 1; i++) {
-            if( netInputArray[i] < min) {
-                min = netInputArray[i];
-                where = i;
-            }
-        }
-
         /* replace the lowest netinput with the actual one if this is higher
            and save the pointer to the actual unit in 'unitsToUpdate' */
 
         if( sum > min ) {
             netInputArray[where] = sum;
             unitsToUpdate[where] = unit_ptr;
+
+            /* the previous minimum slot was just overwritten, so find the
+               new minimum of netInputArray */
+            min = netInputArray[0];
+            where = 0;
+            for(i = 1; i <= NoOfOnes - 1; i++) {
+                if( netInputArray[i] < min) {
+                    min = netInputArray[i];
+                    where = i;
+                }
+            }
         }
     }
 
@@ -2104,8 +2122,6 @@ krui_err  UPDATE_FixAct_Hop(float *parameterArray, int NoOfParams) {
             }
         }
     }
-    free(netInputArray);
-    free(unitsToUpdate);
 
     return( KRERR_NO_ERROR );
 }

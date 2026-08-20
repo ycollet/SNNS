@@ -115,6 +115,7 @@ static void pr_obs_updateLink (struct Link *link_ptr,
 static void pr_skel_processLink (struct Unit *unit_ptr, struct Link *link_ptr);
 static void pr_skel_check_saliency (struct Unit *unit_ptr);
 
+static krui_err pr_nc_calc_means (int pattern);
 static krui_err pr_nc_calc_stddev (int pattern, struct Unit *this_unit_ptr);
 static void     pr_nc_check_stddev (struct Unit *unit_ptr, struct Unit *unit_ptr2);
 static krui_err pr_nc_process_succ_unit (struct Unit *unit_ptr, struct Link *link_ptr);

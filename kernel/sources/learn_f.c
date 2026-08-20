@@ -3928,6 +3928,7 @@ krui_err LEARN_RBF_DDA(int start_pattern, int end_pattern,
     struct Link  *link_ptr;
     TopoPtrArray topo_ptr;
     Patterns     out_pat_ptr;
+    double       rbfInv;
 
 
     /* Treat parameters */
@@ -3939,6 +3940,10 @@ krui_err LEARN_RBF_DDA(int start_pattern, int end_pattern,
     if ( theta_pos <= 0.0 || theta_pos > 1.0 ) return DDA_PARAM_ONE;
 
     if ( theta_neg <= 0.0 || theta_neg > 1.0 ) return DDA_PARAM_TWO;
+
+    /* theta_neg is constant for the rest of this call, so compute
+       RBF_INV once instead of calling log() on every use below */
+    rbfInv = RBF_INV;
 
     if ( max_units_displayed == 0 ) max_units_displayed = DEF_MAX_UNITS_DISPLAYED;
 
@@ -4138,8 +4143,8 @@ krui_err LEARN_RBF_DDA(int start_pattern, int end_pattern,
                 if ( link_ptr->to->act > theta_neg ) {
                     /* Shrink! */
                     if ( link_ptr->to->bias < 1.0/RBF_SQR( RBF_MIN_SIGMA ) ) {
-                        if ( link_ptr->to->value_a/RBF_INV > RBF_SQR( RBF_MIN_SIGMA ) )
-                            link_ptr->to->bias = RBF_INV/link_ptr->to->value_a;
+                        if ( link_ptr->to->value_a/rbfInv > RBF_SQR( RBF_MIN_SIGMA ) )
+                            link_ptr->to->bias = rbfInv/link_ptr->to->value_a;
                         else
                             link_ptr->to->bias = 1.0/RBF_SQR( RBF_MIN_SIGMA );
                     }
@@ -4255,11 +4260,11 @@ krui_err LEARN_RBF_DDA(int start_pattern, int end_pattern,
 
                         /* Activation greater than theta_neg? Sigma too big ? */
 
-                        if ( RBF_INV/new_rbf_ptr->bias > sqr_distance )
+                        if ( rbfInv/new_rbf_ptr->bias > sqr_distance )
                             /* Shrink! */
                             if ( new_rbf_ptr->bias < 1.0/RBF_SQR( RBF_MIN_SIGMA ) ) {
-                                if ( sqr_distance/RBF_INV > RBF_SQR( RBF_MIN_SIGMA ) )
-                                    new_rbf_ptr->bias = RBF_INV / sqr_distance;
+                                if ( sqr_distance/rbfInv > RBF_SQR( RBF_MIN_SIGMA ) )
+                                    new_rbf_ptr->bias = rbfInv / sqr_distance;
                                 else
                                     new_rbf_ptr->bias = 1.0/RBF_SQR( RBF_MIN_SIGMA );
                             }
@@ -7579,8 +7584,21 @@ static float propagateNet_kohonen(int pattern_no, int sub_pat_no, float height,
     /***************************************************************/
 
 
-    for (ver = 0; ver < sizever; ver++)
-        for (hor = 0; hor < sizehor; hor++)
+    {
+        /* only cells inside the (verwin,horwin) +/- radius window can ever
+           pass the checks below, so restrict the scan to that window
+           (clamped to the grid bounds) instead of visiting every cell */
+        int verLo = (int) floor(verwin - radius);
+        int verHi = (int) ceil(verwin + radius);
+        int horLo = (int) floor(horwin - radius);
+        int horHi = (int) ceil(horwin + radius);
+        if (verLo < 0) verLo = 0;
+        if (verHi >= sizever) verHi = sizever - 1;
+        if (horLo < 0) horLo = 0;
+        if (horHi >= sizehor) horHi = sizehor - 1;
+
+    for (ver = verLo; ver <= verHi; ver++)
+        for (hor = horLo; hor <= horHi; hor++)
             if ((hor < radius + horwin) &&
                     (hor > horwin - radius) &&
                     (ver < radius + verwin) &&
@@ -7621,6 +7639,7 @@ static float propagateNet_kohonen(int pattern_no, int sub_pat_no, float height,
                         normalize_weight(unit_ptr, sum);
                 }
             }
+    }
     sum_error = 0.0;		/* 0.0 is chosen arbitrarily and serves no
 				   purpose */
     return (sum_error);
