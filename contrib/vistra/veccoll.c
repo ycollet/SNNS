@@ -171,7 +171,7 @@ Number dimMax(VecColl vc, long dim) {
 /*******************************************************/
 void collectRows(vc, vecFunc, v)
 VecColl vc;
-Number (*vecFunc)();
+Number (*vecFunc)(Vector);
 Vector v;
 {
     long numVectors, i;
@@ -191,7 +191,7 @@ Vector v;
 /*******************************************************/
 void collectCols(vc, vecFunc, v)
 VecColl vc;
-Number (*vecFunc)();
+Number (*vecFunc)(Vector);
 Vector v;
 {
     Vector col;
@@ -216,7 +216,7 @@ Vector v;
 /*******************************************************/
 void doRows(vc, vecFunc)
 VecColl vc;
-void (*vecFunc)();
+void (*vecFunc)(Vector);
 {
     long i, numVectors;
 
@@ -356,7 +356,7 @@ void fftRows(VecColl vc) {
 /* from bis Zeile to einschliesslich.                */
 /*****************************************************/
 void removeRowRange(VecColl vc, unsigned from, unsigned to) {
-    freeFromTo(vc, from, to, freeVector);
+    freeFromTo(vc, from, to, (void(*)(void*))freeVector);
 }          /* removeRowRange */
 
 

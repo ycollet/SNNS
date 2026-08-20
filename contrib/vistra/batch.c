@@ -1,4 +1,5 @@
 #include "xvis.h"
+#include <unistd.h>
 
 #define numCols(p)      (operateOnInputs ? inputDims(p) : outputDims(p))
 
@@ -7,7 +8,7 @@ typedef struct {
     int nparams;
 } Command_Struct;
 
-static int execLine();                           /* error gesetzt */
+static void execLine(void);                           /* error gesetzt */
 static int commandNr(char *, Command_Struct *);
 static void batchWarn(char *);
 static void execLoad(int, VecColl, Boolean);
@@ -102,7 +103,7 @@ void interpret(Collection coll, Patterns p) {
 /* ausgefuehrt wurde, sonst 1.                    */
 /* Variable error wird gesetzt.                   */
 /**************************************************/
-static int execLine() {
+static void execLine() {
     char *copy, *first, *second, buf[512], *direction;
     int nr;
     Number n1, n2;
@@ -536,7 +537,7 @@ static int execLine() {
 /**************************************************/
 static void execLoad(int nr, VecColl vc, Boolean loadVert) {
     Vector scalarVec;
-    void (*collectFunc)();
+    void (*collectFunc)(VecColl, Number (*)(Vector), Vector);
     unsigned u, maxAllowed;
     Number n1;
     char buf[512];

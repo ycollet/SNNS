@@ -20,7 +20,7 @@ static void sswJumpHoriz(Widget, XtPointer, XtPointer);
 static SSW createSSW(parent, width, height, popdown_cb, data)
 Widget parent;
 unsigned width, height;
-void (*popdown_cb)();
+XtCallbackProc popdown_cb;
 XtPointer data;
 {
     SSW ssw;

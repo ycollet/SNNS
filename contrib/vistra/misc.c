@@ -1,5 +1,6 @@
 #include "xvis.h"
 #include <math.h>
+#include <ctype.h>
 
 /*****************************************/
 /* Antworte TRUE gdw. u = 2^n fuer eine  */
@@ -78,9 +79,9 @@ void diskToStr(FILE *f, char *s) {
 long flen(FILE *f) {
     long answer;
 
-    if(fseek(f, 0L, 2)) error(2);
+    if(fseek(f, 0L, 2)) errorR(2,0);
     answer = ftell(f);
-    if(answer == -1L) error(2);
+    if(answer == -1L) errorR(2,0);
     rewind(f);
 
     error = 0;

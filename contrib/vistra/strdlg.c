@@ -41,7 +41,7 @@ static Widget createStrDlgShell(Widget parent) {
 static void popupStrDlg(w, title, defaultValue, buttonLabel, callback)
 Widget w;
 char *title, *defaultValue, *buttonLabel;
-void (*callback)();
+XtCallbackProc callback;
 {
     Position x, y;
 

@@ -236,7 +236,7 @@ Collection removeFromTo(Collection coll, long from, long to) {
 /* Loesche die Collection coll. Fuehre vorher mit   */
 /* jedem Element von coll die Funktion func aus.    */
 /****************************************************/
-void freeDeep(Collection coll, void (*func)()) {
+void freeDeep(Collection coll, void (*func)(void *)) {
     if(notEmpty(coll)) freeFromTo(coll, 1L, size(coll), func);
     free(coll);
 }               /* freeDeep */
@@ -250,7 +250,7 @@ void freeDeep(Collection coll, void (*func)()) {
 /* Parameter erwartet und nichts (void) zurueck-    */
 /* liefert.                                         */
 /****************************************************/
-Collection freeFromTo(Collection coll, long from, long to, void (*func)()) {
+Collection freeFromTo(Collection coll, long from, long to, void (*func)(void *)) {
     struct Member *toRemove, *pred, *succ;
     long i;
 
@@ -300,7 +300,7 @@ long indexOf(Collection coll, void *elem) {
 /* gibt. Falls dies fuer kein Element von coll der  */
 /* Fall ist, so antworte -1L.                       */
 /****************************************************/
-long detectPos(Collection coll, void *search, Boolean (*equals)()) {
+long detectPos(Collection coll, void *search, Boolean (*equals)(void *, void *)) {
     long i, collSize = size(coll);
 
     for(i = 1L; i <= collSize; i++)

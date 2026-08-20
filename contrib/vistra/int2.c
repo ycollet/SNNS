@@ -191,8 +191,7 @@ static void popupInt2Dlg(w, title, headline, item1, item2,
 Widget w;
 char *title, *headline, *item1, *item2, *okButtonLabel;
 int from1, to1, from2, to2, default1, default2;
-void (*up1_cb)(), (*down1_cb)(), (*up2_cb)(), (*down2_cb)(),
-     (*ok_cb)(), (*cancel_cb)();
+XtCallbackProc up1_cb, down1_cb, up2_cb, down2_cb, ok_cb, cancel_cb;
 XtPointer ok_data, cancel_data;
 {
     Position x, y;

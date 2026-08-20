@@ -372,7 +372,7 @@ static unsigned drawHistogrammes(GW gw, VecColl vc, Range rangeY,
         drawMarkY(gw->pm, &cs, markY_High);
         XSetForeground(display, gc, color);
         drawHisto(gw->pm, cs, (Vector) at(vc, i));
-        if(error) return;
+        if(error) return i - 1;
         cs.x += (gwDists[gw->kind] + gw->widthPerVector);
     }      /* for */
     answer = i - 1;
@@ -490,7 +490,7 @@ static unsigned drawPolyLines(GW gw, VecColl vc, Range rangeY, PixelNo color) {
         drawMarkY(gw->pm, &cs, markY_High);
         XSetForeground(display, gc, color);
         drawConnectedLines(gw->pm, cs, (Vector) at(vc, i));
-        if(error) return;
+        if(error) return i - 1;
         cs.x += (gwDists[gw->kind] + gw->widthPerVector);
     }      /* for */
     answer = i - 1;

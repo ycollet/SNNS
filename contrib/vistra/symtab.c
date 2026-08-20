@@ -14,12 +14,12 @@ Symtab newSymtab(long buckets) {
     long i;
 
     answer = (Symtab) malloc(sizeof(*answer));
-    if(answer == NULL) error(1);
+    if(answer == NULL) errorR(1,NULL);
     answer->buckets = (struct Node **) malloc(sizeof(struct Node *) * buckets);
-    if(answer->buckets == NULL) error(1);
+    if(answer->buckets == NULL) errorR(1,NULL);
     for(i = 0L; i < buckets; i++)
         answer->buckets[i] = NULL;
-    if(! (answer->order = newColl())) error(1);
+    if(! (answer->order = newColl())) errorR(1,NULL);
     answer->numBuckets = buckets;
 
     error = 0;
@@ -98,15 +98,15 @@ char *addSymbol(Symtab st, char *sym) {
     if(symCopy == NULL) {
         /* sym ist noch nicht in der Symboltabelle */
         newNode = (struct Node *) malloc(sizeof(*newNode));
-        if(newNode == NULL) error(1);
-        if(! (symCopy = my_strdup(sym))) error(1);
+        if(newNode == NULL) errorR(1,NULL);
+        if(! (symCopy = my_strdup(sym))) errorR(1,NULL);
         hash_val = strhash(sym, st->numBuckets);
         newNode->name = symCopy;
         /* fuege newNode am Anfang ein */
         newNode->next = st->buckets[hash_val];
         st->buckets[hash_val] = newNode;
         /* haenge sym ans Ende der order-Liste */
-        if(! add(st->order, symCopy)) error(1);
+        if(! add(st->order, symCopy)) errorR(1,NULL);
     }
 
     error = 0;
@@ -177,18 +177,18 @@ Symtab readSymtab(FILE *f) {
     long len, i, nlines;
 
     len = flen(f);
-    if(error) return;
-    if(! (log = (char *) malloc((unsigned) len + 5))) error(1);
+    if(error) return NULL;
+    if(! (log = (char *) malloc((unsigned) len + 5))) errorR(1,NULL);
     diskToStr(f, log);
-    if(! (lines = tokens(log, "\n"))) error(1);
+    if(! (lines = tokens(log, "\n"))) errorR(1,NULL);
 
     answer = newSymtab(NO_BUCKETS);
-    if(error) return;
+    if(error) return NULL;
 
     nlines = size(lines);
     for(i = 1L; i <= nlines; i++) {
         addSymbol(answer, (char *) at(lines, i));
-        if(error) return;
+        if(error) return NULL;
     }     /* for */
 
     free(log);

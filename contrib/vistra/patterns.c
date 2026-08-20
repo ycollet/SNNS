@@ -1,5 +1,6 @@
 #include "xvis.h"
 #include <ctype.h>
+#include <time.h>
 
 static FILE *patternFile;          /* bearbeitetes Pattern File */
 static Format format;
@@ -31,12 +32,12 @@ Patterns newPatterns() {
     Patterns answer;
 
     answer = (Patterns) malloc(sizeof(*answer));
-    if(answer == NULL) error(1);                /* not enough memory */
+    if(answer == NULL) errorR(1,NULL);                /* not enough memory */
 
-    if(! (answer->inputs = newColl())) error(1);
-    if(! (answer->outputs = newColl())) error(1);
-    if(! (answer->classes = newColl())) error(1);
-    if(! (answer->classNos = newColl())) error(1);
+    if(! (answer->inputs = newColl())) errorR(1,NULL);
+    if(! (answer->outputs = newColl())) errorR(1,NULL);
+    if(! (answer->classes = newColl())) errorR(1,NULL);
+    if(! (answer->classNos = newColl())) errorR(1,NULL);
     answer->symtab = newSymtab(NO_BUCKETS);
     if(error) return NULL;
     answer->count = 0L;
@@ -51,8 +52,8 @@ Patterns newPatterns() {
 /* p frei.                                  */
 /********************************************/
 void freePatterns(Patterns p) {
-    freeDeep(p->inputs, freeVector);
-    freeDeep(p->outputs, freeVector);
+    freeDeep(p->inputs, (void(*)(void*))freeVector);
+    freeDeep(p->outputs, (void(*)(void*))freeVector);
     freeCollAll(p->classNos);
     freeColl(p->classes);
     freeSymtab(p->symtab);
@@ -141,7 +142,7 @@ unsigned removePatterns(Patterns p, unsigned from, unsigned to) {
         firstToRemove = max(1, from);
         lastToRemove = min(p->count, to);
         numToRemove = lastToRemove - firstToRemove + 1;
-        if(numToRemove >= p->count) error(28);
+        if(numToRemove >= p->count) errorR(28,0);
         removeRowRange(p->inputs, firstToRemove, lastToRemove);
         if(hasOutputs(p))
             removeRowRange(p->outputs, firstToRemove, lastToRemove);
@@ -175,10 +176,10 @@ unsigned removeCols(Patterns p, Boolean flag, unsigned from, unsigned to) {
         firstToRemove = max(1, from);
         lastToRemove = min(ndims, to);
         numToRemove = lastToRemove - firstToRemove + 1;
-        if(numToRemove >= ndims) error(29);
+        if(numToRemove >= ndims) errorR(29,0);
         vc = (flag ? p->inputs : p->outputs);
         removeColRange(vc, firstToRemove, lastToRemove);
-        if(error) return;
+        if(error) return 0;
         if(flag) p->inputDims -= numToRemove;
         else p->outputDims -= numToRemove;
     }
@@ -414,7 +415,7 @@ void writeSymtab(Patterns p, FILE *f) {
             nvecs = size(p->outputs);
             for(i = 1L; i <= nvecs; i++) {
                 v = (Vector) at(p->outputs, i);
-                if(detectPos(set, v, veq) == -1L)
+                if(detectPos(set, v, (Boolean(*)(void*,void*))veq) == -1L)
                     if(! add(set, v)) {
                         freeColl(set);
                         error(1);

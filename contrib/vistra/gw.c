@@ -621,7 +621,7 @@ static void initGW(GW gw) {
     char buf[10];
 
     gw->kind = noKind;
-    gw->pm = NULL;
+    gw->pm = None;
     gw->pmWidth = 0;
     gw->pmHeight = 0;
     gw->curWidth = 0;
@@ -1421,7 +1421,7 @@ clrMat:
 /**************************************************************/
 /**************************************************************/
 static void redrawGW(Widget w, XtPointer client_data, XEvent *event,
-                     Boolean *bool) {
+                     Boolean *continueToDispatch) {
     GW gw = (GW) client_data;
 
     XClearWindow(display, XtWindow(gw->core));

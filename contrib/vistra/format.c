@@ -11,13 +11,13 @@
 static enum Token tok;
 static Format format;
 
-static void definition();                        /* error gesetzt */
-static void stmtList();                          /* error gesetzt */
-static void stmt();                              /* error gesetzt */
-static void altList();                           /* error gesetzt */
-static void descList();                          /* error gesetzt */
-static void descListCdr();                       /* error gesetzt */
-static void desc();                              /* error gesetzt */
+static void definition(void);                        /* error gesetzt */
+static void stmtList(void);                          /* error gesetzt */
+static void stmt(void);                              /* error gesetzt */
+static void altList(void);                           /* error gesetzt */
+static void descList(void);                          /* error gesetzt */
+static void descListCdr(void);                       /* error gesetzt */
+static void desc(void);                              /* error gesetzt */
 static Boolean isStmtBegin(enum Token);
 
 
@@ -30,14 +30,14 @@ Format newFormat(FILE *ff) {
     Format f;
     char *str;
 
-    if(! (f = (Format) malloc(sizeof(*f)))) error(1);
+    if(! (f = (Format) malloc(sizeof(*f)))) errorR(1,NULL);
 
     fileLength = flen(ff);
     if(error) return NULL;
-    if(fileLength > MAX_VAL(unsigned)) error(3);   /* format file too long */
+    if(fileLength > MAX_VAL(unsigned)) errorR(3,NULL);   /* format file too long */
 
     str = (char *) malloc((unsigned) fileLength);
-    if(str == NULL) error(1);                 /* not enough memory */
+    if(str == NULL) errorR(1,NULL);                 /* not enough memory */
 
     /* copy the contents of the format file to String str */
     diskToStr(ff, str);
@@ -428,7 +428,7 @@ static void desc() {
 /***********************************************************/
 /***********************************************************/
 Boolean isDesc(enum Token tk) {
-    static tokenClass[] = {
+    static Boolean tokenClass[] = {
         TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE,
         FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
     };

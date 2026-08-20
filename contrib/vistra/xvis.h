@@ -64,12 +64,18 @@
 
 /* Ueberpruefe den Return-Wert von ftell() */
 #define checkPos(pos)  if((pos) == -1L) { error = 6; return; }
+/* Same, for use inside a function that returns a value on error paths */
+#define checkPosR(pos,retval)  if((pos) == -1L) { error = 6; return (retval); }
 
 /* Setze den Filepointer von File f auf Position pos, teste auf Fehler */
 #define setPos(f,pos)  if(fseek((f), (pos), 0)) { error = 6; return; }
+/* Same, for use inside a function that returns a value on error paths */
+#define setPosR(f,pos,retval)  if(fseek((f), (pos), 0)) { error = 6; return (retval); }
 
 /* Beende Funktion und setze den Fehlercode nr */
 #define error(nr)      { error = (nr); return; }
+/* Same, for use inside a function that returns a value on error paths */
+#define errorR(nr,retval)      { error = (nr); return (retval); }
 
 /* Berechne den durch so (eine ScaleOp structure) skalierten Wert von n */
 #define scale(so, n)      ((n) * (so).mult + (so).add)
@@ -238,7 +244,7 @@ typedef struct {
 Collection newColl();
 void freeColl(Collection);
 void freeCollAll(Collection);
-void freeDeep();
+void freeDeep(Collection coll, void (*func)(void *));
 Collection add(Collection, void *);
 void *at(Collection, long);
 void put(Collection, long, void *);
@@ -246,9 +252,9 @@ Collection rmv(Collection, void *);
 Collection removeAt(Collection, long);
 Collection removeComplete(Collection, long);
 Collection removeFromTo(Collection, long, long);
-Collection freeFromTo();
+Collection freeFromTo(Collection coll, long from, long to, void (*func)(void *));
 long indexOf(Collection, void *);
-long detectPos();
+long detectPos(Collection coll, void *search, Boolean (*equals)(void *, void *));
 long size(Collection);
 Boolean isEmpty(Collection);
 Boolean notEmpty(Collection);
@@ -349,9 +355,9 @@ long numberOfRows(VecColl);
 long numberOfCols(VecColl);
 void compScalarsRow(VecColl, Vector, char);
 void compScalarsCol(VecColl, Vector, char);
-void collectRows();
-void collectCols();
-void doRows();
+void collectRows(VecColl vc, Number (*vecFunc)(Vector), Vector v);
+void collectCols(VecColl vc, Number (*vecFunc)(Vector), Vector v);
+void doRows(VecColl vc, void (*vecFunc)(Vector));
 Number overallAvg(VecColl);
 Number overallMin(VecColl);
 Number overallMax(VecColl);
@@ -378,7 +384,7 @@ unsigned numSymbols(Symtab);
 Collection sequence(Symtab);
 char *locateSymbol(Symtab, char *);
 Symtab readSymtab(FILE *);                              /* error gesetzt */
-void fprintSymtab(Symtab, FILE *);
+void fprintSymbols(Symtab, FILE *);
 
 /* Public functions of BATCH.O */
 void interpret(Collection, Patterns);                   /* error gesetzt */
@@ -409,7 +415,7 @@ void getScaleOp(ScaleOp *, Range, Range);
 /* GLOBAL VARIABLES                                                    */
 /*---------------------------------------------------------------------*/
 
-extern error;
+extern int error;
 extern char errorInfo[];
 extern long rowCount;
 extern char tokenval[];

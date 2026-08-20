@@ -1,6 +1,6 @@
 #include <dirent.h>
 
-static void doBatch();                                 /* error gesetzt */
+static void doBatch(void);                                 /* error gesetzt */
 static void getFormatsInDir(char *, Collection, Collection);
 /* error gesetzt */
 static void addFormat(char *, char *, Collection, Collection);
@@ -169,7 +169,7 @@ static void initialize(int argc, char **argv) {
         readFmt = nameToFormat(format_name);
         if(error) return;
         selectedFormat = (app_data.readFmt ?
-                          detectPos(formatNames, format_name, streq) : 1);
+                          detectPos(formatNames, format_name, (Boolean(*)(void*,void*))streq) : 1);
 
         /* oeffne das Pattern File */
         if(! (pf = fopen(fileName, "r"))) {

@@ -1,23 +1,23 @@
 static Boolean exitLoop;           /* fuers Interpretieren von Loops       */
 static Boolean exitAlt;            /*   "         "         " Alternativen */
 
-static Boolean matchDescList();               /* error gesetzt */
+static Boolean matchDescList(void);               /* error gesetzt */
 static Boolean matchDesc(enum Token, char *); /* error gesetzt */
 static Boolean matchString(char *);
 static Boolean matchAsterisk();
-static Boolean matchQuestionMark();
-static Boolean matchNewLine();
+static Boolean matchQuestionMark(void);
+static Boolean matchNewLine(void);
 static Boolean matchLong(long);
-static Boolean matchVector();
+static Boolean matchVector(void);
 static Boolean matchVectorAll(long);          /* error gesetzt */
-static Boolean matchClassName();
+static Boolean matchClassName(void);
 static Boolean my_eof(FILE *);
 static void doDesc(enum Token);               /* error gesetzt */
-static void doDescList();                     /* error gesetzt */
-static void doAsterisk();
-static void doQuestionMark();                 /* error gesetzt */
+static void doDescList(void);                     /* error gesetzt */
+static void doAsterisk(void);
+static void doQuestionMark(void);                 /* error gesetzt */
 static void doString(char *);                 /* error gesetzt */
-static void doNewLine();                      /* error gesetzt */
+static void doNewLine(void);                      /* error gesetzt */
 static long readLong(long);                   /* error gesetzt */
 static Vector readVector(long);               /* error gesetzt */
 static void readClassName(char *);            /* error gesetzt */
@@ -170,7 +170,7 @@ static Boolean matchDescList() {
     long filePos, formatPos;
 
     filePos = ftell(patternFile);
-    checkPos(filePos);
+    checkPosR(filePos,FALSE);
     formatPos = getPosition(format);
     tok = nextToken(format);
 
@@ -213,7 +213,7 @@ static Boolean matchDescList() {
                 skipWhiteSpace(patternFile);
                 if(fgetc(patternFile) == EOF) matched = FALSE;
                 else {
-                    if(fseek(patternFile, -1L, 1)) error(6);
+                    if(fseek(patternFile, -1L, 1)) errorR(6,FALSE);
                     matched = TRUE;
                     fscanf(patternFile, "%*s");
                 }
@@ -231,14 +231,14 @@ static Boolean matchDescList() {
         }         /* switch */
 
         if(! matched) {
-            setPos(patternFile, filePos);
+            setPosR(patternFile, filePos,FALSE);
             error = 0;
             return FALSE;
         }
         tok = nextToken(format);
     }         /* while */
 
-    setPos(patternFile, filePos);
+    setPosR(patternFile, filePos,FALSE);
     setPosition(format, formatPos);
     error = 0;
     return TRUE;
@@ -258,7 +258,7 @@ static Boolean matchDesc(enum Token desc, char *tokvalue) {
     long filePos;
 
     filePos = ftell(patternFile);
-    checkPos(filePos);
+    checkPosR(filePos,FALSE);
 
     switch(desc) {
     case outputDim:
@@ -293,7 +293,7 @@ static Boolean matchDesc(enum Token desc, char *tokvalue) {
         break;
     }      /* switch */
 
-    setPos(patternFile, filePos);
+    setPosR(patternFile, filePos,FALSE);
 
     error = 0;
     return answer;
@@ -405,10 +405,10 @@ static Boolean matchVectorAll(long dim) {
         count = 0L;
         do {
             pos = ftell(patternFile);
-            checkPos(pos);
+            checkPosR(pos,FALSE);
 
             result = fscanf(patternFile, "%f", &dummy);
-            if(result != 1) setPos(patternFile, pos)
+            if(result != 1) setPosR(patternFile, pos,FALSE)
                 else count++;
         } while(result == 1);
 
@@ -703,7 +703,7 @@ static Vector readVector(long dim) {
     Number *np, n;
 
     if(dim) {               /* dimension already known */
-        if(! (answer = newVector(dim))) error(1);
+        if(! (answer = newVector(dim))) errorR(1,NULL);
 
         for(i = 1L; i <= dim; i++) {
             skipSpaceAndCountNl(patternFile);
@@ -718,19 +718,19 @@ static Vector readVector(long dim) {
     else {             /* input dimension is unknown by now */
         Collection coll;       /* can dynamically grow in contrast to answer */
 
-        if(! (coll = newColl())) error(1);
+        if(! (coll = newColl())) errorR(1,NULL);
         do {
             long saveRowCount = rowCount;
 
-            if(! (np = (Number *) malloc(sizeof(*np)))) error(1);
+            if(! (np = (Number *) malloc(sizeof(*np)))) errorR(1,NULL);
             pos = ftell(patternFile);
-            checkPos(pos);
+            checkPosR(pos,NULL);
             skipSpaceAndCountNl(patternFile);
             if((result = fscanf(patternFile, "%f", np)) == 1) {
-                if(! add(coll, np)) error(1);
+                if(! add(coll, np)) errorR(1,NULL);
             } else {
                 /* setze File Pointer zurueck; hinter die zuletzt gelesene Number */
-                setPos(patternFile, pos);
+                setPosR(patternFile, pos,NULL);
                 rowCount = saveRowCount;
             }
         } while(result == 1);
@@ -741,7 +741,7 @@ static Vector readVector(long dim) {
             freeColl(coll);
             return NULL;
         } else {
-            if(! (answer = newVector(size(coll)))) error(1);
+            if(! (answer = newVector(size(coll)))) errorR(1,NULL);
             copyFromColl(answer, coll);
             freeCollAll(coll);
         }    /* else */

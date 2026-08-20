@@ -37,9 +37,9 @@ Patterns readN01(FILE *f) {
     long i, j;
     char n01Tag[4];
 
-    if(fread(n01Tag, sizeof(char), 4, f) != 4) error(16);
+    if(fread(n01Tag, sizeof(char), 4, f) != 4) errorR(16,NULL);
 
-    if(fread(&header, sizeof(header), 1, f) != 1) error(16);
+    if(fread(&header, sizeof(header), 1, f) != 1) errorR(16,NULL);
     if(! isDEC) {
         header.NumberOfData = reverseUnsigned(header.NumberOfData);
         header.PlaceOfInputData = reverseUnsigned(header.PlaceOfInputData);
@@ -62,47 +62,47 @@ Patterns readN01(FILE *f) {
     p->classCount = header.NumberOfClasses;
 
     /* Lese die Input Patterns */
-    if(fseek(f, header.PlaceOfInputData, 0)) error(16);
+    if(fseek(f, header.PlaceOfInputData, 0)) errorR(16,NULL);
     for(i = 1L; i <= header.NumberOfData; i++) {
-        if(! (v = newVector(header.InputDimension))) error(1);
+        if(! (v = newVector(header.InputDimension))) errorR(1,NULL);
         if(fread(v->elements, sizeof(N01Number), header.InputDimension, f)
-                != header.InputDimension) error(16);
+                != header.InputDimension) errorR(16,NULL);
         if(! isDEC)
             for(j = 0L; j < header.InputDimension; j++)
                 v->elements[j] = reverseNumber(v->elements[j]);
-        if(! add(inputs(p), v)) error(1);
+        if(! add(inputs(p), v)) errorR(1,NULL);
     }
 
     /* Lese die Output Patterns */
     if(header.PlaceOfOutputData) {
         /* Output Vektoren vorhanden */
-        if(fseek(f, header.PlaceOfOutputData, 0)) error(16);
+        if(fseek(f, header.PlaceOfOutputData, 0)) errorR(16,NULL);
         for(i = 1L; i <= header.NumberOfData; i++) {
-            if(! (v = newVector(header.OutputDimension))) error(1);
+            if(! (v = newVector(header.OutputDimension))) errorR(1,NULL);
             if(fread(v->elements, sizeof(N01Number), header.OutputDimension, f)
-                    != header.OutputDimension) error(16);
+                    != header.OutputDimension) errorR(16,NULL);
             if(! isDEC)
                 for(j = 0L; j < header.OutputDimension; j++)
                     v->elements[j] = reverseNumber(v->elements[j]);
-            if(! add(outputs(p), v)) error(1);
+            if(! add(outputs(p), v)) errorR(1,NULL);
         }    /* for */
     }      /* if */
 
     /* Lese die Klassen-Nummern */
     if(header.PlaceOfClassData) {
         /* Klassen-Nummern vorhanden */
-        if(fseek(f, header.PlaceOfClassData, 0)) error(16);
+        if(fseek(f, header.PlaceOfClassData, 0)) errorR(16,NULL);
         for(i = 1L; i <= header.NumberOfData; i++) {
             long *classNo;
             N01Class cls;
 
             classNo = (long *) malloc(sizeof(*classNo));
-            if(! classNo) error(1);
-            if(fread(&cls, sizeof(cls), 1, f) != 1) error(16);
+            if(! classNo) errorR(1,NULL);
+            if(fread(&cls, sizeof(cls), 1, f) != 1) errorR(16,NULL);
             /* kein Fehler */
             if(! isDEC) cls = reverseUnsigned(cls);
             *classNo = (long) cls;
-            if(! add(classNos(p), classNo)) error(1);
+            if(! add(classNos(p), classNo)) errorR(1,NULL);
         }    /* for */
     }      /* if */
 

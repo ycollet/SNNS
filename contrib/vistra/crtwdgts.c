@@ -11,9 +11,9 @@ static Widget createInt2DlgShell(Widget);
 #ifdef XFWF_FILE_SELECTION
 static Widget createFileSelShell(Widget);
 #endif
-static SSW createSSW();
-static Widget createTextWindow();
-static void addMenuItems();                         /* error gesetzt */
+static SSW createSSW(Widget parent, unsigned width, unsigned height, XtCallbackProc popdown_cb, XtPointer data);
+static Widget createTextWindow(char *title, char *text, unsigned width, unsigned height, Widget parent, XtCallbackProc callback);
+static void addMenuItems(Widget sm, Collection labels, XtCallbackProc callback, Collection widgetColl);                         /* error gesetzt */
 static void addFileMenu(Widget);
 static void addTransformMenu(Widget);
 static void addRemoveMenu(Widget);
@@ -924,7 +924,7 @@ static void addFormatMenu(Widget w) {
 static void addMenuItems(sm, labels, callback, widgetColl)
 Widget sm;
 Collection labels, widgetColl;
-void (*callback)();
+XtCallbackProc callback;
 {
     int i, num = size(labels);
     String itemName;
@@ -1129,7 +1129,7 @@ static Widget createTextWindow(title, text, width, height, parent, callback)
 char *title, *text;
 unsigned width, height;
 Widget parent;
-void (*callback)();
+XtCallbackProc callback;
 {
     Widget answer, twForm, twText, twCloseButton;
 

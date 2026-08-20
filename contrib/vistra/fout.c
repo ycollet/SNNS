@@ -13,7 +13,7 @@ static Boolean classNosAsOutputs;
 
 
 static Boolean writeNextList(Boolean);
-static void writeDescList();
+static void writeDescList(void);
 static void backpatch(FILE *, Collection, char);
 
 /***************************************************/

@@ -139,7 +139,7 @@ static void popupStr2Dlg(w, title, headline, item1, item2, default1, default2,
                          okButtonLabel, callback)
 Widget w;
 char *title, *headline, *item1, *item2, *default1, *default2, *okButtonLabel;
-void (*callback)();
+XtCallbackProc callback;
 {
     Position x, y;
 
@@ -230,11 +230,11 @@ static void setActivation(Patterns p) {
 static Format nameToFormat(char *name) {
     long pos;
 
-    pos = detectPos(formatNames, name, streq);
+    pos = detectPos(formatNames, name, (Boolean(*)(void*,void*))streq);
     if(pos < 2L) {
         /* kein Format mit diesem Suffix */
         sprintf(errorInfo, "Unknown format %s!", name);
-        error(22);
+        errorR(22,NULL);
     }
 
     error = 0;
@@ -266,7 +266,7 @@ static Vector scalarsVertAsVec() {
         if(strcmp(s, buf)) {
             if(sscanf(s, "%f", &n) != 1) {
                 sprintf(errorInfo, "vertical scalar nr:  %u", firstVec + i);
-                error(23);
+                errorR(23,NULL);
             } else {
                 putDim(vert, (long) (firstVec + i), n);
                 sprintf(buf, NUMBER_FORMAT, n);
@@ -299,7 +299,7 @@ static Vector scalarsHorizAsVec() {
         if(strcmp(s, buf)) {
             if(sscanf(s, "%f", &n) != 1) {
                 sprintf(errorInfo, "horizontal scalar nr:  %u", firstDim + i);
-                error(23);
+                errorR(23,NULL);
             } else {
                 putDim(horiz, (long)(i + firstDim), n);
                 sprintf(buf, NUMBER_FORMAT, n);
@@ -528,7 +528,7 @@ static void exposeWidget(Widget W) {
 static void popupFileSelector(w, title, ok_cb)
 Widget w;
 char *title;
-void (*ok_cb)();
+XtCallbackProc ok_cb;
 {
     Position x, y;
 

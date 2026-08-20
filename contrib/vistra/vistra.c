@@ -27,6 +27,8 @@
 #include "xvis.h"
 #include "def.h"
 #include <math.h>
+#include <time.h>
+#include <unistd.h>
 /* #include <sys/stdtypes.h> */
 #ifdef XFWF_FILE_SELECTION
 #include <Xfwf/FileSel.h>
@@ -53,32 +55,32 @@
 /***********************************************************************/
 static void xhandleErr(int);
 /*** INIT.C ***/
-static void initialize();                             /* error gesetzt */
+static void initialize(int argc, char **argv);                             /* error gesetzt */
 static void initialize2(Widget);
 /*** UIF.C ***/
-static void fillPatternView();                        /* error gesetzt */
-static void changeInOut();                            /* error gesetzt */
+static void fillPatternView(void);                        /* error gesetzt */
+static void changeInOut(void);                            /* error gesetzt */
 static Format nameToFormat(char *);                   /* error gesetzt */
 #ifdef XFWF_FILE_SELECTION
-static void popupFileSelector();
+static void popupFileSelector(Widget w, char *title, XtCallbackProc ok_cb);
 #endif
-static void popupStr2Dlg();
+static void popupStr2Dlg(Widget w, char *title, char *headline, char *item1, char *item2, char *default1, char *default2, char *okButtonLabel, XtCallbackProc callback);
 static void popupErrDlg(Widget, char *, char *);
 static void getStr2DlgValues(char **, char **);
 static void setActivation(Patterns);
-static Vector scalarVec();                            /* error gesetzt */
-static Vector scalarsVertAsVec();                     /* error gesetzt */
-static Vector scalarsHorizAsVec();                    /* error gesetzt */
+static Vector scalarVec(void);                            /* error gesetzt */
+static Vector scalarsVertAsVec(void);                     /* error gesetzt */
+static Vector scalarsHorizAsVec(void);                    /* error gesetzt */
 static void fixSize(Widget);
-static void updateInfoWidgets();
-static void updateScalarsHoriz();
-static void updateScalarsVert();
-static void updateDimLabels();
-static void updateNrLabels();
-static void updateClassLabels();
-static void updateElems();
-static void updateVertScrollBar();
-static void updateHorizScrollBar();
+static void updateInfoWidgets(void);
+static void updateScalarsHoriz(void);
+static void updateScalarsVert(void);
+static void updateDimLabels(void);
+static void updateNrLabels(void);
+static void updateClassLabels(void);
+static void updateElems(void);
+static void updateVertScrollBar(void);
+static void updateHorizScrollBar(void);
 static void updateTW(Widget, char *, char *);
 static void showInfo(char *);
 static void exposeWidget(Widget);
@@ -88,10 +90,10 @@ static void popupSSW(SSW);
 /*** CRTWDGTS.C ***/
 static void createAllWidgets(Widget);                 /* error gesetzt */
 /*** INT2.C ***/
-static void popupInt2Dlg();
-static void updateInt2Text();
+static void popupInt2Dlg(Widget w, char *title, char *headline, char *item1, char *item2, int from1, int to1, int from2, int to2, int default1, int default2, char *okButtonLabel, XtCallbackProc up1_cb, XtCallbackProc down1_cb, XtCallbackProc up2_cb, XtCallbackProc down2_cb, XtCallbackProc ok_cb, XtPointer ok_data, XtCallbackProc cancel_cb, XtPointer cancel_data);
+static void updateInt2Text(void);
 /*** STRDLG.C ***/
-static void popupStrDlg();
+static void popupStrDlg(Widget w, char *title, char *defaultValue, char *buttonLabel, XtCallbackProc callback);
 /*** GW.C ***/
 static GW openGW(Widget, char *);
 static void freeGW(GW);
@@ -184,10 +186,10 @@ static Widget operationBox, addCommand, subCommand, multCommand, divCommand,
 /****************************************************************************/
 /******* Variablen des User-Interface, die keine Widgets enthalten **********/
 /****************************************************************************/
-static inOutSwitch;
+static int inOutSwitch;
 /* EDIT_INPUT:  Input Pattern editieren  */
 /* EDIT_OUTPUT: Output Pattern editieren */
-static scalarSwitch;
+static int scalarSwitch;
 /* FILL_HORIZ:  Spalten-Operation        */
 /* FILL_VERT:   Zeilen-Operation         */
 static Patterns pats;
@@ -282,7 +284,7 @@ static XFontStruct *drawFont;
 /************* H A U P T - P R O G R A M M ***************************/
 /*********************************************************************/
 /*********************************************************************/
-main(int argc, char **argv) {
+int main(int argc, char **argv) {
     initialize(argc, argv);
     if(error) handleErr(error);
 
@@ -389,7 +391,7 @@ static void loadPatterns(Widget w, XtPointer client_data, XtPointer ret) {
     pats = p;
     /* schliesse alle geoeffneten Graphik-Fenster */
     if(notEmpty(openGWs))
-        freeFromTo(openGWs, 1L, size(openGWs), freeGW);
+        freeFromTo(openGWs, 1L, size(openGWs), (void(*)(void*))freeGW);
 
     fillPatternView();
     if(error) handleErr(error);
@@ -1420,7 +1422,7 @@ Widget w;
 XtPointer client_data, garbage;
 {
     int itemNo = (int) client_data;
-    void (*collectFunc)();
+    void (*collectFunc)(VecColl, Number (*)(Vector), Vector);
     VecColl vc = editedVecColl(pats);
     Number konst;
 

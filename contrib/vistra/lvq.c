@@ -23,55 +23,55 @@ Patterns readLVQ(FILE *f) {
     char buf[CLASS_MAXLEN + 1], *copy;
 
     answer = newPatterns();
-    if(error) return;
+    if(error) return NULL;
 
     rowCount = 1L;
     skipSpaceAndCountNl(f);
     if(fscanf(f, "%ld", &(answer->inputDims)) != 1) {
         strcpy(errorInfo, "Integer expected!");
         freePatterns(answer);
-        error(5);
+        errorR(5,NULL);
     }
 
     vecCount = 0L;
     while(! atEndNl(f)) {
         /* lese Eingabevektor ein */
-        if(! (v = newVector(answer->inputDims))) error(1);
+        if(! (v = newVector(answer->inputDims))) errorR(1,NULL);
         for(i = 1L; i <= answer->inputDims; i++) {
             if(fscanf(f, "%f", &n) != 1) {
                 sprintf(errorInfo, "Floating number expected!");
                 freePatterns(answer);
-                error(5);
+                errorR(5,NULL);
             }
             putDim(v, i, n);
             skipSpaceAndCountNl(f);
         }        /* for */
-        if(! add(answer->inputs, v)) error(1);
+        if(! add(answer->inputs, v)) errorR(1,NULL);
         vecCount++;
 
         /* lese Klassen-Symbol ein */
         if(fscanf(f, CLASS_SCANF_FORMAT, buf) != 1) {
             strcpy(errorInfo, "Class name expected!");
             freePatterns(answer);
-            error(5);
+            errorR(5,NULL);
         }
         copy = addSymbol(answer->symtab, buf);
-        if(error) return;
-        if(! add(answer->classes, copy)) error(1);
+        if(error) return NULL;
+        if(! add(answer->classes, copy)) errorR(1,NULL);
     }          /* while */
 
     /* teste, ob mindestens 1 Eingabevektor gelesen wurde. */
     if(vecCount == 0L) {
         strcpy(errorInfo, "No input pattern!");
         freePatterns(answer);
-        error(5);
+        errorR(5,NULL);
     }
 
     answer->count = vecCount;
     answer->classCount = (long) numSymbols(answer->symtab);
     answer->outputDims = 0L;
     genClassNosFromNames(answer);
-    if(error) return;
+    if(error) return NULL;
 
     error = 0;
     return answer;
@@ -107,7 +107,7 @@ void lvqRead(Patterns p, FILE *f, Boolean inVecs) {
         for(i = 1L; i <= ndims; i++) {
             if(fscanf(f, "%f", &n) != 1) {
                 sprintf(errorInfo, "Floating number expected!");
-                freeDeep(newVecs, freeVector);
+                freeDeep(newVecs, (void(*)(void*))freeVector);
                 error(5);
             }
             putDim(v, i, n);
@@ -119,18 +119,18 @@ void lvqRead(Patterns p, FILE *f, Boolean inVecs) {
         /* lese Klassen-Symbol ein */
         if(fscanf(f, CLASS_SCANF_FORMAT, buf) != 1) {
             strcpy(errorInfo, "Class name expected!");
-            freeDeep(newVecs, freeVector);
+            freeDeep(newVecs, (void(*)(void*))freeVector);
             error(5);
         }
     }          /* while */
 
     /* werfe die bisherigen Vektoren weg */
     if(inVecs) {
-        freeDeep(p->inputs, freeVector);
+        freeDeep(p->inputs, (void(*)(void*))freeVector);
         p->inputs = newVecs;
         p->inputDims = ndims;
     } else {
-        freeDeep(p->outputs, freeVector);
+        freeDeep(p->outputs, (void(*)(void*))freeVector);
         p->outputs = newVecs;
         p->outputDims = ndims;
     }
