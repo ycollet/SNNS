@@ -5,9 +5,9 @@ static void freeList(struct Node *);
 
 
 /****************************************************/
-/* Antworte eine neue Symtab. Diese soll buckets    */
-/* Buckets fuer offenes Hashing benutzen. Die       */
-/* Variable error wird gesetzt.                     */
+/* Return a new Symtab. It shall use "buckets"      */
+/* buckets for open hashing.                        */
+/* Sets the global variable error.                  */
 /****************************************************/
 Symtab newSymtab(long buckets) {
     Symtab answer;
@@ -28,10 +28,10 @@ Symtab newSymtab(long buckets) {
 
 
 /*****************************************************/
-/* Gebe den Speicherplatz fuer Symtab st frei.       */
-/* ACHTUNG: Dabei wird auch der Speicher aller       */
-/* Klassen-Namen freigegeben. Zeiger auf diese       */
-/* duerfen von nun an nicht mehr verwendet werden.   */
+/* Free the memory used by Symtab st.                */
+/* WARNING: This also frees the memory of all class  */
+/* names. Pointers to these must no longer be used   */
+/* after this call.                                  */
 /*****************************************************/
 void freeSymtab(Symtab st) {
     long i;
@@ -45,10 +45,9 @@ void freeSymtab(Symtab st) {
 
 
 /*****************************************************/
-/* Antworte eine Collection aller Symbole, die in st */
-/* gespeichert sind. Die Reihenfolge entspricht      */
-/* der Reihenfolge, in der die Symbole zu st hinzu-  */
-/* gefuegt wurden.                                   */
+/* Return a Collection of all symbols stored in st.  */
+/* The order corresponds to the order in which the   */
+/* symbols were added to st.                         */
 /*****************************************************/
 Collection sequence(Symtab st) {
     return st->order;
@@ -56,8 +55,8 @@ Collection sequence(Symtab st) {
 
 
 /*****************************************************/
-/* Antworte die Anzahl verschiedener Symbole, die in */
-/* st enthalten sind.                                */
+/* Return the number of distinct symbols contained   */
+/* in st.                                            */
 /*****************************************************/
 unsigned numSymbols(Symtab st) {
     return size(st->order);
@@ -65,8 +64,7 @@ unsigned numSymbols(Symtab st) {
 
 
 /*****************************************************/
-/* Gebe den Speicher fuer die Liste, die bei node    */
-/* beginnt, frei.                                    */
+/* Free the memory for the list starting at node.    */
 /*****************************************************/
 static void freeList(struct Node *node) {
     struct Node *toFree;
@@ -80,14 +78,13 @@ static void freeList(struct Node *node) {
 
 
 /*****************************************************/
-/* Fuege den String sym zur Symboltabelle st hinzu.  */
-/* Die Symboltabelle haelt sich eine Kopie von sym,  */
-/* sodass der Speicher, auf den sym zeigt, nach      */
-/* der Rueckkehr von addSymbol() wieder anderweitig  */
-/* genutzt werden kann. Antworte die Kopie von sym,  */
-/* die vom Aufrufer anstelle von sym benutzt werden  */
-/* soll.                                             */
-/* Variable error wird gesetzt.                      */
+/* Add the string sym to the symbol table st.        */
+/* The symbol table keeps its own copy of sym, so    */
+/* the memory that sym points to can be reused for   */
+/* other purposes after addSymbol() returns. Return  */
+/* the copy of sym that the caller should use         */
+/* instead of sym.                                   */
+/* Sets the global variable error.                   */
 /*****************************************************/
 char *addSymbol(Symtab st, char *sym) {
     long hash_val;
@@ -96,16 +93,16 @@ char *addSymbol(Symtab st, char *sym) {
 
     symCopy = locateSymbol(st, sym);
     if(symCopy == NULL) {
-        /* sym ist noch nicht in der Symboltabelle */
+        /* sym is not yet in the symbol table */
         newNode = (struct Node *) malloc(sizeof(*newNode));
         if(newNode == NULL) errorR(1,NULL);
         if(! (symCopy = my_strdup(sym))) errorR(1,NULL);
         hash_val = strhash(sym, st->numBuckets);
         newNode->name = symCopy;
-        /* fuege newNode am Anfang ein */
+        /* insert newNode at the beginning */
         newNode->next = st->buckets[hash_val];
         st->buckets[hash_val] = newNode;
-        /* haenge sym ans Ende der order-Liste */
+        /* append sym to the end of the order list */
         if(! add(st->order, symCopy)) errorR(1,NULL);
     }
 
@@ -115,8 +112,8 @@ char *addSymbol(Symtab st, char *sym) {
 
 
 /*****************************************************/
-/* Antworte einen Hash-Wert zwischen 0 und           */
-/* maxValue - 1 fuer String str.                     */
+/* Return a hash value between 0 and maxValue - 1    */
+/* for string str.                                   */
 /*****************************************************/
 static long strhash(char *str, long maxValue) {
     int count = 0;
@@ -128,8 +125,8 @@ static long strhash(char *str, long maxValue) {
 
 
 /*****************************************************/
-/* Antworte einen Zeiger auf sym, falls String sym   */
-/* in der Symboltabelle st enthalten ist, sonst      */
+/* Return a pointer to sym if the string sym is      */
+/* contained in the symbol table st, otherwise       */
 /* NULL.                                             */
 /*****************************************************/
 char * locateSymbol(Symtab st, char *sym) {
@@ -145,12 +142,12 @@ char * locateSymbol(Symtab st, char *sym) {
 
 
 /*****************************************************/
-/* Schreibe die Symbole von st ins File f ab der     */
-/* aktuellen File Position. Die Symbole werden in    */
-/* Reihenfolge geschrieben, wie sie mittels der      */
-/* Funktion addSymbol hinzugefuegt wurden. Duplikate */
-/* werden vorher eliminiert.                         */
-/* Setze Variable error.                             */
+/* Write the symbols of st to file f starting at the */
+/* current file position. The symbols are written in */
+/* the order in which they were added via the        */
+/* addSymbol function. Duplicates are eliminated     */
+/* beforehand.                                       */
+/* Sets the global variable error.                   */
 /*****************************************************/
 void fprintSymbols(Symtab st, FILE *f) {
     long num, i;
@@ -163,12 +160,12 @@ void fprintSymbols(Symtab st, FILE *f) {
 
 
 /******************************************************/
-/* Antworte eine Symtab, die die Symbole des Files f  */
-/* enthaelt. Dabei werden alle durch White Space von- */
-/* einander getrennten Strings als Symbole betrachtet,*/
-/* unabhaengig davon, ob mehrere Strings in 1 Zeile   */
-/* enthalten sind oder nicht.                         */
-/* Variable error wird gesetzt.                       */
+/* Return a Symtab containing the symbols of file f.  */
+/* All strings separated from each other by white     */
+/* space are considered symbols, regardless of        */
+/* whether several strings are contained in a single  */
+/* line or not.                                       */
+/* Sets the global variable error.                    */
 /******************************************************/
 Symtab readSymtab(FILE *f) {
     Symtab answer;

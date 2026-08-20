@@ -1,10 +1,10 @@
 #include <dirent.h>
 
-static void doBatch(void);                                 /* error gesetzt */
+static void doBatch(void);                                 /* sets error */
 static void getFormatsInDir(char *, Collection, Collection);
-/* error gesetzt */
+/* sets error */
 static void addFormat(char *, char *, Collection, Collection);
-/* error gesetzt */
+/* sets error */
 
 #define XtNnumberFont                "numberFont"
 #define XtNoutFile                   "outFile"
@@ -98,8 +98,8 @@ static XrmOptionDescRec options[] = {
 
 
 /****************************************************/
-/* Initialisiere das Programm.                      */
-/* Setze Variable error.                            */
+/* Initialize the program.                          */
+/* Sets the global variable error.                  */
 /****************************************************/
 static void initialize(int argc, char **argv) {
     Format readFmt, writeFmt;
@@ -125,16 +125,16 @@ static void initialize(int argc, char **argv) {
 
     isDEC = *((int *) decTest) == 0x0031304e;
 
-    /* Initialisiere formats und formatNames. */
+    /* Initialize formats and formatNames. */
     if(! (formatNames = newColl())) error(1);
     if(! (formats = newColl())) error(1);
 
-    /* Fuege 3 Menupunkte hinzu, die nicht mit einem Format auf Platte korr. */
+    /* Add 3 menu entries that do not correspond to a format on disk. */
     if(! add(formatNames, SEE_SUFFIX_MENU_LABEL)) error(1);
     if(! add(formatNames, N01_MENU_LABEL)) error(1);
     if(! add(formatNames, LVQ_MENU_LABEL)) error(1);
 
-    /* Lese alle durch ASCII-Files definierten Formate */
+    /* Read all formats defined by ASCII files */
     if(! (format_dir = getenv(FORMAT_DIR_ENVVAR)))
         printf("Vistra warning: environment variable %s not defined!\n",
                FORMAT_DIR_ENVVAR);
@@ -144,18 +144,18 @@ static void initialize(int argc, char **argv) {
     }
 
     if(app_data.logFile) {
-        /* BATCH MODUS */
+        /* BATCH MODE */
         doBatch();
         if(error) handleErr(error);
         else exit(0);
     }
 
-    /* INTERAKTIVER MODUS */
+    /* INTERACTIVE MODE */
     if(fileName) {
         FILE *pf;
         char *format_name;
 
-        /* bestimme Namen des Lese-Formats */
+        /* determine the name of the read format */
         if(app_data.readFmt) format_name = app_data.readFmt;
         else {
             /* see suffix */
@@ -171,13 +171,13 @@ static void initialize(int argc, char **argv) {
         selectedFormat = (app_data.readFmt ?
                           detectPos(formatNames, format_name, (Boolean(*)(void*,void*))streq) : 1);
 
-        /* oeffne das Pattern File */
+        /* open the pattern file */
         if(! (pf = fopen(fileName, "r"))) {
             sprintf(errorInfo, "Pattern file:  %s", fileName);
             error(11);
         }
 
-        /* lese Pattern File ein */
+        /* read in the pattern file */
         printf("Reading pattern file %s...\n", fileName);
         if(streq(format_name, N01_MENU_LABEL)) pats = readN01(pf);
         else if(streq(format_name, LVQ_MENU_LABEL)) pats = readLVQ(pf);
@@ -194,7 +194,7 @@ static void initialize(int argc, char **argv) {
         selectedFormat = 1;
     }
 
-    /* Initialisiere lf */
+    /* Initialize lf */
     if(app_data.log && fileName) {
         char *buf;
         if(! (buf = (char *) malloc(strlen(fileName) + 6))) error(1);
@@ -209,7 +209,7 @@ static void initialize(int argc, char **argv) {
         lf = NULL;
     }
 
-    /* Initialisiere weitere Variablen */
+    /* Initialize other variables */
     swapSSWOpened = FALSE;
     lastNr = 1;
     vert = horiz = NULL;
@@ -221,8 +221,8 @@ static void initialize(int argc, char **argv) {
 
 
 /*************************************************************/
-/* Initialisiere alles, wofuer ein Widget des Programms      */
-/* notwendig ist.                                            */
+/* Initialize everything for which a widget of the program   */
+/* is required.                                              */
 /*************************************************************/
 static void initialize2(Widget w) {
     display = XtDisplay(w);
@@ -234,7 +234,7 @@ static void initialize2(Widget w) {
 
 
 /*************************************************************/
-/* Variable error wird gesetzt.                              */
+/* Sets the global variable error.                           */
 /*************************************************************/
 static void doBatch() {
     FILE *outFile, *inFile, *logFile;
@@ -250,7 +250,7 @@ static void doBatch() {
         error(32);
     }
 
-    /* bestimme den Namen des Lese-Formats */
+    /* determine the name of the read format */
     if(app_data.readFmt) readFmt_name = app_data.readFmt;
     else {
         /* see suffix */
@@ -264,10 +264,10 @@ static void doBatch() {
     readFmt = nameToFormat(readFmt_name);
     if(error) return;
 
-    /* bestimme den Namen des Ausgabe-Formats */
+    /* determine the name of the output format */
     if(app_data.writeFmt) writeFmt_name = app_data.writeFmt;
     else {
-        /* benutze Suffix des Ausgabefiles oder readFmt */
+        /* use the suffix of the output file or readFmt */
         Boolean suffixIsFormat = FALSE;
 
         if(app_data.outFile) {
@@ -283,13 +283,13 @@ static void doBatch() {
     writeFmt = nameToFormat(writeFmt_name);
     if(error) return;
 
-    /* oeffne Input-File */
+    /* open input file */
     if(! (inFile = fopen(fileName, "r"))) {
         sprintf(errorInfo, "Pattern file:  %s", fileName);
         error(11);
     }
 
-    /* oeffne Output-File */
+    /* open output file */
     if(! app_data.outFile) {
         if(! (app_data.outFile = (char *) malloc(strlen(fileName) + 6))) error(1);
         sprintf(app_data.outFile, "%s.out", fileName);
@@ -299,7 +299,7 @@ static void doBatch() {
         error(12);
     }
 
-    /* lese Patterns ein */
+    /* read in patterns */
     if(streq(readFmt_name, N01_MENU_LABEL)) p = readN01(inFile);
     else if(streq(readFmt_name, LVQ_MENU_LABEL)) p = readLVQ(inFile);
     else {
@@ -310,7 +310,7 @@ static void doBatch() {
     fclose(inFile);
     if(error) return;
 
-    /* transformiere Patterns gemaess logFile */
+    /* transform patterns according to logFile */
     len = flen(logFile);
     if(error) return;
     if(! (log = (char *) malloc((unsigned) len + 5))) error(1);
@@ -321,7 +321,7 @@ static void doBatch() {
     free(log);
     freeColl(opStrings);
 
-    /* schreibe Patterns nach outFile */
+    /* write patterns to outFile */
     if(streq(writeFmt_name, N01_MENU_LABEL)) writeN01(p, outFile);
     else if(streq(writeFmt_name, LVQ_MENU_LABEL)) writeLVQ(p, outFile);
     else fileOut(p, writeFmt, outFile);
@@ -332,12 +332,12 @@ static void doBatch() {
 
 
 /*********************************************************/
-/* Fuege der Collection fmts alle Formate hinzu, deren   */
-/* ASCII-Definitions-File sich im Directory dirname be-  */
-/* finden und eine korrekte Syntax besitzen.             */
-/* Die Namen der korrekten Format-Dateien werden (ohne   */
-/* Suffix) der Collection names angehaengt.              */
-/* Variable error wird gesetzt.                          */
+/* Add to the collection fmts all formats whose ASCII    */
+/* definition file is located in the directory dirname   */
+/* and has correct syntax.                               */
+/* The names of the correct format files are appended    */
+/* (without suffix) to the collection names.             */
+/* Sets the global variable error.                       */
 /*********************************************************/
 static void getFormatsInDir(dirname, names, fmts)
 char *dirname;
@@ -359,7 +359,7 @@ Collection names, fmts;
         if(len >= lenExt) {
             ext = dp->d_name + len - lenExt;
             if(strcmp(ext, FORMAT_EXTENSION) == 0) {
-                /* Extension stimmt */
+                /* extension matches */
                 addFormat(dirname, dp->d_name, fmts, names);
                 if(error) {
                     closedir(dirp);
@@ -375,12 +375,11 @@ Collection names, fmts;
 
 
 /*****************************************************/
-/* Ueberpruefe, ob es sich bei der Datei namens fname*/
-/* im Directory dirname um eine Format-Datei mit     */
-/* korrekter Syntax handelt.                         */
-/* Falls ja, so fuege das Format bzw. den Format-    */
-/* Namen den Collections fmtColl bzw. nameColl hinzu.*/
-/* Variable error wird gesetzt.                      */
+/* Check whether the file named fname in directory   */
+/* dirname is a format file with correct syntax.     */
+/* If so, add the format and the format name to the  */
+/* collections fmtColl and nameColl, respectively.   */
+/* Sets the global variable error.                   */
 /*****************************************************/
 static void addFormat(char *dirname, char *fname, Collection fmtColl,
                       Collection nameColl) {
@@ -390,7 +389,7 @@ static void addFormat(char *dirname, char *fname, Collection fmtColl,
     Boolean noSlash;
     unsigned dirnameLen, len, lenWithoutExt;
 
-    /* berechne den vollstaendigen Pfadnamen in fullyQualified */
+    /* compute the fully qualified path name in fullyQualified */
     dirnameLen = strlen(dirname);
     len = strlen(fname);
     noSlash = (dirname[dirnameLen-1] != '/');
@@ -399,7 +398,7 @@ static void addFormat(char *dirname, char *fname, Collection fmtColl,
     if(noSlash) sprintf(fullyQualified, "%s/%s", dirname, fname);
     else sprintf(fullyQualified, "%s%s", dirname, fname);
 
-    /* ueberpruefe die Syntax des Formats */
+    /* check the syntax of the format */
     if(f = fopen(fullyQualified, "r")) {
         fmt = newFormat(f);
         if(error) return;
@@ -415,7 +414,7 @@ static void addFormat(char *dirname, char *fname, Collection fmtColl,
         error(0);
     }
 
-    /* fuege Format und Namen den Collections fmtColl bzw. nameColl hinzu. */
+    /* add the format and name to the collections fmtColl and nameColl. */
     if(! add(fmtColl, fmt)) error(1);
     lenWithoutExt = len - strlen(FORMAT_EXTENSION);
     if(! (fmtName = (char *) malloc(lenWithoutExt + 1))) error(1);

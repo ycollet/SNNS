@@ -1,32 +1,32 @@
-static Boolean exitLoop;           /* fuers Interpretieren von Loops       */
-static Boolean exitAlt;            /*   "         "         " Alternativen */
+static Boolean exitLoop;           /* for interpreting loops               */
+static Boolean exitAlt;            /*   "         "         alternatives   */
 
-static Boolean matchDescList(void);               /* error gesetzt */
-static Boolean matchDesc(enum Token, char *); /* error gesetzt */
+static Boolean matchDescList(void);               /* sets error */
+static Boolean matchDesc(enum Token, char *); /* sets error */
 static Boolean matchString(char *);
 static Boolean matchAsterisk();
 static Boolean matchQuestionMark(void);
 static Boolean matchNewLine(void);
 static Boolean matchLong(long);
 static Boolean matchVector(void);
-static Boolean matchVectorAll(long);          /* error gesetzt */
+static Boolean matchVectorAll(long);          /* sets error */
 static Boolean matchClassName(void);
 static Boolean my_eof(FILE *);
-static void doDesc(enum Token);               /* error gesetzt */
-static void doDescList(void);                     /* error gesetzt */
+static void doDesc(enum Token);               /* sets error */
+static void doDescList(void);                     /* sets error */
 static void doAsterisk(void);
-static void doQuestionMark(void);                 /* error gesetzt */
-static void doString(char *);                 /* error gesetzt */
-static void doNewLine(void);                      /* error gesetzt */
-static long readLong(long);                   /* error gesetzt */
-static Vector readVector(long);               /* error gesetzt */
-static void readClassName(char *);            /* error gesetzt */
+static void doQuestionMark(void);                 /* sets error */
+static void doString(char *);                 /* sets error */
+static void doNewLine(void);                      /* sets error */
+static long readLong(long);                   /* sets error */
+static Vector readVector(long);               /* sets error */
+static void readClassName(char *);            /* sets error */
 
 /********************************************************/
-/* Lese das Pattern File f vom Format form ein und      */
-/* speicher die Daten in pttrns.                        */
-/* Die Syntax von form wird nicht ueberprueft.          */
-/* Die Variable error wird gesetzt.                     */
+/* Reads the pattern file f according to format form    */
+/* and stores the data in pttrns.                       */
+/* The syntax of form is not checked.                   */
+/* Sets the global variable error.                      */
 /********************************************************/
 void fileIn(Patterns pttrns, Format form, FILE *f) {
     enum Token firstDesc, descAfter;
@@ -71,7 +71,7 @@ void fileIn(Patterns pttrns, Format form, FILE *f) {
             descAfter = lookUpNextDesc(format, endOfLoop);
             if(descAfter == aString) strcpy(saveVal, tokenval);
             exitAlt = FALSE;
-            do {           /* wiederhole Rumpf */
+            do {           /* repeat body */
                 if(my_eof(patternFile)) {
                     setPosition(format, endOfLoop);
                     break;
@@ -81,7 +81,7 @@ void fileIn(Patterns pttrns, Format form, FILE *f) {
                 if(matched) {
                     setPosition(format, endOfLoop);
                     exitAlt = TRUE;
-                } else {      /* Alternativen probieren */
+                } else {      /* try alternatives */
                     altDone = FALSE;
                     do {
                         matched = matchDescList();
@@ -89,10 +89,10 @@ void fileIn(Patterns pttrns, Format form, FILE *f) {
                         if(matched) {
                             doDescList();
                             if(error) return;
-                            /* tok enthaelt jetzt or oder altEnd */
+                            /* tok now contains 'or' or altEnd */
                             altDone = TRUE;
                             setPosition(format, beginningOfLoop);
-                        } else {   /* probiere naechste Alternative */
+                        } else {   /* try next alternative */
                             while(tok != or && tok != altEnd)
                                 tok = nextToken(format);
                             if(tok == altEnd) {
@@ -107,7 +107,7 @@ void fileIn(Patterns pttrns, Format form, FILE *f) {
                 }           /* else */
             } while(! exitAlt);
             break;
-        default:             /* tok muss ein Deskriptor sein */
+        default:             /* tok must be a descriptor */
             doDesc(tok);
             if(error) return;
             break;
@@ -150,20 +150,19 @@ void fileIn(Patterns pttrns, Format form, FILE *f) {
     pats->count = inCount;
     genClassNos(pats);
     if(error) return;
-    /* jetzt sind auch classNos und classCount initialisiert */
+    /* classNos and classCount are now also initialized */
 
     error = 0;
 }             /* fileIn */
 
 
 /***************************************************/
-/* Antworte TRUE gdw. alle Deskriptoren bis zum    */
-/* naechsten Token, das kein Deskriptor ist,       */
-/* mit den weiteren Zeichen des Pattern Files in   */
-/* Einklang gebracht werden koennen. Der File      */
-/* Pointer von patternFile wird genauso nicht      */
-/* bewegt wie der Format Pointer.                  */
-/* Setze Variable error.                           */
+/* Returns TRUE iff all descriptors up to the next */
+/* token that is not a descriptor can be matched   */
+/* against the remaining characters of the pattern */
+/* file. Neither the file pointer of patternFile   */
+/* nor the format pointer is moved.                */
+/* Sets the global variable error.                 */
 /***************************************************/
 static Boolean matchDescList() {
     Boolean matched;
@@ -222,7 +221,7 @@ static Boolean matchDescList() {
         case newLine:
             matched = matchNewLine();
             break;
-        case writeNewLine:   /* beim Lesen nicht beachten */
+        case writeNewLine:   /* ignore when reading */
             matched = TRUE;
             break;
         case aString:
@@ -246,12 +245,11 @@ static Boolean matchDescList() {
 
 
 /***************************************************/
-/* Antworte mit TRUE gdw. ein String von           */
-/* patternFile eingelesen werden koennte, das mit  */
-/* dem Token                                       */
-/* desc in Einklang gebracht werden kann.          */
-/* Der File Pointer von patternFile wird nicht     */
-/* bewegt. Setze Variable error.                   */
+/* Returns TRUE iff a string could be read from    */
+/* patternFile that can be matched against the     */
+/* token desc.                                     */
+/* The file pointer of patternFile is not moved.   */
+/* Sets the global variable error.                 */
 /***************************************************/
 static Boolean matchDesc(enum Token desc, char *tokvalue) {
     Boolean answer;
@@ -301,11 +299,10 @@ static Boolean matchDesc(enum Token desc, char *tokvalue) {
 
 
 /********************************************************/
-/* Teste, ob der String str vom Pattern File            */
-/* eingelesen werden kann. Ein oder mehrere white space */
-/* Characters in str entsprechen einer beliebigen       */
-/* Anzahl von white space Charactern des Pattern        */
-/* Files.                                               */
+/* Tests whether the string str can be read from the    */
+/* pattern file. One or more white space characters in  */
+/* str correspond to any number of white space          */
+/* characters in the pattern file.                      */
 /********************************************************/
 static Boolean matchString(char *str) {
     char *cp;
@@ -331,9 +328,9 @@ static Boolean matchString(char *str) {
 
 
 /************************************************/
-/* Ueberlese den naechsten String im Pattern    */
-/* File. Antworte mit TRUE gdw. ein solcher     */
-/* existiert bevor EOF erreicht ist.            */
+/* Skips over the next string in the pattern    */
+/* file. Returns TRUE iff such a string exists  */
+/* before EOF is reached.                        */
 /************************************************/
 static Boolean matchQuestionMark() {
     return ! atEnd(patternFile);
@@ -341,8 +338,8 @@ static Boolean matchQuestionMark() {
 
 
 /*************************************************/
-/* Antworte TRUE gdw. als naechstes ein newline  */
-/* Character kommt.                              */
+/* Returns TRUE iff the next character is a      */
+/* newline.                                       */
 /*************************************************/
 static Boolean matchNewLine() {
     char c;
@@ -354,9 +351,9 @@ static Boolean matchNewLine() {
 
 
 /*************************************************/
-/* Antworte mit TRUE gdw. eine Integer Zahl      */
-/* groesser oder gleich min vom Pattern File     */
-/* gelesen werden konnte.                        */
+/* Returns TRUE iff an integer greater than or   */
+/* equal to min could be read from the pattern   */
+/* file.                                          */
 /*************************************************/
 static Boolean matchLong(long min) {
     long value;
@@ -369,9 +366,9 @@ static Boolean matchLong(long min) {
 
 
 /***********************************************/
-/* Antworte TRUE gdw. im Pattern File als      */
-/* naechstes eine Float Zahl kommt.            */
-/* Setze Variable error.                       */
+/* Returns TRUE iff the next item in the       */
+/* pattern file is a floating point number.    */
+/* Sets the global variable error.             */
 /***********************************************/
 static Boolean matchVector() {
     int dummy;
@@ -381,13 +378,13 @@ static Boolean matchVector() {
 
 
 /***********************************************/
-/* Antworte TRUE gdw. dim Floats im Pattern    */
-/* File als naechstes kommen, falls dim > 0.   */
-/* Falls dim == 0 ist, dann antworte TRUE gdw. */
-/* mindestens ein Float kommt. Der File Pointer*/
-/* wird in diesem Fall genau hinter die letzte */
-/* Floating Point Zahl gesetzt.                */
-/* Setze Variable error.                       */
+/* Returns TRUE iff dim floats come up next in */
+/* the pattern file, if dim > 0.               */
+/* If dim == 0, returns TRUE iff at least one  */
+/* float comes up. In this case, the file      */
+/* pointer is placed exactly after the last    */
+/* floating point number.                      */
+/* Sets the global variable error.             */
 /***********************************************/
 static Boolean matchVectorAll(long dim) {
     int dummy;
@@ -424,9 +421,9 @@ static Boolean matchVectorAll(long dim) {
 
 
 /*************************************************/
-/* Lese das naechste Wort vom Pattern File und   */
-/* antworte TRUE gdw. ein solches ueberhaupt     */
-/* noch kommt.                                   */
+/* Reads the next word from the pattern file and */
+/* returns TRUE iff such a word still comes up   */
+/* at all.                                       */
 /*************************************************/
 static Boolean matchClassName() {
     return matchQuestionMark();
@@ -434,10 +431,10 @@ static Boolean matchClassName() {
 
 
 /***********************************************/
-/* Fuehre semantische Aktionen fuer alle       */
-/* Deskriptoren aus bis zum naechsten Token,   */
-/* das kein Deskriptor ist.                    */
-/* Setze Variable error.                       */
+/* Performs semantic actions for all           */
+/* descriptors up to the next token that is    */
+/* not a descriptor.                           */
+/* Sets the global variable error.             */
 /***********************************************/
 static void doDescList() {
     tok = nextToken(format);
@@ -452,8 +449,9 @@ static void doDescList() {
 
 
 /***********************************************/
-/* Fuehre semantische Aktionen des Interpreters*/
-/* aus. Setze Variable error.                  */
+/* Performs the semantic actions of the        */
+/* interpreter. Sets the global variable       */
+/* error.                                      */
 /***********************************************/
 static void doDesc(enum Token tk) {
     long l;
@@ -565,12 +563,12 @@ static void doDesc(enum Token tk) {
 
 
 /********************************************************/
-/* Lese einen String vom Format str vom Pattern File    */
-/* ein. Ein oder mehrere white space                    */
-/* Characters in str entsprechen einer beliebigen       */
-/* Anzahl von white space Charactern des Pattern        */
-/* Files. Erhoehe rowCount um die Anzahl gelesener      */
-/* Newlines. Setze Variable error.                      */
+/* Reads a string in the format str from the pattern    */
+/* file. One or more white space characters in str      */
+/* correspond to any number of white space characters   */
+/* in the pattern file. Increments rowCount by the      */
+/* number of newlines read. Sets the global variable    */
+/* error.                                               */
 /********************************************************/
 static void doString(char *str) {
     char *cp;
@@ -600,10 +598,10 @@ static void doString(char *str) {
 
 
 /************************************************/
-/* Bewege den File Pointer von patternFile      */
-/* genau hinter das naechste Newline Zeichen    */
-/* bzw. ans Ende des Files. Erhoehe rowCount    */
-/* im ersten Fall um 1.                         */
+/* Moves the file pointer of patternFile        */
+/* to exactly after the next newline character  */
+/* or to the end of the file. Increments        */
+/* rowCount by 1 in the first case.             */
 /************************************************/
 static void doAsterisk() {
     char c;
@@ -615,9 +613,10 @@ static void doAsterisk() {
 
 
 /************************************************/
-/* Ueberlese den naechsten String im Pattern    */
-/* File und setze Variable error. Erhoehe       */
-/* rowCount um die Anzahl gelesener Newlines.   */
+/* Skips over the next string in the pattern    */
+/* file and sets the global variable error.     */
+/* Increments rowCount by the number of         */
+/* newlines read.                                */
 /************************************************/
 static void doQuestionMark() {
     char c;
@@ -637,12 +636,12 @@ static void doQuestionMark() {
 
 
 /**************************************************/
-/* Bewege den File Pointer von patternFile genau  */
-/* hinter das naechste Newline bzw. EOF Zeichen.  */
-/* Setze Variable error ungleich 0 gdw. davor     */
-/* ein Zeichen kommt, das kein Tab und kein Blank */
-/* ist. Erhoehe rowCount um 1, falls hinter einem */
-/* Newline stehengeblieben wird.                  */
+/* Moves the file pointer of patternFile exactly  */
+/* after the next newline or EOF character.       */
+/* Sets the global variable error to nonzero iff  */
+/* a character that is neither a tab nor a blank  */
+/* comes before it. Increments rowCount by 1 if   */
+/* it stops right after a newline.                */
 /**************************************************/
 static void doNewLine() {
     char c;
@@ -661,11 +660,11 @@ static void doNewLine() {
 
 
 /*************************************************/
-/* Lese eine Integerzahl vom Pattern File, die   */
-/* groesser oder gleich min ist.                 */
-/* Erhoehe dabei rowCount um die Anzahl          */
-/* vorher gelesener Newlines.                    */
-/* Setze Variable error.                         */
+/* Reads an integer from the pattern file that   */
+/* is greater than or equal to min.              */
+/* Increments rowCount by the number of          */
+/* newlines read beforehand.                     */
+/* Sets the global variable error.               */
 /*************************************************/
 static long readLong(long min) {
     long value;
@@ -690,10 +689,10 @@ static long readLong(long min) {
 
 
 /***********************************************/
-/* Lese dim floats vom Pattern File ein,       */
-/* falls dim > 0. Ansonsten lese alle          */
-/* aufeinanderfolgenden floats ein bis etwas   */
-/* anderes kommt. Setze Variable error.        */
+/* Reads dim floats from the pattern file, if  */
+/* dim > 0. Otherwise, reads all consecutive   */
+/* floats until something else comes up.       */
+/* Sets the global variable error.             */
 /***********************************************/
 static Vector readVector(long dim) {
     long i;
@@ -729,7 +728,7 @@ static Vector readVector(long dim) {
             if((result = fscanf(patternFile, "%f", np)) == 1) {
                 if(! add(coll, np)) errorR(1,NULL);
             } else {
-                /* setze File Pointer zurueck; hinter die zuletzt gelesene Number */
+                /* reset the file pointer to right after the last number read */
                 setPosR(patternFile, pos,NULL);
                 rowCount = saveRowCount;
             }
@@ -753,9 +752,9 @@ static Vector readVector(long dim) {
 
 
 /*************************************************/
-/* Lese das naechste Wort vom Pattern File in    */
-/* den Speicherbereich, auf den buf zeigt.       */
-/* Setze Variable error.                         */
+/* Reads the next word from the pattern file     */
+/* into the memory area pointed to by buf.       */
+/* Sets the global variable error.               */
 /*************************************************/
 static void readClassName(char *buf) {
     int result;

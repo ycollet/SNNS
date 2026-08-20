@@ -260,7 +260,7 @@ krui_err tac_freeStorage(int StartPattern, int  EndPattern) {
       in the array OutputUnitError. Additionaly the Arrays
       MeanOutputUnitError and PatternSumError are calculated here.
       And the WholeSummedError, too.
-      PSE und WSE are using fabs(act-teach), whereas the others
+      PSE and WSE are using fabs(act-teach), whereas the others
       are using act-teach.
       The routine is similar to the one in cc_learn.c.
   NOTES    : OUTPUT_UNIT_SUM_ERROR is only used temporarly

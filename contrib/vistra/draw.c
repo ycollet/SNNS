@@ -15,9 +15,9 @@ static void drawMarkY(Drawable, CoordSystem *, Number);
 
 
 /*********************************************************/
-/* Initialisiere die lokalen Variablen von DRAW.C.       */
-/* Die Funktionen von DRAW.C sollen den Screen und das   */
-/* Display von Widget w verwenden.                       */
+/* Initialize the local variables of DRAW.C.             */
+/* The functions of DRAW.C should use the screen and     */
+/* display of widget w.                                  */
 /*********************************************************/
 void initDrawer(Widget w) {
     unsigned i;
@@ -40,8 +40,8 @@ void initDrawer(Widget w) {
 
 
 /********************************************************/
-/* Antworte die Pixel-Nummer der Farbintensitaet, die   */
-/* dem Wert n entspricht bezogen auf den Wertebereich r.*/
+/* Return the pixel number of the color intensity that  */
+/* corresponds to value n relative to the range r.      */
 /********************************************************/
 static PixelNo colorPixel(Number n, Range r) {
     XColor xcol;
@@ -50,7 +50,7 @@ static PixelNo colorPixel(Number n, Range r) {
     double v, red, green, blue;
 
     /* if(monochrome) return BlackPixel(display ,screen); */
-    /* Berechne die Farbintensitaet in einer Skala von 0.0 - 1.0 */
+    /* Compute the color intensity on a scale of 0.0 - 1.0 */
     if(r.lowest >= r.highest) v = 0.0;
     else v = (n - r.lowest) / (r.highest - r.lowest);
 
@@ -96,8 +96,8 @@ static PixelNo colorPixel(Number n, Range r) {
 
 
 /********************************************************/
-/* Antworte die Pixel-Nummer der Graustufe, die         */
-/* dem Wert n entspricht bezogen auf den Wertebereich r.*/
+/* Return the pixel number of the gray level that       */
+/* corresponds to value n relative to the range r.      */
 /********************************************************/
 static PixelNo grayPixel(Number n, Range r) {
     XColor xcol;
@@ -106,7 +106,7 @@ static PixelNo grayPixel(Number n, Range r) {
     double v, red, green, blue;
 
     /* if(monochrome) return BlackPixel(display ,screen); */
-    /* Berechne die Farbintensitaet in einer Skala von 0.0 - 1.0 */
+    /* Compute the color intensity on a scale of 0.0 - 1.0 */
     if(r.lowest >= r.highest) v = 0.0;
     else v = (n - r.lowest) / (r.highest - r.lowest);
 
@@ -135,7 +135,7 @@ static void drawColorArray(Drawable d, Boolean gray, Vector v,
     long i, v_dims, cellX, cellY;
     PixelNo pixel;
 
-    /* Zeichne die Farbzellen */
+    /* Draw the color cells */
     v_dims = dims(v);
     for(i = 1L; i <= rows*cols; i++) {
         cellY = (i - 1) / cols;
@@ -152,7 +152,7 @@ static void drawColorArray(Drawable d, Boolean gray, Vector v,
                        width, height);                      /* width, height */
     }       /* for */
 
-    /* Zeichne ein Rechteck um das Farbmuster */
+    /* Draw a rectangle around the color pattern */
     XSetForeground(display, gc, black);
     XDrawRectangle(display,                      /* Display */
                    d, gc, x+1, y+1,                       /* Drawable, GC, x , y */
@@ -208,7 +208,7 @@ Range rangeX, rangeY;
     ScaleOp scaleX, scaleY;
     Range pixelX, pixelY;
 
-    /* Achsen sollen in jedem Fall sichtbar sein */
+    /* The axes should always be visible */
     rangeX.lowest = min(rangeX.lowest, 0);
     rangeX.highest = max(rangeX.highest, 0);
     rangeY.lowest = min(rangeY.lowest, 0);
@@ -220,7 +220,7 @@ Range rangeX, rangeY;
     innerWidth = width - (2 * X_DIST_FROM_EDGE);
     innerHeight = height - (2 * Y_DIST_FROM_EDGE);
 
-    /* berechne die Position des Ursprungs. */
+    /* compute the position of the origin. */
     pixelX.lowest = 0.0;
     pixelX.highest = innerWidth - 1.0;
     pixelY.lowest = 0.0;
@@ -245,12 +245,12 @@ static void drawCoordinateSystem(d, cs)
 Drawable d;
 CoordSystem *cs;
 {
-    /* zeichne die x-Achse */
+    /* draw the x axis */
     XDrawLine(display, d, gc,                   /* Display, Drawable, GC */
-              cs->x, cs->y + cs->originY,                  /* Startpunkt */
-              cs->x + cs->width - 1, cs->y + cs->originY);   /* Endpunkt */
+              cs->x, cs->y + cs->originY,                  /* start point */
+              cs->x + cs->width - 1, cs->y + cs->originY);   /* end point */
 
-    /* zeichne die y-Achse */
+    /* draw the y axis */
     XDrawLine(display, d, gc,
               cs->x + cs->originX, cs->y,
               cs->x + cs->originX, cs->y + cs->height - 1);
@@ -258,7 +258,7 @@ CoordSystem *cs;
 
 
 /********************************************************/
-/* Variable error wird gesetzt.                         */
+/* Sets the global variable error.                      */
 /********************************************************/
 static void drawHisto(d, cs, v)
 Drawable d;
@@ -296,7 +296,7 @@ Vector v;
 
 
 /********************************************************/
-/* Variable error wird gesetzt.                         */
+/* Sets the global variable error.                      */
 /********************************************************/
 static void drawHistogram(GW gw, Vector v, Range rangeY, PixelNo color) {
     unsigned numDims;
@@ -331,7 +331,7 @@ static void drawHistogram(GW gw, Vector v, Range rangeY, PixelNo color) {
 
 
 /********************************************************/
-/* Variable error wird gesetzt.                         */
+/* Sets the global variable error.                      */
 /********************************************************/
 static unsigned drawHistogrammes(GW gw, VecColl vc, Range rangeY,
                                  PixelNo color) {
@@ -383,7 +383,7 @@ static unsigned drawHistogrammes(GW gw, VecColl vc, Range rangeY,
 
 
 /********************************************************/
-/* Variable error wird gesetzt.                         */
+/* Sets the global variable error.                      */
 /********************************************************/
 static void drawConnectedLines(d, cs, v)
 Drawable d;
@@ -415,7 +415,7 @@ Vector v;
 
 
 /********************************************************/
-/* Variable error wird gesetzt.                         */
+/* Sets the global variable error.                      */
 /********************************************************/
 static void drawPolyLine(GW gw, Vector v, Range rangeY, PixelNo color) {
     unsigned numDims;
@@ -450,7 +450,7 @@ static void drawPolyLine(GW gw, Vector v, Range rangeY, PixelNo color) {
 
 
 /********************************************************/
-/* Variable error wird gesetzt.                         */
+/* Sets the global variable error.                      */
 /********************************************************/
 static unsigned drawPolyLines(GW gw, VecColl vc, Range rangeY, PixelNo color) {
     unsigned i, answer, numVectors, numDims, posX, posY;
@@ -501,7 +501,7 @@ static unsigned drawPolyLines(GW gw, VecColl vc, Range rangeY, PixelNo color) {
 
 
 /********************************************************/
-/* Variable error wird gesetzt.                         */
+/* Sets the global variable error.                      */
 /********************************************************/
 static void draw2DProjection(gw, vc, dimX, dimY, color)
 GW gw;
@@ -530,7 +530,7 @@ PixelNo color;
     markY_High = getBelow(cs.y_mult, rangeY.highest);
     markY_Low = getAbove(cs.y_mult, rangeY.lowest);
 
-    /* Zeichne das Koordinatensystem */
+    /* Draw the coordinate system */
     cs.x = PM_LEFTMARGIN;
     cs.y = PM_TOPMARGIN;
     XSetForeground(display, gc, black);

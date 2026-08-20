@@ -139,7 +139,7 @@ int		fd;
             buf[next_buf_place] = '\0';
             next_buf_place = 0;
 
-            /* message im Protokoll speichern, fuer evtl. repaint */
+            /* store message in the log, for possible repaint */
             next_prot->message = strdup(buf);
             next_prot->next=(Protokoll *)malloc((unsigned)sizeof(Protokoll));
             if (next_prot->next == NULL) {

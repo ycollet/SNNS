@@ -2,20 +2,20 @@
 #include <ctype.h>
 #include <time.h>
 
-static FILE *patternFile;          /* bearbeitetes Pattern File */
+static FILE *patternFile;          /* pattern file being processed */
 static Format format;
 static Patterns pats;
 static enum Token tok;
-static long inDims, outDims;       /* Dimensionen der Ein- bzw. Ausgabevekt.*/
+static long inDims, outDims;       /* dimensions of the input and output vectors. */
 static long inCount, outCount, classCount;
-/* Zaehlen die gelesenen bzw. ge-       */
-/* schriebenen Ein/Ausgabevektoren bzw. */
-/* Klassen-Namen.                       */
-static long numPats;               /* Anzahl von Patterns */
+/* Count the input/output vectors and   */
+/* class names that have been read or   */
+/* written, respectively.               */
+static long numPats;               /* number of patterns */
 
 /* Private function headers */
 static long classNoOfVec(Collection, Vector);
-static void addMapping(Collection, Vector, long);  /* error gesetzt */
+static void addMapping(Collection, Vector, long);  /* sets error */
 static char *printStatVals(char *, VecColl);
 
 #include "fin.c"
@@ -25,8 +25,8 @@ static char *printStatVals(char *, VecColl);
 
 
 /*************************************************/
-/* Gebe eine neues Patterns-Objekt zurueck.      */
-/* Setze Variable error.                         */
+/* Returns a new patterns object.                */
+/* Sets the global variable error.               */
 /*************************************************/
 Patterns newPatterns() {
     Patterns answer;
@@ -48,8 +48,8 @@ Patterns newPatterns() {
 
 
 /********************************************/
-/* Gebe den Speicher des Patterns-Objekts   */
-/* p frei.                                  */
+/* Frees the memory of the patterns object  */
+/* p.                                       */
 /********************************************/
 void freePatterns(Patterns p) {
     freeDeep(p->inputs, (void(*)(void*))freeVector);
@@ -65,10 +65,10 @@ double drand48();
 void srand48(long);
 
 /*******************************************************/
-/* Aendere die Reihenfolge der Patterns willkuerlich.  */
-/* Falls v != NULL, so aendere die Reihenfolge der     */
-/* Elemente von v gemaess der Aenderung der Patterns.  */
-/* Variable error wird gesetzt.                        */
+/* Randomly change the order of the patterns.          */
+/* If v != NULL, change the order of the elements of   */
+/* v according to the change made to the patterns.     */
+/* Sets the global variable error.                     */
 /*******************************************************/
 void randomize(Patterns p, Vector v) {
     VecColl randInputs, randOutputs;
@@ -88,7 +88,7 @@ void randomize(Patterns p, Vector v) {
 
     srand48((long) time(NULL));
     for(i = p->count; i >= 1; i--) {
-        /* Generiere Zufallszahl zwischen 0.0 und 1.0 */
+        /* generate random number between 0.0 and 1.0 */
         randNum = drand48();
         index = min(((long) (randNum * i)) + 1L, i);
         if(! add(randInputs, at(p->inputs, index))) error(1);
@@ -129,10 +129,10 @@ void randomize(Patterns p, Vector v) {
 
 
 /********************************************/
-/* Entferne von p alle Patterns der Nummern */
-/* from bis to einschliesslich.             */
-/* Antworte die Anzahl entfernter Patterns. */
-/* Variable error wird gesetzt.             */
+/* Removes all patterns of p with numbers   */
+/* from to to inclusive.                    */
+/* Returns the number of removed patterns.  */
+/* Sets the global variable error.          */
 /********************************************/
 unsigned removePatterns(Patterns p, unsigned from, unsigned to) {
     unsigned i, firstToRemove, lastToRemove, numToRemove;
@@ -159,13 +159,13 @@ unsigned removePatterns(Patterns p, unsigned from, unsigned to) {
 
 
 /********************************************/
-/* Entferne alle Dimensionen von from bis   */
-/* to einschliesslich von den Eingabe-      */
-/* vektoren, falls flag==TRUE, oder von den */
-/* Ausgabevektoren, falls flag==FALSE.      */
-/* Antworte die tatsaechliche Anzahl an     */
-/* entfernten Dimensionen.                  */
-/* Variable error wird gesetzt.             */
+/* Removes all dimensions from from to      */
+/* to inclusive from the input vectors, if  */
+/* flag==TRUE, or from the output vectors,  */
+/* if flag==FALSE.                          */
+/* Returns the actual number of removed     */
+/* dimensions.                              */
+/* Sets the global variable error.          */
 /********************************************/
 unsigned removeCols(Patterns p, Boolean flag, unsigned from, unsigned to) {
     unsigned ndims, firstToRemove, lastToRemove, numToRemove = 0;
@@ -190,13 +190,13 @@ unsigned removeCols(Patterns p, Boolean flag, unsigned from, unsigned to) {
 
 
 /**************************************************************/
-/* Entferne alle Dimensionen, die durchs Feld lp gegeben sind.*/
-/* Entferne sie von den Eingabevektoren, falls flag==TRUE     */
-/* bzw. von den Ausgabevektoren, falls flag==FALSE.           */
-/* Das Feld lp wird durch eine 0 begrenzt.                    */
-/* count gibt die Groesse des Feldes lp an.                   */
-/* Es wird die Anzahl der entfernten Dimensionen geantwortet. */
-/* Variable error wird gesetzt.                               */
+/* Removes all dimensions given by the array lp.              */
+/* Removes them from the input vectors, if flag==TRUE, or     */
+/* from the output vectors, if flag==FALSE.                   */
+/* The array lp is terminated by a 0.                         */
+/* count gives the size of the array lp.                      */
+/* Returns the number of removed dimensions.                  */
+/* Sets the global variable error.                             */
 /**************************************************************/
 void removeDimList(Patterns p, Boolean flag, long *lp, long count) {
     long numVectors, numDims, i;
@@ -206,7 +206,7 @@ void removeDimList(Patterns p, Boolean flag, long *lp, long count) {
     vc = (flag ? p->inputs : p->outputs);
     numVectors = num(p);
 
-    /* Entferne die Dimensionen von allen Vektoren */
+    /* remove the dimensions from all vectors */
     for(i = 1L; i <= numVectors; i++) {
         removeDims((Vector) at(vc, i), lp, count);
         if(error) return;
@@ -218,8 +218,8 @@ void removeDimList(Patterns p, Boolean flag, long *lp, long count) {
 
 
 /********************************************/
-/* Antworte die Anzahl der Input-Patterns   */
-/* von p.                                   */
+/* Returns the number of input patterns     */
+/* of p.                                    */
 /********************************************/
 long num(Patterns p) {
     return p->count;
@@ -227,8 +227,8 @@ long num(Patterns p) {
 
 
 /********************************************/
-/* Antworte eine VecColl aller Input        */
-/* Vektoren von p.                          */
+/* Returns a VecColl of all input vectors   */
+/* of p.                                    */
 /********************************************/
 VecColl inputs(Patterns p) {
     return p->inputs;
@@ -236,9 +236,9 @@ VecColl inputs(Patterns p) {
 
 
 /********************************************/
-/* Antworte eine VecColl aller Output       */
-/* Vektoren von p. Antworte eine leere      */
-/* VecColl, falls keine vorhanden sind.     */
+/* Returns a VecColl of all output vectors  */
+/* of p. Returns an empty VecColl if none   */
+/* are present.                             */
 /********************************************/
 VecColl outputs(Patterns p) {
     return p->outputs;
@@ -246,9 +246,9 @@ VecColl outputs(Patterns p) {
 
 
 /********************************************/
-/* Antworte eine Collection aller Klassen   */
-/* Namen von p. Antworte eine leere         */
-/* Collection, falls keine vorhanden sind.  */
+/* Returns a collection of all class names  */
+/* of p. Returns an empty collection if     */
+/* none are present.                        */
 /********************************************/
 Collection classes(Patterns p) {
     return p->classes;
@@ -256,10 +256,10 @@ Collection classes(Patterns p) {
 
 
 /********************************************/
-/* Antworte eine Collection aller Klassen-  */
-/* Nummern von p. Antworte eine leere       */
-/* Collection, falls diese noch nicht be-   */
-/* rechnet wurden.                          */
+/* Returns a collection of all class        */
+/* numbers of p. Returns an empty           */
+/* collection if these have not yet been    */
+/* computed.                                */
 /********************************************/
 Collection classNos(Patterns p) {
     return p->classNos;
@@ -267,12 +267,12 @@ Collection classNos(Patterns p) {
 
 
 /********************************************/
-/* Antworte die Anzahl verschiedener Aus-   */
-/* klassen von p. Diese entspricht auch der */
-/* maximalen Klassen-Nummer.                */
-/* Gibt es keine Ausgabevektoren und Klassen*/
-/* oder wurden die Nummern noch nicht be-   */
-/* rechnet, so wird 0 zurueckgegeben.       */
+/* Returns the number of distinct output    */
+/* classes of p. This also corresponds to   */
+/* the maximum class number.                */
+/* If there are no output vectors and       */
+/* classes, or if the numbers have not yet  */
+/* been computed, 0 is returned.            */
 /********************************************/
 long maxClassNo(Patterns p) {
     return p->classCount;
@@ -280,8 +280,8 @@ long maxClassNo(Patterns p) {
 
 
 /********************************************/
-/* Antworte true gdw. die Patterns p auch   */
-/* Ausgabevektoren besitzen.                */
+/* Returns true iff the patterns p also     */
+/* have output vectors.                     */
 /********************************************/
 Boolean hasOutputs(Patterns p) {
     return notEmpty(outputs(p));
@@ -289,8 +289,8 @@ Boolean hasOutputs(Patterns p) {
 
 
 /********************************************/
-/* Antworte true gdw. die Patterns p auch   */
-/* Klassennamen besitzen.                   */
+/* Returns true iff the patterns p also     */
+/* have class names.                        */
 /********************************************/
 Boolean hasClassNames(Patterns p) {
     return notEmpty(classes(p));
@@ -298,10 +298,10 @@ Boolean hasClassNames(Patterns p) {
 
 
 /********************************************/
-/* Antworte einen String, der die Klasse des*/
-/* i-ten Patterns von p darstellt. Dies ist */
-/* entweder ein Klassen-Name oder ein String*/
-/* der die Klassen-Nummer repraesentiert.   */
+/* Returns a string representing the class  */
+/* of the i-th pattern of p. This is either */
+/* a class name or a string representing    */
+/* the class number.                        */
 /********************************************/
 char *classString(Patterns p, long i) {
     static char buf[NUM_OF_PATS_STR_MAXLEN + 1];
@@ -317,11 +317,10 @@ char *classString(Patterns p, long i) {
 #define ROW_TITLE_LEN      21
 
 /********************************************/
-/* Antworte einen String, der den Text ent- */
-/* haelt, der im Statistik-Fenster angezeigt*/
-/* werden soll.                             */
-/* Antworte NULL, falls nicht genuegend     */
-/* Speicher vorhanden.                      */
+/* Returns a string containing the text to  */
+/* be displayed in the statistics window.   */
+/* Returns NULL if not enough memory is     */
+/* available.                               */
 /********************************************/
 char *statString(Patterns p, char *fn) {
     char *buf, *cp;
@@ -332,7 +331,7 @@ char *statString(Patterns p, char *fn) {
     vallen = 5*ROW_TITLE_LEN + 6*SIZEOF_NL + 4*NUMBER_STR_LENGTH;
 
     buflen = headlen + vallen + (hasOutputs(p) ? vallen : 0) +
-             100;               /* zur Sicherheit */
+             100;               /* for safety */
     if(! (buf = (char *) malloc(buflen))) return NULL;
 
     cp = buf;
@@ -397,9 +396,10 @@ static char *printStatVals(char *cp, VecColl vc) {
 
 
 /********************************************/
-/* Schreibe alle Symbole (ohne Duplikate)   */
-/* ins File f ab der aktuellen Fileposition.*/
-/* Setze Variable error.                    */
+/* Writes all symbols (without duplicates)  */
+/* to file f starting at the current file   */
+/* position. Sets the global variable       */
+/* error.                                   */
 /********************************************/
 void writeSymtab(Patterns p, FILE *f) {
     long i, nvecs, diffVecs, nclassNos;
@@ -409,7 +409,7 @@ void writeSymtab(Patterns p, FILE *f) {
     if(hasClassNames(p)) {
         fprintSymbols(p->symtab, f);
         if(error) return;
-    } else {          /* schreibe die Output-Vektoren als Symbole */
+    } else {          /* write the output vectors as symbols */
         if(hasOutputs(p)) {
             if(! (set = newColl())) error(1);
             nvecs = size(p->outputs);
@@ -431,7 +431,7 @@ void writeSymtab(Patterns p, FILE *f) {
             }     /* for */
             freeColl(set);
         }       /* if(hasOutputs(p)) */
-        else {  /* schreibe die Klassen-Nummern */
+        else {  /* write the class numbers */
             for(i = 1L; i <= p->classCount; i++)
                 fprintf(f, "%ld\n", i);
         }
@@ -442,8 +442,8 @@ void writeSymtab(Patterns p, FILE *f) {
 
 
 /********************************************/
-/* Antworte die Dimension der Input Vektoren*/
-/* von p.                                   */
+/* Returns the dimension of the input       */
+/* vectors of p.                            */
 /********************************************/
 long inputDims(Patterns p) {
     return p->inputDims;
@@ -451,8 +451,8 @@ long inputDims(Patterns p) {
 
 
 /********************************************/
-/* Antworte die Dimension der Output        */
-/* Vektoren von p.                          */
+/* Returns the dimension of the output      */
+/* vectors of p.                            */
 /********************************************/
 long outputDims(Patterns p) {
     return p->outputDims;
@@ -460,17 +460,17 @@ long outputDims(Patterns p) {
 
 
 /********************************************/
-/* Generiere Klassen-Nummern fuer die Aus-  */
-/* gabevektoren von p. Gleiche Ausgabe-     */
-/* vektoren bekommen gleiche Nummern.       */
-/* Die Nummern beginnen bei 1 und werden    */
-/* dann um je 1 hochgezaehlt, wenn ein Aus- */
-/* gabevektor vorher noch nicht vorkam.     */
-/* Existieren keine Ausgabevektoren, dann   */
-/* werden die Klassennamen betrachtet.      */
-/* Die Funktion setzt die Variablen         */
-/* classNos und classCount.                 */
-/* Variable error wird gesetzt              */
+/* Generates class numbers for the output   */
+/* vectors of p. Identical output vectors   */
+/* get identical numbers.                   */
+/* The numbers start at 1 and are then      */
+/* incremented by 1 each time an output     */
+/* vector has not occurred before.          */
+/* If there are no output vectors, the      */
+/* class names are considered instead.      */
+/* The function sets the variables          */
+/* classNos and classCount.                 */
+/* Sets the global variable error           */
 /********************************************/
 void genClassNos(Patterns p) {
     if(hasClassNames(p)) {
@@ -486,10 +486,10 @@ void genClassNos(Patterns p) {
 
 
 /**************************************************/
-/* Generiere Klassen-Nummern anhand der Klassen   */
-/* Namen der Patterns p und setze die Variablen   */
-/* classNos und classCount entsprechend.          */
-/* Variable error wird gesetzt.                   */
+/* Generates class numbers based on the class     */
+/* names of the patterns p and sets the variables */
+/* classNos and classCount accordingly.           */
+/* Sets the global variable error.                */
 /**************************************************/
 void genClassNosFromNames(Patterns p) {
     long *classNo, numClasses, i;
@@ -513,10 +513,10 @@ void genClassNosFromNames(Patterns p) {
 
 
 /**************************************************/
-/* Generiere Klassen-Nummern anhand der Ausgabe-  */
-/* Vektoren von p und setze die Variablen         */
-/* classNos und classCount entsprechend.          */
-/* Variable error wird gesetzt.                   */
+/* Generates class numbers based on the output    */
+/* vectors of p and sets the variables            */
+/* classNos and classCount accordingly.           */
+/* Sets the global variable error.                */
 /**************************************************/
 void genClassNosFromVectors(Patterns p) {
     long *classNo, numVectors, i, noCount = 0L;
@@ -533,7 +533,7 @@ void genClassNosFromVectors(Patterns p) {
         v = (Vector) at(outputs(p), i);
         *classNo = classNoOfVec(map, v);
         if(*classNo == -1L) {
-            /* Vektor v tritt an Position i zum ersten Mal auf */
+            /* vector v occurs for the first time at position i */
             *classNo = ++noCount;
             addMapping(map, v, *classNo);
             if(error) return;
@@ -541,21 +541,21 @@ void genClassNosFromVectors(Patterns p) {
         if(! add(classNos(p), classNo)) error(1);
     }       /* for */
 
-    freeCollAll(map);             /* auch Speicher der Mapping Strukturen */
+    freeCollAll(map);             /* also frees the memory of the mapping structures */
     p->classCount = noCount;
     error = 0;
 }         /* genClassNosFromVectors */
 
 
-struct Mapping {                /* benoetigt von classNoOfVec()    */
-    Vector vec;                   /* und addMapping().               */
+struct Mapping {                /* needed by classNoOfVec()        */
+    Vector vec;                   /* and addMapping().                */
     long no;
 };
 
 /****************************************************/
-/* Antworte die Klassen-Nummer des Ausgabevektors v.*/
-/* Ist v in coll noch keine Klasse zugeordnet, so   */
-/* antworte -1L.                                    */
+/* Returns the class number of the output vector v. */
+/* If v has not yet been assigned a class in coll,  */
+/* returns -1L.                                     */
 /****************************************************/
 static long classNoOfVec(Collection coll, Vector v) {
     long index;
@@ -570,9 +570,9 @@ static long classNoOfVec(Collection coll, Vector v) {
 
 
 /****************************************************/
-/* Fuege der Collection coll die Abbildung des      */
-/* Vektors v nach Klassen-Nummer classNo hinzu.     */
-/* Variable error wird gesetzt.                     */
+/* Adds the mapping of vector v to class number     */
+/* classNo to the collection coll.                  */
+/* Sets the global variable error.                  */
 /****************************************************/
 static void addMapping(Collection coll, Vector v, long classNo) {
     struct Mapping *m;
@@ -586,11 +586,11 @@ static void addMapping(Collection coll, Vector v, long classNo) {
 
 
 /******************************************************/
-/* Ersetze die Klassen-Namen von p durch die Symbole  */
-/* der Symtab st. st muss mindestens so viele unter-  */
-/* schiedl. Symbole enthalten wie die groesste        */
-/* Klassen-Nummer von p.                              */
-/* Variable error wird gesetzt.                       */
+/* Replaces the class names of p with the symbols     */
+/* from the symtab st. st must contain at least as    */
+/* many distinct symbols as the largest class number  */
+/* of p.                                              */
+/* Sets the global variable error.                    */
 /******************************************************/
 void replaceClasses(Patterns p, Symtab st) {
     long i, numClasses;
@@ -616,14 +616,14 @@ void replaceClasses(Patterns p, Symtab st) {
 
 
 /**********************************************************/
-/* Erweiter alle Input-Vektoren von p um die zugehoerigen */
-/* Klassenvektoren, falls flag == TRUE. Ist flag == FALSE */
-/* so werden die Output-Vektoren erweitert.               */
-/* Der Klassenvektor besteht aus classCount               */
-/* Elementen und hat in der i-ten Dimension eine 1 stehen */
-/* wenn der entsprechende Input-Vektor die Klassennummer  */
-/* i besitzt. Alle anderen Elemente sind 0.               */
-/* Variable error wird gesetzt.                           */
+/* Expands all input vectors of p with the corresponding  */
+/* class vectors, if flag == TRUE. If flag == FALSE, the  */
+/* output vectors are expanded instead.                   */
+/* The class vector consists of classCount elements and   */
+/* has a 1 in the i-th dimension when the corresponding   */
+/* input vector has class number i. All other elements    */
+/* are 0.                                                 */
+/* Sets the global variable error.                        */
 /**********************************************************/
 void expandWithClassVectors(Patterns p, Boolean flag) {
     VecColl vc;
@@ -651,9 +651,9 @@ void expandWithClassVectors(Patterns p, Boolean flag) {
 
 
 /***************************************************/
-/* Erweiter alle Eingabevektoren von p um die      */
-/* dazugehoerigen Ausgabevektoren.                 */
-/* Variable error wird gesetzt.                    */
+/* Expands all input vectors of p with the         */
+/* corresponding output vectors.                   */
+/* Sets the global variable error.                 */
 /***************************************************/
 void expandWithOutputs(Patterns p) {
     long numVectors, i;

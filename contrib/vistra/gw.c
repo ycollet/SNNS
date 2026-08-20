@@ -3,8 +3,8 @@
 #define PM_LEFTMARGIN               48
 #define PM_TOPMARGIN                48
 #define LINE_WIDTH                  1
-#define X_DIST_FROM_EDGE            16    /* minimaler Abstand der Koor- */
-#define Y_DIST_FROM_EDGE            16    /* dinatenachsen von den Raendern.*/
+#define X_DIST_FROM_EDGE            16    /* minimum distance of the     */
+#define Y_DIST_FROM_EDGE            16    /* coordinate axes from the edges.*/
 #define VECS_PER_ROW                100
 #define POLY_HISTO_HEIGHT           100
 #define DRAWFONT_WIDTH              6
@@ -62,8 +62,8 @@ static void gwPopdownInt2(Widget, XtPointer, XtPointer);
 static void redrawGW(Widget, XtPointer, XEvent *, Boolean *);
 
 static unsigned gwWidths[][2] = {
-    { 64, 1000, },                  /* Groessen der Darstellungsarten:     */
-    { 1, 40, },                     /*  - (Minimalgroesse, Maximalgroesse) */
+    { 64, 1000, },                  /* sizes of the display modes:         */
+    { 1, 40, },                     /*  - (minimum size, maximum size)     */
     { 1, 40, },
     { 1, 40, },
     { 1, 40, },
@@ -80,9 +80,9 @@ static unsigned gwDists[] = {
 #include "draw.c"
 
 /********************************************************/
-/* Oeffne ein neues Graphik-Fenster.                    */
-/* Antworte NULL, falls dies nicht moeglich ist (weil   */
-/* zu wenig Speicher vorhanden).                        */
+/* Open a new graphics window.                          */
+/* Return NULL if this is not possible (because there   */
+/* is not enough memory available).                     */
 /********************************************************/
 static GW openGW(Widget parent, char *title) {
     GW answer;
@@ -603,7 +603,8 @@ static GW openGW(Widget parent, char *title) {
 
 
 /*********************************************************/
-/* Berechne globale Minima und Maxima der Patterns pats. */
+/* Compute the global minima and maxima of the pattern   */
+/* set pats.                                             */
 /*********************************************************/
 static void computeMinMax(GW gw) {
     gw->minInputs = overallMin(inputs(pats));
@@ -643,9 +644,8 @@ static void initGW(GW gw) {
 
 
 /****************************************************/
-/* Schliesse das Graphik-Fenster, das durch         */
-/* client_data uebergeben wird und gebe saemtliche  */
-/* Ressourcen frei.                                 */
+/* Close the graphics window passed in via          */
+/* client_data and free all its resources.          */
 /****************************************************/
 static void gwCommClose(w, client_data, garbage)
 Widget w;
@@ -660,7 +660,7 @@ XtPointer client_data, garbage;
 
 
 /****************************************************/
-/* Gebe alle Ressourcen von gw frei.                */
+/* Free all resources of gw.                        */
 /****************************************************/
 static void freeGW(GW gw) {
     if(gw->pm) XFreePixmap(display, gw->pm);
@@ -1156,8 +1156,8 @@ XtPointer client_data, garbage;
 
     currentlySet = (int) XawToggleGetCurrent(
                        XtNameToWidget(gw->commForm, "gwInputToggle"));
-    /* currentlySet kann NULL enthalten, da auch ein Unset eines Toggles */
-    /* einen Aufruf dieser Funktion bewirkt.                             */
+    /* currentlySet can contain NULL, since unsetting a toggle also     */
+    /* causes this function to be called.                                */
     if(currentlySet) {
         if((gw->input && currentlySet==GW_SHOW_OUTPUT) ||
                 (! gw->input && currentlySet==GW_SHOW_INPUT)) {
@@ -1169,9 +1169,9 @@ XtPointer client_data, garbage;
 
 
 /****************************************************/
-/* Aktualisiere die Graphik des gw->core Widgets je */
-/* gewaehlter Darstellungsart, Pattern-Nummer,      */
-/* Groesse etc.                                     */
+/* Update the graphics of the gw->core widget       */
+/* according to the selected display mode, pattern  */
+/* number, size, etc.                               */
 /****************************************************/
 static void updateGW(GW gw) {
     char buf[90];
@@ -1182,7 +1182,7 @@ static void updateGW(GW gw) {
     if(gw->kind == noKind) return;
     if(notPrintableGW(gw)) return;
 
-    /* aktualisiere das Nr-Label und Size-Label */
+    /* update the Nr label and Size label */
     gw->displayed = min(maxNr, gw->displayed);
     if(allInOne(gw->kind)) strcpy(buf, "all");
     else sprintf(buf, "%u", gw->displayed);
@@ -1192,31 +1192,31 @@ static void updateGW(GW gw) {
     XtVaSetValues(XtNameToWidget(gw->infoForm, "gwSizeLabel"),
                   XtNlabel, buf, NULL);
 
-    /* berechne die Breite/Hoehe fuer ein Diagramm EINES Vektors. */
-    /* Setze die Felder widthPerVector und heightPerVector.       */
+    /* compute the width/height for the diagram of A SINGLE vector. */
+    /* Sets the widthPerVector and heightPerVector fields.           */
     computeExtents(gw);
 
     gw->pmWidth = gw->widthPerVector + PM_LEFTMARGIN + gwDists[gw->kind];
     gw->pmHeight = gw->heightPerVector + PM_TOPMARGIN + gwDists[gw->kind];
 
-    /* Kreiere neue Pixmap */
+    /* create a new pixmap */
     if(gw->pm) XFreePixmap(display, gw->pm);
     gw->pm = XCreatePixmap(display, XtWindow(topLevel),
                            gw->pmWidth, gw->pmHeight, depth);
 
-    /* Initialisiere die Pixmap */
+    /* initialize the pixmap */
     XSetForeground(display, gc, white);
     XFillRectangle(display, gw->pm, gc, 0, 0, gw->pmWidth, gw->pmHeight);
 
-    /* berechne evtl. Minima und Maxima neu */
+    /* recompute minima and maxima if necessary */
     if(gw->patVersion != lastChanged) {
-        /* die Ein- oder Ausgabevektoren haben sich zwischen- */
-        /* zeitlich geaendert.                                */
+        /* the input or output vectors have changed in the      */
+        /* meantime.                                             */
         computeMinMax(gw);
         gw->patVersion = lastChanged;
     }
 
-    /* zeichne in die Pixmap */
+    /* draw into the pixmap */
     switch(gw->kind) {
     case proj2D:
         draw2DProjection(gw, displayedVecs(gw),
@@ -1266,8 +1266,8 @@ static void updateGW(GW gw) {
 
 
 /********************************************************/
-/* Berechne die Werte der Felder widthPerVector und     */
-/* heightPerVector von gw.                              */
+/* Compute the values of the widthPerVector and         */
+/* heightPerVector fields of gw.                        */
 /********************************************************/
 static void computeExtents(GW gw) {
     unsigned ndims = (unsigned) maxDim(gw);
@@ -1311,8 +1311,8 @@ XtPointer client_data, garbage;
 
     gw->displayed = min(maxNr, gw->displayed);
 
-    /* berechne die Breite/Hoehe fuer ein Diagramm EINES Vektors. */
-    /* Setze die Felder widthPerVector und heightPerVector.       */
+    /* compute the width/height for the diagram of A SINGLE vector. */
+    /* Sets the widthPerVector and heightPerVector fields.           */
     computeExtents(gw);
 
     toShow = maxNr - gw->displayed + 1;
@@ -1327,24 +1327,24 @@ XtPointer client_data, garbage;
                        (gw->heightPerVector + gwDists[gw->kind])
                        + PM_TOPMARGIN);
 
-    /* Kreiere neue Pixmap */
+    /* create a new pixmap */
     if(gw->pm) XFreePixmap(display, gw->pm);
     gw->pm = XCreatePixmap(display, XtWindow(topLevel),
                            gw->pmWidth, gw->pmHeight, depth);
 
-    /* Initialisiere die Pixmap */
+    /* initialize the pixmap */
     XSetForeground(display, gc, white);
     XFillRectangle(display, gw->pm, gc, 0, 0, gw->pmWidth, gw->pmHeight);
 
-    /* berechne evtl. Minima und Maxima neu */
+    /* recompute minima and maxima if necessary */
     if(gw->patVersion != lastChanged) {
-        /* die Ein- oder Ausgabevektoren haben sich zwischen- */
-        /* zeitlich geaendert.                                */
+        /* the input or output vectors have changed in the      */
+        /* meantime.                                             */
         computeMinMax(gw);
         gw->patVersion = lastChanged;
     }
 
-    /* zeichne in die Pixmap */
+    /* draw into the pixmap */
     switch(gw->kind) {
     case histo:
         r.lowest = selMin(gw);
@@ -1434,8 +1434,8 @@ static void redrawGW(Widget w, XtPointer client_data, XEvent *event,
 
 
 /*************************************************************/
-/* Callback, das aufgerufen, wenn der Benutzer im int2Dlg    */
-/* 'Cancel' waehlt.                                          */
+/* Callback that is invoked when the user selects 'Cancel'   */
+/* in the int2Dlg.                                           */
 /*************************************************************/
 static void gwPopdownInt2(w, client_data, garbage)
 Widget w;

@@ -45,11 +45,11 @@ static char *errorMessages[] = {
 
 
 /*****************************************************************/
-/* Schreibe die zum Fehler err gehoerende Fehlermeldung nach     */
-/* stdout und beende das Programm.                               */
-/* Diese Funktion muss anstatt xhandleErr() benutzt werden, wenn */
-/* die Widgets des Programms nicht kreiert sind, z.B. in der     */
-/* Initialisierungsphase oder bei Batch-Aufrufen.                */
+/* Write the error message belonging to error err to stdout      */
+/* and terminate the program.                                    */
+/* This function must be used instead of xhandleErr() when the   */
+/* program's widgets have not been created yet, e.g. during the  */
+/* initialization phase or for batch calls.                      */
 /*****************************************************************/
 void handleErr(int err) {
     char buf[MAX_LENGTH_ERROR_MESSAGE];
@@ -61,10 +61,10 @@ void handleErr(int err) {
 
 
 /******************************************************************/
-/* Erzeuge die Fehlermeldung zum Fehlercode err und schreibe diese*/
-/* in den Puffer, auf den buf zeigt.                              */
-/* Die Funktion liest die globalen Variablen errorInfo und        */
-/* rowCount.                                                      */
+/* Generate the error message for error code err and write it     */
+/* into the buffer pointed to by buf.                              */
+/* The function reads the global variables errorInfo and          */
+/* rowCount.                                                       */
 /******************************************************************/
 void genErrorMessage(int err, char *buf) {
     switch(err) {

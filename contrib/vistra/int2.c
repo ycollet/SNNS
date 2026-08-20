@@ -2,11 +2,10 @@ static int val[2], from[2], to[2];
 static Widget int2Cancel;
 
 /***********************************************/
-/* Kreiere und antworte eine neue Popup-Shell  */
-/* fuer eine Dialogbox, bei der der Benutzer   */
-/* 2 Integers eingibt. Der Benutzer kann den   */
-/* Vorgang ueber einen 'Cancel'-Button         */
-/* abbrechen.                                  */
+/* Create and return a new popup shell for a   */
+/* dialog box in which the user enters 2       */
+/* integers. The user can cancel the           */
+/* operation via a 'Cancel' button.            */
 /***********************************************/
 static Widget createInt2DlgShell(Widget parent) {
     Widget answer, int2Form;
@@ -177,10 +176,10 @@ static Widget createInt2DlgShell(Widget parent) {
 
 
 /***********************************************/
-/* Oeffne die Dialogbox int2DlgShell, die vom  */
-/* Benutzer zwei Integers erfragt. Der Benutzer*/
-/* hat die Moeglichkeit, den Vorgang ueber     */
-/* 'Cancel' abzubrechen.                       */
+/* Open the dialog box int2DlgShell, which     */
+/* asks the user for two integers. The user    */
+/* has the option to cancel the operation      */
+/* via 'Cancel'.                                */
 /***********************************************/
 static void popupInt2Dlg(w, title, headline, item1, item2,
                          from1, to1, from2, to2, default1, default2,
@@ -215,7 +214,7 @@ XtPointer ok_data, cancel_data;
     val[1] = default2;
     updateInt2Text();
 
-    /* Installiere die Callbacks */
+    /* Install the callbacks */
     XtRemoveAllCallbacks(int2Ok, XtNcallback);
     XtAddCallback(int2Ok, XtNcallback, ok_cb, ok_data);
     XtRemoveAllCallbacks(int2Up[0], XtNcallback);
@@ -246,8 +245,8 @@ static void updateInt2Text() {
 
 
 /********************************************************/
-/* client_data == 0:  oberes Command-Widget.            */
-/* client_data == 1:  unteres Command-Widget.           */
+/* client_data == 0:  upper command widget.             */
+/* client_data == 1:  lower command widget.             */
 /********************************************************/
 static void arrowUp(w, client_data, garbage)
 Widget w;
@@ -263,8 +262,8 @@ XtPointer client_data, garbage;
 
 
 /********************************************************/
-/* client_data == 0:  oberes Command-Widget.            */
-/* client_data == 1:  unteres Command-Widget.           */
+/* client_data == 0:  upper command widget.             */
+/* client_data == 1:  lower command widget.             */
 /********************************************************/
 static void arrowDown(w, client_data, garbage)
 Widget w;
@@ -280,8 +279,8 @@ XtPointer client_data, garbage;
 
 
 /********************************************************/
-/* client_data == 0:  oberes Command-Widget.            */
-/* client_data == 1:  unteres Command-Widget.           */
+/* client_data == 0:  upper command widget.             */
+/* client_data == 1:  lower command widget.             */
 /********************************************************/
 static void arrowUpMat(w, client_data, garbage)
 Widget w;
@@ -296,8 +295,8 @@ XtPointer client_data, garbage;
 
 
 /********************************************************/
-/* client_data == 0:  oberes Command-Widget.            */
-/* client_data == 1:  unteres Command-Widget.           */
+/* client_data == 0:  upper command widget.             */
+/* client_data == 1:  lower command widget.             */
 /********************************************************/
 static void arrowDownMat(w, client_data, garbage)
 Widget w;

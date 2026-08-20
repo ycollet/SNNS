@@ -8,7 +8,7 @@ typedef struct {
     int nparams;
 } Command_Struct;
 
-static void execLine(void);                           /* error gesetzt */
+static void execLine(void);                           /* sets error */
 static int commandNr(char *, Command_Struct *);
 static void batchWarn(char *);
 static void execLoad(int, VecColl, Boolean);
@@ -67,18 +67,18 @@ static Collection toks;
 
 
 /**************************************************/
-/* Interpretiere die Batch-Kommandos von coll und */
-/* fuehre sie auf den Patterns p durch.           */
-/* Jedes Element von coll ist ein String, der eine*/
-/* Zeile eines Log-Files enthaelt.                */
-/* Variable error wird gesetzt.                   */
+/* Interpret the batch commands from coll and     */
+/* execute them on the patterns p.                */
+/* Each element of coll is a string that contains */
+/* a line of a log file.                          */
+/* Sets the global variable error.                */
 /**************************************************/
 void interpret(Collection coll, Patterns p) {
     long ncomms;
     Collection toks;
     char *copy;
 
-    /* Initialisierung */
+    /* Initialization */
     pats = p;
     operateOnInputs = TRUE;
     if(! (horiz = newVector(inputDims(p)))) error(1);
@@ -86,7 +86,7 @@ void interpret(Collection coll, Patterns p) {
     if(! (vert = newVector(num(p)))) error(1);
     putAllDim(vert, 0);
 
-    /* Interpretiere Zeile fuer Zeile */
+    /* Interpret line by line */
     ncomms = size(coll);
     for(n = 1L; n <= ncomms; n++) {
         line = (char *) at(coll, n);
@@ -99,9 +99,9 @@ void interpret(Collection coll, Patterns p) {
 
 
 /**************************************************/
-/* Antworte 0, falls eine Operation erfolgreich   */
-/* ausgefuehrt wurde, sonst 1.                    */
-/* Variable error wird gesetzt.                   */
+/* Return 0 if an operation was executed          */
+/* successfully, otherwise 1.                     */
+/* Sets the global variable error.                */
 /**************************************************/
 static void execLine() {
     char *copy, *first, *second, buf[512], *direction;
@@ -119,7 +119,7 @@ static void execLine() {
     if(isEmpty(toks)) return;
 
     first = (char *) at(toks, 1L);
-    if(streq(first, "%")) return;                /* Kommentar-Zeile */
+    if(streq(first, "%")) return;                /* comment line */
     printf("%s ... ", line);
     ntoks = (unsigned) size(toks);
     if(ntoks == 1L) {
@@ -127,7 +127,7 @@ static void execLine() {
         return;
     }
 
-    /* Ueberpruefe ersten Parameter */
+    /* Check the first parameter */
     if(streq(first, "I")) {
         if(! operateOnInputs) {
             freeVector(horiz);
@@ -151,7 +151,7 @@ static void execLine() {
         return;
     }
 
-    /* Ueberpruefe zweiten Parameter */
+    /* Check the second parameter */
     second = (char *) at(toks, 2L);
     if((nr = commandNr(second, commands)) == -1) {
         sprintf(buf, "unknown keyword '%s' as second parameter!", second);
@@ -159,7 +159,7 @@ static void execLine() {
         return;
     }
 
-    /* Ueberpruefe die Anzahl der Parameter */
+    /* Check the number of parameters */
     if(commands[nr].nparams && ntoks != commands[nr].nparams) {
         sprintf(buf, "expected exactly %d parameters!",
                 commands[nr].nparams);
@@ -167,8 +167,8 @@ static void execLine() {
         return;
     }
 
-    /* Parameter 1 und 2 bereits getestet. Weitere Tests abhaengig von  */
-    /* jeweiligem Command.                                              */
+    /* Parameters 1 and 2 already checked. Further tests depend on the */
+    /* respective command.                                              */
     switch(nr) {
     case 0: { /* SCALE */
         ScaleOp sop;
@@ -210,7 +210,7 @@ static void execLine() {
         FILE *pipe, *pcaIn, *pcaOut;
         char *tempIn, *tempOut, buf[512];
 
-        /* Schreibe Patterns in ein temporaeres LVQ-File */
+        /* Write patterns to a temporary LVQ file */
         if(! (tempIn = mktemp("@PCA_INXXXXXXXX"))) error(39);
         if(! (tempOut = mktemp("@PCA_OUTXXXXXXXX"))) error(39);
         if(! (pcaIn = fopen(tempIn, "w"))) {

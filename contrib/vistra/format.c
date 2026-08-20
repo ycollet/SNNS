@@ -11,19 +11,19 @@
 static enum Token tok;
 static Format format;
 
-static void definition(void);                        /* error gesetzt */
-static void stmtList(void);                          /* error gesetzt */
-static void stmt(void);                              /* error gesetzt */
-static void altList(void);                           /* error gesetzt */
-static void descList(void);                          /* error gesetzt */
-static void descListCdr(void);                       /* error gesetzt */
-static void desc(void);                              /* error gesetzt */
+static void definition(void);                        /* sets error */
+static void stmtList(void);                          /* sets error */
+static void stmt(void);                              /* sets error */
+static void altList(void);                           /* sets error */
+static void descList(void);                          /* sets error */
+static void descListCdr(void);                       /* sets error */
+static void desc(void);                              /* sets error */
 static Boolean isStmtBegin(enum Token);
 
 
 /**************************************************/
-/* Antworte ein Format vom Format-File ff.        */
-/* Setze Variable error.                          */
+/* Returns a format from the format file ff.      */
+/* Sets the global variable error.                */
 /**************************************************/
 Format newFormat(FILE *ff) {
     long fileLength;
@@ -49,7 +49,7 @@ Format newFormat(FILE *ff) {
 
 
 /**************************************************/
-/* Gebe den Speicher des Formats f wieder frei.   */
+/* Frees the memory of the format f.              */
 /**************************************************/
 void freeFormat(Format f) {
     free(f->contents);
@@ -58,7 +58,7 @@ void freeFormat(Format f) {
 
 
 /**************************************************/
-/* Gebe die aktuelle Position der Eingabe zurueck.*/
+/* Returns the current position of the input.     */
 /**************************************************/
 long getPosition(Format f) {
     return f->pos - f->contents;
@@ -66,8 +66,8 @@ long getPosition(Format f) {
 
 
 /**************************************************/
-/* Setze den Format-Positionszeiger von f         */
-/* auf pos.                                       */
+/* Sets the format position pointer of f          */
+/* to pos.                                        */
 /**************************************************/
 void setPosition(Format f, long pos) {
     f->pos = f->contents + pos;
@@ -75,8 +75,8 @@ void setPosition(Format f, long pos) {
 
 
 /**************************************************/
-/* Antworte das naechste Token vom Format f.      */
-/* Bewege den Format Pointer jedoch nicht.        */
+/* Returns the next token from format f.          */
+/* Does not move the format pointer, however.     */
 /**************************************************/
 enum Token lookUp(Format f) {
     long savePos;
@@ -90,9 +90,9 @@ enum Token lookUp(Format f) {
 
 
 /************************************************************/
-/* Antworte den ersten Deskriptor, der in f ab              */
-/* Position pos kommt. Wenn kein Deskriptor mehr            */
-/* danach kommt, so antworte endOfString.                   */
+/* Returns the first descriptor that appears in f            */
+/* starting at position pos. If no more descriptor           */
+/* follows, returns endOfString.                             */
 /************************************************************/
 enum Token lookUpNextDesc(Format f, long pos) {
     long savePos;
@@ -110,10 +110,10 @@ enum Token lookUpNextDesc(Format f, long pos) {
 /**************************************************/
 /* enum Token nextToken(Format f)                 */
 /*------------------------------------------------*/
-/* Lese das naechste Token vom Format f.          */
-/* Bewege dabei den Format-Zeiger hinter dieses   */
-/* Token.                                         */
-/* Folgende Tokens werden erkannt:                */
+/* Reads the next token from format f.            */
+/* Moves the format pointer past this token in    */
+/* the process.                                   */
+/* The following tokens are recognized:           */
 /*                                                */
 /* Token          return                          */
 /* -----------------------------------------------*/
@@ -132,14 +132,14 @@ enum Token lookUpNextDesc(Format f, long pos) {
 /* "{"            loopBegin                       */
 /* "}"            loopEnd                         */
 /* "|"            or                              */
-/* "<beliebig>"   aString                         */
+/* "<anything>"   aString                         */
 /* "\0"           endOfString                     */
-/* z.B. "%G"      unknownControl                  */
+/* e.g. "%G"      unknownControl                  */
 /*                                                */
-/* Im Falle von aString wird die Variable         */
-/* tokenval auf <beliebig> gesetzt.               */
-/* Folgende Zeichenkombinationen werden durch     */
-/* durch Characters ersetzt:                      */
+/* In the case of aString, the variable           */
+/* tokenval is set to <anything>.                 */
+/* The following character combinations are       */
+/* replaced by characters:                        */
 /*                                                */
 /*   "%%" -> '%'                                  */
 /*   "%*" -> '*'                                  */
@@ -154,14 +154,14 @@ enum Token lookUpNextDesc(Format f, long pos) {
 /*                                                */
 /**************************************************/
 enum Token nextToken(Format f) {
-    char *p2;                  /* String pointer fuer tokenval */
+    char *p2;                  /* string pointer for tokenval */
     int index;
-    Boolean whitespace;        /* TRUE gdw. bisher nur white space gelesen */
+    Boolean whitespace;        /* TRUE iff only white space has been read so far */
     enum Token found;
     char *cp1, *cp2;
-    unsigned strCount;         /* merke Anzahl gelesener Zeichen fuer aString */
-    /* damit die Laenge STRINGLENGTH von tokenval  */
-    /* nicht ueberschritten wird.                  */
+    unsigned strCount;         /* remembers the number of characters read for aString */
+    /* so that the length STRINGLENGTH of tokenval */
+    /* is not exceeded.                            */
 
     strcpy(tokenval, "");
     p2 = tokenval;
@@ -262,12 +262,12 @@ enum Token nextToken(Format f) {
 
 
 /*****************************************/
-/* Antworte die Position nach dem ersten */
-/* Auftreten des Tokens tk im Format f   */
-/* ab der aktuellen Position.            */
-/* Falls tk nicht mehr vorkommt, dann    */
-/* wird -1L zurueckgegeben.              */
-/* Setze Variable error.                 */
+/* Returns the position after the first  */
+/* occurrence of the token tk in format f*/
+/* starting from the current position.   */
+/* If tk does not occur again, -1L is    */
+/* returned.                             */
+/* Sets the global variable error.       */
 /*****************************************/
 long posAfter(Format f, enum Token searched) {
     enum Token reached;
@@ -284,9 +284,9 @@ long posAfter(Format f, enum Token searched) {
 
 
 /****************************************************/
-/* Ueberpruefe die Syntax von Format f.             */
-/* Setze error auf eine Zahl ungleich 0 bei einem   */
-/* Syntax-Fehler, sonst setze error auf 0.          */
+/* Checks the syntax of format f.                   */
+/* Sets error to a nonzero number in case of a      */
+/* syntax error, otherwise sets error to 0.         */
 /****************************************************/
 void checkSyntax(Format f) {
     long oldPos;

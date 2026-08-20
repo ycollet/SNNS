@@ -76,7 +76,7 @@ extern float  ksh_error_bound(float error_bound);
 extern int ksh_readNetinfo( void );
 extern int ksh_init_net( char *filename );
 
-/* Einlesen des Netzes <filename>.net und initialisieren der Parameter */
+/* Reads in the network <filename>.net and initializes the parameters */
 
 extern int ksh_set_learning_function( char *fname );
 

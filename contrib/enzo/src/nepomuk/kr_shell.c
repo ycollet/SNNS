@@ -72,37 +72,37 @@
 
 #include "kr_shell.h"
 
-/* Netzparameter */
+/* Network parameters */
 static int
 no_sites,
-no_links,     /* Anzahl Gewichte im Netz */
-no_units,     /* Gesamtzahl Neuronen im Netz */
-no_inputs,    /* Anzahl Eingabe-Neuronen */
-no_outputs,   /* Anzahl Ausgabe-Neuronen */
-no_patterns;  /* Anzahl Muster */
+no_links,     /* Number of weights in the network */
+no_units,     /* Total number of neurons in the network */
+no_inputs,    /* Number of input neurons */
+no_outputs,   /* Number of output neurons */
+no_patterns;  /* Number of patterns */
 
-/* Kernel-Interface Funktionsparameter */
-static int  no_updateparams,   /* Anzahl Parameter der Updatefunktion */
-       no_learnparams;    /* Anzahl Parameter der Lernfunktion */
+/* Kernel interface function parameters */
+static int  no_updateparams,   /* Number of parameters of the update function */
+       no_learnparams;    /* Number of parameters of the learning function */
 
-static float learn_params[5],  /* Lern-Parameter */
-       init_params[5],  /* Init-Parameter */
-       update_params[5];     /* Update-Parameter */
+static float learn_params[5],  /* Learning parameters */
+       init_params[5],  /* Init parameters */
+       update_params[5];     /* Update parameters */
 
 /* Filenames */
 static char *netname;
 
-/* kernel_shell Variable */
+/* kernel_shell variable */
 static float error_bound = 0.5;
 
-/* Dynamisch allokierte Kommunikationsvariable */
+/* Dynamically allocated communication variables */
 static float *netin = NULL;
 static float *netout = NULL;
 static float *target = NULL;
 
-/* Dynamisch allokierte interne Varialbe */
-static int *inputs = NULL;   /* Liste der Eingabeunits */
-static int *outputs = NULL;  /* Liste der Ausgabeunits */
+/* Dynamically allocated internal variables */
+static int *inputs = NULL;   /* List of input units */
+static int *outputs = NULL;  /* List of output units */
 
 #define MAXPARAMS 5
 
@@ -170,8 +170,8 @@ int ksh_readNetinfo( void ) {
     int *ip,*op;
 
     /*
-      vorbelegen der Parameterarrays mit Defaultwerten,
-      allokieren der dynamischen Variablen
+      pre-fill the parameter arrays with default values,
+      allocate the dynamic variables
     */
     krui_getNetInfo( &no_sites, &no_links, &dummy, &dummy );
     no_units = krui_getNoOfUnits();
@@ -185,16 +185,16 @@ int ksh_readNetinfo( void ) {
     (void) krui_getFuncParamInfo( krui_getLearnFunc(), INIT_FUNC,
                                   &dummy, &dummy);
 
-    /* Generierung eines Dummy-Patterns */
+    /* Generation of a dummy pattern */
     /* --- js, 25.1.94 --- */
     /* --- js, 28.2.94: set no_pattern --- */
     if( (no_patterns = krui_getNoOfPatterns()) == 0 ) {
         (void) krui_newPattern();
     }
 
-    /* ridi 93 : ueberfluessig und gefaehrlich (reinit)            */
-    /* js 94:    n"otig und wichtig, falls ohne reinit() verwendet */
-    /*           vgl. die "Anderung dort                           */
+    /* ridi 93 : superfluous and dangerous (reinit)                */
+    /* js 94:    necessary and important, if used without reinit() */
+    /*           cf. the change made there                         */
     if (netin)   free (netin);
     netin  = NULL;
     if (netout)  free (netout);
@@ -213,7 +213,7 @@ int ksh_readNetinfo( void ) {
     inputs    = (int *)   malloc((unsigned)(sizeof(int) * no_inputs));
     outputs   = (int *)   malloc((unsigned)(sizeof(int) * no_outputs));
 
-    /* Erstellen der Liste der Ein-/Ausgabeunits */
+    /* Create the list of input/output units */
     ip = inputs;
     op = outputs;
     for(i=1; i<=no_units; i++) {
@@ -229,7 +229,7 @@ int ksh_readNetinfo( void ) {
         init_params[i] = 0.0;
     }
 
-    /* Default-Belegungen */
+    /* Default assignments */
     init_params[0] = -.25;
     init_params[1] = .25;
     learn_params[0] = 0.1;
@@ -275,7 +275,7 @@ int ksh_propagate_pattern (int patno) {
     /* clamps pattern <patno> on Input-Nodes
        propagates Input-Activation-Forward through MLP-FF-Net */
     int i,ret_code=0;
-    int *op;   /* Hilfszeiger */
+    int *op;   /* Helper pointer */
 
     op = outputs;
     if (!strcmp (krui_getUpdateFunc(),"Forward_Backward_Prop") ||
@@ -303,13 +303,13 @@ int ksh_propagate_pattern (int patno) {
 
 void ksh_get_target_pattern (int patno) {
     int i;
-    int *op;   /* Hilfszeiger */
+    int *op;   /* Helper pointer */
 
     op = outputs;
-    krui_setPatternNo (patno); /* Auswahl des p.ten Musters  */
-    krui_showPattern( OUTPUT_ACT); /* Muster an Eingabeschicht anlegen, Target an Ausgabe */
+    krui_setPatternNo (patno); /* Selection of the p-th pattern  */
+    krui_showPattern( OUTPUT_ACT); /* Apply pattern to input layer, target to output */
     for (i= 0; i< no_outputs; i++) {
-        target[i] = krui_getUnitActivation(*op++); /* Speichern der Zielwerte */
+        target[i] = krui_getUnitActivation(*op++); /* Store the target values */
     }
 }
 

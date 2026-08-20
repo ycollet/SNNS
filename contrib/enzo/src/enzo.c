@@ -637,7 +637,7 @@ int main( int argc, char *argv[] ) {
 
     pre_evolution();
     /*    evaluation();  */
-    /*    history();     */         /* masch: mich stoeren diese Infos */
+    /*    history();     */         /* masch: these messages annoy me */
 
     optimization();
     evaluation();

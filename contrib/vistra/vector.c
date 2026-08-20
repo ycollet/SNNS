@@ -3,9 +3,9 @@
 
 
 /**************************************************/
-/* Antworte einen neuen Vektor der Dimension dim. */
-/* Falls nicht genuegend Speicher hierfuer vor-   */
-/* handen, antworte NULL.                         */
+/* Returns a new vector of dimension dim.         */
+/* If not enough memory is available for this,    */
+/* returns NULL.                                  */
 /**************************************************/
 Vector newVector(long dim) {
     Vector vec;
@@ -24,7 +24,7 @@ Vector newVector(long dim) {
 
 
 /**************************************************/
-/* Gebe den Speicherplatz fuer Vektor v frei.     */
+/* Frees the memory for vector v.                 */
 /**************************************************/
 void freeVector(Vector v) {
     free(v->elements);
@@ -33,9 +33,8 @@ void freeVector(Vector v) {
 
 
 /**************************************************/
-/* Schreibe Vektor v in die Datei f. Tritt ein    */
-/* Fehler auf, so gebe einen Wert <> 0 zurueck,   */
-/* sonst 0.                                       */
+/* Writes vector v to file f. If an error occurs, */
+/* returns a value <> 0, otherwise 0.             */
 /**************************************************/
 int fprintVector(Vector v, FILE *f) {
     long i;
@@ -48,7 +47,7 @@ int fprintVector(Vector v, FILE *f) {
 
 
 /**************************************************/
-/* Antworte die Dimension des Vektors v.          */
+/* Returns the dimension of vector v.             */
 /**************************************************/
 long dims(Vector v) {
     return v->dimensions;
@@ -56,7 +55,7 @@ long dims(Vector v) {
 
 
 /**************************************************/
-/* Antworte die i-te Dimension des Vektors v.     */
+/* Returns the i-th dimension of vector v.        */
 /**************************************************/
 Number atDim(Vector v, long i) {
     return v->elements[i - 1];
@@ -64,8 +63,8 @@ Number atDim(Vector v, long i) {
 
 
 /**************************************************/
-/* Setze die i-te Dimension des Vektors v auf     */
-/* den Wert val.                                  */
+/* Sets the i-th dimension of vector v to the     */
+/* value val.                                     */
 /**************************************************/
 void putDim(Vector v, long i, Number val) {
     v->elements[i - 1] = val;
@@ -73,8 +72,8 @@ void putDim(Vector v, long i, Number val) {
 
 
 /**************************************************/
-/* Setze jede Dimension des Vektors v auf den     */
-/* Wert val.                                      */
+/* Sets every dimension of vector v to the        */
+/* value val.                                     */
 /**************************************************/
 void putAllDim(Vector v, Number val) {
     long numDims, i;
@@ -86,7 +85,7 @@ void putAllDim(Vector v, Number val) {
 
 
 /**************************************************/
-/* Antworte das kleinste Element von v.           */
+/* Returns the smallest element of v.             */
 /**************************************************/
 Number minimum(Vector v) {
     long numDims, i;
@@ -101,7 +100,7 @@ Number minimum(Vector v) {
 
 
 /**************************************************/
-/* Antworte das groesste Element von v.           */
+/* Returns the largest element of v.              */
 /**************************************************/
 Number maximum(Vector v) {
     long numDims, i;
@@ -116,7 +115,7 @@ Number maximum(Vector v) {
 
 
 /**************************************************/
-/* Antworte die Summe des Vektors v.              */
+/* Returns the sum of vector v.                   */
 /**************************************************/
 Number sum(Vector v) {
     Number answer;
@@ -130,7 +129,7 @@ Number sum(Vector v) {
 
 
 /**************************************************/
-/* Antworte den Mittelwert des Vektors v.         */
+/* Returns the average of vector v.               */
 /**************************************************/
 Number avg(Vector v) {
     return sum(v) / dims(v);
@@ -138,16 +137,15 @@ Number avg(Vector v) {
 
 
 /**************************************************/
-/* Vergleiche die Vektoren v1 und v2. Ist v1<v2   */
-/* so antworte V_LESS, sind sie gleich, so        */
-/* antworte V_EQUAL, und ist v1>v2, so antworte   */
-/* V_GREATER.                                     */
-/* v1 < v2 gdw. es gibt i, sodass fuer alle j<i   */
-/* (j>=1) atDim(v1, i)=atDim(v2, i) und           */
+/* Compares vectors v1 and v2. If v1<v2, returns  */
+/* V_LESS; if they are equal, returns V_EQUAL;    */
+/* and if v1>v2, returns V_GREATER.               */
+/* v1 < v2 iff there exists i such that for all   */
+/* j<i (j>=1) atDim(v1, i)=atDim(v2, i) and       */
 /* atDim(v1, j) < atDim(v2, j).                   */
-/* Die Vektoren v1 und v2 muessen die gleiche     */
-/* Dimensionalitaet besitzen. Ein Test findet     */
-/* nicht statt.                                   */
+/* Vectors v1 and v2 must have the same           */
+/* dimensionality. No check is performed for      */
+/* this.                                          */
 /**************************************************/
 int vcmp(Vector v1, Vector v2) {
     long dimensions, j;
@@ -172,7 +170,7 @@ Boolean veq(Vector v1, Vector v2) {
 
 
 /**************************************************/
-/* Antworte die Laenge des Vektors v.             */
+/* Returns the length of vector v.                */
 /**************************************************/
 Number length(Vector v) {
     Number sum = 0;
@@ -187,7 +185,7 @@ Number length(Vector v) {
 
 
 /**************************************************/
-/* Multipliziere jedes Element von v mit n.       */
+/* Multiplies every element of v by n.            */
 /**************************************************/
 void multiply(Vector v, Number n) {
     long i, dim;
@@ -199,11 +197,11 @@ void multiply(Vector v, Number n) {
 
 
 /**************************************************/
-/* Multipliziere jedes Element von v2 mit dem ent-*/
-/* sprechenden Element von v1 und speicher das    */
-/* Ergebnis in v1. v2 bleibt unveraendert.        */
-/* Die Dimensionen von v1 und v2 muessen ueberein-*/
-/* stimmen, eine Ueberpruefung findet nicht statt.*/
+/* Multiplies every element of v2 with the        */
+/* corresponding element of v1 and stores the     */
+/* result in v1. v2 remains unchanged.            */
+/* The dimensions of v1 and v2 must match; no     */
+/* check is performed for this.                   */
 /**************************************************/
 void multVector(Vector v1, Vector v2) {
     long i, dim;
@@ -215,11 +213,11 @@ void multVector(Vector v1, Vector v2) {
 
 
 /**************************************************/
-/* Dividiere jedes Element von v1 durch das ent-  */
-/* sprechende Element von v2 und speicher das     */
-/* Ergebnis in v1. v2 bleibt unveraendert.        */
-/* Die Dimensionen von v1 und v2 muessen ueberein-*/
-/* stimmen, eine Ueberpruefung findet nicht statt.*/
+/* Divides every element of v1 by the             */
+/* corresponding element of v2 and stores the     */
+/* result in v1. v2 remains unchanged.            */
+/* The dimensions of v1 and v2 must match; no     */
+/* check is performed for this.                   */
 /**************************************************/
 void divVector(Vector v1, Vector v2) {
     long i, dim;
@@ -231,7 +229,7 @@ void divVector(Vector v1, Vector v2) {
 
 
 /**************************************************/
-/* Addiere n von jedem Element des Vektors v.     */
+/* Adds n to every element of vector v.           */
 /**************************************************/
 void addConst(Vector v, Number n) {
     long i, dim;
@@ -243,11 +241,11 @@ void addConst(Vector v, Number n) {
 
 
 /**************************************************/
-/* Addiere elementweise den Vektor v2 zum Vektor  */
-/* v1 hinzu. v1 erhaelt anschliessend die Summe,  */
-/* v2 bleibt unveraendert.                        */
-/* v1 und v2 muessen die gleiche Dimension haben, */
-/* eine Ueberpruefung findet nicht statt.         */
+/* Adds vector v2 element-wise to vector v1.      */
+/* v1 subsequently holds the sum, v2 remains      */
+/* unchanged.                                     */
+/* v1 and v2 must have the same dimension; no     */
+/* check is performed for this.                   */
 /**************************************************/
 void addVector(Vector v1, Vector v2) {
     long i, dim;
@@ -259,11 +257,11 @@ void addVector(Vector v1, Vector v2) {
 
 
 /*****************************************************/
-/* Subtrahiere elementweise den Vektor v2 vom Vektor */
-/* v1 hinzu. v1 erhaelt anschliessend die Summe,     */
-/* v2 bleibt unveraendert.                           */
-/* v1 und v2 muessen die gleiche Dimension haben,    */
-/* eine Ueberpruefung findet nicht statt.            */
+/* Subtracts vector v2 element-wise from vector      */
+/* v1. v1 subsequently holds the result, v2          */
+/* remains unchanged.                                */
+/* v1 and v2 must have the same dimension; no        */
+/* check is performed for this.                      */
 /*****************************************************/
 void subVector(Vector v1, Vector v2) {
     long i, dim;
@@ -275,7 +273,7 @@ void subVector(Vector v1, Vector v2) {
 
 
 /**************************************************/
-/* Negiere alle Elemente von v.                   */
+/* Negates all elements of v.                     */
 /**************************************************/
 void neg(Vector v) {
     long i, dim;
@@ -287,9 +285,9 @@ void neg(Vector v) {
 
 
 /**************************************************/
-/* Ersetze alle Elemente von v durch deren Kehr-  */
-/* wert. Es wird nicht getestet, ob ein Element 0 */
-/* ist.                                           */
+/* Replaces all elements of v with their          */
+/* reciprocal. It is not checked whether an       */
+/* element is 0.                                  */
 /**************************************************/
 void invert(Vector v) {
     long i, dim;
@@ -301,7 +299,7 @@ void invert(Vector v) {
 
 
 /**************************************************/
-/* Antworte die Varianz des Vektors v.            */
+/* Returns the variance of vector v.              */
 /**************************************************/
 Number var(Vector v) {
     double average, sum = 0;
@@ -317,7 +315,7 @@ Number var(Vector v) {
 
 
 /**************************************************/
-/* Antworte die Standardabweichung des Vektors v. */
+/* Returns the standard deviation of vector v.    */
 /**************************************************/
 Number sigma(Vector v) {
     return sqrt(var(v));
@@ -325,7 +323,7 @@ Number sigma(Vector v) {
 
 
 /**************************************************/
-/* Skaliere den Vektor v mittels so.              */
+/* Scales vector v using so.                      */
 /**************************************************/
 void scaleVec(Vector v, ScaleOp so) {
     long dim, i;
@@ -337,7 +335,7 @@ void scaleVec(Vector v, ScaleOp so) {
 
 
 /**************************************************/
-/* Normiere den Vektor v auf Laenge 1.            */
+/* Normalizes vector v to length 1.               */
 /**************************************************/
 void normalize(Vector v) {
     Number len;
@@ -348,9 +346,9 @@ void normalize(Vector v) {
 
 
 /**************************************************/
-/* Antworte die Position des ersten Auftretens von*/
-/* n im Vektor v. Antworte 0L, falls n nicht als  */
-/* Element von v enthalten ist.                   */
+/* Returns the position of the first occurrence   */
+/* of n in vector v. Returns 0L if n is not       */
+/* contained as an element of v.                  */
 /**************************************************/
 long detectFirst(Vector v, Number n) {
     long i, dim;
@@ -364,8 +362,8 @@ long detectFirst(Vector v, Number n) {
 
 
 /**************************************************/
-/* Schreibe einen String nach buf, der in jeder   */
-/* Zeile genau ein Element von v enthaelt.        */
+/* Writes a string to buf that contains exactly   */
+/* one element of v per line.                     */
 /**************************************************/
 void asStringVert(Vector v, char *buf) {
     long dim, i;
@@ -380,10 +378,10 @@ void asStringVert(Vector v, char *buf) {
 
 
 /**************************************************/
-/* Kopiere alle Elemente von coll in den Vektor v.*/
-/* Die Groesse von coll und die Anzahl der        */
-/* Dimensionen von v muessen identisch sein. Eine */
-/* Ueberpruefung findet nicht statt.              */
+/* Copies all elements of coll into vector v.     */
+/* The size of coll and the number of dimensions  */
+/* of v must be identical. No check is performed  */
+/* for this.                                      */
 /**************************************************/
 void copyFromColl(Vector v, Collection coll) {
     long i;
@@ -394,7 +392,7 @@ void copyFromColl(Vector v, Collection coll) {
 
 
 /******************************************************/
-/* Kopiere die Elemente von v2 nach v1.               */
+/* Copies the elements of v2 to v1.                   */
 /******************************************************/
 void copyVec(Vector v1, Vector v2) {
     long i;
@@ -405,10 +403,10 @@ void copyVec(Vector v1, Vector v2) {
 
 
 /******************************************************/
-/* Antworte den Vektor v als eine Collection der      */
-/* Elemente (Numbers).                                */
-/* Antworte NULL, falls der Speicher fuer die         */
-/* Collection nicht ausreicht.                        */
+/* Returns vector v as a collection of its            */
+/* elements (Numbers).                                */
+/* Returns NULL if there is not enough memory for     */
+/* the collection.                                    */
 /******************************************************/
 Collection asColl(Vector v) {
     Collection answer;
@@ -427,13 +425,13 @@ Collection asColl(Vector v) {
 
 
 /******************************************************/
-/* Antworte einen neuen Vektor, der dim1 + dim2       */
-/* Dimensionen besitzt, wobei dim1 die Dimension-     */
-/* alitaet des Vektors v1 und dim2 die des Vektors v2 */
-/* darstellen. Der neue Vektor bekommt als Elemente   */
-/* die Elemente von v1 gefolgt von denen von v2.      */
-/* Antworte NULL, falls nicht genuegend Speicher ver- */
-/* fuegbar fuer den zurueckzugebenden Vektor.         */
+/* Returns a new vector that has dim1 + dim2          */
+/* dimensions, where dim1 is the dimensionality of    */
+/* vector v1 and dim2 that of vector v2.              */
+/* The new vector's elements are the elements of v1   */
+/* followed by those of v2.                           */
+/* Returns NULL if not enough memory is available     */
+/* for the vector to be returned.                     */
 /******************************************************/
 Vector expand(Vector v1, Vector v2) {
     Vector answer;
@@ -456,17 +454,18 @@ Vector expand(Vector v1, Vector v2) {
 
 
 /****************************************************/
-/* Entferne vom Vektor v alle durch dims gegebenen  */
-/* Dimensionen.                                     */
-/* ds zeigt auf ein Array von Integern des Typs     */
-/* long. Jedes Element des Arrays gibt eine zu      */
-/* loeschende Dimension an. Die Elemente von ds     */
-/* muessen aufsteigend sortiert sein. (1 3 4) z.B.  */
-/* besagt, dass die Dimensionen 1, 3 und 4 geloescht*/
-/* werden sollen. Um das Ende des Arrays zu mar-    */
-/* kieren, muss dort eine 0L erscheinen.            */
-/* num gibt die Anzahl der zu entfernenden Dim. an. */
-/* Variable error wird gesetzt.                     */
+/* Removes all dimensions given by dims from        */
+/* vector v.                                        */
+/* ds points to an array of integers of type long.  */
+/* Each element of the array specifies a dimension  */
+/* to be removed. The elements of ds must be sorted */
+/* in ascending order. E.g. (1 3 4) means that      */
+/* dimensions 1, 3 and 4 are to be removed.         */
+/* To mark the end of the array, a 0L must appear   */
+/* there.                                            */
+/* num gives the number of dimensions to be         */
+/* removed.                                          */
+/* Sets the global variable error.                  */
 /****************************************************/
 void removeDims(Vector v, long *ds, long num) {
     long i, dim, outCount;
@@ -489,9 +488,9 @@ void removeDims(Vector v, long *ds, long num) {
 
 
 /******************************************************/
-/* Entferne vom Vektor v alle Dimensionen von from bis*/
-/* to einschliesslich.                                */
-/* Variable error wird gesetzt.                       */
+/* Removes all dimensions from from to to inclusive   */
+/* from vector v.                                     */
+/* Sets the global variable error.                    */
 /******************************************************/
 void removeDimRange(Vector v, unsigned from, unsigned to) {
     unsigned i, numToRemove, firstToRemove, lastToRemove, count;
@@ -520,12 +519,11 @@ void removeDimRange(Vector v, unsigned from, unsigned to) {
 
 
 /************************************************************/
-/* Fuehre auf dem Vektor v eine Fast Fourier Transformation */
-/* durch.                                                   */
-/* Der Funktion muessen zwei Arrays von doubles uebergeben  */
-/* werden, deren Speicher bereits allokiert wurde und die   */
-/* mindestens sovielen Elementen Platz bieten wie die An-   */
-/* zahl Dimensionen von v.                                  */
+/* Performs a Fast Fourier Transform on vector v.           */
+/* Two arrays of doubles must be passed to the function,    */
+/* whose memory has already been allocated and which have  */
+/* room for at least as many elements as the number of      */
+/* dimensions of v.                                         */
 /************************************************************/
 void fft(Vector v, double *VecRe, double *VecIm) {
     int Size, Forward;
@@ -605,7 +603,7 @@ void fft(Vector v, double *VecRe, double *VecIm) {
 
 
 /*************************************************************/
-/* Fuehre auf Vektor vec eine hlog-Operation aus.            */
+/* Performs an hlog operation on vector vec.                 */
 /*************************************************************/
 void hlog(Vector vec) {
     Number *hilfelems;
@@ -645,11 +643,11 @@ void hlog(Vector vec) {
 
 
 /*******************************************************/
-/* Schreibe alle Elemente von v nacheinander in den    */
-/* Puffer buf. Die Elemente werden durch numBlanks     */
-/* Blanks voneinander getrennt.                        */
-/* Antworte einen Zeiger auf erste Zeichen hinter dem  */
-/* geschriebenen String.                               */
+/* Writes all elements of v one after another into the */
+/* buffer buf. The elements are separated from each    */
+/* other by numBlanks blanks.                          */
+/* Returns a pointer to the first character after the  */
+/* written string.                                     */
 /*******************************************************/
 char *printVec(Vector v, char *buf, unsigned numBlanks) {
     long i;

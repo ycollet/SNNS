@@ -149,7 +149,7 @@ ui_krui_setCurrentLink(int sourceNo, int targetNo, char *siteName) {
 /*****************************************************************************
   FUNCTION : ui_correctName
 
-  PURPOSE  : replace all ' ', '\t' und '\n' with underscores ('_')
+  PURPOSE  : replace all ' ', '\t' and '\n' with underscores ('_')
   NOTES    :
 
   UPDATE   : 27.9.1990

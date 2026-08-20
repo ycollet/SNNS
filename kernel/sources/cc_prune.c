@@ -175,7 +175,7 @@ void cc_pruneNet (int StartPattern, int EndPattern, int pruneFunc) {
 
   PURPOSE  : Should remove Unit, does nothing.
 
-  NOTES    : Parameteruebergabe richten, falls Routine aktiviert wird.
+  NOTES    : Fix parameter passing if the routine is activated.
 
   UPDATE   : 24.11.95 <ausgelagert by Juergen Gatter>
 ******************************************************************************/

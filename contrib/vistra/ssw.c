@@ -290,10 +290,9 @@ static void updateSSWscrollHoriz(SSW ssw) {
 
 
 /*************************************************************/
-/* Wird aufgerufen, sobald ein Button losgelassen wird,      */
-/* nachdem dieser zuvor ueber der vertikalen Scrollbar       */
-/* gedrueckt wurde.                                          */
-/* pos enthaelt die relative Pointer-Position in Pixels.     */
+/* Called as soon as a button is released, after it was      */
+/* previously pressed over the vertical scrollbar.           */
+/* pos contains the relative pointer position in pixels.     */
 /*************************************************************/
 static void sswScrollVert(w, client_data, pos)
 Widget w;
@@ -302,7 +301,7 @@ XtPointer client_data, pos;
     SSW ssw = (SSW) client_data;
     int ptrpos = (int) pos, previous = ssw->firstRow;
 
-    if(ptrpos > 0)                /* Button 1 wurde gedrueckt */
+    if(ptrpos > 0)                /* button 1 was pressed */
         ssw->firstRow = max(1, (int) (ssw->firstRow - ssw->visRows));
     else ssw->firstRow = min(ssw->firstRow + ssw->visRows, num(pats));
     ssw->usedRows = min(ssw->visRows, num(pats) - ssw->firstRow + 1);
@@ -316,10 +315,9 @@ XtPointer client_data, pos;
 
 
 /*************************************************************/
-/* Wird aufgerufen, sobald Button 1 oder 3 losgelassen wird, */
-/* nachdem dieser zuvor ueber der horizontalen Scrollbar     */
-/* gedrueckt wurde.                                          */
-/* pos enthaelt die relative Pointer-Position in Pixels.     */
+/* Called as soon as button 1 or 3 is released, after it     */
+/* was previously pressed over the horizontal scrollbar.     */
+/* pos contains the relative pointer position in pixels.     */
 /*************************************************************/
 static void sswScrollHoriz(w, client_data, pos)
 Widget w;
@@ -328,7 +326,7 @@ XtPointer client_data, pos;
     SSW ssw = (SSW) client_data;
     int ptrpos = (int) pos, previous = ssw->firstCol;
 
-    if(ptrpos > 0)             /* Button 1 wurde gedrueckt */
+    if(ptrpos > 0)             /* button 1 was pressed */
         ssw->firstCol = max(1, (int) (ssw->firstCol - ssw->visCols));
     else ssw->firstCol = min(ssw->firstCol + ssw->visCols, swapCols(pats));
     ssw->usedCols = min(ssw->visCols, swapCols(pats) - ssw->firstCol + 1);
@@ -342,11 +340,10 @@ XtPointer client_data, pos;
 
 
 /*************************************************************/
-/* Wird aufgerufen, sobald der Mouse Button 2 losgelassen    */
-/* wir, nachdem dieser zuvor ueber der vertikalen Scrollbar  */
-/* gedrueckt wurde.                                          */
-/* percent gibt die Position des Balkens an und liegt        */
-/* zwischen 0.0 und 1.0.                                     */
+/* Called as soon as mouse button 2 is released, after it    */
+/* was previously pressed over the vertical scrollbar.       */
+/* percent gives the position of the thumb and lies          */
+/* between 0.0 and 1.0.                                      */
 /*************************************************************/
 static void sswJumpVert(w, client_data, percent)
 Widget w;
@@ -369,11 +366,10 @@ XtPointer client_data, percent;
 
 
 /*************************************************************/
-/* Wird aufgerufen, sobald der Mouse Button 2 losgelassen    */
-/* wir, nachdem dieser zuvor ueber der horizontalen Scrollbar*/
-/* gedrueckt wurde.                                          */
-/* percent gibt die Position des Balkens an und liegt        */
-/* zwischen 0.0 und 1.0.                                     */
+/* Called as soon as mouse button 2 is released, after it    */
+/* was previously pressed over the horizontal scrollbar.     */
+/* percent gives the position of the thumb and lies          */
+/* between 0.0 and 1.0.                                      */
 /*************************************************************/
 static void sswJumpHoriz(w, client_data, percent)
 Widget w;

@@ -1,5 +1,5 @@
 /*************************************************************/
-/* Antworte eine neue Popupshell fuer eine Dialog Widget.    */
+/* Return a new popup shell for a dialog widget.             */
 /*************************************************************/
 static Widget createStrDlgShell(Widget parent) {
     static Widget answer, strDlgButtonCancel;
@@ -30,13 +30,13 @@ static Widget createStrDlgShell(Widget parent) {
 
 
 /*************************************************************/
-/* Oeffne eine Dialogbox mit dem Titel title, in der der     */
-/* Benutzer aufgefordert wird, einen String einzugeben.      */
-/* Der Standardwert ist defaultValue. Der Benutzer kann      */
-/* ueber 'Cancel' den Vorgang abbrechen, wobei NULL zurueck- */
-/* gegeben wird. Oder er waehlt Button mit dem Label         */
-/* buttonLabel, woraufhin der momentane Inhalt des Eingabe-  */
-/* felds geantwortet wird.                                   */
+/* Open a dialog box with the title "title", in which the    */
+/* user is prompted to enter a string.                       */
+/* The default value is defaultValue. The user can cancel    */
+/* the operation via 'Cancel', in which case NULL is         */
+/* returned. Or the user selects the button with the label   */
+/* buttonLabel, whereupon the current content of the input   */
+/* field is returned.                                         */
 /*************************************************************/
 static void popupStrDlg(w, title, defaultValue, buttonLabel, callback)
 Widget w;

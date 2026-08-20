@@ -1,7 +1,7 @@
 /******************************************************/
 /******************************************************/
-/******* Routinen zum Lesen und Schreiben von *********/
-/*******        N 0 1 - F o r m a t e n       *********/
+/*******   Routines for reading and writing   *********/
+/*******        N 0 1   f o r m a t s         *********/
 /******************************************************/
 /******************************************************/
 
@@ -18,17 +18,17 @@ typedef struct {
     unsigned NumberOfClasses;
 } N01Type;
 
-static void checkN01Header(N01Type *);             /* error gesetzt */
+static void checkN01Header(N01Type *);             /* sets error */
 static N01Number reverseNumber(N01Number);
 static unsigned reverseUnsigned(unsigned);
-static void writeN01_SUN(Patterns, FILE *);        /* error gesetzt */
-static void writeN01_DEC(Patterns, FILE *);        /* error gesetzt */
+static void writeN01_SUN(Patterns, FILE *);        /* sets error */
+static void writeN01_DEC(Patterns, FILE *);        /* sets error */
 
 /**********************************************************/
-/* Lese das File f ein, das im N01-Format vorliegt.       */
-/* Antworte die gelesenen Vektoren und Klassen in Form    */
-/* eines Patterns-Typs.                                   */
-/* Variable error wird gesetzt.                           */
+/* Read in file f, which is in N01 format.                */
+/* Return the vectors and classes read, in the form of    */
+/* a Patterns type.                                       */
+/* Sets the global variable error.                        */
 /**********************************************************/
 Patterns readN01(FILE *f) {
     N01Type header;
@@ -50,7 +50,7 @@ Patterns readN01(FILE *f) {
         header.OutputDimension = reverseUnsigned(header.OutputDimension);
     }
 
-    /* Ueberpruefe den Inhalt des Headers */
+    /* Check the contents of the header */
     checkN01Header(&header);
     if(error) return NULL;
 
@@ -61,7 +61,7 @@ Patterns readN01(FILE *f) {
     p->count = header.NumberOfData;
     p->classCount = header.NumberOfClasses;
 
-    /* Lese die Input Patterns */
+    /* Read the input patterns */
     if(fseek(f, header.PlaceOfInputData, 0)) errorR(16,NULL);
     for(i = 1L; i <= header.NumberOfData; i++) {
         if(! (v = newVector(header.InputDimension))) errorR(1,NULL);
@@ -73,9 +73,9 @@ Patterns readN01(FILE *f) {
         if(! add(inputs(p), v)) errorR(1,NULL);
     }
 
-    /* Lese die Output Patterns */
+    /* Read the output patterns */
     if(header.PlaceOfOutputData) {
-        /* Output Vektoren vorhanden */
+        /* output vectors present */
         if(fseek(f, header.PlaceOfOutputData, 0)) errorR(16,NULL);
         for(i = 1L; i <= header.NumberOfData; i++) {
             if(! (v = newVector(header.OutputDimension))) errorR(1,NULL);
@@ -88,9 +88,9 @@ Patterns readN01(FILE *f) {
         }    /* for */
     }      /* if */
 
-    /* Lese die Klassen-Nummern */
+    /* Read the class numbers */
     if(header.PlaceOfClassData) {
-        /* Klassen-Nummern vorhanden */
+        /* class numbers present */
         if(fseek(f, header.PlaceOfClassData, 0)) errorR(16,NULL);
         for(i = 1L; i <= header.NumberOfData; i++) {
             long *classNo;
@@ -99,7 +99,7 @@ Patterns readN01(FILE *f) {
             classNo = (long *) malloc(sizeof(*classNo));
             if(! classNo) errorR(1,NULL);
             if(fread(&cls, sizeof(cls), 1, f) != 1) errorR(16,NULL);
-            /* kein Fehler */
+            /* no error */
             if(! isDEC) cls = reverseUnsigned(cls);
             *classNo = (long) cls;
             if(! add(classNos(p), classNo)) errorR(1,NULL);
@@ -112,8 +112,8 @@ Patterns readN01(FILE *f) {
 
 
 /*****************************************************/
-/* Ueberpruefe den N01 Header hd auf Plausibilitaet. */
-/* Setze Variable error entsprechend.                */
+/* Check the N01 header hd for plausibility.         */
+/* Sets the global variable error accordingly.       */
 /*****************************************************/
 static void checkN01Header(N01Type *hd) {
     if(hd->InputDimension == 0) {
@@ -134,9 +134,9 @@ static void checkN01Header(N01Type *hd) {
 
 
 /*******************************************************/
-/* Schreibe die Patterns p im N01-Format nach File f   */
-/* ab der aktuellen File Position von f.               */
-/* Variable error wird gesetzt.                        */
+/* Write the patterns p in N01 format to file f,       */
+/* starting at the current file position of f.         */
+/* Sets the global variable error.                     */
 /*******************************************************/
 void writeN01(Patterns p, FILE *f) {
     if(isDEC) writeN01_DEC(p, f);
@@ -155,10 +155,10 @@ static void writeN01_SUN(Patterns p, FILE *f) {
     char n01Tag[] = "N01";
     unsigned offsetAfterInputs, offsetAfterOutputs;
 
-    /* schreibe die N01-Kennung */
+    /* write the N01 tag */
     if(fwrite(n01Tag, sizeof(char), 4, f) != 4) error(17);
 
-    /* schreibe den Header */
+    /* write the header */
     header.InputDimension = (unsigned) inputDims(p);
     header.OutputDimension = (unsigned) outputDims(p);
     header.NumberOfData = (unsigned) num(p);
@@ -185,7 +185,7 @@ static void writeN01_SUN(Patterns p, FILE *f) {
     header.OutputDimension = reverseUnsigned(header.OutputDimension);
     if(fwrite(&header, sizeof(header), 1, f) != 1) error(17);
 
-    /* Schreibe die Input Vektoren */
+    /* Write the input vectors */
     if(! (elems = (N01Number *) malloc(p->inputDims * sizeof(*elems))))
         error(1);
     nums = size(p->inputs);
@@ -198,7 +198,7 @@ static void writeN01_SUN(Patterns p, FILE *f) {
     }
     free(elems);
 
-    /* Schreibe die Output Vektoren, falls welche vorhanden */
+    /* Write the output vectors, if any are present */
     if(hasOutputs(p)) {
         if(! (elems = (N01Number *) malloc(p->outputDims *
                                            sizeof(*elems)))) error(1);
@@ -214,7 +214,7 @@ static void writeN01_SUN(Patterns p, FILE *f) {
     }        /* if */
 
 
-    /* Schreibe die Klassen-Nummern */
+    /* Write the class numbers */
     if(notEmpty(clsnos)) {
         N01Class c;
         nums = size(clsnos);
@@ -240,10 +240,10 @@ static void writeN01_DEC(Patterns p, FILE *f) {
     char n01Tag[] = "N01";
     unsigned offsetAfterInputs, offsetAfterOutputs;
 
-    /* schreibe die N01-Kennung */
+    /* write the N01 tag */
     if(fwrite(n01Tag, sizeof(char), 4, f) != 4) error(17);
 
-    /* schreibe den Header */
+    /* write the header */
     header.InputDimension = (unsigned) inputDims(p);
     header.OutputDimension = (unsigned) outputDims(p);
     header.NumberOfData = (unsigned) num(p);
@@ -262,7 +262,7 @@ static void writeN01_DEC(Patterns p, FILE *f) {
     header.PlaceOfClassData = (isEmpty(clsnos) ? 0 : offsetAfterOutputs);
     if(fwrite(&header, sizeof(header), 1, f) != 1) error(17);
 
-    /* Schreibe die Input Vektoren */
+    /* Write the input vectors */
     nums = size(p->inputs);
     for(i = 1L; i <= nums; i++) {
         v = (Vector) at(p->inputs, i);
@@ -270,7 +270,7 @@ static void writeN01_DEC(Patterns p, FILE *f) {
                 != header.InputDimension) error(17);
     }
 
-    /* Schreibe die Output Vektoren, falls welche vorhanden */
+    /* Write the output vectors, if any are present */
     if(hasOutputs(p)) {
         nums = size(p->outputs);
         for(i = 1L; i <= nums; i++) {
@@ -281,7 +281,7 @@ static void writeN01_DEC(Patterns p, FILE *f) {
     }        /* if */
 
 
-    /* Schreibe die Klassen-Nummern */
+    /* Write the class numbers */
     if(notEmpty(clsnos)) {
         N01Class c;
         nums = size(clsnos);

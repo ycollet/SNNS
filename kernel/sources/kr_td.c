@@ -843,10 +843,10 @@ static	float testTDNetBackward(int pattern_no, int sub_pat_no,
     while (unit_ptr != (struct Unit *) NULL) {
         devit = *(--out_pat) - unit_ptr->Out.output; /*  calc. devitation */
 
-        /* der Fehler wird auch summiert, wenn die Gewichtsfaktoren nicht adaptiert werden */
+        /* the error is also summed even if the weights are not adapted */
         sum_error += devit * devit; /*  sum up the error of the network  */
         if ( (float) fabs( devit ) <= delta_max ) {
-            devit = 0; /* joe: sonst koennen Fehler auftreten*/
+            devit = 0; /* joe: otherwise errors can occur */
         }
         unit_ptr = *--topo_ptr;
 

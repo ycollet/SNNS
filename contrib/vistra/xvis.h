@@ -21,25 +21,25 @@
 #define V_EQUAL                    0         /*          "             */
 #define PI                         3.141592
 #define NUM_COLORS                 100
-/* Anzahl versch. Farbstufen */
+/* number of distinct color levels */
 #define NUM_GRAYS                  50
-/* Anzahl versch. Graustufen */
+/* number of distinct gray levels */
 #define MAX_LENGTH_ERROR_MESSAGE   512
-/* Max. Laenge einer Fehlermeldung */
+/* max. length of an error message */
 #define MAX_LENGTH_ERRORINFO       256
-/* Max. Laenge der globalen Var. errorInfo */
+/* max. length of the global variable errorInfo */
 #define MAX_LENGTH_TOKENVAL        1024
-/* Max. Laenge der globalen Var. tokenval */
+/* max. length of the global variable tokenval */
 #define CLASS_MAXLEN               80
-/* Max. Laenge eines Klassen-Namens */
+/* max. length of a class name */
 #define CLASS_SCANF_FORMAT         "%80s"
-/* scanf()-Format zum Lesen von Klassen */
+/* scanf() format for reading classes */
 #define NO_BUCKETS                 100
-/* Anzahl Buckets fuer Klassen-Namen-Hashing */
+/* number of buckets for class name hashing */
 #define FORMAT_DIR_ENVVAR          "VISTRAFORMATS"
-/* Namen der Environment Variable, die das */
-/* Directory angibt, in dem die FDL-Format */
-/* Dateien zu finden sind.                 */
+/* Name of the environment variable that      */
+/* specifies the directory in which the FDL   */
+/* format files are to be found.              */
 #define FORMAT_EXTENSION           ".fmt"
 #define TEMP_DIR                   "/tmp/"
 
@@ -62,22 +62,22 @@
 /* MACROS                                                             */
 /*--------------------------------------------------------------------*/
 
-/* Ueberpruefe den Return-Wert von ftell() */
+/* Check the return value of ftell() */
 #define checkPos(pos)  if((pos) == -1L) { error = 6; return; }
 /* Same, for use inside a function that returns a value on error paths */
 #define checkPosR(pos,retval)  if((pos) == -1L) { error = 6; return (retval); }
 
-/* Setze den Filepointer von File f auf Position pos, teste auf Fehler */
+/* Set the file pointer of file f to position pos, checking for errors */
 #define setPos(f,pos)  if(fseek((f), (pos), 0)) { error = 6; return; }
 /* Same, for use inside a function that returns a value on error paths */
 #define setPosR(f,pos,retval)  if(fseek((f), (pos), 0)) { error = 6; return (retval); }
 
-/* Beende Funktion und setze den Fehlercode nr */
+/* Terminate the function and set the error code nr */
 #define error(nr)      { error = (nr); return; }
 /* Same, for use inside a function that returns a value on error paths */
 #define errorR(nr,retval)      { error = (nr); return (retval); }
 
-/* Berechne den durch so (eine ScaleOp structure) skalierten Wert von n */
+/* Compute the value of n scaled by so (a ScaleOp structure) */
 #define scale(so, n)      ((n) * (so).mult + (so).add)
 
 #define max(a,b)  ((a) >= (b) ? (a) : (b))
@@ -166,10 +166,10 @@ struct PatternsType {
 typedef struct PatternsType * Patterns;
 
 typedef struct {
-    int originX;              /* X-Koordinate des Ursprungs rel. zu x */
-    int originY;              /* Y-Koordinate  "      "     "    "  " */
-    float x_mult;             /* Anzahl Pixels fuer eine X-Laengeneinheit */
-    float y_mult;             /*   "      "     "    "   Y-      "        */
+    int originX;              /* X coordinate of the origin relative to x */
+    int originY;              /* Y coordinate  "      "     "    "     "  */
+    float x_mult;             /* number of pixels for one X length unit   */
+    float y_mult;             /*   "      "     "    "    Y      "     "  */
     int x;
     int y;
     unsigned width;
@@ -260,56 +260,56 @@ Boolean isEmpty(Collection);
 Boolean notEmpty(Collection);
 
 /* Public functions of FORMAT.O */
-Format newFormat(FILE *);                      /* error gesetzt */
+Format newFormat(FILE *);                      /* sets error */
 void freeFormat(Format);
 long getPosition(Format);
 void setPosition(Format, long);
 enum Token lookUp(Format);
 enum Token lookUpNextDesc(Format, long);
 enum Token nextToken(Format);
-void checkSyntax(Format);                      /* error gesetzt */
+void checkSyntax(Format);                      /* sets error */
 long posAfter(Format, enum Token);
 Boolean isDesc(enum Token);
 
 /* Public functions of PATTERNS.O */
-Patterns newPatterns();                        /* error gesetzt */
-void fileIn(Patterns, Format, FILE *);         /* error gesetzt */
-void fileOut(Patterns, Format, FILE *);        /* error gesetzt */
+Patterns newPatterns();                        /* sets error */
+void fileIn(Patterns, Format, FILE *);         /* sets error */
+void fileOut(Patterns, Format, FILE *);        /* sets error */
 void freePatterns(Patterns);
 unsigned removePatterns(Patterns, unsigned, unsigned);
-/* error gesetzt */
+/* sets error */
 unsigned removeCols(Patterns, Boolean, unsigned, unsigned);
-/* error gesetzt */
+/* sets error */
 void removeDimList(Patterns, Boolean, long *, long);
-/* error gesetzt */
-void randomize(Patterns, Vector);              /* error gesetzt */
+/* sets error */
+void randomize(Patterns, Vector);              /* sets error */
 long num(Patterns);
 VecColl inputs(Patterns);
 VecColl outputs(Patterns);
 Collection classes(Patterns);
 Collection classNos(Patterns);
-void genClassNos(Patterns);                    /* error gesetzt */
-void genClassNosFromNames(Patterns);           /* error gesetzt */
-void genClassNosFromVectors(Patterns);         /* error gesetzt */
-void replaceClasses(Patterns, Symtab);         /* error gesetzt */
+void genClassNos(Patterns);                    /* sets error */
+void genClassNosFromNames(Patterns);           /* sets error */
+void genClassNosFromVectors(Patterns);         /* sets error */
+void replaceClasses(Patterns, Symtab);         /* sets error */
 long maxClassNo(Patterns);
 char *classString(Patterns, long);
 char *statString(Patterns, char *);
-void writeSymtab(Patterns, FILE *);            /* error gesetzt */
+void writeSymtab(Patterns, FILE *);            /* sets error */
 long inputDims(Patterns);
 long outputDims(Patterns);
 Boolean hasClassNames(Patterns);
 Boolean hasOutputs(Patterns);
-void expandWithClassVectors(Patterns, Boolean);/* error gesetzt */
-void expandWithOutputs(Patterns);              /* error gesetzt */
+void expandWithClassVectors(Patterns, Boolean);/* sets error */
+void expandWithOutputs(Patterns);              /* sets error */
 /* N01.C */
-Patterns readN01(FILE *);                      /* error gesetzt */
-void writeN01(Patterns, FILE *);               /* error gesetzt */
+Patterns readN01(FILE *);                      /* sets error */
+void writeN01(Patterns, FILE *);               /* sets error */
 /* LVQ.C */
-Patterns readLVQ(FILE *);                      /* error gesetzt */
-void writeLVQ(Patterns, FILE *);               /* error gesetzt */
-void lvqRead(Patterns, FILE *, Boolean);       /* error gesetzt */
-void lvqWrite(Patterns, FILE *, Boolean);      /* error gesetzt */
+Patterns readLVQ(FILE *);                      /* sets error */
+void writeLVQ(Patterns, FILE *);               /* sets error */
+void lvqRead(Patterns, FILE *, Boolean);       /* sets error */
+void lvqWrite(Patterns, FILE *, Boolean);      /* sets error */
 
 /* Public functions of VECTOR.O */
 Vector newVector(long);
@@ -344,8 +344,8 @@ void copyFromColl(Vector, Collection);
 void copyVec(Vector, Vector);
 Collection asColl(Vector);
 Vector expand(Vector, Vector);
-void removeDims(Vector, long *, long);                  /* error gesetzt */
-void removeDimRange(Vector, unsigned, unsigned);        /* error gesetzt */
+void removeDims(Vector, long *, long);                  /* sets error */
+void removeDimRange(Vector, unsigned, unsigned);        /* sets error */
 void fft(Vector, double *, double *);
 void hlog(Vector v);
 char *printVec(Vector, char *, unsigned);
@@ -368,26 +368,26 @@ Number dimMax(VecColl, long);
 unsigned constCols(VecColl, long *);
 void colVec(VecColl, long, Vector);
 void scaleAll(VecColl, Number, Number, ScaleOp *);
-void fftRows(VecColl);                                  /* error gesetzt */
+void fftRows(VecColl);                                  /* sets error */
 void removeRowRange(VecColl, unsigned, unsigned);
-void removeColRange(VecColl, unsigned, unsigned);       /* error gesetzt */
+void removeColRange(VecColl, unsigned, unsigned);       /* sets error */
 void replaceRow(VecColl, unsigned, Vector);
 void replaceCol(VecColl, unsigned, Vector);
-void covariance(VecColl, Number **);                    /* error gesetzt */
+void covariance(VecColl, Number **);                    /* sets error */
 void colAsStringVert(VecColl, long, long, long, char *);
 
 /* Public functions of SYMTAB.O */
-Symtab newSymtab(long);                                 /* error gesetzt */
+Symtab newSymtab(long);                                 /* sets error */
 void freeSymtab(Symtab);
-char *addSymbol(Symtab, char *);                        /* error gesetzt */
+char *addSymbol(Symtab, char *);                        /* sets error */
 unsigned numSymbols(Symtab);
 Collection sequence(Symtab);
 char *locateSymbol(Symtab, char *);
-Symtab readSymtab(FILE *);                              /* error gesetzt */
+Symtab readSymtab(FILE *);                              /* sets error */
 void fprintSymbols(Symtab, FILE *);
 
 /* Public functions of BATCH.O */
-void interpret(Collection, Patterns);                   /* error gesetzt */
+void interpret(Collection, Patterns);                   /* sets error */
 
 /* Public functions of EH.O */
 void handleErr(int);
@@ -396,7 +396,7 @@ void genErrorMessage(int, char *);
 /* Public functions of MISC.O */
 void diskToStr(FILE *, char *);
 Collection tokens(char *, char *);
-long flen(FILE *);                                      /* error gesetzt */
+long flen(FILE *);                                      /* sets error */
 char *printnchr(char *, unsigned, char);
 char *strupr(char *);
 char *my_strdup(char *);

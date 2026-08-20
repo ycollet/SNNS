@@ -3,8 +3,8 @@
 #include <ctype.h>
 
 /*****************************************/
-/* Antworte TRUE gdw. u = 2^n fuer eine  */
-/* ganze Zahl n >= 0.                    */
+/* Return TRUE iff u = 2^n for some      */
+/* integer n >= 0.                       */
 /*****************************************/
 Boolean isPowerOf2(unsigned u) {
     if(u == 1) return TRUE;
@@ -17,8 +17,8 @@ Boolean isPowerOf2(unsigned u) {
 
 
 /*****************************************/
-/* Antworte TRUE gdw. u eine Quadratzahl */
-/* ist.                                  */
+/* Return TRUE iff u is a perfect        */
+/* square.                               */
 /*****************************************/
 Boolean isSquare(unsigned u) {
     unsigned sqroot;
@@ -29,13 +29,13 @@ Boolean isSquare(unsigned u) {
 
 
 /*****************************************/
-/* Antworte eine Collection von Strings. */
-/* Jedes Element stellt eine Token von   */
-/* str1 dar.                             */
-/* Die Token sind dabei durch die Zeichen*/
-/* von str2 begrenzt.                    */
-/* antworte NULL, falls zu wenig Speicher*/
-/* verfuegbar.                           */
+/* Return a Collection of strings.       */
+/* Each element represents a token of    */
+/* str1.                                 */
+/* The tokens are delimited by the       */
+/* characters in str2.                   */
+/* Return NULL if not enough memory      */
+/* is available.                         */
 /*****************************************/
 Collection tokens(char *str1, char *str2) {
     Collection answer;
@@ -43,7 +43,7 @@ Collection tokens(char *str1, char *str2) {
 
     if(! (answer = newColl())) return NULL;
 
-    /* Lese die Token der aktuellen Zeile */
+    /* Read the tokens of the current line */
     if(tok = strtok(str1, str2))
         do {
             if(! add(answer, tok)) {
@@ -73,8 +73,8 @@ void diskToStr(FILE *f, char *s) {
 
 
 /*******************************************/
-/* Antworte die Laenge von File f.         */
-/* Setze Variable error.                   */
+/* Return the length of file f.            */
+/* Sets the global variable error.         */
 /*******************************************/
 long flen(FILE *f) {
     long answer;
@@ -90,9 +90,9 @@ long flen(FILE *f) {
 
 
 /*****************************************************/
-/* Setze die ersten num Zeichen von s auf ch und     */
-/* antworte einen Pointer aufs erste Zeichen         */
-/* dahinter.                                         */
+/* Set the first num characters of s to ch and       */
+/* return a pointer to the first character after     */
+/* them.                                              */
 /*****************************************************/
 char *printnchr(char *cp, unsigned num, char ch) {
     unsigned i;
@@ -103,9 +103,9 @@ char *printnchr(char *cp, unsigned num, char ch) {
 
 
 /*****************************************************/
-/* Antworte eine Kopie von str. Der Speicher fuer    */
-/* diese Kopie wird mittels malloc() angefordert.    */
-/* Antworte NULL, bei zuwenig Speicher.              */
+/* Return a copy of str. The memory for this copy    */
+/* is requested via malloc().                        */
+/* Return NULL if there is not enough memory.        */
 /*****************************************************/
 char *my_strdup(char *str) {
     char *answer;
@@ -117,8 +117,8 @@ char *my_strdup(char *str) {
 
 
 /*****************************************************/
-/* Wandle alle Kleinbuchstaben des Strings str in    */
-/* Grossbuchstaben um. Antworte str.                 */
+/* Convert all lowercase letters of string str to    */
+/* uppercase letters. Return str.                    */
 /*****************************************************/
 char *strupr(char *str) {
     char *cp;
@@ -131,8 +131,7 @@ char *strupr(char *str) {
 
 
 /*********************************************************/
-/* Antworte TRUE genau dann, wenn die Strings s1 und s2  */
-/* gleich sind.                                          */
+/* Return TRUE iff the strings s1 and s2 are equal.      */
 /*********************************************************/
 Boolean streq(char *s1, char *s2) {
     return strcmp(s1, s2) == 0;
@@ -140,9 +139,9 @@ Boolean streq(char *s1, char *s2) {
 
 
 /*************************************************/
-/* Ueberspringe alle Whitespace Character        */
-/* (Blanks, Newlines, Tabs) im File f bis zum    */
-/* naechsten Non-Whitespace Character.           */
+/* Skip all whitespace characters (blanks,       */
+/* newlines, tabs) in file f up to the next      */
+/* non-whitespace character.                     */
 /*************************************************/
 void skipWhiteSpace(FILE *f) {
     char c;
@@ -153,11 +152,11 @@ void skipWhiteSpace(FILE *f) {
 
 
 /*************************************************/
-/* Ueberspringe alle Whitespace Character        */
-/* (Blanks, Newlines, Tabs) im File f bis zum    */
-/* naechsten Non-Whitespace Character. Erhoehe   */
-/* rowCount dabei um die Anzahl gelesener        */
-/* Newlines.                                     */
+/* Skip all whitespace characters (blanks,       */
+/* newlines, tabs) in file f up to the next      */
+/* non-whitespace character. Increment rowCount  */
+/* by the number of newlines read in the         */
+/* process.                                      */
 /*************************************************/
 void skipSpaceAndCountNl(FILE *f) {
     char c;
@@ -166,14 +165,14 @@ void skipSpaceAndCountNl(FILE *f) {
         if((c = fgetc(f)) == '\n') rowCount++;
     } while(isspace(c));
     if(c != EOF)
-        fseek(f, -1L, 1);             /* setze ein Zeichen zurueck */
+        fseek(f, -1L, 1);             /* back up one character */
 }          /* skipSpaceAndCountNl */
 
 
 /**************************************************/
-/* Antworte mit TRUE gdw. ab der aktuellen File   */
-/* Position nur noch white space kommt.           */
-/* Ueberlese den white space.                     */
+/* Return TRUE iff, from the current file         */
+/* position onward, only white space follows.     */
+/* Skip over the white space.                     */
 /**************************************************/
 Boolean atEnd(FILE *f) {
     char ch;
@@ -186,12 +185,12 @@ Boolean atEnd(FILE *f) {
 
 
 /**************************************************/
-/* Ueberlese alle white space Zeichen bis zum     */
-/* naechsten Zeichen, das kein white space ist.   */
-/* Erhoehe dabei rowCount um die Anzahl gelesener */
-/* Newlines.                                      */
-/* Antworte TRUE gdw. das erste Non white space   */
-/* Zeichen EOF ist.                               */
+/* Skip over all white space characters up to     */
+/* the next character that is not white space.    */
+/* Increment rowCount by the number of newlines   */
+/* read in the process.                           */
+/* Return TRUE iff the first non-white-space      */
+/* character is EOF.                              */
 /**************************************************/
 Boolean atEndNl(FILE *f) {
     char ch;
@@ -204,10 +203,10 @@ Boolean atEndNl(FILE *f) {
 
 
 /**************************************************/
-/* Antworte einen String, der die Matrix mat dar- */
-/* stellt.                                        */
-/* Antworte NULL, falls nicht genuegend Speicher  */
-/* vorhanden.                                     */
+/* Return a string that represents the matrix     */
+/* mat.                                           */
+/* Return NULL if not enough memory is            */
+/* available.                                     */
 /**************************************************/
 char *matAsString(Number **mat, unsigned rows, unsigned cols) {
     unsigned i, j, lineLength;
@@ -216,7 +215,7 @@ char *matAsString(Number **mat, unsigned rows, unsigned cols) {
     lineLength = NUM_OF_PATS_STR_MAXLEN + cols * (NUMBER_STR_LENGTH + 2) + 1;
     if(! (answer = (char *) malloc((rows + 2) * lineLength + 1)))
         return NULL;
-    /* schreibe die Headline */
+    /* write the headline */
     cp = answer;
     cp = printnchr(cp, NUM_OF_PATS_STR_MAXLEN, ' ');
     *cp++ = '|';
@@ -248,10 +247,10 @@ char *matAsString(Number **mat, unsigned rows, unsigned cols) {
 
 
 /*******************************************************/
-/* Fuelle so mit Werten, die eine Abbildung des Werte- */
-/* bereichs from in den Wertebereich to erlauben. so   */
-/* muss dann beim Umrechnen eines Wertes in den neuen  */
-/* Bereich angegeben werden.                           */
+/* Fill so with values that allow a mapping from the   */
+/* value range "from" to the value range "to". so must */
+/* then be supplied when converting a value into the   */
+/* new range.                                          */
 /*******************************************************/
 void getScaleOp(ScaleOp *so, Range from, Range to) {
     float stretchFactor;

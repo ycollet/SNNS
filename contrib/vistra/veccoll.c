@@ -3,7 +3,7 @@
 
 
 /*******************************************************/
-/* Antworte die Anzahl der Zeilenvektoren von vc.      */
+/* Returns the number of row vectors of vc.            */
 /*******************************************************/
 long numberOfRows(VecColl vc) {
     return size(vc);
@@ -11,7 +11,7 @@ long numberOfRows(VecColl vc) {
 
 
 /*******************************************************/
-/* Antworte die Anzahl der Spaltenvektoren von vc.     */
+/* Returns the number of column vectors of vc.         */
 /*******************************************************/
 long numberOfCols(VecColl vc) {
     return dims((Vector) at(vc, 1));
@@ -19,10 +19,10 @@ long numberOfCols(VecColl vc) {
 
 
 /*******************************************************/
-/* Antworte die Anzahl konstanter Dimensionen von vc.  */
-/* Schreibe die Nummern dieser Dimensionen in auf-     */
-/* steigender Folge ins Feld lp und setze ans Ende eine*/
-/* 0.                                                  */
+/* Returns the number of constant dimensions of vc.    */
+/* Writes the numbers of these dimensions in            */
+/* ascending order into the array lp and puts a 0      */
+/* at the end.                                         */
 /*******************************************************/
 unsigned constCols(VecColl vc, long *lp) {
     long i, nvecs, ndims;
@@ -39,8 +39,8 @@ unsigned constCols(VecColl vc, long *lp) {
 
 
 /*******************************************************/
-/* Antworte den Mittelwert der Elemente aller Vektoren,*/
-/* die durch vc gegeben sind.                          */
+/* Returns the average of the elements of all vectors, */
+/* given by vc.                                        */
 /*******************************************************/
 Number overallAvg(VecColl vc) {
     long i, numVectors;
@@ -55,8 +55,8 @@ Number overallAvg(VecColl vc) {
 
 
 /*******************************************************/
-/* Antworte das kleinste Element aller Vektoren        */
-/* aus vc.                                             */
+/* Returns the smallest element of all vectors         */
+/* in vc.                                              */
 /*******************************************************/
 Number overallMin(VecColl vc) {
     long numVectors, i;
@@ -71,8 +71,8 @@ Number overallMin(VecColl vc) {
 
 
 /*******************************************************/
-/* Antworte das groesste Element aller Vektoren        */
-/* aus vc.                                             */
+/* Returns the largest element of all vectors          */
+/* in vc.                                              */
 /*******************************************************/
 Number overallMax(VecColl vc) {
     long numVectors, i;
@@ -87,7 +87,7 @@ Number overallMax(VecColl vc) {
 
 
 /*******************************************************/
-/* Antworte die globale Standardabweichung von vc.     */
+/* Returns the overall standard deviation of vc.       */
 /*******************************************************/
 Number overallStddev(VecColl vc) {
     long i, j, nvecs, ncols;
@@ -113,8 +113,8 @@ Number overallStddev(VecColl vc) {
 
 
 /*******************************************************/
-/* Antworte den Mittelwert der dim-ten Elemente aller  */
-/* Vektoren, die durch vc gegeben sind.                */
+/* Returns the average of the dim-th elements of all   */
+/* vectors given by vc.                                */
 /*******************************************************/
 Number dimAvg(VecColl vc, long dim) {
     long i, numVectors;
@@ -129,8 +129,8 @@ Number dimAvg(VecColl vc, long dim) {
 
 
 /*******************************************************/
-/* Antworte das kleinste Element, das irgendein Vektor */
-/* aus vc in der Dimension dim enthaelt.               */
+/* Returns the smallest element that any vector        */
+/* in vc contains in dimension dim.                    */
 /*******************************************************/
 Number dimMin(VecColl vc, long dim) {
     long i, numVectors;
@@ -146,8 +146,8 @@ Number dimMin(VecColl vc, long dim) {
 
 
 /*******************************************************/
-/* Antworte das groesste Element, das irgendein Vektor */
-/* aus vc in der Dimension dim enthaelt.               */
+/* Returns the largest element that any vector         */
+/* in vc contains in dimension dim.                    */
 /*******************************************************/
 Number dimMax(VecColl vc, long dim) {
     long i, numVectors;
@@ -163,11 +163,11 @@ Number dimMax(VecColl vc, long dim) {
 
 
 /*******************************************************/
-/* Setze das i-te Element von v auf das Skalar, das man*/
-/* erhaelt, wenn auf den i-ten Zeilenvektor von vc die */
-/* Funktion vecFunc angewendet wird.                   */
-/* vecFunc muss eine Number antworten und darf nur     */
-/* einen Vektor als einzigen Parameter benutzen.       */
+/* Sets the i-th element of v to the scalar obtained   */
+/* by applying the function vecFunc to the i-th row    */
+/* vector of vc.                                       */
+/* vecFunc must return a Number and may only take a    */
+/* vector as its single parameter.                     */
 /*******************************************************/
 void collectRows(vc, vecFunc, v)
 VecColl vc;
@@ -183,11 +183,11 @@ Vector v;
 
 
 /*******************************************************/
-/* Setze das i-te Element von v auf das Skalar, das man*/
-/* erhaelt, wenn auf den i-ten Spaltenvektor von vc die*/
-/* Funktion vecFunc angewendet wird.                   */
-/* vecFunc muss eine Number antworten und darf nur     */
-/* einen Vektor als einzigen Parameter benutzen.       */
+/* Sets the i-th element of v to the scalar obtained   */
+/* by applying the function vecFunc to the i-th        */
+/* column vector of vc.                                */
+/* vecFunc must return a Number and may only take a    */
+/* vector as its single parameter.                     */
 /*******************************************************/
 void collectCols(vc, vecFunc, v)
 VecColl vc;
@@ -210,9 +210,9 @@ Vector v;
 
 
 /*******************************************************/
-/* Rufe die Funktion vecFunc fuer jeden Zeilenvektor   */
-/* von vc auf. vecFunc erwartet diesen Vektor als      */
-/* einzigen Parameter.                                 */
+/* Calls the function vecFunc for every row vector     */
+/* of vc. vecFunc expects this vector as its only      */
+/* parameter.                                          */
 /*******************************************************/
 void doRows(vc, vecFunc)
 VecColl vc;
@@ -227,10 +227,10 @@ void (*vecFunc)(Vector);
 
 
 /*******************************************************/
-/* Fuelle Vektor v mit dem dim-ten Spaltenvektor von   */
-/* vc. Die Dimension von v muss groesser oder gleich   */
-/* der Anzahl Zeilen von vc sein. Eine Ueberpruefung   */
-/* findet nicht statt.                                 */
+/* Fills vector v with the dim-th column vector of     */
+/* vc. The dimension of v must be greater than or      */
+/* equal to the number of rows of vc. No check is      */
+/* performed for this.                                 */
 /*******************************************************/
 void colVec(VecColl vc, long dim, Vector v) {
     long numVectors, i;
@@ -242,11 +242,11 @@ void colVec(VecColl vc, long dim, Vector v) {
 
 
 /*********************************************************/
-/* Addiere/subtrahiere/multipliziere oder dividiere jeden*/
-/* Zeilenvektor von vc mit der Konstanten an             */
-/* der entsprechenden Position in v.                     */
-/* Die Rechenart ist durch Character c gegeben.          */
-/* Erlaubte Werte von c: '+', '-', '*' oder '/'.         */
+/* Adds/subtracts/multiplies or divides each             */
+/* row vector of vc with the constant at the             */
+/* corresponding position in v.                          */
+/* The operation is given by character c.                */
+/* Allowed values of c: '+', '-', '*' or '/'.            */
 /*********************************************************/
 void compScalarsRow(VecColl vc, Vector v, char c) {
     long numVectors, i;
@@ -274,11 +274,11 @@ void compScalarsRow(VecColl vc, Vector v, char c) {
 
 
 /*********************************************************/
-/* Addiere/subtrahiere/multipliziere oder dividiere jeden*/
-/* Spaltenvektor von vc mit der Konstanten an            */
-/* der entsprechenden Position in v.                     */
-/* Die Rechenart ist durch Character c gegeben.          */
-/* Erlaubte Werte von c: '+', '-', '*' oder '/'.         */
+/* Adds/subtracts/multiplies or divides each             */
+/* column vector of vc with the constant at the          */
+/* corresponding position in v.                          */
+/* The operation is given by character c.                */
+/* Allowed values of c: '+', '-', '*' or '/'.            */
 /*********************************************************/
 void compScalarsCol(VecColl vc, Vector v, char c) {
     long numVectors, i;
@@ -306,14 +306,14 @@ void compScalarsCol(VecColl vc, Vector v, char c) {
 
 
 /****************************************************/
-/* Skaliere alle Elemente von vc auf den Werte-     */
-/* bereich von from bis to.                         */
+/* Scales all elements of vc to the value range     */
+/* from from to to.                                 */
 /****************************************************/
 void scaleAll(VecColl vc, Number from, Number to, ScaleOp *sop) {
     Range old, new;
     long numVectors, i;
 
-    /* Berechne den bisherigen Wertebereich */
+    /* compute the previous value range */
     old.lowest = overallMin(vc);
     old.highest = overallMax(vc);
 
@@ -328,9 +328,9 @@ void scaleAll(VecColl vc, Number from, Number to, ScaleOp *sop) {
 
 
 /*****************************************************/
-/* Fuehre auf allen Zeilenvektoren von vc eine       */
-/* Fast Fourier Transformation durch.                */
-/* Variable error wird gesetzt.                      */
+/* Performs a Fast Fourier Transform on all          */
+/* row vectors of vc.                                */
+/* Sets the global variable error.                   */
 /*****************************************************/
 void fftRows(VecColl vc) {
     double *real, *imag;
@@ -352,8 +352,8 @@ void fftRows(VecColl vc) {
 
 
 /*****************************************************/
-/* Entferne alle Zeilenvektoren von vc von Zeile     */
-/* from bis Zeile to einschliesslich.                */
+/* Removes all row vectors of vc from row            */
+/* from to row to inclusive.                         */
 /*****************************************************/
 void removeRowRange(VecColl vc, unsigned from, unsigned to) {
     freeFromTo(vc, from, to, (void(*)(void*))freeVector);
@@ -361,9 +361,9 @@ void removeRowRange(VecColl vc, unsigned from, unsigned to) {
 
 
 /*****************************************************/
-/* Entferne alle Spaltenvektoren von vc von Spalte   */
-/* from bis Spalte to einschliesslich.               */
-/* Variable error wird gesetzt.                      */
+/* Removes all column vectors of vc from column      */
+/* from to column to inclusive.                      */
+/* Sets the global variable error.                   */
 /*****************************************************/
 void removeColRange(VecColl vc, unsigned from, unsigned to) {
     unsigned numVectors, i;
@@ -379,8 +379,8 @@ void removeColRange(VecColl vc, unsigned from, unsigned to) {
 
 
 /******************************************************/
-/* Ersetze den Inhalt des row-ten Zeilenvektors durch */
-/* den Inhalt von v.                                  */
+/* Replaces the contents of the row-th row vector     */
+/* with the contents of v.                            */
 /******************************************************/
 void replaceRow(VecColl vc, unsigned row, Vector v) {
     copyVec((Vector) at(vc, row), v);
@@ -388,8 +388,8 @@ void replaceRow(VecColl vc, unsigned row, Vector v) {
 
 
 /******************************************************/
-/* Ersetze den Inhalt des col-ten Spaltenvektors durch*/
-/* den Inhalt von v.                                  */
+/* Replaces the contents of the col-th column vector  */
+/* with the contents of v.                            */
 /******************************************************/
 void replaceCol(VecColl vc, unsigned col, Vector v) {
     unsigned nrows, i;
@@ -401,9 +401,9 @@ void replaceCol(VecColl vc, unsigned col, Vector v) {
 
 
 /******************************************************/
-/* Schreibe die Elemente from bis to des col-ten      */
-/* Spaltenvektors von vc nach buf.                    */
-/* Jedes Element steht in einer Zeile des Strings.    */
+/* Writes the elements from from to to of the         */
+/* col-th column vector of vc into buf.               */
+/* Each element is on its own line of the string.     */
 /******************************************************/
 void colAsStringVert(VecColl vc, long col, long from, long to, char *buf) {
     long i;
@@ -417,11 +417,11 @@ void colAsStringVert(VecColl vc, long col, long from, long to, char *buf) {
 
 
 /******************************************************/
-/* Berechne die Kovarianz-Matrix der Vektoren von vc. */
-/* Der Speicher fuer die Matrix muss vom Aufrufer     */
-/* allokiert werden und ein Pointer durch Parameter   */
-/* covMatrix uebergeben werden.                       */
-/* Variable error wird gesetzt.                       */
+/* Computes the covariance matrix of the vectors of   */
+/* vc. The memory for the matrix must be allocated    */
+/* by the caller, and a pointer must be passed via    */
+/* the parameter covMatrix.                           */
+/* Sets the global variable error.                    */
 /******************************************************/
 void covariance(VecColl vc, Number **covMatrix) {
     int i, j, k;
@@ -430,17 +430,17 @@ void covariance(VecColl vc, Number **covMatrix) {
     Number *mean;
     Vector vec;
 
-    /* berechne die Mittelwerte der einzelnen Spalten (Dimensionen) */
+    /* compute the averages of the individual columns (dimensions) */
     if(! (mean = (Number *) malloc(sizeof(*mean) * n))) error(1);
     for(i = 0; i < n; i++)
         mean[i] = dimAvg(vc, (long) i+1);
 
-    /* initialisiere covMatrix */
+    /* initialize covMatrix */
     for(i = 0; i < n; i++)
         for(j = 0; j <= i; j++)
             covMatrix[i][j] = 0.0;
 
-    /* berechne eine Haelfte der Matrix */
+    /* compute one half of the matrix */
     for(k = 0; k < m; k++) {
         vec = (Vector) at(vc, k+1);
 
@@ -450,7 +450,7 @@ void covariance(VecColl vc, Number **covMatrix) {
                                    (atDim(vec, j+1) - mean[j]);
     }
 
-    /* spiegel die Matrix an der Diagonalen */
+    /* mirror the matrix across the diagonal */
     for(i = 0; i < n; i++) {
         for(j = 0; j < i; j++) {
             covMatrix[i][j] /= m;

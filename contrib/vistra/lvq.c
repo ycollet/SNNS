@@ -1,6 +1,6 @@
 /*****************************************************/
-/* Schreibe die Patterns p im LVQ-Format nach File f.*/
-/* Variable error wird gesetzt.                      */
+/* Write the patterns p in LVQ format to file f.     */
+/* Sets the global variable error.                   */
 /*****************************************************/
 void writeLVQ(Patterns p, FILE *f) {
     lvqWrite(p, f, TRUE);
@@ -11,9 +11,9 @@ void writeLVQ(Patterns p, FILE *f) {
 
 
 /*****************************************************/
-/* Lese das Pattern File f ein, das im LVQ-Format    */
-/* vorliegt. Antworte die Patterns.                  */
-/* Variable error wird gesetzt.                      */
+/* Read in the pattern file f, which is in LVQ       */
+/* format. Return the patterns.                      */
+/* Sets the global variable error.                   */
 /*****************************************************/
 Patterns readLVQ(FILE *f) {
     Patterns answer;
@@ -35,7 +35,7 @@ Patterns readLVQ(FILE *f) {
 
     vecCount = 0L;
     while(! atEndNl(f)) {
-        /* lese Eingabevektor ein */
+        /* read in the input vector */
         if(! (v = newVector(answer->inputDims))) errorR(1,NULL);
         for(i = 1L; i <= answer->inputDims; i++) {
             if(fscanf(f, "%f", &n) != 1) {
@@ -49,7 +49,7 @@ Patterns readLVQ(FILE *f) {
         if(! add(answer->inputs, v)) errorR(1,NULL);
         vecCount++;
 
-        /* lese Klassen-Symbol ein */
+        /* read in the class symbol */
         if(fscanf(f, CLASS_SCANF_FORMAT, buf) != 1) {
             strcpy(errorInfo, "Class name expected!");
             freePatterns(answer);
@@ -60,7 +60,7 @@ Patterns readLVQ(FILE *f) {
         if(! add(answer->classes, copy)) errorR(1,NULL);
     }          /* while */
 
-    /* teste, ob mindestens 1 Eingabevektor gelesen wurde. */
+    /* check whether at least 1 input vector was read. */
     if(vecCount == 0L) {
         strcpy(errorInfo, "No input pattern!");
         freePatterns(answer);
@@ -79,11 +79,10 @@ Patterns readLVQ(FILE *f) {
 
 
 /*****************************************************/
-/* Lese die Vektoren des LVQ-Files f ein.            */
-/* inVecs ist auf TRUE zu setzen, wenn es sich bei   */
-/* den Vektoren um Eingabevektoren handelt, bei Aus- */
-/* gabevektoren auf FALSE.                           */
-/* Variable error wird gesetzt.                      */
+/* Read in the vectors of the LVQ file f.            */
+/* inVecs should be set to TRUE if the vectors are   */
+/* input vectors, and to FALSE for output vectors.   */
+/* Sets the global variable error.                   */
 /*****************************************************/
 void lvqRead(Patterns p, FILE *f, Boolean inVecs) {
     VecColl newVecs;
@@ -102,7 +101,7 @@ void lvqRead(Patterns p, FILE *f, Boolean inVecs) {
     if(! (newVecs = newColl())) error(1);
     vecCount = 0L;
     while(! atEndNl(f)) {
-        /* lese Eingabevektor ein */
+        /* read in the input vector */
         if(! (v = newVector(ndims))) error(1);
         for(i = 1L; i <= ndims; i++) {
             if(fscanf(f, "%f", &n) != 1) {
@@ -116,7 +115,7 @@ void lvqRead(Patterns p, FILE *f, Boolean inVecs) {
         if(! add(newVecs, v)) error(1);
         vecCount++;
 
-        /* lese Klassen-Symbol ein */
+        /* read in the class symbol */
         if(fscanf(f, CLASS_SCANF_FORMAT, buf) != 1) {
             strcpy(errorInfo, "Class name expected!");
             freeDeep(newVecs, (void(*)(void*))freeVector);
@@ -124,7 +123,7 @@ void lvqRead(Patterns p, FILE *f, Boolean inVecs) {
         }
     }          /* while */
 
-    /* werfe die bisherigen Vektoren weg */
+    /* discard the previous vectors */
     if(inVecs) {
         freeDeep(p->inputs, (void(*)(void*))freeVector);
         p->inputs = newVecs;
@@ -140,9 +139,9 @@ void lvqRead(Patterns p, FILE *f, Boolean inVecs) {
 
 
 /************************************************************/
-/* Falls inVecs TRUE ist, dann schreibe die Eingabevektoren */
-/* von p im LVQ-Format nach f, sonst die Ausgabevektoren.   */
-/* Variable error wird gesetzt.                             */
+/* If inVecs is TRUE, then write the input vectors of p     */
+/* in LVQ format to f, otherwise the output vectors.        */
+/* Sets the global variable error.                          */
 /************************************************************/
 void lvqWrite(Patterns p, FILE *f, Boolean inVecs) {
     Boolean symbols;

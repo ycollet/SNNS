@@ -191,7 +191,7 @@ int LOOP_EvalCountLoop() {
 
     if(! AbortLoop) {
         if( ! (LastToken->Value).Loop->LoopHeader->ActIter) {
-            /*** neu, 26.11. */
+            /*** new, 26.11. */
             if(NestingDepth)                /* beginning to evaluate outer loop - insert ';' */
                 MissingSemi = FALSE;
             if(MissingSemi) {
@@ -264,7 +264,7 @@ int LOOP_EvalCountLoop() {
         } else {
             EvalLoopMode = FALSE;
             AbortLoop = FALSE;
-            /*** neu, 26.11. */
+            /*** new, 26.11. */
             NestingDepth  --;   /* decrement depth of nested loops and conditional statements */
             return END;
             /*       return LOOP_GetNextToken();  */
@@ -347,7 +347,7 @@ int LOOP_EvalDo() {
         ConditionMode = FALSE;                        /* next tokens are got from loop body */
         /* LastToken points to  DO, set  it to WHILE, FOR, or FOREACH */
         Evaluated = FALSE;
-        /*** neu, 4..12. -- if war  vorher nur fuer WHILE */
+        /*** new, 4.12. -- if was previously only for WHILE */
         if(STACKBEGIN(LastToken->NextToken->Token))/*begin to execute loop body immediately */
             if(ConditionValue)                          /* condition == TRUE, more iterations */
                 if(! (LastToken->NextToken->Value).Loop->Continue) {
@@ -361,9 +361,9 @@ int LOOP_EvalDo() {
         else
             LastToken = LastToken->NextToken;
     }
-    /*** neu, 5.12. */
+    /*** new, 5.12. */
     FirstValue = FALSE;                       /* continue with stmts, increment next time */
-    /*** neu, 5.12. */
+    /*** new, 5.12. */
     return LOOP_GetNextStackValue();      /* 2nd. entry, DO NOT RETURN "DO" (next symbol) */
 }
 
@@ -429,7 +429,7 @@ int LOOP_EvalEnd() {
                 NestingDepth  --;                            /* decrement depth of nested loops */
                 return END;                /* while loop: parser sees a sequence of while loops */
             } else {                 /* do not decrement NestingDepth - continue in same loop */
-                /*** neu, 26.11. */
+                /*** new, 26.11. */
                 MissingSemi = TRUE;
                 return LOOP_GetNextStackValue(); /* for, foreach: iterate loop body, ignore end */
             }
@@ -757,9 +757,9 @@ SymbolType Type;                                                          /* tok
             (void) printf("******bug: not in condition mode at DO\n");
         break;
     case THEN:                                        /* set pointer back to IF or ELSEIF */
-        /*** neu, 3.12. */
+        /*** new, 3.12. */
         LastToken = ((LastToken->NextToken = TPtr)->NextToken = NestedBackPtr->TokenPtr);
-        /*** neu, 3.12. */
+        /*** new, 3.12. */
         break;              /* do not remove ptr. to IF or ELSEIF from stack (wait for END) */
     case END:
         LOOP_SetEndBackPtr(TPtr);

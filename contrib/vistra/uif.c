@@ -1,5 +1,5 @@
 /****************************************************/
-/* Variable error wird gesetzt.                     */
+/* Sets the global variable error.                  */
 /****************************************************/
 static void fillPatternView() {
     Dimension width, height;
@@ -13,12 +13,12 @@ static void fillPatternView() {
         XtAddCallback(outputToggle, XtNcallback, toggle, NULL);
     }
 
-    /* Fuelle die Widgets mit neuem Inhalt */
+    /* Fill the widgets with new content */
     firstVec = firstDim = 1;
     usedRows = min(num(pats), visVecs);
     usedCols = min(numCols(pats), visDims);
 
-    /* Initialisiere die Skalar-Vektoren */
+    /* Initialize the scalar vectors */
     if(vert) freeVector(vert);
     if(horiz) freeVector(horiz);
     if(! (vert = newVector(num(pats)))) error(1);
@@ -36,11 +36,11 @@ static void fillPatternView() {
     updateScalarsVert();
     updateScalarsHoriz();
 
-    /* Mache bestimmte Funktionen aktiv/deaktiv, je nachdem, ob Ausgabe- */
-    /* vektoren existieren oder nicht. */
+    /* Activate/deactivate certain functions, depending on whether     */
+    /* output vectors exist or not.                                     */
     setActivation(pats);
 
-    /* Oeffne neues Log-File */
+    /* Open new log file */
     if(app_data.log) {
         char *buf;
         fclose(lf);
@@ -55,17 +55,17 @@ static void fillPatternView() {
         free(buf);
     }
     logFirstTime = TRUE;
-    time(&lastChanged);            /* setze Zeitstempel neu */
+    time(&lastChanged);            /* reset timestamp */
 
     error = 0;
 }       /* fillPatternView */
 
 
 /***********************************************************/
-/* Variable error wird gesetzt.                            */
+/* Sets the global variable error.                         */
 /***********************************************************/
 static void changeInOut() {
-    /* Initialisiere die Skalar-Vektoren */
+    /* Initialize the scalar vectors */
     if(vert) freeVector(vert);
     if(horiz) freeVector(horiz);
     if(! (vert = newVector(num(pats)))) error(1);
@@ -92,20 +92,20 @@ static void changeInOut() {
 
 
 /*************************************************************/
-/* Speicher in x und y die Koordinaten relativ zum Root      */
-/* Window, die ein Popup Widget haben muss, um vor dem       */
-/* Widget w positioniert zu werden.                          */
+/* Store in x and y the coordinates, relative to the root    */
+/* window, that a popup widget must have in order to be      */
+/* positioned in front of widget w.                          */
 /*************************************************************/
 static void getPopupPosition(Widget w, Position *x, Position *y) {
     Dimension width, height;
 
-    /* Berechne Koordinaten des Mittelpunkts von w in x und y */
+    /* Compute the coordinates of the center of w in x and y */
     XtVaGetValues(w,
                   XtNwidth, &width,
                   XtNheight, &height,
                   NULL);
 
-    /* Berechne Koordinaten in Bezug auf das Root Window */
+    /* Compute coordinates relative to the root window */
     XtTranslateCoords(w,
                       (Position) width/4,
                       (Position) height/4,
@@ -130,10 +130,10 @@ static void popupErrDlg(Widget w, char *title, char *message) {
 
 
 /***********************************************/
-/* Oeffne die Dialogbox str2DlgShell, die vom  */
-/* Benutzer zwei Strings erfragt. Der Benutzer */
-/* hat die Moeglichkeit, den Vorgang ueber     */
-/* 'Cancel' abzubrechen.                       */
+/* Open the dialog box str2DlgShell, which     */
+/* asks the user for two strings. The user     */
+/* has the option to cancel the operation via  */
+/* 'Cancel'.                                   */
 /***********************************************/
 static void popupStr2Dlg(w, title, headline, item1, item2, default1, default2,
                          okButtonLabel, callback)
@@ -162,9 +162,9 @@ XtCallbackProc callback;
 
 
 /***********************************************/
-/* Setze val1 und val2 auf die Strings, die in */
-/* den beiden Text-Widgets der str2DlgShell    */
-/* momentan enthalten sind.                    */
+/* Set val1 and val2 to the strings currently  */
+/* contained in the two text widgets of the    */
+/* str2DlgShell.                               */
 /***********************************************/
 static void getStr2DlgValues(char **val1, char **val2) {
     XtVaGetValues(str2Text1, XtNstring, val1, NULL);
@@ -173,9 +173,9 @@ static void getStr2DlgValues(char **val1, char **val2) {
 
 
 /***********************************************/
-/* Aktiviere/deaktiviere Menupunkte, Toggles   */
-/* etc., je nachdem, ob p Ausgabevektoren be-  */
-/* sitzt oder nicht.                           */
+/* Activate/deactivate menu entries, toggles,  */
+/* etc., depending on whether p has output     */
+/* vectors or not.                             */
 /***********************************************/
 static void setActivation(Patterns p) {
     Boolean loaded, outputsExist, classNamesExist;
@@ -223,16 +223,16 @@ static void setActivation(Patterns p) {
 
 
 /*********************************************************/
-/* Antworte das Format namens name. Antworte NULL, falls */
-/* es sich um das N01 oder LVQ-Format handelt.           */
-/* Variable error wird gesetzt.                          */
+/* Return the format named name. Return NULL if it is    */
+/* the N01 or LVQ format.                                */
+/* Sets the global variable error.                       */
 /*********************************************************/
 static Format nameToFormat(char *name) {
     long pos;
 
     pos = detectPos(formatNames, name, (Boolean(*)(void*,void*))streq);
     if(pos < 2L) {
-        /* kein Format mit diesem Suffix */
+        /* no format with this suffix */
         sprintf(errorInfo, "Unknown format %s!", name);
         errorR(22,NULL);
     }
@@ -244,7 +244,7 @@ static Format nameToFormat(char *name) {
 
 
 /**********************************************************/
-/* Setze Variable error.                                  */
+/* Sets the global variable error.                        */
 /**********************************************************/
 static Vector scalarVec() {
     return (scalarSwitch==FILL_VERT ? scalarsVertAsVec() : scalarsHorizAsVec());
@@ -252,7 +252,7 @@ static Vector scalarVec() {
 
 
 /******************************************************/
-/* Variable error wird gesetzt.                       */
+/* Sets the global variable error.                    */
 /******************************************************/
 static Vector scalarsVertAsVec() {
     String s;
@@ -283,10 +283,10 @@ static Vector scalarsVertAsVec() {
 
 
 /******************************************************/
-/* Antworte einen Vektor, der als Elemente die Numbers*/
-/* enthaelt, deren String-Repraesentationen in den    */
-/* Text Widgets scalarsHoriz[] stehen.                */
-/* Variable error wird gesetzt.                       */
+/* Return a vector whose elements are the Numbers     */
+/* whose string representations are contained in the  */
+/* text widgets scalarsHoriz[].                       */
+/* Sets the global variable error.                    */
 /******************************************************/
 static Vector scalarsHorizAsVec() {
     int i;
@@ -316,7 +316,7 @@ static Vector scalarsHorizAsVec() {
 
 
 /*********************************************************/
-/* Mache das Shell-Widget w groessenunveraenderlich.     */
+/* Make the shell widget w non-resizable.                */
 /*********************************************************/
 static void fixSize(Widget sw) {
     Dimension w, h;

@@ -247,7 +247,7 @@ static NetID kpm_putNetDescr( NetDescr *n ) {
         ksh_setUnitOutput           ( unit_no, u[u_no].output       );
         ksh_setUnitBias             ( unit_no, u[u_no].bias         );
 
-        if( unit_no != u_no+1 )  /* ERROR !!?  vgl. krio_readUnitDefnitions  */;
+        if( unit_no != u_no+1 )  /* ERROR !!?  cf. krio_readUnitDefnitions  */;
 
         if( u[u_no].name != NULL ) ksh_setUnitName( unit_no, u[u_no].name );
 
@@ -461,7 +461,7 @@ void kpm_sortNets( CmpFct netcmp ) {
     sorted = last = firstUsedNet;
 
     firstUsedNet = firstUsedNet->usedSucc;
-    sorted->usedSucc = NULL; /* Ende der sort. Liste */
+    sorted->usedSucc = NULL; /* End of the sorted list */
 
     while( firstUsedNet != NULL ) {
         net = firstUsedNet;
@@ -517,7 +517,7 @@ kpm_err kpm_deleteNet( NetID id ) {
 /* -------------------------------------------------------------------------- */
 
 /* --- kpm_freeNetDescr( NetDescr *n ) -------------------------------------- */
-/* L"oscht den Speicher nach dem Benutzen des Descriptors (weights, units)    */
+/* Frees the memory after using the descriptor (weights, units)              */
 /*                                                           masch 12.02.94  */
 
 void kpm_freeNetDescr( NetDescr *n ) {

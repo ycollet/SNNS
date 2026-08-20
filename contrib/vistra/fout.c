@@ -1,15 +1,14 @@
 static Boolean numPatsWritten, inDimsWritten, outDimsWritten;
-/* TRUE gdw. die entsprechenden Werte   */
-/* bereits geschrieben wurden.          */
+/* TRUE iff the corresponding values     */
+/* have already been written.            */
 static Collection patch;
-/* patch enthaelt die File-Positionen, an denen die Dimensionalitaet der */
-/* Ausgabevektoren ausgegeben wurde.                                     */
-/* An diesen File-Positionen muss eventuell eine 0 in eine 1 umgewandelt */
-/* werden, falls anstatt Ausgabevektoren die Klassennummern verwendet    */
-/* wurden.                                                               */
+/* patch contains the file positions at which the dimensionality of the  */
+/* output vectors was written.                                          */
+/* At these file positions, a 0 may have to be changed to a 1 if class   */
+/* numbers were used instead of output vectors.                         */
 static Boolean classNosAsOutputs;
-/* TRUE gdw. eine Klassennummer anstelle eines Ausgabevektors (weil      */
-/* keine existieren) geschrieben wurde.                                  */
+/* TRUE iff a class number was written in place of an output vector      */
+/* (because none exist).                                                 */
 
 
 static Boolean writeNextList(Boolean);
@@ -17,8 +16,8 @@ static void writeDescList(void);
 static void backpatch(FILE *, Collection, char);
 
 /***************************************************/
-/* Schreibe die Patterns pttrns nach File f im     */
-/* Format form. Variable error wird gesetzt.       */
+/* Write the patterns pttrns to file f in format   */
+/* form. Sets the global variable error.           */
 /***************************************************/
 void fileOut(Patterns pttrns, Format form, FILE *f) {
     Boolean descListWritten, bodyExecuted;
@@ -40,7 +39,7 @@ void fileOut(Patterns pttrns, Format form, FILE *f) {
             beginningOfLoop = getPosition(format);
             bodyExecuted = FALSE;
             while(writeNextList(bodyExecuted)) {
-                /* writeNextList hat Format Pointer bewegt */
+                /* writeNextList has moved the format pointer */
                 setPosition(format, beginningOfLoop);
                 tok = nextToken(format);
                 writeDescList();
@@ -49,7 +48,7 @@ void fileOut(Patterns pttrns, Format form, FILE *f) {
                     return;
                 }
                 bodyExecuted = TRUE;
-                /* writeDescList hat Format Pointer bewegt */
+                /* writeDescList has moved the format pointer */
                 setPosition(format, beginningOfLoop);
             }       /* while */
             tok = nextToken(format);
@@ -96,11 +95,11 @@ void fileOut(Patterns pttrns, Format form, FILE *f) {
 
 
 /***************************************************/
-/* Antworte TRUE gdw. die Liste der Deskriptoren   */
-/* ab der aktuellen Position von format in die     */
-/* Datei geschrieben werden kann. Der Format       */
-/* Pointer von format wird dabei hinter das erste  */
-/* Token bewegt, das kein Deskriptor ist.          */
+/* Return TRUE iff the list of descriptors,        */
+/* starting at the current position of format,     */
+/* can be written to the file. The format pointer  */
+/* of format is moved past the first token that    */
+/* is not a descriptor.                            */
 /***************************************************/
 static Boolean writeNextList(Boolean bodyExecuted) {
     long inputsInList = 0L, outputsInList = 0L, classesInList = 0L;
@@ -152,11 +151,11 @@ static Boolean writeNextList(Boolean bodyExecuted) {
 
 
 /***************************************************/
-/* Schreibe nacheinander alle Deskriptoren in die  */
-/* Datei patternFile bis ein Token angetroffen     */
-/* wird, das kein Deskriptor ist. Der Format       */
-/* Pointer von format wird hinter dieses Token     */
-/* bewegt. Variable error wird gesetzt.            */
+/* Write all descriptors, one after another, to    */
+/* the file patternFile until a token is           */
+/* encountered that is not a descriptor. The       */
+/* format pointer of format is moved past this     */
+/* token. Sets the global variable error.          */
 /***************************************************/
 static void writeDescList() {
     Vector vec;
@@ -176,7 +175,7 @@ static void writeDescList() {
                 if(hasOutputs(pats)) {
                     vec = (Vector) at(pats->outputs, ++outCount);
                     if(fprintVector(vec, patternFile)) error(7);
-                } else {   /* schreibe die Klassennummer */
+                } else {   /* write the class number */
                     fprintf(patternFile, "%ld",
                             *(long *) at(pats->classNos, ++outCount));
                     if(! classNosAsOutputs && notEmpty(patch)) {
@@ -245,10 +244,10 @@ static void writeDescList() {
 
 
 /*************************************************************************/
-/* Ersetze alle Zeichen der Datei f, die sich auf den durch positions ge-*/
-/* gebenen (eine Collection von long-Zeigern) Positionen in f befinden,  */
-/* durch das Zeichen patchChar.                                          */
-/* Variable error wird gesetzt.                                          */
+/* Replace all characters of file f located at the positions in f given  */
+/* by positions (a Collection of long pointers) with the character      */
+/* patchChar.                                                            */
+/* Sets the global variable error.                                       */
 /*************************************************************************/
 static void backpatch(FILE *f, Collection positions, char patchChar) {
     long initialPos, *pos, i, n = size(positions);

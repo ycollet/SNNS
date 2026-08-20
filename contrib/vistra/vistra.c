@@ -1,26 +1,27 @@
 /**********************************************************************/
 /**********************************************************************/
-/***** VISTRA - Hauptfile                                         *****/
+/***** VISTRA - Main file                                         *****/
 /***** ---------------------------------------------------------- *****/
-/***** Diese Datei enthaelt die main-Funktion und alle Callbacks  *****/
-/***** die das Hauptfenster von Vistra betreffen.                 *****/
+/***** This file contains the main function and all callbacks     *****/
+/***** related to the main window of Vistra.                      *****/
 /*****                                                            *****/
-/***** Folgende Dateien werden included:                          *****/
-/*****   "crtwdgts.c" - Fkt., die Widgets kreieren.               *****/
-/*****                  (insbesondere die des Hauptfensters)      *****/
-/*****   "uif.c"  - Fkt. der graphischen Benutzer-Oberflaeche,    *****/
-/*****              die keine Callbacks sind.                     *****/
-/*****             (u.a. update-Routinen der Hauptfenster-Widgets)*****/
-/*****   "init.c" - Initialisierung von Vistra.                   *****/
-/*****   "draw.c" - Zeichen-Routinen der Graphik-Fenster.         *****/
-/*****   "gw.c"   - Kreation, Steuerung und Loeschen der Graphik- *****/
-/*****              Fenster.                                      *****/
-/*****   "int2.c" - Routinen der Dialogbox, in der 2 Integers     *****/
-/*****              eingegeben werden.                            *****/
-/*****   "ssw.c"  - Routinen des SpreadSheet-Windows.             *****/
-/*****              Das SpreadSheet-Window ist das Fenster, das   *****/
-/*****              die Vektoren enthaelt, die momentan nicht im  *****/
-/*****              Hauptfenster bearbeitet werden.               *****/
+/***** The following files are included:                          *****/
+/*****   "crtwdgts.c" - Functions that create widgets.            *****/
+/*****                  (in particular those of the main window)  *****/
+/*****   "uif.c"  - Functions of the graphical user interface     *****/
+/*****              that are not callbacks.                       *****/
+/*****             (among others, update routines for the main    *****/
+/*****              window widgets)                                *****/
+/*****   "init.c" - Initialization of Vistra.                     *****/
+/*****   "draw.c" - Drawing routines for the graphics windows.    *****/
+/*****   "gw.c"   - Creation, control and destruction of graphics *****/
+/*****              windows.                                      *****/
+/*****   "int2.c" - Routines of the dialog box in which 2         *****/
+/*****              integers are entered.                         *****/
+/*****   "ssw.c"  - Routines of the SpreadSheet window.           *****/
+/*****              The SpreadSheet window is the window that     *****/
+/*****              contains the vectors that are currently not   *****/
+/*****              being edited in the main window.               *****/
 /**********************************************************************/
 /**********************************************************************/
 
@@ -55,12 +56,12 @@
 /***********************************************************************/
 static void xhandleErr(int);
 /*** INIT.C ***/
-static void initialize(int argc, char **argv);                             /* error gesetzt */
+static void initialize(int argc, char **argv);                             /* sets error */
 static void initialize2(Widget);
 /*** UIF.C ***/
-static void fillPatternView(void);                        /* error gesetzt */
-static void changeInOut(void);                            /* error gesetzt */
-static Format nameToFormat(char *);                   /* error gesetzt */
+static void fillPatternView(void);                        /* sets error */
+static void changeInOut(void);                            /* sets error */
+static Format nameToFormat(char *);                   /* sets error */
 #ifdef XFWF_FILE_SELECTION
 static void popupFileSelector(Widget w, char *title, XtCallbackProc ok_cb);
 #endif
@@ -68,9 +69,9 @@ static void popupStr2Dlg(Widget w, char *title, char *headline, char *item1, cha
 static void popupErrDlg(Widget, char *, char *);
 static void getStr2DlgValues(char **, char **);
 static void setActivation(Patterns);
-static Vector scalarVec(void);                            /* error gesetzt */
-static Vector scalarsVertAsVec(void);                     /* error gesetzt */
-static Vector scalarsHorizAsVec(void);                    /* error gesetzt */
+static Vector scalarVec(void);                            /* sets error */
+static Vector scalarsVertAsVec(void);                     /* sets error */
+static Vector scalarsHorizAsVec(void);                    /* sets error */
 static void fixSize(Widget);
 static void updateInfoWidgets(void);
 static void updateScalarsHoriz(void);
@@ -88,7 +89,7 @@ static void exposeWidget(Widget);
 static void updateSSW(SSW);
 static void popupSSW(SSW);
 /*** CRTWDGTS.C ***/
-static void createAllWidgets(Widget);                 /* error gesetzt */
+static void createAllWidgets(Widget);                 /* sets error */
 /*** INT2.C ***/
 static void popupInt2Dlg(Widget w, char *title, char *headline, char *item1, char *item2, int from1, int to1, int from2, int to2, int default1, int default2, char *okButtonLabel, XtCallbackProc up1_cb, XtCallbackProc down1_cb, XtCallbackProc up2_cb, XtCallbackProc down2_cb, XtCallbackProc ok_cb, XtPointer ok_data, XtCallbackProc cancel_cb, XtPointer cancel_data);
 static void updateInt2Text(void);
@@ -101,16 +102,16 @@ static void freeGW(GW);
 static void initDrawer(Widget);
 static void drawColorArray(Drawable, Boolean, Vector, unsigned, unsigned,
                            unsigned, unsigned, Range, long, long);
-static void drawHistogram(GW, Vector, Range, PixelNo);   /* error gesetzt */
-static void drawPolyLine(GW, Vector, Range, PixelNo);    /* error gesetzt */
+static void drawHistogram(GW, Vector, Range, PixelNo);   /* sets error */
+static void drawPolyLine(GW, Vector, Range, PixelNo);    /* sets error */
 static void draw2DProjection(GW, VecColl, long, long, PixelNo);
-/* error gesetzt */
+/* sets error */
 static unsigned drawHistogrammes(GW, VecColl, Range, PixelNo);
-/* error gesetzt */
+/* sets error */
 static unsigned drawPolyLines(GW, VecColl, Range, PixelNo);
-/* error gesetzt */
+/* sets error */
 static unsigned drawMatrices(GW, Boolean, VecColl, Range, long, long);
-/* error gesetzt */
+/* sets error */
 
 /***************************************************************************/
 /******** CALLBACKs ********************************************************/
@@ -184,84 +185,85 @@ static Widget operationBox, addCommand, subCommand, multCommand, divCommand,
        replaceCommand;
 
 /****************************************************************************/
-/******* Variablen des User-Interface, die keine Widgets enthalten **********/
+/******* User interface variables that are not widgets ***********************/
 /****************************************************************************/
 static int inOutSwitch;
-/* EDIT_INPUT:  Input Pattern editieren  */
-/* EDIT_OUTPUT: Output Pattern editieren */
+/* EDIT_INPUT:  edit input pattern       */
+/* EDIT_OUTPUT: edit output pattern      */
 static int scalarSwitch;
-/* FILL_HORIZ:  Spalten-Operation        */
-/* FILL_VERT:   Zeilen-Operation         */
+/* FILL_HORIZ:  column operation         */
+/* FILL_VERT:   row operation            */
 static Patterns pats;
-/* Die Patterns, die momentan geladen sind.           */
-/* NULL, falls keine geladen.                         */
+/* The patterns that are currently loaded.            */
+/* NULL, if none are loaded.                          */
 static char *fileName;
-/* Name des Pattern files, das gerade geladen ist.    */
-/* NULL, falls momentan keine Patterns geladen sind.  */
+/* Name of the pattern file that is currently loaded. */
+/* NULL, if no patterns are currently loaded.         */
 static Collection formatNames;
 /* Collection('see Suffix' <fmt1> <fmt2> ... <fmt3>)  */
-/* <fmti>: Name eines Format-Files ohne Suffix '.fmt' */
-/* Die Strings stellen gleichzeitig die Labels der    */
-/* Menu-Items des Format-Menus dar.                   */
+/* <fmti>: Name of a format file without the '.fmt'   */
+/* suffix. The strings simultaneously serve as the    */
+/* labels of the format menu's items.                 */
 static Collection formats;
-/* Collection aller syntaktisch korrekten ASCII-      */
-/* Formate, die auf Platte gefunden wurden.           */
-/* size(formats) == size(formatNames) - 3 gilt stets. */
+/* Collection of all syntactically correct ASCII      */
+/* formats found on disk.                             */
+/* size(formats) == size(formatNames) - 3 always      */
+/* holds.                                              */
 static Collection formatMenuItems;
-/* Collection aller smeBSBObjects, die die Items des  */
-/* Format-Menus darstellen.                           */
-/* size(formatMenuItems) == size(formatNames) gilt    */
-/* stets.                                             */
+/* Collection of all smeBSBObjects that represent the */
+/* items of the format menu.                          */
+/* size(formatMenuItems) == size(formatNames) always  */
+/* holds.                                              */
 static int selectedFormat;
-/* Index des momentan ausgewaehlten Format-Menuitems  */
-/* in Collection formatNames.                         */
+/* Index of the currently selected format menu item   */
+/* in the formatNames collection.                     */
 static time_t lastChanged;
-/* Zeitstempel der letzten Modifikation der Eingabe-  */
-/* oder Ausgabevektoren, die ein neues globales       */
-/* Minimum oder Maximum zur Folge hat.                */
-/* GWs vergleichen ihren Zeitstempel mit lastChanged  */
-/* um zu wissen, ob die Minima und Maxima neu be-     */
-/* rechnet werden muessen.                            */
+/* Timestamp of the last modification of the input or */
+/* output vectors that results in a new global        */
+/* minimum or maximum.                                */
+/* GWs compare their timestamp with lastChanged to    */
+/* know whether the minima and maxima need to be      */
+/* recomputed.                                        */
 static Pixmap hook;
-/* Haken fuer selektierte Menupunkte.                 */
-static SSW swapSSW;   /* SSW zur Anzeige der Input oder Output Vektoren     */
-/* (READ ONLY-Fenster mit SpreadSheet.                */
+/* Checkmark for selected menu items.                 */
+static SSW swapSSW;   /* SSW for displaying the input or output vectors     */
+/* (read-only window with spreadsheet).               */
 static Boolean swapSSWOpened;
-/* True: Input/Output-Vektoren werden im separaten    */
-/*       Fenster (swapSSW) angezeigt (Read Only).     */
-/* False: Swap-Fenster nicht geoeffnet.               */
-static FILE *lf;      /* Log-File                                           */
+/* True: input/output vectors are displayed in a      */
+/*       separate window (swapSSW) (read only).       */
+/* False: swap window is not open.                    */
+static FILE *lf;      /* Log file                                           */
 static Boolean logFirstTime;
-/* TRUE gdw. erste Log-Periode                        */
+/* TRUE iff first log period                          */
 static unsigned lastNr;
-/* Nummer des zuletzt mittels 'Load Nr...' geladenem  */
-/* Spalten- bzw. Zeilenvektors.                       */
+/* Number of the row or column vector most recently   */
+/* loaded via 'Load Nr...'.                           */
 static char infoBuf[512];
-/* zum Formatieren der Infos von infoLabel.           */
+/* for formatting the info messages of infoLabel.     */
 static XFontStruct *gwFont;
-/* Font fuer die Commands der Graphik-Fenster         */
+/* Font for the commands of the graphics windows      */
 static Collection openGWs;
-/* Collection aller momentan geoeffneten GWs.         */
+/* Collection of all currently open GWs.              */
 static unsigned depth;
-/* Tiefe des Screens.                                 */
-static int screen;    /* Der Screen, auf dem Vistra laeuft.                 */
-static Display *display;    /* Der Display (benoetigt von X)                */
+/* Depth of the screen.                               */
+static int screen;    /* The screen on which Vistra runs.                   */
+static Display *display;    /* The display (needed by X)                    */
 
 /****************************************************************************/
-/***** VARIABLEN zur Steuerung des HAUPTFENSTERS. ***************************/
+/***** VARIABLES for controlling the MAIN WINDOW. ***************************/
 /****************************************************************************/
 static Vector vert, horiz;
-/* Vertikaler und horizontaler Skalar-Vektor.         */
-static int firstVec;  /* Enthaelt die Nummer des ersten Vektors, der        */
-/* momentan sichtbar ist im Hauptfenster.             */
-static int firstDim;  /* Enthaelt die Nummer der Dimension, die gerade noch */
-/* links sichtbar ist im Hauptfenster.                */
-static int visVecs;   /* Anzahl der sichtbaren Vektoren.                    */
-static int visDims;   /* Anzahl der sichtbaren Dimensionen.                 */
-static int usedRows;  /* Anzahl der benutzten Zeilen in der Pattern View.   */
-static int usedCols;  /* Anzahl der benutzten Spalten in der Pattern View.  */
+/* Vertical and horizontal scalar vector.             */
+static int firstVec;  /* Contains the number of the first vector that is    */
+/* currently visible in the main window.              */
+static int firstDim;  /* Contains the number of the dimension that is still */
+/* visible on the left in the main window.            */
+static int visVecs;   /* Number of visible vectors.                         */
+static int visDims;   /* Number of visible dimensions.                      */
+static int usedRows;  /* Number of rows used in the pattern view.           */
+static int usedCols;  /* Number of columns used in the pattern view.        */
 
-/***** zum Zeichnen notwendige Variablen ************************************/
+/***** variables required for drawing ****************************************/
 static PixelNo colorpixel[NUM_COLORS];
 static PixelNo graypixel[NUM_GRAYS];
 static Colormap cmap;
@@ -281,7 +283,7 @@ static XFontStruct *drawFont;
 
 /*********************************************************************/
 /*********************************************************************/
-/************* H A U P T - P R O G R A M M ***************************/
+/************* M A I N   P R O G R A M ********************************/
 /*********************************************************************/
 /*********************************************************************/
 int main(int argc, char **argv) {
@@ -311,12 +313,12 @@ int main(int argc, char **argv) {
 /****************************************************************************/
 
 /*************************************************************/
-/* Wird aufgerufen, sobald der 'Load'-Button des Dialogs     */
-/* "dialog" angeklickt wird.                                 */
-/* Lade die Patterns des Files, dessen Namen im Dialog       */
-/* eingetippt wurde. Bei Erfolg werden die Patterns in der   */
-/* Variable pats gespeichert. Das Format des Pattern Files   */
-/* ist durch die Variable format gegeben.                    */
+/* Called as soon as the 'Load' button of the "dialog"       */
+/* dialog is clicked.                                        */
+/* Loads the patterns from the file whose name was typed     */
+/* into the dialog. On success, the patterns are stored in   */
+/* the variable pats. The format of the pattern file is      */
+/* given by the variable format.                              */
 /*************************************************************/
 static void loadPatterns(Widget w, XtPointer client_data, XtPointer ret) {
     char *suffix, *format_name;
@@ -335,7 +337,7 @@ static void loadPatterns(Widget w, XtPointer client_data, XtPointer ret) {
     value = XawDialogGetValueString((Widget) client_data);
 #endif
 
-    /* stelle Format-Namen fest und ggf. zugehoeriges ASCII-Format */
+    /* determine the format name and, if applicable, the corresponding ASCII format */
     if(selectedFormat == 1) {
         /* 'See Suffix' */
         suffix = strrchr(value, '.');
@@ -353,7 +355,7 @@ static void loadPatterns(Widget w, XtPointer client_data, XtPointer ret) {
         return;
     }
 
-    /* oeffne Pattern File */
+    /* open the pattern file */
     f = fopen(value, "r");
     if(! f) {
         sprintf(errorInfo, "Pattern file:  %s", value);
@@ -361,7 +363,7 @@ static void loadPatterns(Widget w, XtPointer client_data, XtPointer ret) {
         return;
     }
 
-    /* lese File ein */
+    /* read in the file */
     showInfo("Loading patterns...");
     if(streq(format_name, N01_MENU_LABEL)) p = readN01(f);
     else if(streq(format_name, LVQ_MENU_LABEL)) p = readLVQ(f);
@@ -380,7 +382,7 @@ static void loadPatterns(Widget w, XtPointer client_data, XtPointer ret) {
         xhandleErr(error);
         return;
     }
-    /* Patterns erfolgreich geladen */
+    /* patterns loaded successfully */
     if(fileName) {
         free(fileName);
         fileName = NULL;
@@ -389,14 +391,14 @@ static void loadPatterns(Widget w, XtPointer client_data, XtPointer ret) {
 
     if(pats) freePatterns(pats);
     pats = p;
-    /* schliesse alle geoeffneten Graphik-Fenster */
+    /* close all open graphics windows */
     if(notEmpty(openGWs))
         freeFromTo(openGWs, 1L, size(openGWs), (void(*)(void*))freeGW);
 
     fillPatternView();
     if(error) handleErr(error);
 
-    /* schliesse oder aktualisiere das Swap-Fenster, falls geoeffnet */
+    /* close or update the swap window, if open */
     if(swapSSWOpened) {
         if(hasOutputs(pats)) updateSSW(swapSSW);
         else {
@@ -408,8 +410,8 @@ static void loadPatterns(Widget w, XtPointer client_data, XtPointer ret) {
 
 
 /*************************************************************/
-/* Wird aufgerufen, sobald der 'Write'-Button des String-    */
-/* Dialogs angeklickt wird.                                  */
+/* Called as soon as the 'Write' button of the string        */
+/* dialog is clicked.                                        */
 /*************************************************************/
 static void writePatterns(w, client_data, garbage)
 Widget w;
@@ -423,7 +425,7 @@ XtPointer client_data, garbage;
     XtPopdown(strDlgShell);
     value = XawDialogGetValueString((Widget) client_data);
 
-    /* stelle den Format-Namen fest und ggf. das Schreib-ASCII-Format */
+    /* determine the format name and, if applicable, the write ASCII format */
     if(selectedFormat == 1) {
         /* 'See Suffix' */
         suffix = strrchr(value, '.');
@@ -441,7 +443,7 @@ XtPointer client_data, garbage;
         return;
     }
 
-    /* Oeffne Output File */
+    /* open the output file */
     f = fopen(value, "w");
     if(! f) {
         sprintf(errorInfo, "Output file:  %s", value);
@@ -449,7 +451,7 @@ XtPointer client_data, garbage;
         return;
     }
 
-    /* Schreibe Pattern File */
+    /* write the pattern file */
     sprintf(infoBuf, "Writing patterns to %s...", value);
     showInfo(infoBuf);
     if(streq(format_name, N01_MENU_LABEL)) writeN01(pats, f);
@@ -465,8 +467,8 @@ XtPointer client_data, garbage;
 
 
 /******************************************************/
-/* Lese das Symtab-File ein, dessen Name ueber das    */
-/* Dialog-Widget client_data eingegeben wurde.        */
+/* Reads in the symtab file whose name was entered    */
+/* via the client_data dialog widget.                 */
 /******************************************************/
 static void loadSymbols(w, client_data, ret)
 Widget w;
@@ -493,7 +495,7 @@ XtPointer client_data, ret;
         return;
     }
 
-    /* Lese das Symtab-File */
+    /* read the symtab file */
     sprintf(infoBuf, "Loading symbols from %s...", value);
     showInfo(infoBuf);
     st = readSymtab(f);
@@ -505,7 +507,7 @@ XtPointer client_data, ret;
         xhandleErr(33);
         return;
     }
-    /* Ersetze die bisherigen Klassennamen durch die neuen von st */
+    /* replace the previous class names with the new ones from st */
     XtVaSetValues(infoLabel, XtNlabel, "Replacing symbols...", NULL);
     replaceClasses(pats, st);
     clearInfo();
@@ -514,15 +516,15 @@ XtPointer client_data, ret;
         xhandleErr(error);
         return;
     }
-    /* Aktualisiere die Widgets */
+    /* update the widgets */
     updateClassLabels();
 }        /* loadSymbols */
 
 
 /******************************************************/
-/* Schreibe die Symbole der Patterns pats in das File,*/
-/* dessen Name ueber das Dialog-Widget client_data    */
-/* eingegeben wurde.                                  */
+/* Writes the symbols of the patterns pats to the file*/
+/* whose name was entered via the client_data dialog  */
+/* widget.                                            */
 /******************************************************/
 static void writeSymbols(w, client_data, garbage)
 Widget w;
@@ -576,7 +578,7 @@ XtPointer client_data, garbage;
             fprintf(lf, "%c add horiz\n", inOutChar());
     }
     clearInfo();
-    time(&lastChanged);            /* setze Zeitstempel neu */
+    time(&lastChanged);            /* reset timestamp */
     updateElems();
 }       /* addScalars */
 
@@ -606,7 +608,7 @@ XtPointer client_data, garbage;
             fprintf(lf, "%c subtract horiz\n", inOutChar());
     }
     clearInfo();
-    time(&lastChanged);            /* setze Zeitstempel neu */
+    time(&lastChanged);            /* reset timestamp */
     updateElems();
 }       /* subScalars */
 
@@ -636,7 +638,7 @@ XtPointer client_data, garbage;
             fprintf(lf, "%c multiply horiz\n", inOutChar());
     }
     clearInfo();
-    time(&lastChanged);            /* setze Zeitstempel neu */
+    time(&lastChanged);            /* reset timestamp */
     updateElems();
 }       /* multScalars */
 
@@ -670,7 +672,7 @@ XtPointer client_data, garbage;
             fprintf(lf, "%c divide horiz\n", inOutChar());
     }
     clearInfo();
-    time(&lastChanged);            /* setze Zeitstempel neu */
+    time(&lastChanged);            /* reset timestamp */
     updateElems();
 }       /* divScalars */
 
@@ -733,7 +735,7 @@ XtPointer client_data, garbage;
             fprintf(lf, "%c replace horiz %u\n", inOutChar(), nr);
     }
 
-    time(&lastChanged);            /* setze Zeitstempel neu */
+    time(&lastChanged);            /* reset timestamp */
     if((scalarSwitch == FILL_VERT && nr>=firstDim && nr<firstDim+usedCols) ||
             (scalarSwitch == FILL_HORIZ && nr>=firstVec && nr<firstVec+usedRows))
         updateElems();
@@ -777,7 +779,7 @@ XtPointer client_data, garbage;
     }
     clearInfo();
 
-    time(&lastChanged);            /* setze Zeitstempel neu */
+    time(&lastChanged);            /* reset timestamp */
     updateElems();
 }       /* scaleVectors */
 
@@ -823,11 +825,11 @@ XtPointer client_data, garbage;
             return;
         }
 
-        /* Aktualisiere die betroffenen Widgets */
+        /* update the affected widgets */
         if(ret) {
             firstVec = 1;
             usedRows = min(num(pats), visVecs);
-            time(&lastChanged);            /* setze Zeitstempel neu */
+            time(&lastChanged);            /* reset timestamp */
             updateNrLabels();
             updateElems();
             updateClassLabels();
@@ -884,11 +886,11 @@ XtPointer client_data, garbage;
         if(app_data.log)
             fprintf(lf, "%c rmDimRange %u %u\n", inOutChar(), small, big);
 
-        /* Aktualisiere die betroffenen Widgets */
+        /* update the affected widgets */
         if(ret) {
             firstDim = 1;
             usedCols = min(numCols(pats), visDims);
-            time(&lastChanged);            /* setze Zeitstempel neu */
+            time(&lastChanged);            /* reset timestamp */
             updateDimLabels();
             updateElems();
             updateScalarsHoriz();
@@ -899,9 +901,8 @@ XtPointer client_data, garbage;
 
 
 /***************************************************************************/
-/* Wird immer aufgerufen, wenn irgendein Menupunkt des File-Menus ausge-   */
-/* waehlt wird. garbage ist ohne Bedeutung. client_data gibt die Nummer    */
-/* des ausgewaehlten Menuepunkts zurueck.                                  */
+/* Always called when any item of the File menu is selected. garbage is   */
+/* meaningless. client_data returns the number of the selected menu item. */
 /***************************************************************************/
 static void fileMenuSelect(w, client_data, garbage)
 Widget w;
@@ -980,9 +981,8 @@ XtPointer client_data, garbage;
 
 
 /***************************************************************************/
-/* Wird immer aufgerufen, wenn irgendein Menupunkt des Transform-Menus aus-*/
-/* gewaehlt wird. garbage ist ohne Bedeutung. client_data gibt die Nummer  */
-/* des ausgewaehlten Menuepunkts an.                                       */
+/* Always called when any item of the Transform menu is selected. garbage */
+/* is meaningless. client_data gives the number of the selected menu item.*/
 /***************************************************************************/
 static void transformMenuSelect(w, client_data, garbage)
 Widget w;
@@ -1005,7 +1005,7 @@ XtPointer garbage;
             fprintf(lf, "%c hlog\n", inOutChar());
         clearInfo();
 
-        time(&lastChanged);            /* setze Zeitstempel neu */
+        time(&lastChanged);            /* reset timestamp */
         updateElems();
         break;
     case 1:  /* FFT */
@@ -1025,14 +1025,14 @@ XtPointer garbage;
         if(app_data.log)
             fprintf(lf, "%c fft\n", inOutChar());
 
-        time(&lastChanged);            /* setze Zeitstempel neu */
+        time(&lastChanged);            /* reset timestamp */
         updateElems();
         break;
     case 2: { /* PCA */
         FILE *pipe, *pcaIn, *pcaOut;
         char *tempIn, *tempOut, buf[512];
 
-        /* Schreibe Patterns in ein temporaeres LVQ-File */
+        /* write patterns to a temporary LVQ file */
         if(! (tempIn = mktemp("@PCA_INXXXXXXXX"))) {
             xhandleErr(39);
             return;
@@ -1091,26 +1091,26 @@ XtPointer garbage;
             return;
         }
         if(app_data.log) fprintf(lf, "%c pca\n", inOutChar());
-        time(&lastChanged);            /* setze Zeitstempel neu */
+        time(&lastChanged);            /* reset timestamp */
         updateElems();
     }
     break;
-    case 3:  /* Normalisiere */
+    case 3:  /* Normalize */
         showInfo("Normalizing...");
         doRows(editedVecColl(pats), normalize);
         if(app_data.log)
             fprintf(lf, "%c normalize\n", inOutChar());
         clearInfo();
 
-        time(&lastChanged);            /* setze Zeitstempel neu */
+        time(&lastChanged);            /* reset timestamp */
         updateElems();
         break;
-    case 4:  /* Skaliere */
+    case 4:  /* Scale */
         popupStr2Dlg(topLevel,
-                     "scale vectors",                /* Titel */
+                     "scale vectors",                /* Title */
                      "Specify the new range:",       /* Headline */
-                     "lowest number:",               /* Label fuer 1.String */
-                     "highest number:",              /* Label fuer 2.String */
+                     "lowest number:",               /* Label for 1st string */
+                     "highest number:",              /* Label for 2nd string */
                      "", "",                         /* Default values */
                      "scale",                        /* Button label */
                      scaleVectors);                  /* Callback */
@@ -1136,7 +1136,7 @@ XtPointer garbage;
         updateScalarsVert();
         if(swapSSWOpened) updateSSW(swapSSW);
         break;
-    case 6: { /* Erweiter mit Klassenvektor */
+    case 6: { /* Expand with class vector */
         Vector h, pad;
 
         h = scalarsHorizAsVec();
@@ -1163,7 +1163,7 @@ XtPointer garbage;
         if(app_data.log)
             fprintf(lf, "%c classExpand\n", inOutChar());
 
-        time(&lastChanged);            /* setze Zeitstempel neu */
+        time(&lastChanged);            /* reset timestamp */
         updateHorizScrollBar();
         if(usedCols != visDims) {
             usedCols = min(visDims, numCols(pats) - firstDim + 1);
@@ -1173,7 +1173,7 @@ XtPointer garbage;
         }
     }
     break;
-    case 7: { /* Erweiter mit Ausgabevektor */
+    case 7: { /* Expand with output vector */
         Vector h, pad;
 
         h = scalarsHorizAsVec();
@@ -1200,7 +1200,7 @@ XtPointer garbage;
         if(app_data.log)
             fprintf(lf, "i outputExpand\n");
 
-        time(&lastChanged);            /* setze Zeitstempel neu */
+        time(&lastChanged);            /* reset timestamp */
         updateHorizScrollBar();
         if(usedCols != visDims) {
             usedCols = min(visDims, numCols(pats) - firstDim + 1);
@@ -1210,7 +1210,7 @@ XtPointer garbage;
         }
     }
     break;
-    case 8:  /* Berechne die Klassen-Nummern neu */
+    case 8:  /* Recompute the class numbers */
         if(! hasClassNames(pats) && hasOutputs(pats)) {
             showInfo("Refreshing class numbers...");
             genClassNosFromVectors(pats);
@@ -1235,9 +1235,8 @@ XtPointer garbage;
 
 
 /***************************************************************************/
-/* Wird immer aufgerufen, wenn irgendein Menupunkt des Remove-Menus aus-   */
-/* gewaehlt wird. garbage ist ohne Bedeutung. client_data gibt die Nummer  */
-/* des ausgewaehlten Menuepunkts an.                                       */
+/* Always called when any item of the Remove menu is selected. garbage is */
+/* meaningless. client_data gives the number of the selected menu item.   */
 /***************************************************************************/
 static void removeMenuSelect(w, client_data, garbage)
 Widget w;
@@ -1248,7 +1247,7 @@ XtPointer garbage;
     unsigned numDims = (unsigned) numCols(pats);
 
     switch(itemNo) {
-    case 0:  /* Entferne Dimensionen */
+    case 0:  /* Remove dimensions */
         popupInt2Dlg(topLevel, "remove dimensions",
                      "Remove all dimensions", "from:", "to:",
                      1, numDims, 1, numDims, 1, 1, "remove",
@@ -1256,7 +1255,7 @@ XtPointer garbage;
                      removeDimensions, NULL,
                      popdown, (XtPointer) int2DlgShell);
         break;
-    case 1: { /* Entferne konstante Dimensionen */
+    case 1: { /* Remove constant dimensions */
         Vector v;
         unsigned ret;
         long *lp, i;
@@ -1297,14 +1296,14 @@ XtPointer garbage;
 
         firstDim = 1;
         usedCols = min(numCols(pats), visDims);
-        time(&lastChanged);            /* setze Zeitstempel neu */
+        time(&lastChanged);            /* reset timestamp */
         updateDimLabels();
         updateElems();
         updateScalarsHoriz();
         updateHorizScrollBar();
     }
     break;
-    case 2:  /* Entferne Vektoren */
+    case 2:  /* Remove vectors */
         popupInt2Dlg(topLevel, "remove vectors",
                      "Remove all vectors", "from nr:", "to nr:",
                      1, num(pats), 1, num(pats), 1, 1, "remove",
@@ -1323,9 +1322,8 @@ XtPointer garbage;
 
 
 /***************************************************************************/
-/* Wird immer aufgerufen, wenn irgendein Menupunkt des Show-Menus ausge-   */
-/* waehlt wird. garbage ist ohne Bedeutung. client_data gibt die Nummer    */
-/* des ausgewaehlten Menuepunkts an.                                       */
+/* Always called when any item of the Show menu is selected. garbage is   */
+/* meaningless. client_data gives the number of the selected menu item.   */
 /***************************************************************************/
 static void showMenuSelect(Widget w, XtPointer client_data, XtPointer garbage) {
     int itemNo = (int) client_data;
@@ -1343,7 +1341,7 @@ static void showMenuSelect(Widget w, XtPointer client_data, XtPointer garbage) {
             return;
         }
         break;
-    case 1: { /* Statistik */
+    case 1: { /* Statistics */
         char *contents;
         Position x, y;
 
@@ -1360,7 +1358,7 @@ static void showMenuSelect(Widget w, XtPointer client_data, XtPointer garbage) {
         XtPopup(statistics, XtGrabNonexclusive);
     }
     break;
-    case 2: { /* Kovarianz-Matrix */
+    case 2: { /* Covariance matrix */
         char *contents, buf[60];
         Number **cov;
         unsigned i, j, ndims = (unsigned) numCols(pats);
@@ -1396,7 +1394,7 @@ static void showMenuSelect(Widget w, XtPointer client_data, XtPointer garbage) {
         XtPopup(statistics, XtGrabNonexclusive);
     }
     break;
-    case 3:  /* Zeige das Swap-Fenster (Input oder Output-Vektoren) */
+    case 3:  /* Show the swap window (input or output vectors) */
         popupSSW(swapSSW);
         swapSSWOpened = TRUE;
         break;
@@ -1413,9 +1411,8 @@ static void showMenuSelect(Widget w, XtPointer client_data, XtPointer garbage) {
 #define LOG_LOADCOMM   (scalarSwitch == FILL_VERT ? "loadVert" : "loadHoriz")
 
 /***************************************************************************/
-/* Wird immer aufgerufen, wenn irgendein Menupunkt des Load-Menus ausge-   */
-/* waehlt wird. garbage ist ohne Bedeutung. client_data gibt die Nummer    */
-/* des ausgewaehlten Menuepunkts an.                                       */
+/* Always called when any item of the Load menu is selected. garbage is   */
+/* meaningless. client_data gives the number of the selected menu item.   */
 /***************************************************************************/
 static void loadMenuSelect(w, client_data, garbage)
 Widget w;
@@ -1482,7 +1479,7 @@ XtPointer client_data, garbage;
                 fprintf(lf, "\n");
             }
         break;
-    case 4:  /* Standardabweichung */
+    case 4:  /* Standard deviation */
         showInfo("Loading standard deviations...");
         (*collectFunc)(vc, sigma, selVec());
         clearInfo();
@@ -1579,7 +1576,7 @@ XtPointer client_data, garbage;
     if(app_data.log)
         fprintf(lf, "%c %s const %g\n", inOutChar(), LOG_LOADCOMM, n);
 
-    /* Aktualisiere die entsprechenden Text-Widgets */
+    /* update the corresponding text widgets */
     if(scalarSwitch == FILL_VERT) updateScalarsVert();
     else updateScalarsHoriz();
 }      /* loadConstant */
@@ -1619,7 +1616,7 @@ XtPointer client_data, garbage;
         fprintf(lf, "\n");
     }
 
-    /* Aktualisiere die entsprechenden Text-Widgets */
+    /* update the corresponding text widgets */
     if(scalarSwitch == FILL_VERT) updateScalarsVert();
     else updateScalarsHoriz();
 
@@ -1628,9 +1625,8 @@ XtPointer client_data, garbage;
 
 
 /***************************************************************************/
-/* Wird immer aufgerufen, wenn irgendein Menupunkt des Format-Menus aus-   */
-/* gewaehlt wird. garbage ist ohne Bedeutung. client_data gibt die Nummer  */
-/* des ausgewaehlten Menuepunkts an.                                       */
+/* Always called when any item of the Format menu is selected. garbage is */
+/* meaningless. client_data gives the number of the selected menu item.   */
 /***************************************************************************/
 static void formatMenuSelect(w, client_data, garbage)
 Widget w;
@@ -1658,18 +1654,18 @@ XtPointer garbage;
 
 
 /***************************************************************/
-/* Wird immer aufgerufen, wenn inputToggle oder outputToggle   */
-/* gesetzt bzw. angeklickt wird.                               */
+/* Always called when inputToggle or outputToggle is set or    */
+/* clicked.                                                     */
 /***************************************************************/
 static void toggle(Widget w, XtPointer client_data, XtPointer garbage) {
     int currentlySet;
 
     currentlySet = (int) XawToggleGetCurrent(inputToggle);
-    /* currentlySet kann NULL enthalten, da auch ein Unset eines Toggles */
-    /* einen Aufruf dieser Funktion bewirkt.                             */
+    /* currentlySet can be NULL, since unsetting a toggle also causes    */
+    /* a call to this function.                                          */
     if(currentlySet) {
         if(currentlySet != inOutSwitch) {
-            /* tausche Inhalte der Shells aus */
+            /* swap the contents of the shells */
             inOutSwitch = currentlySet;
             changeInOut();
             if(error) {
@@ -1683,15 +1679,15 @@ static void toggle(Widget w, XtPointer client_data, XtPointer garbage) {
 
 
 /***************************************************************/
-/* Wird immer aufgerufen, wenn vertToggle oder horizToggle     */
-/* gesetzt bzw. angeklickt wird.                               */
+/* Always called when vertToggle or horizToggle is set or      */
+/* clicked.                                                     */
 /***************************************************************/
 static void toggleScalars(Widget w, XtPointer client_data, XtPointer garbage) {
     int currentlySet;
 
     currentlySet = (int) XawToggleGetCurrent(vertToggle);
-    /* currentlySet kann NULL enthalten, da auch ein Unset eines Toggles */
-    /* einen Aufruf dieser Funktion bewirkt.                             */
+    /* currentlySet can be NULL, since unsetting a toggle also causes    */
+    /* a call to this function.                                          */
     if(currentlySet) {
         if(currentlySet != scalarSwitch) {
             scalarSwitch = currentlySet;
@@ -1709,8 +1705,8 @@ static void toggleScalars(Widget w, XtPointer client_data, XtPointer garbage) {
 
 
 /**************************************************************/
-/* Schliesse die Dialogbox bzw. Shell, die durch client_data  */
-/* uebergeben wird.                                           */
+/* Closes the dialog box or shell that is passed via          */
+/* client_data.                                               */
 /**************************************************************/
 static void popdown(Widget w, XtPointer client_data, XtPointer garbage) {
     XtPopdown((Widget) client_data);
@@ -1751,10 +1747,9 @@ XtPointer client_data, garbage;
 
 
 /*************************************************************/
-/* Wird aufgerufen, sobald ein Button losgelassen wird,      */
-/* nachdem dieser zuvor ueber der vertikalen Scrollbar       */
-/* gedrueckt wurde.                                          */
-/* pos enthaelt die relative Pointer-Position in Pixels.     */
+/* Called as soon as a button is released after having been  */
+/* pressed over the vertical scrollbar.                       */
+/* pos contains the relative pointer position in pixels.     */
 /*************************************************************/
 static void scrollVertical(w, client_data, pos)
 Widget w;
@@ -1767,7 +1762,7 @@ XtPointer client_data, pos;
         xhandleErr(error);
         return;
     }
-    if(ptrpos > 0)                /* Button 1 wurde gedrueckt */
+    if(ptrpos > 0)                /* button 1 was pressed */
         firstVec = max(1, firstVec - visVecs);
     else firstVec = min(firstVec + visVecs, num(pats));
     usedRows = min(visVecs, num(pats) - firstVec + 1);
@@ -1783,10 +1778,9 @@ XtPointer client_data, pos;
 
 
 /*************************************************************/
-/* Wird aufgerufen, sobald Button 1 oder 3 losgelassen wird, */
-/* nachdem dieser zuvor ueber der horizontalen Scrollbar     */
-/* gedrueckt wurde.                                          */
-/* pos enthaelt die relative Pointer-Position in Pixels.     */
+/* Called as soon as button 1 or 3 is released after having  */
+/* been pressed over the horizontal scrollbar.                */
+/* pos contains the relative pointer position in pixels.     */
 /*************************************************************/
 static void scrollHorizontal(w, client_data, pos)
 Widget w;
@@ -1799,7 +1793,7 @@ XtPointer client_data, pos;
         xhandleErr(error);
         return;
     }
-    if(ptrpos > 0)             /* Button 1 wurde gedrueckt */
+    if(ptrpos > 0)             /* button 1 was pressed */
         firstDim = max(1, firstDim - visDims);
     else firstDim = min(firstDim + visDims, numCols(pats));
     usedCols = min(visDims, numCols(pats) - firstDim + 1);
@@ -1814,11 +1808,10 @@ XtPointer client_data, pos;
 
 
 /*************************************************************/
-/* Wird aufgerufen, sobald der Mouse Button 2 losgelassen    */
-/* wir, nachdem dieser zuvor ueber der vertikalen Scrollbar  */
-/* gedrueckt wurde.                                          */
-/* percent gibt die Position des Balkens an und liegt        */
-/* zwischen 0.0 und 1.0.                                     */
+/* Called as soon as mouse button 2 is released after having */
+/* been pressed over the vertical scrollbar.                  */
+/* percent gives the position of the bar and lies between    */
+/* 0.0 and 1.0.                                                */
 /*************************************************************/
 static void jumpVertical(w, client_data, percent)
 Widget w;
@@ -1848,11 +1841,10 @@ XtPointer client_data, percent;
 
 
 /*************************************************************/
-/* Wird aufgerufen, sobald der Mouse Button 2 losgelassen    */
-/* wir, nachdem dieser zuvor ueber der horizontalen Scrollbar*/
-/* gedrueckt wurde.                                          */
-/* percent gibt die Position des Balkens an und liegt        */
-/* zwischen 0.0 und 1.0.                                     */
+/* Called as soon as mouse button 2 is released after having */
+/* been pressed over the horizontal scrollbar.                */
+/* percent gives the position of the bar and lies between    */
+/* 0.0 and 1.0.                                                */
 /*************************************************************/
 static void jumpHorizontal(w, client_data, percent)
 Widget w;
@@ -1882,7 +1874,7 @@ XtPointer client_data, percent;
 
 /*************************************************************/
 /*************************************************************/
-/*           E N D E der C A L L B A C Ks                    */
+/*           E N D  of  C A L L B A C K s                    */
 /*************************************************************/
 /*************************************************************/
 
@@ -1895,7 +1887,7 @@ static void xhandleErr(int err) {
     static char message[MAX_LENGTH_ERROR_MESSAGE];
     Position x, y;
 
-    /* bei zuwenig Speicher: beende das Programm */
+    /* if there is not enough memory: terminate the program */
     if(err == 1) handleErr(err);
 
     genErrorMessage(err, message);

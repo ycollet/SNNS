@@ -348,7 +348,7 @@ for ((link_ptr) = ((struct Link *) (unit_ptr)->sites)->next; (link_ptr) != NULL;
 #define SIGN_OF_THE_CORRELATION CorBetweenSpecialActAndOutError
 
 #define OUTPUT_UNIT_SUM_ERROR   MeanOutputUnitError
-/* Aus Performance-Gruenden wird Variable 2-mal benutzt.
+/* For performance reasons, the variable is used twice.
 */
 /* */
 

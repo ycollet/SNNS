@@ -1,14 +1,16 @@
 #include "xvis.h"
 
-int error;                     /* Fehler gdw. error <> 0          */
+int error;                     /* Error iff error <> 0            */
 char errorInfo[MAX_LENGTH_ERRORINFO];
-/* Zusatzinformation zum Fehler    */
-long rowCount;                 /* Bei fehlerhaftem Format des     */
-/* einzulesenden Pattern Files,    */
-/* gibt rowCount die Nummer der    */
-/* Zeile an, in der der Fehler     */
-/* auftrat.                        */
+/* Additional information about   */
+/* the error                       */
+long rowCount;                 /* If the pattern file being read  */
+/* has an incorrect format,        */
+/* rowCount indicates the number   */
+/* of the line in which the error  */
+/* occurred.                       */
 char tokenval[MAX_LENGTH_TOKENVAL];
-/* Zusatzinformation zum Token     */
-Boolean isDEC;                 /* TRUE gdw. Progr. auf DEC        */
-/* compiliert.                     */
+/* Additional information about   */
+/* the token                       */
+Boolean isDEC;                 /* TRUE iff the program is         */
+/* compiled on DEC.                */

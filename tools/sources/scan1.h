@@ -24,7 +24,7 @@
 
 
 /*****************************************************************************
-  NOTE: This file is added for consistency with the "Ansi-Richtlinien fuer
+  NOTE: This file is added for consistency with the "ANSI Guidelines for
         SNNS" since flex does not support header files.
 
 ******************************************************************************/

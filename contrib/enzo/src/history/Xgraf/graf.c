@@ -32,22 +32,22 @@ extern double log10(double);
 /************************************************************************/
 /* Constants:      */
 
-#define  ABSTAND_X  50    /* Abstand der Achsen vom Rand des Fensters   */
+#define  ABSTAND_X  50    /* Distance of the axes from the window border */
 #define  ABSTAND_Y  50
 
 
 /************************************************************************/
 /* Static data structures: */
 
-static int      achsen_ur_x;  /* x-Koordinatenursprung in Pixeln        */
+static int      achsen_ur_x;  /* x coordinate origin in pixels          */
 static int      achsen_ur_y;  /* y- ...                                 */
-static int      achsen_len_x; /* Laenge des x-Bereichs - Rand in Pixeln */
-static int      achsen_len_y; /* dto fuer y-Bereich                     */
-static float    x_coord_min, x_coord_max; /* x-Koordinaten des Randes   */
-static float    y_coord_min, y_coord_max; /* dto. fuer y                */
-static float    scale_x, scale_y;         /* Koordinateneinheiten/Pixel */
-static float    window_x_size, window_y_size; /* Groesse des ganzen Fensters */
-static FILE *pfp; /* Filepointer fuer 'popen' auf Fensterprogramm       */
+static int      achsen_len_x; /* Length of the x range - border in pixels */
+static int      achsen_len_y; /* ditto for the y range                  */
+static float    x_coord_min, x_coord_max; /* x coordinates of the border */
+static float    y_coord_min, y_coord_max; /* ditto for y                */
+static float    scale_x, scale_y;         /* coordinate units/pixel     */
+static float    window_x_size, window_y_size; /* size of the entire window */
+static FILE *pfp; /* file pointer for 'popen' on window program         */
 
 
 /************************************************************************/
@@ -264,21 +264,21 @@ void axis_graf(char  *x_text, char  *y_text) {
 /************************************************************************/
 
 void setcoord_graf(float  x_min, float  x_max, float  y_min, float  y_max) {
-    /* Laenge der Achsen */
+    /* Length of the axes */
     achsen_len_x = (int)(window_x_size - 2*ABSTAND_X);
     achsen_len_y = (int)(window_y_size - 2*ABSTAND_Y);
 
-    /* dargestellter Koordinatenbereich */
+    /* Displayed coordinate range */
     x_coord_min = x_min;
     x_coord_max = x_max;
     y_coord_min = y_min;
     y_coord_max = y_max;
 
-    /* Skalierfaktoren in Pixel/Koordinateneinheit */
+    /* Scale factors in pixels/coordinate unit */
     scale_x = achsen_len_x/(x_coord_max - x_coord_min);
     scale_y = achsen_len_y/(y_coord_max - y_coord_min);
 
-    /* Ursprung des Achsenkreuzes in Bezug auf Fenster: */
+    /* Origin of the axis cross relative to the window: */
     achsen_ur_x = (int)(ABSTAND_X - x_coord_min*scale_x);
     achsen_ur_y = (int)(ABSTAND_Y + y_coord_max*scale_y);
 }

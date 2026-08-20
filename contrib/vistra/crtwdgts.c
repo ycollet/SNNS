@@ -13,7 +13,7 @@ static Widget createFileSelShell(Widget);
 #endif
 static SSW createSSW(Widget parent, unsigned width, unsigned height, XtCallbackProc popdown_cb, XtPointer data);
 static Widget createTextWindow(char *title, char *text, unsigned width, unsigned height, Widget parent, XtCallbackProc callback);
-static void addMenuItems(Widget sm, Collection labels, XtCallbackProc callback, Collection widgetColl);                         /* error gesetzt */
+static void addMenuItems(Widget sm, Collection labels, XtCallbackProc callback, Collection widgetColl);                         /* sets error */
 static void addFileMenu(Widget);
 static void addTransformMenu(Widget);
 static void addRemoveMenu(Widget);
@@ -32,8 +32,9 @@ static int vertScrollBarLength, horizScrollBarLength;
 
 
 /****************************************************/
-/* Kreiere alle Widgets des Programms und weise sie */
-/* den entsprechenden globalen Widget Variablen zu. */
+/* Create all widgets of the program and assign     */
+/* them to the corresponding global widget          */
+/* variables.                                       */
 /****************************************************/
 static void createAllWidgets(Widget top_level) {
     static char toggleTransStr[] = "#override\n\
@@ -183,7 +184,7 @@ static void addPatternFormWidgets(Widget parent) {
     visVecs = (PATTERNS_HEIGHT / (textHeight + BORDER_WIDTH)) + 1;
     visDims = (PATTERNS_WIDTH / (textWidth + BORDER_WIDTH)) + 1;
 
-    /* Allokiere Speicher fuer alle Widget-Arrays */
+    /* Allocate memory for all widget arrays */
     vertBytes = visVecs * sizeof(Widget);
     horizBytes = visDims * sizeof(Widget);
     if(! (nrLabels = (Widget *) malloc(vertBytes))) error(1);
@@ -195,7 +196,7 @@ static void addPatternFormWidgets(Widget parent) {
     for(i = 0; i < visVecs; i++)
         if(! (elems[i] = (Widget *) malloc(horizBytes))) error(1);
 
-    /* Kreiere die Widgets der Arrays */
+    /* Create the widgets of the arrays */
     for(i = 0; i < visVecs; i++) {
         nrLabels[i] = XtVaCreateManagedWidget(
                           "nrLabel", labelWidgetClass, parent,
@@ -434,7 +435,7 @@ static void addPatternFormWidgets(Widget parent) {
 
 
 /***********************************************/
-/* Erzeuge Label-Widgets als Kinder von parent.*/
+/* Create label widgets as children of parent. */
 /***********************************************/
 static void addInfoWidgets(Widget parent) {
     labelFile = XtVaCreateManagedWidget(
@@ -565,11 +566,11 @@ static void addInfoWidgets(Widget parent) {
 
 
 /***********************************************/
-/* Fuege dem Widget parent alle Buttons als    */
-/* Kinder hinzu, die Operationen der Skalar-   */
-/* Vektoren auf der VecColl (Input- oder Out-  */
-/* putvektoren), die momentan im Window darge- */
-/* stellt sind, anstossen.                     */
+/* Add to the widget parent all buttons as     */
+/* children that trigger operations on the     */
+/* scalar vectors of the VecColl (input or     */
+/* output vectors) currently displayed in the  */
+/* window.                                     */
 /***********************************************/
 static void addOperationWidgets(Widget parent) {
     addCommand = XtVaCreateManagedWidget(
@@ -607,7 +608,7 @@ static void addOperationWidgets(Widget parent) {
 #define NUM_FILEMENU_ITEMS 8
 
 /****************************************************************/
-/* Fuege dem Widget w das File Menu als Kind hinzu.             */
+/* Add the File menu to widget w as a child.                    */
 /****************************************************************/
 static void addFileMenu(Widget w) {
     int i;
@@ -671,7 +672,7 @@ static void addFileMenu(Widget w) {
 #define NUM_TRANSFORMMENU_ITEMS 9
 
 /****************************************************************/
-/* Fuege dem Widget w das Transform-Menu als Kind hinzu.        */
+/* Add the Transform menu to widget w as a child.               */
 /****************************************************************/
 static void addTransformMenu(Widget w) {
     int i;
@@ -731,7 +732,7 @@ static void addTransformMenu(Widget w) {
 #define NUM_REMOVEMENU_ITEMS 3
 
 /****************************************************************/
-/* Fuege dem Widget w das Remove-Menu als Kind hinzu.           */
+/* Add the Remove menu to widget w as a child.                  */
 /****************************************************************/
 static void addRemoveMenu(Widget w) {
     int i;
@@ -779,7 +780,7 @@ static void addRemoveMenu(Widget w) {
 #define NUM_SHOWMENU_ITEMS 4
 
 /****************************************************************/
-/* Fuege dem Widget w das Show-Menu als Kind hinzu.             */
+/* Add the Show menu to widget w as a child.                    */
 /****************************************************************/
 static void addShowMenu(Widget w) {
     int i;
@@ -829,8 +830,8 @@ static void addShowMenu(Widget w) {
 #define NUM_LOADMENU_ITEMS 12
 
 /***********************************************/
-/* Fuege das 'Load'-Menu mit all seinen Menu-  */
-/* Items dem Widget w als Kind hinzu.          */
+/* Add the 'Load' menu, with all its menu      */
+/* items, to widget w as a child.              */
 /***********************************************/
 static void addLoadMenu(Widget parent) {
     int i;
@@ -884,13 +885,13 @@ static void addLoadMenu(Widget parent) {
 
 
 /******************************************************/
-/* Fuege dem Widget w das Format-Menu als Kind hinzu. */
-/* Die Anzahl der Menu-Items und deren Labels sind    */
-/* durch die Variable formatNames gegeben, die vor    */
-/* Aufruf der Funktion initialisiert sein muss.       */
-/* Gleichzeitig wird die Variable formatMenuItems     */
-/* initialisiert.                                     */
-/* Variable error wird gesetzt.                       */
+/* Add the Format menu to widget w as a child.        */
+/* The number of menu items and their labels are     */
+/* given by the variable formatNames, which must be  */
+/* initialized before this function is called.        */
+/* At the same time, the variable formatMenuItems     */
+/* is initialized.                                    */
+/* Sets the global variable error.                    */
 /******************************************************/
 static void addFormatMenu(Widget w) {
     formatMenuButton = XtVaCreateManagedWidget(
@@ -913,13 +914,12 @@ static void addFormatMenu(Widget w) {
 
 
 /******************************************************/
-/* Fuege dem SimpleMenu sm die Menu Items hinzu,      */
-/* deren Namen in der Collection labels enthalten     */
-/* sind. Die Funktion callback soll aufgerufen werden */
-/* wenn irgendeiner der Items ausgewaehlt wird.       */
-/* Fuege die neu erzeugten smeBSBObjects zu widgetColl*/
-/* hinzu.                                             */
-/* Setze Variable error.                              */
+/* Add to the SimpleMenu sm the menu items whose      */
+/* names are contained in the collection labels. The  */
+/* function callback shall be called when any of the  */
+/* items is selected.                                 */
+/* Add the newly created smeBSBObjects to widgetColl. */
+/* Sets the global variable error.                    */
 /******************************************************/
 static void addMenuItems(sm, labels, callback, widgetColl)
 Widget sm;
@@ -950,9 +950,9 @@ XtCallbackProc callback;
 
 
 /*************************************************************/
-/* Antworte eine Popup-Shell fuer den Fehlerdialog.          */
-/* Das Label Widget fuer den Text der Fehlermeldung wird     */
-/* noch nicht gesetzt.                                       */
+/* Return a popup shell for the error dialog.                */
+/* The label widget for the error message text is not        */
+/* set yet.                                                  */
 /*************************************************************/
 static Widget createErrDlgShell(Widget parent) {
     Widget errDlgForm, errDlgOk, answer;
@@ -1002,11 +1002,10 @@ static Widget createErrDlgShell(Widget parent) {
 
 
 /***********************************************/
-/* Kreiere und antworte eine neue Popup-Shell  */
-/* fuer eine Dialogbox, bei der der Benutzer   */
-/* 2 Strings eingibt. Der Benutzer kann den    */
-/* Vorgang ueber einen 'Cancel'-Button         */
-/* abbrechen.                                  */
+/* Create and return a new popup shell for a   */
+/* dialog box in which the user enters 2       */
+/* strings. The user can cancel the operation  */
+/* via a 'Cancel' button.                      */
 /***********************************************/
 static Widget createStr2DlgShell(Widget parent) {
     Widget answer, str2Form, str2Cancel;
