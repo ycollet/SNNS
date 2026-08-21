@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> RPC Setup Panel</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" RPC Setup Panel">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html5306 HREF="node284.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html5304 HREF="node281.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html5298 HREF="node282.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html5308 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html5309 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html5307 HREF="node284.html"> New Panel</A>
+<B>Up:</B> <A NAME=tex2html5305 HREF="node281.html"> Control Panels</A>
+<B> Previous:</B> <A NAME=tex2html5299 HREF="node282.html"> SNNS RPC Panel</A>
+<BR> <HR> <P>
+<H2><A NAME=SECTION001322000000000000000> RPC Setup Panel</A></H2>
+<P>
+<A NAME=setup>&#160;</A>
+<A NAME=7227>&#160;</A>
+<P>
+With the help of this panel the current settings of the marked simulator
+kernel are displayed and modified.
+<P>
+<P><A NAME=7236>&#160;</A><A NAME=rpcsetup>&#160;</A><IMG  ALIGN=BOTTOM ALT="" SRC="img1363.gif">
+<BR><STRONG>Figure:</STRONG> The RPC Setup Panel<BR>
+<P>
+<P>
+<UL><LI> <IMG  ALIGN=BOTTOM ALT="" SRC="img1364.gif"> and <IMG  ALIGN=BOTTOM ALT="" SRC="img1365.gif"> switch between the
+  connection types UDP and TCP. If the connection type is changed, the
+  current connection is terminated and a new connection is
+  established. <tt> UDP</tt> and <tt> TCP</tt> are the two possible protocols
+  that are build directly upon the internet protocol (IP). <tt> UDP</tt>
+  (unreliable datagram protocol) is a little bit faster than <tt>
+    TCP</tt>. Since <tt> TCP</tt> is more reliable we recomend it for usage
+  with <tt> xguirpc</tt>.
+<P>
+<LI> <IMG  ALIGN=BOTTOM ALT="" SRC="img1366.gif"> and <IMG  ALIGN=BOTTOM ALT="" SRC="img1367.gif"> set the mode of
+  the kernel. The function of the coop-master mode has not been
+  implemented in this release of the SNNS.
+<P>
+<LI> <tt> Standard timeout</tt> The waiting interval of the graphical
+  user-interface, which is used to determine when an rpc error should
+  be displayed.
+<P>
+<LI><tt> Long duration timeout</tt> The long duration timeout field is
+  responsible for the waiting time in the learning process.  It
+  specifies the time <tt> xguirpc</tt> will wait for a <tt> kernlrpc</tt>
+  program to finish a training cycle. If there is no response within
+  that period of time <tt> xguirpc</tt> will assume an errror in the
+  program execution. This value should be rather large for big nets or
+  pattern sets, otherwise an error will be displayed even if there is
+  actually none.
+<P>
+<LI><tt> Timeout for autoexit</tt> is responsible to specify
+  how long a simulator kernel will wait without receiving any messages
+  before it automatically stops. This value is entered in minutes.
+<P>
+<LI><tt> switch to local (ALL)</tt> Specifies the threshold for
+  asynchronous execution mode. If there are fewer training cycles
+  specified in the control panel, <tt> xguirpc</tt> will wait for the
+  remote host to finish learning (synchronous mode). If there are more
+  training cycles specified, <tt> xguirpc</tt> will start training on the
+  remote host and then immediately switch back to `direct local' to
+  allow the user further input as long as <tt> kernlrpc</tt> is executing
+  training on the remote host ( asynchronous mode). This value is
+  relevant only for the training of all patterns.
+<P>
+<LI><tt> switch to local (SINGLE)</tt> Same as <tt> switch to local
+    (ALL)</tt> but with relevance only to learning a single pattern.
+<P>
+<LI> <IMG  ALIGN=BOTTOM ALT="" SRC="img1368.gif"> All entered values are set only after this button is
+  pressed.
+<P>
+<LI> <IMG  ALIGN=BOTTOM ALT="" SRC="img1369.gif"> will use the default values.
+<P>
+<LI> <IMG  ALIGN=BOTTOM ALT="" SRC="img1370.gif"> closes the window.
+</UL><BR> <HR><A NAME=tex2html5306 HREF="node284.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html5304 HREF="node281.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html5298 HREF="node282.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html5308 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html5309 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html5307 HREF="node284.html"> New Panel</A>
+<B>Up:</B> <A NAME=tex2html5305 HREF="node281.html"> Control Panels</A>
+<B> Previous:</B> <A NAME=tex2html5299 HREF="node282.html"> SNNS RPC Panel</A>
+<BR> <HR> <P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

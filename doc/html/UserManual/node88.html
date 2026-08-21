@@ -1,0 +1,40 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Hebb</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Hebb">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html2684 HREF="node89.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html2682 HREF="node78.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html2676 HREF="node87.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html2686 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html2687 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html2685 HREF="node89.html"> Hebb_FixAct</A>
+<B>Up:</B> <A NAME=tex2html2683 HREF="node78.html"> Initialization Functions</A>
+<B> Previous:</B> <A NAME=tex2html2677 HREF="node87.html"> DLVQ_Weights</A>
+<BR> <HR> <P>
+<H3><A NAME=SECTION005601000000000000000> Hebb</A></H3>
+<P>
+<A NAME=2129>&#160;</A>
+<A NAME=Hebb>&#160;</A>
+This procedure is similar to the Hebbian Learning Rule with a learning 
+rate of 1. Additionally the bias of all input and output neurons is 
+set with the parameters p1 and p2 which have to be provided in field1 
+and field2. Please note that the <tt> Hebb</tt>, <tt> ClippHebb</tt>, <tt> HopFixAct</tt>
+and <tt> PseudoInv</tt> initialization functions are actually learning functions.
+The reason why those functions are called initialization functions, is the 
+fact that there is no true training because all weights will be calculated 
+directly. In case the values of the parameters p1 and p2 are 1 and -1
+the bias of the input and output neurons will be set to ld (n) and ld (k).
+Where n is the number of input neurons and k is the number of output neurons.
+These settings are also the default settings for p1 and p2. 
+In any other case the p1 and p2 represent the bias of the input and 
+output neurons without any modification.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

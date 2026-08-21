@@ -1,0 +1,61 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Parameters of SCG</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Parameters of SCG">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html4770 HREF="node245.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html4768 HREF="node241.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html4762 HREF="node243.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html4772 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html4773 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html4771 HREF="node245.html"> Complexity of SCG</A>
+<B>Up:</B> <A NAME=tex2html4769 HREF="node241.html"> Scaled Conjugate Gradient </A>
+<B> Previous:</B> <A NAME=tex2html4763 HREF="node243.html"> Main features of </A>
+<BR> <HR> <P>
+<H2><A NAME=SECTION0010173000000000000000> Parameters of SCG</A></H2>
+<P>
+As <IMG  ALIGN=MIDDLE ALT="" SRC="img1226.gif"> and  <IMG  ALIGN=MIDDLE ALT="" SRC="img1227.gif"> are computed from their respective values at
+step <b>k-1</b>,  SCG has two parameters, namely the initial values <IMG  ALIGN=MIDDLE ALT="" SRC="img1228.gif"> and
+<IMG  ALIGN=MIDDLE ALT="" SRC="img1229.gif">. Their values are not critical but should respect the conditions
+<IMG  ALIGN=MIDDLE ALT="" SRC="img1230.gif"> and <IMG  ALIGN=MIDDLE ALT="" SRC="img1231.gif">. Empirically M&#248;ller
+has shown that bigger values of <IMG  ALIGN=MIDDLE ALT="" SRC="img1232.gif"> can lead to a slower convergence.
+<P>
+The third parameter is the usual quantity <IMG  ALIGN=MIDDLE ALT="" SRC="img1233.gif"> (cf. standard
+backpropagation).
+<P>
+In SNNS, it is usually the responsibility of the user to determine
+when the learning process should stop. Unfortunately, the <IMG  ALIGN=MIDDLE ALT="" SRC="img1234.gif">
+adaptation mechanism sometimes assigns too large values to <IMG  ALIGN=MIDDLE ALT="" SRC="img1235.gif">
+when no more progress is possible. In order to avoid floating-point
+exceptions, we have added a termination criterion<A NAME=tex2html532 HREF="footnode.html#6339"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/foot_motif.gif"></A> to SCG.  The criterion is taken from the CGMs presented
+in [<A HREF="node389.html#recipes88">P<IMG  ALIGN=BOTTOM ALT="" SRC="img1452.gif">88</A>]: stop when <P><IMG  ALIGN=BOTTOM ALT="" SRC="img1237.gif"><P> <IMG  ALIGN=MIDDLE ALT="" SRC="img1238.gif">
+is a small number used to rectify the special case of converging to a
+function value of exactly zero.  It is set to <IMG  ALIGN=BOTTOM ALT="" SRC="img1239.gif">.
+<IMG  ALIGN=MIDDLE ALT="" SRC="img1240.gif"> is a tolerance depending of the floating-point precision
+<IMG  ALIGN=BOTTOM ALT="" SRC="img1241.gif"> of your machine, and it should be set to <IMG  ALIGN=BOTTOM ALT="" SRC="img1242.gif">, which is
+usually equal to <IMG  ALIGN=BOTTOM ALT="" SRC="img1243.gif"> (simple precision) or to <IMG  ALIGN=BOTTOM ALT="" SRC="img1244.gif"> (double
+precision).
+<P>
+To summarize, there are four non-critical parameters:
+<OL><LI> <IMG  ALIGN=MIDDLE ALT="" SRC="img1245.gif">. Should satisfy <IMG  ALIGN=MIDDLE ALT="" SRC="img1246.gif">. If 0, will
+  be set to <IMG  ALIGN=BOTTOM ALT="" SRC="img1247.gif">;
+<LI> <IMG  ALIGN=MIDDLE ALT="" SRC="img1248.gif">. Should satisfy <IMG  ALIGN=MIDDLE ALT="" SRC="img1249.gif">. If 0,
+  will be set to <IMG  ALIGN=BOTTOM ALT="" SRC="img1250.gif">;
+<LI> <IMG  ALIGN=MIDDLE ALT="" SRC="img1251.gif">. See standard backpropagation. Can be set to 0 if
+  you don't know what to do with it;
+<LI> <IMG  ALIGN=MIDDLE ALT="" SRC="img1252.gif">. Depends on the floating-point precision. Should be set to
+  <IMG  ALIGN=BOTTOM ALT="" SRC="img1253.gif"> (simple precision) or to <IMG  ALIGN=BOTTOM ALT="" SRC="img1254.gif"> (double precision). If
+  0, will be set to <IMG  ALIGN=BOTTOM ALT="" SRC="img1255.gif">.
+</OL>
+<P>
+<b> Note:</b> SCG is a batch learning method, so shuffling the
+patterns has no effect.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

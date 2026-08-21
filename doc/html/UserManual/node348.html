@@ -1,0 +1,38 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Including Own Activation Functions:</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Including Own Activation Functions:">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html6174 HREF="node349.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html6172 HREF="node346.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html6168 HREF="node347.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html6176 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html6177 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html6175 HREF="node349.html"> Error Messages</A>
+<B>Up:</B> <A NAME=tex2html6173 HREF="node346.html"> Activation Functions</A>
+<B> Previous:</B> <A NAME=tex2html6169 HREF="node347.html"> Supported Activation Functions:</A>
+<BR> <HR> <P>
+<H4><A NAME=SECTION0015124020000000000000> Including Own Activation Functions:</A></H4>
+<P>
+The file &quot;tools/sources/functions.h&quot; contains two arrays: One array
+with the function names (ACT_FUNC_NAMES) and one for the macros
+which represent the function (ACT_FUNCTIONS). These macros are
+realized as character strings so they can be written to the generated
+C-source.
+<P>
+The easiest way to include an own activation function is to write the
+two necessary entries in the first position of the arrays. After that
+the constant ``ActRbfNumber'' should be increased. If a new Radial Basis
+function should be included, the entries should be appended at the end
+without increasing ActRbfNumber. An empty string (&quot;&quot;) should still be the last
+entry of the array Act_FUNC_NAMES because this is the flag for the end
+of the array.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

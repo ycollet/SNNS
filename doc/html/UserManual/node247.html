@@ -1,0 +1,58 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Background of Pruning Algorithms</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Background of Pruning Algorithms">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html4812 HREF="node248.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html4810 HREF="node246.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html4804 HREF="node246.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html4814 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html4815 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html4813 HREF="node248.html"> Theory of the </A>
+<B>Up:</B> <A NAME=tex2html4811 HREF="node246.html"> Pruning Algorithms</A>
+<B> Previous:</B> <A NAME=tex2html4805 HREF="node246.html"> Pruning Algorithms</A>
+<BR> <HR> <P>
+<H1><A NAME=SECTION001110000000000000000> Background of Pruning Algorithms</A></H1>
+<P>
+<A NAME=6568>&#160;</A>
+<P>
+Pruning algorithms try to make neural networks smaller by pruning
+unnecessary links or units, for different reasons:
+<P>
+<UL><LI> It is possible to find a fitting architecture this way.
+<P>
+<LI> The cost of a net can be reduced (think of runtime, memory and
+cost for hardware implementation).
+<P>
+<LI> The generalization<A NAME=tex2html536 HREF="footnode.html#6570"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/foot_motif.gif"></A> can (but
+need not) be improved.
+<P>
+<LI> Unnecessary input units can be pruned in order to give evidence
+of the relevance of input values.
+</UL>
+<P>
+Pruning algorithms can be rated according to two criterions:
+<P>
+<UL><LI> <i> What</i> will be pruned? We distinguish weight pruning and
+node pruning. Special types of node pruning are input pruning and
+hidden unit pruning.
+<P>
+<LI> <i> How</i> will be pruned? The most common possibilities are
+<i> penalty term algorithms</i> (like Backpropagation with Weight Decay,
+see section <A HREF="node148.html#bpwd"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A>) and <i> sensitivity algorithms</i> which are
+described in this chapter.
+</UL>
+<P>
+Sensitivity algorithms perform training and pruning of a neural net
+alternately, according to the algorithm in figure <A HREF="node247.html#prsensalg"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A>.
+<P>
+<P><A NAME=6588>&#160;</A><A NAME=prsensalg>&#160;</A><IMG  ALIGN=BOTTOM ALT="" SRC="img1257.gif">
+<BR><STRONG>Figure:</STRONG> Algorithm for sensitivity algorithms<BR>
+<P><BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

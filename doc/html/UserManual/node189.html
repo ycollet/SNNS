@@ -1,0 +1,43 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> RBF_Weights_Redo</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" RBF_Weights_Redo">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html4063 HREF="node190.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html4061 HREF="node186.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html4057 HREF="node188.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html4065 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html4066 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html4064 HREF="node190.html"> Learning Functions</A>
+<B>Up:</B> <A NAME=tex2html4062 HREF="node186.html"> Initialization Functions</A>
+<B> Previous:</B> <A NAME=tex2html4058 HREF="node188.html"> RBF_Weights_Kohonen</A>
+<BR> <HR> <P>
+<H4><A NAME=SECTION0010102230000000000000> RBF_Weights_Redo</A></H4>
+<P>
+<A NAME=4604>&#160;</A>
+<P>
+This initialization procedure influences only the link weights between
+hidden and output layer. It initializes the network as well as
+possible by taking the bias and the center vectors of the hidden
+neurons as a starting point. The center vectors can be set
+by the previously described initialization procedure. Another
+possibility is to create the center vectors by an external
+procedure, convert these center vectors into a SNNS pattern file
+and copy the patterns into the corresponding link weights by using
+the previously described initialization procedure. When doing
+this, Kohonen training must not be performed of course.
+<P>
+The effect of the procedure <tt> RBF_Weights_Redo</tt> differs from 
+<tt> RBF_Weights</tt> only in the way that the center vectors and
+the bias remain unchanged. As expected, the last two initialization
+parameters are omitted. The meaning and effect of the remaining three
+parameters is identical with the ones described in <tt> RBF_Weights</tt>.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

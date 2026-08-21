@@ -1,0 +1,78 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Fundamentals</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Fundamentals">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html3639 HREF="node157.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html3637 HREF="node155.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html3631 HREF="node155.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html3641 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html3642 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html3640 HREF="node157.html"> Initializing Counterpropagation</A>
+<B>Up:</B> <A NAME=tex2html3638 HREF="node155.html"> Counterpropagation</A>
+<B> Previous:</B> <A NAME=tex2html3632 HREF="node155.html"> Counterpropagation</A>
+<BR> <HR> <P>
+<H2><A NAME=SECTION001051000000000000000> Fundamentals</A></H2>
+<P>
+Counterpropagation was originally proposed as a pattern-lookup system
+that takes advantage of the parallel architecture of neural networks.
+Counterpropagation is useful in pattern mapping and pattern
+completion applications and can also serve as a sort of bidirectional
+associative memory.
+<P>
+When presented with a pattern, the network classifies that pattern by
+using a learned reference vector. The hidden units play a key role in
+this process, since the hidden layer performs a competitive
+classification to group the patterns. Counterpropagation works best on
+tightly clustered patterns in distinct groups.
+<P>
+Two types of layers are used: The hidden layer is a Kohonen layer with
+competitive units that do unsupervised learning; the output layer is
+a Grossberg layer, which is fully connected with the hidden layer
+and is not competitive.
+<P>
+When trained, the network works as follows. After presentation of a
+pattern in the input layer, the units in the hidden layer sum their
+inputs according to
+<P><IMG  ALIGN=BOTTOM ALT="" SRC="img789.gif"><P>
+and then compete to respond to that input pattern. The unit with the
+highest net input wins and its activation is set to 1 while all others
+are set to 0.
+After the competition, the output layer does a weighted sum on the
+outputs of the hidden layer. 
+<P><IMG  ALIGN=BOTTOM ALT="" SRC="img790.gif"><P>
+<P>
+Let c be the index of the winning hidden layer neuron. Since <IMG  ALIGN=MIDDLE ALT="" SRC="img791.gif">
+is the only nonzero element in the sum, which in turn is equal to one,
+this can be reduced to
+<P><IMG  ALIGN=BOTTOM ALT="" SRC="img792.gif"><P>
+Thus the winning hidden unit activates a pattern in the output layer.
+<P>
+During training, the weights are adapted as follows:
+<OL><LI> A winner of the competition is chosen in response to an input pattern.
+<P>
+<LI> The weights between the input layer and the winner are
+adjusted according to
+<P><IMG  ALIGN=BOTTOM ALT="" SRC="img793.gif"><P>
+All the other weights remain unchanged.
+<P>
+<LI> The output of the network is computed and compared to the target
+pattern.
+<P>
+<LI> The weights between the winner and the output layer are updated
+according to
+<P><IMG  ALIGN=BOTTOM ALT="" SRC="img794.gif"><P>
+All the other weights remain unchanged.
+</OL><BR> <HR><A NAME=tex2html3639 HREF="node157.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html3637 HREF="node155.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html3631 HREF="node155.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html3641 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html3642 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html3640 HREF="node157.html"> Initializing Counterpropagation</A>
+<B>Up:</B> <A NAME=tex2html3638 HREF="node155.html"> Counterpropagation</A>
+<B> Previous:</B> <A NAME=tex2html3632 HREF="node155.html"> Counterpropagation</A>
+<BR> <HR> <P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

@@ -1,0 +1,49 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Layout of Autoassociative Networks</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Layout of Autoassociative Networks">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html4546 HREF="node227.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html4544 HREF="node224.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html4538 HREF="node225.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html4548 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html4549 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html4547 HREF="node227.html"> Hebbian Learning</A>
+<B>Up:</B> <A NAME=tex2html4545 HREF="node224.html"> Autoassociative Networks</A>
+<B> Previous:</B> <A NAME=tex2html4539 HREF="node225.html"> General Characteristics</A>
+<BR> <HR> <P>
+<H2><A NAME=SECTION0010142000000000000000> Layout of Autoassociative Networks</A></H2>
+<P>
+An autoassociative network in SNNS consists of two layers: A layer of
+<b> world</b> units and a layer of <b> learning</b> units.  The
+representation on the world units indicates the information coming
+into the network from the outside world.  The representation on the
+learning units represents the network's current interpretation of
+the incoming information.  This interpretation is determined partially
+by the input and partially by the network's prior learning.
+<P>
+Figure <A HREF="node226.html#AutoAssoz"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A> shows a simple example network. Each unit in the
+world layer sends input to exactly one unit in the learning layer.
+The connected pair of units corresponds to a single node in the
+typical representation of autoassociative networks.  The link from the
+world unit always has a weight of 1.0, and is unidirectional from the
+world unit to the learning unit.  The learning units are fully
+interconnected with each other.
+<P>
+<P><A NAME=5981>&#160;</A><A NAME=AutoAssoz>&#160;</A><IMG  ALIGN=BOTTOM ALT="" SRC="img1184.gif">
+<BR><STRONG>Figure:</STRONG> A simple Autoassociative Memory Network<BR>
+<P>
+<P>
+The links between the learning units change according to the selected
+learning rule to fit the representation on the world units.  The links
+between the world units and their corresponding learning units are not
+affected by learning.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

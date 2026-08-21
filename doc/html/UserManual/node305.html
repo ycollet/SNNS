@@ -1,0 +1,63 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> setInitFunc</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" setInitFunc">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html5624 HREF="node306.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html5622 HREF="node304.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html5616 HREF="node304.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html5626 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html5627 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html5625 HREF="node306.html"> setLearnFunc</A>
+<B>Up:</B> <A NAME=tex2html5623 HREF="node304.html"> Function Calls To </A>
+<B> Previous:</B> <A NAME=tex2html5617 HREF="node304.html"> Function Calls To </A>
+<BR> <HR> <P>
+<H3><A NAME=SECTION001431100000000000000> setInitFunc</A></H3>
+<P>
+<A NAME=7595>&#160;</A>
+<P>
+This function call selects the function with which the net is
+initialized. The format is:
+<blockquote> <tt> setInitFunc (function name, parameter...)</tt>
+</blockquote>
+<P>
+where <tt> function name</tt> is the initialization function and has to be 
+selected out of:
+<blockquote> <PRE>ART1_Weights        DLVQ_Weights            Random_Weights_Perc  
+ART2_Weights        Hebb                    Randomize_Weights    
+ARTMAP_Weights      Hebb_Fixed_Act          RBF_Weights          
+CC_Weights          JE_Weights              RBF_Weights_Kohonen  
+ClippHebb           Kohonen_Rand_Pat        RBF_Weights_Redo     
+CPN_Weights_v3.2    Kohonen_Weights_v3.2    RCC_Weights          
+CPN_Weights_v3.3    Kohonen_Const           RM_Random_Weights    
+CPN_Rand_Pat        PseudoInv
+</PRE></blockquote>
+<P>
+It has to be provided by the user and the name has to be exactly as printed 
+above. The function name has to be embraced by <tt> &quot;&quot;</tt>.
+<P>
+After the name of the initialization function is provided the user can
+enter the parameters which influence the initialization process. If no
+parameters have been entered default values will be selected. The
+selected parameters have to be of type float. Function calls could
+look like this:
+<P>
+<blockquote> <tt> setInitFunc (&quot;Randomize_Weights&quot;)<BR> 
+setInitFunc(&quot;Randomize_Weights&quot;, 1.0, -1.0)</tt>
+</blockquote>
+<P>
+where the first call selects the <tt> Randomize_Weights</tt> function
+with default parameters.  The second call uses the <tt>
+  Randomize_Weights</tt> function and sets two parameters. The batch
+interpreter displays:
+<P>
+<blockquote> <tt> Init function is now Randomize_Weights<BR> 
+Parameters are: 1.0 -1.0</tt>
+</blockquote><BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

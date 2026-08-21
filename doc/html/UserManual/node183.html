@@ -1,0 +1,165 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> RBF Fundamentals</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" RBF Fundamentals">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html3984 HREF="node184.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html3982 HREF="node182.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html3976 HREF="node182.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html3986 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html3987 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html3985 HREF="node184.html"> RBF Implementation in </A>
+<B>Up:</B> <A NAME=tex2html3983 HREF="node182.html"> Radial Basis Functions </A>
+<B> Previous:</B> <A NAME=tex2html3977 HREF="node182.html"> Radial Basis Functions </A>
+<BR> <HR> <P>
+<H2><A NAME=SECTION0010101000000000000000> RBF Fundamentals</A></H2>
+<P>
+<A NAME=4338>&#160;</A>
+<P>
+The principle of radial basis functions derives from the theory of
+functional approximation. Given <b>N</b> pairs <IMG  ALIGN=MIDDLE ALT="" SRC="img894.gif"> (<IMG  ALIGN=MIDDLE ALT="" SRC="img895.gif">) we are looking for a function <b>f</b> of the form:
+<P>
+<P><IMG  ALIGN=BOTTOM ALT="" SRC="img896.gif"><P>
+<P>
+<b>h</b> is the radial basis function and <IMG  ALIGN=MIDDLE ALT="" SRC="img897.gif"> are the <b>K</b>
+centers which have to be selected. The coefficients <IMG  ALIGN=MIDDLE ALT="" SRC="img898.gif"> are also
+unknown at the moment and have to be computed. <IMG  ALIGN=MIDDLE ALT="" SRC="img899.gif"> and
+<IMG  ALIGN=MIDDLE ALT="" SRC="img900.gif"> are elements of an n--dimensional vector space.
+<P>
+<b>h</b> is applied to the Euclidian distance between each center
+<IMG  ALIGN=MIDDLE ALT="" SRC="img901.gif"> and the given argument <IMG  ALIGN=BOTTOM ALT="" SRC="img902.gif">. Usually a function <b>h</b>
+which has its maximum at a distance of zero is used, most often the
+Gaussian function. In this case, values of <IMG  ALIGN=BOTTOM ALT="" SRC="img903.gif"> which are equal
+to a center <IMG  ALIGN=BOTTOM ALT="" SRC="img904.gif"> yield an output value of 1.0 for the function
+<b>h</b>, while the output becomes almost zero for larger distances.
+<P>
+The function <b>f</b> should be an approximation of the <b>N</b> given pairs
+<IMG  ALIGN=MIDDLE ALT="" SRC="img905.gif"> and should therefore minimize the following error
+function <b>H</b>:
+<P>
+<P><IMG  ALIGN=BOTTOM ALT="" SRC="img906.gif"><P>
+<P>
+The first part of the definition of <b>H</b> (the sum) is the condition
+which minimizes the total error of the approximation, i.e. which
+constrains <b>f</b> to approximate the <b>N</b> given points. The second part of
+<b>H</b> ( <IMG  ALIGN=MIDDLE ALT="" SRC="img907.gif"> ) is a stabilizer which forces <b>f</b> to become as
+smooth as possible. The factor <IMG  ALIGN=BOTTOM ALT="" SRC="img908.gif"> determines the influence of
+the stabilizer.
+<P>
+Under certain conditions it is possible to show that a set of
+coefficients <IMG  ALIGN=MIDDLE ALT="" SRC="img909.gif"> can be calculated so that <b>H</b> becomes minimal. 
+This calculation depends on the centers <IMG  ALIGN=MIDDLE ALT="" SRC="img910.gif"> which
+have to be chosen beforehand.
+<P>
+Introducing the following vectors and matrices <IMG  ALIGN=MIDDLE ALT="" SRC="img911.gif">
+<P><IMG  ALIGN=BOTTOM ALT="" SRC="img912.gif"><P>
+<P>
+the set of unknown parameters <IMG  ALIGN=MIDDLE ALT="" SRC="img913.gif"> can be calculated by the formula:
+<P>
+<P><IMG  ALIGN=BOTTOM ALT="" SRC="img914.gif"><P>
+<P>
+By setting <IMG  ALIGN=BOTTOM ALT="" SRC="img915.gif"> to <b>0</b> this formula becomes identical to the
+computation of the Moore Penrose inverse matrix, which gives the best
+solution of an under-determined system of linear equations. In this
+case, the linear system is exactly the one which follows directly from
+the conditions of an exact interpolation of the given problem:
+<P>
+<P><IMG  ALIGN=BOTTOM ALT="" SRC="img916.gif"><P>
+<P>
+The method of radial basis functions can easily be represented by a
+three layer feedforward neural network. The input layer consists of n
+units which represent the elements of the vector <IMG  ALIGN=BOTTOM ALT="" SRC="img917.gif">. The <b>K</b>
+components of the sum in the definition of <b>f</b> are represented by the
+units of the hidden layer. The links between input and hidden layer
+contain the elements of the vectors <IMG  ALIGN=MIDDLE ALT="" SRC="img918.gif">. The hidden units
+compute the Euclidian distance between the input pattern and the
+vector which is represented by the links leading to this unit. The
+activation of the hidden units is computed by applying the Euclidian
+distance to the function <b>h</b>. Figure <A HREF="node183.html#rbf_special_unit"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A> shows the
+architecture of the special form of hidden units.
+<P>
+
+<P>
+<P><A NAME=4438>&#160;</A><A NAME=rbf_special_unit>&#160;</A><IMG  ALIGN=BOTTOM ALT="" SRC="img919.gif">
+<BR><STRONG>Figure:</STRONG> The special radial basis unit<BR>
+<P>
+<P>
+The single output neuron gets its input from all hidden neurons. The links
+leading to the output neuron hold the coefficients <IMG  ALIGN=MIDDLE ALT="" SRC="img920.gif">. The activation
+of the output neuron is determined by the weighted sum of its inputs.
+<P>
+The previously described architecture of a neural net, which realizes
+an approximation using radial basis functions, can easily be expanded
+with some useful features: More than one output neuron is possible which
+allows the approximation of several functions <b>f</b> around the same set
+<A NAME=4442>&#160;</A>
+of centers <IMG  ALIGN=MIDDLE ALT="" SRC="img921.gif">. The activation of the output units can be
+calculated by using a nonlinear invertible function <IMG  ALIGN=BOTTOM ALT="" SRC="img922.gif"> (e.g.\
+sigmoid). The bias of the output neurons and a direct connection
+between input and hidden layer (shortcut connections) can be used to
+improve the approximation quality. The bias of the hidden units can
+be used to modify the characteristics of the function <b>h</b>. All in all
+a neural network is able to represent the following set of
+approximations:
+<P>
+<P><IMG  ALIGN=BOTTOM ALT="" SRC="img923.gif"><P>
+<P>
+This formula describes the behavior of a fully connected feedforward
+net with <b>n</b> input, <b>K</b> hidden and <b>m</b> output neurons.  <IMG  ALIGN=MIDDLE ALT="" SRC="img924.gif">
+is the activation of output neuron <b>k</b> on the input <IMG  ALIGN=MIDDLE ALT="" SRC="img925.gif"> to the input units. The coefficients <IMG  ALIGN=MIDDLE ALT="" SRC="img926.gif">
+represent the links between hidden and output layer. The shortcut
+connections from input to output are realized by <IMG  ALIGN=MIDDLE ALT="" SRC="img927.gif">.  <IMG  ALIGN=MIDDLE ALT="" SRC="img928.gif"> is
+the bias of the output units and <IMG  ALIGN=MIDDLE ALT="" SRC="img929.gif"> is the bias of the hidden
+neurons which determines the exact characteristics of the function
+<b>h</b>. The activation function of the output neurons is represented by
+<IMG  ALIGN=BOTTOM ALT="" SRC="img930.gif">.
+<P>
+The big advantage of the method of radial basis functions is the
+possibility of a direct computation of the coefficients <IMG  ALIGN=MIDDLE ALT="" SRC="img931.gif">
+(i.e. the links between hidden and output layer) and the bias <IMG  ALIGN=MIDDLE ALT="" SRC="img932.gif">.
+This computation requires a suitable choice of centers <IMG  ALIGN=MIDDLE ALT="" SRC="img933.gif">
+(i.e. the links between input and hidden layer). Because of the lack
+of knowledge about the quality of the <IMG  ALIGN=MIDDLE ALT="" SRC="img934.gif">, it is recommended
+to append some cycles of network training after the direct computation
+of the weights. Since the weights of the links leading from the input
+to the output layer can also not be computed directly, there must be a
+special training procedure for neural networks that uses radial basis
+functions.
+<P>
+The implemented training procedure tries to minimize the error <b>E</b> by 
+using gradient descent. It is recommended to use different learning rates
+for different groups of trainable parameters. The following set of
+formulas contains all information needed by the training procedure:
+<P>
+<P><A NAME=a_fehler_formel>&#160;</A><IMG  ALIGN=BOTTOM ALT="" SRC="img935.gif"><P>
+<P>
+<P><IMG  ALIGN=BOTTOM ALT="" SRC="img936.gif"><P>
+<P>
+It is often helpful to use a momentum term. This term increases the
+learning rate in smooth error planes and decreases it in rough error
+planes. The next formula describes the effect of a momentum term on
+the training of a general parameter <b>g</b> depending on the additional
+parameter <IMG  ALIGN=MIDDLE ALT="" SRC="img937.gif">. <IMG  ALIGN=MIDDLE ALT="" SRC="img938.gif"> is the change of <b>g</b> during the time
+step <b>t+1</b> while <IMG  ALIGN=MIDDLE ALT="" SRC="img939.gif"> is the change during time step <b>t</b>:
+<P>
+<P><IMG  ALIGN=BOTTOM ALT="" SRC="img940.gif"><P>
+<P>
+Another useful improvement of the training procedure is the definition
+of a maximum allowed error inside the output neurons. This prevents
+the network from getting overtrained, since errors that are smaller than
+the predefined value are treated as zero. This in turn prevents the
+corresponding links from being changed.
+<P>
+<BR> <HR><A NAME=tex2html3984 HREF="node184.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html3982 HREF="node182.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html3976 HREF="node182.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html3986 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html3987 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html3985 HREF="node184.html"> RBF Implementation in </A>
+<B>Up:</B> <A NAME=tex2html3983 HREF="node182.html"> Radial Basis Functions </A>
+<B> Previous:</B> <A NAME=tex2html3977 HREF="node182.html"> Radial Basis Functions </A>
+<BR> <HR> <P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

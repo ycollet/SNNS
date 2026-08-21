@@ -1,0 +1,132 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Network Analyzer</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Network Analyzer">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html3339 HREF="node141.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html3337 HREF="node135.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html3333 HREF="node139.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html3341 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html3342 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html3340 HREF="node141.html"> The Network Analyzer </A>
+<B>Up:</B> <A NAME=tex2html3338 HREF="node135.html"> Network Analyzing Tools</A>
+<B> Previous:</B> <A NAME=tex2html3334 HREF="node139.html"> Example Session</A>
+<BR> <HR> <P>
+<H1><A NAME=SECTION00920000000000000000> Network Analyzer</A></H1>
+<P>
+<A NAME=3358>&#160;</A>
+<P>
+The network analyzer is a tool to visualize different types 
+of graphs. An overview of these graphs is shown in table <A HREF="node140.html#na_tab"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A>. 
+This tool was especially developed for the prediction of time series with 
+partial recurrent networks, but is also useful for regular feedforward
+networks. Its window is opened by selecting the entry <tt> ANALYZER</tt>
+in the menu under the  <IMG  ALIGN=BOTTOM ALT="" SRC="img700.gif"> button.
+<P>
+The x-y graph is used to draw the activations or outputs of two units 
+against each other. The t-y graph displays the activation (or output) 
+of a unit during subsequent discrete time steps. The t-e graph makes it 
+possible to visualize the error during subsequent discrete time steps.
+<P>
+<P><A NAME=3373>&#160;</A><A NAME=na_tab>&#160;</A><IMG  ALIGN=BOTTOM ALT="" SRC="img701.gif">
+<BR><STRONG>Table:</STRONG> The different types of graphs, which can be visualized with the
+           network analyzer.<BR>
+<P>
+<P>
+
+<P><A NAME=3384>&#160;</A><A NAME=net_analyzer>&#160;</A><IMG  ALIGN=BOTTOM ALT="" SRC="img702.gif">
+<BR><STRONG>Figure:</STRONG> The Network Analyzer Window.<BR>
+<P>
+<P>
+On the right side of the window, there are different buttons with the 
+following functions:
+<P>
+<IMG  ALIGN=BOTTOM ALT="" SRC="img703.gif">      :
+<P>
+  This button is used to ''switch on'' the network analyzer. If the 
+  Network Analyzer is switched on, every time
+  a pattern has been propagated through the network, the network analyzer
+  updates its display.
+<P>
+<P>
+<P>
+<IMG  ALIGN=BOTTOM ALT="" SRC="img704.gif">    :
+<P>
+  The points will be connected by a line, if this button is toggled.
+<P>
+<P>
+<P>
+<IMG  ALIGN=BOTTOM ALT="" SRC="img705.gif">    :
+<P>
+  Displays a grid.
+  The number of rows and columns of the grid can be specified in the 
+  network analyzer setup.
+<P>
+<P>
+<P>
+<IMG  ALIGN=BOTTOM ALT="" SRC="img706.gif">   :
+<P>
+  This button clears the graph in the display. The time counter will be
+  reset to 1. If there is an active <tt> M--TEST</tt> operation, this operation
+  will be killed.
+<P>
+<P>
+<P>
+<IMG  ALIGN=BOTTOM ALT="" SRC="img707.gif">  :
+<P>
+  A click on this button corresponds to several clicks on the 
+  <IMG  ALIGN=BOTTOM ALT="" SRC="img708.gif"> button in the control panel. The number <b>n</b> of <tt> TEST</tt>
+  operations to be executed can be specified in the Network Analyzer setup.
+  Once pressed, the button remains active until all <b>n</b> <tt> TEST</tt> 
+  operations have been executed or the <tt> M--TEST</tt> operation has been 
+  killed, e.g. by clicking the <IMG  ALIGN=BOTTOM ALT="" SRC="img709.gif"> button in the control panel.
+<P>
+<P>
+<P>
+<IMG  ALIGN=BOTTOM ALT="" SRC="img710.gif">  :
+<P>
+  If this button activated, the points will not only be shown on the
+  display, but their coordinates will also be saved in a file. The name of 
+  this file can be specified in the setup of the Network Analyzer.
+<P>
+<P>
+<P>
+<IMG  ALIGN=BOTTOM ALT="" SRC="img711.gif">   :
+<P>
+  Opens the display control window of the Network Analyzer.
+  The description of this window follows below.
+<P>
+<P>
+<P>
+<IMG  ALIGN=BOTTOM ALT="" SRC="img712.gif">   :
+<P>
+  Opens the Network Analyzer setup window. The description of the setup 
+  follows in the next subsection.
+<P>
+<P>
+<P>
+<IMG  ALIGN=BOTTOM ALT="" SRC="img713.gif">    :
+<P>
+  Closes the network analyzer window. An active <tt> M--TEST</tt> operation
+  will be killed.
+<P>
+<P>
+<P>
+<BR> <HR>
+<UL> 
+<LI> <A NAME=tex2html3343 HREF="node141.html#SECTION00921000000000000000"> The Network Analyzer Setup</A>
+<LI> <A NAME=tex2html3344 HREF="node142.html#SECTION00922000000000000000"> The Display Control Window of the Network Analyzer</A>
+</UL>
+<BR> <HR><A NAME=tex2html3339 HREF="node141.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html3337 HREF="node135.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html3333 HREF="node139.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html3341 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html3342 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html3340 HREF="node141.html"> The Network Analyzer </A>
+<B>Up:</B> <A NAME=tex2html3338 HREF="node135.html"> Network Analyzing Tools</A>
+<B> Previous:</B> <A NAME=tex2html3334 HREF="node139.html"> Example Session</A>
+<BR> <HR> <P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

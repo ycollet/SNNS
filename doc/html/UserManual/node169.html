@@ -1,0 +1,48 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> The Algorithm</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" The Algorithm">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html3806 HREF="node170.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html3804 HREF="node168.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html3798 HREF="node168.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html3808 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html3809 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html3807 HREF="node170.html"> Mathematical Background</A>
+<B>Up:</B> <A NAME=tex2html3805 HREF="node168.html"> Pruned-Cascade-Correlation (PCC)</A>
+<B> Previous:</B> <A NAME=tex2html3799 HREF="node168.html"> Pruned-Cascade-Correlation (PCC)</A>
+<BR> <HR> <P>
+<H3><A NAME=SECTION001082100000000000000> The Algorithm</A></H3>
+<P>
+The aim of Pruned-Cascade-Correlation (PCC) is to minimize the <i>
+expected</i> test set error, instead of the actual training error
+[<A HREF="node389.html#Weh94">Weh94</A>]. PCC tries to determine the optimal number of hidden
+units and to remove unneeded weights after a new hidden unit is
+installed. As pointed out by Wehrfritz, selection criteria or a
+hold-out set, as it is used in ``stopped-learning'', may be applied to
+digest away unneeded weights. In this release of SNNS, however, only
+selection criteria for linear models are implemented.
+<P>
+The algorithm works as follows (CC steps are printed italic):
+<P>
+<OL><LI><i> Train the connections to the output layer</i>
+<LI>Compute the selection criterion
+<LI><i> Train the candidates</i>
+<LI><i> Install the new hidden neuron</i>
+<LI>Compute the selection criterion
+<LI>Set each weight of the last inserted unit to zero and compute
+    the selection criterion; if there exists a weight, whose removal
+    would decrease the selection criterion, remove the link, which
+    decreases the selection criterion <b> most</b>. Goto step 5 until a
+    further removal would increase the selection criterion.
+<LI>Compute the selection criterion; if it is greater than the one,
+    computed before inserting the new hidden unit, notify the user
+    that the net is getting too big.
+</OL><BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

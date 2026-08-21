@@ -1,0 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Operators and Expressions</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Operators and Expressions">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html5513 HREF="node298.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html5511 HREF="node292.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html5505 HREF="node296.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html5515 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html5516 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html5514 HREF="node298.html"> The Print Function</A>
+<B>Up:</B> <A NAME=tex2html5512 HREF="node292.html"> Description of the </A>
+<B> Previous:</B> <A NAME=tex2html5506 HREF="node296.html"> System Variables</A>
+<BR> <HR> <P>
+<H2><A NAME=SECTION001425000000000000000> Operators and Expressions</A></H2>
+<P>
+<A NAME=7462>&#160;</A>
+<P>
+An expression is usually a formula which calculates a value. An
+expression could be a complex mathematical formula or just a value.
+Expressions include:
+<P>
+<blockquote> <tt> 3<BR> 
+TRUE<BR> 
+3 + 3<BR> 
+17 - 4 * a + (2 * ln 5) / 0.3</tt>
+</blockquote>
+<P>
+The value or the result of an expression can be assigned to a
+variable. The following operators exist, ordered by priority from top
+to bottom:
+<P>
+<P><IMG  ALIGN=BOTTOM ALT="" SRC="img1385.gif"><P>
+<P>
+<P><IMG  ALIGN=BOTTOM ALT="" SRC="img1386.gif"><P>
+<P>
+If more than one expression occurs in a line the execution of
+expressions starts at the left and proceeds towards the right. The
+order can be changed with parentheses `(' `)'.
+<P>
+The type of an expression is determined at run time and is set with the
+operator except in the case of integer number division, the modulo operation, 
+the boolean operation and the compare operations.
+<P>
+If two integer values are multilpied, the result will be an integer
+value.  But if an integer and a float value are multilpied, the result
+will be a float value.  If one operator is of type string, then all other
+operators are transformed into strings. Partial expressions are
+calculated before the transformation takes place:
+<P>
+<blockquote> <tt> a := 5 + &quot; plus &quot; + 4 + &quot; is &quot; + ( 8 + 1 )</tt>
+</blockquote>
+<P>
+is transformed to the string:
+<P>
+<blockquote> <tt> 5 plus 4 is 9</tt>
+</blockquote>
+<P>
+Please note that if the user decides to use operators such as sqrt,
+ln, log or the exponential operator, no parentheses are required
+because the operators are not function calls:
+<P>
+<blockquote> <P><IMG  ALIGN=BOTTOM ALT="" SRC="img1387.gif"><P></blockquote>
+<P>
+However parentheses are possible and some times even necessary:
+<P>
+<blockquote> <PRE>sqrt (9 + 16)
+ln (2^16)
+log (alpha * sqrt tau)
+</PRE></blockquote><BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

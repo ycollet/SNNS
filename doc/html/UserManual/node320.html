@@ -1,0 +1,209 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Using Snnsbat</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Using Snnsbat">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html5802 HREF="node321.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html5800 HREF="node318.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html5794 HREF="node319.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html5804 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html5805 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html5803 HREF="node321.html"> Calling Snnsbat</A>
+<B>Up:</B> <A NAME=tex2html5801 HREF="node318.html"> Snnsbat -- The </A>
+<B> Previous:</B> <A NAME=tex2html5795 HREF="node319.html"> The Snnsbat Environment</A>
+<BR> <HR> <P>
+<H2><A NAME=SECTION001452000000000000000> Using Snnsbat</A></H2>
+<P>
+<A NAME=7902>&#160;</A>
+The batch mode execution of SNNS is controlled by the configuration
+file. It contains entries that define the network and parameters
+required for program execution. These entries are tuples (mostly
+pairs) of a keyword followed by one or more values.  There is only one
+tuple allowed per line, but lines may be separated by an arbitrary
+number of comment lines. Comments start with the number sign '#'.
+The set of given tuples specify the actions performed by SNNS in one
+execution run. An arbitrary number of execution runs can be defined in
+one configuration file, by separating the tuple sets with the keyword
+'PerformActions:'. Within a tuple set, the tuples may be listed in any
+order. If a tuple is listed several times, values that are already
+read are overwritten. The only exception is the key 'Type:', which has
+to be listed only once and as the first key.  If a key is omitted, the
+corresponding value(s) are assigned a default.
+<P>
+
+<P>
+Here is a listing of the tuples and their meaning:
+
+<P>
+<P><IMG  ALIGN=BOTTOM ALT="" SRC="img1399.gif"><P>
+<P>
+<P><IMG  ALIGN=BOTTOM ALT="" SRC="img1400.gif"><P>
+<P>
+
+Please note the mandatory colon after each key and the upper case of
+several letters.
+<P>
+<tt> snnsbat</tt> may also be used to perform only parts of a regular
+network training run. If the network is not to be initialized,
+training is not to be performed, or no result file is to be computed,
+the corresponding entries in the configuration file can be omitted.
+<P>
+For all keywords the string '<b>&lt;</b>OLD<b>&gt;</b>' is also a valid value. If
+<b>&lt;</b>OLD<b>&gt;</b> is specified, the value of the previous execution run is
+kept. For the keys 'NetworkFile:' and 'LearnPatternFile:' this means,
+that the corresponding files are not read in again. The network
+(patterns) already in memory are used instead, thereby saving
+considerable execution time. This allows for a continuous logging of
+network performance. The user may, for example, load a network and
+pattern file, train the network for 100 cycles, create a result file,
+train another 100 cycles, create a second result file, and so forth.
+Since the error made by the current network in classifying the
+patterns is reported in the result file, the series of result files
+document the improvement of the network performance.
+<P>
+
+<P>
+The following table shows the behavior of the program caused by omitted
+entries:
+<P>
+<P><IMG  ALIGN=BOTTOM ALT="" SRC="img1401.gif"><P>
+<P>
+<P><IMG  ALIGN=BOTTOM ALT="" SRC="img1402.gif"><P>
+<P>
+Here is a typical example of a configuration file:
+<P>
+
+<PRE>    #
+    Type: SNNSBATCH_2
+    #
+    # If a key is given twice, the second appearance is taken.
+    # Keys that are not required for a special run may be omitted.
+    # If a key is omitted but required, a default value is assumed.
+    # The lines may be separated with comments.
+    #
+    # Please note the mandatory file type specification at the beginning and 
+    # the colon following the key.
+    #
+    #######################################################################
+    NetworkFile: /home/SNNSv4.1/examples/letters.net
+    #
+    InitFunction: Randomize_Weights
+    NoOfInitParam: 2
+    InitParam: -1.0 1.0
+    #
+    LearnPatternFile: /home/SNNSv4.1/examples/letters.pat
+    NoOfVarDim: 2 1
+    SubPatternISize: 5 5
+    SubPatternOSize: 26
+    SubPatternIStep: 5 1
+    SubPatternOStep: 1
+    NoOfLearnParam: 2
+    LearnParam: 0.8 0.3
+    MaxLearnCycles: 100
+    MaxErrorToStop: 1
+    Shuffle: YES
+    #
+    TrainedNetworkFile: trained_letters.net
+    ResultFile: letters1.res
+    ResultMinMaxPattern: 1 26
+    ResultIncludeInput: NO
+    ResultIncludeOutput: YES
+    #
+    #This execution run loads a network and pattern file with variable
+    #pattern format, initializes the network, trains it for 100 cycles
+    #(or stops, if then error is less than 0.01), and finally computes
+    #the result file letters1.
+    PerformActions:
+    #
+    NetworkFile: &lt;OLD&gt;
+    #
+    LearnPatternFile: &lt;OLD&gt;
+    NoOfLearnParam: &lt;OLD&gt;
+    LearnParam: &lt;OLD&gt;
+    MaxLearnCycles: 100
+    MaxErrorToStop: 1
+    Shuffle: YES
+    #
+    ResultFile: letters2.res
+    ResultMinMaxPattern: &lt;OLD&gt;
+    ResultIncludeInput:  &lt;OLD&gt;
+    ResultIncludeOutput: &lt;OLD&gt;
+    #
+    #This execution run continues the training of the already loaded file
+    #for another 100 cycles before creating a second result file.
+    #
+    PerformActions:
+    #
+    NetworkFile: &lt;OLD&gt;
+    #
+    LearnPatternFile: &lt;OLD&gt;
+    NoOfLearnParam: &lt;OLD&gt;
+    LearnParam: 0.2 0.3
+    MaxLearnCycles: 100
+    MaxErrorToStop: 0.01
+    Shuffle: YES
+    #
+    ResultFile: letters3.res
+    ResultMinMaxPattern: &lt;OLD&gt;
+    ResultIncludeInput:  &lt;OLD&gt;
+    ResultIncludeOutput: &lt;OLD&gt;
+    TrainedNetworkFile: trained_letters.net
+    #
+    #This execution run concludes the training of the already loaded file.
+    #After another 100 cycles of training with changed learning
+    #parameters the final network is saved to a file and a third result
+    #file is created.
+    #
+</PRE>
+
+<P>
+
+<P>
+The file <b>&lt;</b>log_file<b>&gt;</b> collects the SNNS kernel messages and
+contains statistics about running time and speed of the program.
+An example protocol file is listed in appendix <A HREF="node320.html#batchProt"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A>.
+<P>
+<A NAME=7921>&#160;</A>
+If the  <b>&lt;</b>log_file<b>&gt;</b> command line parameter is omitted, <tt>
+snnsbat</tt> opens the file `snnsbat.log' in the current directory.
+To limit the size of this file, a maximum of 100 learning cycles are
+logged. This means, that for 1000 learning cycles a message will be
+written to the file every 10 cycles.
+<P>
+If the time required for network training exceeds 30 minutes of CPU
+time, the network is saved. The log file then shows the message:
+<P>
+<PRE>  #####  Temporary network file 'SNNS_Aaaa00457' created.  #####
+</PRE>
+<P>
+Temporay networks always start with the string `SNNS_'. After 30 more
+minutes of CPU time, <tt> snnsbat</tt> creates a second security copy.
+Upon normal termination of the program, these copies are deleted from
+the current directory. The log file then shows the message:
+<P>
+<PRE>  #####  Temporary network file 'SNNS_Aaaa00457' removed.  #####
+</PRE>
+<P>
+In an emergency (powerdown, kill, alarm, etc.), the current network is
+saved by the program. The log file, resp. the mailbox, will later
+show an entry like:
+<P>
+<blockquote> <tt> Signal 15 caught, SNNS V4.1 Batchlearning terminated.
+<P>
+SNNS V4.1 Batchlearning terminated at Tue Mar 23 08:49:04 1995<BR> 
+System: SunOS  Node: matisse  Machine: sun4m<BR> 
+Networkfile './SNNS_BAAa02686' saved.<BR> 
+Logfile 'snnsbat.log' written.</tt>
+</blockquote><BR> <HR><A NAME=tex2html5802 HREF="node321.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html5800 HREF="node318.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html5794 HREF="node319.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html5804 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html5805 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html5803 HREF="node321.html"> Calling Snnsbat</A>
+<B>Up:</B> <A NAME=tex2html5801 HREF="node318.html"> Snnsbat -- The </A>
+<B> Previous:</B> <A NAME=tex2html5795 HREF="node319.html"> The Snnsbat Environment</A>
+<BR> <HR> <P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

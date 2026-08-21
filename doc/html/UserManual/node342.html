@@ -1,0 +1,45 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> TDNN:</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" TDNN:">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html6104 HREF="node343.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html6102 HREF="node341.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html6096 HREF="node341.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html6106 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html6107 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html6105 HREF="node343.html"> CPN:</A>
+<B>Up:</B> <A NAME=tex2html6103 HREF="node341.html"> Special Network Architectures</A>
+<B> Previous:</B> <A NAME=tex2html6097 HREF="node341.html"> Special Network Architectures</A>
+<BR> <HR> <P>
+<H4><A NAME=SECTION0015123010000000000000> TDNN:</A></H4>
+<P>
+Generally, a layer in a time delay neural network consists of feature units and
+their delay units. SNNS2C generates code only containing
+the feature units. The delay units are only additional activations in
+the feature unit. This is possible because every delay unit has the
+same link weights to it's corresponding source units as its feature
+unit.
+<P>
+So the input layer consists only of its prototype units, too. Therefore
+it's not possible to present the whole input pattern to the
+network. This is not necessary because it can be presented step by
+step to the inputs. This is useful for a real-time application,
+with the newest feature units as inputs. To mark a new sequence the
+<em> init</em>-flag (parameter of the function) can be set to 1. After
+this, the delays are filled when the init flag is set to 0 again. 
+To avoid meaningless outputs the function returns NOT_VALID until the
+delays are filled again.
+<P>
+There is a new variable in the record of the header file for TDNNs. It
+is called ``MinDelay'' and is the minimum number of time steps which
+are needed to get a valid output after the <em> init</em>-flag was set.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

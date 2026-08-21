@@ -1,0 +1,51 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Program Flow</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Program Flow">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html6040 HREF="node338.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html6038 HREF="node336.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html6032 HREF="node336.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html6042 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html6043 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html6041 HREF="node338.html"> Including the Compiled </A>
+<B>Up:</B> <A NAME=tex2html6039 HREF="node336.html"> Snns2c</A>
+<B> Previous:</B> <A NAME=tex2html6033 HREF="node336.html"> Snns2c</A>
+<BR> <HR> <P>
+<H2><A NAME=SECTION0015121000000000000000> Program Flow</A></H2>
+<P>
+Because the compilation of very large nets may require some time, the
+program outputs messages, indicating which state of compilation is
+passed at the moment.
+<P>
+<DL ><DT> loading net...
+<DD> the network file is loaded with the function
+  offered by the kernel user interface.
+<P>
+<DT> dividing net into layers ...
+<DD> all units are grouped into layers
+  where all units have the same type and the same activation function.
+  There must not exist any dependencies between the units of the
+  layers except the connections of SPECIAL HIDDEN units to themselves
+  in Elman and Jordan networks or the links of the BPTT-networks.
+<P>
+<DT> sorting layers...
+<DD> these layers are sorted in topological
+  order, e.g. first the input layer, then the hidden layers followed
+  by the output layers and at last the special hidden layers.  A layer
+  which has sources in another layer of the same type is updated later
+  as the source layer.
+<P>
+<DT> writing net...
+<DD> selects the needed activation functions and writes
+  them to the C-source file. After that, the procedure for pattern
+  propagation is written.
+<P>
+ </DL><BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

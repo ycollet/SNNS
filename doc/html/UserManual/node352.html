@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Unit Functions</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Unit Functions">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html6240 HREF="node353.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html6238 HREF="node350.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html6232 HREF="node351.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html6242 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html6243 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html6241 HREF="node353.html"> Unit Enquiry and </A>
+<B>Up:</B> <A NAME=tex2html6239 HREF="node350.html"> Kernel Function Interface</A>
+<B> Previous:</B> <A NAME=tex2html6233 HREF="node351.html"> Overview</A>
+<BR> <HR> <P>
+<H1><A NAME=SECTION001620000000000000000> Unit Functions</A></H1>
+<P>
+<A NAME=8207>&#160;</A>
+<P>
+The following functions are available for manipulation of the cells and
+their components:
+<PRE>krui_getNoOfUnits()
+krui_getNoOfSpecialUnits()
+krui_getFirstUnit()
+krui_getNextUnit()
+krui_setCurrentUnit( int  UnitNo )
+krui_getCurrentUnit()
+krui_getUnitName( int  UnitNo )
+krui_setUnitName( int  UnitNo, char *unit_name )
+krui_searchUnitName( char  *unit_name )
+krui_searchNextUnitName( void )
+krui_getNoOfTTypeUnits()
+krui_getUnitOutFuncName( int  UnitNo )
+krui_setUnitOutFunc( int  UnitNo, char *unitOutFuncName )
+krui_getUnitActFuncName( int  UnitNo )
+krui_setUnitActFunc( int  UnitNo, char *unitActFuncName )
+krui_getUnitFTypeName( int UnitNo )
+krui_getUnitActivation( int  UnitNo )
+krui_setUnitActivation( int  UnitNo, FlintType  unit_activation )
+krui_getUnitInitialActivation( int  UnitNo )
+krui_setUnitInitialActivation( int  UnitNo, FlintType unit_i_activation)
+krui_getUnitOutput( int  UnitNo )
+krui_setUnitOutput( int  UnitNo, FlintType  unit_output )
+krui_getUnitBias( int  UnitNo )
+krui_setUnitBias( int  UnitNo, FlintType  unit_bias )
+krui_getUnitSubnetNo( int UnitNo )
+krui_setUnitSubnetNo( int UnitNo, int  subnet_no)
+krui_getUnitLayerNo( int UnitNo )
+krui_setUnitLayerNo( int UnitNo, unsigned short layer_bitField )
+krui_getUnitPosition( int  UnitNo, struct PosType  *position )
+krui_setUnitPosition( int  UnitNo, struct PosType  *position )
+krui_getUnitNoAtPosition( struct PosType  *position, int subnet_no )
+krui_getUnitNoNearPosition( struct PosType  *position, int subnet_no,
+                            int range, int gridWidth )
+krui_getXYTransTable( struct TransTable  * *xy_trans_tbl_ptr )
+krui_getUnitCenters( int unit_no, int center_no,
+                     struct PositionVector  * *unit_center )
+krui_setUnitCenters( int unit_no, int center_no,
+                     struct PositionVector  *unit_center )
+krui_getUnitTType( int  UnitNo )
+krui_setUnitTType( int  UnitNo, int  UnitTType )
+krui_freezeUnit( int  UnitNo )
+krui_unfreezeUnit( int  UnitNo )
+krui_isUnitFrozen( int  UnitNo )
+krui_getUnitInputType( UnitNo )
+krui_getUnitValueA(int UnitNo)
+krui_setUnitValueA(int UnitNo, FlintTypeParam unit_valueA)
+krui_createDefaultUnit()
+krui_createUnit( char  *unit_name, char  *out_func_name,
+                 char  *act_func_name, FlintType  act,
+                 FlintType  i_act, FlintType  out,
+                 FlintType  bias)
+krui_createFTypeUnit( char  *FType_name)
+krui_setUnitFType( int  UnitNo, char *FTypeName )
+krui_copyUnit( int  UnitNo, int copy_mode )
+krui_deleteUnitList( int no_of_units, int unit_list[] )
+</PRE>
+<BR> <HR>
+<UL> 
+<LI> <A NAME=tex2html6244 HREF="node353.html#SECTION001621000000000000000"> Unit Enquiry and Manipulation Functions</A>
+<LI> <A NAME=tex2html6245 HREF="node354.html#SECTION001622000000000000000"> Unit Definition Functions</A>
+</UL>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

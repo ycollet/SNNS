@@ -1,0 +1,132 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Function Calls Related To Networks</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Function Calls Related To Networks">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html5694 HREF="node312.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html5692 HREF="node303.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html5686 HREF="node310.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html5696 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html5697 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html5695 HREF="node312.html"> Pattern Function Calls</A>
+<B>Up:</B> <A NAME=tex2html5693 HREF="node303.html"> SNNS Function Calls</A>
+<B> Previous:</B> <A NAME=tex2html5687 HREF="node310.html"> setShufflesetSubShuffle</A>
+<BR> <HR> <P>
+<H2><A NAME=SECTION001432000000000000000> Function Calls Related To Networks</A></H2>
+<P>
+<A NAME=7704>&#160;</A>
+<P>
+This section describes the second group of function calls which
+are related to network or network files. The second group of SNNS
+functions contains the following function calls:
+<P>
+<P><IMG  ALIGN=BOTTOM ALT="" SRC="img1390.gif"><P>
+<P>
+The function calls <tt> loadNet</tt> and <tt> saveNet</tt> both have the same format:
+<P>
+<blockquote> <tt> loadNet (file_name)<BR> 
+saveNet (file_name)</tt>
+</blockquote>
+<P>
+where file_name is a valid Unix file name enclosed by <tt> &quot; &quot;</tt>. The function 
+<tt> loadNet</tt> loads a net in the simulator kernel and <tt> saveNet</tt> saves
+a net which is currently located in the simulator kernel. The function call
+<tt> loadNet</tt> sets the system variable <tt> CYCLES</tt> to zero. This variable 
+contains the number of training cycles used by the simulator to train a net. 
+Examples for such calls could be:
+<P>
+<blockquote> <tt> loadNet (&quot;encoder.net&quot;)<BR> 
+...<BR> 
+saveNet (&quot;encoder.net&quot;)</tt>
+</blockquote>
+<P>
+The following result can be seen:
+<P>
+<blockquote> <tt> Net encoder.net loaded<BR> 
+Network file encoder.net written</tt>
+</blockquote>
+<P>
+The function call <tt> saveResult</tt> saves a SNNS result file and has the 
+following format:
+<P>
+<blockquote> <tt> saveResult (file_name, start, end, inclIn, inclOut, file_mode)</tt>
+</blockquote>
+<P>
+The first parameter (file_name) is required. The file name has to be
+a valid Unix file name enclosed by <tt> &quot; &quot;</tt>. All other parameters are
+optional.  Please note that if one specific parameter is to be entered
+all other parameters before the entered parameter have to be provided
+also. The parameter <tt> start</tt> selects the first pattern which will
+be handled and <tt> end</tt> selects the last one. If the user wants to
+handle all patterns the system variable PAT can be entered here. This
+system variable contains the number of all patterns. The parameters
+<tt> inclIn</tt> and <tt> inclOut</tt> decide if the input patterns and the
+output patterns should be saved in the result file or not.  Those
+parameters contain boolean values. If <tt> inclIn</tt> is TRUE all input
+patterns will be saved in the result file. If <tt> inclIn</tt> is FALSE
+the patterns will not be saved. The parameter <tt> inclOut</tt> is
+identical except for the fact that it relates to output patterns.  The
+last parameter <tt> file_mode</tt> of the type string, decides if a file
+should be created or if data is just appended to an existing file. The
+strings &quot;create&quot; and &quot;append&quot; are accepted for file mode.  A <tt>
+  saveResult</tt> call could look like this:
+<P>
+<blockquote> <tt> saveResult (&quot;encoder.res&quot;)<BR> 
+saveResult (&quot;encoder.res&quot;, 1, PAT, FALSE, TRUE, &quot;create&quot;)</tt>
+</blockquote>
+<P>
+both will produce this:
+<P>
+<blockquote> <tt> Result file encoder.res written</tt>
+</blockquote>
+<P>
+In the second case the result file encoder.res was written and
+contains all output patterns.
+<P>
+The function calls <tt> initNet, trainNet, testNet</tt> are related to
+each other. All functions are called without any parameters:
+<P>
+<blockquote> <tt> initNet()<BR> 
+trainNet()<BR> 
+testNet()</tt>
+</blockquote>
+<P>
+<tt> initNet()</tt> initializes the neural network. After the net has been
+reset with the function call <tt> setInitFunc</tt>, the system variable
+<tt> CYCLE</tt> is set to zero. The function call <tt> initNet</tt> is
+necessary if an untrained net is to be trained for the first time or
+if the user wants to set a trained net to its untrained state.
+<blockquote> <tt> initNet()</tt>
+</blockquote>
+<P>
+produces:
+<P>
+<blockquote> <tt> Net initialized</tt>
+</blockquote>
+<P>
+The function call <tt> trainNet</tt> is training the net exactly one cycle long. 
+After this, the content of the system variables  <tt> SSE, MSE, SSEPU</tt> and
+<tt> Cycles</tt> is updated.
+<P>
+The function call <tt> testNet</tt> is used to display the user the error 
+of the trained net, without actually training it. This call changes the 
+system variables <tt> SSE , MSE, SSEPU</tt> but leaves the net and all its 
+weights unchanged.
+<P>
+Please note that the function call <tt> trainNet</tt> is usually used in 
+combination with a repetition control structure like <tt> for</tt>, <tt>
+  repeat</tt>, or <tt> while</tt>.
+<P>
+<BR> <HR><A NAME=tex2html5694 HREF="node312.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html5692 HREF="node303.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html5686 HREF="node310.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html5696 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html5697 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html5695 HREF="node312.html"> Pattern Function Calls</A>
+<B>Up:</B> <A NAME=tex2html5693 HREF="node303.html"> SNNS Function Calls</A>
+<B> Previous:</B> <A NAME=tex2html5687 HREF="node310.html"> setShufflesetSubShuffle</A>
+<BR> <HR> <P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

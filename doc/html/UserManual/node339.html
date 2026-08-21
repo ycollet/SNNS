@@ -1,0 +1,39 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Interfaces:</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Interfaces:">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html6066 HREF="node340.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html6064 HREF="node338.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html6058 HREF="node338.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html6068 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html6069 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html6067 HREF="node340.html"> Example:</A>
+<B>Up:</B> <A NAME=tex2html6065 HREF="node338.html"> Including the Compiled </A>
+<B> Previous:</B> <A NAME=tex2html6059 HREF="node338.html"> Including the Compiled </A>
+<BR> <HR> <P>
+<H4><A NAME=SECTION0015122010000000000000> Interfaces:</A></H4>
+<P>
+All generated networks may be called as C functions. This functions
+have the form:<BR> 
+<tt> int<em> function-name</em>(float *in, float *out, int init)</tt> 
+where <tt> in</tt> and <tt> out</tt> are pointers to the input and output
+arrays of the network. The init flag is needed by some network types
+and it's special meaning is explained in <A HREF="node341.html#special"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A>. The function
+normally returns the value 0 (OK). Other return values are explained in
+section <A HREF="node341.html#special"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A>.
+<P>
+The generated C-source can be compiled separately. To use the network
+it's necessary to include the generated header file (*.h) which is
+also written by SNNS2C. This header file contains a
+prototype of the generated function and a record which contains
+the number of input and output units also.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

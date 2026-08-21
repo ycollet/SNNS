@@ -1,0 +1,47 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Optimal Brain Surgeon</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Optimal Brain Surgeon">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html4865 HREF="node252.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html4863 HREF="node248.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html4857 HREF="node250.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html4867 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html4868 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html4866 HREF="node252.html"> Skeletonization</A>
+<B>Up:</B> <A NAME=tex2html4864 HREF="node248.html"> Theory of the </A>
+<B> Previous:</B> <A NAME=tex2html4858 HREF="node250.html"> Optimal Brain Damage</A>
+<BR> <HR> <P>
+<H2><A NAME=SECTION001123000000000000000> Optimal Brain Surgeon</A></H2>
+<P>
+<A NAME=6621>&#160;</A>
+<A NAME=6622>&#160;</A>
+<P>
+Optimal Brain Surgeon (OBS, see [<A HREF="node389.html#Hassibi93">BH93</A>]) was a further
+development of OBD. It computes the full Hesse-Matrix iteratively,
+which leads to a more exact approximation of the error function:
+<P><A NAME=probstaylorred>&#160;</A><IMG  ALIGN=BOTTOM ALT="" SRC="img1260.gif"><P>
+From equation (<A HREF="node251.html#probstaylorred"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A>), we form a minimization problem
+with the additional condition, that at least one weight must be set to
+zero:
+<P><IMG  ALIGN=BOTTOM ALT="" SRC="img1261.gif"><P>
+and deduce a Lagrangian from that:
+<P><IMG  ALIGN=BOTTOM ALT="" SRC="img1262.gif"><P>
+where <IMG  ALIGN=BOTTOM ALT="" SRC="img1263.gif"> is an Lagrangian multiplier. This leads to
+<P><A NAME=obsgewver>&#160;</A><IMG  ALIGN=BOTTOM ALT="" SRC="img1264.gif"><P>
+Note that the weights of all links are updated.
+<P>
+The problem is, that the inverse of the Hesse-Matrix has to be
+computed to deduce saliency and weight change for every link. A
+sophisticated algorithm has been developed, but it is still very slow
+and takes much memory, so that you will get in trouble for bigger
+problems.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

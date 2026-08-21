@@ -1,0 +1,51 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Pattern files</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Pattern files">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html1915 HREF="node30.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html1913 HREF="node28.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html1907 HREF="node28.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html1917 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html1918 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html1916 HREF="node30.html"> Network files</A>
+<B>Up:</B> <A NAME=tex2html1914 HREF="node28.html"> SNNS File Formats</A>
+<B> Previous:</B> <A NAME=tex2html1908 HREF="node28.html"> SNNS File Formats</A>
+<BR> <HR> <P>
+<H3><A NAME=SECTION00517100000000000000> Pattern files</A></H3>
+<P>
+To train a network on your own data you first have to massage the data
+into a format that SNNS can understand. Fortunately this is quite
+easy. SNNS data files have a header component and a data component.
+The header defines how many patterns the file contains as well as the
+dimensionality of the input and target vectors. The files are saved as
+ASCII test. An example is given in figure <A HREF="node29.html#figffmt"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A>.
+<P>
+<P><A NAME=705>&#160;</A><A NAME=figffmt>&#160;</A><IMG  ALIGN=BOTTOM ALT="" SRC="img90.gif">
+<BR><STRONG>Figure:</STRONG> Pattern file diagram<BR>
+<P>
+<P>
+The header has to conform exactly to the SNNS format, so watch out for
+extra spaces etc. I found it easiest to copy headers from one of the
+example pattern files and to edit the numbers. The data component of
+the pattern file is simply a listing of numbers that represent the
+activations of the input and output units. For each pattern the number
+of values has to match the number of input plus thenumber of output
+units of the network as defined in the header. For clarity you may
+wish to put comments (lines starting with a hash (#)) between your
+patterns like shown in figure <A HREF="node29.html#figffmt"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A>. They are ignored by SNNS
+but may be used by some pattern processing tools. The pattern
+definitions may have 'CR' characters in them.
+<P>
+Note that while the results saved by SNNS use (almost) the same file
+format as used for the pattern files, the label values defined in the
+pattern files are not used.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

@@ -1,0 +1,146 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> The Network Analyzer Setup</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" The Network Analyzer Setup">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html3353 HREF="node142.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html3351 HREF="node140.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html3345 HREF="node140.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html3355 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html3356 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html3354 HREF="node142.html"> The Display Control </A>
+<B>Up:</B> <A NAME=tex2html3352 HREF="node140.html"> Network Analyzer</A>
+<B> Previous:</B> <A NAME=tex2html3346 HREF="node140.html"> Network Analyzer</A>
+<BR> <HR> <P>
+<H2><A NAME=SECTION00921000000000000000> The Network Analyzer Setup</A></H2>
+<P>
+The setup window can be opened by pressing the <tt> SETUP</tt> button on 
+the right side of the network analyzer window.
+The shape of the setup window depends on the type of graph to display
+(see fig. <A HREF="node141.html#na_setup"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A>).
+<P>
+<P><A NAME=na_setup>&#160;</A><IMG  ALIGN=BOTTOM ALT="" SRC="img714.gif"><P>
+<P>
+The setup window consists of five parts (see fig. <A HREF="node141.html#na_setup"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A>):
+<P>
+<P>
+<P>
+ x <P><IMG  ALIGN=BOTTOM ALT="" SRC="img715.gif"><P>
+   \
+<P>
+ To select the type of graph (see table <A HREF="node140.html#na_tab"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A>) to be displayed, 
+ press the corresponding button <IMG  ALIGN=BOTTOM ALT="" SRC="img716.gif"> , <IMG  ALIGN=BOTTOM ALT="" SRC="img717.gif"> or
+ <IMG  ALIGN=BOTTOM ALT="" SRC="img718.gif">.
+<P>
+<P>
+<P>
+ x <P><IMG  ALIGN=BOTTOM ALT="" SRC="img719.gif"><P>
+   \
+<P>
+ The second part of the setup window is used to specify some attributes
+ about the axes. The first line contains the values for the axes in 
+ horizontal direction, the second line these for the vertical axes.
+ The columns <tt> min</tt> and <tt> max</tt> define the area to be displayed.
+ The numbers of the units, whose activation or output values should be 
+ drawn have to be specified in the column <tt> unit</tt>. The last column
+ <tt> grid</tt> the number of columns and rows of the grid can be varied. 
+ The labeling of the axes is dependent on these values, too.
+<P>
+<P>
+<P>
+ x <P><IMG  ALIGN=BOTTOM ALT="" SRC="img720.gif"><P>
+   \
+<P>
+ The selection between showing the activation or the output of a unit along the
+ x-- or y--axes can be made here.
+ To draw the output of a unit click on <IMG  ALIGN=BOTTOM ALT="" SRC="img721.gif"> and to draw the
+ activation of a unit click on <IMG  ALIGN=BOTTOM ALT="" SRC="img722.gif">.
+<P>
+<P>
+<P>
+ x <P><IMG  ALIGN=BOTTOM ALT="" SRC="img723.gif"><P>
+   \
+<P>
+ Different types of error curves can be drawn:
+<P>
+  x <IMG  ALIGN=BOTTOM ALT="" SRC="img724.gif">
+   \
+<P>
+  For each output unit the difference between the generated output and
+  the teaching output is computed. The error is computed as the sum of
+  the absolute values of the differences. If <IMG  ALIGN=BOTTOM ALT="" SRC="img725.gif"> is toggled,
+  the result is divided by the number of output units, giving the
+  average error per output unit.
+<P>
+<P>
+<P>
+   \
+<P>
+  x <IMG  ALIGN=BOTTOM ALT="" SRC="img726.gif">
+   \
+<P>
+  The error is computed as above, but the square of the differences is
+  taken instead of the absolute values. With <IMG  ALIGN=BOTTOM ALT="" SRC="img727.gif"> the mean
+  squared deviation is computed.
+<P>
+<P>
+<P>
+   \
+<P>
+  x <IMG  ALIGN=BOTTOM ALT="" SRC="img728.gif">
+   \
+<P>
+  Here the deviation of only a single output unit is processed. The
+  number of the unit is specified as  <tt> unit j</tt>.
+<P>
+<P>
+<P>
+ x <P><IMG  ALIGN=BOTTOM ALT="" SRC="img729.gif"><P>
+  \
+<P>
+  <tt> m-test</tt>:
+<P>
+   \
+<P>
+  Specifies the number of <tt> TEST</tt> operations, which have to be
+  executed when clicking on <IMG  ALIGN=BOTTOM ALT="" SRC="img730.gif"> button.
+<P>
+<P>
+<P>
+ <tt> time</tt>:
+<P>
+   \
+<P>
+  Sets the time counter to the given value.
+<P>
+<P>
+<P>
+ x <P><IMG  ALIGN=BOTTOM ALT="" SRC="img731.gif"><P>
+   \
+<P>
+ The name of the file, in which the visualized data can be saved by
+ activating the <IMG  ALIGN=BOTTOM ALT="" SRC="img732.gif"> button, can be specified here.
+ The filename will be automatically extended by the suffix '.rec'.
+ To change the filename, the <IMG  ALIGN=BOTTOM ALT="" SRC="img733.gif"> button must not be 
+ activated.
+<P>
+<P>
+<P>
+When the setup is left by clicking on <IMG  ALIGN=BOTTOM ALT="" SRC="img734.gif"> all the changes 
+made in the setup are lost. When leaving the setup by pressing the
+<IMG  ALIGN=BOTTOM ALT="" SRC="img735.gif"> button, the changes will be accepted if no errors 
+could be detected.
+<P>
+<BR> <HR><A NAME=tex2html3353 HREF="node142.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html3351 HREF="node140.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html3345 HREF="node140.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html3355 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html3356 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html3354 HREF="node142.html"> The Display Control </A>
+<B>Up:</B> <A NAME=tex2html3352 HREF="node140.html"> Network Analyzer</A>
+<B> Previous:</B> <A NAME=tex2html3346 HREF="node140.html"> Network Analyzer</A>
+<BR> <HR> <P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

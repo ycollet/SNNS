@@ -1,0 +1,66 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> The For Instruction</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" The For Instruction">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html5562 HREF="node302.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html5560 HREF="node299.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html5554 HREF="node300.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html5564 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html5565 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html5563 HREF="node302.html"> While and Repeat </A>
+<B>Up:</B> <A NAME=tex2html5561 HREF="node299.html"> Control Structures</A>
+<B> Previous:</B> <A NAME=tex2html5555 HREF="node300.html"> The If Instruction</A>
+<BR> <HR> <P>
+<H3><A NAME=SECTION001427200000000000000> The For Instruction</A></H3>
+<P>
+The <tt> for</tt> instruction is a control structure to repeat a block, a
+fixed number of times. The most general appearance is:
+<P>
+<blockquote> for ASSIGNMENT to EXPRESSION do BLOCK endfor
+</blockquote>
+<P>
+A counter for the <tt> for</tt> repetitions of the block is needed. This
+is a variable which counts the loop iterations. The value is increased
+by one if an loop iteration is completed. If the value of the counter
+is larger then the value of the <tt> EXPRESSIONS</tt>, the <tt> BLOCK</tt>
+won't be executed anymore. If the value is already larger at the
+beginning, the instructions contained in the block are not executed at
+all. The counter is a simple variable. A <tt> for</tt> instruction could
+look like this:
+<P>
+<blockquote> for i := 2 to 5 do print (&quot; here we are: &quot;,i) endfor
+</blockquote>
+<P>
+produces:
+<P>
+<blockquote> <tt> here we are: 2<BR> 
+ here we are: 3<BR> 
+ here we are: 4<BR> 
+ here we are: 5</tt>
+</blockquote>
+<P>
+It is possible to control the repetitions of a block by assigning a
+value to the counter or by using the <tt> continue</tt>, <tt> break</tt>
+instructions. The instruction <tt> break</tt> leaves the cycle immediately
+while <tt> continue</tt> increases the counter by one and performs another
+repetition of the block. One example could be:
+<P>
+<blockquote> <tt> for counter := 1 to 200 do<BR> 
+a := a * counter<BR> 
+c := c + 1<BR> 
+if test == TRUE then break endif<BR> 
+endfor
+</blockquote>
+<P>
+In this example the boolean variable test is used to abort the repetitions of 
+the block early.
+<P>
+</tt><BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

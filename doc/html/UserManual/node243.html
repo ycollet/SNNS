@@ -1,0 +1,53 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Main features of SCG</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Main features of SCG">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html4758 HREF="node244.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html4756 HREF="node241.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html4750 HREF="node242.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html4760 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html4761 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html4759 HREF="node244.html"> Parameters of SCG</A>
+<B>Up:</B> <A NAME=tex2html4757 HREF="node241.html"> Scaled Conjugate Gradient </A>
+<B> Previous:</B> <A NAME=tex2html4751 HREF="node242.html"> Conjugate Gradient Methods </A>
+<BR> <HR> <P>
+<H2><A NAME=SECTION0010172000000000000000> Main features of SCG</A></H2>
+<P>
+Let <IMG  ALIGN=MIDDLE ALT="" SRC="img1212.gif"> be a vector from the  space <IMG  ALIGN=BOTTOM ALT="" SRC="img1213.gif">, where <b>N</b> is the sum of
+the number of weights and of the number of biases of the network. Let <b>E</b> be
+the error function we want to minimize.
+<P>
+SCG differs from other CGMs in two points:
+<UL><LI> each iteration <b>k</b> of a CGM computes <IMG  ALIGN=MIDDLE ALT="" SRC="img1214.gif">,
+  where <IMG  ALIGN=MIDDLE ALT="" SRC="img1215.gif"> is a new conjugate direction, and <IMG  ALIGN=MIDDLE ALT="" SRC="img1216.gif"> is the size of the
+  step in this direction. Actually <IMG  ALIGN=MIDDLE ALT="" SRC="img1217.gif"> is a function of <IMG  ALIGN=MIDDLE ALT="" SRC="img1218.gif">, the
+  Hessian matrix of the error function, namely the matrix of the second
+  derivatives. In contrast to other CGMs which avoid the complex
+  computation of the Hessian and approximate <IMG  ALIGN=MIDDLE ALT="" SRC="img1219.gif"> with
+  a <b> time-consuming</b> line search procedure, SCG makes the following simple
+  approximation of the term <IMG  ALIGN=MIDDLE ALT="" SRC="img1220.gif">, a key component of the computation of
+  <IMG  ALIGN=MIDDLE ALT="" SRC="img1221.gif">: 
+<P><IMG  ALIGN=BOTTOM ALT="" SRC="img1222.gif"><P>
+<P>
+<LI> as the Hessian is not always positive definite, which prevents the
+  algorithm from achieving good performance, SCG uses a scalar <IMG  ALIGN=MIDDLE ALT="" SRC="img1223.gif">
+  which is supposed to regulate the indefiniteness of the Hessian. This is a
+  kind of Levenberg-Marquardt method [<A HREF="node389.html#recipes88">P<IMG  ALIGN=BOTTOM ALT="" SRC="img1452.gif">88</A>], and is
+  done by setting: 
+<P><IMG  ALIGN=BOTTOM ALT="" SRC="img1224.gif"><P> and adjusting <IMG  ALIGN=MIDDLE ALT="" SRC="img1225.gif"> at each iteration. This is
+the main contribution of SCG to both fields of neural learning and
+optimization theory. 
+</UL>
+<P>
+SCG has been shown to be considerably faster than standard backpropagation and
+than other CGMs [<A HREF="node389.html#MOLLER93">Mol93</A>].
+<P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

@@ -1,0 +1,60 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Handling Patterns with SNNS</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Handling Patterns with SNNS">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html2860 HREF="node104.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html2858 HREF="UserManual.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html2852 HREF="node102.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html2862 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html2863 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html2861 HREF="node104.html"> Handling Pattern Sets</A>
+<B>Up:</B> <A NAME=tex2html2859 HREF="UserManual.html">No Title</A>
+<B> Previous:</B> <A NAME=tex2html2853 HREF="node102.html"> Creating and Editing </A>
+<BR> <HR> <P>
+<H1><A NAME=SECTION00600000000000000000> Handling Patterns with SNNS</A></H1>
+<P>
+<A NAME=PatHandle>&#160;</A>
+<A NAME=2267>&#160;</A>
+<P>
+The general case of using patterns with a neural network is an exact
+fit of the patterns onto the network. The set of activations of all
+input units is called input pattern, the set of activations of all
+output units is called output pattern. The input pattern and its
+corresponding output pattern is simply called a pattern. This definition
+implies that all patterns for a particular network have the same
+size. These patterns will be called <i> regular</i> or <i> fixed
+sized</i>.
+<P>
+SNNS also offers another, much more flexible type of pattern.  These
+patterns will be called <i> variable sized</i>. Here, the patterns are
+usually larger than the input/output layers of the network. To train
+and recall these patterns small portions (subsequently called <i>
+subpatterns</i>) are systematically cut out from the large pattern and
+propagated through the net, one at a time. Only the smaller
+subpatterns do have to have the fixed size fitting the network. The
+pattern itself may have an arbitrary size and different patterns
+within one pattern set may have differing sizes.  The number of
+variable dimensions is also variable. Example applications for one and
+two variable dimensions include time series patterns for TDNNs and
+picture patterns.
+<P>
+Both of these types of patterns are loaded into SNNS from the same
+kind of pattern file. For a detailed description of the structure of
+this file see sections <A HREF="node105.html#fixPat"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A> and <A HREF="node106.html#varPat"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A>. The grammar is
+given in appendix <A HREF="node383.html#patGrammar"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A>
+<P>
+<BR> <HR>
+<UL> 
+<LI> <A NAME=tex2html2864 HREF="node104.html#SECTION00610000000000000000"> Handling Pattern Sets</A>
+<LI> <A NAME=tex2html2865 HREF="node105.html#SECTION00620000000000000000"> Fixed Size Patterns</A>
+<LI> <A NAME=tex2html2866 HREF="node106.html#SECTION00630000000000000000"> Variable Size Patterns</A>
+</UL>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

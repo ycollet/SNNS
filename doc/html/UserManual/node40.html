@@ -1,0 +1,283 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Control Panel</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Control Panel">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html2067 HREF="node41.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html2065 HREF="node32.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html2059 HREF="node39.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html2069 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html2070 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html2068 HREF="node41.html"> Info Panel</A>
+<B>Up:</B> <A NAME=tex2html2066 HREF="node32.html"> Windows of XGUI</A>
+<B> Previous:</B> <A NAME=tex2html2060 HREF="node39.html"> Defining the Log </A>
+<BR> <HR> <P>
+<H2><A NAME=SECTION00533000000000000000> Control Panel</A></H2>
+<P>
+<A NAME=958>&#160;</A>
+<A NAME=959>&#160;</A>
+<A NAME=remPanel>&#160;</A>
+<P>
+With this window the simulator is operated.  Figure <A HREF="node40.html#ControlPanel"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A>
+shows this window.  Table <A HREF="node40.html#TabControlPanelItem"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A> lists all the input
+options with types and value ranges. The meaning of the 5 learning
+parameters depends upon the learning function selected with the menu
+<tt> select learning function</tt> invoked by the button <IMG  ALIGN=BOTTOM ALT="" SRC="img110.gif"> of the control panel.
+<P>
+<P><A NAME=972>&#160;</A><A NAME=ControlPanel>&#160;</A><IMG  ALIGN=BOTTOM ALT="" SRC="img111.gif">
+<BR><STRONG>Figure:</STRONG> Control Panel<BR>
+<P>
+<P><A NAME=991>&#160;</A><A NAME=TabControlPanelItem>&#160;</A><IMG  ALIGN=BOTTOM ALT="" SRC="img112.gif">
+<BR><STRONG>Table:</STRONG> Input fields of the control panel<BR>
+<P>
+<P>
+There are the following text fields, buttons and menu buttons:
+<P>
+<OL><LI> <tt> STEPS</tt>: This text field specifies the number of update
+  steps of the network. With <tt> Topological_Order</tt> selected as
+  update mode (chosen with the menu <tt> select update function</tt> from
+  the button <tt> OPTIONS</tt> in the control panel) one step is sufficient
+  to propagate information from input to output. With other update
+  modes or with recursive networks, several steps might be needed.
+<P>
+<LI> <IMG  ALIGN=BOTTOM ALT="" SRC="img113.gif">: After clicking this button, the simulator
+  kernel executes the number of steps specified in the text field <tt>
+    STEPS</tt>. If <tt> STEPS</tt> is zero, the units are only redrawn. The
+  update mode selected with the button <IMG  ALIGN=BOTTOM ALT="" SRC="img114.gif"> is used (see
+  chapter <A HREF="node14.html#Modes"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A>). The first update step in the mode <tt>
+    topological</tt> takes longer than the following, because the net is
+  sorted topologically first. Then all units are redrawn.
+<P>
+<LI> <tt> COUNT</tt>: The text field next to the <tt> STEP</tt> button
+  displays the steps, executed so far.
+<P>
+<LI> <IMG  ALIGN=BOTTOM ALT="" SRC="img115.gif">: Initializes the network with values according
+  to the function and parameters given in the last line of the panel.
+<P>
+<LI> <IMG  ALIGN=BOTTOM ALT="" SRC="img116.gif">: The counter is reset and the units are
+  assigned their initial activation.
+<P>
+<LI> <IMG  ALIGN=BOTTOM ALT="" SRC="img117.gif">: 
+<A NAME=1010>&#160;</A> 
+<A NAME=1011>&#160;</A> 
+  By pressing the error button in the control panel,
+  SNNS will print out several statistics. The formulas were
+  contributed by Warren Sarle from the SAS institute. Note that these
+  criteria are for <i> linear</i> models; they can sometimes be applied
+  directly to nonlinear models if the sample size is large. A
+  recommended reference for linear model selection criteria is
+  [<A HREF="node389.html#Jud80">JGHL80</A>].
+<P>
+  Notation:<BR> 
+  <P><IMG  ALIGN=BOTTOM ALT="" SRC="img118.gif"><P>
+<P>
+  <b> Criteria for adequacy of the estimated model in the sample</b><BR> 
+  Pearson's <IMG  ALIGN=BOTTOM ALT="" SRC="img119.gif">, the proportion of variance, is explained or accounted
+  by the model:<BR> <IMG  ALIGN=MIDDLE ALT="" SRC="img120.gif"> <b> Criteria for adequacy of the true model in the population</b><BR> 
+  The mean square error [<A HREF="node389.html#Jud80">JGHL80</A>] is defined as: <IMG  ALIGN=MIDDLE ALT="" SRC="img121.gif">, the root mean square error as: <IMG  ALIGN=MIDDLE ALT="" SRC="img122.gif">.
+<P>
+  The <IMG  ALIGN=MIDDLE ALT="" SRC="img123.gif">, the <IMG  ALIGN=BOTTOM ALT="" SRC="img124.gif"> [<A HREF="node389.html#Jud80">JGHL80</A>] adjusted for degrees of
+  freedom, is defined as:<BR> <IMG  ALIGN=MIDDLE ALT="" SRC="img125.gif"> <b> Criteria for adequacy of the estimated model in the population</b><BR> 
+  Anemiya's prediction criterion [<A HREF="node389.html#Jud80">JGHL80</A>] is similar to the
+  <IMG  ALIGN=MIDDLE ALT="" SRC="img126.gif">:<BR> <IMG  ALIGN=MIDDLE ALT="" SRC="img127.gif">The estimated mean square error of prediction (<IMG  ALIGN=MIDDLE ALT="" SRC="img128.gif">) assuming that
+  the values of the regressors are fixed and that the model is correct
+  is:<BR> <IMG  ALIGN=MIDDLE ALT="" SRC="img129.gif"> The conservative mean square error in prediction [<A HREF="node389.html#Weh94">Weh94</A>] 
+  is:<BR> <IMG  ALIGN=MIDDLE ALT="" SRC="img130.gif"> The generalized cross validation (<b>GCV</b>) is given by Wahba
+  [<A HREF="node389.html#Gol79">GHW79</A>] as:<BR> <IMG  ALIGN=MIDDLE ALT="" SRC="img131.gif">The estimated mean square error of prediction assuming that both
+  independent and dependent variables are multivariate normal is
+  defined as:<BR> <IMG  ALIGN=MIDDLE ALT="" SRC="img132.gif">Shibata's criterion <IMG  ALIGN=MIDDLE ALT="" SRC="img133.gif"> can be found in
+  [<A HREF="node389.html#Shi81">Shi68</A>].
+<P>
+  Finally, there is Akaikes information criterion [<A HREF="node389.html#Jud80">JGHL80</A>]:<BR> 
+  <IMG  ALIGN=MIDDLE ALT="" SRC="img134.gif">
+  <BR> and the Schwarz's Bayesian criterion
+  [<A HREF="node389.html#Jud80">JGHL80</A>]:<BR> <IMG  ALIGN=MIDDLE ALT="" SRC="img135.gif">.Obviously, most of these selection criteria do only make sense, if
+  <b>n&gt;&gt;p</b>.
+<P>
+<LI> <IMG  ALIGN=BOTTOM ALT="" SRC="img136.gif">: Information about the net is written to the
+  text window.
+<P>
+<LI> <tt> CYCLES</tt>: This text field specifies the number of learning
+  cycles. It is mainly used in conjunction with the next two buttons.
+  A cycle (also called an epoch sometimes) is a unit of training where
+  all patterns of a pattern file are presented to the network once.
+<P>
+<LI> <IMG  ALIGN=BOTTOM ALT="" SRC="img137.gif">: The net is trained with a single pattern for
+the number of training cycles defined in the field <tt> CYCLES</tt>. The
+text window reports the error of the network every <tt> CYCLES</tt><IMG  ALIGN=MIDDLE ALT="" SRC="img138.gif">
+cycles, i.e. independent of the number of training cycles only
+10 numbers are generated. (This prevents flooding the user with
+network performance data and slowing down the training by file
+I/O).
+<P>
+<A NAME=1076>&#160;</A>
+The error reported in the text window is the sum of the quadratic
+differences between the teaching input and the real output over all
+output units. The average error per output unit is given behind <tt>
+ave</tt>.
+<P>
+<LI> <IMG  ALIGN=BOTTOM ALT="" SRC="img139.gif">: The net is trained with all patterns for the
+number of training cycles specified in the field <tt> CYCLES</tt>. This is
+the usual way to train networks from the graphical user interface.
+Note, that if cycles has a value of, say, 100, the button <tt> ALL</tt>
+causes SNNS to train all patterns once (one cycle = one epoch) and
+repeat this 100 times (NOT training each pattern 100 times in a
+row and then applying the next pattern).
+<P>
+The error reported in the text window is the sum of the quadratic
+difference between the teaching input and the real output over all
+output units summed over the number of patterns presented. The average
+error per output unit is given behind <tt> ave</tt>.
+<P>
+<LI> <IMG  ALIGN=BOTTOM ALT="" SRC="img140.gif">: Stops the teaching cycle. After completion of
+the current step or teaching cycle, the simulation is halted
+immediately.
+<P>
+<LI> <IMG  ALIGN=BOTTOM ALT="" SRC="img141.gif">: With this button, the user can test the
+behavior of the net with all patterns loaded. The activation values
+of input and output units are copied into the net. (For output units
+see also button <IMG  ALIGN=BOTTOM ALT="" SRC="img142.gif">). Then the number of update steps
+specified in <tt> STEPS</tt> are executed.
+<P>
+<LI> <IMG  ALIGN=BOTTOM ALT="" SRC="img143.gif">: It is important for optimal learning that
+the various patterns are presented in different order in the
+different cycles. A random sequence of patterns is created
+automatically, if <tt> SHUFFLE</tt> is switched on.
+<P>
+<LI> <IMG  ALIGN=BOTTOM ALT="" SRC="img144.gif">: Offers the following menu:
+<A NAME=1089>&#160;</A>
+<P>
+<P><IMG  ALIGN=BOTTOM ALT="" SRC="img145.gif"><P>
+<P>
+If <tt> jog weights</tt> is selected, a popup window appears to specify
+the value range (<tt> low limit .. high limit</tt>) of the random noise to be
+added to all links in the network.
+<P>
+<LI> <IMG  ALIGN=BOTTOM ALT="" SRC="img146.gif">: With this button, the user specifies the changes
+  to the activation values of the output units when a pattern is
+  applied with <IMG  ALIGN=BOTTOM ALT="" SRC="img147.gif">. The following table gives the three
+  possible alternatives:
+<P>
+  <P><IMG  ALIGN=BOTTOM ALT="" SRC="img148.gif"><P>
+<P>
+  The label of this button always displays the item selected from the
+  menu.
+<P>
+<LI> <tt> PATTERN</tt>: This text field displays the current pattern
+  number.
+<P>
+<LI> <IMG  ALIGN=BOTTOM ALT="" SRC="img149.gif">: The pattern whose number is displayed in the
+  text field <tt> PATTERN</tt> is deleted from the pattern file.
+<P>
+<LI> <IMG  ALIGN=BOTTOM ALT="" SRC="img150.gif">: The pattern whose number is displayed in the
+  text field <tt> PATTERN</tt> is modified in place.
+<P>
+  The current activation of the input units and the current output
+  values of output units of the network loaded make up the input and
+  output pattern. These values might have been set with the network
+  editor and the Info panel before.
+<P>
+<LI> <IMG  ALIGN=BOTTOM ALT="" SRC="img151.gif">: A new pattern is defined that is added behind
+  existing patterns. Input and output values are defined as above.
+  This button is disabled whenever the current pattern set has
+  variable dimensions.
+<P>
+<LI> <IMG  ALIGN=BOTTOM ALT="" SRC="img152.gif">: The simulator advances to the pattern whose
+  number is displayed in the text field <tt> PATTERN</tt>.
+<P>
+<LI> Arrow buttons xgui_figs/xgui_button_first.ps,
+  xgui_figs/xgui_button_prev.ps,
+  xgui_figs/xgui_button_next.ps, and
+  xgui_figs/xgui_button_last.ps: With these buttons, the
+  user can navigate through all patterns loaded, as well as jump
+  directly to the first and last pattern. Unlike with the button
+  <IMG  ALIGN=BOTTOM ALT="" SRC="img153.gif"> no update steps are performed here.
+<P>
+<LI> <IMG  ALIGN=BOTTOM ALT="" SRC="img154.gif">: Opens the panel for sub-pattern handling. The
+  button is inactive when the current pattern set has no variable
+  dimensions. The sub-pattern panel is described in section
+  <A HREF="node106.html#varPat"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A>.
+<P>
+<LI> <IMG  ALIGN=BOTTOM ALT="" SRC="img155.gif">: Opens the menu of loaded pattern sets.  The
+  pattern set of the selected entry is removed from main memory. The
+  corresponding pattern file remains untouched. When the current
+  pattern set is deleted, the last in the list becomes current. When
+  the last remaining pattern set is deleted, the current pattern set
+  becomes undefined and the menu shows the entry <tt> No Files</tt>.
+<P>
+<LI> <IMG  ALIGN=BOTTOM ALT="" SRC="img156.gif">: Also opens the menu of loaded pattern sets. The
+  pattern set of the selected entry becomes the current set. All
+  training, testing, and propagation actions refer always to the
+  current pattern set. The name of the corresponding pattern file is
+  displayed next to the button in the <i> Current Pattern Set</i> field.
+<P>
+<LI> <i> Current Pattern Set</i>: This field displays the name of the
+  pattern set currently used for training. When no current pattern set
+  is defined the entry &quot;<tt> Training Pattern File ?</tt>&quot; is displayed.
+<P>
+<LI> <tt> VALID</tt>: Gives the intervals in which the training process
+  is to be interrupted by the computation of the error on the
+  validation pattern set. A value of 0 inhibits validation. The
+  validation error is printed on the shell window and plotted in the
+  graph display.
+<P>
+<LI> <IMG  ALIGN=BOTTOM ALT="" SRC="img157.gif">: Opens the menu of loaded pattern sets. The
+  pattern set of the selected entry becomes the current validation
+  set. The name of the corresponding pattern file is displayed next
+  to the button in the <i> Validation Pattern Set</i> field.
+<P>
+<LI> <i> Validation Pattern Set</i>: This field displays the name of the
+  pattern set currently used for validation. When no current pattern set
+  is defined the entry &quot;<tt> Validation Pattern File ?</tt>&quot; is displayed.
+<P>
+<LI> <tt> LEARN</tt>: Up to five fields to specify the parameters of the
+  learning function. The number required and their resp. meaning
+  depend upon the learning function used. Only as many widgets as
+  parameters needed will be displayed, i.e. all widgets visible need
+  to filled in. A description of the learning functions that are
+  already built in into SNNS is given in
+  section <A HREF="node52.html#LearningParameters"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A>.
+<P>
+<LI> <IMG  ALIGN=BOTTOM ALT="" SRC="img158.gif">: in the LEARN row invokes a menu to select
+a learning function (learning procedure). The following learning
+functions are currently implemented:
+<A NAME=1139>&#160;</A>
+<A NAME=1140>&#160;</A>
+<P>
+<P><IMG  ALIGN=BOTTOM ALT="" SRC="img159.gif"><P>
+<P>
+<P><IMG  ALIGN=BOTTOM ALT="" SRC="img160.gif"><P>
+<P>
+<LI> <tt> UPDATE</tt>: Up to five fields to specify the parameters of the
+  update function. The number required and their resp. meaning depend
+  upon the update function used. Only as many widgets as parameters
+  needed will be displayed, i.e. all widgets visible need to filled
+  in.
+<P>
+<LI> <IMG  ALIGN=BOTTOM ALT="" SRC="img161.gif">: in the UPDATE row invokes a menu to select
+  an update function. A list of the update functions that
+  are already built in into SNNS and their descriptions is given in
+  section <A HREF="node53.html#UpdateFuncs"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A>.
+<P>
+<LI> <tt> INIT</tt>: Five fields to specify the parameters of the init
+  function. The number required and their resp. meaning depend upon
+  the init function used. Only as many widgets as parameters needed
+  will be displayed, i.e. all widgets visible need to filled in.
+<P>
+<LI> <IMG  ALIGN=BOTTOM ALT="" SRC="img162.gif">: in the INIT row invokes a menu to select
+  an initialization function. See section <A HREF="node78.html#InitFuncs"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A> for a list
+  of the init functions available as well as their description.
+<P>
+</OL><BR> <HR><A NAME=tex2html2067 HREF="node41.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html2065 HREF="node32.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html2059 HREF="node39.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html2069 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html2070 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html2068 HREF="node41.html"> Info Panel</A>
+<B>Up:</B> <A NAME=tex2html2066 HREF="node32.html"> Windows of XGUI</A>
+<B> Previous:</B> <A NAME=tex2html2060 HREF="node39.html"> Defining the Log </A>
+<BR> <HR> <P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

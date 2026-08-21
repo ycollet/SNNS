@@ -1,0 +1,104 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Update Modes</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Update Modes">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html1642 HREF="node15.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html1640 HREF="node9.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html1634 HREF="node13.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html1644 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html1645 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html1643 HREF="node15.html"> Learning in Neural </A>
+<B>Up:</B> <A NAME=tex2html1641 HREF="node9.html"> Neural Network Terminology</A>
+<B> Previous:</B> <A NAME=tex2html1635 HREF="node13.html"> Sites</A>
+<BR> <HR> <P>
+<H1><A NAME=SECTION00420000000000000000> Update Modes</A></H1>
+<P>
+<A NAME=Modes>&#160;</A>
+<A NAME=412>&#160;</A>
+<A NAME=413>&#160;</A>
+<P>
+To compute the new activation values of the units, the SNNS simulator
+running on a sequential workstation processor has to visit all of them
+in some sequential order. This order is defined by the <em>
+Update Mode</em>. Five update modes for general use are implemented in
+SNNS. The first is a synchronous mode, all other are asynchronous,
+i.e. in these modes units see the new outputs of their predecessors
+if these have fired before them.
+<P>
+<OL><LI> <em> synchronous</em>: The units change their activation all together
+after each step. To do this, the kernel first computes the new
+activations of all units from their activation functions in some
+arbitrary order. After all units have their new activation value
+assigned, the new output of the units is computed. The outside
+spectator gets the impression that all units have fired
+simultaneously (in sync).
+<P>
+<LI> <em> random permutation</em>: The units compute their new
+activation and output function sequentially. The order is defined
+randomly, but each unit is selected exactly once in every step.
+<P>
+<LI> <em> random</em>: The order is defined by a random number
+generator. Thus it is not guaranteed that all units are visited
+exactly once in one update step, i.e. some units may be updated
+several times, some not at all.
+<P>
+<LI> <em> serial</em>: The order is defined by ascending internal unit
+number. If units are created with ascending unit numbers from input to
+output units, this is the fastest mode. Note that the use of serial
+mode is not advisable if the units of a network are not in ascending
+order.
+<P>
+<LI> <em> topological</em>: The kernel sorts the units by their
+topology. This order corresponds to the natural propagation of
+activity from input to output. In pure feed-forward nets the input
+activation reaches the output especially fast with this mode, because
+many units already have their final output which doesn't change later. 
+</OL>
+<P>
+Additionally, there are 12 more update modes for special network
+topologies implemented in SNNS.
+<P>
+<OL><LI><em> CPN</em>: For learning with counterpropagation.
+<P>
+<LI><em> Time Delay</em>: This mode takes into account the special
+connections of time delay networks. Connections have to be updated in
+the order in which they become valid in the course of time.
+<P>
+<LI><em> ART1_Stable</em>, <em> ART2_Stable</em> and <em> ARTMAP_Stable</em>:
+Three update modes for the three adaptive resonance theory network
+models. They propagate a pattern through the network until a stable
+state has been reached.
+<P>
+<LI><em> ART1_Synchronous</em>, <em> ART2_Synchronous</em> and 
+<em> ARTMAP_Synchronous</em>: Three other update modes for the three adaptive
+resonance theory network models. They perform just one propagation
+step with each call.
+<P>
+<LI><em> CC</em> and <em> RCC</em>: Special update modes for the cascade
+correlation and recurrent cascade correlation meta algorithms.
+<P>
+<LI><em> BPTT</em>: For recurrent networks, trained with
+  `backpropagation through time'.
+<P>
+<LI><em> RM_Synchronous</em>: Special update mode for auto-associative
+memory networks.
+</OL>
+<P>
+Note, that all update modes only apply to the <em> forward
+propagation phase</em>, the backward phase in learning procedures like
+backpropagation is not affected at all.
+<P>
+<BR> <HR><A NAME=tex2html1642 HREF="node15.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html1640 HREF="node9.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html1634 HREF="node13.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html1644 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html1645 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html1643 HREF="node15.html"> Learning in Neural </A>
+<B>Up:</B> <A NAME=tex2html1641 HREF="node9.html"> Neural Network Terminology</A>
+<B> Previous:</B> <A NAME=tex2html1635 HREF="node13.html"> Sites</A>
+<BR> <HR> <P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

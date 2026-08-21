@@ -1,0 +1,44 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Enhanced Backpropagation</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Enhanced Backpropagation">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html3517 HREF="node147.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html3515 HREF="node144.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html3509 HREF="node145.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html3519 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html3520 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html3518 HREF="node147.html"> Batch Backpropagation</A>
+<B>Up:</B> <A NAME=tex2html3516 HREF="node144.html"> Backpropagation Networks</A>
+<B> Previous:</B> <A NAME=tex2html3510 HREF="node145.html"> Vanilla Backpropagation</A>
+<BR> <HR> <P>
+<H2><A NAME=SECTION001012000000000000000> Enhanced Backpropagation</A></H2>
+<P>
+An enhanced version of backpropagation uses a momentum term and flat
+spot elimination. It is listed among the SNNS learning functions
+as <tt> BackpropMomentum</tt>.
+<P>
+The momentum term introduces the old weight change as a parameter for
+the computation of the new weight change. This avoids oscillation
+problems common with the regular backpropagation algorithm when the error
+surface has a very narrow minimum area. The new weight change is
+computed by
+<P><IMG  ALIGN=BOTTOM ALT="" SRC="img746.gif"><P>
+<IMG  ALIGN=BOTTOM ALT="" SRC="img747.gif"> is a constant specifying the influence of the momentum.
+<P>
+The effect of these enhancements is that flat spots of the error
+surface are traversed relatively rapidly with a few big steps, while the step
+size is decreased as the surface gets rougher. This adaption of the
+step size increases learning speed significantly.
+<P>
+<b> Note</b> that the old weight change is lost every time the parameters
+are modified, new patterns are loaded, or the network is modified.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

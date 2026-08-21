@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Example Dialogue to Create a 3D-Network</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Example Dialogue to Create a 3D-Network">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html5070 HREF="node266.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html5068 HREF="node260.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html5064 HREF="node264.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html5072 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html5073 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html5071 HREF="node266.html"> 3D-Control Panel</A>
+<B>Up:</B> <A NAME=tex2html5069 HREF="node260.html"> Creating a 3D-Network</A>
+<B> Previous:</B> <A NAME=tex2html5065 HREF="node264.html"> Displaying the z-Coordinates</A>
+<BR> <HR> <P>
+<H3><A NAME=SECTION001223500000000000000> Example Dialogue to Create a 3D-Network</A></H3>
+<P>
+<A NAME=6812>&#160;</A>
+<A NAME=6813>&#160;</A>
+<P>
+The following example is to demonstrate the rearranging of a normal 2D
+network for three dimensional display. As example network, the
+letter classifier LETTERS.NET is used.
+<P>
+In the 2D-display, the network looks like in figure <A HREF="node265.html#2Ddisplay"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A>:
+<P>
+<P><A NAME=6825>&#160;</A><A NAME=2Ddisplay>&#160;</A><IMG  ALIGN=BOTTOM ALT="" SRC="img1288.gif">
+<BR><STRONG>Figure:</STRONG> 2D-display<BR>
+<P>
+<P>
+One scales the net with <tt> scale</tt> <IMG  ALIGN=BOTTOM ALT="" SRC="img1289.gif"> in the transformation
+panel, then it looks like figure <A HREF="node265.html#scaledNetwork"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A> (left).  After a
+rotation with <tt> rotate</tt> <IMG  ALIGN=BOTTOM ALT="" SRC="img1290.gif"> by <IMG  ALIGN=BOTTOM ALT="" SRC="img1291.gif"> around the
+x-axis the network looks like figure <A HREF="node265.html#rotatedNetwork"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A> (right).
+<P>
+<P><A NAME=6848>&#160;</A><A NAME=rotatedNetwork>&#160;</A><A NAME=scaledNetwork>&#160;</A><IMG  ALIGN=BOTTOM ALT="" SRC="img1294.gif">
+<BR><STRONG>Figure:</STRONG> Scaled network (left) and network rotated by <IMG  ALIGN=BOTTOM ALT="" SRC="img1293.gif"> (right)<BR>
+<P>
+<P>
+Now the middle layer is selected in the 2D-display
+(figure <A HREF="node265.html#SelectionOneLayer"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A>, left).
+<P>
+<P><A NAME=6871>&#160;</A><A NAME=assignZValue>&#160;</A><A NAME=SelectionOneLayer>&#160;</A><IMG  ALIGN=BOTTOM ALT="" SRC="img1295.gif">
+<BR><STRONG>Figure:</STRONG> Selection of one layer (left) and assigning a z-value (right)<BR>
+<P>
+<P>
+To assign the z-coordinate to the layer, the <tt> z-value</tt> entry in
+the 3D-control panel is set to three. Then one moves the mouse into
+the 2D-display and enters the key sequence  &quot;`<tt> U 3 Z</tt>&quot;'. This is
+shown in figure <A HREF="node265.html#assignZValue"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A> (right).
+<P>
+<P><A NAME=6896>&#160;</A><A NAME=movingPlane>&#160;</A><A NAME=ReferenceUnit>&#160;</A><IMG  ALIGN=BOTTOM ALT="" SRC="img1296.gif">
+<BR><STRONG>Figure:</STRONG> Selection of a reference unit (left) and moving a plane (right)<BR>
+<P>
+<P>
+Now the reference unit must be selected (figure <A HREF="node265.html#ReferenceUnit"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A>, left).
+<P>
+To move the units over the zero plane, the mouse is moved in the XGUI
+display to the position x=3, y=0 and the keys  &quot;`<tt> U 3 M</tt>&quot;' are
+pressed. The result is displayed in figure <A HREF="node265.html#movingPlane"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A> (right).
+<P>
+<P><A NAME=6918>&#160;</A><A NAME=ProjectIllumin>&#160;</A><A NAME=ParallelProjection>&#160;</A><IMG  ALIGN=BOTTOM ALT="" SRC="img1297.gif">
+<BR><STRONG>Figure:</STRONG> Wire-frame model in parallel projection (left) and solid model
+in central projection (right)<BR>
+<P>
+<P>
+The output layer, which is assigned the z-value 6, is treated
+accordingly.  Now the network may be rotated to any position
+(figure <A HREF="node265.html#ParallelProjection"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A>, left).
+<P>
+Finally the central projection and the illumination may be turned
+on (figure <A HREF="node265.html#ProjectIllumin"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A>, right).
+<P>
+These are the links in the wire-frame model
+(figure <A HREF="node265.html#LinksWireframe"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A>, left).The network with links in the
+solid model looks like figure <A HREF="node265.html#LinksSolid"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A> (right).
+<P>
+<P><A NAME=6941>&#160;</A><A NAME=LinksSolid>&#160;</A><A NAME=LinksWireframe>&#160;</A><IMG  ALIGN=BOTTOM ALT="" SRC="img1298.gif">
+<BR><STRONG>Figure:</STRONG> Network with links in the wireframe model (left) and in the solid
+model (right)<BR>
+<P>
+<P>
+
+<BR> <HR><A NAME=tex2html5070 HREF="node266.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html5068 HREF="node260.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html5064 HREF="node264.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html5072 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html5073 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html5071 HREF="node266.html"> 3D-Control Panel</A>
+<B>Up:</B> <A NAME=tex2html5069 HREF="node260.html"> Creating a 3D-Network</A>
+<B> Previous:</B> <A NAME=tex2html5065 HREF="node264.html"> Displaying the z-Coordinates</A>
+<BR> <HR> <P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

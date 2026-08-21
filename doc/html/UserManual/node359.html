@@ -1,0 +1,114 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Functions for the Manipulation of Prototypes</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Functions for the Manipulation of Prototypes">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html6324 HREF="node360.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html6322 HREF="node350.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html6316 HREF="node358.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html6326 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html6327 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html6325 HREF="node360.html"> Functions to Read </A>
+<B>Up:</B> <A NAME=tex2html6323 HREF="node350.html"> Kernel Function Interface</A>
+<B> Previous:</B> <A NAME=tex2html6317 HREF="node358.html"> Link Functions</A>
+<BR> <HR> <P>
+<H1><A NAME=SECTION001650000000000000000> Functions for the Manipulation of Prototypes</A></H1>
+<P>
+<A NAME=8290>&#160;</A>
+<P>
+By describing the characteristic properties of units, like
+activation/output function and sites, the user can define unit
+prototypes (called f-types in SNNS). Thereby the user can create a
+library of units. It is a big advantage that each change to the
+prototypes in the library affects all units of this f-type in the
+whole network. This means, that all units of a certain type are
+updated with a change in the library. With the following functions
+prototypes can be defined and manipulated:
+<P>
+<PRE>krui_setFirstFTypeEntry()
+krui_setNextFTypeEntry()
+krui_setFTypeEntry( char  *Ftype_symbol )
+krui_getFTypeName()
+krui_setFTypeName( char  *unitFType_name )
+krui_getFTypeActFuncName()
+krui_setFTypeActFunc( char  *act_func_name )
+krui_getFTypeOutFuncName()
+krui_setFTypeOutFunc( char  *out_func_name )
+krui_setFirstFTypeSite()
+krui_setNextFTypeSite()
+krui_getFTypeSiteName()
+krui_setFTypeSiteName( char  *FType_site_name )
+krui_createFTypeEntry( char *FType_symbol,char *act_func,
+                       char *out_func, int no_of_sites,
+                       char * *array_of_site_names )
+krui_deleteFTypeEntry( char *  FType_symbol )
+</PRE>
+<P>
+<code>bool  krui_setFirstFTypeEntry()</code><BR> 
+<code>bool  krui_setNextFTypeEntry()</code><BR> 
+initializes the first/next prototype and makes it current. The return
+code is FALSE if no unit types are defined, otherwise TRUE.
+<code>bool  krui_setFTypeEntry( char *Ftype_symbol )</code><BR> 
+selects a prototype by a name and returns TRUE if the name exists.
+<code>char  *krui_getFTypeName()</code><BR> 
+determines the name of the current prototype.
+<code>krui_err  krui_setFTypeName( char  *unitFType_name )</code><BR> 
+changes the name of the current prototype. The name has to be
+unambiguous, i.e. all names have to be different. If the name is
+ambiguous, or if memory allocation failed, an error code is returned.
+<code>char  *krui_getFTypeActFuncName()</code><BR> 
+determines the name of the activation function of the current prototype.
+<code>krui_err  krui_setFTypeActFunc( char * act_func_name )</code><BR> 
+changes the activation function of the current prototype; returns an
+error code if the given function is not a valid activation function.
+All units of the net that are derived from this prototype change their
+activation function.
+<code>char  *krui_getFTypeOutFuncName()</code><BR> 
+determines the name of the output function of the current prototype.
+<code>krui_err  krui_setFTypeOutFunc( char  *out_func_name )</code><BR> 
+changes the output function of the current prototype; returns an error
+code if the given function is not a valid output function. All units of
+the net that are derived from this prototype change their output
+function.  
+<code>bool  krui_setFirstFTypeSite()</code><BR> 
+selects the first site of the prototype (this site becomes current
+prototype site); returns TRUE if the prototype has sites.
+<code>bool  krui_setNextFTypeSite()</code><BR> 
+selects the next site of the prototype (this site becomes current
+prototype site); returns TRUE if the prototype has more sites.
+<code>char  *krui_getFTypeSiteName()</code><BR> 
+determines the name of the current prototype site.
+<code>krui_err  krui_setFTypeSiteName( char *FType_site_name )</code><BR> 
+changes the name (and also the site function) of the current prototype
+site. All units of the net that are derived from this prototype change
+their site names or site functions.  An error code is generated if the
+new site name is not yet defined.
+<P>
+<code>krui_err krui_createFTypeEntry( char *FType_symbol,char *act_func,</code><BR> 
+<code>                                char *out_func, int no_of_sites,</code><BR> 
+<code>                                char * *array_of_site_names )</code><BR> 
+defines the prototype of a unit. If the prototype is supposed to have
+sites, i.e.  <tt> no_of_sites &gt; 0</tt>, an array of pointers to strings is
+needed to define the sites. These pointers must point to strings
+containing the names of the sites. The number of pointers in the
+arrays must match <code>no_of_sites</code>. An error code is generated if
+the site names are ambiguous, one or several site names are unknown,
+the prototype name is ambiguous, or a memory allocation error occurred.
+<P>
+<code>void  krui_deleteFTypeEntry( char  *FType_symbol )</code><BR> 
+deletes the specified prototype. If there are still units in the net which
+are derived from this prototype, they loose their unit type.
+<P>
+<BR> <HR><A NAME=tex2html6324 HREF="node360.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html6322 HREF="node350.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html6316 HREF="node358.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html6326 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html6327 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html6325 HREF="node360.html"> Functions to Read </A>
+<B>Up:</B> <A NAME=tex2html6323 HREF="node350.html"> Kernel Function Interface</A>
+<B> Previous:</B> <A NAME=tex2html6317 HREF="node358.html"> Link Functions</A>
+<BR> <HR> <P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

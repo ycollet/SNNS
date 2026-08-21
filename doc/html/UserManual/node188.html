@@ -1,0 +1,83 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> RBF_Weights_Kohonen</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" RBF_Weights_Kohonen">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html4053 HREF="node189.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html4051 HREF="node186.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html4045 HREF="node187.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html4055 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html4056 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html4054 HREF="node189.html"> RBF_Weights_Redo</A>
+<B>Up:</B> <A NAME=tex2html4052 HREF="node186.html"> Initialization Functions</A>
+<B> Previous:</B> <A NAME=tex2html4046 HREF="node187.html"> RBF_Weights</A>
+<BR> <HR> <P>
+<H4><A NAME=SECTION0010102220000000000000> RBF_Weights_Kohonen</A></H4>
+<P>
+<A NAME=4585>&#160;</A>
+<P>
+One disadvantage of the above initialization procedure is the very
+simple selection of center vectors from the set of teaching patterns.
+It would be favorable if the center vectors would homogeneously cover
+the space of teaching patterns. <tt> RBF_Weights_Kohonen</tt> allows a
+self--organizing training of center vectors. Here, just as the name of
+the procedure already tells, the self--organizing maps of Kohonen are
+used (see [<A HREF="node389.html#Wasser89">Was89</A>]). The simplest version of Kohonen's maps has
+been implemented. It works as follows:
+<P>
+One precondition for the use of Kohonen maps is that the teaching
+patterns have to be normalized. This means, that they represent
+vectors with length 1. <b>K</b> patterns have to be selected from the set
+of <b>n</b> teaching patterns acting as starting values for the center
+vectors.  Now the scalar product between one teaching pattern and each
+center vector is computed. If the vectors are normalized to length 1,
+the scalar product gives a measure for the distance between the two
+multiplied vectors. Now the center vector is determined whose distance
+to the current teaching pattern is minimal, i.e. whose scalar product
+is the largest one. This center vector is moved a little bit in the
+direction of the current teaching pattern:
+<P>
+<P><IMG  ALIGN=BOTTOM ALT="" SRC="img957.gif"><P>
+<P>
+This procedure is repeated for all teaching patterns several times. As
+a result, the center vectors adapt the statistical properties of the
+set of teaching patterns.
+<P>
+The resp. meanings of the three initialization parameters are:
+<P>
+<OL><LI><i> learn cycles</i>: determines the number of iterations of the
+Kohonen training for all teaching patterns. If 0 epochs are specified
+only the center vectors are set, but no training is performed.
+<P>
+<LI><i> learning rate</i> <IMG  ALIGN=BOTTOM ALT="" SRC="img958.gif">: It should be picked between 0 and
+1. A learning rate of 0 leaves the center vectors unchanged. Using a
+learning rate of 1 replaces the selected center vector by the current
+teaching pattern.
+<P>
+<LI><i> shuffle</i>: Determines the selection of initial center vectors
+at the beginning of the procedure. A value of 0 leads to the even
+selection already described for <tt> RBF_Weights</tt>. Any value other
+than 0 causes a random selection of center vectors from the set of
+teaching patterns.
+</OL>
+<P>
+Note, that the described initialization procedure initializes only the
+center vectors (i.e. the link weights between input and hidden layer).
+The bias values of the neurons have to be set manually using the
+graphical user interface. To perform the final initialization of
+missing link weights, another initialization procedure has been
+implemented.
+<P>
+<BR> <HR><A NAME=tex2html4053 HREF="node189.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html4051 HREF="node186.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html4045 HREF="node187.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html4055 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html4056 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html4054 HREF="node189.html"> RBF_Weights_Redo</A>
+<B>Up:</B> <A NAME=tex2html4052 HREF="node186.html"> Initialization Functions</A>
+<B> Previous:</B> <A NAME=tex2html4046 HREF="node187.html"> RBF_Weights</A>
+<BR> <HR> <P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

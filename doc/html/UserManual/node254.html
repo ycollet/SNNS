@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Pruning Nets in SNNS</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Pruning Nets in SNNS">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html4897 HREF="node255.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html4895 HREF="node246.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html4891 HREF="node253.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html4899 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html4900 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html4898 HREF="node255.html"> 3D-Visualization of Neural </A>
+<B>Up:</B> <A NAME=tex2html4896 HREF="node246.html"> Pruning Algorithms</A>
+<B> Previous:</B> <A NAME=tex2html4892 HREF="node253.html"> Non-contributing Units</A>
+<BR> <HR> <P>
+<H1><A NAME=SECTION001130000000000000000> Pruning Nets in SNNS</A></H1>
+<P>
+<A NAME=6700>&#160;</A>
+<P>
+To use one of the pruning algorithms mentioned above, set the learning
+function in the control panel (options menu, see section
+<A HREF="node52.html#LearningParameters"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A>) to <tt> PruningFeedForward</tt>.
+<P>
+<b> Note:</b> This information is saved with the net. Be sure to check
+the learning function each time you reload the net.
+<P>
+The pruning algorithms can be customized by changing the parameters in
+the pruning panel (see figure <A HREF="node254.html#prpanel"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A>) which can be invoked by
+choosing <tt> PRUNING</tt> in the main menu. The figure shows the default
+values of the parameters.
+<P>
+<P><A NAME=6713>&#160;</A><A NAME=prpanel>&#160;</A><IMG  ALIGN=BOTTOM ALT="" SRC="img1269.gif">
+<BR><STRONG>Figure:</STRONG> Pruning Panel<BR>
+<P>
+<P>
+The first block of the panel controls the pruning, the second the
+embedded learning epochs and the last two specify parameters for
+certain pruning algorithms. To save the changes to the parameters and
+close the pruning panel, press the button <IMG  ALIGN=BOTTOM ALT="" SRC="img1270.gif">.
+<P>
+The current pruning function is shown in the box ``<tt> General
+  Parameters for Pruning</tt>''. To select a different one, press the
+button <IMG  ALIGN=BOTTOM ALT="" SRC="img1271.gif"> which pops up a list of the available pruning
+functions, analogous to the change of the learning function.
+<P>
+There are two criterions to stop the pruning: The error after
+retraining must not exceed
+<UL><LI> the error before the first pruning by more then a certain
+percentage determined by the user in the field ``<tt> Maximum error
+increase in %:</tt>'' and
+<LI> the absolute value given in the field ``<tt> Accepted error</tt>''
+</UL>
+<P>
+Normally, the state of the net before the last (obviously too
+expensive) pruning is restored at the end. You can prevent this by
+switching the radio buttons next to ``<tt> Recreate last pruned
+element</tt>'' to <IMG  ALIGN=BOTTOM ALT="" SRC="img1272.gif">.
+<P>
+The second box in the pruning panel (``<tt> General Parameters for
+Learning</tt>'') allows to select the (subordinate) learning function in
+the same way as the pruning function. Only learning functions for
+feed-forward-nets appear in the list. You can select the number of
+epochs for the first training and each retraining separately. The
+training, however, stops when the absolute error falls short of the
+``<tt> Minimum error to stop</tt>''. This prevents the net from
+overtraining.
+<P>
+The parameter for OBS in the third box is the initial value of the
+diagonal elements in the Hesse-Matrix. For the exact meaning of that
+parameter (to which OBS is said to be not very sensible) see
+[<A HREF="node389.html#Hassibi93">BH93</A>].
+<P>
+The last box allows the user to choose which kind of neurons should be
+pruned by the node pruning methods. Input or hidden unit pruning can
+be selected by two sets of radio buttons.
+<P>
+Learning Parameters of the subordinate learning function have to be
+typed in in the control panel, as if the training would be processed by
+this function only. The field <IMG  ALIGN=BOTTOM ALT="" SRC="img1273.gif"> in the control panel
+has no effect on pruning algorithms. To start pruning, press the
+button <IMG  ALIGN=BOTTOM ALT="" SRC="img1274.gif"> in the pruning panel and the button <IMG  ALIGN=BOTTOM ALT="" SRC="img1275.gif"> or <IMG  ALIGN=BOTTOM ALT="" SRC="img1276.gif"> respectively in the control panel.
+<P>
+<BR> <HR><A NAME=tex2html4897 HREF="node255.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html4895 HREF="node246.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html4891 HREF="node253.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html4899 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html4900 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html4898 HREF="node255.html"> 3D-Visualization of Neural </A>
+<B>Up:</B> <A NAME=tex2html4896 HREF="node246.html"> Pruning Algorithms</A>
+<B> Previous:</B> <A NAME=tex2html4892 HREF="node253.html"> Non-contributing Units</A>
+<BR> <HR> <P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

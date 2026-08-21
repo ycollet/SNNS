@@ -1,0 +1,40 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Quickprop</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Quickprop">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html3551 HREF="node150.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html3549 HREF="node143.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html3543 HREF="node148.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html3553 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html3554 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html3552 HREF="node150.html"> RPROP</A>
+<B>Up:</B> <A NAME=tex2html3550 HREF="node143.html"> Neural Network Models </A>
+<B> Previous:</B> <A NAME=tex2html3544 HREF="node148.html"> Backpropagation with Weight </A>
+<BR> <HR> <P>
+<H1><A NAME=SECTION001020000000000000000> Quickprop</A></H1>
+<P>
+<A NAME=3751>&#160;</A>
+<P>
+One method to speed up the learning is to use information about the
+curvature of the error surface. This requires the computation of the
+second order derivatives of the error function. Quickprop assumes the
+error surface to be locally quadratic and attempts to jump in
+one step from the current position directly into the minimum of the
+parabola.
+<P>
+Quickprop [<A HREF="node389.html#Fahlma88">Fah88</A>] computes the derivatives in the direction of
+each weight. After computing the first gradient with regular
+backpropagation, a direct step to the error minimum is attempted by
+<P><IMG  ALIGN=BOTTOM ALT="" SRC="img749.gif"><P>
+<P>
+where:
+<P>
+<P><IMG  ALIGN=BOTTOM ALT="" SRC="img750.gif"><P><BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

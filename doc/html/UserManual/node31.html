@@ -1,0 +1,116 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> XGUI Files</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" XGUI Files">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html1937 HREF="node32.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html1935 HREF="node18.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html1929 HREF="node30.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html1939 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html1940 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html1938 HREF="node32.html"> Windows of XGUI</A>
+<B>Up:</B> <A NAME=tex2html1936 HREF="node18.html"> Using the Graphical </A>
+<B> Previous:</B> <A NAME=tex2html1930 HREF="node30.html"> Network files</A>
+<BR> <HR> <P>
+<H1><A NAME=SECTION00520000000000000000> XGUI Files</A></H1>
+<P>
+The graphical user interface consists of the following files:
+<P>
+<P>
+<A NAME=712>&#160;</A>
+<A NAME=713>&#160;</A>
+<P><IMG  ALIGN=BOTTOM ALT="" SRC="img91.gif"><P>
+<P>
+<P>
+The file <tt> snns</tt> in the home directory of SNNS is only a symbolic
+link to the file
+<P>
+<tt> xgui/bin/&lt;architecture&gt;/xgui</tt>
+<P>
+where <tt> &lt;architecture&gt;</tt> is one of the currently supported machine
+architectures, like <tt> dec_alpha</tt>, <tt> dec_mips</tt>, <tt> hp_ux</tt>,
+<tt> ibm_aix</tt>, <tt> sgi_irix</tt>, <tt> pc_linux</tt>, <tt> sun_os4x</tt>, or
+<tt> sun_solaris</tt>.
+<P>
+The file <tt> Readme_xgui</tt> contains changes performed after printing
+of this document. The user is urged to read it, prior to using
+XGUI. The file  <tt> help.hdoc</tt> is explained in
+chapter <A HREF="node49.html#HelpWindows"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A>.
+<P>
+XGUI looks for the files <tt> default.cfg</tt> and <tt> help.hdoc</tt> first
+in the current directory. If not found there, it looks in the
+directory specified by the environment variable <tt> XGUILOADPATH</tt>. By
+the command
+<P>
+<tt> setenv XGUILOADPATH</tt> <i> Path</i>
+<P>
+this variable can be set to the path where <tt> default.cfg</tt> and <tt>
+help.hdoc</tt> are located.  This is best done by an entry to the files
+<tt> .login</tt> or <tt> .cshrc</tt>. Advanced users may change the help file
+or the default configuration for their own purposes. This should be
+done, however, only on a copy of the files in a private directory.
+<P>
+<A NAME=747>&#160;</A>
+SNNS uses the following extensions for its files:
+<P>
+<PRE><TT> 
+             		 <tt> .net</tt>      		 network files (units and link weights)
+<P>
+             		 <tt> .pat</tt>      		 pattern files
+<P>
+             		 <tt> .cfg</tt>      		 configuration settings files
+<P>
+             		 <tt> .txt</tt>      		 text files (log files)
+<P>
+             		 <tt> .res</tt>      		 result files (unit activations)
+<P>
+</TT></PRE>
+<P>
+<A NAME=757>&#160;</A>
+A simulator run is started by the command
+<P>
+<tt> snns [&lt;netfile&gt;.net] [&lt;pattern&gt;.pat] [&lt;config&gt;.cfg]
+[options]</tt> <IMG  ALIGN=BOTTOM ALT="" SRC="img92.gif">
+<P>
+where valid options are
+<P>
+<blockquote> -font  <tt> &lt;name&gt;</tt> : font for the simulator<BR> 
+-dfont <tt> &lt;name&gt;</tt> : font for the displays<BR> 
+-mono : black &amp; white on color screens<BR> 
+-help : help screen to explain the options
+</blockquote>
+<P>
+in the home directory of SNNS or by directly calling
+<P>
+<tt> &lt;SNNS-directory&gt;/xgui/bin/&lt;architecture&gt;/xgui</tt>
+<P>
+from any directory.  Note that the shell variable XGUILOADPATH must be
+set properly before, or SNNS will complain about missing files <tt>
+default.cfg</tt> and <tt> help.hdoc</tt>.
+<P>
+The executable <tt> xgui</tt> may also be called with X-Window parameters as
+arguments.
+<P>
+Setting the display font can be advisable, if the font selected
+by the SNNS automatic font detection looks ugly. The following example
+starts the display with the 7x13bold font
+<P>
+<tt> snns -font 7x13bold</tt> <IMG  ALIGN=BOTTOM ALT="" SRC="img93.gif">
+<P>
+The fonts which are available can be detected with the
+program xfontsel (not part of this distribution).
+The current version of SNNS can not handle fonts wider than 8 pixels.
+<P>
+<BR> <HR><A NAME=tex2html1937 HREF="node32.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html1935 HREF="node18.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html1929 HREF="node30.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html1939 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html1940 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html1938 HREF="node32.html"> Windows of XGUI</A>
+<B>Up:</B> <A NAME=tex2html1936 HREF="node18.html"> Using the Graphical </A>
+<B> Previous:</B> <A NAME=tex2html1930 HREF="node30.html"> Network files</A>
+<BR> <HR> <P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

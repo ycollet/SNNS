@@ -1,0 +1,118 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Update Functions</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Update Functions">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html2219 HREF="node54.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html2217 HREF="node18.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html2211 HREF="node52.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html2221 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html2222 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html2220 HREF="node54.html"> ART1_Stable</A>
+<B>Up:</B> <A NAME=tex2html2218 HREF="node18.html"> Using the Graphical </A>
+<B> Previous:</B> <A NAME=tex2html2212 HREF="node52.html"> Parameters of the </A>
+<BR> <HR> <P>
+<H1><A NAME=SECTION00550000000000000000> Update Functions</A></H1>
+<P>
+<A NAME=UpdateFuncs>&#160;</A>
+<A NAME=1915>&#160;</A>
+<P>
+Why is an update mode important? It is necessary to visit the neurons 
+of a net in a specific sequential order to perform operations on them. 
+This order depends on the topology of the net and greatly influences 
+the outcome of a propagation cycle. For each net 
+with its own characteristics, it is very important to choose the update 
+function associated with the net in order to get the desired behavior 
+of the neural network. If a wrong update function is given, SNNS will display 
+ a error message on your screen. Click <IMG  ALIGN=BOTTOM ALT="" SRC="img432.gif"> in the control panel 
+to select an update function.
+<P>
+The following update functions are available for the various network types:
+<P>
+<P><IMG  ALIGN=BOTTOM ALT="" SRC="img433.gif"><P>
+<P>
+All these functions receive their input from the five update parameter fields
+in the control panel. See figure <A HREF="node40.html#ControlPanel"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A>
+<P>
+The following parameters are required for ART, Hopfield, and
+Autoassociative networks. The description of the update functions will
+indicate which parameter is needed.
+<P>
+<PRE><TT>
+<P>
+		 <IMG  ALIGN=MIDDLE ALT="" SRC="img434.gif"> 		 = vigilance parameter with (<IMG  ALIGN=MIDDLE ALT="" SRC="img435.gif">) : field1
+<P>
+		 <IMG  ALIGN=MIDDLE ALT="" SRC="img436.gif"> 		 = initial vigilance parameter for the ART<IMG  ALIGN=BOTTOM ALT="" SRC="img437.gif"> part of the net
+<P>
+		 		 		 with (0 <IMG  ALIGN=MIDDLE ALT="" SRC="img438.gif"> 1) : field1
+<P>
+		 <IMG  ALIGN=MIDDLE ALT="" SRC="img439.gif"> 		 = vigilance parameter for ART<IMG  ALIGN=BOTTOM ALT="" SRC="img440.gif"> with (<IMG  ALIGN=MIDDLE ALT="" SRC="img441.gif">) : field2
+<P>
+		  <IMG  ALIGN=MIDDLE ALT="" SRC="img442.gif"> 		 = Inter-ART-Reset control with (<IMG  ALIGN=MIDDLE ALT="" SRC="img443.gif">) : field3
+<P>
+		 <b>a</b> 		 = strength of the influence of the lower level in F1 by the middle
+<P>
+		 		 		 level with (<b>a</b> <b>&gt;</b> 0) : field2
+<P>
+		 <b>b</b> 		 = strength of the influence of the middle level in F1 by the upper
+<P>
+		 		 		 level with (<b>b</b> <b>&gt;</b> 0) : field3
+<P>
+		 <b>c</b> 		 = part of the length of vector p with (0 <b>&lt;</b> c <b>&lt;</b> 1) : field4
+<P>
+		 <IMG  ALIGN=BOTTOM ALT="" SRC="img444.gif"> 		 = Kind of threshold with (<IMG  ALIGN=MIDDLE ALT="" SRC="img445.gif">) : field5
+<P>
+		 c 		 = number of units : field1
+<P>
+		 n 		 = iteration parameter : field1
+<P>
+		 x 		 = number of selected neurons
+<P>
+</TT></PRE>
+<P>
+Field1..Field5 are the positions in the control panel. For a more
+detailed description of ART-parameters see section <A HREF="node195.html#artmodelsinsnns"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A>: ART Models in SNNS
+<P>
+Now here is a description of the steps the various update functions perform, 
+and of the way in which they differ.
+<P>
+<BR> <HR>
+<UL> 
+<LI> <A NAME=tex2html2223 HREF="node54.html#SECTION00550100000000000000"> ART1_Stable</A>
+<LI> <A NAME=tex2html2224 HREF="node55.html#SECTION00550200000000000000"> ART1_Synchronous</A>
+<LI> <A NAME=tex2html2225 HREF="node56.html#SECTION00550300000000000000"> ART2_Stable</A>
+<LI> <A NAME=tex2html2226 HREF="node57.html#SECTION00550400000000000000"> ART2_Synchronous</A>
+<LI> <A NAME=tex2html2227 HREF="node58.html#SECTION00550500000000000000"> ARTMAP_Stable</A>
+<LI> <A NAME=tex2html2228 HREF="node59.html#SECTION00550600000000000000"> ARTMAP_Synchronous</A>
+<LI> <A NAME=tex2html2229 HREF="node60.html#SECTION00550700000000000000"> Auto_Synchronous</A>
+<LI> <A NAME=tex2html2230 HREF="node61.html#SECTION00550800000000000000"> BAM_Order</A>
+<LI> <A NAME=tex2html2231 HREF="node62.html#SECTION00550900000000000000"> BBTT_Order</A>
+<LI> <A NAME=tex2html2232 HREF="node63.html#SECTION005501000000000000000"> CC_Order</A>
+<LI> <A NAME=tex2html2233 HREF="node64.html#SECTION005501100000000000000"> CounterPropagation</A>
+<LI> <A NAME=tex2html2234 HREF="node65.html#SECTION005501200000000000000"> Dynamic_LVQ</A>
+<LI> <A NAME=tex2html2235 HREF="node66.html#SECTION005501300000000000000"> Hopfield_Fixed_Act</A>
+<LI> <A NAME=tex2html2236 HREF="node67.html#SECTION005501400000000000000"> Hopfield_Synchronous</A>
+<LI> <A NAME=tex2html2237 HREF="node68.html#SECTION005501500000000000000"> JE_Order</A>
+<LI> <A NAME=tex2html2238 HREF="node69.html#SECTION005501600000000000000"> JE_Special</A>
+<LI> <A NAME=tex2html2239 HREF="node70.html#SECTION005501700000000000000"> Kohonen_Order</A>
+<LI> <A NAME=tex2html2240 HREF="node71.html#SECTION005501800000000000000"> RCC_Order</A>
+<LI> <A NAME=tex2html2241 HREF="node72.html#SECTION005501900000000000000"> Random_Order</A>
+<LI> <A NAME=tex2html2242 HREF="node73.html#SECTION005502000000000000000"> Random_Permutation</A>
+<LI> <A NAME=tex2html2243 HREF="node74.html#SECTION005502100000000000000"> Serial_Order</A>
+<LI> <A NAME=tex2html2244 HREF="node75.html#SECTION005502200000000000000"> Synchronous_Order</A>
+<LI> <A NAME=tex2html2245 HREF="node76.html#SECTION005502300000000000000"> TimeDelay_Order</A>
+<LI> <A NAME=tex2html2246 HREF="node77.html#SECTION005502400000000000000"> Topological_Order</A>
+</UL>
+<BR> <HR><A NAME=tex2html2219 HREF="node54.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html2217 HREF="node18.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html2211 HREF="node52.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html2221 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html2222 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html2220 HREF="node54.html"> ART1_Stable</A>
+<B>Up:</B> <A NAME=tex2html2218 HREF="node18.html"> Using the Graphical </A>
+<B> Previous:</B> <A NAME=tex2html2212 HREF="node52.html"> Parameters of the </A>
+<BR> <HR> <P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

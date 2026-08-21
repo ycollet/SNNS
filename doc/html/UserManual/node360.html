@@ -1,0 +1,46 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Functions to Read the Function Table</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Functions to Read the Function Table">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html6336 HREF="node361.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html6334 HREF="node350.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html6328 HREF="node359.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html6338 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html6339 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html6337 HREF="node361.html"> Network Initialization Functions</A>
+<B>Up:</B> <A NAME=tex2html6335 HREF="node350.html"> Kernel Function Interface</A>
+<B> Previous:</B> <A NAME=tex2html6329 HREF="node359.html"> Functions for the </A>
+<BR> <HR> <P>
+<H1><A NAME=SECTION001660000000000000000> Functions to Read the Function Table</A></H1>
+<P>
+<A NAME=8304>&#160;</A>
+<P>
+<code>int  krui_getNoOfFunctions()</code><BR> 
+determines the number of available functions (unit, site, and learning
+functions).
+<P>
+<code>void  krui_getFuncInfo( int  func_no,</code><BR> 
+<code>                        char * *func_name,</code><BR> 
+<code>                        int  *func_type )</code><BR> 
+determines the name and type (activation, output, site, or learning
+function) from the function table. See include file  <code>glob_typ.h</code>
+for the definition of the function types.
+<code>bool  krui_isFunction( char  *func_name, int  func_type )</code><BR> 
+returns TRUE if the specified function is a valid function.
+<P>
+<code>bool krui_getFuncParamInfo( char *func_name, int  func_type,</code><BR> 
+<code>                            int *no_of_input_params,</code><BR> 
+<code>                            int *no_of_output_params )</code><BR> 
+returns the number of input and output parameters of the given
+learning, update or initialization function.
+Returns TRUE if the given function exists, FALSE otherwise.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

@@ -1,0 +1,65 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Concepts</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Concepts">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html5024 HREF="node262.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html5022 HREF="node260.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html5016 HREF="node260.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html5026 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html5027 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html5025 HREF="node262.html"> Assigning a new </A>
+<B>Up:</B> <A NAME=tex2html5023 HREF="node260.html"> Creating a 3D-Network</A>
+<B> Previous:</B> <A NAME=tex2html5017 HREF="node260.html"> Creating a 3D-Network</A>
+<BR> <HR> <P>
+<H3><A NAME=SECTION001223100000000000000> Concepts</A></H3>
+<P>
+A three dimensional network is created with the network editor in the
+first 2D-display. It can be created in two dimensions as usual and
+then changed into 3D form by adding a z-coordinate. It may as
+well be created directly in three dimensions.
+<P>
+Great care was given to compatibility aspects on the extension of
+the network editor. Therefore a network is represented in exactly the
+same way as in the 2D case.
+<P>
+In the 2D representation each unit is assigned a unique (x, y)
+coordinate. The different layers of units lie next to each other. In
+the 3D representation these layers are to lie on top of each other. An
+additional z-coordinate may not simply be added, because this would
+lead to ambiguity in the 2D display.
+<P>
+Therefore an (x, y) offset by which all units of a layer are
+transposed against their position in the 2D display has to be computed
+for each layer. The distance of the layer in height corresponds to the
+z value. Only entire layers may be moved, i.e. all units of a layer
+have to be in the same z plane, meaning they must have the same
+z-coordinate. Figure <A HREF="node261.html#Layers2D3D"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A> explains this behavior.
+<P>
+<P><A NAME=6778>&#160;</A><A NAME=Layers2D3D>&#160;</A><IMG  ALIGN=BOTTOM ALT="" SRC="img1280.gif">
+<BR><STRONG>Figure:</STRONG> Layers in the 2D- and 3D-display<BR>
+<P>
+<P>
+Therefore the network editor contains two new commands
+<PRE><TT>  &#175;<b> Units 3d Z</b>   &#175; : assigning a z-coordinate
+<P>
+		 <b> Units 3d Move</b> 		 : Moving a z-layer
+<P>
+</TT></PRE>
+<P>
+The event of 3D-creation is easily controlled by rotating the network
+in the 3D display by <IMG  ALIGN=BOTTOM ALT="" SRC="img1281.gif"> to be able to see the network
+sideways. It may be useful to display the z-coordinates in the XGUI
+display (see <A HREF="node264.html#xguidisp"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A>).
+<P>
+The user is advised to create a 3D network first as a wire-frame model without
+links for much faster screen display.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

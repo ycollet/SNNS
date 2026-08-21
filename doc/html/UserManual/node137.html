@@ -1,0 +1,79 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> The Algorithm</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" The Algorithm">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html3307 HREF="node138.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html3305 HREF="node136.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html3299 HREF="node136.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html3309 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html3310 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html3308 HREF="node138.html"> Inversion Display</A>
+<B>Up:</B> <A NAME=tex2html3306 HREF="node136.html"> Inversion</A>
+<B> Previous:</B> <A NAME=tex2html3300 HREF="node136.html"> Inversion</A>
+<BR> <HR> <P>
+<H2><A NAME=SECTION00911000000000000000> The Algorithm</A></H2>
+<P>
+<A NAME=3256>&#160;</A>
+<P>
+The inversion of a neural net tries to find an input pattern that
+generates a specific output pattern with the existing connections. To
+find this input, the deviation of each output from the desired output
+is computed as error <IMG  ALIGN=BOTTOM ALT="" SRC="img673.gif">. This error value is used to approach
+the target input in input space step by step. Direction and length of
+this movement is computed by the inversion algorithm.
+<P>
+<A NAME=3257>&#160;</A>
+The most commonly used error value is the <i> Least Mean Square
+Error</i>. <IMG  ALIGN=BOTTOM ALT="" SRC="img674.gif"> is defined as
+<P>
+<P><IMG  ALIGN=BOTTOM ALT="" SRC="img675.gif"><P>
+<P>
+The goal of the algorithm therefore has to be to minimize <IMG  ALIGN=BOTTOM ALT="" SRC="img676.gif">.
+<P>
+Since the error signal <IMG  ALIGN=MIDDLE ALT="" SRC="img677.gif"> can be computed as
+<P>
+<P><IMG  ALIGN=BOTTOM ALT="" SRC="img678.gif"><P>
+<P>
+and for the adaption value of the unit activation follows
+<P>
+<P><IMG  ALIGN=BOTTOM ALT="" SRC="img679.gif"><P>
+<P>
+In this implementation, a uniform pattern is applied to the input
+units in the first step, whose activation level depends upon the
+variable <tt> input pattern</tt>. This pattern is propagated through the
+net and generates the initial output <IMG  ALIGN=BOTTOM ALT="" SRC="img680.gif">. The difference between
+this output vector and the target output vector is propagated
+backwards through the net as error signals <IMG  ALIGN=MIDDLE ALT="" SRC="img681.gif">. This is
+analogous to the propagation of error signals in the backpropagation
+training, with the difference that no weights are adjusted here. When
+the error signals reach the input layer, they represent a gradient in
+input space, which gives the direction for the gradient descent.
+Thereby, the new input vector can be computed as
+<P>
+<P><IMG  ALIGN=BOTTOM ALT="" SRC="img682.gif"><P>
+<P>
+where <IMG  ALIGN=MIDDLE ALT="" SRC="img683.gif"> is the step size in input space, which is set by the
+variable <tt> eta</tt>.
+<P>
+This procedure is now repeated with the new input vector until the
+distance between the generated output vector and the desired output
+vector falls below the predefined limit of <tt> delta_max</tt>, when the
+algorithm is halted.
+<P>
+For a more detailed description of the algorithm and its
+implementation see [<A HREF="node389.html#Mamier92">Mam92</A>].
+<P>
+<BR> <HR><A NAME=tex2html3307 HREF="node138.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html3305 HREF="node136.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html3299 HREF="node136.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html3309 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html3310 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html3308 HREF="node138.html"> Inversion Display</A>
+<B>Up:</B> <A NAME=tex2html3306 HREF="node136.html"> Inversion</A>
+<B> Previous:</B> <A NAME=tex2html3300 HREF="node136.html"> Inversion</A>
+<BR> <HR> <P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

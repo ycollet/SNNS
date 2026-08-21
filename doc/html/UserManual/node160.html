@@ -1,0 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> DLVQ Fundamentals</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" DLVQ Fundamentals">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html3688 HREF="node161.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html3686 HREF="node159.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html3680 HREF="node159.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html3690 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html3691 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html3689 HREF="node161.html"> DLVQ in SNNS</A>
+<B>Up:</B> <A NAME=tex2html3687 HREF="node159.html"> Dynamic Learning Vector </A>
+<B> Previous:</B> <A NAME=tex2html3681 HREF="node159.html"> Dynamic Learning Vector </A>
+<BR> <HR> <P>
+<H2><A NAME=SECTION001061000000000000000> DLVQ Fundamentals</A></H2>
+<P>
+The idea of this algorithm is to find a natural grouping in a set of
+data ([<A HREF="node389.html#Schuer92">SK92</A>], [<A HREF="node389.html#Duda88">DH73</A>].  Every data vector is associated
+with a point in a <b>d</b>-dimensional data space. The hope is that the
+vectors <IMG  ALIGN=BOTTOM ALT="" SRC="img797.gif"> of the same class form a cloud or a cluster in data
+space. The algorithm presupposes that the vectors <IMG  ALIGN=BOTTOM ALT="" SRC="img798.gif"> belonging
+to the same class <IMG  ALIGN=MIDDLE ALT="" SRC="img799.gif"> are distributed normally with a mean vector
+<IMG  ALIGN=MIDDLE ALT="" SRC="img800.gif">, and that all input vectors are normalized.  To
+classify a feature vector <IMG  ALIGN=BOTTOM ALT="" SRC="img801.gif"> measure the Euclidian distance
+<IMG  ALIGN=MIDDLE ALT="" SRC="img802.gif"> from <IMG  ALIGN=BOTTOM ALT="" SRC="img803.gif"> to all other mean vectors
+<IMG  ALIGN=MIDDLE ALT="" SRC="img804.gif"> and assign <IMG  ALIGN=BOTTOM ALT="" SRC="img805.gif"> to the class of the nearest mean. But
+what happens if a pattern <IMG  ALIGN=MIDDLE ALT="" SRC="img806.gif"> of class <IMG  ALIGN=MIDDLE ALT="" SRC="img807.gif"> is assigned
+to a wrong class <IMG  ALIGN=MIDDLE ALT="" SRC="img808.gif">? Then for this wrong classified pattern the
+two mean vectors <IMG  ALIGN=MIDDLE ALT="" SRC="img809.gif"> and <IMG  ALIGN=MIDDLE ALT="" SRC="img810.gif"> are moved or
+trained in the following way:
+<P>
+<UL><LI> The reference vector <IMG  ALIGN=MIDDLE ALT="" SRC="img811.gif"> which the wrong classified 
+      pattern belongs to, and which is the nearest neighbor to this pattern, 
+      is moved a little bit towards this pattern.
+<LI> The mean vector <IMG  ALIGN=MIDDLE ALT="" SRC="img812.gif">, to which a pattern of class <IMG  ALIGN=MIDDLE ALT="" SRC="img813.gif"> is 
+       assigned wrongly, is moved away from it.
+</UL>
+<P>
+The vectors are moved using the rule:
+<P><IMG  ALIGN=BOTTOM ALT="" SRC="img814.gif"><P>
+where <IMG  ALIGN=MIDDLE ALT="" SRC="img815.gif"> is the weight<A NAME=tex2html430 HREF="footnode.html#6163"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/foot_motif.gif"></A>
+between the output <IMG  ALIGN=MIDDLE ALT="" SRC="img817.gif"> of a input unit <b>i</b> and a output unit <b>j</b>.
+<IMG  ALIGN=MIDDLE ALT="" SRC="img818.gif"> is the learning parameter. By choosing it less or greater than
+zero, the direction of movement of a vector can be influenced.
+<P>
+The DLVQ algorithm works in the following way:
+<OL><LI> Load the (normalized) training data, and calculate for every class the
+      mean vector <IMG  ALIGN=MIDDLE ALT="" SRC="img819.gif">. Initialize the net with these vectors. This means:
+      Generate a unit for every class and initialize its weights with the
+      corresponding values. 
+<LI> Now try to associate every pattern in the training set with a 
+      reference vector. If a trainings vector <IMG  ALIGN=BOTTOM ALT="" SRC="img820.gif"> of a class <IMG  ALIGN=MIDDLE ALT="" SRC="img821.gif">
+      is assigned to a class <IMG  ALIGN=MIDDLE ALT="" SRC="img822.gif"> then do the following: 
+      <OL><LI> Move the vector <IMG  ALIGN=MIDDLE ALT="" SRC="img823.gif"> which is nearest to <IMG  ALIGN=MIDDLE ALT="" SRC="img824.gif"> 
+            in its direction.
+      <LI> Move the mean vector <IMG  ALIGN=MIDDLE ALT="" SRC="img825.gif">, to which <IMG  ALIGN=MIDDLE ALT="" SRC="img826.gif"> 
+            is falsely assigned to away from it.  
+      </OL>
+      Repeat this procedure until the number of correctly classified vectors
+      no longer increases.
+<LI> Now calculate, from the vectors of a class <IMG  ALIGN=MIDDLE ALT="" SRC="img827.gif"> associated
+      with a wrong class <IMG  ALIGN=MIDDLE ALT="" SRC="img828.gif">, a new prototype vector <IMG  ALIGN=MIDDLE ALT="" SRC="img829.gif">. For every 
+      class, choose one of the new mean vectors and add it to the
+      net. Return to step 2.   
+</OL><BR> <HR><A NAME=tex2html3688 HREF="node161.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html3686 HREF="node159.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html3680 HREF="node159.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html3690 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html3691 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html3689 HREF="node161.html"> DLVQ in SNNS</A>
+<B>Up:</B> <A NAME=tex2html3687 HREF="node159.html"> Dynamic Learning Vector </A>
+<B> Previous:</B> <A NAME=tex2html3681 HREF="node159.html"> Dynamic Learning Vector </A>
+<BR> <HR> <P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

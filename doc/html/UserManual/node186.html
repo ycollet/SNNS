@@ -1,0 +1,63 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Initialization Functions</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Initialization Functions">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html4026 HREF="node187.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html4024 HREF="node184.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html4018 HREF="node185.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html4028 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html4029 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html4027 HREF="node187.html"> RBF_Weights</A>
+<B>Up:</B> <A NAME=tex2html4025 HREF="node184.html"> RBF Implementation in </A>
+<B> Previous:</B> <A NAME=tex2html4019 HREF="node185.html"> Activation Functions</A>
+<BR> <HR> <P>
+<H3><A NAME=SECTION0010102200000000000000> Initialization Functions</A></H3>
+<P>
+<A NAME=RBF>&#160;</A>
+The goal in initializing a radial basis function  network is the optimal
+computation of link weights between hidden and output layer. Here the
+problem arises that the centers <IMG  ALIGN=MIDDLE ALT="" SRC="img947.gif"> (i.e. link weights
+between input and hidden layer) as well as the parameter <b>p</b> (i.e.\
+the bias of the hidden units) must be set properly.  Therefore,
+three different initialization procedures have been implemented which
+perform different tasks:
+<P>
+<OL><LI> <tt> RBF_Weights</tt>: This procedure first selects evenly
+distributed centers <IMG  ALIGN=MIDDLE ALT="" SRC="img948.gif"> from the loaded training patterns and
+assigns them to the links between input and hidden layer. Subsequently
+the bias of all neurons (parameter <b>p</b>) inside the hidden layer is set
+to a value determined by the user and finally the links between hidden
+and output layer are computed.
+<P>
+<LI> <tt> RBF_Weights_Redo</tt>: In contrast to the preceding procedure
+only the links between hidden and output layer are computed. All other
+links and bias remain unchanged.
+<P>
+<LI> <tt> RBF_Weights_Kohonen</tt>: Using the self--organizing method
+of Kohonen feature maps, appropriate centers are generated on base of
+the teaching patterns. The computed centers are copied into the
+corresponding links. No other links and bias are changed.
+<P>
+</OL>
+<P>
+It is necessary that valid patterns are loaded into SNNS to use the
+initialization. If no patterns are present upon starting any of the
+three procedures an alert box will occur showing the error. A detailed
+description of the procedures and the parameters used is given in the
+following paragraphs.
+<P>
+<BR> <HR>
+<UL> 
+<LI> <A NAME=tex2html4030 HREF="node187.html#SECTION0010102210000000000000"> RBF_Weights</A>
+<LI> <A NAME=tex2html4031 HREF="node188.html#SECTION0010102220000000000000"> RBF_Weights_Kohonen</A>
+<LI> <A NAME=tex2html4032 HREF="node189.html#SECTION0010102230000000000000"> RBF_Weights_Redo</A>
+</UL>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

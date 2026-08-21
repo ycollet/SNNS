@@ -1,0 +1,43 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> The Initialization Function JE_Weights</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" The Initialization Function JE_Weights">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html4662 HREF="node236.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html4660 HREF="node234.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html4654 HREF="node234.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html4664 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html4665 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html4663 HREF="node236.html"> Learning Functions</A>
+<B>Up:</B> <A NAME=tex2html4661 HREF="node234.html"> Working with Partial </A>
+<B> Previous:</B> <A NAME=tex2html4655 HREF="node234.html"> Working with Partial </A>
+<BR> <HR> <P>
+<H3><A NAME=SECTION0010152100000000000000> The Initialization Function JE_Weights</A></H3>
+<P>
+The initialization function <tt> JE_Weights</tt> requires the
+specification of five parameters:
+<P>
+<UL><LI> <IMG  ALIGN=BOTTOM ALT="" SRC="img1193.gif">, <IMG  ALIGN=MIDDLE ALT="" SRC="img1194.gif"> : 
+       The weights of the forward connections are randomly chosen
+       from the interval <IMG  ALIGN=MIDDLE ALT="" SRC="img1195.gif">.  
+ <LI> <IMG  ALIGN=BOTTOM ALT="" SRC="img1196.gif"> : 
+       Weights of self recurrent links from context units to themselves.
+       Simple Elman networks use <IMG  ALIGN=BOTTOM ALT="" SRC="img1197.gif">. 
+ <LI> <IMG  ALIGN=MIDDLE ALT="" SRC="img1198.gif"> :
+       Weights of other recurrent links to context units. This value
+       is often set to <IMG  ALIGN=BOTTOM ALT="" SRC="img1199.gif">. 
+ <LI> <IMG  ALIGN=MIDDLE ALT="" SRC="img1200.gif">  : 
+       Initial activation of all context units.
+</UL>
+<P>
+These values are to be set in the <tt> INIT</tt> line of the control panel
+in the order given above.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

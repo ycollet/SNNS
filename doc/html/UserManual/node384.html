@@ -1,0 +1,47 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Terminal Symbols</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Terminal Symbols">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html6636 HREF="node385.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html6634 HREF="node383.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html6628 HREF="node383.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html6638 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html6639 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html6637 HREF="node385.html"> Grammar</A>
+<B>Up:</B> <A NAME=tex2html6635 HREF="node383.html"> Grammar of the </A>
+<B> Previous:</B> <A NAME=tex2html6629 HREF="node383.html"> Grammar of the </A>
+<BR> <HR> <P>
+<H2><A NAME=SECTION001841000000000000000> Terminal Symbols</A></H2>
+<P>
+
+<PRE>WHITE                     {&quot; &quot; | &quot;\t&quot;}
+FREE                      {^&quot;\n&quot;}                      /* anything up to EOL */
+COMMENT                   &quot;#&quot; FREE &quot;\n&quot;
+L_BRACKET                 &quot;[&quot;
+R_BRACKET                 &quot;]&quot;
+V_NUMBER                  [Vv]{INT}+&quot;.&quot;{INT}+           /* version number */
+INT                       [&quot;0&quot;-&quot;9&quot;]
+NUMBER                    [-+]?{{INT}+ | {INT}+{EXP} |{INT}+&quot;.&quot;{INT}*({EXP})? |
+                          {INT}*&quot;.&quot;{INT}+({EXP})?} 
+EXP                       [Ee][-+]?{INT}+
+VERSION_HEADER            &quot;SNNS pattern definition file&quot;
+GENERATED_AT              &quot;generated at&quot; {FREE}* &quot;\n&quot;
+NO_OF_PATTERN             &quot;No. of patterns&quot; {WHITE}* &quot;:&quot;
+NO_OF_INPUT               &quot;No. of input units&quot; {WHITE}* &quot;:&quot;
+NO_OF_OUTPUT              &quot;No. of output units&quot; {WHITE}* &quot;:&quot;
+NO_OF_VAR_IDIM            &quot;No. of variable input dimensions&quot; {WHITE}* &quot;:&quot;
+NO_OF_VAR_ODIM            &quot;No. of variable output dimensions&quot; {WHITE}* &quot;:&quot;
+MAXIMUM_IDIM              &quot;Maximum input dimensions&quot; {WHITE}* &quot;:&quot;
+MAXIMUM_ODIM              &quot;Maximum output dimensions&quot; {WHITE}* &quot;:&quot;
+</PRE>
+
+<P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

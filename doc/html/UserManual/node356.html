@@ -1,0 +1,53 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Functions for the Definition of Sites</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Functions for the Definition of Sites">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html6290 HREF="node357.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html6288 HREF="node355.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html6282 HREF="node355.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html6292 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html6293 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html6291 HREF="node357.html"> Functions for the </A>
+<B>Up:</B> <A NAME=tex2html6289 HREF="node355.html"> Site Functions</A>
+<B> Previous:</B> <A NAME=tex2html6283 HREF="node355.html"> Site Functions</A>
+<BR> <HR> <P>
+<H2><A NAME=SECTION001631000000000000000> Functions for the Definition of Sites</A></H2>
+<P>
+<A NAME=8264>&#160;</A>
+<P>
+<code>krui_err  krui_createSiteTableEntry( char  *site_name, char  *site_func )</code><BR> 
+defines the correspondence between site function and name of the site.
+Error codes are generated for site names already used, invalid site
+functions, or problems with the memory allocation.
+<P>
+<code>krui_err  krui_changeSiteTableEntry( char  *old_site_name,</code><BR> 
+<code>                                     char  *new_site_name,</code><BR> 
+<code>                                     char  *new_site_func )</code><BR> 
+changes the correspondence between site function and name of the site.
+All sites in the network with the name <code>old_site_name</code>
+change their name and function. Error
+codes are generated for already defined site names, invalid new site
+function, or problems with the memory allocation.
+<code>krui_err  krui_deleteSiteTableEntry( char *site_name )</code><BR> 
+deletes a site in the site table. This is possible only if there
+exist no sites in the network with that name.
+Returns an error code if there  are still sites with this name in the net.
+<P>
+<code>bool  krui_getFirstSiteTableEntry( char * *site_name, char * *site_func )</code><BR> 
+<code>bool  krui_getNextSiteTableEntry ( char * *site_name, char * *site_func )</code><BR> 
+returns the first/next pair of site name and site function. The
+return code is TRUE if there is (still) an entry in the site table,
+else FALSE.
+<code>char  *krui_getSiteTableFuncName( char  *site_name )</code><BR> 
+returns the name of the site function assigned to the site. If no
+site with this name exists, a pointer to NULL is returned.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

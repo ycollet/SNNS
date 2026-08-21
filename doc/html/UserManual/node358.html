@@ -1,0 +1,104 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Link Functions</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Link Functions">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html6312 HREF="node359.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html6310 HREF="node350.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html6304 HREF="node357.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html6314 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html6315 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html6313 HREF="node359.html"> Functions for the </A>
+<B>Up:</B> <A NAME=tex2html6311 HREF="node350.html"> Kernel Function Interface</A>
+<B> Previous:</B> <A NAME=tex2html6305 HREF="node357.html"> Functions for the </A>
+<BR> <HR> <P>
+<H1><A NAME=SECTION001640000000000000000> Link Functions</A></H1>
+<P>
+<A NAME=8277>&#160;</A>
+<P>
+The following functions are available to define or determine the
+topology of the network:
+<P>
+<PRE>krui_getFirstPredUnit( FlintType  *strength )
+krui_getNextPredUnit( FlintType   *strength )
+krui_getCurrentPredUnit( FlintType  *strength )
+krui_getFirstSuccUnit( int  UnitNo, FlintType  *strength )
+krui_getNextSuccUnit( FlintType  *strength )
+krui_isConnected( int  source_unit_no )
+krui_areConnected( int source_unit_no, int target_unit_no,
+                   FlintType  *weight )
+krui_getLinkWeight()
+krui_setLinkWeight( FlintTypeParam  weight )
+krui_createLink( int source_unit_no, FlintTypeParam  weight )
+krui_deleteLink()
+krui_deleteAllInputLinks()
+krui_deleteAllOutputLinks()
+krui_jogWeights( FlintTypeParam  minus, FlintTypeParam  plus)
+</PRE>
+<P>
+<code>int  krui_getFirstPredUnit( FlintType  *strength )</code><BR> 
+determines the unit number of the predecessor unit of the current unit
+and site; returns 0 if no such unit exists, i.e. if the current
+unit has no inputs. If a predecessor unit exists, the connection
+between the two units becomes current and its strength is returned.
+<code>int  krui_getNextPredUnit( FlintType   *strength )</code><BR> 
+gets another predecessor unit of the current unit/site (returns 0 if
+no more exist). Otherwise like <code>krui_getFirstPredUnit(...)</code>.
+<code>int  krui_getCurrentPredUnit( FlintType  *strength )</code><BR> 
+yields the current predecessor unit.
+<code>int krui_getFirstSuccUnit( int UnitNo, FlintType *strength )</code><BR> 
+yields unit number and connection strength of the first successor unit
+to the current unit. The return code is 0 if no such unit exists,
+i.e. the current unit has no outputs. If a successor unit exists,
+the connection between the two units becomes current. If the
+successor unit has sites, the site connected with this link becomes
+current site. The function is slow, because the units are connected
+only backwards (lookup time is proportional to the number of
+connections in the net).  <code>int  krui_getNextSuccUnit( FlintType  *strength )</code><BR> 
+gets another successor unit of the current unit (returns 0 if no other
+successors exist). Otherwise like <code>krui_getFirstSuccUnit(...)</code>. The
+function is slow, because the units are only connected backwards.
+<code>bool  krui_isConnected( int  source_unit_no )</code><BR> 
+checks, whether there is a connection between the current unit and
+the source unit. If this is true, this link becomes current and TRUE is
+returned.
+<P>
+<code>bool  krui_areConnected( int source_unit_no, int target_unit_no,</code><BR> 
+<code>                         FlintType  *weight )</code><BR> 
+checks, whether there is a connection between the source unit and
+the target unit. In contrast to <code>krui_isConnected(...)</code> this
+function traverses sites during the search. If there is such a
+connection, this link becomes current and TRUE is returned.
+<code>FlintType  krui_getLinkWeight()</code><BR> 
+<code>void       krui_setLinkWeight( FlintTypeParam  weight )</code><BR> 
+determines/sets the connection weight of the current link.
+<P>
+<code>krui_err  krui_createLink( int source_unit_no, FlintTypeParam weight )</code><BR> 
+creates a new link between the current unit/site and the source unit.
+An error code is generated if a link between these two units already
+exists, or if the source unit does not exist.
+<code>krui_err  krui_deleteLink()</code><BR> 
+deletes the current link. To delete a connection between the current
+unit/site and the source unit a sequence of <tt> krui_isConnected(
+source_unit_no )</tt> and <tt> krui_deleteLink()</tt> is ideal.  
+<code>krui_err  krui_deleteAllInputLinks()</code><BR> 
+<code>krui_err  krui_deleteAllOutputLinks()</code><BR> 
+deletes all inputs/outputs at the current unit/site.
+<code>void krui_jogWeights( FlintTypeParam minus, FlintTypeParam plus)</code><BR> 
+adds uniform distributed random values to the connection weights of the network. 
+Minus must be less then plus. 
+See also <code>krui_setSeedNo(...)</code>.
+<P>
+<BR> <HR><A NAME=tex2html6312 HREF="node359.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html6310 HREF="node350.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html6304 HREF="node357.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html6314 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html6315 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html6313 HREF="node359.html"> Functions for the </A>
+<B>Up:</B> <A NAME=tex2html6311 HREF="node350.html"> Kernel Function Interface</A>
+<B> Previous:</B> <A NAME=tex2html6305 HREF="node357.html"> Functions for the </A>
+<BR> <HR> <P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

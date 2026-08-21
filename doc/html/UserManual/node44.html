@@ -1,0 +1,155 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Setup Panel of a 2D Display</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Setup Panel of a 2D Display">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html2113 HREF="node45.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html2111 HREF="node43.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html2107 HREF="node43.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html2115 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html2116 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html2114 HREF="node45.html"> Graph Window</A>
+<B>Up:</B> <A NAME=tex2html2112 HREF="node43.html"> 2D Displays</A>
+<B> Previous:</B> <A NAME=tex2html2108 HREF="node43.html"> 2D Displays</A>
+<BR> <HR> <P>
+<H3><A NAME=SECTION00535100000000000000> Setup Panel of a 2D Display</A></H3>
+<P>
+<A NAME=SetupPanel>&#160;</A>
+<A NAME=1324>&#160;</A>
+<A NAME=1325>&#160;</A>
+<P>
+Changes to the kind of display of the network can be performed in the
+<b> Setup panel</b>. All settings become valid only after the button
+<IMG  ALIGN=BOTTOM ALT="" SRC="img180.gif"> is clicked. The whole display window is then redrawn.
+<P>
+<P><A NAME=1335>&#160;</A><A NAME=FigSetupPanel>&#160;</A><IMG  ALIGN=BOTTOM ALT="" SRC="img181.gif">
+<BR><STRONG>Figure:</STRONG> Setup Panel of a 2D-display.<BR>
+<P>
+<P>
+<OL><A NAME=1340>&#160;</A>
+<LI> Buttons to control the display of unit information: The first
+two lines of the Setup panel (<tt> units top</tt> and <tt> units bottom</tt>)
+contain two buttons each to set the unit parameter that can be
+displayed at the top resp. the bottom of the unit.
+<P>
+The button <IMG  ALIGN=BOTTOM ALT="" SRC="img182.gif"> toggles the display of information which can
+be selected with the button <IMG  ALIGN=BOTTOM ALT="" SRC="img183.gif">.  The unit name, unit
+number, or the z-value (3D coordinate) can be displayed above the unit,
+the activation, initial activation, bias, or output of the unit below
+the unit. The numerical attribute selected with the button <IMG  ALIGN=BOTTOM ALT="" SRC="img184.gif"> at the bottom of the unit (activation, initial activation,
+output, or bias) also determines the size of the unit in the graphical
+representation.
+<P>
+It is usually not advisable to switch off <tt> top</tt> (number or name),
+because this information is needed for reference to the info panel. An
+unnamed unit is always displayed with its number.
+<P>
+<A NAME=1347>&#160;</A>
+<LI> Buttons to control the display of link information: The third
+line consists of three buttons to select the display of link data, 
+<IMG  ALIGN=BOTTOM ALT="" SRC="img185.gif">, <IMG  ALIGN=BOTTOM ALT="" SRC="img186.gif">, <IMG  ALIGN=BOTTOM ALT="" SRC="img187.gif">.
+<P>
+<UL><LI> <IMG  ALIGN=BOTTOM ALT="" SRC="img188.gif"> determines whether to draw links at all (then
+        <IMG  ALIGN=BOTTOM ALT="" SRC="img189.gif"> is inverted),
+<LI> <IMG  ALIGN=BOTTOM ALT="" SRC="img190.gif"> displays link weights at the center of the
+        line representing the link,
+<LI> <IMG  ALIGN=BOTTOM ALT="" SRC="img191.gif"> displays arrow heads of the links pointing
+        from source to target unit.
+</UL>
+<P>
+<A NAME=1357>&#160;</A>
+<LI> <IMG  ALIGN=BOTTOM ALT="" SRC="img192.gif"> invokes another popup window to select the
+display of up to eight different layers in the display window. Layers are
+being stacked like transparent sheets of paper and allow for a selective
+display of units and links. These layers need NOT
+correspond with layers of units of the network topology (as in
+multilayer feed-forward networks), but they may do so. Layers are very
+useful to display only a selected subset of the network. The display
+of each layer can be switched on or off independently. A unit may
+belong to several layers at the same time. The assignment of units to
+layers can be done with the menu <tt> assign layers</tt> invoked with the
+button <tt> OPTIONS</tt> in the main Info panel.
+<P>
+<A NAME=1361>&#160;</A>
+<LI> <IMG  ALIGN=BOTTOM ALT="" SRC="img193.gif"> sets the 2D--display colors. On monochrome
+  terminals, black on white or white on black representation of the
+  network can be selected from a popup menu. On color displays, a
+  color editing window is opened. This window consists of three parts:
+  The palette of available colors at the top, the buttons to select
+  the item to be colored in the lower left region, and the color
+  preview window in the lower right region.
+<P>
+<P><A NAME=1370>&#160;</A><IMG  ALIGN=BOTTOM ALT="" SRC="img194.gif">
+<BR><STRONG>Figure:</STRONG> Color Setup Panel.<BR>
+<P>
+<P>
+A color is set by clicking first at the appropriate button (<IMG  ALIGN=BOTTOM ALT="" SRC="img195.gif">, <IMG  ALIGN=BOTTOM ALT="" SRC="img196.gif">, or <IMG  ALIGN=BOTTOM ALT="" SRC="img197.gif">) and then at the
+desired color in the color palette. The selected setting is immediately
+displayed in the color preview window. All colors may be set in
+any order and any number of times. The changes become effective in the
+corresponding 2D--display only after both the setup panel and the
+color edit panel have been dismissed with the <IMG  ALIGN=BOTTOM ALT="" SRC="img198.gif"> button.
+<P>
+<A NAME=1377>&#160;</A>
+<LI> Sliders for the selection of link display parameters,
+<tt> links positive</tt> and <tt> links negative</tt>:
+<P>
+There are two slidebars to set thresholds for the display of links.
+When the bubble is moved, the current threshold is displayed in
+absolute and relative value at the bottom of the setup panel. Only
+those links with an absolute value above the threshold are displayed.
+The range of the absolute values is <IMG  ALIGN=MIDDLE ALT="" SRC="img199.gif">
+(see also paragraph <A HREF="node43.html#GraphicWindows"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A>). The trigger values can be
+set independently for positive and negative weights. With these link
+thresholds the user can concentrate on the strong connections.
+Reducing the number of links drawn is an effective means to speed up
+the drawing of the displays, since line drawing takes most of the time
+to display a network.
+<P>
+Note: The links that are not drawn are only invisible. They still
+remain accessible, i.e. they are affected by editor operations.
+<P>
+<A NAME=1381>&#160;</A>
+<LI> <tt> units scale</tt>: This slidebar sets the parameter <i> scaleFactor</i>
+for the size of the growing boxes of the units. Its range is <IMG  ALIGN=MIDDLE ALT="" SRC="img200.gif">. A scale factor of <IMG  ALIGN=BOTTOM ALT="" SRC="img201.gif"> draws the unit with
+activation <IMG  ALIGN=BOTTOM ALT="" SRC="img202.gif"> with full size. A scale factor of <IMG  ALIGN=BOTTOM ALT="" SRC="img203.gif"> draws a unit
+with activation <IMG  ALIGN=BOTTOM ALT="" SRC="img204.gif"> only with half size.
+<P>
+<A NAME=1384>&#160;</A>
+<LI> <tt> grid width</tt>: This value sets the width of the grid on which
+the units are placed. For some nets, changing the default of 37 pixels
+may be useful, e.g. to be able to better position the units in a
+geometrical pattern. Overlapping tops and bottoms occur if a grid
+size of less than 35 pixels is selected (26 pixels if units are
+displayed without numerical values). This overlap, however, does not
+affect computation in any way.
+<P>
+<A NAME=1386>&#160;</A>
+<LI> <tt> origin (grid)</tt>: 
+These two fields determine the origin of the window, i.e. the grid
+position of the top left corner.  There, the left field
+represents the x coordinate, the right is the y coordinate. The origin
+is usually (0, 0). Setting it to (20, 0) moves the display 20 units to
+the right and 10 units down in the grid.
+<P>
+<A NAME=1388>&#160;</A>
+<LI> <tt> subnet number</tt>: 
+This field adjusts the subnet number to be displayed in this window.
+Values between <b>-32736</b> and <b>+32735</b> are possible here.
+</OL>
+<P>
+
+<P>
+<BR> <HR><A NAME=tex2html2113 HREF="node45.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html2111 HREF="node43.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html2107 HREF="node43.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html2115 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html2116 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html2114 HREF="node45.html"> Graph Window</A>
+<B>Up:</B> <A NAME=tex2html2112 HREF="node43.html"> 2D Displays</A>
+<B> Previous:</B> <A NAME=tex2html2108 HREF="node43.html"> 2D Displays</A>
+<BR> <HR> <P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

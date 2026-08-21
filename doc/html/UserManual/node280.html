@@ -1,0 +1,65 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Kernelrpc</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Kernelrpc">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html5265 HREF="node281.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html5263 HREF="node278.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html5259 HREF="node279.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html5267 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html5268 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html5266 HREF="node281.html"> Control Panels</A>
+<B>Up:</B> <A NAME=tex2html5264 HREF="node278.html"> SNNS RPC Programs</A>
+<B> Previous:</B> <A NAME=tex2html5260 HREF="node279.html"> Xguirpc</A>
+<BR> <HR> <P>
+<H2><A NAME=SECTION001312000000000000000> Kernelrpc</A></H2>
+<P>
+<tt> Kernelrpc</tt> has the following options:
+<P>
+<UL><LI> <tt> uid</tt> <b>&lt;</b>xguirpc.user-id<b>&gt;</b>: the user-id of the <tt> xguirpc</tt> user,
+<P>
+<LI> <tt> host</tt> <b>&lt;</b>xgui_rpc_host<b>&gt;</b>: the host-name of the <tt> xguirpc</tt>,
+<P>
+<LI> <tt> program</tt> <b>&lt;</b>xgui_program_number<b>&gt;</b>: the program number
+  under which the <tt> xguirpc</tt> is registered at the portmapper,
+<P>
+<LI> <tt> version</tt> <b>&lt;</b>xgui_version_number<b>&gt;</b>: the version number
+  under which the <tt> xguirpc</tt> is registered at the portmapper,
+<P>
+<LI> <tt> type</tt> <b>&lt;</b>type<b>&gt;</b>: kernel type (normal or masters),
+<P>
+<LI> <tt> net</tt> <b>&lt;</b>net-name<b>&gt;</b>: the name of a network file that is to be loaded,
+<P>
+<LI> <tt> pat</tt> <b>&lt;</b>pat-name<b>&gt;</b>: the name of a pattern file that is to
+  be loaded. This option may be given more than once.
+<P>
+</UL>
+<P>
+If <tt> kernelrpc</tt> is started without any options the kernel will wait
+a short period of time. If there is no connection to an <tt> xguirpc</tt>
+the <tt> kernelrpc</tt> will be aborted. The default waiting time is set
+to 15 minutes. The simplest way to start <tt> kernelrpc</tt> is with the
+help of the <b> New panel</b> of the rpc module, because all options are
+set automatically. It is possible to run up to 10 <tt> kernelrpc</tt>s at
+the same time on one computer.
+<P>
+In some networks problems occur, caused by the domain name. If NIS
+(SUN Yellow pages) is activated, the function <tt> getdomainname</tt> does
+not deliver the correct domain name.  However, this problem can be
+solved, if the environment variable DOMAINNAME is set to the correct
+domain name.
+<P>
+<tt> Example:</tt> On our Sun workstations <tt> getdomainname</tt> returns
+<tt> infra</tt> instead of<BR> <tt> informatik.uni-stuttgart.de</tt>.  To solve
+this problem, we type: <tt> setenv DOMAINNAME
+informatik.uni-stuttgart.de</tt>. The best way to achieve this is to add
+the above line to the <tt> .cshrc</tt> file.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

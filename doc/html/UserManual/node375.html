@@ -1,0 +1,74 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> The ASCII Network File Format</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" The ASCII Network File Format">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html6525 HREF="node376.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html6523 HREF="node374.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html6517 HREF="node374.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html6527 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html6528 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html6526 HREF="node376.html"> Form of the </A>
+<B>Up:</B> <A NAME=tex2html6524 HREF="node374.html"> Kernel File Interface</A>
+<B> Previous:</B> <A NAME=tex2html6518 HREF="node374.html"> Kernel File Interface</A>
+<BR> <HR> <P>
+<H1><A NAME=SECTION001810000000000000000> The ASCII Network File Format</A></H1>
+<P>
+<A NAME=8575>&#160;</A>
+<P>
+
+<P>
+The ASCII representation of a network consists of the
+following parts:
+<UL><LI> a header, which contains information about the net
+<LI> the definition of the teaching function
+<LI> the definition of the sites
+<LI> the definition of cell types
+<LI> the definition of the default values for cells
+<LI> the enumeration of the cells with all their characteristics
+<LI> the list of connections
+<LI> a list of subnet numbers
+<LI> a list of layer numbers
+</UL>
+<P>
+All parts, except the header and the enumeration of the cells, may be
+omitted. Each part may also be empty. It then consists only of the
+part title, the header line and the boarder marks (e.g.:
+<code>SPM_amp</code>----|---|------&amp;).
+<P>
+Entries in the <i> site definition section</i> do not contain any
+empty columns. The only empty column in the <i> type definition
+section</i> may be the <i> sites</i> column, in which case the cells
+of this type do not have sites.
+<P>
+Entries in the <i> unit definition section</i> have at least the
+columns <i> no.</i> (cell number) and <i> position</i> filled. The
+entries (rows) are sorted by increasing cell number. If column <i>
+typeName</i> is filled, the columns <i> act func</i>, <i> out func</i>,
+and <i> sites</i> remain empty.
+<P>
+Entries in the <i> connection definition section</i> have all columns
+filled. The respective cell does not have a site, if the column <i>
+site</i> is empty. The entries are sorted by increasing number of the
+target cell (column <i> target</i>). Each entry may have multiple
+entries in the column <i> sources</i>. In this case, the entries
+(number of the source cell and the connection strength) are separated
+by a comma and a blank, or by a comma and a newline (see example in
+the Appendix <A HREF="node386.html#AppendixExamples"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A>).
+<P>
+The file may contain comment lines. Each line beginning with <b>
+#</b> is skipped by the SNNS-kernel.
+<P>
+<BR> <HR><A NAME=tex2html6525 HREF="node376.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html6523 HREF="node374.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html6517 HREF="node374.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html6527 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html6528 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html6526 HREF="node376.html"> Form of the </A>
+<B>Up:</B> <A NAME=tex2html6524 HREF="node374.html"> Kernel File Interface</A>
+<B> Previous:</B> <A NAME=tex2html6518 HREF="node374.html"> Kernel File Interface</A>
+<BR> <HR> <P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

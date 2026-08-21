@@ -1,0 +1,281 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Variable Size Patterns</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Variable Size Patterns">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html2897 HREF="node107.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html2895 HREF="node103.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html2891 HREF="node105.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html2899 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html2900 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html2898 HREF="node107.html"> Graphical Network Editor</A>
+<B>Up:</B> <A NAME=tex2html2896 HREF="node103.html"> Handling Patterns with </A>
+<B> Previous:</B> <A NAME=tex2html2892 HREF="node105.html"> Fixed Size Patterns</A>
+<BR> <HR> <P>
+<H1><A NAME=SECTION00630000000000000000> Variable Size Patterns</A></H1>
+<P>
+<A NAME=varPat>&#160;</A>
+<A NAME=2291>&#160;</A>
+<P>
+Variable patterns are much more difficult to define and handle.
+Example applications for variable pattern set include TDNN patterns
+for one variable dimension and picture processing for two variable
+dimensions. The SNNS pattern definition is very flexible and allows a
+great degree of freedom. Unfortunately this also renders the writing of
+correct pattern files more difficult and promotes mistakes.
+<P>
+To make the user acquainted with the pattern file format we describe the
+format with the help of an example pattern file. The beginning of the
+pattern file describing a bitmap picture is given below. For easier
+reference, line numbers have been added on the left.
+<P>
+ <PRE>0001  SNNS pattern definition file V3.2
+0002  generated at Fri Aug  3 00:00:44 1999
+0003
+0004  No. of patterns : 10
+0005  No. of input units : 1
+0006  No. of output units : 1
+0007  No. of variable input dimensions : 2
+0008  Maximum input dimensions : [ 200 200 ]
+0009  No. of variable output dimensions : 2
+0010  Maximum output dimensions : [ 200 200 ]
+0011 
+0012  # Input pattern 1: pic1
+0013  [ 200 190 ]
+0014  1 1 1 0 1 1 1 1 1 1 0 0 0 0 1 1 1 1 1 1 1 1 1 0 1 1 0 0 1 1 0 1
+      .
+      .
+      .
+0214  1 1 1 0 1 1 1 1 1 1 0 0 0 0 1 1 1 1 1 1 1 1 1 0 1 1 0 0 1 1 0 1
+0215  # Output pattern 1: pic1
+0216  [ 200 190 ]
+0217  1 1 1 0 1 1 1 1 1 1 0 0 0 0 1 1 1 1 1 1 1 1 1 0 1 1 0 0 1 1 0 1
+      .
+      .
+      .
+</PRE>
+<P>
+Some of the comments identifying parameter names make no sense when
+the file describes a variable pattern. They are kept, however, for
+reasons of compatibility with the regular fixed size pattern
+definitions.
+<P>
+The meaning of the various lines is:
+<P>
+
+<UL>
+<DT>Line 0001
+<DD> gives the version number of the grammar this file follows. For
+variable size pattern files the version V3.2 is mandatory!
+<P>
+<DT>Line 0002
+<DD> is information for the book keeping of the user only. Usually
+the time of the generation of the pattern file is given here. The string
+'generated at' is mandatory !
+<P>
+
+<P>
+<DT>Line 0004
+<DD> gives the number of patterns defined in this file. The number
+of subpatterns is not specified, since it depends on the size of the network.
+Remember: The same pattern may be used by different sized networks
+resulting in varying numbers of subpatterns!
+<P>
+<DT>Line 0005
+<DD> <b> CAUTION !</b> This variable does <b> NOT</b> give the number
+of input units but the size <b>C</b> of the fixed dimension. For TDNNs this would
+be the (invariant) number of features, for a picture it would be the
+number of values per pixel (i.e. a bitmap picture would have size 1,
+an RGB picture size 3).
+<P>
+<DT>Line 0006
+<DD> corresponds to line 0005 for the output pattern
+<P>
+<DT>Line 0007
+<DD> this line specifies the number of variable input
+dimensions <b>I</b>. With fixed size patterns 0 has to be specified.
+<P>
+<DT>Line 0008
+<DD> this line specifies the size of the largest pattern in this
+pattern set. It is required for parsing and storage allocation
+purposes. The number of entries in the list has to match the number
+given in line 0007, if 0 was specified there an empty list (i.e. ``[
+]'')has to be given here.
+<P>
+<b> Note:</b> The lines 0007 and 0008 are pairwise mandatory, i.e. if
+one is given, the other has to be specified as well. Old pattern files
+do have neither one and can therefore still be read correctly.
+<P>
+<DT>Line 0009
+<DD> corresponds to line 0007 for the output pattern. It specifies
+the number of variable output dimensions <b>O</b>.
+<P>
+
+<P>
+<DT>Line 0010
+<DD> corresponds to line 0008 for the output pattern.
+<P>
+<b> Note:</b> The lines 0009 and 0010 are again pairwise mandatory, i.e. if
+one is given, the other has to be specified as well. Old pattern files
+do have neither one and can therefore still be read correctly.
+<P>
+<DT>Line 0012
+<DD> an arbitrary comment. All Text following the sign
+`#' in the same line is ignored.
+<P>
+<DT>Line 0013
+<DD> this line has to be specified whenever <b>I</b> in line 0007 is <IMG  ALIGN=MIDDLE ALT="" SRC="img529.gif">. It specifies the size of the following input pattern and is given
+as a list of integers separated by blanks and enclosed in [ ]. The
+values have to be given by descending dimensions row, i.e. [ dimension_3
+dimension_2 dimension_1 ] (here: [200 190]). Note that [200 190] is
+less than the maximum, which is specified in line 0008.
+<P>
+<DT>Line 0014
+<DD> the first line of <IMG  ALIGN=MIDDLE ALT="" SRC="img530.gif">
+activation values<A NAME=tex2html283 HREF="footnode.html#2303"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/foot_motif.gif"></A>
+(i.e. here 1*190 = 190 integer values). The values are expected to be
+stored as:<BR> 
+<IMG  ALIGN=MIDDLE ALT="" SRC="img531.gif"> times<BR> 
+<BR> 
+<IMG  ALIGN=MIDDLE ALT="" SRC="img532.gif"> times<BR> 
+<b>C</b> values.
+<P>
+
+<P>
+<DT>Line 0214
+<DD> the last line of <IMG  ALIGN=MIDDLE ALT="" SRC="img533.gif">
+activation values (i.e. here the <IMG  ALIGN=BOTTOM ALT="" SRC="img534.gif"> line)
+<P>
+<DT>Line 0215
+<DD> corresponds to line 0012 for the output pattern.
+<P>
+<DT>Line 0216
+<DD> corresponds to line 0013 for the output pattern.
+<P>
+<DT>Line 0217
+<DD> corresponds to line 0014 for the output pattern.
+<P>
+</UL>
+<P>
+Once the patterns are loaded into the simulator, their handling can be
+controlled by using the control panel. For the handling of variable size
+patterns an additional subpattern panel is provided. The handling of
+patterns is described in conjunction with the control panel description
+in section <A HREF="node40.html#remPanel"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A>. All these explanations are intended for
+fixed sized patterns, but also hold true for variable size patterns
+so they are not repeated here.
+<P>
+The additional functionality necessary for dealing with variable size
+patterns is provided by the subpat panel depicted in figure
+<A HREF="node106.html#subpatpan"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A>.
+<P>
+<P><A NAME=2320>&#160;</A><A NAME=subpatpan>&#160;</A><IMG  ALIGN=BOTTOM ALT="" SRC="img535.gif">
+<BR><STRONG>Figure:</STRONG> The handling panel for variable pattern sizes.<BR>
+<P>
+<P>
+ 4pt plus 2pt minus 4pt
+<P>
+A subpattern is defined as the number of input and output activations
+that match the number of input and output units of the network. The
+size and shape of the subpattern must be defined in the subpat panel.
+<P>
+<b> Note:</b> A correct subpattern must be defined before any learning,
+propagation or recall function can be executed.
+<P>
+<b> Note:</b> For a network with 30 input units input subpatterns of
+size 1x30, 2x15, 3x10, 5x6, 6x5, 10x3, 2x15, and 30x1 would all be
+valid and would be propagated correctly if <b>C = 1</b>. Is the position of
+the various input units important, however, (as in pictures) both size
+<b> and shape</b> have to match the network. Shape is not checked
+automatically, but has to be taken care of by the user! In the case of
+a color picture, where each pixel is represented by three values (RGB)
+<b>C</b> would be set to three and the set of possible combinations
+would shrink to 1x10, 2x5, 5x2, and 10x1.
+<P>
+<b> Note:</b> When loading a new pattern set, the list of activations is
+assigned to the units in order of ascending unit number. The user is
+responsible for the correct positioning of the units. When creating
+and deleting units their order is easily mixed up. This leads to
+unwanted graphical representations and the impression of the patterns
+being wrong. To avoid this behavior always make sure to have the lowest
+unit number in the upper left corner and the highest in the lower
+right. To avoid these problems use BIGNET for network creation.
+<P>
+Once a subpattern is defined, the user can scroll through the pattern
+along every dimension using the buttons 
+xgui_figs/xgui_button_first.ps,
+xgui_figs/xgui_button_prev.ps,
+xgui_figs/xgui_button_next.ps, and
+xgui_figs/xgui_button_last.ps. The step size used for
+scrolling when pressing the buttons
+xgui_figs/xgui_button_prev.ps  and
+xgui_figs/xgui_button_next.ps  is determined by the input and
+output step fields for the various dimensions. The user can still as well
+browse through the pattern set using the arrow buttons of the control
+panel.
+<P>
+It is possible to load various pattern sets with a varying number of
+variable dimensions. The user is free to use any of them with the same
+network alternatively. When switching between these pattern sets the
+subpattern panel will automatically adapt to show the correct number
+of variable dimensions.
+<P>
+When stepping through the subpatterns, in learning, testing, or simply
+displaying, the resulting behavior is always governed by the input
+pattern. If the last possible subpattern within the current pattern is
+reached, the request for the next subpattern will automatically yield
+the first subpattern of the next pattern in both input and output
+layer. Therefore it is not possible to handle all subpatterns for
+training when there are not the same number of subpatterns in input
+and output layer available. By adjusting the step width accordingly,
+it should always be possible to achieve correct network behavior.
+<P>
+<P><A NAME=2341>&#160;</A><A NAME=patTile>&#160;</A><IMG  ALIGN=BOTTOM ALT="" SRC="img536.gif">
+<BR><STRONG>Figure:</STRONG> Tiling versus shifting of subpatterns.<BR>
+<P>
+<P>
+ 20pt plus 2pt minus 4pt
+<P>
+The last possible subpattern in the above description is dependent
+from the settings of the subpattern panel. An example for a
+one-dimensional case would be: In a pattern of size 22 is the last
+subpattern with size = 3 and step = 5 the position 15. Changing the
+step width to 2 would lead to a last position of 18.
+In figure <A HREF="node106.html#patTile"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A>, the left pattern would have only 9
+subpatterns, whereas the right one would have 49 !
+<P>
+The next reachable position with the current step width will always be
+a multiple of this step width. That is, if the step width is 4 and
+pattern position 8 is reached, a change of step width to 5 and a
+subsequent press of xgui_figs/xgui_button_next.ps
+would result in position 10 (and not 13 as some might expect).
+<P>
+When selecting a step width, the user also has to remember whether the
+pattern should be divided in tiles or overlapping pieces. When
+implementing filter e.g., whether picture or others, a tiling stile
+will always be more appropriate, since different units are treated not
+concordantly.
+<P>
+It is the sole responsibility of the user to define the step width and
+the size of the subpattern correctly for both input and output. The
+user has to take care for the subpatterns to be correspondent. A wrong
+specification can lead to unpredictable learning behavior. The best
+way to check the settings is to press the <IMG  ALIGN=BOTTOM ALT="" SRC="img537.gif"> button, since
+exactly those subpatterns are thereby generated that will also be used
+for the training. By observing the reported position in the subpattern
+panel it can be verified whether meaningful 
+values have been specified.
+<P>
+<BR> <HR><A NAME=tex2html2897 HREF="node107.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html2895 HREF="node103.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html2891 HREF="node105.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html2899 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html2900 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html2898 HREF="node107.html"> Graphical Network Editor</A>
+<B>Up:</B> <A NAME=tex2html2896 HREF="node103.html"> Handling Patterns with </A>
+<B> Previous:</B> <A NAME=tex2html2892 HREF="node105.html"> Fixed Size Patterns</A>
+<BR> <HR> <P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

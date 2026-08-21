@@ -1,0 +1,59 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> setSubPattern</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" setSubPattern">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html5672 HREF="node310.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html5670 HREF="node304.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html5664 HREF="node308.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html5674 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html5675 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html5673 HREF="node310.html"> setShufflesetSubShuffle</A>
+<B>Up:</B> <A NAME=tex2html5671 HREF="node304.html"> Function Calls To </A>
+<B> Previous:</B> <A NAME=tex2html5665 HREF="node308.html"> setPruningFunc</A>
+<BR> <HR> <P>
+<H3><A NAME=SECTION001431500000000000000> setSubPattern</A></H3>
+<P>
+<A NAME=7673>&#160;</A>
+<P>
+The function call <tt> setSubPattern</tt> defines the
+<i> Subpattern-Shifting-Scheme</i> which is described in chapter ``Variable
+size pattern''. The definition of the <i> Subpattern-Shifting-Scheme</i> has
+to fit the used pattern file and the architecture of the net. The
+format of the function call is:
+<P>
+<blockquote> <tt> setSubPattern(InputSize, InputStep1, OutputSize1, OutputStep1)</tt>
+</blockquote>
+<P>
+The first dimension of the subpatterns is described by the first four
+parameters. The order of the parameters is identical to the order in
+the graphical user interface ( see chapter ``Sub Pattern Handling'').
+All four parameters are needed for one dimension. If a second
+dimension exists the four parameters of that dimension are given after
+the four parameters of the first dimension. This applies to all
+following dimensions. Function calls could look like this:
+<P>
+<blockquote> <tt> setSubPattern (5, 3, 5, 1)<BR> 
+setSubPattern(5, 3, 5, 1, 5, 3, 5, 1)</tt>
+</blockquote>
+<P>
+A one-dimensional subpattern with the InputSize 5, InputStep 3,
+OutputSize 5, OutputStep 1 is defined by the first call. A
+two-dimensional subpattern as used in the example network <tt> watch
+  net</tt> is defined by the second function call. The following text is
+displayed by the batch interpreter:
+<P>
+<blockquote> <tt> Sub-pattern shifting scheme (re)defined<BR> 
+Parameters are: 5 3 5 1 5 3 5 1</tt>
+</blockquote>
+<P>
+The parameters have to be integers.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

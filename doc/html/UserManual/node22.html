@@ -1,0 +1,119 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Creating New Networks</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Creating New Networks">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html1831 HREF="node23.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html1829 HREF="node19.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html1823 HREF="node21.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html1833 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html1834 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html1832 HREF="node23.html"> Training Networks</A>
+<B>Up:</B> <A NAME=tex2html1830 HREF="node19.html"> Introduction to SNNS</A>
+<B> Previous:</B> <A NAME=tex2html1824 HREF="node21.html"> Reading and Writing </A>
+<BR> <HR> <P>
+<H2><A NAME=SECTION00513000000000000000> Creating New Networks</A></H2>
+<P>
+You will need to create your own networks. SNNS allows the creation of
+many different network types. Here is an example of how to create a
+conventional (fully connected) feed-forward network.
+<P>
+First select the FEEDFORWARD option, hidden under the <IMG  ALIGN=BOTTOM ALT="" SRC="img52.gif">
+button in the manager panel. You are then faced with the panel in
+figure <A HREF="node22.html#figbignet"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A>. Only two parts of the panel are required.
+<P>
+The top allows the definition of the network topology, that is how
+many units are required in each layer and how they should appear if
+the network is displayed on the screen. The lower part allows you to
+fully connect the layers and to create the network.
+<P>
+Note that much of what you are defining here is purely cosmetic. The
+pattern files contain a given number of inputs and outputs, they have
+to match the network topology; how they are arranged in the display is
+immaterial.
+<P>
+ <P><A NAME=626>&#160;</A><A NAME=figbignet>&#160;</A><IMG  ALIGN=BOTTOM ALT="" SRC="img53.gif">
+<BR><STRONG>Figure:</STRONG> The SNNS BigNet Feedforward network designer panel<BR>
+<P>
+<P>
+First you have to define the input layer by filling the blanks in the
+top right hand corner (edit plane) of the panel.  The panel shows the
+current settings for each group of units (a plane in SNNS
+terminology).  Each group is of a given type (i.e. input, hidden or
+output), and each plane contains a number of units arranged in an
+x-y-z coordinate system. This is used for drawing networks only!
+<P>
+You can change the entries by entering values into the boxes or by
+clicking on <IMG  ALIGN=BOTTOM ALT="" SRC="img54.gif"> and <IMG  ALIGN=BOTTOM ALT="" SRC="img55.gif"> to change the unit type and relative
+position. The relative position is not used for the first plane of
+units (there is nothing to position it relatively to). The layers
+will, for instance, be positioned below the previous layers if the
+'Rel. Position' has been changed to 'below' by clicking on the <IMG  ALIGN=BOTTOM ALT="" SRC="img56.gif">
+button.
+<P>
+Here is an example of how to create a simple pattern associator
+network with a 5x7 matrix of inputs inputs, 10 hidden units and 26
+outputs:
+<PRE>Leave 'Type' as input
+set no 'x' direction to 5
+set no 'y' direction to 7
+and click on \fbox{ENTER}
+</PRE>
+If the input is acceptable it will be copied to the column to the
+left. The next step is to define the hidden layer, containing 10
+units, positioned to the right the inputs.
+<PRE>Change 'Type' from input to hidden by clicking on \fbox{TYPE} once.
+set no 'x' direction to 1
+set no 'y' direction to 10
+change 'Rel.Position' to 'below' by clicking on \fbox{POS}
+and click on \fbox{ENTER}
+</PRE>
+You are now ready to define the output plane, here you want 26 output
+units to the right of the input. You may want to save space and
+arrange the 26 outputs as two columns of 13 units each.
+<PRE>Change 'Type' from hidden to output by clicking on \fbox{TYPE} again.
+set no 'x' direction to 2
+set no 'y' direction to 13
+and click on \fbox{ENTER}
+</PRE>
+After defining the layer topology the connections have to be made.
+Simply click on <IMG  ALIGN=BOTTOM ALT="" SRC="img57.gif"> (bottom left of lower panel). Then
+select <IMG  ALIGN=BOTTOM ALT="" SRC="img58.gif"> and <IMG  ALIGN=BOTTOM ALT="" SRC="img59.gif">. You may have to confirm the
+destruction of any network already present.
+<P>
+Selection of <IMG  ALIGN=BOTTOM ALT="" SRC="img60.gif"> from the SNNS-manager panel should result in
+figure <A HREF="node22.html#figdisplay"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A>.
+<P>
+<P><A NAME=645>&#160;</A><A NAME=figdisplay>&#160;</A><IMG  ALIGN=BOTTOM ALT="" SRC="img61.gif">
+<BR><STRONG>Figure:</STRONG> SNNS network display panel<BR>
+<P>
+<P>
+The lines showing the weights are not normally visible, you have to
+switch them on by select <IMG  ALIGN=BOTTOM ALT="" SRC="img62.gif">, and then click on the <IMG  ALIGN=BOTTOM ALT="" SRC="img63.gif"> button
+next to 'links' option.  You will find that SNNS refuses any further
+input until you have selected <IMG  ALIGN=BOTTOM ALT="" SRC="img64.gif">.
+<P>
+After creating the network and loading in the pattern file(s) - which
+have to fit the network topology - you can start training the net. The
+network you have just created should fit the 'letters' patterns in the
+SNNS examples directory.
+<P>
+An alternate way to construct a network is via the graphical network
+editor build into SNNS. It is best suited to alter an existing large
+network or to create a new small one. For the creation of large
+networks use bignet. The network editor is described in
+chapter <A HREF="node107.html#XGUIEditor"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A>.
+<P>
+<BR> <HR><A NAME=tex2html1831 HREF="node23.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html1829 HREF="node19.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html1823 HREF="node21.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html1833 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html1834 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html1832 HREF="node23.html"> Training Networks</A>
+<B>Up:</B> <A NAME=tex2html1830 HREF="node19.html"> Introduction to SNNS</A>
+<B> Previous:</B> <A NAME=tex2html1824 HREF="node21.html"> Reading and Writing </A>
+<BR> <HR> <P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

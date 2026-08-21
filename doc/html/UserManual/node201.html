@@ -1,0 +1,63 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> ART1 Update Functions</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" ART1 Update Functions">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html4226 HREF="node202.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html4224 HREF="node198.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html4220 HREF="node200.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html4228 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html4229 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html4227 HREF="node202.html"> ART2</A>
+<B>Up:</B> <A NAME=tex2html4225 HREF="node198.html"> Using ART1 Networks </A>
+<B> Previous:</B> <A NAME=tex2html4221 HREF="node200.html"> ART1 Learning Function</A>
+<BR> <HR> <P>
+<H4><A NAME=SECTION0010121230000000000000> ART1 Update Functions</A></H4>
+<P>
+<A NAME=5139>&#160;</A>
+<P>
+To propagate a new pattern through an ART1 network without adjusting
+weights, i.e. to classify a pattern, two different update functions
+have been implemented:
+<P>
+<UL><LI> <tt> ART1_Stable</tt> and
+<LI> <tt> ART1_Synchronous</tt>.
+</UL>
+<P>
+Like the learning function, both of the update functions only take
+the vigilance value <IMG  ALIGN=MIDDLE ALT="" SRC="img1064.gif"> as parameter. It has to be entered in
+the control panel, the line below the parameters for the
+learning function.
+The difference between the
+two update functions is the following:
+<P>
+<tt> ART1_Stable</tt> propagates a
+pattern until the network is stable, i.e. either the <b> cl</b>  unit or
+the <b> nc</b>  unit is active. To use this update function, you can
+use the <IMG  ALIGN=BOTTOM ALT="" SRC="img1065.gif">-button of the control panel. The next pattern
+is copied to the input units and propagated completely through the
+net, until a stable state is reached.
+<P>
+<tt> ART1_Synchronous</tt>, performs just one
+propagation step with each call. To use this function you have
+to press the <IMG  ALIGN=BOTTOM ALT="" SRC="img1066.gif">-button to reset the net to a defined
+initial state, where each unit has its initial activation value.
+Then copy a new pattern into the input layer, using the buttons
+<IMG  ALIGN=BOTTOM ALT="" SRC="img1067.gif"> and <IMG  ALIGN=BOTTOM ALT="" SRC="img1068.gif">. Now you can choose the desired number of
+propagation steps that should be performed, when pressing the
+<IMG  ALIGN=BOTTOM ALT="" SRC="img1069.gif">-button (default is 1). With this update function
+it is very easy to observe how the ART1 learning algorithm
+does its job.
+<P>
+So use <tt> ART1_Synchronous</tt>,
+to <em> trace</em> a pattern through a network, <tt> ART1_Stable</tt> to
+propagate the pattern until a stable state is reached.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

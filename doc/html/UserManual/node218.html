@@ -1,0 +1,62 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> The KOHONEN Learning Function</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" The KOHONEN Learning Function">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html4448 HREF="node219.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html4446 HREF="node217.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html4440 HREF="node217.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html4450 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html4451 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html4449 HREF="node219.html"> The Kohonen Update </A>
+<B>Up:</B> <A NAME=tex2html4447 HREF="node217.html"> SOM Implementation in </A>
+<B> Previous:</B> <A NAME=tex2html4441 HREF="node217.html"> SOM Implementation in </A>
+<BR> <HR> <P>
+<H3><A NAME=SECTION0010132100000000000000> The KOHONEN Learning Function</A></H3>
+<P>
+SOM training in SNNS can be performed with the learning function
+<tt> Kohonen</tt>. It can be selected from the list of learning functions
+in the control panel. Five parameters have to be passed to this
+learning function:
+<P>
+<UL><LI> <b> Adaptation Height (Learning Height)</b> 
+The initial adaptation height <IMG  ALIGN=MIDDLE ALT="" SRC="img1175.gif"> can vary between 0 and 1. It determines
+the overall adaptation strength.
+<P>
+<LI> <b> Adaptation Radius (Learning Radius)</b> 
+The initial adaptation radius <IMG  ALIGN=MIDDLE ALT="" SRC="img1176.gif"> is the radius of the neighborhood
+of the winning unit. All units within this radius are adapted. Values
+should range between 1 and the size of the map.
+<P>
+<LI> <b> Decrease Factor mult_H</b>
+The adaptation height decreases monotonically after the presentation
+of every learning pattern. This decrease is controlled by the decrease
+factor mult_H: <IMG  ALIGN=MIDDLE ALT="" SRC="img1177.gif">
+<P>
+<LI> <b> Decrease Factor mult_R</b>
+The adaptation radius also decreases monotonically after the
+presentation of every learning pattern. This second decrease is
+controlled by the decrease factor mult_R: <IMG  ALIGN=MIDDLE ALT="" SRC="img1178.gif">
+<P>
+<LI> <b> Horizontal size</b> 
+Since the internal representation of a network doesn't allow to
+determine the 2-dimensional layout of the grid, the horizontal size in
+units must be provided for the learning function.  It is the same
+value as used for the creation of the network.
+</UL>
+<P>
+<b> Note:</b> After each completed training the parameters adaption
+height and adaption radius are updated in the control panel to reflect
+their new values. So when training is started anew, it resumes at the
+point where it was stopped last. Both mult_H and mult_R should be in
+the range <IMG  ALIGN=MIDDLE ALT="" SRC="img1179.gif">. A value of 1 consequently keeps the adaption values
+at a constant level.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

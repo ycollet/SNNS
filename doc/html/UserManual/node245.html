@@ -1,0 +1,39 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Complexity of SCG</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Complexity of SCG">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html4780 HREF="node246.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html4778 HREF="node241.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html4774 HREF="node244.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html4782 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html4783 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html4781 HREF="node246.html"> Pruning Algorithms</A>
+<B>Up:</B> <A NAME=tex2html4779 HREF="node241.html"> Scaled Conjugate Gradient </A>
+<B> Previous:</B> <A NAME=tex2html4775 HREF="node244.html"> Parameters of SCG</A>
+<BR> <HR> <P>
+<H2><A NAME=SECTION0010174000000000000000> Complexity of SCG</A></H2>
+<P>
+The number of epochs is not relevant when comparing SCG to other algorithms
+like standard backpropagation. Indeed one iteration in SCG needs the
+computation of two gradients, and one call to the error function, while one
+iteration in standard backpropagation needs the computation of one gradient
+and one call to the error function. M&#248;ller defines a <em> complexity unit</em>
+(cu) to be equivalent to the complexity of one forward passing of all patterns
+in the training set. Then computing the error costs 1 cu while computing the
+gradient can be estimated to cost 3 cu. According to M&#248;ller's metric, one
+iteration of SCG is as complex as around <IMG  ALIGN=MIDDLE ALT="" SRC="img1256.gif"> iterations of standard
+backpropagation.
+<P>
+<b> Note:</b> As the SNNS implementation of SCG is not very well
+optimized, the CPU time is not necessarily a good comparison
+criterion.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

@@ -1,0 +1,45 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Memory Management Functions</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Memory Management Functions">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html6432 HREF="node369.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html6430 HREF="node350.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html6424 HREF="node367.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html6434 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html6435 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html6433 HREF="node369.html"> ART Interface Functions</A>
+<B>Up:</B> <A NAME=tex2html6431 HREF="node350.html"> Kernel Function Interface</A>
+<B> Previous:</B> <A NAME=tex2html6425 HREF="node367.html"> Miscelaneous other Interface </A>
+<BR> <HR> <P>
+<H1><A NAME=SECTION0016140000000000000000> Memory Management Functions</A></H1>
+<P>
+<A NAME=8364>&#160;</A>
+<P>
+<code>krui_err  krui_allocateUnits( int  number )</code><BR> 
+reserves <code>&lt;number&gt;</code> units in memory. Additional units can be
+requested by multiple calls to that function. This function doesn't
+have to be called, since the SNNS kernel always reserves enough memory
+for units, sites and links. If a large amount of units is needed,
+however, a call to <code>krui_allocateUnits(...)</code> eases the
+administration of system resources. If <code>krui_allocateUnits(...)</code>
+is never called, units are always requested in blocks of size
+<code>&lt;UNIT_BLOCK&gt;</code>. See also <code>kr_def.h</code>.
+<P>
+<code>void krui_getMemoryManagerInfo(int *unit_bytes, int *site_bytes,</code><BR> 
+<code>                               int *link_bytes, int *NTable_bytes,</code><BR> 
+<code>                               int *STable_bytes, int *FTable_bytes)</code><BR> 
+determines the number of allocated (not the number of used) bytes for
+the various components.
+<code>void  krui_deleteNet()</code><BR> 
+deletes the network and frees the whole memory used for the
+representation of the data structures.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

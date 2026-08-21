@@ -1,0 +1,114 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> TDNN Fundamentals</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" TDNN Fundamentals">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html3892 HREF="node177.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html3890 HREF="node175.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html3884 HREF="node175.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html3894 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html3895 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html3893 HREF="node177.html"> TDNN Implementation in </A>
+<B>Up:</B> <A NAME=tex2html3891 HREF="node175.html"> Time Delay Networks </A>
+<B> Previous:</B> <A NAME=tex2html3885 HREF="node175.html"> Time Delay Networks </A>
+<BR> <HR> <P>
+<H2><A NAME=SECTION001091000000000000000> TDNN Fundamentals</A></H2>
+<P>
+Time delay networks (or TDNN for short), introduced by Alex Waibel
+([<A HREF="node389.html#Wai89">WHH<IMG  ALIGN=BOTTOM ALT="" SRC="img1453.gif">89</A>]), are a group of neural networks that have a special
+topology. They are used for position independent recognition of
+features within a larger pattern. A special convention for naming
+different parts of the network is used here (see figure <A HREF="node176.html#TD_namingps"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A>)
+<P>
+<P><A NAME=4290>&#160;</A><A NAME=TD_namingps>&#160;</A><IMG  ALIGN=BOTTOM ALT="" SRC="img889.gif">
+<BR><STRONG>Figure:</STRONG> The naming conventions of TDNNs<BR>
+<P>
+<P>
+<UL><LI> <b> Feature: </b> A component of the pattern to be learned.
+<P>
+  <LI> <b> Feature Unit: </b> The unit connected with the feature to be
+learned. There are as many feature units in the input layer of a TDNN
+as there are features.
+<P>
+  <LI> <b> Delay: </b> In order to be able to recognize patterns
+place or time-invariant, older activation and connection values of the feature
+units have to be stored. This is performed by making a copy of the
+feature units with all their outgoing connections in each time step,
+before updating the original units. The total number of time steps
+saved by this procedure is called <i> delay</i>.
+<P>
+  <LI> <b> Receptive Field: </b> The feature units and their delays are
+fully connected to the original units of the subsequent layer. These
+units are called <i> receptive field</i>. The receptive field is
+usually, but not necessarily, as wide as the number of feature units;
+the feature units might also be split up between several receptive
+fields. Receptive fields may overlap in the source plane, but do have
+to cover all feature units.
+<P>
+  <LI> <b> Total Delay Length: </b> The length of the layer. It equals
+the sum of the length of all delays of the network layers topological
+following the current one minus the number of these subsequent layers.
+<P>
+  <LI> <b> Coupled Links: </b> Each link in a receptive field is
+reduplicated for every subsequent step of time up to the total delay
+length. During the learning phase, these links are treated as a single
+one and are changed according to the average of the changes they would
+experience if treated separately. Also the units' bias which realizes a
+special sort of link weight is duplicated over all delay steps of a
+current feature unit. In figure <A HREF="node176.html#TD_namingps"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A> only
+two pairs of coupled links are depicted (out of 54 quadruples) for
+simplicity reasons. 
+</UL>
+<P>
+The activation of a unit is normally computed by passing the weighted
+sum of its inputs to an activation function, usually a threshold
+or sigmoid function. For TDNNs this behavior is modified through the
+introduction of delays. Now all the inputs of a unit are each
+multiplied by the N delay steps defined for this layer. So a hidden
+unit in figure <A HREF="node176.html#TD_namingps"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A> would get 6 undelayed input links
+from the six feature units, and 7x6 = 48 input links from the seven
+delay steps of the 6 feature units for a total of 54 input
+connections. Note, that all units in the hidden layer have 54 input
+links, but only those hidden units activated at time 0 (at the top
+most row of the layer) have connections to the actual feature units.
+All other hidden units have the same connection pattern, but shifted
+to the bottom (i.e. to a later point in time) according to their
+position in the layer (i.e. delay position in time). By building a
+whole network of time delay layers, the TDNN can relate inputs in
+different points in time or input space.
+<P>
+Training in this kind of network is performed by a procedure similar
+to backpropagation, that takes the special semantics of coupled links
+into account. To enable the network to achieve the desired behavior, a
+sequence of patterns has to be presented to the input layer with the
+feature shifted within the patterns. Remember that since each of the
+feature units is duplicated for each frame shift in time, the whole
+history of activations is available at once. But since the shifted
+copies of the units are mere duplicates looking for the same event,
+weights of the corresponding connections between the time shifted
+copies have to be treated as one. First, a regular forward pass of
+backpropagation is performed, and the error in the output layer is
+computed. Then the error derivatives are computed and propagated
+backward. This yields different correction values for corresponding
+connections. Now all correction values for corresponding links are
+averaged and the weights are updated with this value.
+<P>
+This update algorithm forces the network to train on time/position
+independent detection of sub-patterns. This important feature of TDNNs
+makes them independent from error-prone preprocessing algorithms for
+time alignment. The drawback is, of course, a rather long,
+computationally intensive, learning phase.
+<P>
+<BR> <HR><A NAME=tex2html3892 HREF="node177.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html3890 HREF="node175.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html3884 HREF="node175.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html3894 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html3895 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html3893 HREF="node177.html"> TDNN Implementation in </A>
+<B>Up:</B> <A NAME=tex2html3891 HREF="node175.html"> Time Delay Networks </A>
+<B> Previous:</B> <A NAME=tex2html3885 HREF="node175.html"> Time Delay Networks </A>
+<BR> <HR> <P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

@@ -1,0 +1,101 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Print Panel</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Print Panel">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html2161 HREF="node49.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html2159 HREF="node32.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html2153 HREF="node47.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html2163 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html2164 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html2162 HREF="node49.html"> Help Windows</A>
+<B>Up:</B> <A NAME=tex2html2160 HREF="node32.html"> Windows of XGUI</A>
+<B> Previous:</B> <A NAME=tex2html2154 HREF="node47.html"> Projection Panel</A>
+<BR> <HR> <P>
+<H2><A NAME=SECTION00539000000000000000> Print Panel</A></H2>
+<P>
+<A NAME=PrintPanel>&#160;</A>
+<A NAME=1464>&#160;</A>
+<A NAME=1465>&#160;</A>
+<P>
+The print panel handles the Postscript output. A 2D-display can be
+associated with the printer. All setup options and values of this
+display will be printed. Color and encapsulated Postscript are also
+supported. The output device is either a printer or a file.  If the
+output device is a printer, a '.ps'-file is generated and spooled in the
+/tmp directory. It has a unique name starting with the prefix `snns'. The
+directory must be writable. When xgui terminates normally, all SNNS
+spool files are deleted.
+<P>
+<P><A NAME=1473>&#160;</A><A NAME=FigPrintPanel>&#160;</A><IMG  ALIGN=BOTTOM ALT="" SRC="img228.gif">
+<BR><STRONG>Figure:</STRONG> Printer panel<BR>
+<P>
+<P>
+The following fields can be set in the Printer Panel, which is shown
+in figure <A HREF="node48.html#FigPrintPanel"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A>.
+<P>
+<OL><LI><b> File Name</b> resp. <b> Command Line</b>:<BR> 
+If the output device is a file: the filename.<BR> 
+If the output device is a printer: the command line to start the printer.<BR> 
+The filename in the command line has to be '$1'.
+<LI><b> Destination</b>: Selects the output device.
+Toggles the above input line between File Name and Command Line.
+<LI><b> Paper</b>: Selects the paper format.
+<LI><b> Orientation</b>: Sets the orientation of the display on the paper.
+Can be 'portrait' or 'landscape'.
+<LI><b> Border (mm)</b>: Sets the size of the horizontal and vertical
+borders on the sheet in millimeters.
+<LI><b> AutoScale</b>: Scales the network to the largest size possible
+on the paper.
+<LI><b> Aspect</b>: If on, scaling in X and Y direction is done uniformly.
+<LI><b> X-Scale</b>: Scale factor in X direction. Valid only if AutoScale is 
+'OFF'.
+<LI><b> Y-Scale</b>: Scale factor in Y direction. Valid only if AutoScale is
+'OFF'.
+</OL>
+<P>
+<IMG  ALIGN=BOTTOM ALT="" SRC="img229.gif">: Cancels the printing and closes the panel.
+<P>
+<IMG  ALIGN=BOTTOM ALT="" SRC="img230.gif">: Starts printing.
+<P>
+<IMG  ALIGN=BOTTOM ALT="" SRC="img231.gif">: Opens the network setup panel. This
+panel allows the specification of several options to control the way
+the network is printed.
+<A NAME=1493>&#160;</A>
+<A NAME=1494>&#160;</A>
+<P>
+The variables that can be set here include:
+<P>
+<OL><LI><b> x-min</b>, <b> y-min</b>, <b> x-max</b> and <b> y-max</b> describe the
+section to be printed. 
+<LI><PRE><TT> <b> Unit size</b>:&#175; <IMG  ALIGN=BOTTOM ALT="" SRC="img232.gif">: All units have the same size.
+<P>
+		<IMG  ALIGN=BOTTOM ALT="" SRC="img233.gif">: The size of a unit depends on its value.
+<P>
+</TT></PRE>
+<LI><b> Shape</b>: Sets the shape of the units.
+<P>
+<LI><PRE><TT> <b> Text</b>:&#175; <IMG  ALIGN=BOTTOM ALT="" SRC="img234.gif">: The box around
+text overwrites the background color and the links.
+<P>
+		<IMG  ALIGN=BOTTOM ALT="" SRC="img235.gif">: No box around the text.
+<P>
+</TT></PRE>
+<LI><b> Border</b>: A border is drawn around the network, if set to 'ON'.
+<LI><b> Color</b>: If set, the value is printed color coded.
+<LI><b> Fill Intens</b>: The fill intensity for units on monochrome
+printers. 
+<LI><b> Display</b>: Selects the display to be printed.
+</OL><BR> <HR><A NAME=tex2html2161 HREF="node49.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html2159 HREF="node32.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html2153 HREF="node47.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html2163 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html2164 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html2162 HREF="node49.html"> Help Windows</A>
+<B>Up:</B> <A NAME=tex2html2160 HREF="node32.html"> Windows of XGUI</A>
+<B> Previous:</B> <A NAME=tex2html2154 HREF="node47.html"> Projection Panel</A>
+<BR> <HR> <P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

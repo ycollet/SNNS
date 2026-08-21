@@ -1,0 +1,107 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> SNNS for Workstation Clusters</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" SNNS for Workstation Clusters">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html5219 HREF="node278.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html5217 HREF="UserManual.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html5211 HREF="node276.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html5221 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html5222 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html5220 HREF="node278.html"> SNNS RPC Programs</A>
+<B>Up:</B> <A NAME=tex2html5218 HREF="UserManual.html">No Title</A>
+<B> Previous:</B> <A NAME=tex2html5212 HREF="node276.html"> 3D-Display Window</A>
+<BR> <HR> <P>
+<H1><A NAME=SECTION001300000000000000000> SNNS for Workstation Clusters</A></H1>
+<P>
+<A NAME=rpcversion>&#160;</A>
+<A NAME=7125>&#160;</A>
+<A NAME=7126>&#160;</A>
+<P>
+Training several neural networks on a single workstation may require a
+large amount of training time, if performed on a single workstation.
+Dividing the training task among several workstations on a LAN (local
+area network) may significantly decrease the overall training time.
+This version of SNNS for workstation clusters allows to train several
+(possibly different) networks on different workstations and to control
+them with a single graphical user-interface.
+<P>
+The kernel interface has been extended for this purpose by an <em>
+rpc</em> module that is controlled by the graphical user-interface xgui.
+The module was named <em> rpc</em> because the communication among the
+workstations is performed via the rpc (remote procedure call)
+protocol.
+<P>
+This parallel SNNS version supports the following methods of parallelism:
+<UL><LI> training different networks in parallel, each with its own pattern file,
+<LI> training several copies of the same network with different parameters
+or different initialization in parallel, each with its own (copied)
+pattern file, or
+<LI> an arbitrary combination of the above two methods.
+</UL>
+The parallel version currently does NOT support dividing the training
+of a single network over several workstations. This might be added in
+a future version, if it can be implemented efficiently enough.
+<P>
+The extension consists of two programs:
+<UL><LI> <tt> xguirpc</tt>: SNNS simulator program (xgui, simulator kernel,
+  and rpc module linked into one executable program). This program is
+  the graphical user-interface, which controls the different simulator
+  kernels. It has the same functionality as the xgui (snns) program
+  plus different panels to control the rpc-interface. To use multiple
+  simulator kernels, one may start as many <tt> kernelrpc</tt> programs as
+  desired.
+<LI> <tt> kernelrpc</tt>: simulator kernel linked with the rpc module (the
+  server). This program is the stand alone simulator kernel with
+  rpc module, which is controlled from the <tt> xguirpc</tt> program. Each
+  kernel has is own net, pattern sets and configurations.
+</UL>
+<P>
+The files are located in the directory
+<P>
+<b>&lt;</b>snns-root<b>&gt;</b>/rpc/bin/<b>&lt;</b>architecture<b>&gt;</b>
+<P>
+where <b>&lt;</b>architecture<b>&gt;</b> is one of the currently supported machine
+architectures. We have tested it on an Intel Paragon and single CPU Sun
+SparcStations, and Linux systems. To use the program efficiently on
+multi-CPU systems like the DEC Alpha some adjustments in the libraries
+might be necessary.
+<P>
+The easiest way to start a new simulator kernel is from the <b> new
+panel</b> called by pressing the <IMG  ALIGN=BOTTOM ALT="" SRC="img1350.gif"> button in the <b> SNNS
+rpc panel</b> (see <A HREF="node282.html#rpcpanel"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A>).
+<P>
+If the networks are to be trained without human supervision, a similar
+functionality may also be obtained by starting a copy of the batch
+SNNS simulator <tt> snnsbat</tt> on each workstation.
+<P>
+<BR> <HR>
+<UL> 
+<LI> <A NAME=tex2html5223 HREF="node278.html#SECTION001310000000000000000"> SNNS RPC Programs</A>
+<UL> 
+<LI> <A NAME=tex2html5224 HREF="node279.html#SECTION001311000000000000000"> Xguirpc</A>
+<LI> <A NAME=tex2html5225 HREF="node280.html#SECTION001312000000000000000"> Kernelrpc</A>
+</UL> 
+<LI> <A NAME=tex2html5226 HREF="node281.html#SECTION001320000000000000000"> Control Panels</A>
+<UL> 
+<LI> <A NAME=tex2html5227 HREF="node282.html#SECTION001321000000000000000"> SNNS RPC Panel</A>
+<LI> <A NAME=tex2html5228 HREF="node283.html#SECTION001322000000000000000"> RPC Setup Panel</A>
+<LI> <A NAME=tex2html5229 HREF="node284.html#SECTION001323000000000000000"> New Panel</A>
+<LI> <A NAME=tex2html5230 HREF="node285.html#SECTION001324000000000000000"> Transfer Panels</A>
+<LI> <A NAME=tex2html5231 HREF="node286.html#SECTION001325000000000000000"> Show Info Panel</A>
+</UL> 
+<LI> <A NAME=tex2html5232 HREF="node287.html#SECTION001330000000000000000"> RPC Errors</A>
+</UL>
+<BR> <HR><A NAME=tex2html5219 HREF="node278.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html5217 HREF="UserManual.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html5211 HREF="node276.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html5221 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html5222 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html5220 HREF="node278.html"> SNNS RPC Programs</A>
+<B>Up:</B> <A NAME=tex2html5218 HREF="UserManual.html">No Title</A>
+<B> Previous:</B> <A NAME=tex2html5212 HREF="node276.html"> 3D-Display Window</A>
+<BR> <HR> <P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

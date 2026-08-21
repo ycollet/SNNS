@@ -1,0 +1,53 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Pat_sel</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Pat_sel">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html6005 HREF="node336.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html6003 HREF="node322.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html5997 HREF="node334.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html6007 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html6008 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html6006 HREF="node336.html"> Snns2c</A>
+<B>Up:</B> <A NAME=tex2html6004 HREF="node322.html"> Tools for SNNS</A>
+<B> Previous:</B> <A NAME=tex2html5998 HREF="node334.html"> Netperf</A>
+<BR> <HR> <P>
+<H1><A NAME=SECTION0015110000000000000000> Pat_sel</A></H1>
+<P>
+<A NAME=8087>&#160;</A>
+<P>
+Given a pattern file and a file which contains numbers, <tt> pat_sel</tt>
+produces a new pattern file which contains the subset of the first
+one.  This pattern file consists of the patterns whose numbers are
+given in the number file.
+<P>
+Synopsis: <tt> pat_sel</tt> <b>&lt;</b>number file<b>&gt;</b> <b>&lt;</b>input pattern file<b>&gt;</b> <b>&lt;</b>output pattern file<b>&gt;</b>
+<P>
+Parameters:
+<PRE><TT> 
+<tt> &lt;number file&gt;</tt> 		 ASCII file which contains positive integer
+<P>
+		 numbers (one per line) in ascending order.
+<P>
+<tt> &lt;input pattern file&gt;</tt> 		 SNNS pattern file.
+<P>
+<tt> &lt;output pattern file&gt;</tt> 		 SNNS pattern file which contains the selected
+<P>
+		 subset (created by <tt> pat_sel</tt>)
+<P>
+</TT></PRE>
+<tt> Pat_sel</tt> can be used to create a pattern file which contains only the 
+patterns that were classified 'wrong' by the neural network.  
+That is why a `result file' has to be created using SNNS. 
+The result file can be analyzed with the tool analyze. 
+This 'number file' and the corresponding 'pattern file' are used by 
+pat_sel. The new 'pattern file' will be created.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

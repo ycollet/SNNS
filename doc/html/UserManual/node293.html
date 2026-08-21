@@ -1,0 +1,46 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Structure of a Batch Program</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Structure of a Batch Program">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html5465 HREF="node294.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html5463 HREF="node292.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html5457 HREF="node292.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html5467 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html5468 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html5466 HREF="node294.html"> Data Types and </A>
+<B>Up:</B> <A NAME=tex2html5464 HREF="node292.html"> Description of the </A>
+<B> Previous:</B> <A NAME=tex2html5458 HREF="node292.html"> Description of the </A>
+<BR> <HR> <P>
+<H2><A NAME=SECTION001421000000000000000> Structure of a Batch Program</A></H2>
+<P>
+The structure of a batch program is not predetermined. There is no
+declaration section for variables in the program. All instructions are
+specified in the program according to their execution order. Multiple
+blanks are allowed between instructions. Even no blanks between
+instructions are possible if the semantics are clear. Single
+instructions in a line don't have to be completed by a semicolon. In
+such a case the end of line character (Ctrl-D) is separating two
+different instructions in two lines. Also key words which have the
+responsibility of determining the end of a block (<tt> endwhile,
+  endif, endfor, until</tt> and <tt> else</tt>) don't have to be completed by
+a semicolon. Multiple semicolons are possible between two
+instructions. However if there are more than two instructions in a
+line the semicolon is necessary. Comments in the source code of the
+programs start with a '#' character. Then the rest of the line will
+be regarded as a comment.<BR> A comment could have the following
+appearance:
+<P>
+<blockquote> <tt> #This is a comment</tt><BR> 
+<tt> a:=4  #This is another comment</tt>
+ </blockquote>
+The second line begins with an instruction and ends with a comment.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

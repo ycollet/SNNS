@@ -1,0 +1,509 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Editor Commands</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Editor Commands">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html3001 HREF="node115.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html2999 HREF="node107.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html2993 HREF="node113.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html3003 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html3004 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html3002 HREF="node115.html"> Example Dialogue</A>
+<B>Up:</B> <A NAME=tex2html3000 HREF="node107.html"> Graphical Network Editor</A>
+<B> Previous:</B> <A NAME=tex2html2994 HREF="node113.html"> Short Command Reference</A>
+<BR> <HR> <P>
+<H1><A NAME=SECTION00750000000000000000> Editor Commands</A></H1>
+<P>
+<A NAME=EditorCommands>&#160;</A>
+<A NAME=2546>&#160;</A>
+<P>
+We now describe the editor commands in more detail. The description
+has the following form that is shown in two examples:
+<P>
+<b> Links Make Clique</b> (selection LINK : site-popup)
+<P>
+<A NAME=2548>&#160;</A>
+First comes the command sequence (<b> Links Make Clique</b>) which is
+invoked by pressing the keys L, M, and C in this order.  The items in
+parentheses indicate that the command depends on the objects of a
+previous selection of a group of units with the mouse (selection),
+that it depends on the value of the LINK field in the info panel, and
+that a site-popup appears if there are sites defined in the network.
+The options are given in their temporal order, the colon ':' stands
+for the moment when the last character of the command sequence is
+pressed, i.e. the selection and the input of the value must precede
+the last key of the command sequence.
+<P>
+<b> Units Set Activation</b> (selection TARGET :)
+<P>
+The command sequence <b> Units Set Activation</b> is invoked by pressing
+the keys U, S, A, in that order. The items in parentheses indicate
+that the command depends on the selection of a group of units with the
+mouse (selection) which it depends on the value of the TARGET field
+and that these two things must be done before the last key of the
+command sequence is pressed.
+<P>
+The following table displays the meaning of the symbols in parenthesis:
+<P>
+<P><IMG  ALIGN=BOTTOM ALT="" SRC="img538.gif"><P>
+<P>
+In the case of a <tt> site-popup</tt> a site for the operation can be
+chosen from this popup window. However, if one clicks the <tt> DONE</tt>
+button immediately afterwards, only the direct input without sites is
+chosen. In the following description, this direct input should be
+regarded as a special case of a site.
+<P>
+All newly generated units are assigned to all active layers in
+the display in which the command for their creation was issued.
+<P>
+The following keys are always possible within a command sequence:
+<P>
+<UL><LI> <tt> Quit</tt>: quit a command
+<LI> <tt> Return</tt>: quit and return to normal mode
+<LI> <tt> Help</tt>: get help information to the commands
+</UL>
+<P>
+A detailed description of the commands follows:
+<P>
+<OL><LI> <b> Flags Safety</b> (:)
+<A NAME=2567>&#160;</A>
+<P>
+<A NAME=2568>&#160;</A>
+If the <tt> SAFETY</tt>-Flag is set, then with every operation which deletes
+units, sites or links (<tt> Units Delete ...</tt> or <tt> Links Delete
+...</tt>) a confirmer asks if the units, sites or links should really be
+deleted. If the flag is set, this is shown in the manager panel with a <tt>
+safe</tt> after the little flag icon. If the flag is not set, units, sites
+or links are deleted immediately. There is no undo operation for these
+deletions.
+<P>
+<LI> <b> Links Set</b> (selection LINK :)
+<A NAME=2574>&#160;</A>
+<P>
+All link weights between the selected units are set to the value of
+the LINK field in the info panel.
+<P>
+<LI> <b> Links Make Clique</b> (selection LINK : site-popup)
+<A NAME=2576>&#160;</A>
+<P>
+A full connection between all selected units is generated. Since
+links may be deleted selectively afterwards, this function is useful
+in many cases where many links in both directions are to be generated.
+<P>
+If a site is selected, a complete connection is only possible if
+all units have a site with the same name.
+<P>
+<LI> <b> Links Make from Source unit</b> (selection <IMG  ALIGN=MIDDLE ALT="" SRC="img539.gif">unit<IMG  ALIGN=MIDDLE ALT="" SRC="img540.gif"> : site-popup)
+<A NAME=2578>&#160;</A>
+<P>
+<b> Links Make to Target unit</b> (selection <IMG  ALIGN=MIDDLE ALT="" SRC="img541.gif">unit<IMG  ALIGN=MIDDLE ALT="" SRC="img542.gif"> : site-popup)
+<A NAME=2580>&#160;</A>
+<P>
+Both operations connect all selected units with a single unit under
+the mouse pointer. In the first case, this unit is the source, in the
+second, it is the target. All links get the value of the LINK field in
+the info panel.
+<P>
+If sites are used, only links to the selected site are generated.
+<P>
+<LI> <b> Links Make Double</b> (selection :)
+<A NAME=2582>&#160;</A>
+<P>
+<A NAME=2583>&#160;</A>
+All unidirectional links become double (bidirectional) links. That is,
+new links in the opposite direction are generated. Immediately after
+creation the new links possess the same weights as the original links.
+However, the two links do not share the weight, i.e. subsequent
+training usually changes the similarity.
+<P>
+Connections impinging on a site only become bidirectional, if the
+original source units has a site with the same name.
+<P>
+<LI> <b> Links Make Inverse</b>  (selection :)
+<A NAME=2585>&#160;</A>
+<P>
+All unidirectional links between all selected units change their
+direction. They keep their original value.
+<P>
+Connections leading to a site are only reversed, if the original source
+unit has a site of the same name. Otherwise they remain as they are.
+<P>
+<LI> <b> Links Delete Clique</b> (selection : site-popup)
+<A NAME=2587>&#160;</A>
+<P>
+<b> Links Delete from Source unit</b> (selection <IMG  ALIGN=MIDDLE ALT="" SRC="img543.gif">unit<IMG  ALIGN=MIDDLE ALT="" SRC="img544.gif"> : site-popup)
+<P>
+<b> Links Delete to Target unit</b> (selection <IMG  ALIGN=MIDDLE ALT="" SRC="img545.gif">unit<IMG  ALIGN=MIDDLE ALT="" SRC="img546.gif"> : site-popup)
+<P>
+These three operations are the reverse of <tt> Links Make</tt> in that they
+delete the connections. If the safety flag is set (the word <tt> safe</tt>
+appears behind the flag symbol in the manager panel), a confirmer
+window forces the user to confirm the deletion.
+<P>
+<LI> <b> Links Copy Input</b> (selection <IMG  ALIGN=MIDDLE ALT="" SRC="img547.gif">unit<IMG  ALIGN=MIDDLE ALT="" SRC="img548.gif"> :)
+<A NAME=2593>&#160;</A>
+<P>
+<b> Links Copy Output</b> (selection <IMG  ALIGN=MIDDLE ALT="" SRC="img549.gif">unit<IMG  ALIGN=MIDDLE ALT="" SRC="img550.gif"> :)
+<A NAME=2595>&#160;</A>
+<P>
+<b> Links Copy All</b> (selection <IMG  ALIGN=MIDDLE ALT="" SRC="img551.gif">unit<IMG  ALIGN=MIDDLE ALT="" SRC="img552.gif"> :)
+<A NAME=2597>&#160;</A>
+<P>
+<tt> Links Copy Input</tt> copies all input links of the selected group of
+units to the single unit under the mouse pointer. If sites are used,
+incoming links are only copied if a site with the same name as in the
+original units exists.
+<P>
+<tt> Links Copy Output</tt> copies all output links of the selected group
+of units to the single unit under the mouse pointer.
+<P>
+<tt> Links Copy All</tt> Does both of the two operations above
+<P>
+<LI><b> Links Copy Environment</b> (selection TARGET site-links <IMG  ALIGN=MIDDLE ALT="" SRC="img553.gif">unit<IMG  ALIGN=MIDDLE ALT="" SRC="img554.gif"> :)
+<A NAME=2602>&#160;</A>
+<P>
+This is a rather complex operation: <tt> Links Copy Environment</tt> tries
+to duplicate the links between all selected units and the current <tt>
+TARGET</tt> unit in the info panel at the place of the unit under the
+mouse pointer. The relative position of the selected units to the <tt>
+TARGET</tt> unit plays an important role: if a unit exists that has the
+same relative position to the unit under the mouse cursor as the <tt>
+TARGET</tt> unit has to one of the selected units, then a link between
+this unit and the unit under the mouse pointer is created.
+<P>
+The result of this operation is a copy of the structure of links
+between the selected units and the TARGET unit at the place of the
+unit under the mouse pointer. That is, one obtains the same
+topological structure at the unit under the mouse pointer.
+<P>
+This is shown in figure <A HREF="node114.html#PicEnvironment"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A>. In this figure the
+structure of the <tt> TARGET</tt> unit and the four <tt> Env</tt> units is
+copied to the unit <tt> UnderMousePtr</tt>. However, only two units
+are in the same relative position to the <tt> UnderMousePtr</tt> as
+the <tt> Env</tt> units are to the <tt> Target</tt> unit, namely <tt>
+corrEnv3</tt> corresponding to <tt> Env3</tt> and <tt> corrEnv4</tt> corresponding
+to <tt> Env4</tt>. So only those two links from the units <tt> corrEnv3</tt>
+to <tt> UnderMousePtr</tt> and from <tt> corrEnv4</tt> to <tt>
+UnderMousePtr</tt> are generated.
+<P>
+<P><A NAME=2818>&#160;</A><A NAME=PicEnvironment>&#160;</A><IMG  ALIGN=BOTTOM ALT="" SRC="img555.gif">
+<BR><STRONG>Figure:</STRONG> Example to <tt> Links Copy Environment</tt><BR>
+<P>
+<P>
+<LI> <b> Sites Add</b> (selection : Popup)
+<A NAME=2634>&#160;</A>
+<P>
+A site which is chosen in a popup window is added to all selected
+units. The command has no effect for all units which already have a
+site of this name (because the names of all sites of a unit must be different)
+<P>
+<LI> <b> Sites Delete</b> (selection : Popup)
+<A NAME=2636>&#160;</A>
+<P>
+The site that is chosen in the popup window is deleted at all selected
+units that possess a site of this name. Also all links to this site
+are deleted.
+If the safety flag is set (in the manager panel the word <tt> safe</tt> is
+displayed behind the flag icon at the bottom), then a confirmer window
+forces the user to confirm the deletion first.
+<P>
+<LI> <b> Sites Copy with No links</b> (selection SITE :)
+<A NAME=2639>&#160;</A>
+<P>
+<b> Sites Copy with All links</b> (selection SITE :)
+<A NAME=2641>&#160;</A>
+<P>
+The current site of the <tt> Target</tt> unit is added to all selected
+units which do not have this site yet. Links are copied together with
+the site only with the command <tt> Site Copy with All links</tt>. If a
+unit already has a site of that name, only the links are copied.
+<P>
+<P>
+<LI> <b> Units Freeze</b> (selection :)
+<A NAME=2645>&#160;</A>
+<P>
+<b> Units Unfreeze</b> (selection :)
+<A NAME=2647>&#160;</A>
+<P>
+These commands are used to freeze or unfreeze all selected units.
+Freezing means, that the unit does not get updated anymore, and
+therefore keeps its activation and output. Upon loading input units
+change only their activation, while keeping their output. For output
+units, this depends upon the setting of the pattern load mode. In the
+load mode <tt> Output</tt> only the output is set. Therefore, if frozen
+output units are to keep their output, another mode (<tt> None</tt> or
+<tt> Activation</tt>) has to be selected. A learning cycle, on the other
+hand, executes as if no units have been frozen.
+<P>
+<P>
+<LI> <b> Units Set Name</b>  (selection TARGET :)
+<A NAME=2652>&#160;</A>
+<A NAME=2653>&#160;</A>
+<P>
+<b> Units Set Initial activation</b> (selection TARGET :)
+<A NAME=2655>&#160;</A>
+<A NAME=2656>&#160;</A>
+<P>
+<b> Units Set Output</b> (selection TARGET :)
+<A NAME=2658>&#160;</A>
+<A NAME=2659>&#160;</A>
+<P>
+<b> Units Set Bias</b>  (selection TARGET :)
+<A NAME=2661>&#160;</A>
+<A NAME=2662>&#160;</A>
+<P>
+<b> Units Set io-Type</b> (selection : Popup)
+<A NAME=2664>&#160;</A>
+<A NAME=2665>&#160;</A>
+<P>
+<b> Units Set Function Activation</b> (selection : Popup)
+<A NAME=2667>&#160;</A>
+<A NAME=2668>&#160;</A>
+<P>
+<b> Units Set Function Output</b> (selection : Popup)
+<A NAME=2670>&#160;</A>
+<A NAME=2671>&#160;</A>
+<P>
+<b> Units Set Function F-type</b> (selection : Popup)
+<A NAME=2673>&#160;</A>
+<A NAME=2674>&#160;</A>
+<P>
+Sets the specific attribute of all selected units to a common value.
+Types and functions are defined by a popup window. The operations can
+be aborted by immediately clicking the <tt> DONE</tt> button in the popup
+without selecting an element of the list.
+<P>
+The list item <tt> special_X</tt> for the command <tt> Units Set io-Type</tt>
+makes all selected units special while keeping their topologic type,
+.i.e.: a selected hidden unit becomes a special-hidden, a selected
+output becomes a special-output unit. The list item <tt> non-special_X</tt>
+performs the reverse procedure.
+<P>
+The remaining attributes are read from the corresponding fields of the
+<tt> Target</tt> unit in the info panel. The user can of course change the
+values there (without clicking the <tt> SET</tt> button) and then execute
+<tt> Units Set ...</tt>. A different approach would be to make a unit
+target unit (click on it with the middle mouse button) which already
+has the desired values. This procedure is very convenient, but works
+only if appropriate units already exist. A good idea might be to
+create a couple of such model units first, to be able to quickly set
+different attribute sets in the info panel.
+<P>
+<P>
+<LI> <b> Units Insert Default</b> (<IMG  ALIGN=MIDDLE ALT="" SRC="img556.gif">empty<IMG  ALIGN=MIDDLE ALT="" SRC="img557.gif"> default :)
+<A NAME=2683>&#160;</A>
+<P>
+<b> Units Insert Target</b> (<IMG  ALIGN=MIDDLE ALT="" SRC="img558.gif">empty<IMG  ALIGN=MIDDLE ALT="" SRC="img559.gif"> TARGET :)
+<A NAME=2685>&#160;</A>
+<P>
+<b> Units Insert F-type</b> (<IMG  ALIGN=MIDDLE ALT="" SRC="img560.gif">empty<IMG  ALIGN=MIDDLE ALT="" SRC="img561.gif"> : popup)
+<A NAME=2687>&#160;</A>
+<P>
+This command is used to insert a unit with the IO-type <tt> hidden</tt>.
+It has no connections and its attributes are set according to the
+default values and the <tt> Target</tt> unit. With the command <tt> Units
+Insert Default</tt>, the unit gets no F-type and no sites. With <tt> Units
+Insert F-type</tt> an F-type and sites have to be selected in a popup
+window. <tt> Units Insert Target</tt> creates a copy of the target unit in
+the info panel. If sites/connections are to be copied as well, the
+command <tt> Units Copy All</tt> has to be used instead.
+<P>
+<P>
+<LI> <b> Units Delete</b> (selection :)
+<A NAME=2695>&#160;</A>
+<P>
+All selected units are deleted. If the safety flag is set (<tt> safe</tt>
+appears in the manager panel behind the flag symbol) the deletion has
+to be confirmed with the confirmer.
+<P>
+<P>
+<LI> <b> Units Move</b> (selection TARGET : dest?)
+<A NAME=2698>&#160;</A>
+<P>
+All selected units are moved. The <tt> Target</tt> unit is moved to the
+position at which the mouse button is clicked. It is therefore
+recommended to make one of the units to be moved target unit and
+position the mouse cursor over the target unit before beginning the
+move. Otherwise all moving units will have an offset from the cursor.
+This new position must not be occupied by an unselected unit, because a
+position conflict will result otherwise.  All other units move in the
+same way relative to that position. The command is ignored, if:
+<P>
+<OL><LI> the target position is occupied by an unselected unit, or
+<LI> units would be moved to grid positions already taken by
+unselected units.
+</OL>
+<P>
+It might happen that units are moved beyond the right or lower border
+of the display. These units remain selected, as long as not all units
+are deselected (click the right mouse button to an empty grid
+position).
+<P>
+As long as no target is selected, the editor reacts only to <tt>
+Return</tt>, <tt> Quit</tt> or <tt> Help</tt>. Positioning is eased by displaying
+the unit outlines during the move. The user may also switch to another
+display. If this display has a different subnet number, the subnet
+number of the units changes accordingly. Depending upon layer and
+subnet parameters, it can happen that the moved units are not visible
+at the target.
+<P>
+If networks are generated externally, it might happen that several
+units lie on the same grid position. Upon selection of this position,
+only the unit with the smallest number is selected. With ``Units
+Move'' the user can thereby clarify the situation.
+<P>
+<P>
+<LI> <b> Units Copy ...</b> (selection : dest?)
+<P>
+<b> Units Copy All</b>
+<A NAME=2707>&#160;</A>
+<P>
+<b> Units Copy Input</b>
+<A NAME=2709>&#160;</A>
+<P>
+<b> Units Copy Output</b>
+<A NAME=2711>&#160;</A>
+<P>
+<b> Units Copy None</b>
+<A NAME=2713>&#160;</A>
+<P>
+This command is similar to <tt> Units Move</tt>. <tt> Copy</tt> creates copies
+of the selected units at the positions that would be assigned by <tt>
+Move</tt>. Another difference is that if units are moved to grid positions
+of selected units the command is ignored. The units created have the
+same attributes as their originals, but different numbers.  Since unit
+types are copied as well the new units also inherit the activation
+function, output function and sites. There are four options regarding
+the copying of the links. If no links are copied, the new unit has no
+connections. If, for example, the input links are copied, the new
+units have the same predecessors as their originals.
+<P>
+<P>
+<LI> <b> Units Copy Structure ...</b> (selection : dest?)
+<P>
+<b> Units Copy Structure All</b>
+<P>
+<b> Units Copy Structure Input</b>
+<P>
+<b> Units Copy Structure Output</b>
+<P>
+<b> Units Copy Structure None</b>
+<P>
+<b> Units Copy Structure ... binding</b> (selection : dest? site-popup)
+<P>
+<b> Units Copy Structure Back binding</b>
+<P>
+<b> Units Copy Structure Forward binding</b>
+<P>
+<b> Units Copy Structure Double binding</b>
+<A NAME=2726>&#160;</A>
+<P>
+These commands are refinements of the general <tt> Copy</tt> command.
+Here, all links between the selected units are always copied as well.
+This means that the substructure is copied form the originals to the
+new units. On a copy without <tt> Structure</tt> these links would go
+unnoticed. There are also options, which additional links are to be
+copied. If only the substructure is to be copied, the command <tt>
+Units Copy Structure None</tt> is used.
+<P>
+<P><A NAME=2819>&#160;</A><A NAME=PicForwardBinding>&#160;</A><IMG  ALIGN=BOTTOM ALT="" SRC="img562.gif">
+<BR><STRONG>Figure:</STRONG> An Example for <tt> Units Copy Structure with Forward binding</tt><BR>
+<P>
+<P>
+The options with <tt> binding</tt> present a special feature. There, links
+between original and copied units are inserted automatically, in
+addition to the copied structure links.  <tt> Back</tt>, <tt> Forward</tt> and
+<tt> Double</tt> specify thereby the direction of the links, where
+``back'' means the direction towards the original unit. An example is
+shown in picture <A HREF="node114.html#PicForwardBinding"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A>. If sites are used, the
+connections to the originals are assigned to the site selected in the
+popup. If not all originals have a site with that name, not all new
+units are linked to their predecessors.
+<P>
+With these various copy options, large, complicated nets with the
+same or similar substructures can be created very easily.
+<P>
+<P>
+<LI> <b> Mode Units</b> (:)
+<A NAME=2747>&#160;</A>
+<P>
+<b> Mode Links</b> (:)
+<A NAME=2749>&#160;</A>
+<P>
+Switches to the mode <b> Units</b> or <b> Links</b>. All sequences of the
+normal modes are available. The keys <tt> U</tt> and <tt> L</tt> need not be
+pressed anymore. This shortens all sequences by one key.
+<P>
+<P>
+<LI> <b> Units ... Return</b> (:)
+<A NAME=2755>&#160;</A>
+<P>
+<b> Links ... Return</b> (:)
+<A NAME=2757>&#160;</A>
+<P>
+Returns to normal mode after executing <tt> Mode Units</tt>.
+<P>
+<P>
+<LI> <b> Graphics All</b>  (:)
+<A NAME=2760>&#160;</A>
+<P>
+<b> Graphics Complete</b>  (:)
+<A NAME=2762>&#160;</A>
+<P>
+<b> Graphics Units</b>  (:)
+<A NAME=2764>&#160;</A>
+<P>
+<b> Graphics Links</b>  (:)
+<A NAME=2766>&#160;</A>
+<P>
+These commands initiate redrawing of the whole net, or parts of the
+net.  With the exception of <tt> Graphics Complete</tt>, all commands
+affect only the current display. They are especially useful after
+links have been deleted.
+<P>
+<P>
+<LI> <b> Graphic Direction</b> (<IMG  ALIGN=MIDDLE ALT="" SRC="img563.gif">unit<IMG  ALIGN=MIDDLE ALT="" SRC="img564.gif"> : )
+<A NAME=2769>&#160;</A>
+<P>
+This command assigns arrowheads to all links leading to/from the unit
+selected by the mouse. This is done independently from the setup
+values. XGUI, however, does not recall that links have been drawn.
+This means that, after moving a unit, these links remain in the
+window, if the display of links is switched off in the SETUP.
+<P>
+<P>
+<LI> <b> Graphics Move</b> (TARGET <IMG  ALIGN=MIDDLE ALT="" SRC="img565.gif">empty<IMG  ALIGN=MIDDLE ALT="" SRC="img566.gif">/<IMG  ALIGN=MIDDLE ALT="" SRC="img567.gif">unit<IMG  ALIGN=MIDDLE ALT="" SRC="img568.gif"> :)
+<A NAME=2771>&#160;</A>
+<P>
+The origin of the window (upper left corner) is moved in a way that
+the <tt> target</tt> unit in the info panel becomes visible at the position
+specified by the mouse.
+<P>
+<P>
+<LI> <b> Graphics Origin</b> (<IMG  ALIGN=MIDDLE ALT="" SRC="img569.gif">empty<IMG  ALIGN=MIDDLE ALT="" SRC="img570.gif">/<IMG  ALIGN=MIDDLE ALT="" SRC="img571.gif">unit<IMG  ALIGN=MIDDLE ALT="" SRC="img572.gif"> :)
+<A NAME=2774>&#160;</A>
+<P>
+The position specified by the mouse becomes new origin of the display
+(upper left corner).
+<P>
+<P>
+<LI> <b> Graphics Grid</b> (:)
+<A NAME=2776>&#160;</A>
+<P>
+This command draws a point at each grid position. The grid, however,
+is not refreshed, therefore one might have to redo the command from
+time to time.
+<P>
+</OL><BR> <HR><A NAME=tex2html3001 HREF="node115.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html2999 HREF="node107.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html2993 HREF="node113.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html3003 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html3004 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html3002 HREF="node115.html"> Example Dialogue</A>
+<B>Up:</B> <A NAME=tex2html3000 HREF="node107.html"> Graphical Network Editor</A>
+<B> Previous:</B> <A NAME=tex2html2994 HREF="node113.html"> Short Command Reference</A>
+<BR> <HR> <P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

@@ -1,0 +1,148 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Building a Radial Basis Function Application</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Building a Radial Basis Function Application">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html4083 HREF="node192.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html4081 HREF="node182.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html4077 HREF="node190.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html4085 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html4086 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html4084 HREF="node192.html"> Dynamic Decay Adjustment </A>
+<B>Up:</B> <A NAME=tex2html4082 HREF="node182.html"> Radial Basis Functions </A>
+<B> Previous:</B> <A NAME=tex2html4078 HREF="node190.html"> Learning Functions</A>
+<BR> <HR> <P>
+<H2><A NAME=SECTION0010103000000000000000> Building a Radial Basis Function Application</A></H2>
+<P>
+<A NAME=4644>&#160;</A>
+<A NAME=4645>&#160;</A>
+As a first step, a three--layer feedforward network must be
+constructed with full connectivity between input and hidden layer and
+between hidden and output layer. Either the graphical editor or the
+tool <tt> BIGNET</tt> (both built into SNNS) can be used for this purpose.
+<P>
+The output function of all neurons is set to <tt> Out_</tt><tt>
+Identity</tt>.  The activation function of all hidden layer neurons is
+set to one of the three special activation functions <tt>
+Act_RBF_<IMG  ALIGN=BOTTOM ALT="" SRC="img973.gif"></tt> (preferably to <tt> Act_RBF_Gaussian</tt>). For the
+activation of the output units, a function is needed which takes the
+bias into consideration.  These functions are <tt> Act_Logistic</tt> and
+<tt> Act_Identity</tt><tt> Plus</tt><tt> Bias</tt>.
+<P>
+The next step consists of the creation of teaching patterns. They can
+be generated manually using the graphical editor, or automatically
+from external data sets by using an appropriate conversion program. If
+the initialization procedure <tt> RBF_Weights_Kohonen</tt> is going to
+be used, the center vectors should be normalized to length 1, or to
+equal length.
+<P>
+It is necessary to select an appropriate bias for the hidden units
+before the initialization is continued. Therefore, the link weights
+between input and hidden layer are set first, using the procedure <tt>
+RBF_Weights_Kohonen</tt> so that the center vectors which are
+represented by the link weights form a subset of the available teaching
+patterns. The necessary initialization parameters are: <i> learn
+cycles</i> <b>=0</b>, <i> learning rate</i> <IMG  ALIGN=BOTTOM ALT="" SRC="img974.gif">, <i> shuffle</i> <IMG  ALIGN=BOTTOM ALT="" SRC="img975.gif">.
+Thereby teaching patterns are used as center vectors without
+modification.
+<P>
+To set the bias, the activation of the hidden units is checked for
+different teaching patterns by using the button TEST of the
+SNNS control panel. When doing this, the bias of the hidden neurons
+have to be adjusted so that the activations of the hidden units are as
+diverse as possible. Using the Gaussian function as base function, all
+hidden units are uniformly highly activated, if the bias is chosen too
+small (the case bias <b>=0</b> leads to an activation of 1 of all hidden
+neurons). If the bias is chosen too large, only the unit is activated
+whose link weights correspond to the current teaching pattern. A
+useful procedure to find the right bias is to first set the bias to 1,
+and then to change it uniformly depending on the behavior of the
+network. One must take care, however, that the bias does not become
+negative, since some implemented base functions require the bias to be
+positive. The optimal choice of the bias depends on the dimension of
+the input layer and the similarity among the teaching patterns.
+<P>
+After a suitable bias for the hidden units has been determined, the
+initialization procedure <tt> RBF_Weights</tt> can be started. Depending
+on the selected activation function for the output layer, the two <i>
+scale</i> parameters have to be set (see
+page <A HREF="node187.html#i_skalierung"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A>).  When <tt> Act_IdentityPlusBias</tt>
+is used, the two values 0 and 1 should be chosen. For the logistic
+activation function <tt> Act_Logistic</tt> the values -4 and 4 are
+recommended (also see figure <A HREF="node187.html#i_skalierung"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A>). The parameters <i>
+smoothness</i> and <i> deviation</i> should be set to 0 first. The <i>
+bias</i> is set to the previously determined value. Depending on the
+number of teaching patterns and the number of hidden neurons, the
+initialization procedure may take rather long to execute. Therefore,
+some processing comments are printed on the terminal during
+initialization.
+<P>
+After the initialization has finished, the result may be checked by
+using the <IMG  ALIGN=BOTTOM ALT="" SRC="img976.gif"> button. However, the exact network error can
+only be determined by the teaching function. Therefore, the learning
+function <tt> RadialBasisLearning</tt> has to be selected first. All
+learning parameters are set to 0 and the number of learning cycles
+(CYCLES) is set to 1. After pressing the button <IMG  ALIGN=BOTTOM ALT="" SRC="img977.gif">, the
+learning function is started. Since the learning parameters are set to
+0, no changes inside the network will occur. After the
+presentation of all available teaching patterns, the actual error is
+printed to the terminal. As usual, the error is defined as the sum of
+squared errors of all output units (see
+formula <A HREF="node183.html#a_fehler_formel"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A>). Under certain conditions it can be
+possible that the error becomes very large. This is mostly due to
+numerical problems. A poorly selected bias, for example, has shown to
+be a difficult starting point for the initialization. Also, if the
+number of teaching patterns is less than or equal to the number of hidden
+units a problem arises. In this case the number of unknown
+weights plus unknown bias values of output units exceeds the number of
+teaching patterns, i.e. there are more unknown parameters to be
+calculated than equations available. One or more neurons less inside
+the hidden layer then reduces the error considerably.
+<P>
+After the first initialization it is recommended to save the current
+network to test the possibilities of the learning function.  It has
+turned out that the learning function becomes quickly unstable if too
+large learning rates are used. It is recommended to first set only one
+of the three learning rates (<i> centers, bias (p), weights</i>) to a
+value larger than 0 and to check the sensitivity of the learning
+function on this single learning rate. The use of the parameter <i>
+bias (p)</i> is exceptionally critical because it causes serious changes
+of the base function. If the bias of any hidden neuron is getting
+negative during learning, an appropriate message is printed to the
+terminal. In that case, a continuing meaningful training is
+impossible and the network should be reinitialized.
+<P>
+Immediately after initialization it is often useful to train only
+the link weights between hidden and output layer. Thereby the
+numerical inaccuracies which appeared during initialization are
+corrected. However, an optimized total result can only be achieved if
+also the center vectors are trained, since they might have been
+selected disadvantageously.
+<P>
+The initialization procedure used for direct link weight calculation is
+unable to calculate the weights between input and output layer.
+If such links are present, the following procedure is recommended:
+Even before setting the center vectors by using <tt>
+RBF_Weights_Kohonen</tt>, and before searching an appropriate bias, all
+weights should be set to random values between <IMG  ALIGN=MIDDLE ALT="" SRC="img978.gif"> and <IMG  ALIGN=BOTTOM ALT="" SRC="img979.gif">
+by using the initialization procedure <tt> Randomize_Weights</tt>.
+Thereby, all links between input and output layer are
+preinitialized.  Later on, after executing the procedure <tt>
+RBF_Weights</tt>, the error of the network will still be relatively large,
+because the above mentioned links have not been considered. Now it is
+easy to train these weights by only using the teaching parameter <i>
+weights</i> during learning.
+<P>
+<BR> <HR><A NAME=tex2html4083 HREF="node192.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html4081 HREF="node182.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html4077 HREF="node190.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html4085 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html4086 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html4084 HREF="node192.html"> Dynamic Decay Adjustment </A>
+<B>Up:</B> <A NAME=tex2html4082 HREF="node182.html"> Radial Basis Functions </A>
+<B> Previous:</B> <A NAME=tex2html4078 HREF="node190.html"> Learning Functions</A>
+<BR> <HR> <P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

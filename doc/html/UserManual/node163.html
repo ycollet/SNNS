@@ -1,0 +1,174 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Backpropagation Through Time (BPTT)</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Backpropagation Through Time (BPTT)">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html3722 HREF="node164.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html3720 HREF="node143.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html3714 HREF="node162.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html3724 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html3725 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html3723 HREF="node164.html"> The Cascade Correlation </A>
+<B>Up:</B> <A NAME=tex2html3721 HREF="node143.html"> Neural Network Models </A>
+<B> Previous:</B> <A NAME=tex2html3715 HREF="node162.html"> Remarks</A>
+<BR> <HR> <P>
+<H1><A NAME=SECTION001070000000000000000> Backpropagation Through Time (BPTT)</A></H1>
+<P>
+<A NAME=3997>&#160;</A>
+<A NAME=3998>&#160;</A>
+<A NAME=3999>&#160;</A>
+<A NAME=4000>&#160;</A>
+<A NAME=4001>&#160;</A>
+<A NAME=4002>&#160;</A>
+<A NAME=4003>&#160;</A>
+<P>
+This is a learning algorithm for recurrent networks that are updated
+in discrete time steps (non-fixpoint networks). These networks may
+contain any number of feedback loops in their connectivity graph. The
+only restriction in this implementation is that there may be no
+connections between input units<A NAME=tex2html439 HREF="footnode.html#4004"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/foot_motif.gif"></A>.  The gradients of the weights in the
+recurrent network are approximated using an feedforward network with a
+fixed number of layers.  Each layer <b>t</b> contains all activations
+<IMG  ALIGN=MIDDLE ALT="" SRC="img842.gif"> of the recurrent network at time step <b>t</b>. The highest layer
+contains the most recent activations at time <b>t=0</b>. These activations
+are calculated synchronously, using only the activations at <b>t=1</b> in
+the layer below.  The weight matrices between successive layers are
+all identical. To calculate an exact gradient for an input pattern
+sequence of length <b>T</b>, the feedforward network needs <b>T+1</b> layers if
+an output pattern should be generated after the last pattern of the
+input sequence. This transformation of a recurrent network into a
+equivalent feedforward network was first described in
+[<A HREF="node389.html#Minsky69">MP69</A>], p. 145 and the application of backpropagation
+learning to these networks was introduced in [<A HREF="node389.html#Rum862">RHW86</A>].
+<P>
+To avoid deep networks for long sequences, it is possible to use only
+a fixed number of layers to store the activations back in time. This
+method of <i> truncated backpropagation through time</i> is described in
+[<A HREF="node389.html#Zipser90">Zip90</A>] and is used here. An improved feature in this
+implementation is the combination with the quickprop algorithm by
+[<A HREF="node389.html#Fahlma88">Fah88</A>] for weight adaption. The number of additional copies
+of network activations is controlled by the parameter <tt> backstep</tt>.
+Since the setting of <tt> backstep</tt> virtually generates a hierarchical
+network with <tt> backstep</tt> <b>+ 1</b> layers and error information during
+backpropagation is diminished very rapidly in deep networks, the
+number of additional activation copies is limited by <tt> backstep</tt>
+<IMG  ALIGN=MIDDLE ALT="" SRC="img843.gif">.
+<P>
+There are three versions of backpropagation through time available:
+<P>
+<DL ><DT>BPTT:
+<DD> Backpropagation through time with online-update.<BR> 
+The gradient for each weight is summed over <tt> backstep</tt> copies
+between successive layers and the weights are adapted using the
+formula for backpropagation with momentum term after each pattern. The
+momentum term uses the weight change during the previous pattern. Using
+small learning rates <tt> eta</tt>, <tt> BPTT</tt> is especially useful to
+start adaption with a large number of patterns since the weights are
+updated much more frequently than in batch-update.
+<P>
+<DT>BBPTT:
+<DD> Batch backpropagation through time.<BR> 
+The gradient for each weight is calculated for each pattern as in
+<tt> BPTT</tt> and then averaged over the whole training set. The momentum
+term uses update information closer to the true gradient than in <tt>
+BPTT</tt>.
+<P>
+<DT>QPTT:
+<DD> Quickprop through time.<BR> 
+The gradient in quickprop through time is calculated as in <tt>
+BBPTT</tt>, but the weights are adapted using the substantially more
+efficient quickprop-update rule.
+<P>
+ </DL>
+<P>
+A recurrent network has to start processing a sequence of patterns
+with defined activations. All activities in the network may be set to
+zero by applying an input pattern containing only zero values. If such
+all-zero patterns are part of normal input patterns, an extra input
+unit has to be added for reset control. If this reset unit is set to
+<b>1</b>, the network is in the free running mode. If the reset unit <i>
+and</i> all normal input units are set to <b>0</b>, all activations in the
+network are set to <b>0</b> and all stored activations are cleared as well.
+<P>
+The processing of an input pattern <IMG  ALIGN=MIDDLE ALT="" SRC="img844.gif"> with a set of non-input
+activations <IMG  ALIGN=MIDDLE ALT="" SRC="img845.gif"> is performed as follows:
+<P>
+<OL><LI> The input pattern <IMG  ALIGN=MIDDLE ALT="" SRC="img846.gif"> is copied to the input units to become a
+subset of the existing unit activations <IMG  ALIGN=MIDDLE ALT="" SRC="img847.gif"> of the whole net.
+<P>
+<LI> If <IMG  ALIGN=MIDDLE ALT="" SRC="img848.gif"> contains only zero activations, all activations
+<IMG  ALIGN=MIDDLE ALT="" SRC="img849.gif"> and all stored activations <IMG  ALIGN=MIDDLE ALT="" SRC="img850.gif"> are set to <IMG  ALIGN=BOTTOM ALT="" SRC="img851.gif">.
+<P>
+<LI> All activations <IMG  ALIGN=MIDDLE ALT="" SRC="img852.gif"> are calculated synchronously using
+the activation function and activation values <IMG  ALIGN=MIDDLE ALT="" SRC="img853.gif">.
+<P>
+<LI> During learning, an output pattern <IMG  ALIGN=MIDDLE ALT="" SRC="img854.gif"> is always compared with
+the output subset of the <i> new</i> activations <IMG  ALIGN=MIDDLE ALT="" SRC="img855.gif">.
+<P>
+</OL>
+<P>
+Therefore there is exactly <i> one</i> synchronous update step between
+an input and an output pattern with the same pattern number.
+<P>
+If an input pattern has to be processed with more than one network
+update, there has to be a delay between corresponding input and output
+patterns.  If an output pattern <IMG  ALIGN=BOTTOM ALT="" SRC="img856.gif"> is the <b>n</b>-th pattern after an
+input pattern <IMG  ALIGN=BOTTOM ALT="" SRC="img857.gif">, the input pattern has been processed in <b>n+1</b>
+update steps by the network.  These <b>n+1</b> steps may correspond to <b>n</b>
+hidden layers processing the pattern or a recurrent processing path
+through the network with <b>n+1</b> steps. Because of this pipelined
+processing of a pattern sequence, the number of hidden layers that may
+develop during training in a fully recurrent network is influenced by
+the delay between corresponding input and output patterns. If the
+network has a defined hierarchical topology without shortcut
+connections between <b>n</b> different hidden layers, an output pattern
+should be the <b>n</b>-th pattern after its corresponding input pattern in
+the pattern file.
+<P>
+An example illustrating this relation is given with the delayed XOR
+network in the network file <tt> xor-rec.net</tt> and the pattern files <tt>
+xor-rec1.pat</tt> and <tt> xor-rec2.pat</tt>. With the patterns <tt>
+xor-rec1.pat</tt>, the task is to compute the XOR function of the
+previous input pattern.  In <tt> xor-rec2.pat</tt>, there is a delay of
+2 patterns for the result of the XOR of the input pattern. Using a
+fixed network topology with shortcut connections, the BPTT learning
+algorithm develops solutions with a different number of processing
+steps using the shortcut connections from the first hidden layer to
+the output layer to solve the task in <tt> xor-rec1.pat</tt>. To map the
+patterns in <tt> xor-rec2.pat</tt> the result is first calculated in the
+second hidden layer and copied from there to the output layer during
+the next update step<A NAME=tex2html440 HREF="footnode.html#4035"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/foot_motif.gif"></A>.
+<P>
+The update function <tt> BPTT-Order</tt> performs the synchronous update
+of the network and detects reset patterns.  If a network is tested
+using the <IMG  ALIGN=BOTTOM ALT="" SRC="img858.gif"> button in the control panel, the internal
+activations and the output activation of the output units are first
+overwritten with the values in the target pattern, depending on the
+setting of the button <IMG  ALIGN=BOTTOM ALT="" SRC="img859.gif">. To provide correct activations on
+feedback connections leading out of the output units in the following
+network update, all output activations are copied to the units initial
+activation values <tt> i_act</tt> after each network update and are
+copied back from <tt> i_act</tt> to <tt> out</tt> before each update.  The
+non-input activation values may therefore be influenced before a
+network update by changing the initial activation values <tt> i_act</tt>.
+<P>
+If the network has to be reset by stepping over a reset pattern with
+the <IMG  ALIGN=BOTTOM ALT="" SRC="img860.gif"> button, keep in mind that after clicking <IMG  ALIGN=BOTTOM ALT="" SRC="img861.gif">,
+the pattern number is increased first, the new input pattern is copied
+into the input layer second, and then the update function is called.
+So to reset the network, the current pattern must be set to the pattern
+directly preceding the reset pattern.
+<P>
+<BR> <HR><A NAME=tex2html3722 HREF="node164.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html3720 HREF="node143.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html3714 HREF="node162.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html3724 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html3725 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html3723 HREF="node164.html"> The Cascade Correlation </A>
+<B>Up:</B> <A NAME=tex2html3721 HREF="node143.html"> Neural Network Models </A>
+<B> Previous:</B> <A NAME=tex2html3715 HREF="node162.html"> Remarks</A>
+<BR> <HR> <P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

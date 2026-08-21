@@ -1,0 +1,51 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> CPN_Weights_v3.2</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" CPN_Weights_v3.2">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html2648 HREF="node86.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html2646 HREF="node78.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html2640 HREF="node84.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html2650 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html2651 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html2649 HREF="node86.html"> CPN_Weights_v3.3</A>
+<B>Up:</B> <A NAME=tex2html2647 HREF="node78.html"> Initialization Functions</A>
+<B> Previous:</B> <A NAME=tex2html2641 HREF="node84.html"> CPN_Rand_Pat</A>
+<BR> <HR> <P>
+<H3><A NAME=SECTION00560700000000000000> CPN_Weights_v3.2</A></H3>
+<P>
+<A NAME=2113>&#160;</A>
+This function generates random points in an n-dimensional hypercube
+and later projects them onto the surface of an n-dimensional unit
+hypersphere or onto one of its main diagonal sectors (main diagonal
+quadrant for <b>n=2</b>, octant for <b>n=3</b>, ...).
+<P>
+First the interval, from which the Kohonen weights for the
+initialization tasks are selected, is determined. Depending upon the
+initialization parameters, which have to be provided in field1
+and field2, the interval may be <IMG  ALIGN=MIDDLE ALT="" SRC="img465.gif">, <IMG  ALIGN=MIDDLE ALT="" SRC="img466.gif">, or
+<IMG  ALIGN=MIDDLE ALT="" SRC="img467.gif">.
+<P>
+Every component <IMG  ALIGN=MIDDLE ALT="" SRC="img468.gif"> of every Kohonen layer neuron j is then
+assigned a random value from the above interval, yielding weight
+vectors <IMG  ALIGN=MIDDLE ALT="" SRC="img469.gif">, which are random points within an
+n-dimensional hypercube.
+<P>
+The length of each vector <IMG  ALIGN=MIDDLE ALT="" SRC="img470.gif"> is then normalized to 1.
+<P>
+All weights of the neurons of the Grossberg layer are set to 1.
+<P>
+Note that this initialization function does NOT produce weight vectors
+with equal point density on the hypersphere, because with increasing
+dimension of the hypercube in which the random dots are generated,
+many more points are originally in the corners of the hypercube than
+in the interior of the inscribed hypersphere.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

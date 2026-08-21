@@ -1,0 +1,59 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Initializing Counterpropagation</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Initializing Counterpropagation">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html3651 HREF="node158.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html3649 HREF="node155.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html3643 HREF="node156.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html3653 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html3654 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html3652 HREF="node158.html"> Counterpropagation Implementation in </A>
+<B>Up:</B> <A NAME=tex2html3650 HREF="node155.html"> Counterpropagation</A>
+<B> Previous:</B> <A NAME=tex2html3644 HREF="node156.html"> Fundamentals</A>
+<BR> <HR> <P>
+<H2><A NAME=SECTION001052000000000000000> Initializing Counterpropagation</A></H2>
+<P>
+<A NAME=CountPropInit>&#160;</A>
+<P>
+For Counterpropagation networks three initialization functions are
+available: CPN_Rand_Pat, CPN_Weights_v3.2, and CPN_Weights_v3.3.
+See section <A HREF="node78.html#InitFuncs"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A> for a detailed description of these
+functions.
+<P>
+<b> Note:</b><BR> 
+In SNNS versions 3.2 and 3.3 there was only the initialization
+function <tt> CPN_Weights</tt> available. Although it had the same name,
+there was a significant difference between the two. The older version,
+still available now as <tt> CPN_Weights_v3.2</tt> selected its values
+from the hyper<b> cube</b> defined by the two initialization parameters.
+This resulted in an uneven distribution of these values after they had
+been normalized, thereby biasing the network towards a certain
+(unknown) direction. The newer version, still available now as <tt>
+  CPN_Weights_v3.3</tt> selected its values from the hyper<b> sphere</b>
+defined by the two initialization parameters. This resulted in an even
+distribution of these values after they had been normalized. However
+it had the disadvantage of having an exponential time complexity,
+thereby making it useless for networks with more than about 15 input
+units. The influence of the parameters on these two functions is given
+below.
+<P>
+Two parameters are used which represent the minimum (a) and maximum
+(b) of the range out of which initial values for the second
+(Grossberg) layer are selected at random. The vector <IMG  ALIGN=MIDDLE ALT="" SRC="img795.gif"> of weights
+leading to unit <b>i</b> of the Kohonen layer are initialized as normalized
+vectors (length 1) drawn at random from part of a hyper-sphere
+(hyper-cube). Here, min and max determine which part of the
+hyper body is used according to table <A HREF="node157.html#ini0"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A>.
+<P>
+<P><A NAME=3907>&#160;</A><A NAME=ini0>&#160;</A><IMG  ALIGN=BOTTOM ALT="" SRC="img796.gif">
+<BR><STRONG>Table:</STRONG> Influence of minimum and maximum on the initialization of weight
+vectors for CPN and SOM.<BR>
+<P><BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

@@ -1,0 +1,59 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Calling Snnsbat</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Calling Snnsbat">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html5812 HREF="node322.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html5810 HREF="node318.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html5806 HREF="node320.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html5814 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html5815 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html5813 HREF="node322.html"> Tools for SNNS</A>
+<B>Up:</B> <A NAME=tex2html5811 HREF="node318.html"> Snnsbat -- The </A>
+<B> Previous:</B> <A NAME=tex2html5807 HREF="node320.html"> Using Snnsbat</A>
+<BR> <HR> <P>
+<H2><A NAME=SECTION001453000000000000000> Calling Snnsbat</A></H2>
+<P>
+<A NAME=7928>&#160;</A>
+<A NAME=7929>&#160;</A>
+<P>
+<tt> snnsbat</tt> may be called interactively or in batch mode. It was
+designed, however, to be called in batch mode. On Unix machines,
+the command `at' should be used, to allow logging the program with the
+mailbox. However, `at' can only read from standard input, so a
+combination of `echo' and `pipe' has to be used.
+<P>
+Three short examples for Unix are given here, to clarify the calls:
+<P>
+<blockquote> unix<b>&gt;</b>echo 'snnsbat mybatch.cfg mybatch.log' <IMG  ALIGN=MIDDLE ALT="" SRC="img1403.gif"> at 21:00 Friday 
+</blockquote>
+<P>
+starts <tt> snnsbat</tt> next Friday at 9pm with the parameters given in
+mybatch.cfg and writes the output to the file mybatch.log in the
+current directory.
+<P>
+<blockquote> unix<b>&gt;</b>echo 'snnsbat SNNSconfig1.cfg  SNNSlog1.log' <IMG  ALIGN=MIDDLE ALT="" SRC="img1404.gif"> at 22 
+</blockquote>
+<P>
+starts <tt> snnsbat</tt> today at 10pm
+<P>
+<blockquote> unix<b>&gt;</b>echo 'snnsbat' <IMG  ALIGN=MIDDLE ALT="" SRC="img1405.gif"> at now + 2 hours 
+</blockquote>
+<P>
+starts <tt> snnsbat</tt> in 2 hours and uses the default files snnsbat.cfg
+and snnsbat.log
+<P>
+The executable is located in the directory
+`.../SNNSv4.1/kernel/bin/<b>&lt;</b>machine_type<b>&gt;</b>/'.<BR> 
+The sources of snnsbat can be found in the directory
+`.../SNNSv4.1/kernel/sources/'.<BR> An example configuration file was
+placed in `.../SNNSv4.0/examples'.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

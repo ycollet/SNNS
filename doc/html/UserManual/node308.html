@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> setPruningFunc</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" setPruningFunc">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html5660 HREF="node309.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html5658 HREF="node304.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html5652 HREF="node307.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html5662 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html5663 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html5661 HREF="node309.html"> setSubPattern</A>
+<B>Up:</B> <A NAME=tex2html5659 HREF="node304.html"> Function Calls To </A>
+<B> Previous:</B> <A NAME=tex2html5653 HREF="node307.html"> setUpdateFunc</A>
+<BR> <HR> <P>
+<H3><A NAME=SECTION001431400000000000000> setPruningFunc</A></H3>
+<P>
+<A NAME=7648>&#160;</A>
+<P>
+This function call is used to select the different pruning algorithms
+for neural networks. (See chapter <tt> Pruning algorithms</tt>). A
+function call may look like this:
+<P>
+<blockquote> <tt> setPruningFunc (function name1, function name2, parameters)</tt>
+</blockquote>
+<P>
+where function name1 is the name of the pruning function and has to be
+selected from:
+<P>
+<blockquote> <PRE>MagPruning               OptimalBrainSurgeon    OptimalBrainDamage
+Noncontributing_Units    Skeletonization
+</PRE>
+</blockquote>
+<P>
+Function name2 is the name of the subordinated learning function and has to 
+be selected out of:
+<P>
+<blockquote> <PRE>BackpropBatch          Quickprop        BackpropWeightDecay  
+BackpropMomentum       Rprop            Std_Backpropagation
+</PRE>
+</blockquote>
+<P>
+Additionally the parameters described below can be entered. If no
+parameters are entered default values are used by the interpreter.
+Those values appear in the graphical user interface in the
+corresponding widget of the pruning window.
+<P>
+<OL><LI> Maximum error increase in % (float)
+<LI> Accepted error (float)
+<LI> Recreate last pruned element (boolean)
+<LI> Learn cycles for first training (integer)
+<LI> Learn cycles for retraining (integer)
+<LI> Minimum error to stop (float)
+<LI> Initial value for matrix (float)
+<LI> Input pruning (boolean)
+<LI> Hidden pruning (boolean)
+</OL>
+<P>
+Function calls could look like this:
+<P>
+<blockquote> <tt> setPruningFunc(&quot;OptimalBrainDamage&quot;,&quot;Std_Backpropagation&quot;)<BR> 
+ setPruningFunc(&quot;MagPruning&quot;, &quot;Rprop&quot;, 15.0, 3.5, FALSE, 500, 90,<BR> 1e6, 1.0)
+</tt>
+</blockquote>
+<P>
+In the first function call the pruning function and the subordinate
+learning function is selected. In the second function call almost all
+parameters are specified. Please note that a function call has to be
+specified without a carriage return. Long function calls have to be
+specified within one line.  The following text is displayed by the
+batch interpreter:
+<P>
+<blockquote> <tt> Pruning function is now MagPruning<BR> 
+Subordinate learning function is now Rprop<BR> 
+Parameters are: 15.0 3.5 FALSE 500 90 1.0 1e-6 TRUE TRUE</tt>
+</blockquote>
+<P>
+The regular learning function <tt> PruningFeedForward</tt> has to be set
+with the function call <tt> setLearnFunc()</tt>. This is not necessary if
+<tt> PruningFeedForward</tt> is already set in the network file.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

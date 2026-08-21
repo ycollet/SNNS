@@ -1,0 +1,205 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Error Messages of the Simulator Kernel</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Error Messages of the Simulator Kernel">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html6454 HREF="node371.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html6452 HREF="node350.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html6448 HREF="node369.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html6456 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html6457 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html6455 HREF="node371.html"> Transfer Functions</A>
+<B>Up:</B> <A NAME=tex2html6453 HREF="node350.html"> Kernel Function Interface</A>
+<B> Previous:</B> <A NAME=tex2html6449 HREF="node369.html"> ART Interface Functions</A>
+<BR> <HR> <P>
+<H1><A NAME=SECTION0016160000000000000000> Error Messages of the Simulator Kernel</A></H1>
+<P>
+<A NAME=8375>&#160;</A>
+<A NAME=8376>&#160;</A>
+<P>
+Most interface functions return an error code if the parameters
+contradict each other, or if an error occurred during execution. If no
+error occurred during execution of a kernel interface function, the
+function returns the code: <code>KRERR_NO_ERROR</code>.
+<code>KRERR_NO_ERROR</code> is equal to 0.  The simulator kernel can generate
+54 different error messages.  The error code constants are defined in
+<code>glob_typ.h</code>.  There is also a function to translate an error
+code into text:
+<P>
+<code>char  *krui_error( int  error_code )</code><BR> 
+converts an error code to a string. The following error messages are
+used:
+<P>
+<PRE>KRERR_NO_ERROR:                  No Error
+KRERR_INSUFFICIENT_MEM:          Insufficient memory
+KRERR_UNIT_NO:                   Invalid unit number
+KRERR_OUTFUNC:                   Invalid unit output function
+KRERR_ACTFUNC:                   Invalid unit activation function
+KRERR_SITEFUNC:                  Invalid site function
+KRERR_CREATE_SITE:               Creation of sites is not permitted 
+                                 because unit has direct input links
+KRERR_ALREADY_CONNECTED:         Creation of a link is not permitted 
+                                 because there exists already a link 
+                                 between these units
+KRERR_CRITICAL_MALLOC:           allocation failed in critical operation.
+KRERR_FTYPE_NAME:                Ftype name is not definite
+KRERR_FTYPE_ENTRY:               Current Ftype entry is not defined
+KRERR_COPYMODE:                  Invalid copy mode
+KRERR_NO_SITES:                  Current unit does not have sites
+KRERR_FROZEN:                    Can't update unit because unit is frozen
+KRERR_REDEF_SITE_NAME:           Redefinition of site name not permitted
+                                 (site name already exists)
+KRERR_UNDEF_SITE_NAME:           Site name is not defined
+KRERR_NOT_3D:                    Invalid Function: Not a 3D-Kernel
+KRERR_DUPLICATED_SITE:           Unit has already a site with this name  
+KRERR_INUSE_SITE:                Can not delete site table entry because 
+                                 site is in use
+KRERR_FTYPE_SITE:                Current Ftype site is not defined
+KRERR_FTYPE_SYMBOL:              Given symbol is not defined in the symbol 
+                                 table
+KRERR_IO:                        Physical I/O error
+KRERR_SAVE_LINE_LEN:             Creation of output file failed 
+                                 (line length, limit exceeded)
+KRERR_NET_DEPTH:                 The depth of the network does not fit the 
+                                 learning function
+KRERR_NO_UNITS:                  No Units defined
+KRERR_EOF:                       Unexpected EOF
+KRERR_LINE_LENGTH:               Line length exceeded
+KRERR_FILE_FORMAT:               Incompatible file format
+KRERR_FILE_OPEN:                 Can not open file
+KRERR_FILE_SYNTAX:               Syntax error at line
+KRERR_MALLOC1:                   Memory allocation error 1
+KRERR_TTYPE:                     Topologic type invalid
+KRERR_SYMBOL:                    Symbol pattern invalid 
+                                 (must match [A-Za-z]^[|, ]*)
+KRERR_NO_SUCH_SITE:              Current unit does not have a site with 
+                                 this name
+KRERR_NO_HIDDEN_UNITS:           No hidden units defined
+KRERR_CYCLES:                    cycle(s):
+KRERR_DEAD_UNITS:                dead unit(s):
+KRERR_INPUT_PATTERNS:            Pattern file contains not the same number
+                                 of input units as the network                                
+KRERR_OUTPUT_PATTERNS:           Pattern file contains not the same number 
+                                 of output units as the network
+KRERR_CHANGED_I_UNITS:           Number of input units has changed
+KRERR_CHANGED_O_UNITS:           Number of output units has changed
+KRERR_NO_INPUT_UNITS:            No input units defined
+KRERR_NO_OUTPUT_UNITS:           No output units defined
+KRERR_NO_PATTERNS:               No patterns defined
+KRERR_INCORE_PATTERNS:           Incore patterns incompatible with current 
+                                 network (remove loaded patterns before 
+                                 loading network)
+KRERR_PATTERN_NO:                Invalid pattern number
+KRERR_LEARNING_FUNC:             Invalid learning function
+KRERR_PARAMETERS:                Invalid parameters
+KRERR_UPDATE_FUNC:               Invalid update function
+KRERR_INIT_FUNC:                 Invalid initialization function
+KRERR_DERIV_FUNC:                Derivation function of the activation 
+                                 function does not exist
+KRERR_I_UNITS_CONNECT:           input unit(s) with input connections to 
+                                 other units
+KRERR_O_UNITS_CONNECT:           output unit(s) with output connections to 
+                                 other units
+KRERR_TOPOMODE:                  Invalid topological sorting mode
+KRERR_LEARNING_SITES:            Learning function doesn't support sites   
+KRERR_SITES_NO_SUPPORT:          Sites are not supported
+KRERR_NO_MASPAR_KERNEL:          This isn't a MasPar Kernel
+KRERR_NOT_NEIGHBOUR_LAYER:       Connection(s) between unit(s) in 
+                                 non-neighbour layers are not supported
+KRERR_MUCH_LAYERS:               The number of layers is too high
+KRERR_NOT_FULLY_CONNECTED:       The network layers aren't fully connected
+KRERR_MODE_FF1_INVALID_OP:       This operation is not allowed in parallel 
+                                 kernel mode
+KRERR_NET_TRANSFORM:             Change of network type isn't possible in 
+                                 parallel kernel mode
+KRERR_NO_CURRENT_LINK:           No current link defined
+KRERR_NO_CURRENT_UNIT:           No current unit defined
+KRERR_UNIT_NO_INPUT:             Current unit does't have any inputs
+KRERR_TOPO_DEFINITION:           Invalid parameter in topologic definition 
+                                 section
+KRERR_BAD_CONNECTION:            Creation of link between these units is 
+                                 not permitted
+KRERR_MASPAR_NO_RESPOND:         MasPar doesn't respond 
+KRERR_NOT_IMPLEMENTED_YET:       This function isn't implemented yet
+KRERR_NOT_PARRALLEL_MODE:        Kernel isn't in parallel mode
+KRERR_MASPAR_OUT_OF_PE_MEM:      MasPar ran out of memory
+KRERR_MASPAR_COMMUNICATE:        MasPar communication error
+KRERR_MASPAR_OUT_OF_PE:          MasPar ran out of processors
+KRERR_MISSING_DEFAULT_FUNC:      Missing default function 
+                                 (check function table)
+KRERR_MASPAR_MULTI_OUT_FUNC:     MasPar kernel does not support multiple 
+                                 unit output functions
+KRERR_MASPAR_MULTI_ACT_FUNC:     MasPar kernel doesn't support multiple 
+                                 unit activation functions
+KRERR_NET_DEPTH:                 The depth of the network does not fit to 
+                                 the learning function
+KRERR_NO_OF_UNITS_IN_LAYER:      Wrong no. of units in layer
+KRERR_UNIT_MISSING:              Unit missing or not correctly connected
+KRERR_UNDETERMINED_UNIT:         Unit does not belong to a defined layer 
+                                 in the network
+KRERR_ACT_FUNC:                  Unit has wrong activation function
+KRERR_OUT_FUNC:                  Unit has wrong output function
+KRERR_SITE_FUNC:                 Unexpected site function at unit 
+KRERR_UNEXPECTED_SITES:          Unit is not expected to have sites 
+KRERR_UNEXPECTED_DIRECT_INPUTS:  Unit is expected to have sites 
+KRERR_SITE_MISSING:              Site missing at unit 
+KRERR_UNEXPECTED_LINK:           Unexpected link 
+KRERR_LINK_MISSING:              Missing link(s) to unit 
+KRERR_LINK_TO_WRONG_SITE:        Link ends at wrong site of target unit 
+KRERR_TOPOLOGY:                  The network is not fitting the required 
+                                 topology
+KRERR_PARAM_BETA:                Wrong beta parameter in unit bias value
+KRERR_CC_ERROR1:                 Topo_ptr_array is sorted in the wrong way
+KRERR_CC_ERROR2:                 There is no memory allocated
+KRERR_CC_ERROR3:                 Not enough memory to run Casscade
+KRERR_CC_ERROR4:                 Hidden unit with more than one recurent 
+                                 link detected
+KRERR_CC_ERROR5:                 Hidden unit without recurrent link found
+KRERR_CC_ERROR6:                 Hidden layer does not fit the required 
+                                 topology
+KRERR_CC_ERROR7:                 The first link of a hidden unit is not a 
+                                 recurent link
+KRERR_CC_ERROR8:                 Special unit with more than one recurent 
+                                 link detected
+KRERR_CC_ERROR9:                 First link of a special unit is not a 
+                                 recurent link
+KRERR_CC_ERROR10:                Wrong update function
+KRERR_CC_ERROR11:                Wrong init function
+DLVQ_ERROR1:                     There are empty classes
+DLVQ_ERROR2:                     There is a class lower than zero
+DLVQ_ERROR3:                     Wrong number of output units.
+DLVQ_ERROR4:                     This network is not fitting the required 
+                                 topology
+DLVQ_ERROR5:                     There isn't a unit for every class
+KRERR_NP_NO_MORE_ENTRIES:        No more free pattern sets available
+KRERR_NP_NO_SUCH_PATTERN_SET:    No such Pattern set defined
+KRERR_NP_CURRENT_PATTERN:        No current pattern defined
+KRERR_NP_DIMENSION:              Specified sub pattern does not fit into 
+                                 pattern
+KRERR_NP_NO_SUCH_PATTERN:        No such pattern available
+KRERR_NP_NO_CURRENT_PATTERN_SET: No current pattern set defined
+KRERR_NP_DOES_NOT_FIT:           Pattern (sub pattern) does not fit the 
+                                 network
+KRERR_NP_NO_TRAIN_SCHEME:        No sub pattern shifting scheme defined
+KRERR_NP_NO_OUTPUT_PATTERN:      Pattern contains no output information
+KRERR_NP_INCOMPATIBLE_NEW:       New Pattern does not fit to existing set   
+KRERR_NP_PARAM_ZERO:             Illegal parameter value &lt;= 0 specified
+KRERR_IP_ISNOTINITED:            Paragon kernel is not initialized
+KRERR_IP_ISINITED:               Paragon kernel is already initialized
+KRERR_IP_SENDMSGFAILED:          Sending a message fails
+KRERR_IP_MSGSYNTAX:              Syntax error in received message 
+KRERR_IP_UNKNOWENCMD:            Receive unknown command
+KRERR_IP_LESSPAT:                There are less patterns than allocated 
+                                 nodes
+KRERR_IP_WEIGHTUPDATE:           Weight update with global sum fails
+KRERR_IP_LEARNFNOTPAR:           Learning function is not parallelized
+</PRE>
+<P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

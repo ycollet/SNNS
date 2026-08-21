@@ -1,0 +1,53 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Simulated Annealing</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Simulated Annealing">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html4720 HREF="node241.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html4718 HREF="node238.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html4714 HREF="node239.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html4722 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html4723 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html4721 HREF="node241.html"> Scaled Conjugate Gradient </A>
+<B>Up:</B> <A NAME=tex2html4719 HREF="node238.html"> Stochastic Learning Functions</A>
+<B> Previous:</B> <A NAME=tex2html4715 HREF="node239.html"> Monte-Carlo</A>
+<BR> <HR> <P>
+<H2><A NAME=SECTION0010162000000000000000> Simulated Annealing</A></H2>
+<P>
+<A NAME=6095>&#160;</A>
+<P>
+Simulated annealing is a more sophisticated method for finding the
+global minima of a error surface. In contrast to monte carlo learning
+only one weight or bias is changed at a learning cycle. Dependant on
+the error development and a system temperature this change is
+accepted or rejected.  One of the advantages of simulated annealing is
+that learning does not get stuck in local minima.
+<P>
+At the beginning of learning the temperature <b>T</b> is set to <IMG  ALIGN=MIDDLE ALT="" SRC="img1207.gif">. Each
+training cycle consists of the following four steps.
+<P>
+<OL><LI> Change one weight or bias by random in the range <IMG  ALIGN=MIDDLE ALT="" SRC="img1208.gif">.
+<P>
+<LI> Calculate the net error as sum of the given error function for
+all patterns.
+<P>
+<LI> Accept change if the error decreased or if the error increased
+  by <IMG  ALIGN=BOTTOM ALT="" SRC="img1209.gif"> with the probability p given by: <IMG  ALIGN=MIDDLE ALT="" SRC="img1210.gif">
+<P>
+<LI> Decrease the temperature: <IMG  ALIGN=MIDDLE ALT="" SRC="img1211.gif"></OL>
+<P>
+The three implemented simulated annealing functions only differ in
+the way the net error is calculated. Sim_Ann_SS calculates a
+summed squared error like the backpropagation learning functions;
+Sim_Ann_WTA calculates a winner takes all error; and Sim_Ann_WWTA
+calculates a winner takes all error and adds a term corresponding to
+the security of the winner takes all decision.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

@@ -1,0 +1,44 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Grammar</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Grammar">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html6646 HREF="node386.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html6644 HREF="node383.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html6640 HREF="node384.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html6648 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html6649 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html6647 HREF="node386.html"> Example Network Files</A>
+<B>Up:</B> <A NAME=tex2html6645 HREF="node383.html"> Grammar of the </A>
+<B> Previous:</B> <A NAME=tex2html6641 HREF="node384.html"> Terminal Symbols</A>
+<BR> <HR> <P>
+<H2><A NAME=SECTION001842000000000000000> Grammar</A></H2>
+<P>
+
+<PRE>pattern_file              ::= header pattern_list                     
+header                    ::= VERSION_HEADER V_NUMBER GENERATED_AT NO_OF_PATTERN NUMBER
+                              i_head [o_head] [vi_head] [vo_head]
+i_head                    ::= [Comment] NO_OF_INPUT NUMBER
+o_head                    ::= [Comment] NO_OF_OUTPUT NUMBER
+vi_head                   ::= [Comment] NO_OF_VAR_IDIM NUMBER MAXIMUM_IDIM actual_dim
+vo_head                   ::= [Comment] NO_OF_VAR_ODIM NUMBER MAXIMUM_ODIM actual_dim
+actual_dim                ::= (L_BRACKET actual_dim_rest R_BRACKET) | 
+                              (L_BRACKET R_BRACKET)                
+actual_dim_rest           ::= dim_entry | (actual_dim_rest dim_entry)
+dim_entry                 ::= INT
+pattern_list              ::= pattern | (pattern_list pattern)
+pattern                   ::= pattern_start pattern_body 
+pattern_start             ::= [Comment] [actual_dim]
+pattern_body              ::= pattern_entry | (pattern_body pattern_entry)
+pattern_entry             ::= NUMBER
+</PRE>
+
+<P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

@@ -1,0 +1,42 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> CounterPropagation</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" CounterPropagation">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html2375 HREF="node65.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html2373 HREF="node53.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html2367 HREF="node63.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html2377 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html2378 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html2376 HREF="node65.html"> Dynamic_LVQ</A>
+<B>Up:</B> <A NAME=tex2html2374 HREF="node53.html"> Update Functions</A>
+<B> Previous:</B> <A NAME=tex2html2368 HREF="node63.html"> CC_Order</A>
+<BR> <HR> <P>
+<H3><A NAME=SECTION005501100000000000000> CounterPropagation</A></H3>
+<P>
+<A NAME=2007>&#160;</A>
+The <tt> CounterPropagation</tt> update algorithm updates a net that
+consists of a input, hidden and output layer. In this case the hidden
+layer is called the Kohonen layer and the output layer is called the
+Grossberg layer.  At the beginning of the algorithm the output of the
+input neurons is equal to the input vector. The input vector is
+normalized to the length of one.  Now the progression of the Kohonen
+layer starts. This means that a neuron with the highest net input is
+identified. The activation of this winner neuron is set to 1. The
+activation of all other neurons in this layer is set to 0.  Now the
+output of all output neurons is calculated. There is only one neuron
+of the hidden layer with the activation and the output set to 1. This
+and the fact that the activation and the output of all output neurons
+is the weighted sum on the output of the hidden neurons implies that
+the output of the output neurons is the weight of the link between the
+winner neuron and the output neurons. This update function makes sense
+only in combination with the CPN learning function.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

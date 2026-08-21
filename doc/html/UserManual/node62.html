@@ -1,0 +1,38 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> BBTT_Order</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" BBTT_Order">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html2351 HREF="node63.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html2349 HREF="node53.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html2343 HREF="node61.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html2353 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html2354 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html2352 HREF="node63.html"> CC_Order</A>
+<B>Up:</B> <A NAME=tex2html2350 HREF="node53.html"> Update Functions</A>
+<B> Previous:</B> <A NAME=tex2html2344 HREF="node61.html"> BAM_Order</A>
+<BR> <HR> <P>
+<H3><A NAME=SECTION00550900000000000000> BBTT_Order</A></H3>
+<P>
+<A NAME=1996>&#160;</A>
+The <tt> BBTT_Order</tt> algorithm performs an update on a recurrent
+network. The recurrent net can be transformed into a regular
+feedforward net with an input, multiple hidden and output layer. At
+the beginning the update procedure checks if there is a zero-input
+pattern in the input layer. Suppose there is such a pattern, then the
+so called <tt> i_act</tt> value buffer is set to 0 for all neurons.  In
+this case <tt> i_act</tt> can be seen as a buffer for the output value of
+the hidden and output neurons. The next step is to copy the <tt>
+  i_act</tt> value to the output of all hidden and output neurons. The
+new activation of the hidden and output units will be calculated. Now
+the new output for every neuron in the hidden and output layer will be
+computed and stored in <tt> i_act</tt>.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

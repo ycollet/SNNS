@@ -1,0 +1,56 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Connections (Links)</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Connections (Links)">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html1620 HREF="node13.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html1618 HREF="node10.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html1612 HREF="node11.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html1622 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html1623 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html1621 HREF="node13.html"> Sites</A>
+<B>Up:</B> <A NAME=tex2html1619 HREF="node10.html"> Building Blocks of </A>
+<B> Previous:</B> <A NAME=tex2html1613 HREF="node11.html"> Units</A>
+<BR> <HR> <P>
+<H2><A NAME=SECTION00412000000000000000> Connections (Links)</A></H2>
+<P>
+<A NAME=394>&#160;</A>
+<A NAME=395>&#160;</A>
+<P>
+The direction of a connection shows the direction of the transfer of
+activation. The unit from which the connection starts is called the <em>
+source unit</em>, or <em> source</em> for short, while the other is called
+<A NAME=398>&#160;</A>
+<A NAME=399>&#160;</A>
+<A NAME=400>&#160;</A>
+<A NAME=401>&#160;</A>
+the <em> target unit</em>, or <em> target</em>. Connections where source and
+target are identical (recursive connections) are possible. Multiple
+connections between one unit and the same input port of another unit are
+redundant, and therefore prohibited. This is checked by SNNS.
+<P>
+<A NAME=404>&#160;</A>
+Each connection has a <em> weight</em> (or strength) assigned to it. The
+effect of the output of one unit on the successor unit is defined by
+this value: if it is negative, then the connection is inhibitory,
+i.e. decreasing the activity of the target unit; if it is positive,
+it has an excitatory, i.e. activity enhancing, effect.
+<P>
+The most frequently used network architecture is built hierarchically
+bottom-up. The input into a unit comes only from the units of
+preceding layers. Because of the unidirectional flow of
+information within the net they are also called feed-forward nets
+(as example see the neural net classifier introduced in chapter
+<A HREF="node17.html#PatternMatcher"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A>). In many models a full connectivity between all
+units of adjoining levels is assumed.
+<P>
+Weights are represented as floats with nine decimal digits of precision.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

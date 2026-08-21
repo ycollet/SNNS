@@ -1,0 +1,49 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> TDNN Implementation in SNNS</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" TDNN Implementation in SNNS">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html3904 HREF="node178.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html3902 HREF="node175.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html3896 HREF="node176.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html3906 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html3907 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html3905 HREF="node178.html"> Activation Function</A>
+<B>Up:</B> <A NAME=tex2html3903 HREF="node175.html"> Time Delay Networks </A>
+<B> Previous:</B> <A NAME=tex2html3897 HREF="node176.html"> TDNN Fundamentals</A>
+<BR> <HR> <P>
+<H2><A NAME=SECTION001092000000000000000> TDNN Implementation in SNNS</A></H2>
+<P>
+The original time delay algorithm was slightly modified for
+implementation in SNNS, since it requires either variable network
+sizes or fixed length input patterns. Time delay networks in SNNS
+are allowed no delay in the output layer. This has the following
+consequences:
+<P>
+<UL><LI> The input layer has fixed size.
+  <LI> Not the whole pattern is present at the input layer at once.
+Therefore one pass through the network is not enough to compute all
+necessary weight changes. This makes learning more computationally
+intensive. 
+</UL>
+<P>
+The coupled links are implemented as one physical (i.e. normal) link
+and a set of logical links associated with it. Only the physical links
+are displayed in the graphical user interface. The bias of all delay
+units has no effect. Instead, the bias of the corresponding feature
+unit is used during propagation and backpropagation.
+<P>
+<BR> <HR>
+<UL> 
+<LI> <A NAME=tex2html3908 HREF="node178.html#SECTION001092100000000000000"> Activation Function</A>
+<LI> <A NAME=tex2html3909 HREF="node179.html#SECTION001092200000000000000"> Update Function</A>
+<LI> <A NAME=tex2html3910 HREF="node180.html#SECTION001092300000000000000"> Learning Function</A>
+</UL>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

@@ -1,0 +1,60 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> While and Repeat Instructions</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" While and Repeat Instructions">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html5572 HREF="node303.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html5570 HREF="node299.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html5566 HREF="node301.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html5574 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html5575 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html5573 HREF="node303.html"> SNNS Function Calls</A>
+<B>Up:</B> <A NAME=tex2html5571 HREF="node299.html"> Control Structures</A>
+<B> Previous:</B> <A NAME=tex2html5567 HREF="node301.html"> The For Instruction</A>
+<BR> <HR> <P>
+<H3><A NAME=SECTION001427300000000000000> While and Repeat Instructions</A></H3>
+<P>
+The <tt> while</tt> and the <tt> repeat</tt> instructions differ from a <tt> for</tt>
+instruction because they don't have a count variable and execute their commands
+only while a condition is met (while) or until a condition is met (repeat).
+The condition is an expression which delivers a boolean value. The formats of 
+the <tt> while</tt> and the <tt> repeat</tt> instructions are:
+<P>
+<blockquote> <tt> while EXPRESSION do BLOCK endwhile<BR> 
+repeat BLOCK until EXPRESSION</tt>
+<P>
+</blockquote>
+<P>
+The user has to make sure that the cycle terminates at one point. This can be
+achieved by making sure that the EXPRESSION delivers once the value `TRUE' in 
+case of the <tt> repeat</tt> instruction or `FALSE' in case of the <tt> while</tt> 
+instruction. The <tt> for</tt> example from the previous section is equivalent to:
+<P>
+<blockquote> <tt> i := 2<BR> 
+while i &lt;= 5 do <BR> 
+print ( &quot;here we are: &quot;,i)<BR> 
+i := i + 1
+endwhile</tt>
+</blockquote>
+<P>
+or to:
+<P>
+<blockquote> <tt> i := 2<BR> 
+repeat<BR> 
+print ( &quot;here we are: &quot;,i)<BR> 
+i := i + 1<BR> 
+until i &gt; 5</tt>
+</blockquote>
+<P>
+The main difference between <tt> repeat</tt> and <tt> while</tt> is that repeat 
+guarantees that the BLOCK is executed at least once. The <tt> break</tt> and the
+<tt> continue</tt> instructions may also be used within the BLOCK.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

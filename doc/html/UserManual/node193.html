@@ -1,0 +1,175 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> The Dynamic Decay Adjustment Algorithm</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" The Dynamic Decay Adjustment Algorithm">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html4109 HREF="node194.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html4107 HREF="node192.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html4101 HREF="node192.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html4111 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html4112 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html4110 HREF="node194.html"> Using RBF--DDA in </A>
+<B>Up:</B> <A NAME=tex2html4108 HREF="node192.html"> Dynamic Decay Adjustment </A>
+<B> Previous:</B> <A NAME=tex2html4102 HREF="node192.html"> Dynamic Decay Adjustment </A>
+<BR> <HR> <P>
+<H2><A NAME=SECTION0010111000000000000000> The Dynamic Decay Adjustment Algorithm</A></H2>
+<P>
+The Dynamic Decay Adjustment (DDA--)Algorithm is an extension of the
+RCE-Algorithm (see [<A HREF="node389.html#Huda92">Hud92</A>,<A HREF="node389.html#ReCE82">RCE82</A>]) and offers easy and
+constructive training for Radial Basis Function Networks. RBFs
+trained with the DDA-Algorithm often achieve classification accuracy
+comparable to Multi Layer Perceptrons (MLPs)<A NAME=tex2html472 HREF="footnode.html#4683"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/foot_motif.gif"></A>
+but training is significantly faster ([<A HREF="node389.html#BeDi95">BD95</A>]).
+<P>
+An RBF trained with the DDA-Algorithm (RBF-DDA) is similar 
+in structure to the common feedforward MLP with one hidden layer
+and without shortcut connections:
+<UL><LI> The number of units in the <b> input layer</b> represents
+        the dimensionality of the input space.
+  <LI> The <b> hidden layer</b> contains the RBF units.
+        Units are added in this layer during training.
+        The input layer is fully connected to the hidden layer.
+  <LI> Each unit in the <b> output layer</b> represents one 
+        possible class, resulting in an 1-of-n or binary coding.
+        For classification a winner-takes-all approach is used,
+        i.e. the output with the highest activation determines
+        the class. Each hidden unit is connected to exactly one output unit.
+</UL>
+<P>
+The main differences to an MLP are the activation function and
+propagation rule of the hidden layer: Instead of using a sigmoid or
+another nonlinear squashing function, RBFs use localized functions,
+radial Gaussians, as an activation function. In addition, a
+computation of the Euclidian distance to an individual reference
+vector replaces the scalar product used in MLPs:
+<P><IMG  ALIGN=BOTTOM ALT="" SRC="img980.gif"><P>
+If the network receives vector <IMG  ALIGN=BOTTOM ALT="" SRC="img981.gif"> as an input, <IMG  ALIGN=MIDDLE ALT="" SRC="img982.gif"> indicates
+the activation of one RBF unit with reference vector <IMG  ALIGN=MIDDLE ALT="" SRC="img983.gif"> and
+standard deviation <IMG  ALIGN=MIDDLE ALT="" SRC="img984.gif">.
+<P>
+The output layer computes the output for each class as follows:
+<P><IMG  ALIGN=BOTTOM ALT="" SRC="img985.gif"><P>
+with <b>m</b> indicating the number of RBFs belonging to the corresponding
+class and <IMG  ALIGN=MIDDLE ALT="" SRC="img986.gif"> being the weight for each RBF.
+<P>
+An example of a full RBF-DDA is shown in figure <A HREF="node193.html#rbfddanet"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A>.
+Note that there do not exist any shortcut connections between input
+and output units in an RBF-DDA.
+<P>
+<P><A NAME=4708>&#160;</A><A NAME=rbfddanet>&#160;</A><IMG  ALIGN=BOTTOM ALT="" SRC="img987.gif">
+<BR><STRONG>Figure:</STRONG> The structure of a Radial Basis Function Network.<BR>
+<P>
+<P>
+In this illustration the weight vector that connects all input units
+to one hidden unit represents the centre of the Gaussian. The
+Euclidian distance of the input vector to this reference vector (or
+<i> prototype</i>) is used as an input to the Gaussian which leads to a
+local response; if the input vector is <i> close</i> to the prototype,
+the unit will have a high activation. In contrast the activation will
+be close to zero for larger distances.  Each output unit simply
+computes a weighted sum of all activations of the RBF units belonging
+to the corresponding class.
+<P>
+The DDA-Algorithm introduces the idea of distinguishing between <i>
+  matching</i> and <i> conflicting</i> neighbors in an <i> area of
+  conflict</i>. Two thresholds <IMG  ALIGN=BOTTOM ALT="" SRC="img988.gif"> and <IMG  ALIGN=BOTTOM ALT="" SRC="img989.gif"> are
+introduced as illustrated in figure <A HREF="node193.html#oneddarbf"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A>.
+<P>
+<P><A NAME=6221>&#160;</A><A NAME=oneddarbf>&#160;</A><IMG  ALIGN=BOTTOM ALT="" SRC="img990.gif">
+<BR><STRONG>Figure:</STRONG> One RBF unit as used by the DDA-Algorithm. Two <i> thresholds</i>     
+           are used to define an <i> area of conflict</i> where no        
+           other prototype of a conflicting class is allowed to exist.
+           In addition, each training pattern has to be in the inner
+           circle of at least one prototype of the correct class.<BR>
+<P>
+<P>
+Normally, <IMG  ALIGN=BOTTOM ALT="" SRC="img991.gif"> is set to be greater than <IMG  ALIGN=BOTTOM ALT="" SRC="img992.gif"> which
+leads to a <i> area of conflict</i> where neither matching nor
+conflicting training patterns are allowed to lie<A NAME=tex2html473 HREF="footnode.html#4735"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/foot_motif.gif"></A>.  Using these
+thresholds, the algorithm constructs the network dynamically and
+adjusts the radii individually.
+<P>
+In short the main properties of the DDA-Algorithm are:
+<UL><LI> <b> constructive training</b>: new RBF nodes are added whenever necessary.
+      The network is built from scratch, the number of required
+      hidden units is determined during training. Individual radii 
+      are adjusted dynamically during training.
+<LI> <b> fast training</b>: usually about five epochs are needed to complete
+      training, due to the constructive nature of the algorithm. 
+      End of training is clearly indicated.     
+<LI> <b> guaranteed convergence</b>: the algorithm can be proven to
+      terminate.
+<LI> <b> two uncritical parameters</b>: only the two parameters <IMG  ALIGN=BOTTOM ALT="" SRC="img993.gif">
+      and <IMG  ALIGN=BOTTOM ALT="" SRC="img994.gif"> have to
+      be adjusted manually. Fortunately the values of these two
+      thresholds are not critical to determine. For all tasks that have
+      been used so far, <IMG  ALIGN=BOTTOM ALT="" SRC="img995.gif"> and <IMG  ALIGN=BOTTOM ALT="" SRC="img996.gif"> was
+      a good choice.
+<LI> <b> guaranteed properties</b> of the network: it can be shown that
+      after training has terminated, the network holds several conditions for
+      all training patterns: wrong classifications are below a certain
+      threshold (<IMG  ALIGN=BOTTOM ALT="" SRC="img997.gif">) and correct classifications are above 
+      another threshold (<IMG  ALIGN=BOTTOM ALT="" SRC="img998.gif">).
+</UL>
+<P>
+The DDA-Algorithm is based on two steps. During training, whenever a
+pattern is misclassified, either a new RBF unit with an initial weight
+= 1 is introduced (called <i> commit</i>) or the weight of an existing
+RBF (which covers the new pattern) is incremented. In both cases the
+radii of conflicting RBFs (RBFs belonging to the wrong class) are
+reduced (called <i> shrink</i>).  This guarantees that each of the
+patterns in the training data is covered by an RBF of the correct
+class and none of the RBFs of a conflicting class has an inappropriate
+response.
+<P>
+Two parameters are introduced at this stage, a <i> positive threshold</i>
+<IMG  ALIGN=BOTTOM ALT="" SRC="img999.gif"> and a <i> negative threshold</i> <IMG  ALIGN=BOTTOM ALT="" SRC="img1000.gif">. To commit
+a new prototype, none of the existing RBFs of the correct class has
+an activation above <IMG  ALIGN=BOTTOM ALT="" SRC="img1001.gif"> and during shrinking no RBF of
+a conflicting class is allowed to have an activation above <IMG  ALIGN=BOTTOM ALT="" SRC="img1002.gif">.
+Figure <A HREF="node193.html#ddaexp"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A> shows an example that illustrates the first
+few training steps of the DDA-Algorithm.
+<P>
+<P><A NAME=4786>&#160;</A><A NAME=ddaexp>&#160;</A><IMG  ALIGN=BOTTOM ALT="" SRC="img1003.gif">
+<BR><STRONG>Figure:</STRONG> An example of the DDA-Algorithm: (1) a pattern of class <b>A</b>
+    is encountered and a new RBF is created; (2) a training pattern of
+    class <b>B</b> leads to a new prototype for class <b>B</b> and shrinks the
+    radius of the existing RBF of class <b>A</b>; (3) another pattern of
+    class <b>B</b> is classified correctly and shrinks again the prototype
+    of class <b>A</b>; (4) a new pattern of class <b>A</b> introduces another
+    prototype of that class.<BR>
+<P>
+<P>
+After training is finished, two conditions are true for all input--output
+pairs<A NAME=tex2html474 HREF="footnode.html#4790"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/foot_motif.gif"></A>
+<IMG  ALIGN=MIDDLE ALT="" SRC="img1004.gif"> of the training data:
+<UL><LI> at least one prototype of the correct class <b>c</b> has an activation value
+      greater or equal to <IMG  ALIGN=BOTTOM ALT="" SRC="img1005.gif">:
+  <P><IMG  ALIGN=BOTTOM ALT="" SRC="img1006.gif"><P>
+<LI> all prototypes of conflicting classes have activations less or equal to
+      <IMG  ALIGN=BOTTOM ALT="" SRC="img1007.gif"> (<IMG  ALIGN=MIDDLE ALT="" SRC="img1008.gif"> indicates the number of prototypes belonging
+      to class <b>k</b>):
+  <P><IMG  ALIGN=BOTTOM ALT="" SRC="img1009.gif"><P></UL>
+<P>
+For all experiments conducted so far, the choice of <IMG  ALIGN=BOTTOM ALT="" SRC="img1010.gif">=0.4
+and <IMG  ALIGN=BOTTOM ALT="" SRC="img1011.gif">=0.2 led to satisfactory results. In theory, those
+parameters should be dependent on the dimensionality of the feature
+space but in practice the values of the two thresholds seem to be
+uncritical.  Much more important is that the input data is normalized.
+Due to the radial nature of RBFs each attribute should be distributed
+over an equivalent range. Usually normalization into [0,1] is
+sufficient.
+<P>
+<BR> <HR><A NAME=tex2html4109 HREF="node194.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html4107 HREF="node192.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html4101 HREF="node192.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html4111 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html4112 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html4110 HREF="node194.html"> Using RBF--DDA in </A>
+<B>Up:</B> <A NAME=tex2html4108 HREF="node192.html"> Dynamic Decay Adjustment </A>
+<B> Previous:</B> <A NAME=tex2html4102 HREF="node192.html"> Dynamic Decay Adjustment </A>
+<BR> <HR> <P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

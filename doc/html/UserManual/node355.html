@@ -1,0 +1,52 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Site Functions</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Site Functions">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html6276 HREF="node356.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html6274 HREF="node350.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html6268 HREF="node354.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html6278 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html6279 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html6277 HREF="node356.html"> Functions for the </A>
+<B>Up:</B> <A NAME=tex2html6275 HREF="node350.html"> Kernel Function Interface</A>
+<B> Previous:</B> <A NAME=tex2html6269 HREF="node354.html"> Unit Definition Functions</A>
+<BR> <HR> <P>
+<H1><A NAME=SECTION001630000000000000000> Site Functions</A></H1>
+<P>
+Before input functions (sites) can be set for units, they first have
+to be defined. To define it, each site is assigned a name by the user.
+Sites can be selected by using this name. For the definition of sites,
+the following functions are available:
+<P>
+<PRE>krui_createSiteTableEntry( char  *site_name, char  *site_func )
+krui_changeSiteTableEntry( char  *old_site_name, char  *new_site_name,
+                           char  *new_site_func )
+krui_deleteSiteTableEntry( char *site_name )
+krui_getFirstSiteTableEntry( char * *site_name, char * *site_func )
+krui_getNextSiteTableEntry( char * *site_name, char * *site_func )
+krui_getSiteTableFuncName( char  *site_name )
+krui_setFirstSite( void )
+krui_setNextSite( void )
+krui_setSite( char  *site_name )
+krui_getSiteValue()
+krui_getSiteName()
+krui_setSiteName( char  *site_name )
+krui_getSiteFuncName()
+krui_addSite( char *site_name )
+krui_deleteSite()
+</PRE>
+<P>
+<BR> <HR>
+<UL> 
+<LI> <A NAME=tex2html6280 HREF="node356.html#SECTION001631000000000000000"> Functions for the Definition of Sites</A>
+<LI> <A NAME=tex2html6281 HREF="node357.html#SECTION001632000000000000000"> Functions for the Manipulation of Sites</A>
+</UL>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

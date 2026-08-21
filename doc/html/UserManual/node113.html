@@ -1,0 +1,256 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Short Command Reference</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Short Command Reference">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html2989 HREF="node114.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html2987 HREF="node107.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html2981 HREF="node112.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html2991 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html2992 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html2990 HREF="node114.html"> Editor Commands</A>
+<B>Up:</B> <A NAME=tex2html2988 HREF="node107.html"> Graphical Network Editor</A>
+<B> Previous:</B> <A NAME=tex2html2982 HREF="node112.html"> Use of the </A>
+<BR> <HR> <P>
+<H1><A NAME=SECTION00740000000000000000> Short Command Reference</A></H1>
+<P>
+<A NAME=ShortCommandReference>&#160;</A>
+<P>
+The following section briefly describes the commands of the network
+editor. Capital letters denote the keys that must be hit to invoke the
+command in a command sequence.
+<P>
+The following commands are possible within any command sequence
+<P>
+<UL><LI> <tt> Quit</tt>: quit a command 
+<LI> <tt> Return</tt>: quit a command and return to normal mode (see
+chapter <A HREF="node108.html#EditorModes"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A>) 
+<LI> <tt> Help</tt>: get help information. A help window pops up (see
+chapter <A HREF="node49.html#HelpWindows"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A>) 
+</UL>
+<P>
+As already mentioned, some operations have a different meaning if
+there exist units with sites in a network. These operations are
+indicated with the suffix <em> (Sites!)</em> and are described in more
+detail in chapter <A HREF="node114.html#EditorCommands"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A>. Commands that manipulate sites
+are also included in this overview. They start with the first command
+<tt> Sites</tt>.
+<P>
+<OL><UL><LI> <tt> Flags Safety</tt>: sets/resets safety flag (a flag to prompt
+the user before units or links are deleted; additional question, if
+units with different subnet numbers are selected.)
+<P>
+</UL>
+<P>
+<LI> Link Commands:
+<A NAME=2437>&#160;</A>
+<A NAME=2438>&#160;</A>
+<P>
+<UL><LI> <tt> Links Set</tt>: sets all links between the selected units to
+the weight displayed in the info panel (independent of sites)
+<P>
+<LI> <tt> Links Make ...</tt>: creates or modifies connections
+<P>
+<LI> <tt> Links Make Clique</tt>: connects every selected unit with every
+other selected unit <em> (Sites!)</em>
+<P>
+<LI> <tt> Links Make to Target unit</tt>: creates links from all selected
+source units to a single target unit (under the mouse pointer) <em>
+(Sites!)</em>
+<P>
+<LI> <tt> Links Make from Source unit</tt>: creates links from a single
+source unit (under the mouse pointer) to all selected target units
+<em> (Sites!)</em>
+<P>
+<LI> <tt> Links Make Double</tt>: doubles all links between the selected
+units, i.e. generates two links (from source to target and from
+target to source) from each single link) <em> (Sites!)</em>
+<P>
+<LI> <tt> Links Make Invers</tt>: changes the direction of all links
+between the selected units <em> (Sites!)</em>
+<P>
+<LI> <tt> Links Delete Clique</tt>: deletes all links between all
+selected units <em> (Sites!)</em>
+<P>
+<LI> <tt> Links Delete to Target unit</tt>: deletes all incoming links
+from a selected group of units to a single target unit (under the
+mouse pointer) <em> (Sites!)</em>
+<P>
+<LI> <tt> Links Delete from Source unit</tt>: deletes all outgoing links
+from a single source unit (under the mouse pointer) to a selected
+group of units <em> (Sites!)</em>
+<P>
+<LI> <tt> Links Copy Input</tt>: copies all input links leading into the
+selected group of units as new input links to the target unit (under
+the mouse pointer) <em> (Sites!)</em>
+<P>
+<LI> <tt> Links Copy Output</tt>: copies all output links starting from
+the selected group of units as new output links of the source unit
+(under the mouse pointer) <em> (Sites!)</em>.
+<P>
+<LI> <tt> Links Copy All</tt>: copies all input and output links from the
+selected group of units as new input or output links to the unit under
+the mouse pointer <em> (Sites!)</em>
+<P>
+<LI> <tt> Links Copy Environment</tt>: copies all links between the
+selected units and the <tt> TARGET</tt> unit to the actual unit, if there
+exist units with the same relative distance <em> (Sites!)</em>
+<P>
+</UL>
+<P>
+<LI> Site Commands:
+<A NAME=2468>&#160;</A>
+<A NAME=2469>&#160;</A>
+<P>
+<UL><LI> <tt> Sites Add</tt>: add a site to all selected units
+<P>
+<LI> <tt> Sites Delete</tt>: delete a site from all selected units
+<P>
+<LI> <tt> Sites Copy with No links</tt>: copies the current site of the
+<tt> Target</tt> unit to all selected units. Links are not copied
+<P>
+<LI> <tt> Sites Copy with All links</tt>: ditto, but with all links
+<P>
+</UL>
+<P>
+<LI> Unit Commands:
+<A NAME=2477>&#160;</A>
+<A NAME=2478>&#160;</A>
+<P>
+<UL><LI> <tt> Units Freeze</tt>: freeze all selected units
+<P>
+<LI> <tt> Units Unfreeze</tt>: reset freeze for all selected units
+<P>
+<LI> <tt> Units Set Name</tt>: sets name to the name of <tt> Target</tt>
+<P>
+<LI> <tt> Units Set io-Type</tt>: sets I/O type to the type of <tt> Target</tt>
+<P>
+<LI> <tt> Units Set Activation</tt>: sets activation to the activation of
+<tt> Target</tt>
+<P>
+<LI> <tt> Units Set Initial activation</tt>: sets initial activation to
+the initial activation of <tt> Target</tt>
+<P>
+<LI> <tt> Units Set Output</tt>: sets output to the output of <tt>
+Target</tt>
+<P>
+<LI> <tt> Units Set Bias</tt>: sets bias to the bias of <tt> Target</tt>
+<P>
+<LI> <tt> Units Set Function Activation</tt>: sets activation function.
+Note: all selected units loose their default type (f-type)
+<P>
+<LI> <tt> Units Set Function Output</tt>: sets output function
+Note: all selected units loose their default type (f-type)
+<P>
+<LI> <tt> Units Set Function Ftype</tt>: sets default type (f-type)
+<P>
+<LI> <tt> Units Insert Default</tt>: inserts a unit with default values.
+The unit has no links
+<P>
+<LI> <tt> Units Insert Target</tt>: inserts a unit with the same values
+as the <tt> Target</tt> unit. The unit has no links
+<P>
+<LI> <tt> Units Insert Ftype</tt>: inserts a unit of a certain default
+type (f-type) which is determined in a popup window
+<P>
+<LI> <tt> Units Delete</tt>: deletes all selected units
+<P>
+<LI> <tt> Units Move</tt>: all selected units are moved. The mouse
+determines the destination position of the <tt> TARGET</tt> unit
+(info-panel). The selected units and their position after the move are
+shown as outlines.
+<P>
+<LI> <tt> Units Copy ...</tt>: copies all selected units to a new
+position. The mouse position determines the destination position of
+the <tt> TARGET</tt> unit (info-panel).
+<P>
+<LI> <tt> Units Copy All</tt>: copies all selected units with <em> all</em>
+links
+<P>
+<LI> <tt> Units Copy Input</tt>: copies all selected units with their
+input links
+<P>
+<LI> <tt> Units Copy Output</tt>: copies all selected units and their
+output links
+<P>
+<LI> <tt> Units Copy None</tt>: copies all selected units, but no links
+<P>
+<LI> <tt> Units Copy Structure ...</tt>: copies all selected units and
+the link structure between these units, i.e. a whole subnet is copied
+<P>
+<LI> <tt> Units Copy Structure All</tt>: copies all selected units,
+all links between them, and all input and output links to and from
+these units
+<P>
+<LI> <tt> Units Copy Structure Input</tt>: copies all selected units,
+all links between <BR> them, and all input links to these units
+<P>
+<LI> <tt> Units Copy Structure Output</tt>: copies all selected units,
+all links between them, and all output links from these units
+<P>
+<LI> <tt> Units Copy Structure None</tt>: copies all selected units and
+all links between them
+<P>
+<LI> <tt> Units Copy Structure Back binding</tt>: copies all selected
+units and all links between them and inserts additional links from the
+new to the corresponding original units <em> (Sites!)</em>
+<P>
+<LI> <tt> Units Copy Structure Forward binding</tt>: copies all selected
+units and all links between them and inserts additional links from the
+original to the corresponding new units <em> (Sites!)</em>
+<P>
+<LI> <tt> Units Copy Structure Double binding</tt>: ditto, but inserts
+additional links from the original to the new units and vice versa
+<em> (Sites!)</em>
+<P>
+</UL>
+<P>
+<LI> Mode Commands:
+<A NAME=2523>&#160;</A>
+<UL><LI> <tt> Mode Units</tt>: unit mode, shortens command sequence if one
+wants to work with unit commands only. All subsequences after the <tt>
+Units</tt> command are valid then
+<P>
+<LI> <tt> Mode Links</tt>:  analogous to <tt> Mode Units</tt>, but for link
+commands
+<P>
+</UL>
+<P>
+<LI> Graphics Commands:
+<A NAME=2530>&#160;</A>
+<A NAME=2531>&#160;</A>
+<P>
+<UL><LI> <tt> Graphics All</tt>: redraws the local window
+<P>
+<LI> <tt> Graphics Complete</tt>: redraws all windows
+<P>
+<LI> <tt> Graphics Direction</tt>: draws all links from and to a unit
+with arrows in the local window
+<P>
+<LI> <tt> Graphics Links</tt>: redraws all links in the local window
+<P>
+<LI> <tt> Graphics Move</tt>: moves the origin of the local window such
+that the <tt> Target</tt> unit is displayed at the position of the mouse
+pointer
+<P>
+<LI> <tt> Graphics Origin</tt>: moves the origin of the local window to
+the position indicated
+<P>
+<LI> <tt> Graphics Grid</tt>: displays a graphic grid at the raster
+positions in the local window
+<P>
+<LI> <tt> Graphics Units</tt>: redraws all units in the local window
+<P>
+</UL></OL><BR> <HR><A NAME=tex2html2989 HREF="node114.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html2987 HREF="node107.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html2981 HREF="node112.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html2991 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html2992 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html2990 HREF="node114.html"> Editor Commands</A>
+<B>Up:</B> <A NAME=tex2html2988 HREF="node107.html"> Graphical Network Editor</A>
+<B> Previous:</B> <A NAME=tex2html2982 HREF="node112.html"> Use of the </A>
+<BR> <HR> <P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

@@ -1,0 +1,155 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Introduction to SNNS</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Introduction to SNNS">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html1486 HREF="node3.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html1484 HREF="UserManual.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html1478 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html1488 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html1489 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html1487 HREF="node3.html"> LicensingCopying and </A>
+<B>Up:</B> <A NAME=tex2html1485 HREF="UserManual.html">No Title</A>
+<B> Previous:</B> <A NAME=tex2html1479 HREF="node1.html">Contents</A>
+<BR> <HR> <P>
+<H1><A NAME=SECTION00200000000000000000> Introduction to SNNS</A></H1>
+<P>
+<A NAME=IntroductionSNNS>&#160;</A>
+<P>
+SNNS (Stuttgart Neural Network Simulator) is a simulator for neural
+networks developed at the Institute for Parallel and Distributed High
+Performance Systems (Institut f&#252;r Parallele und Verteilte
+H&#246;chstleistungsrechner, IPVR) at the University of Stuttgart since
+1989. The goal of the project is to create an efficient and flexible
+simulation environment for research on and application of neural nets.
+<P>
+<A NAME=83>&#160;</A> The SNNS simulator consists of four main
+components that are depicted in figure <A HREF="node2.html#SNNS"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A>: Simulator kernel,
+graphical user interface, batch simullator version snnsbat, and
+network compiler snns2c. There was also a fifth part, Nessus, that was
+used to construct networks for SNNS. Nessus, however, has become
+obsolete since the introduction of powerful interactive network
+creation tools within the graphical user interface and is no longer
+supported. The simulator kernel operates on the internal network data
+structures of the neural nets and performs all operations on them. The
+graphical user interface XGUI<A NAME=tex2html4 HREF="footnode.html#85"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/foot_motif.gif"></A>,
+built on top of the kernel, gives a graphical representation of the
+neural networks and controls the kernel during the simulation run. In
+addition, the user interface can be used to directly create,
+manipulate and visualize neural nets in various ways.  Complex
+networks can be created quickly and easily.  Nevertheless, XGUI should
+also be well suited for unexperienced users, who want to learn about
+connectionist models with the help of the simulator. An online help
+system, partly context-sensitive, is integrated, which can offer
+assistance with problems.
+<P>
+<P><A NAME=93>&#160;</A><A NAME=SNNS>&#160;</A><IMG  ALIGN=BOTTOM ALT="" SRC="img5.gif">
+<BR><STRONG>Figure:</STRONG> SNNS components: simulator kernel, graphical user
+interface xgui, batchman, and network compiler snns2c<BR>
+<P>
+<P>
+An important design concept was to enable the user to select only those
+aspects of the visual representation of the net in which he is
+interested. This includes depicting several aspects and parts of the
+network with multiple windows as well as suppressing unwanted
+information.
+<P>
+<A NAME=97>&#160;</A>
+<A NAME=98>&#160;</A>
+<P><A NAME=106>&#160;</A><A NAME=TabMachine>&#160;</A><IMG  ALIGN=BOTTOM ALT="" SRC="img6.gif">
+<BR><STRONG>Table:</STRONG> Machines and operating systems on which SNNS has been tested<BR> 
+(as of November 1995)<BR>
+<P>
+<P>
+SNNS is implemented completely in ANSI-C. The simulator kernel has already
+been tested on numerous machines and operating systems (see also table
+<A HREF="node2.html#TabMachine"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A>). XGUI is based upon X11 Release 5 from MIT and the
+Athena Toolkit, and was tested under various window managers, like <tt>
+  twm, tvtwm, olwm, ctwm, fvwm</tt>. It also works under X11R6.
+<P>
+This document is structured as follows:
+<P>
+This chapter <A HREF="node2.html#IntroductionSNNS"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A> gives a brief introduction and
+overview of SNNS.
+<P>
+Chapter <A HREF="node3.html#LicenseCopyAcknowl"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A> gives the details about how to obtain
+SNNS and under what conditions. It includes licensing, copying and
+exclusion of warranty. It then discusses how to install SNNS and gives
+acknowledgments of its numerous authors.
+<P>
+Chapter <A HREF="node9.html#Connectionism"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A> introduces the components of neural nets
+and the terminology used in the description of the simulator.
+Therefore, this chapter may also be of interest to people already
+familiar with neural nets.
+<P>
+Chapter <A HREF="node18.html#XGUIManual"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A> describes how to operate the two-dimensional
+graphical user interface. After a short overview of all commands a
+more detailed description of these commands with an example dialog is
+given.
+<P>
+Chapter <A HREF="node103.html#PatHandle"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A> describes the form and usage of the patterns
+of SNNS
+<P>
+Chapter <A HREF="node107.html#XGUIEditor"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A> describes the integrated graphical editor of
+the 2D user interface. These editor commands allow the interactive
+construction of networks with arbitrary topologies.
+<P>
+Chapter <A HREF="node116.html#Bignet"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A> is about a tool to facilitate the generation of
+large, regular networks from the graphical user interface.
+<P>
+Chapter <A HREF="node135.html#xguiAnalyze"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A> describes the network analyzing facilities,
+built into SNNS.
+<P>
+Chapter <A HREF="node143.html#ImplemModels"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A> describes the connectionist models that are
+already implemented in SNNS, with a strong emphasis on the less
+familiar network models.
+<P>
+Chapter <A HREF="node246.html#Pruning"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A> describes the four pruning functions which are
+available in SNNS.
+<P>
+Chapter <A HREF="node255.html#XGUI3D"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A> introduces a new visualization component for
+three-dimensional visualization of the topology and the activity of
+neural networks with wireframe or solid models.
+<P>
+Chapter <A HREF="node277.html#rpcversion"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A> describes how to use the full power of
+multiple computers in a cluster of workstations for training networks
+with SNNS.
+<P>
+Chapter <A HREF="node288.html#Batchversion"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A> introduces the batch capabilities of SNNS.
+They can be accessed via an additional interface to the kernel, that
+allows for easy background execution.
+<P>
+Chapter <A HREF="node322.html#SNNStools"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A> gives a brief overlook over the tools that
+come with SNNS, without being an internal part of it.
+<P>
+Chapter <A HREF="node350.html#KernelFunctionInterface"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A> describes in detail the
+interface between the kernel and the graphical user interface. This
+function interface is important, since the kernel can be included in
+user written C programs.
+<P>
+Chapter <A HREF="node371.html#TransferFunctions"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A> details the activation functions and output
+function that are already built in.
+<P>
+In appendix A the format of the file interface to the kernel is
+described, in which the nets are read in and written out by the
+kernel. Files in this format may also be generated by any other
+program, or even an editor.
+<P>
+The grammars for both network and pattern files are also given here.
+<P>
+In appendix B and C examples for network and batch configuration files
+are given.
+<P>
+<BR> <HR><A NAME=tex2html1486 HREF="node3.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html1484 HREF="UserManual.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html1478 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html1488 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html1489 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html1487 HREF="node3.html"> LicensingCopying and </A>
+<B>Up:</B> <A NAME=tex2html1485 HREF="UserManual.html">No Title</A>
+<B> Previous:</B> <A NAME=tex2html1479 HREF="node1.html">Contents</A>
+<BR> <HR> <P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

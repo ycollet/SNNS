@@ -1,0 +1,58 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Generalization of Neural Networks</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Generalization of Neural Networks">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html1666 HREF="node17.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html1664 HREF="node9.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html1658 HREF="node15.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html1668 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html1669 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html1667 HREF="node17.html"> An Example of </A>
+<B>Up:</B> <A NAME=tex2html1665 HREF="node9.html"> Neural Network Terminology</A>
+<B> Previous:</B> <A NAME=tex2html1659 HREF="node15.html"> Learning in Neural </A>
+<BR> <HR> <P>
+<H1><A NAME=SECTION00440000000000000000> Generalization of Neural Networks</A></H1>
+<P>
+<A NAME=518>&#160;</A>
+<P>
+<P><A NAME=526>&#160;</A><A NAME=overtraining>&#160;</A><IMG  ALIGN=BOTTOM ALT="" SRC="img38.gif">
+<BR><STRONG>Figure:</STRONG> Error development of a training and a validation set<BR>
+<P>
+<P>
+One of the major advantages of neural nets is their ability to
+generalize. This means that a trained net could classify data from the
+same class as the learning data that it has never seen before. In real world applications developers
+normally have only a small part of all possible patterns for the
+generation of a neural net. To reach the best generalization, the
+dataset should be split into three parts:
+<P>
+<UL><LI> The <b> training set</b> is used to train a neural net. The error
+  of this dataset is minimized during training.
+<LI> The <b> validation set</b> is used to determine the performance of
+  a neural network on patterns that are not trained during learning.
+<LI> A <b> test set</b> for finally checking the over all performance
+  of a neural net.
+</UL>
+<P>
+Figure <A HREF="node16.html#overtraining"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A> shows a typical error development of a
+training set (lower curve) and a validation set (upper curve).
+<P>
+The learning should be stopped in the minimum of the validation set
+error. At this point the net generalizes best. When learning is not
+stopped, overtraining occurs and the performance of the net on the
+whole data decreases, despite the fact that the error on the training
+data still gets smaller. After finishing the learning phase, the net
+should be finally checked with the third data set, the test set.
+<P>
+SNNS performs one validation cycle every n training cycles. Just like
+training, validation is controlled from the control panel.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

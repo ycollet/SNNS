@@ -1,0 +1,41 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Conjugate Gradient Methods (CGMs)</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Conjugate Gradient Methods (CGMs)">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html4746 HREF="node243.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html4744 HREF="node241.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html4738 HREF="node241.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html4748 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html4749 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html4747 HREF="node243.html"> Main features of </A>
+<B>Up:</B> <A NAME=tex2html4745 HREF="node241.html"> Scaled Conjugate Gradient </A>
+<B> Previous:</B> <A NAME=tex2html4739 HREF="node241.html"> Scaled Conjugate Gradient </A>
+<BR> <HR> <P>
+<H2><A NAME=SECTION0010171000000000000000> Conjugate Gradient Methods (CGMs)</A></H2>
+<P>
+They are general purpose second order techniques that help minimize goal
+functions of several variables, with sound theoretical foundations
+[<A HREF="node389.html#recipes88">P<IMG  ALIGN=BOTTOM ALT="" SRC="img1452.gif">88</A>,<A HREF="node389.html#WASSERMAN95">Was95</A>]. Second order means that these methods make use
+of the second derivatives of the goal function, while first-order techniques
+like standard backpropagation only use the first derivatives. A second order
+technique generally finds a better way to a (local) minimum than a first order
+technique, but <b> at a higher computational cost</b>.
+<P>
+Like standard backpropagation, CGMs iteratively try to get closer to the
+minimum. But while standard backpropagation always proceeds down the gradient
+of the error function, a conjugate gradient method will proceed in a direction
+which is <b> conjugate</b> to the directions of the previous steps. Thus the
+minimization performed in one step is not partially undone by the next, as it
+is the case with standard backpropagation and other gradient descent methods.
+<P>
+
+<P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

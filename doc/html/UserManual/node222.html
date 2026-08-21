@@ -1,0 +1,55 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Building and Training Self-Organizing Maps</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Building and Training Self-Organizing Maps">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html4496 HREF="node223.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html4494 HREF="node217.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html4488 HREF="node221.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html4498 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html4499 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html4497 HREF="node223.html"> Evaluation Tools for </A>
+<B>Up:</B> <A NAME=tex2html4495 HREF="node217.html"> SOM Implementation in </A>
+<B> Previous:</B> <A NAME=tex2html4489 HREF="node221.html"> The Kohonen Activation </A>
+<BR> <HR> <P>
+<H3><A NAME=SECTION0010132500000000000000> Building and Training Self-Organizing Maps</A></H3>
+<P>
+Since any modification of a Self-Organizing Map in the 2D display like
+the creation, deletion or movement of units or weights may destroy the
+relative position of the units in the map we strongly recommend to
+generate these networks only with the available <b> BIGNET (Kohonen)</b>
+tool.  See also chapter <A HREF="node116.html#Bignet"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A> for detailed information on how
+to create networks.  Outside xgui you can also use the tool <b>
+convert2snns</b>.  Information on this program can be found in the
+respective README file in the directory SNNSv3.3/tools/doc.  Note: Any
+modification of the units after the creation of the network may result
+in undesired behavior!
+<P>
+To train a new feature map with SNNS, set the appropriate standard
+functions: select init function <b> KOHONEN_Weights</b>, update
+function <b> Kohonen_Order</b> and learning function <b> Kohonen</b>.
+Remember: There is no special activation function for Kohonen
+learning, since setting an activation function for the units doesn't
+affect the learning procedure. To visualize the results of the
+training, however, one of the two activation functions <tt>
+Act_Euclid</tt> and <tt> Act_Componnent</tt> has to be selected. For their 
+semantics see section <A HREF="node223.html#SOMEva"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A>.
+<P>
+After providing patterns (ideally normalized) and assigning
+reasonable values to the learning function, the learning process can
+be started.  To get a proper appearance of SOMs in the 2D-display set
+the <b> grid width</b> to 16 and turn off the unit labeling and link
+display in the display panel.
+<P>
+When a learning run is completed the adaption height and adaption
+radius parameters are automatically updated in the control panel to
+reflect the actual values in the kernel.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

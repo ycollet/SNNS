@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Selecting a learning function</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Selecting a learning function">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html1867 HREF="node26.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html1865 HREF="node23.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html1861 HREF="node24.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html1869 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html1870 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html1868 HREF="node26.html"> Saving Results for </A>
+<B>Up:</B> <A NAME=tex2html1866 HREF="node23.html"> Training Networks</A>
+<B> Previous:</B> <A NAME=tex2html1862 HREF="node24.html"> Initialisation</A>
+<BR> <HR> <P>
+<H3><A NAME=SECTION00514200000000000000> Selecting a learning function</A></H3>
+<P>
+The default learning function for feed-forward nets is
+Std_Backpropagation, you may want something a little more
+extravagant. Simply click on <IMG  ALIGN=BOTTOM ALT="" SRC="img68.gif"> (Select function next to the
+learning parameters, see figure <A HREF="node24.html#figremote"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A>) and pick what you
+want to use. The routines you may want to consider are
+Std_Backpropagation, BackpropMomentum or Rprop).  Use
+BackpropMomentum for the letters example.
+<P>
+Each learning function requires a different parameter set: here are
+the important ones, details are given in the manual:
+<DL ><DT>Std_Backpropagation
+<DD> 1: <IMG  ALIGN=BOTTOM ALT="" SRC="img69.gif"> learning rate (0-1), 2: <IMG  ALIGN=MIDDLE ALT="" SRC="img70.gif">, the maximum error that is tolerated. use 0 or a small
+  value.
+<DT>BackpropMomentum
+<DD> 1: <IMG  ALIGN=BOTTOM ALT="" SRC="img71.gif"> learning rate (0-1), 2: <IMG  ALIGN=MIDDLE ALT="" SRC="img72.gif">
+  momentum term (0-0.99), 3: <b>c</b> flat spot elimination (ignore) and 4:
+  <IMG  ALIGN=MIDDLE ALT="" SRC="img73.gif"> max ignored error.
+<DT>Rprop
+<DD> 1: starting values of <IMG  ALIGN=MIDDLE ALT="" SRC="img74.gif"> (0-0.2) 2:
+  <IMG  ALIGN=MIDDLE ALT="" SRC="img75.gif"> maximum update value (30 works well..) 3: <IMG  ALIGN=BOTTOM ALT="" SRC="img76.gif">
+  the weight decay term as an exponent (5 works for most problems) <IMG  ALIGN=BOTTOM ALT="" SRC="img77.gif">.
+<P>
+ </DL>
+<P>
+Once all parameters are set you are ready to do some training.
+Training is done for a number of 'CYCLES' or epochs (enter a number,
+say 200 - see fig. <A HREF="node24.html#figremote"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A>). All training patterns are
+presented once during each cycle. It is sometimes preferable to select
+the patterns randomly for presentation rather than in order: Click on
+<IMG  ALIGN=BOTTOM ALT="" SRC="img78.gif"> to do this.
+<P>
+For the pattern associator example leave the learning rate at 0.2 and
+set the momentum term (second field) to 0.5; leave everything else at
+0.
+<P>
+Before starting the learning process you may like to open a GRAPH panel
+(from <IMG  ALIGN=BOTTOM ALT="" SRC="img79.gif">) to monitor the progress during training.<A NAME=tex2html75 HREF="footnode.html#682"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/foot_motif.gif"></A>
+<P>
+Click on <IMG  ALIGN=BOTTOM ALT="" SRC="img80.gif"> to start training and <IMG  ALIGN=BOTTOM ALT="" SRC="img81.gif"> to interrupt training at
+any time. The graph will start on the left whenever the network is
+initialised so that it is easy to compare different learning
+parameters. The current errors are also displayed on the screen so
+that they could be used in any graph plotting package (like xmgr).
+<P>
+It is impossible to judge the network performance from the training
+data alone.  It is therefore sensible to load in a 'test' set once in
+a while to ensure that the net is not over-training and generalising
+correctly.  There is no test set for the letters example. You can have
+up to 5 different data sets active at any one time. The two <IMG  ALIGN=BOTTOM ALT="" SRC="img82.gif">
+buttons on the control panel allow you to select which data sets to
+use for training and validation. The top button selects the training
+set, the bottom one the 'validation set'. If you enter a non-zero
+value into the box next to <IMG  ALIGN=BOTTOM ALT="" SRC="img83.gif"> a validation data set will be
+tested and the root-mean-square error will be plotted on the graph in
+red every N cycles (N is the number you entered in the box).
+<P>
+You can also step through all the patterns in a data set and, without
+updating any weight, calculate the output activations. To step through
+the patterns click on <IMG  ALIGN=BOTTOM ALT="" SRC="img84.gif">.
+<P>
+You can go to any pattern in the training data set by either
+specifying the pattern number in the field next to 'PATTERN' and
+clicking on <IMG  ALIGN=BOTTOM ALT="" SRC="img85.gif"> or by using the 'tape player controls' positioned
+to the right of <IMG  ALIGN=BOTTOM ALT="" SRC="img86.gif">. The outputs given by the network when stepping
+though the data are the targets, not the calculated outputs (!).
+<P>
+<BR> <HR><A NAME=tex2html1867 HREF="node26.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html1865 HREF="node23.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html1861 HREF="node24.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html1869 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html1870 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html1868 HREF="node26.html"> Saving Results for </A>
+<B>Up:</B> <A NAME=tex2html1866 HREF="node23.html"> Training Networks</A>
+<B> Previous:</B> <A NAME=tex2html1862 HREF="node24.html"> Initialisation</A>
+<BR> <HR> <P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

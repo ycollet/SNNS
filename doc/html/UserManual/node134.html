@@ -1,0 +1,62 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> BigNet for Elman Networks</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" BigNet for Elman Networks">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html3261 HREF="node135.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html3259 HREF="node132.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html3255 HREF="node133.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html3263 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html3264 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html3262 HREF="node135.html"> Network Analyzing Tools</A>
+<B>Up:</B> <A NAME=tex2html3260 HREF="node132.html"> BigNet for Partial </A>
+<B> Previous:</B> <A NAME=tex2html3256 HREF="node133.html"> BigNet for Jordan </A>
+<BR> <HR> <P>
+<H2><A NAME=SECTION00862000000000000000> BigNet for Elman Networks</A></H2>
+<P>
+By clicking on the <IMG  ALIGN=BOTTOM ALT="" SRC="img663.gif"> button in the BigNet menu,
+the BigNet window for Elman networks (see fig.<A HREF="node134.html#bn_elman"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A>) is opened.
+<P>
+<P><A NAME=3233>&#160;</A><A NAME=bn_elman>&#160;</A><IMG  ALIGN=BOTTOM ALT="" SRC="img664.gif">
+<BR><STRONG>Figure:</STRONG> The BigNet Window for Elman Networks<BR>
+<P>
+<P>
+The number of units of each layer has to be specified in the column 
+<tt> No. of Units</tt>. Each hidden layer is assigned a context layer
+having the same size. The values in the column <tt> No. of Col.</tt> have 
+the same meaning as the corresponding values in the BigNet window 
+for Jordan networks.
+<P>
+The number of hidden layers can be changed with the buttons 
+<IMG  ALIGN=BOTTOM ALT="" SRC="img665.gif"> and <IMG  ALIGN=BOTTOM ALT="" SRC="img666.gif">. <IMG  ALIGN=BOTTOM ALT="" SRC="img667.gif"> adds a new
+hidden layer just before the output layer. The hidden layer with the
+highest layer number can be deleted by pressing the <IMG  ALIGN=BOTTOM ALT="" SRC="img668.gif">
+button. The current implementation requires at least one and at most
+eight hidden layers. If the network is supposed to also contain a
+context layer for the output layer, the <IMG  ALIGN=BOTTOM ALT="" SRC="img669.gif">
+button has to be toggled, else the <IMG  ALIGN=BOTTOM ALT="" SRC="img670.gif"> button.  Press the <IMG  ALIGN=BOTTOM ALT="" SRC="img671.gif"> button to create the
+net. The generated network has the following properties:
+<P>
+<UL><LI> The layer <b>i</b> is fully connected to the layer <b>i+1</b>.
+ <LI> Each context layer is fully connected to its hidden layer. 
+       A hidden layer is connected to its context layer with
+       recurrent 1-to-1-connections. 
+ <LI> Each context unit is connected to itself. 
+ <LI> If there is a context layer assigned to the output layer, the
+       same connection rules as for hidden layers are used.
+ <LI> Default activation function for input and context units is the
+       identity function, for hidden and output units the logistic function.
+ <LI> Default output function for all units is the identity function
+</UL>
+<P>
+Click on the <IMG  ALIGN=BOTTOM ALT="" SRC="img672.gif"> button to close the BigNet window for
+Elman networks.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

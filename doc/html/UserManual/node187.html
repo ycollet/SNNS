@@ -1,0 +1,148 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> RBF_Weights</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" RBF_Weights">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html4041 HREF="node188.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html4039 HREF="node186.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html4033 HREF="node186.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html4043 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html4044 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html4042 HREF="node188.html"> RBF_Weights_Kohonen</A>
+<B>Up:</B> <A NAME=tex2html4040 HREF="node186.html"> Initialization Functions</A>
+<B> Previous:</B> <A NAME=tex2html4034 HREF="node186.html"> Initialization Functions</A>
+<BR> <HR> <P>
+<H4><A NAME=SECTION0010102210000000000000> RBF_Weights</A></H4>
+<P>
+<A NAME=4547>&#160;</A>
+<P>
+Of the named three procedures <tt> RBF_Weights</tt> is the most
+comprehensive one.  Here all necessary initialization tasks (setting
+link weights and bias) for a fully connected three layer feedforward
+network (without shortcut connections) can be performed in one single
+step.  Hence, the choice of centers (i.e. the link weights between
+input and hidden layer) is rather simple: The centers are evenly
+selected from the loaded teaching patterns and assigned to the links
+of the hidden neurons. The selection process assigns the first
+teaching pattern to the first hidden unit, and the last pattern to the
+last hidden unit. The remaining hidden units receive centers which are
+evenly picked from the set of teaching patterns. If, for example, 13
+teaching patterns are loaded and the hidden layer consists of 5
+neurons, then the patterns with numbers 1, 4, 7, 10 and 13 are
+selected as centers.
+<P>
+Before a selected teaching pattern is distributed among the
+corresponding link weights it can be modified slightly with a random
+number.  For this purpose, an initialization parameter (<i>
+deviation</i>, parameter 5) is set, which determines
+the maximum percentage of deviation allowed to occur randomly. To
+calculate the deviation, an inverse tangent function is used to
+approximate a normal distribution so that small deviations are more
+probable than large deviations.  Setting the parameter <i> deviation</i>
+to 1.0 results in a maximum deviation of 100%. The centers are copied
+unchanged into the link weights if the deviation is set to 0.
+<P>
+A small modification of the centers is recommended for the following
+reasons: First, the number of hidden units may exceed the number of
+teaching patterns. In this case it is necessary to break the symmetry
+which would result without modification. This symmetry would render
+the calculation of the Moore Penrose inverse matrix impossible. The
+second reason is that there may be a few anomalous patterns inside the
+set of teaching patterns.  These patterns would cause bad
+initialization results if they accidentally were selected as a center.
+By adding a small amount of noise, the negative effect caused by
+anomalous patterns can be lowered. However, if an exact interpolation
+is to be performed no modification of centers may be allowed.
+<P>
+The next initialization step is to set the free parameter <b>p</b> of the
+base function <b>h</b>, i.e. the bias of the hidden neurons. In order to
+do this, the initialization parameter <i> bias (p)</i> is directly
+copied into the bias of all hidden neurons. The setting of the bias is
+highly related to the base function <b>h</b> used and to the properties of
+the teaching patterns. When the Gaussian function is used, it is
+recommended to choose the value of the bias so that 5--10% of all
+hidden neurons are activated during propagation of every single teaching
+pattern. If the bias is chosen too small, almost all hidden neurons are
+uniformly activated during propagation. If the bias is chosen too large,
+only that hidden neuron is activated whose center vector corresponds
+to the currently applied teaching pattern.
+<P>
+Now the expensive initialization of the links between hidden and
+output layer is actually performed. In order to do this, the following
+formula which was already presented above is applied:
+<P>
+<P><IMG  ALIGN=BOTTOM ALT="" SRC="img949.gif"><P>
+<P>
+The initialization parameter 3 (<i> smoothness</i>) represents the value
+of <IMG  ALIGN=BOTTOM ALT="" SRC="img950.gif"> in this formula. The matrices have been extended to allow
+an automatic computation of an additional constant value.  If there is
+more than one neuron inside the output layer, the following set of
+functions results:
+<P>
+<P><IMG  ALIGN=BOTTOM ALT="" SRC="img951.gif"><P>
+<P>
+The bias of the output neuron(s) is directly set to the calculated value
+of <b>b</b> (<IMG  ALIGN=MIDDLE ALT="" SRC="img952.gif">). Therefore, it is necessary to choose an
+activation function for the output neurons that uses the bias of
+the neurons. In the current version of SNNS, the functions <tt>
+Act_Logistic</tt> and <tt> Act_IdentityPlusBias</tt> implement this feature.
+<P>
+The activation functions of the output units lead to the remaining two
+initialization parameters. The initialization procedure assumes a
+linear activation of the output units. The link weights are calculated
+so that the weighted sum of the hidden neurons equals the teaching
+output. However, if a sigmoid activation function is used, which is
+recommended for pattern recognition tasks, the activation function has
+to be considered during initialization.  Ideally, the supposed input
+for the activation function should be computed with the inverse
+activation function depending on the corresponding teaching output.
+This input value would be associated with the vector <IMG  ALIGN=MIDDLE ALT="" SRC="img953.gif"> during
+the calculation of weights.  Unfortunately, the inverse activation
+function is unknown in the general case.
+<P>
+The first and second initialization parameters (<i> 0_scale</i>) and
+(<i> 1_scale</i>) are a remedy for this dilemma. They define the two
+control points of a piecewise linear function which approximates the
+activation function.  <i> 0_scale</i> and <i> 1_ scale</i> give the net
+inputs of the output units which produce the teaching outputs <b>0</b> and
+<b>1</b>. If, for example, the linear activation function <tt>
+  Act_IdentityPlusBias</tt> is used, the values 0 and 1 have to be used.
+When using the logistic activation function <tt> Act_Logistic</tt>, the
+values -4 and 4 are recommended.  If the bias is set to 0, these
+values lead to a final activation of <IMG  ALIGN=BOTTOM ALT="" SRC="img954.gif"> (resp. <IMG  ALIGN=BOTTOM ALT="" SRC="img955.gif">). These
+are comparatively good approximations of the desired teaching outputs
+0 and 1. The implementation interpolates linearly between the set
+values of <i> 0_scale</i> and <i> 1_scale</i>. Thus, also teaching
+values which differ from <b>0</b> and <b>1</b> are mapped to corresponding input
+values.
+<P>
+<P><A NAME=4577>&#160;</A><A NAME=i_skalierung>&#160;</A><IMG  ALIGN=BOTTOM ALT="" SRC="img956.gif">
+<BR><STRONG>Figure:</STRONG> Relation between teaching output, input value and logistic activation<BR>
+<P>
+<P>
+Figure <A HREF="node187.html#i_skalierung"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A> shows the activation of an output unit under
+use of the logistic activation function. The scale has been chosen in
+such a way, that the teaching outputs <b>0</b> and <b>1</b> are mapped to the input
+values <b>-2</b> and <b>2</b>.
+<P>
+The optimal values used for <i> 0_scale</i> and <i> 1_scale</i> can not
+be given in general. With the logistic activation function large
+scaling values lead to good initialization results, but interfere with
+the subsequent training, since the logistic function is used mainly in
+its very flat parts. On the other hand, small scaling values lead
+to bad initialization results, but produce good preconditions for
+additional training.
+<P>
+<BR> <HR><A NAME=tex2html4041 HREF="node188.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html4039 HREF="node186.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html4033 HREF="node186.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html4043 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html4044 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html4042 HREF="node188.html"> RBF_Weights_Kohonen</A>
+<B>Up:</B> <A NAME=tex2html4040 HREF="node186.html"> Initialization Functions</A>
+<B> Previous:</B> <A NAME=tex2html4034 HREF="node186.html"> Initialization Functions</A>
+<BR> <HR> <P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

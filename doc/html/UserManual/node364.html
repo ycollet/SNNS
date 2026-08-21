@@ -1,0 +1,108 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Functions for the Manipulation of Patterns</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Functions for the Manipulation of Patterns">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html6384 HREF="node365.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html6382 HREF="node350.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html6376 HREF="node363.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html6386 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html6387 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html6385 HREF="node365.html"> File I/O Functions</A>
+<B>Up:</B> <A NAME=tex2html6383 HREF="node350.html"> Kernel Function Interface</A>
+<B> Previous:</B> <A NAME=tex2html6377 HREF="node363.html"> Learning and Pruning </A>
+<BR> <HR> <P>
+<H1><A NAME=SECTION0016100000000000000000> Functions for the Manipulation of Patterns</A></H1>
+<P>
+<A NAME=8326>&#160;</A>
+<P>
+<code>krui_err  krui_setPatternNo( int  patter_no )</code><BR> 
+sets the current pattern; returns an error code if the pattern number
+is invalid.  
+<code>krui_err  krui_deletePattern( void )</code><BR> 
+deletes the current pattern.
+<code>krui_err  krui_modifyPattern( void )</code><BR> 
+modifies the current pattern. Sets the pattern to the current
+activation of the units.
+<code>krui_err  krui_showPattern( int  mode )</code><BR> 
+outputs a pattern on the activation or output values of the
+input/output units. The following modes are possible:
+<UL><LI> <code>OUTPUT_NOTHING</code>: stores the input pattern in the
+activation of the input units.
+<LI> <code>OUTPUT_ACT</code>: like  <code>OUTPUT_NOTHING</code>, but stores
+also the output pattern in the activation of the output units.
+<LI> <code>OUTPUT_OUT</code>: like <code>OUTPUT_ACT</code>, additionally a new
+output value of the output units is computed.
+</UL>
+<P>
+<code>krui_showPattern(...)</code><BR> draws pattern on the
+display. Generates an error code if the number of input and output
+units does not correspond with the previously loaded pattern. The
+constants of the various modes are defined in <code>glob_typ.h</code>.
+<code>krui_err  krui_newPattern( void )</code><BR> 
+creates a new pattern (an input/output pair).
+A pattern can be created by modifying the activation
+value of the input/output units.
+The function returns an error code if there is insufficient memory or
+the number of input/output units is incompatible with the pattern.
+<P>
+Note: <code>krui_newPattern()</code> switches pattern shuffling off.
+For shuffling the new patterns call:
+<PRE>  krui_newPattern(...)
+  krui_shufflePatterns( TRUE )
+</PRE>
+<code>void  krui_deleteAllPatterns()</code><BR> 
+deletes all previously defined patterns in main memory.
+<code>krui_err krui_shufflePatterns( bool on_or_off )</code><BR> 
+shuffles the order of the patterns if <tt> on_or_off</tt> is
+true. If <tt> on_or_off</tt> is false the original order can be
+restored. See also <code>krui_setSeedNo(...)</code>.  
+<code>krui_err  krui_shuffleSubPatterns(bool on_or_off)</code><BR> 
+shuffles sub pattern pairs by using pseudo random generator.<BR> 
+<code>krui_shuffleSubPatterns(TRUE)</code> switches shuffeling of sub patterns on,<BR> 
+<code>krui_shuffleSubPatterns(FALSE)</code> switches shuffeling of sub patterns off.<BR> 
+The default presetting is <code>krui_shuffleSubPatterns (FALSE)</code>.
+<code>int  krui_getNoOfPatterns( void )</code><BR> 
+returns the actual number of patterns (0 if no patterns have been loaded).
+<code>int  krui_getTotalNoOfSubPatterns( void )</code><BR> 
+returns the total number of subpatterns contained in all patterns of
+the current pattern set (0 if no patterns have been loaded).
+<code>krui_err  krui_allocNewPatternSet(int *set_no)</code><BR> 
+returns the number of the allocated pattern set.
+In case of an error the error code will be returned.
+<code>krui_err krui_setCurrPatSet(int number)</code><BR> 
+chooses the number of the current pattern set.
+The number ranges from 0 to n-1.
+<code>krui_err  krui_deletePatSet(int number)</code><BR> 
+deletes all patterns of the pattern set with the given number. 
+<code>krui_err  krui_GetPatInfo(pattern_set_info *set_info,</code><BR> 
+<code>                          pattern_descriptor *pat_info)</code><BR> 
+gets all available information concerning the current pattern  set and the current
+pattern.
+<code>krui_err  kruiDefShowSubPat(int *insize,int *outsize,int,</code><BR> 
+<code>                            int *inpos,int *outpos)</code><BR> 
+defines the sub pattern that will be shown with the next call of <code>krui_showPattern</code>.
+<code>krui_err  krui_DefTrainSubPat(int *insize,int *outsize,int *instep,</code><BR> 
+<code>                              int *outstep, int *max_n_pos)</code><BR> 
+defines how sub pattern should be generated during training.
+<code>krui_DefTrainSubPat()</code> has to be called before any training can take place.
+<code>krui_err   krui_AlignSubPat(int *inpos,int *outpos,int *no)</code><BR> 
+aligns the given sub pattern position to a valid position which fits the 
+defined sub pattern training scheme <code>(krui_DefTrainSubPat)</code>.
+<code>krui_err  krui_GetShapeOfSubPattern(int *insize,int *outsize,int *inpos,</code><BR> 
+<code>                                    int *outpos,int *n_pos)</code><BR> 
+gets the shape of the sub pattern by using the current set,current pattern and the current 
+train scheme (defined with <code>krui_DefTrainSubPat)</code>.
+<BR> <HR><A NAME=tex2html6384 HREF="node365.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html6382 HREF="node350.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html6376 HREF="node363.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html6386 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html6387 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html6385 HREF="node365.html"> File I/O Functions</A>
+<B>Up:</B> <A NAME=tex2html6383 HREF="node350.html"> Kernel Function Interface</A>
+<B> Previous:</B> <A NAME=tex2html6377 HREF="node363.html"> Learning and Pruning </A>
+<BR> <HR> <P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

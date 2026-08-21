@@ -1,0 +1,50 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Variables</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Variables">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html5489 HREF="node296.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html5487 HREF="node292.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html5481 HREF="node294.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html5491 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html5492 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html5490 HREF="node296.html"> System Variables</A>
+<B>Up:</B> <A NAME=tex2html5488 HREF="node292.html"> Description of the </A>
+<B> Previous:</B> <A NAME=tex2html5482 HREF="node294.html"> Data Types and </A>
+<BR> <HR> <P>
+<H2><A NAME=SECTION001423000000000000000> Variables</A></H2>
+<P>
+In order to save values it is possible to use variables in the batch
+language.  A variable is introduced to the interpreter
+automatically once it is used for the first time. No previous
+declaration is required. Names of variables must start with a
+letter or an underscore. Digits, letters or more underscores could
+follow. Names could be:
+<P>
+<blockquote> <tt> a, num1, _test, first_net, k17_u, Test_buffer_1</tt>
+</blockquote>
+<P>
+The interpreter distinguishes between lower and upper case letters.
+The type of a variable is not known until a value is assigned to it. 
+The variable has the same type as the assigned value:
+<P>
+<blockquote> <tt> a = 5<BR> 
+filename := &quot;first.net&quot;<BR> 
+init_flag := TRUE<BR> 
+NET_ERR = 4.7e+11<BR> 
+a := init_flag</tt>
+</blockquote>
+<P>
+The assignment of variables is done by using `=' or `:='. The
+comparison operator is `=='. The variable `a' belongs to the type
+integer and changes its type in line 5 to boolean. <tt> Filename</tt>
+belongs to the type string and <tt> NET_ERR</tt> to the type float.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

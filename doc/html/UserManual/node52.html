@@ -1,0 +1,567 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Parameters of the Learning Functions</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Parameters of the Learning Functions">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html2207 HREF="node53.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html2205 HREF="node18.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html2199 HREF="node51.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html2209 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html2210 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html2208 HREF="node53.html"> Update Functions</A>
+<B>Up:</B> <A NAME=tex2html2206 HREF="node18.html"> Using the Graphical </A>
+<B> Previous:</B> <A NAME=tex2html2200 HREF="node51.html"> Confirmer</A>
+<BR> <HR> <P>
+<H1><A NAME=SECTION00540000000000000000> Parameters of the Learning Functions</A></H1>
+<P>
+<A NAME=LearningParameters>&#160;</A>
+<A NAME=1577>&#160;</A>
+<P>
+The following learning parameters (from left to right) are used by the learning
+functions that are already built into SNNS:
+<P>
+<UL><LI> <tt> Std_Backpropagation</tt> (''Vanilla`` Backpropagation),<BR> 
+<tt> BackpropBatch</tt> and<BR> <tt> TimeDelayBackprop</tt>
+<A NAME=1582>&#160;</A>
+<A NAME=1583>&#160;</A>
+<A NAME=1584>&#160;</A>
+<A NAME=1585>&#160;</A>
+<A NAME=1586>&#160;</A>
+<A NAME=1587>&#160;</A>
+<P>
+  <OL><LI> <IMG  ALIGN=MIDDLE ALT="" SRC="img247.gif">: learning parameter, specifies the step width of the
+        gradient descent.
+<P>
+        Typical values of <IMG  ALIGN=MIDDLE ALT="" SRC="img248.gif"> are <IMG  ALIGN=BOTTOM ALT="" SRC="img249.gif">. Some small examples
+        actually train even faster with values above 1, like 2.0.
+<P>
+  <LI> <IMG  ALIGN=MIDDLE ALT="" SRC="img250.gif">: the maximum difference 
+        <IMG  ALIGN=MIDDLE ALT="" SRC="img251.gif"> between a teaching value <IMG  ALIGN=MIDDLE ALT="" SRC="img252.gif"> and 
+        an output <IMG  ALIGN=MIDDLE ALT="" SRC="img253.gif"> of an output unit which is tolerated, 
+        i.e. which is propagated back as <IMG  ALIGN=MIDDLE ALT="" SRC="img254.gif">. 
+        If values above 0.9 should be regarded as 1 and values 
+        below 0.1 as 0, then <IMG  ALIGN=MIDDLE ALT="" SRC="img255.gif"> should be set to <IMG  ALIGN=BOTTOM ALT="" SRC="img256.gif">. 
+        This prevents overtraining of the network.
+<P>
+        Typical values of <IMG  ALIGN=MIDDLE ALT="" SRC="img257.gif"> are 0, 0.1 or 0.2.
+  </OL>
+<P>
+
+<P>
+<LI> <tt> BackpropMomentum</tt> (Backpropagation with momentum term and
+        flat spot elimination):
+<A NAME=1600>&#160;</A>
+<A NAME=1601>&#160;</A>
+<P>
+  <OL><LI> <IMG  ALIGN=MIDDLE ALT="" SRC="img258.gif">: learning parameter, specifies the step width of the
+        gradient descent.
+<P>
+        Typical values of <IMG  ALIGN=MIDDLE ALT="" SRC="img259.gif"> are <IMG  ALIGN=BOTTOM ALT="" SRC="img260.gif">. Some small examples
+        actually train even faster with values above 1, like 2.0.
+<P>
+  <LI> <IMG  ALIGN=MIDDLE ALT="" SRC="img261.gif">: momentum term, specifies the amount of the old weight
+        change (relative to 1) which is added to the current change.
+<P>
+        Typical values of <IMG  ALIGN=MIDDLE ALT="" SRC="img262.gif"> are <IMG  ALIGN=BOTTOM ALT="" SRC="img263.gif">.
+<P>
+  <LI> <b>c</b>: flat spot elimination value, a constant value 
+        which is added to the derivative of the activation function
+        to enable the network to pass flat spots of the error surface.
+<P>
+        Typical values of <b>c</b> are <IMG  ALIGN=BOTTOM ALT="" SRC="img264.gif">, most often
+        0.1 is used.
+<P>
+  <LI> <IMG  ALIGN=MIDDLE ALT="" SRC="img265.gif">: the maximum difference 
+        <IMG  ALIGN=MIDDLE ALT="" SRC="img266.gif"> between a teaching value <IMG  ALIGN=MIDDLE ALT="" SRC="img267.gif"> and 
+        an output <IMG  ALIGN=MIDDLE ALT="" SRC="img268.gif"> of an output unit which is tolerated, 
+        i.e. which is propagated back as <IMG  ALIGN=MIDDLE ALT="" SRC="img269.gif">. See above.
+  </OL>
+<P>
+<A NAME=1611>&#160;</A>
+  The general formula for Backpropagation used here is
+  <P><IMG  ALIGN=BOTTOM ALT="" SRC="img270.gif"><P>
+<P>
+<LI><tt> BackpropWeightDecay</tt> (Backpropagation with Weight Decay)
+<A NAME=1634>&#160;</A>
+<A NAME=1635>&#160;</A>
+<P>
+  <OL><LI> <IMG  ALIGN=MIDDLE ALT="" SRC="img271.gif">: learning parameter, specifies the step width of the
+        gradient descent.
+<P>
+        Typical values of <IMG  ALIGN=MIDDLE ALT="" SRC="img272.gif"> are <IMG  ALIGN=BOTTOM ALT="" SRC="img273.gif">. Some small examples
+        actually train even faster with values above 1, like 2.0.
+<P>
+  <LI> <b>d</b>: weight decay term, specifies how much of the old weight
+        value is subtracted after learning. Try values between 0.005
+        and 0.3.
+<P>
+  <LI> <IMG  ALIGN=MIDDLE ALT="" SRC="img274.gif">: the minimum weight that is tolerated for a
+    link. All links with a smaller weight will be pruned.
+<P>
+  <LI> <IMG  ALIGN=MIDDLE ALT="" SRC="img275.gif">: the maximum difference 
+        <IMG  ALIGN=MIDDLE ALT="" SRC="img276.gif"> between a teaching value <IMG  ALIGN=MIDDLE ALT="" SRC="img277.gif"> and 
+        an output <IMG  ALIGN=MIDDLE ALT="" SRC="img278.gif"> of an output unit which is tolerated, 
+        i.e. which is propagated back as <IMG  ALIGN=MIDDLE ALT="" SRC="img279.gif">. See above.
+  </OL>
+<P>
+
+<P>
+<LI> <tt> BackpropThroughTime (BPTT)</tt>,<BR> 
+      <tt> BatchBackpropThroughTime (BBPTT)</tt>:
+<A NAME=1648>&#160;</A>
+<A NAME=1649>&#160;</A>
+<A NAME=1650>&#160;</A>
+<A NAME=1651>&#160;</A>
+<P>
+  <OL><LI> <IMG  ALIGN=MIDDLE ALT="" SRC="img280.gif">: learning parameter, specifies the step width of the
+        gradient descent.
+<P>
+        Typical values of <IMG  ALIGN=MIDDLE ALT="" SRC="img281.gif"> for BPTT and BBPTT are <IMG  ALIGN=BOTTOM ALT="" SRC="img282.gif">.
+<P>
+  <LI> <IMG  ALIGN=MIDDLE ALT="" SRC="img283.gif">:  momentum term, specifies the amount of the old weight
+        change (relative to 1) which is added to the current change.
+<P>
+        Typical values of <IMG  ALIGN=MIDDLE ALT="" SRC="img284.gif"> are <IMG  ALIGN=BOTTOM ALT="" SRC="img285.gif">.
+<P>
+  <LI> backstep: the number of backprop steps back in time.
+        BPTT stores a sequence of all unit activations while input
+        patterns are applied. The activations are stored in a
+        first-in-first-out queue for each unit. The largest backstep 
+        value supported is 10.
+   </OL>
+<P>
+<LI> <tt> Quickprop</tt>:
+<A NAME=1655>&#160;</A>
+<A NAME=1656>&#160;</A>
+<P>
+  <OL><LI> <IMG  ALIGN=MIDDLE ALT="" SRC="img286.gif">: learning parameter, specifies the step width of the
+        gradient descent.
+<P>
+        Typical values of <IMG  ALIGN=MIDDLE ALT="" SRC="img287.gif"> for Quickprop are <IMG  ALIGN=BOTTOM ALT="" SRC="img288.gif">.
+<P>
+  <LI> <IMG  ALIGN=MIDDLE ALT="" SRC="img289.gif">: maximum growth parameter, specifies the maximum amount
+        of weight change (relative to 1) which is added to the current change
+<P>
+        Typical values of <IMG  ALIGN=MIDDLE ALT="" SRC="img290.gif"> are <IMG  ALIGN=BOTTOM ALT="" SRC="img291.gif">.
+<P>
+  <LI> <IMG  ALIGN=BOTTOM ALT="" SRC="img292.gif">: weight decay term to shrink the weights.
+<P>
+        Typical values of <IMG  ALIGN=BOTTOM ALT="" SRC="img293.gif"> are <IMG  ALIGN=BOTTOM ALT="" SRC="img294.gif">. Quickprop is rather
+        sensitive to this parameter. It should not be set too large.
+<P>
+  <LI> <IMG  ALIGN=MIDDLE ALT="" SRC="img295.gif">: the maximum difference 
+        <IMG  ALIGN=MIDDLE ALT="" SRC="img296.gif"> between a teaching value <IMG  ALIGN=MIDDLE ALT="" SRC="img297.gif"> and 
+        an output <IMG  ALIGN=MIDDLE ALT="" SRC="img298.gif"> of an output unit which is tolerated, 
+        i.e. which is propagated back as <IMG  ALIGN=MIDDLE ALT="" SRC="img299.gif">. See above.
+  </OL>
+<P>
+<LI> <tt> QuickpropThroughTime (QPTT)</tt>:
+<A NAME=1667>&#160;</A>
+<A NAME=1668>&#160;</A>
+<P>
+  <OL><LI> <IMG  ALIGN=MIDDLE ALT="" SRC="img300.gif">: learning parameter, specifies the step width of the
+        gradient descent.
+<P>
+        Typical values of <IMG  ALIGN=MIDDLE ALT="" SRC="img301.gif"> for QPTT are <IMG  ALIGN=BOTTOM ALT="" SRC="img302.gif">.
+<P>
+  <LI> <IMG  ALIGN=MIDDLE ALT="" SRC="img303.gif">: maximum growth parameter, specifies the maximum amount
+        of weight change (relative to 1) which is added to the current change
+<P>
+        Typical values of <IMG  ALIGN=MIDDLE ALT="" SRC="img304.gif"> are <IMG  ALIGN=BOTTOM ALT="" SRC="img305.gif">.
+<P>
+  <LI> <IMG  ALIGN=BOTTOM ALT="" SRC="img306.gif">: weight decay term to shrink the weights.
+<P>
+        Typical values of <IMG  ALIGN=BOTTOM ALT="" SRC="img307.gif"> are <IMG  ALIGN=BOTTOM ALT="" SRC="img308.gif">.
+<P>
+  <LI> backstep: the number of quickprop steps back in time.
+        QPTT stores a sequence of all unit activations while input
+        patterns are applied. The activations are stored in a
+        first-in-first-out queue for each unit.
+<P>
+        The largest backstep value supported is 10.
+  </OL>
+<P>
+<LI> <tt> Counterpropagation</tt>:
+<A NAME=1672>&#160;</A>
+<A NAME=1673>&#160;</A>
+<P>
+  <OL><LI> <IMG  ALIGN=BOTTOM ALT="" SRC="img309.gif">: learning parameter of the Kohonen layer.
+<P>
+        Typical values of <IMG  ALIGN=BOTTOM ALT="" SRC="img310.gif"> for Counterpropagation are <IMG  ALIGN=BOTTOM ALT="" SRC="img311.gif"> .
+<P>
+  <LI> <IMG  ALIGN=MIDDLE ALT="" SRC="img312.gif">: learning parameter of the Grossberg layer.
+<P>
+        Typical values of <IMG  ALIGN=MIDDLE ALT="" SRC="img313.gif"> are <IMG  ALIGN=BOTTOM ALT="" SRC="img314.gif">.
+<P>
+  <LI> <IMG  ALIGN=BOTTOM ALT="" SRC="img315.gif">: threshold of a unit.
+<P>
+        We often use a value <IMG  ALIGN=BOTTOM ALT="" SRC="img316.gif"> of 0.
+  </OL>
+<P>
+<LI> <tt> Backpercolation 1</tt>:
+<A NAME=1677>&#160;</A>
+<A NAME=1678>&#160;</A>
+<P>
+  <OL><LI> <IMG  ALIGN=BOTTOM ALT="" SRC="img317.gif">: global error magnification. This is the factor in
+        the formula <IMG  ALIGN=MIDDLE ALT="" SRC="img318.gif">, where <IMG  ALIGN=BOTTOM ALT="" SRC="img319.gif"> is
+        the internal activation error of a unit, <b>t</b> is the teaching
+        input and <b>o</b> the output of a unit.
+<P>
+        Typical values of <IMG  ALIGN=BOTTOM ALT="" SRC="img320.gif"> are 1. Bigger values (up to 10)
+        may also be used here.
+<P>
+  <LI> <IMG  ALIGN=BOTTOM ALT="" SRC="img321.gif">: If the error value <IMG  ALIGN=MIDDLE ALT="" SRC="img322.gif"> drops below this threshold
+        value, the adaption according to the Backpercolation algorithm
+        begins. <IMG  ALIGN=MIDDLE ALT="" SRC="img323.gif"> is defined as:
+<P>
+<P><IMG  ALIGN=BOTTOM ALT="" SRC="img324.gif"><P>
+<P>
+  <LI> <IMG  ALIGN=MIDDLE ALT="" SRC="img325.gif">: the maximum difference 
+        <IMG  ALIGN=MIDDLE ALT="" SRC="img326.gif"> between a teaching value <IMG  ALIGN=MIDDLE ALT="" SRC="img327.gif"> and 
+        an output <IMG  ALIGN=MIDDLE ALT="" SRC="img328.gif"> of an output unit which is tolerated, 
+        i.e. which is propagated back as <IMG  ALIGN=MIDDLE ALT="" SRC="img329.gif">. See above.
+  </OL>
+<P>
+<LI> <tt> Dynamic Learning Vector Quantization (DLVQ)</tt>:
+<A NAME=1691>&#160;</A>
+<A NAME=1692>&#160;</A>
+<P>
+  <OL><LI> <IMG  ALIGN=MIDDLE ALT="" SRC="img330.gif">: learning rate, specifies the step width of the mean
+        vector <IMG  ALIGN=MIDDLE ALT="" SRC="img331.gif">, which is nearest to a pattern <IMG  ALIGN=MIDDLE ALT="" SRC="img332.gif">,
+        towards this pattern. Remember that <IMG  ALIGN=MIDDLE ALT="" SRC="img333.gif"> is moved only, if
+        <IMG  ALIGN=MIDDLE ALT="" SRC="img334.gif"> is not assigned to the correct class <IMG  ALIGN=MIDDLE ALT="" SRC="img335.gif">. A typical
+        value is 0.03.
+<P>
+  <LI> <IMG  ALIGN=MIDDLE ALT="" SRC="img336.gif">: learning rate, specifies the step width of a mean
+        vector <IMG  ALIGN=MIDDLE ALT="" SRC="img337.gif">, to which a pattern of class <IMG  ALIGN=MIDDLE ALT="" SRC="img338.gif"> is falsely
+        assigned to, away from this pattern. A typical value is 0.03. Best
+        results can be achieved, if the condition <IMG  ALIGN=MIDDLE ALT="" SRC="img339.gif"> is
+        satisfied.
+<P>
+  <LI> Number of cycles you want to train the net before additive mean
+        vectors are calculated.
+  </OL>
+<P>
+<LI> <tt> RadialBasisLearning</tt>:
+<A NAME=1707>&#160;</A>
+<A NAME=1708>&#160;</A>
+<P>
+  <OL><LI> <i> centers</i>: determines the learning rate <IMG  ALIGN=MIDDLE ALT="" SRC="img340.gif"> used for the
+        modification of center vectors.
+<P>
+  <LI><i> bias (p)</i>: determines the learning rate <IMG  ALIGN=MIDDLE ALT="" SRC="img341.gif">, used for
+        the modification of the parameters <b>p</b> of the base function. <b>p</b>
+        is stored as bias of the hidden units.
+<P>
+  <LI><i> weights</i>: influences the training of all link weights that
+        are leading to the output layer as well as the training of the
+        bias of all output neurons.
+<P>
+  <LI><i> delta max.</i>: If the actual error is smaller than the
+        maximum allowed error (<i> delta max.</i>) the corresponding
+        weights are not changed.
+<P>
+  <LI><i> momentum</i>:influences the amount of the momentum--term during
+        training.
+<P>
+  </OL>
+<P>
+<LI> <tt> RadialBasisLearning with Dynamic Decay Adjustment</tt>:
+<A NAME=1718>&#160;</A>
+<A NAME=1719>&#160;</A>
+<OL><LI> <IMG  ALIGN=BOTTOM ALT="" SRC="img342.gif">: positive threshold. To commit a new prototype,
+  none of the existing RBFs of the correct class may have an
+  activation above <IMG  ALIGN=BOTTOM ALT="" SRC="img343.gif">
+<P>
+<LI> <IMG  ALIGN=BOTTOM ALT="" SRC="img344.gif">:negative threshold. During shrinking no RBF unit of
+  a conflicting class is allowed to have an activation above
+  <IMG  ALIGN=BOTTOM ALT="" SRC="img345.gif">.
+<P>
+<LI> n: the maximum number of RBF units to be diplayed in one row.
+  This item allows the user to control the appearance of the network
+  on the screen and has no influence on the performance.
+<P>
+</OL>
+<P>
+
+<P>
+<LI> <tt> ART1</tt>
+<A NAME=1727>&#160;</A>
+<A NAME=1728>&#160;</A>
+<P>
+  <OL><LI> <IMG  ALIGN=MIDDLE ALT="" SRC="img346.gif">: vigilance parameter. If the quotient of active F<IMG  ALIGN=MIDDLE ALT="" SRC="img347.gif"> units
+        divided by the number of active F<IMG  ALIGN=MIDDLE ALT="" SRC="img348.gif"> units is below <IMG  ALIGN=MIDDLE ALT="" SRC="img349.gif">, an
+        ART reset is performed.
+<P>
+  </OL>
+<P>
+<LI> <tt> ART2</tt>
+<A NAME=1732>&#160;</A>
+<A NAME=1733>&#160;</A>
+<P>
+  <OL><LI> <IMG  ALIGN=MIDDLE ALT="" SRC="img350.gif">: vigilance parameter. Specifies the minimal length of the
+        error vector <b> r</b> (units <IMG  ALIGN=MIDDLE ALT="" SRC="img351.gif">).
+  <LI> <b>a</b>: Strength of the influence of the lower level in F<IMG  ALIGN=MIDDLE ALT="" SRC="img352.gif"> by
+        the middle level.
+  <LI> <b>b</b>: Strength of the influence of the middle level in F<IMG  ALIGN=MIDDLE ALT="" SRC="img353.gif"> by
+        the upper level.
+  <LI> <b>c</b>: Part of the length of vector <b> p</b>
+        (units  <IMG  ALIGN=MIDDLE ALT="" SRC="img354.gif">) used to compute the error.
+  <LI> <IMG  ALIGN=BOTTOM ALT="" SRC="img355.gif">: Threshold for output function <b>f</b> of units <IMG  ALIGN=MIDDLE ALT="" SRC="img356.gif"> and
+        <IMG  ALIGN=MIDDLE ALT="" SRC="img357.gif">.
+<P>
+  </OL>
+<P>
+
+<P>
+<LI> <tt> ARTMAP</tt>
+<A NAME=1739>&#160;</A>
+<A NAME=1740>&#160;</A>
+<P>
+  <OL><LI> <IMG  ALIGN=MIDDLE ALT="" SRC="img358.gif">: vigilance parameter for <IMG  ALIGN=BOTTOM ALT="" SRC="img359.gif"> subnet.
+        (quotient <IMG  ALIGN=MIDDLE ALT="" SRC="img360.gif">)
+  <LI> <IMG  ALIGN=MIDDLE ALT="" SRC="img361.gif">: vigilance parameter for <IMG  ALIGN=BOTTOM ALT="" SRC="img362.gif"> subnet.
+        (quotient <IMG  ALIGN=MIDDLE ALT="" SRC="img363.gif">)
+  <LI> <IMG  ALIGN=MIDDLE ALT="" SRC="img364.gif">: vigilance parameter for inter ART reset control. 
+        (quotient <IMG  ALIGN=MIDDLE ALT="" SRC="img365.gif">)
+<P>
+  </OL>
+<P>
+<LI><tt> RPROP (resilient propagation)</tt>
+<A NAME=1752>&#160;</A>
+<A NAME=1753>&#160;</A>
+<P>
+  <OL><LI> <i> delta<IMG  ALIGN=MIDDLE ALT="" SRC="img366.gif"></i>: starting values for all <IMG  ALIGN=MIDDLE ALT="" SRC="img367.gif">.
+        Default value is 0.1.
+<P>
+  <LI><i> <IMG  ALIGN=MIDDLE ALT="" SRC="img368.gif"></i>: the upper limit for the update values 
+        <IMG  ALIGN=MIDDLE ALT="" SRC="img369.gif">.The default value of <IMG  ALIGN=MIDDLE ALT="" SRC="img370.gif"> is <IMG  ALIGN=BOTTOM ALT="" SRC="img371.gif">.
+<P>
+  <LI><i> <IMG  ALIGN=BOTTOM ALT="" SRC="img372.gif"></i>: the weight-decay determines the relationship
+        between the output error and to reduction in the size of the
+        weights.<em> Important:</em> Please note that the weight decay
+        parameter <IMG  ALIGN=BOTTOM ALT="" SRC="img373.gif"> denotes the exponent, to allow comfortable
+        input of very small weight-decay.  A choice of the third
+        learning parameter <IMG  ALIGN=BOTTOM ALT="" SRC="img374.gif"> corresponds to a ratio of 
+        weight decay term to output error of <IMG  ALIGN=MIDDLE ALT="" SRC="img375.gif">.
+<P>
+  </OL>
+<P>
+<LI> <tt> Cascade Correlation (CC)</tt> and<BR> 
+      <tt> Recurrent Cascade Correlation (RCC)</tt>
+<A NAME=1765>&#160;</A>
+<A NAME=1766>&#160;</A>
+<P>
+CC and RCC are not learning functions themselves. They are meta
+algorithms to build and train optimal networks. However, they have a
+set of standard learning functions embedded. Here these functions
+require modified parameters. The embedded learning functions are:
+<P>
+<UL>
+<P>
+<LI> Backpropagation (in CC or RCC):  
+<OL><LI> <IMG  ALIGN=MIDDLE ALT="" SRC="img376.gif">: learning parameter, specifies the step width of gradient
+      decent minimizing the net error.
+<LI> <IMG  ALIGN=MIDDLE ALT="" SRC="img377.gif">: momentum term, specifies the amount of the old weight
+      change, which is added to the current change.
+<LI> <b>c</b>: flat spot elimination value, a constant value which is added to
+      the derivative of the activation function to enable the network
+      to pass flat spots on the error surface.
+<LI> <IMG  ALIGN=MIDDLE ALT="" SRC="img378.gif">: learning parameter, specifies the step width of gradient
+      ascent maximizing the covariance.
+<LI> <IMG  ALIGN=MIDDLE ALT="" SRC="img379.gif">: momentum term specifies the amount of the old weight change,
+      which is added to the current change.                 
+</OL>
+<P>
+The general formula for this learning function is: 
+<P><IMG  ALIGN=BOTTOM ALT="" SRC="img380.gif"><P>
+<P>
+The slopes <IMG  ALIGN=MIDDLE ALT="" SRC="img381.gif"> and <IMG  ALIGN=MIDDLE ALT="" SRC="img382.gif">
+are abbreviated by <b>S</b>. This abbreviation is valid for all embedded functions.
+By changing the sign of the gradient value <IMG  ALIGN=MIDDLE ALT="" SRC="img383.gif">, 
+the same learning function can be used to maximize the covariance and to
+minimize the error.
+<P>
+<LI>Rprop (in CC or RCC):            
+<OL><LI> <IMG  ALIGN=MIDDLE ALT="" SRC="img384.gif">: decreasing factor, specifies the factor by which
+      the update-value <IMG  ALIGN=MIDDLE ALT="" SRC="img385.gif"> is to be decreased when minimizing the
+      net error. A typical value is <IMG  ALIGN=BOTTOM ALT="" SRC="img386.gif">. 
+<LI> <IMG  ALIGN=MIDDLE ALT="" SRC="img387.gif">: increasing factor, specifies the factor by which
+      the update-value <IMG  ALIGN=MIDDLE ALT="" SRC="img388.gif"> is to be increased when minimizing the
+      net error. A typical value is <IMG  ALIGN=BOTTOM ALT="" SRC="img389.gif">
+<LI> not used.
+<LI> <IMG  ALIGN=MIDDLE ALT="" SRC="img390.gif">: decreasing factor, specifies the factor by which
+      the update-value <IMG  ALIGN=MIDDLE ALT="" SRC="img391.gif"> is to be decreased when maximizing the
+      covariance. A typical value is <IMG  ALIGN=BOTTOM ALT="" SRC="img392.gif">. 
+<LI> <IMG  ALIGN=MIDDLE ALT="" SRC="img393.gif">: increasing factor, specifies the factor by which
+      the update-value <IMG  ALIGN=MIDDLE ALT="" SRC="img394.gif"> is to be increased when maximizing the
+      covariance. A typical value is <IMG  ALIGN=BOTTOM ALT="" SRC="img395.gif"></OL>
+<P>
+The weight change is computed by:
+<P><IMG  ALIGN=BOTTOM ALT="" SRC="img396.gif"><P>
+<P>
+where <IMG  ALIGN=MIDDLE ALT="" SRC="img397.gif"> is defined as follows: <IMG  ALIGN=MIDDLE ALT="" SRC="img398.gif">.  Furthermore, the condition <IMG  ALIGN=MIDDLE ALT="" SRC="img399.gif"> should not be violated.
+<P>
+<LI>Quickprop (in CC or RCC):        
+<OL><LI> <IMG  ALIGN=MIDDLE ALT="" SRC="img400.gif">: learning parameter, specifies the step width of the
+      gradient descent when minimizing the net error. 
+      A typical value is <IMG  ALIGN=BOTTOM ALT="" SRC="img401.gif"> 
+<LI> <IMG  ALIGN=MIDDLE ALT="" SRC="img402.gif">: maximum growth parameter, realizes a kind of dynamic 
+       momentum term. A typical value is 2.0. 
+<LI> <IMG  ALIGN=BOTTOM ALT="" SRC="img403.gif">: weight decay term to shrink the weights. A typical value is
+      <IMG  ALIGN=MIDDLE ALT="" SRC="img404.gif">.
+<LI> <IMG  ALIGN=MIDDLE ALT="" SRC="img405.gif">: learning parameter, specifies the step width of the
+      gradient ascent when maximizing the covariance. 
+      A typical value is <IMG  ALIGN=BOTTOM ALT="" SRC="img406.gif"> 
+<LI> <IMG  ALIGN=MIDDLE ALT="" SRC="img407.gif">: maximum growth parameter, realizes a kind of dynamic 
+       momentum term. A typical value is 2.0. 
+</OL>
+<P>
+The formula used is:
+<P><IMG  ALIGN=BOTTOM ALT="" SRC="img408.gif"><P></UL>           
+<P>
+<LI> <tt> Kohonen</tt>
+<A NAME=1849>&#160;</A>
+<A NAME=1850>&#160;</A>
+<A NAME=1851>&#160;</A>
+<P>
+  <OL><LI><i> h(0):</i> Adaptation height. The initial adaptation height
+  can vary between 0 and 1. It determines the overall adaptation
+  strength.
+<P>
+  <LI><i> r(0):</i> Adaptation radius. The initial adaptation radius
+  <IMG  ALIGN=MIDDLE ALT="" SRC="img409.gif"> is the radius of the neighborhood of the winning unit. All
+  units within this radius are adapted. Values should range between 1
+  and the size of the map.
+<P>
+  <LI><i> mult_H:</i> Decrease factor. The adaptation height decreases
+  monotonically after the presentation of every learning pattern. This
+  decrease is controlled by the decrease factor mult_H: <IMG  ALIGN=MIDDLE ALT="" SRC="img410.gif">
+<P>
+  <LI><i> mult_R:</i> Decrease factor. The adaptation radius also
+  decreases monotonically after the presentation of every learning
+  pattern. This second decrease is controlled by the decrease factor
+  mult_R: <IMG  ALIGN=MIDDLE ALT="" SRC="img411.gif">
+<P>
+  <LI><i> h:</i> Horizontal size. Since the internal representation of a
+  network doesn't allow to determine the 2-dimensional layout of the
+  grid, the horizontal size in units must be provided for the learning
+  function.  It is the same value as used for the creation of the
+  network.  
+  </OL>
+<P>
+<LI> <tt> RM_delta (Rumelhart and McClelland's delta rule) </tt>
+<A NAME=1860>&#160;</A>
+<P>
+  <OL><LI><i> n:</i> learning parameter, specifies the step width of the
+      gradient descent. In [<A HREF="node389.html#rum861">RM86</A>] Rumelhart and McClelland 
+      use 0.01, although values less than 0.03 are generally
+      acceptable.
+<P>
+  <LI><i> Ncycles:</i> number of update cycles, specifies how many
+      times a pattern is propagated through the network before the
+      learning rule is applied. This parameter must be large enough so
+      that the network is relatively stable after the set number of
+      propagations.  A value of 50 is recommended as a baseline.
+      Increasing the value of this parameter increases the accuracy of
+      the network but at a cost of processing time.  Larger networks
+      will probably require a higher setting of Ncycles.
+<P>
+  </OL>
+  <b> NOTE:</b> With this learning rule the update function <tt>
+    RM_Synchronous</tt> has to be used which needs as update parameter
+  the number of iterations!
+<P>
+
+<P>
+<LI> <tt> Hebbian Learning</tt>
+<A NAME=1869>&#160;</A>
+<P>
+  <OL><LI><i> n:</i> learning parameter, specifies the step width of the
+      gradient descent. Values less than (1 / number of nodes) are
+      recommended.
+<P>
+  <LI><i> Wmax:</i> maximum weight strength, specifies the maximum
+      absolute value of weight allowed in the network.  A value of 1.0
+      is recommended, although this should be lowered if the network
+      experiences explosive growth in the weights and activations.
+      Larger networks will require lower values of Wmax.
+<P>
+  <LI><i> count:</i> number of times the network is updated before 
+      calculating the error.
+<P>
+  </OL>
+<P>
+  <b> NOTE:</b> With this learning rule the update function <tt>
+  RM_Synchronous</tt> has to be used which needs as update parameter
+  the number of iterations!
+<P>
+<LI><tt> Monte-Carlo:</tt> 
+<A NAME=1878>&#160;</A> 
+<A NAME=1879>&#160;</A>
+<P>
+  <OL><LI> <i> <b>Min</b></i>: lower limit of weights and biases.
+    Typical values are <IMG  ALIGN=MIDDLE ALT="" SRC="img412.gif">.
+<P>
+  <LI><i> <b>Max</b></i>: upper limit of weights and biases.
+    Typical values are <IMG  ALIGN=BOTTOM ALT="" SRC="img413.gif">.
+<P>
+  </OL>
+<P>
+<LI> <tt> Simulated_Annealing_SS_error</tt>,<BR> 
+<tt> Simulated_Annealing_WTA_error</tt> and<BR> 
+<tt> Simulated_Annealing_WWTA_error:</tt> 
+<A NAME=1887>&#160;</A>
+<A NAME=1888>&#160;</A> 
+<A NAME=1889>&#160;</A>
+<A NAME=1890>&#160;</A> 
+<A NAME=1891>&#160;</A>
+<A NAME=1892>&#160;</A>
+<P>
+  <OL><LI> <i> <b>Min</b></i>: lower limit of weights and biases.
+    Typical values are <IMG  ALIGN=MIDDLE ALT="" SRC="img414.gif">.
+<P>
+  <LI><i> <b>Max</b></i>: upper limit of weights and biases.
+    Typical values are <IMG  ALIGN=BOTTOM ALT="" SRC="img415.gif">.
+<P>
+  <LI> <IMG  ALIGN=MIDDLE ALT="" SRC="img416.gif">: learning parameter, specifies the Simulated Annealing
+    start temperature .
+    Typical values of <IMG  ALIGN=MIDDLE ALT="" SRC="img417.gif"> are <IMG  ALIGN=BOTTOM ALT="" SRC="img418.gif">.
+<P>
+  <LI> <b>deg</b>: degradation term of the temperature: <IMG  ALIGN=MIDDLE ALT="" SRC="img419.gif">
+    Typical values of <b>deg</b> are <IMG  ALIGN=BOTTOM ALT="" SRC="img420.gif">.
+<P>
+  </OL>
+<P>
+<LI> <tt> Scaled Conjugate Gradient (SCG)</tt>
+<A NAME=1900>&#160;</A>
+<A NAME=1901>&#160;</A>
+<P>
+All of the following parameters are non-critical, i.e. they influence
+only the speed of convergence, not whether there will be success or
+not.
+<P>
+   <OL><LI> <IMG  ALIGN=MIDDLE ALT="" SRC="img421.gif">. Should satisfy <IMG  ALIGN=MIDDLE ALT="" SRC="img422.gif">. If 0, will
+     be set to <IMG  ALIGN=BOTTOM ALT="" SRC="img423.gif">;
+   <LI> <IMG  ALIGN=MIDDLE ALT="" SRC="img424.gif">. Should satisfy <IMG  ALIGN=MIDDLE ALT="" SRC="img425.gif">. If 0,
+     will be set to <IMG  ALIGN=BOTTOM ALT="" SRC="img426.gif">;
+   <LI> <IMG  ALIGN=MIDDLE ALT="" SRC="img427.gif">. See standard backpropagation. Can be set to 0 if
+     you don't know what to do with it;
+   <LI> <IMG  ALIGN=MIDDLE ALT="" SRC="img428.gif">. Depends on the floating-point precision. Should be set to
+     <IMG  ALIGN=BOTTOM ALT="" SRC="img429.gif"> (simple precision) or to <IMG  ALIGN=BOTTOM ALT="" SRC="img430.gif"> (double precision). If
+     0, will be set to <IMG  ALIGN=BOTTOM ALT="" SRC="img431.gif">.
+</OL></UL>           
+<P>
+<BR> <HR><A NAME=tex2html2207 HREF="node53.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html2205 HREF="node18.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html2199 HREF="node51.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html2209 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html2210 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html2208 HREF="node53.html"> Update Functions</A>
+<B>Up:</B> <A NAME=tex2html2206 HREF="node18.html"> Using the Graphical </A>
+<B> Previous:</B> <A NAME=tex2html2200 HREF="node51.html"> Confirmer</A>
+<BR> <HR> <P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

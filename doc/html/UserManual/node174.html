@@ -1,0 +1,128 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Using the Cascade Algorithms in SNNS</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Using the Cascade Algorithms in SNNS">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html3862 HREF="node175.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html3860 HREF="node164.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html3856 HREF="node173.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html3864 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html3865 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html3863 HREF="node175.html"> Time Delay Networks </A>
+<B>Up:</B> <A NAME=tex2html3861 HREF="node164.html"> The Cascade Correlation </A>
+<B> Previous:</B> <A NAME=tex2html3857 HREF="node173.html"> Mathematical Background</A>
+<BR> <HR> <P>
+<H2><A NAME=SECTION001084000000000000000> Using the Cascade Algorithms in SNNS</A></H2>
+<P>
+Networks that make use of the cascade correlation architecture can be
+created in SNNS in the same way as all other network types. The
+control of the training phase, however, is moved from the control panel
+to the special cascade window described below. The control panel is
+still used to specify the learning parameters, while the text field
+<tt> CYCLE</tt> does <b> not</b> specify as usual the number of learning
+cycles. This field is used here to specify the maximal number of
+hidden units to be generated during the learning phase. The number of
+learning cycles is entered in the cascade window.  The learning
+parameters for the embedded learning functions Quickprop, Rprop and
+Backprop are described in chapter <A HREF="node52.html#LearningParameters"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A>.
+<P>
+If the topology of a net is specified correctly, the program will
+automatically order the units and layers from left to right in the
+following way: input layer, hidden layer, output layer, and a 
+candidate layer. <A NAME=tex2html449 HREF="footnode.html#4219"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/foot_motif.gif"></A>  The hidden layer is generated with 5 units always
+having the same x-coordinate (i.e. above each other on the display).
+<P>
+The cascade correlation control panel and the cascade window (see
+fig. <A HREF="node174.html#cascadewindow"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A>), is opened by clicking the <IMG  ALIGN=BOTTOM ALT="" SRC="img885.gif"> button in the manager panel.  The cascade window is needed
+to set the parameters of the learning algorithms CC and RCC. To start
+Cascade Correlation, learning function <tt> CC</tt>, update function <tt>
+  CC_Order</tt> and init function <tt> CC_Weights</tt> in the corresponding
+menus have to be selected. Recurrent Cascade-Correlation is started in
+the same way, only that this time the functions <tt> RCC, RCC_Update</tt>
+and <tt> RCC_Weights</tt> have to be selected.  If one of these functions
+is left out, a confirmer window with an error message pops up and
+learning does not start. The init functions of cascade differ from the
+normal init functions: upon initialization of a cascade net all hidden
+units are deleted.
+<P>
+<P><A NAME=4234>&#160;</A><A NAME=cascadewindow>&#160;</A><IMG  ALIGN=BOTTOM ALT="" SRC="img886.gif">
+<BR><STRONG>Figure:</STRONG> The cascade window<BR>
+<P>
+<P>
+The cascade window has the following text fields, buttons and menus:
+<UL><LI> <tt> Global parameters:</tt> 
+  <UL><LI> <tt> Max. output unit error:</tt> <BR> 
+      This value is used as abort condition for the learning algorithms
+      CC and RCC. If the error of every single output unit is smaller 
+      than the given value learning will be terminated.
+    <LI> <tt> Learning function:</tt> <BR> 
+      Here, the learning function used to maximize the covariance or
+      to minimize the net error can be selected from a pull down menu. 
+      Available learning functions are: <tt> Quickprop</tt>, <tt> Rprop</tt> and <tt>
+      Backprop</tt> 
+    <LI> <tt> Print covariance and error:</tt> <BR> 
+      If this menu item shows <tt> on</tt>, the development of the error and
+      and the covariance of every candidate unit is printed. <tt> off</tt>
+      prevents all outputs of the net.
+    <LI><tt> Prune new hidden unit:<BR> </tt> This enables
+      ``Pruned-Cascade-Correlation''. It defaults to <tt> off</tt>, which
+      means do not remove any weights from the new inserted hidden
+      unit.
+    <LI><tt> Minimize:<BR> </tt> The selection criterion according to which
+      PCC tries to minimize. The default selection criterion is the
+      ``Schwarz's Bayesian criterion'', other criteria available are
+      ``Akaikes information criterion'' and the ``conservative mean
+      square error of prediction''.  This option is ignored, unless
+      PCC is enabled.
+  </UL>
+<LI> <tt> Candidate Parameters:</tt> 
+  <UL><LI> <tt> Min. covariance change:</tt> <BR> 
+      The covariance must change by at least this fraction of its old 
+      value to count as a significant change. If this fraction is not
+      reached, learning is halted and the candidate unit with the maximum
+      covariance is changed into a hidden unit.
+    <LI> <tt> Candidate patience:</tt> <BR> 
+      After this number of steps the program tests whether there is
+      a significant change of the covariance. The change is said to be
+      significant if it is larger than the fraction given by <tt>
+      Min. covariance change</tt>.
+    <LI> <tt> Max. no. of covariance updates:</tt> <BR> 
+      The maximum number of steps to calculate the covariance. After reaching
+      this number, the candidate unit with the maximum covariance is changed
+      to a hidden unit.
+    <LI> <tt> Max. no. of candidate units:</tt> <BR> 
+      The maximum number of candidate units trained at once.
+    <LI> <tt> Activation function:</tt> <BR> 
+      This menu item makes it possible to choose between different activation
+      functions for the candidate units. The functions are: <tt> Act_Logistic
+      Act_LogSym, Act_Tanh, Act_Identity</tt> and <tt> Random</tt>. <tt>
+      Random</tt> is not a real activation function. It randomly assigns
+      one of the other activation functions to each candidate unit.
+      The function <tt> Act_LogSym</tt> is identical to <tt> Act_Logistic</tt>, 
+      except that it is shifted by <IMG  ALIGN=MIDDLE ALT="" SRC="img887.gif"> along the y-axis. 
+  </UL>
+<LI> <tt> Output Parameters:</tt> 
+  <UL><LI> <tt> Error change:</tt> <BR> 
+          analogous to <tt> Min. covariance change</tt> 
+    <LI> <tt> Output patience:</tt> <BR> 
+          analogous to <tt> Candidate patience</tt>
+    <LI> <tt> Max. no. of epochs:</tt> <BR> 
+          analogous to <tt> Max. no. of covariance updates</tt>
+  </UL></UL>
+<P>
+The button <IMG  ALIGN=BOTTOM ALT="" SRC="img888.gif"> deletes all candidate units.
+In SNNS the candidate units are realized as special units.
+<P>
+<BR> <HR><A NAME=tex2html3862 HREF="node175.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html3860 HREF="node164.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html3856 HREF="node173.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html3864 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html3865 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html3863 HREF="node175.html"> Time Delay Networks </A>
+<B>Up:</B> <A NAME=tex2html3861 HREF="node164.html"> The Cascade Correlation </A>
+<B> Previous:</B> <A NAME=tex2html3857 HREF="node173.html"> Mathematical Background</A>
+<BR> <HR> <P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

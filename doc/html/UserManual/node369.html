@@ -1,0 +1,63 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> ART Interface Functions</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" ART Interface Functions">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html6444 HREF="node370.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html6442 HREF="node350.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html6436 HREF="node368.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html6446 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html6447 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html6445 HREF="node370.html"> Error Messages of </A>
+<B>Up:</B> <A NAME=tex2html6443 HREF="node350.html"> Kernel Function Interface</A>
+<B> Previous:</B> <A NAME=tex2html6437 HREF="node368.html"> Memory Management Functions</A>
+<BR> <HR> <P>
+<H1><A NAME=SECTION0016150000000000000000> ART Interface Functions</A></H1>
+<P>
+<A NAME=8367>&#160;</A>
+<P>
+The functions described in this paragraph are only useful if you use
+one of the ART models ART1, ART2 or ARTMAP. They are additional
+functions, not replacing any of the kernel interface functions
+described above. To use them, you have to include the files
+<tt> art_ui.h</tt> and <tt> art_typ.h</tt> in your application.
+<P>
+<code>krui_err artui_getClassifiedStatus( art_cl_status *status )</code><BR> 
+returns the actual classification state of an ART network in parameter
+<tt> status</tt>. Type <tt> art_cl_status</tt> is described above. An
+SNNS error code is returned as function value. 
+The function can be used for ART1, ART2 and ARTMAP models.
+<P>
+<code>krui_err artui_getClassNo( int *class_no )</code><BR> 
+returns a number between 1 and <b>M</b> in parameter <tt> class_no</tt>, which
+is either the index of the actual winner unit in the F<IMG  ALIGN=MIDDLE ALT="" SRC="img1448.gif"> layer of an 
+ART1 or ART2 network or the one of the activated MAP unit in an ARTMAP
+network. It will return -1 as <tt> class_no</tt> if no actual class is
+active. An SNNS error code is returned as function value.
+<P>
+<code>krui_err  artui_getN (int *N )</code><BR> 
+determines the number of F1-units in an ART1 or ART2 network.
+<P>
+<code>krui_err  artui_getM (int *M )</code><BR> 
+determines the number of F2-units in an ART1 or ART2 network.
+<P>
+<code>krui_err  artui_getNa (int *Na )</code><BR> 
+determines the number of F1a-units in an ARTMAP network.
+<P>
+<code>krui_err  artui_getMa (int *Ma )</code><BR> 
+determines the number of F2a-units in an ARTMAP network
+<P>
+<code>krui_err  artui_getNb (int *Nb)</code><BR> 
+determines the number of F1b-units in an ARTMAP network.
+<P>
+<code>krui_err  artui_getMb (int *Mb)</code><BR> 
+determines the number of F2b-units in an ARTMAP network.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

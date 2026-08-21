@@ -1,0 +1,63 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Working with Partial Recurrent Networks</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Working with Partial Recurrent Networks">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html4647 HREF="node235.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html4645 HREF="node229.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html4641 HREF="node233.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html4649 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html4650 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html4648 HREF="node235.html"> The Initialization Function </A>
+<B>Up:</B> <A NAME=tex2html4646 HREF="node229.html"> Partial Recurrent Networks</A>
+<B> Previous:</B> <A NAME=tex2html4642 HREF="node233.html"> Extended Hierarchical Elman </A>
+<BR> <HR> <P>
+<H2><A NAME=SECTION0010152000000000000000> Working with Partial Recurrent Networks</A></H2>
+<P>
+In this subsection, the initialization, learning, and update functions
+for partial recurrent networks are described. These functions can not
+be applied to only the three network models described in the previous
+subsection. They can be applied to a broader class of partial
+recurrent networks. Every partial recurrent network, that has the
+following restrictions, can be used:
+<P>
+<UL><LI> If after the deletion of all context units and the links to and
+from them, the remaining network is a simple feedforward architecture
+with no cycles.
+<P>
+<LI> Input units must not get input from other units.
+<P>
+<LI> Output units may only have outgoing connections to context
+units, but not to other units.
+<P>
+<LI> Every unit, except the input units, has to have at least one
+incoming link. For a context unit this restriction is already
+fulfilled when there exists only a self recurrent link. In this
+case the context unit receives its input only from itself.
+</UL>
+<P>
+In such networks all links leading to context units are considered as
+recurrent links.
+<P>
+Thereby the user has a lot of possibilities to experiment with a great
+variety of partial recurrent networks. E.g. it is allowed to connect
+context units with other context units.
+<P>
+<b> Note:</b> context units are realized as special hidden units. All
+units of type special hidden are assumed to be context units and are
+treated like this.
+<P>
+<BR> <HR>
+<UL> 
+<LI> <A NAME=tex2html4651 HREF="node235.html#SECTION0010152100000000000000"> The Initialization Function JE_Weights</A>
+<LI> <A NAME=tex2html4652 HREF="node236.html#SECTION0010152200000000000000"> Learning Functions</A>
+<LI> <A NAME=tex2html4653 HREF="node237.html#SECTION0010152300000000000000"> Update Functions</A>
+</UL>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

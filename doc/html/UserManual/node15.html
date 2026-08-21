@@ -1,0 +1,110 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Learning in Neural Nets</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Learning in Neural Nets">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html1654 HREF="node16.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html1652 HREF="node9.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html1646 HREF="node14.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html1656 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html1657 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html1655 HREF="node16.html"> Generalization of Neural </A>
+<B>Up:</B> <A NAME=tex2html1653 HREF="node9.html"> Neural Network Terminology</A>
+<B> Previous:</B> <A NAME=tex2html1647 HREF="node14.html"> Update Modes</A>
+<BR> <HR> <P>
+<H1><A NAME=SECTION00430000000000000000> Learning in Neural Nets</A></H1>
+<P>
+<A NAME=learning>&#160;</A>
+<A NAME=439>&#160;</A>
+<P>
+An important focus of neural network research is the question of
+how to adjust the weights of the links to get the desired system
+behavior. This modification is very often based on the Hebbian rule,
+which states that a link between two units is strengthened if both
+units are active at the same time. The Hebbian rule in its general form
+is:
+<P>
+<A NAME=440>&#160;</A>
+<P><IMG  ALIGN=BOTTOM ALT="" SRC="img26.gif"><P>
+<P>
+where:
+<P>
+<P><IMG  ALIGN=BOTTOM ALT="" SRC="img27.gif"><P>
+<P>
+<P><IMG  ALIGN=BOTTOM ALT="" SRC="img28.gif"><P>
+<P>
+<A NAME=458>&#160;</A>
+Training a feed-forward neural network with supervised learning
+consists of the following procedure:
+<P>
+An input pattern is presented to the network. The input is then
+propagated forward in the net until activation reaches the output
+<A NAME=459>&#160;</A>
+<A NAME=460>&#160;</A>
+layer. This constitutes the so called <em> forward propagation phase</em>.
+<P>
+The output of the output layer is then compared with the teaching
+input. The error, i.e. the difference (delta) <IMG  ALIGN=MIDDLE ALT="" SRC="img29.gif"> between the
+output <IMG  ALIGN=MIDDLE ALT="" SRC="img30.gif"> and the teaching input <IMG  ALIGN=MIDDLE ALT="" SRC="img31.gif"> of a target output unit
+<b>j</b> is then used together with the output <IMG  ALIGN=MIDDLE ALT="" SRC="img32.gif"> of the source unit
+<b>i</b> to compute the necessary changes of the link <IMG  ALIGN=MIDDLE ALT="" SRC="img33.gif">. To compute
+the deltas of inner units for which no teaching input is available,
+(units of hidden layers) the deltas of the following layer, which are
+already computed, are used in a formula given below. In this way the
+<A NAME=467>&#160;</A>
+<A NAME=468>&#160;</A>
+errors (deltas) are propagated backward, so this phase is called <em>
+backward propagation</em>.
+<P>
+<A NAME=470>&#160;</A>
+<A NAME=471>&#160;</A>
+In <em> online learning</em>, the weight changes <IMG  ALIGN=MIDDLE ALT="" SRC="img34.gif"> are
+applied to the network after each training pattern, i.e. after each
+<A NAME=474>&#160;</A>
+<A NAME=475>&#160;</A>
+<A NAME=476>&#160;</A>
+forward and backward pass. In <em> offline learning</em> or <em> batch
+learning</em> the weight changes are cumulated for all patterns in the
+training file and the sum of all changes is applied after one full
+cycle (epoch) through the training pattern file.
+<P>
+<A NAME=479>&#160;</A>
+The most famous learning algorithm which works in the manner described
+is currently backpropagation. In the backpropagation learning
+algorithm online training is usually significantly faster than batch
+training, especially in the case of large training sets with many
+similar training examples.
+<P>
+The backpropagation weight update rule, also called <em> generalized
+delta-rule</em> reads as follows:
+<A NAME=481>&#160;</A>
+<P>
+<P><IMG  ALIGN=BOTTOM ALT="" SRC="img35.gif"><P>
+<P>
+where:
+<P>
+<P><IMG  ALIGN=BOTTOM ALT="" SRC="img36.gif"><P>
+<P>
+There are several backpropagation algorithms supplied with SNNS: one
+``vanilla backpropagation'' called <tt> Std_Backpropagation</tt>, one
+with momentum term and flat spot elimination called <tt>
+BackpropMomentum</tt> and a batch version called <tt> BackpropBatch</tt>. They
+can be chosen from the <b> control</b> panel with the button <IMG  ALIGN=BOTTOM ALT="" SRC="img37.gif"> and the menu selection <tt> select learning function</tt>.
+<P>
+In SNNS, one may either set the number of training cycles in advance
+or train the network until it has reached a predefined error on
+the training set.
+<P>
+<BR> <HR><A NAME=tex2html1654 HREF="node16.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html1652 HREF="node9.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html1646 HREF="node14.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html1656 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html1657 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html1655 HREF="node16.html"> Generalization of Neural </A>
+<B>Up:</B> <A NAME=tex2html1653 HREF="node9.html"> Neural Network Terminology</A>
+<B> Previous:</B> <A NAME=tex2html1647 HREF="node14.html"> Update Modes</A>
+<BR> <HR> <P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

@@ -1,0 +1,51 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Optimal Brain Damage</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Optimal Brain Damage">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html4853 HREF="node251.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html4851 HREF="node248.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html4845 HREF="node249.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html4855 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html4856 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html4854 HREF="node251.html"> Optimal Brain Surgeon</A>
+<B>Up:</B> <A NAME=tex2html4852 HREF="node248.html"> Theory of the </A>
+<B> Previous:</B> <A NAME=tex2html4846 HREF="node249.html"> Magnitude Based Pruning</A>
+<BR> <HR> <P>
+<H2><A NAME=SECTION001122000000000000000> Optimal Brain Damage</A></H2>
+<P>
+<A NAME=6596>&#160;</A>
+<A NAME=6597>&#160;</A>
+<P>
+Optimal Brain Damage (OBD) approximates the change of the error
+function when pruning a certain weight. A Taylor series is used for
+the approximation:
+<P><A NAME=prtaylorobd>&#160;</A><IMG  ALIGN=BOTTOM ALT="" SRC="img1258.gif"><P>
+To simplify the computation, we assume that
+<UL><LI> the net error function was driven into a minimum by training, so
+that the first term on the right side of equation (<A HREF="node250.html#prtaylorobd"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A>)
+can be omitted;
+<P>
+<LI> the net error function is locally quadratic, so that the last
+term in the equation can be left out;
+<P>
+<LI> the remaining second derivative (<i> Hesse-matrix)</i> consists
+only of diagonal elements, which affects the second term in equation
+(<A HREF="node250.html#prtaylorobd"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A>).
+</UL>
+<P>
+The result of all these simplifications reads as follows:
+<P><IMG  ALIGN=BOTTOM ALT="" SRC="img1259.gif"><P>
+<P>
+Now it is necessary to compute the diagonal elements of the
+Hesse-Matrix. For the description of this and to obtain further
+information read [<A HREF="node389.html#LeCun90">YLC90</A>].
+<P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

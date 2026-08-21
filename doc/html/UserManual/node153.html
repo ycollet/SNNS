@@ -1,0 +1,45 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Parameters</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Parameters">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html3600 HREF="node154.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html3598 HREF="node150.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html3594 HREF="node152.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html3602 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html3603 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html3601 HREF="node154.html"> Backpercolation</A>
+<B>Up:</B> <A NAME=tex2html3599 HREF="node150.html"> RPROP</A>
+<B> Previous:</B> <A NAME=tex2html3595 HREF="node152.html"> General Description</A>
+<BR> <HR> <P>
+<H2><A NAME=SECTION001033000000000000000> Parameters</A></H2>
+<P>
+The Rprop algorithm takes three parameters: the initial update-value
+<IMG  ALIGN=MIDDLE ALT="" SRC="img769.gif">, a limit for the maximum step size, <IMG  ALIGN=MIDDLE ALT="" SRC="img770.gif">,
+and the weight-decay exponent <IMG  ALIGN=BOTTOM ALT="" SRC="img771.gif"> (see above).
+<P>
+When learning starts, all update-values are set to an initial value
+<IMG  ALIGN=MIDDLE ALT="" SRC="img772.gif">.  Since <IMG  ALIGN=MIDDLE ALT="" SRC="img773.gif"> directly determines the size of the first
+weight step, it should be chosen according to the initial values of
+the weights themselves, for example <IMG  ALIGN=MIDDLE ALT="" SRC="img774.gif"> (default setting).
+The choice of this value is rather uncritical, for it is adapted as
+learning proceeds.
+<P>
+In order to prevent the weights from becoming too large, the maximum
+weight-step determined by the size of the update-value, is limited.
+The upper bound is set by the second parameter of Rprop, <IMG  ALIGN=MIDDLE ALT="" SRC="img775.gif">. The
+default upper bound is set somewhat arbitrarily to <IMG  ALIGN=MIDDLE ALT="" SRC="img776.gif">.
+Usually, convergence is rather insensitive to this parameter as well.
+Nevertheless, for some problems it can be advantageous to allow only
+very cautious (namely small) steps, in order to prevent the algorithm
+getting stuck too quickly in suboptimal local minima.
+The minimum step size is constantly fixed to <IMG  ALIGN=MIDDLE ALT="" SRC="img777.gif">.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

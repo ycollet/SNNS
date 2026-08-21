@@ -1,0 +1,57 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> How to obtain SNNS</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" How to obtain SNNS">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html1527 HREF="node6.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html1525 HREF="node3.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html1519 HREF="node4.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html1529 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html1530 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html1528 HREF="node6.html"> Installation</A>
+<B>Up:</B> <A NAME=tex2html1526 HREF="node3.html"> LicensingCopying and </A>
+<B> Previous:</B> <A NAME=tex2html1520 HREF="node4.html"> SNNS License</A>
+<BR> <HR> <P>
+<H1><A NAME=SECTION00320000000000000000> How to obtain SNNS</A></H1>
+<P>
+<A NAME=137>&#160;</A>
+<A NAME=ObtainingSNNS>&#160;</A>
+The SNNS simulator can be obtained via anonymous ftp from host
+<PRE>        ftp.informatik.uni-stuttgart.de  (129.69.211.2)
+</PRE>
+in the subdirectory
+<PRE>        /pub/SNNS
+</PRE>
+as file
+<PRE>        SNNSv4.1.tar.Z
+</PRE>
+or in several parts as files
+<PRE>        SNNSv4.1.tar.Z.aa, SNNSv4.1.tar.Z.ab, ...
+</PRE>
+<P>
+These split files are each less than 1 MB and can be joined with the
+Unix `cat' command into one file <code>SNNSv4.1.tar.Z</code>.  Be sure to
+set the ftp mode to <code>binary</code> before transmission of the files.
+Also watch out for possible higher version numbers, patches or Readme
+files in the above directory <code>/pub/SNNS</code>.
+After successful transmission of the file move it to the directory
+where you want to install SNNS, uncompress and untar the file with the
+Unix command 
+<PRE>        uncompress &lt; SNNSv4.1.tar.Z | tar xvf -
+</PRE>
+<P>
+This will extract SNNS in the current directory. The SNNS distribution
+includes full source code, installation procedures for supported
+machine architectures and some simple examples of trained networks.
+The full English documentation as LaTeX source code with PostScript
+images included and a PostScript version of the documentation is also
+available in the SNNS directory.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

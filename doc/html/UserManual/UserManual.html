@@ -1,0 +1,609 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE>No Title</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value="No Title">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html694 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif_gr.gif">   <IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif_gr.gif">   <A NAME=tex2html696 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html697 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html695 HREF="node1.html">Contents</A>
+<BR> <HR> <P>
+<P>
+
+<P>
+<CENTER>
+<P>
+<i> <b> <H3> UNIVERSITY OF STUTTGART<BR> <H5> INSTITUTE FOR PARALLEL AND DISTRIBUTED<BR> HIGH PERFORMANCE
+SYSTEMS (IPVR)<BR>  Applied Computer Science -- Image Understanding
+</i></b></H3></H5>
+<P>
+
+<H1> SNNS</H1>
+<H4> Stuttgart Neural Network Simulator</H4><BR>
+<H2> User Manual, Version 4.1</H2><BR>
+<P>
+<P><IMG  ALIGN=BOTTOM ALT="" SRC="img4.gif"><P>
+<P>
+<H4>
+        Andreas Zell, G&#252;nter Mamier, Michael Vogt<BR> 
+        Niels Mache, Ralf H&#252;bner, Sven D&#246;ring<BR> 
+        Kai-Uwe Herrmann, Tobias Soyez, Michael Schmalzl<BR> 
+        Tilman Sommer, Artemis Hatzigeorgiou, Dietmar Posselt<BR> 
+        Tobias Schreiner, Bernward Kett, Gianfranco Clemente<BR> 
+        Jens Wieland<BR> 
+</H4>
+<H5> external contributions by<BR> </H5>
+<P>
+<H4> Martin Reczko, Martin Riedmiller<BR> 
+        Mark Seemann, Marcus Ritt, Jamie DeCoster<BR> 
+        Jochen Biedermann, Joachim Danz, Christian Wehrfritz<BR> 
+        Randolf Werner, Michael Berthold, Bruno Orsier<BR> </H4>
+<P>
+<H1> <b> SNNS<BR></H1></b>
+        <H4> Stuttgart Neural Network Simulator</H4><BR>
+        <H4> User Manual, Version 4.1</H4><BR>
+        <H5> Report No. 6/95</H5><BR>
+<P>
+<H5> All Rights reserved</H5><BR>
+<P>
+</CENTER>
+
+<P>
+<BR> <HR>
+<UL> 
+<LI> <A NAME=tex2html698 HREF="node1.html#SECTION00100000000000000000">Contents</A>
+<LI> <A NAME=tex2html699 HREF="node2.html#SECTION00200000000000000000"> Introduction to SNNS</A>
+<LI> <A NAME=tex2html700 HREF="node3.html#SECTION00300000000000000000"> Licensing, Copying and Acknowledgments</A>
+<UL> 
+<LI> <A NAME=tex2html701 HREF="node4.html#SECTION00310000000000000000"> SNNS License</A>
+<LI> <A NAME=tex2html702 HREF="node5.html#SECTION00320000000000000000"> How to obtain SNNS</A>
+<LI> <A NAME=tex2html703 HREF="node6.html#SECTION00330000000000000000"> Installation</A>
+<LI> <A NAME=tex2html704 HREF="node7.html#SECTION00340000000000000000"> Acknowledgments</A>
+<LI> <A NAME=tex2html705 HREF="node8.html#SECTION00350000000000000000"> New Features of Release 4.1</A>
+</UL> 
+<LI> <A NAME=tex2html706 HREF="node9.html#SECTION00400000000000000000"> Neural Network Terminology</A>
+<UL> 
+<LI> <A NAME=tex2html707 HREF="node10.html#SECTION00410000000000000000"> Building Blocks of Neural Nets</A>
+<UL> 
+<LI> <A NAME=tex2html708 HREF="node11.html#SECTION00411000000000000000"> Units</A>
+<LI> <A NAME=tex2html709 HREF="node12.html#SECTION00412000000000000000"> Connections (Links)</A>
+<LI> <A NAME=tex2html710 HREF="node13.html#SECTION00413000000000000000"> Sites</A>
+</UL> 
+<LI> <A NAME=tex2html711 HREF="node14.html#SECTION00420000000000000000"> Update Modes</A>
+<LI> <A NAME=tex2html712 HREF="node15.html#SECTION00430000000000000000"> Learning in Neural Nets</A>
+<LI> <A NAME=tex2html713 HREF="node16.html#SECTION00440000000000000000"> Generalization of Neural Networks</A>
+<LI> <A NAME=tex2html714 HREF="node17.html#SECTION00450000000000000000"> An Example of a simple Network</A>
+</UL> 
+<LI> <A NAME=tex2html715 HREF="node18.html#SECTION00500000000000000000"> Using the Graphical User Interface</A>
+<UL> 
+<LI> <A NAME=tex2html716 HREF="node19.html#SECTION00510000000000000000"> Introduction to SNNS</A>
+<UL> 
+<LI> <A NAME=tex2html717 HREF="node20.html#SECTION00511000000000000000"> Startup</A>
+<LI> <A NAME=tex2html718 HREF="node21.html#SECTION00512000000000000000"> Reading and Writing Files</A>
+<LI> <A NAME=tex2html719 HREF="node22.html#SECTION00513000000000000000"> Creating New Networks</A>
+<LI> <A NAME=tex2html720 HREF="node23.html#SECTION00514000000000000000"> Training Networks</A>
+<UL> 
+<LI> <A NAME=tex2html721 HREF="node24.html#SECTION00514100000000000000"> Initialisation</A>
+<LI> <A NAME=tex2html722 HREF="node25.html#SECTION00514200000000000000"> Selecting a learning function</A>
+</UL> 
+<LI> <A NAME=tex2html723 HREF="node26.html#SECTION00515000000000000000"> Saving Results for Testing</A>
+<LI> <A NAME=tex2html724 HREF="node27.html#SECTION00516000000000000000"> Further Explorations</A>
+<LI> <A NAME=tex2html725 HREF="node28.html#SECTION00517000000000000000"> SNNS File Formats</A>
+<UL> 
+<LI> <A NAME=tex2html726 HREF="node29.html#SECTION00517100000000000000"> Pattern files</A>
+<LI> <A NAME=tex2html727 HREF="node30.html#SECTION00517200000000000000"> Network files</A>
+</UL> 
+</UL> 
+<LI> <A NAME=tex2html728 HREF="node31.html#SECTION00520000000000000000"> XGUI Files</A>
+<LI> <A NAME=tex2html729 HREF="node32.html#SECTION00530000000000000000"> Windows of XGUI</A>
+<UL> 
+<LI> <A NAME=tex2html730 HREF="node33.html#SECTION00531000000000000000"> Manager Panel</A>
+<LI> <A NAME=tex2html731 HREF="node34.html#SECTION00532000000000000000"> File Browser</A>
+<UL> 
+<LI> <A NAME=tex2html732 HREF="node35.html#SECTION00532100000000000000"> Loading and Saving Networks</A>
+<LI> <A NAME=tex2html733 HREF="node36.html#SECTION00532200000000000000"> Loading and Saving Patterns</A>
+<LI> <A NAME=tex2html734 HREF="node37.html#SECTION00532300000000000000"> Loading and Saving Configurations</A>
+<LI> <A NAME=tex2html735 HREF="node38.html#SECTION00532400000000000000"> Saving a Result file</A>
+<LI> <A NAME=tex2html736 HREF="node39.html#SECTION00532500000000000000"> Defining the Log File</A>
+</UL> 
+<LI> <A NAME=tex2html737 HREF="node40.html#SECTION00533000000000000000"> Control Panel</A>
+<LI> <A NAME=tex2html738 HREF="node41.html#SECTION00534000000000000000"> Info Panel</A>
+<UL> 
+<LI> <A NAME=tex2html739 HREF="node42.html#SECTION00534100000000000000"> Unit Function Displays</A>
+</UL> 
+<LI> <A NAME=tex2html740 HREF="node43.html#SECTION00535000000000000000"> 2D Displays</A>
+<UL> 
+<LI> <A NAME=tex2html741 HREF="node44.html#SECTION00535100000000000000"> Setup Panel of a 2D Display</A>
+</UL> 
+<LI> <A NAME=tex2html742 HREF="node45.html#SECTION00536000000000000000"> Graph Window</A>
+<LI> <A NAME=tex2html743 HREF="node46.html#SECTION00537000000000000000"> Weight Display</A>
+<LI> <A NAME=tex2html744 HREF="node47.html#SECTION00538000000000000000"> Projection Panel</A>
+<LI> <A NAME=tex2html745 HREF="node48.html#SECTION00539000000000000000"> Print Panel</A>
+<LI> <A NAME=tex2html746 HREF="node49.html#SECTION005310000000000000000"> Help Windows</A>
+<LI> <A NAME=tex2html747 HREF="node50.html#SECTION005311000000000000000"> Shell window</A>
+<LI> <A NAME=tex2html748 HREF="node51.html#SECTION005312000000000000000"> Confirmer</A>
+</UL> 
+<LI> <A NAME=tex2html749 HREF="node52.html#SECTION00540000000000000000"> Parameters of the Learning Functions</A>
+<LI> <A NAME=tex2html750 HREF="node53.html#SECTION00550000000000000000"> Update Functions</A>
+<UL> 
+<LI> <A NAME=tex2html751 HREF="node54.html#SECTION00550100000000000000"> ART1_Stable</A>
+<LI> <A NAME=tex2html752 HREF="node55.html#SECTION00550200000000000000"> ART1_Synchronous</A>
+<LI> <A NAME=tex2html753 HREF="node56.html#SECTION00550300000000000000"> ART2_Stable</A>
+<LI> <A NAME=tex2html754 HREF="node57.html#SECTION00550400000000000000"> ART2_Synchronous</A>
+<LI> <A NAME=tex2html755 HREF="node58.html#SECTION00550500000000000000"> ARTMAP_Stable</A>
+<LI> <A NAME=tex2html756 HREF="node59.html#SECTION00550600000000000000"> ARTMAP_Synchronous</A>
+<LI> <A NAME=tex2html757 HREF="node60.html#SECTION00550700000000000000"> Auto_Synchronous</A>
+<LI> <A NAME=tex2html758 HREF="node61.html#SECTION00550800000000000000"> BAM_Order</A>
+<LI> <A NAME=tex2html759 HREF="node62.html#SECTION00550900000000000000"> BBTT_Order</A>
+<LI> <A NAME=tex2html760 HREF="node63.html#SECTION005501000000000000000"> CC_Order</A>
+<LI> <A NAME=tex2html761 HREF="node64.html#SECTION005501100000000000000"> CounterPropagation</A>
+<LI> <A NAME=tex2html762 HREF="node65.html#SECTION005501200000000000000"> Dynamic_LVQ</A>
+<LI> <A NAME=tex2html763 HREF="node66.html#SECTION005501300000000000000"> Hopfield_Fixed_Act</A>
+<LI> <A NAME=tex2html764 HREF="node67.html#SECTION005501400000000000000"> Hopfield_Synchronous</A>
+<LI> <A NAME=tex2html765 HREF="node68.html#SECTION005501500000000000000"> JE_Order</A>
+<LI> <A NAME=tex2html766 HREF="node69.html#SECTION005501600000000000000"> JE_Special</A>
+<LI> <A NAME=tex2html767 HREF="node70.html#SECTION005501700000000000000"> Kohonen_Order</A>
+<LI> <A NAME=tex2html768 HREF="node71.html#SECTION005501800000000000000"> RCC_Order</A>
+<LI> <A NAME=tex2html769 HREF="node72.html#SECTION005501900000000000000"> Random_Order</A>
+<LI> <A NAME=tex2html770 HREF="node73.html#SECTION005502000000000000000"> Random_Permutation</A>
+<LI> <A NAME=tex2html771 HREF="node74.html#SECTION005502100000000000000"> Serial_Order</A>
+<LI> <A NAME=tex2html772 HREF="node75.html#SECTION005502200000000000000"> Synchronous_Order</A>
+<LI> <A NAME=tex2html773 HREF="node76.html#SECTION005502300000000000000"> TimeDelay_Order</A>
+<LI> <A NAME=tex2html774 HREF="node77.html#SECTION005502400000000000000"> Topological_Order</A>
+</UL> 
+<LI> <A NAME=tex2html775 HREF="node78.html#SECTION00560000000000000000"> Initialization Functions</A>
+<UL> 
+<LI> <A NAME=tex2html776 HREF="node79.html#SECTION00560100000000000000"> ART1_Weights</A>
+<LI> <A NAME=tex2html777 HREF="node80.html#SECTION00560200000000000000"> ART2_Weights</A>
+<LI> <A NAME=tex2html778 HREF="node81.html#SECTION00560300000000000000"> ARTMAP_Weights</A>
+<LI> <A NAME=tex2html779 HREF="node82.html#SECTION00560400000000000000"> CC_Weights</A>
+<LI> <A NAME=tex2html780 HREF="node83.html#SECTION00560500000000000000"> ClippHebb</A>
+<LI> <A NAME=tex2html781 HREF="node84.html#SECTION00560600000000000000"> CPN_Rand_Pat</A>
+<LI> <A NAME=tex2html782 HREF="node85.html#SECTION00560700000000000000"> CPN_Weights_v3.2</A>
+<LI> <A NAME=tex2html783 HREF="node86.html#SECTION00560800000000000000"> CPN_Weights_v3.3</A>
+<LI> <A NAME=tex2html784 HREF="node87.html#SECTION00560900000000000000"> DLVQ_Weights</A>
+<LI> <A NAME=tex2html785 HREF="node88.html#SECTION005601000000000000000"> Hebb</A>
+<LI> <A NAME=tex2html786 HREF="node89.html#SECTION005601100000000000000"> Hebb_FixAct</A>
+<LI> <A NAME=tex2html787 HREF="node90.html#SECTION005601200000000000000"> JE_Weights</A>
+<LI> <A NAME=tex2html788 HREF="node91.html#SECTION005601300000000000000"> Kohonen_Weights_v3.2</A>
+<LI> <A NAME=tex2html789 HREF="node92.html#SECTION005601400000000000000"> Kohonen_Const</A>
+<LI> <A NAME=tex2html790 HREF="node93.html#SECTION005601500000000000000"> Kohonen_Rand_Pat</A>
+<LI> <A NAME=tex2html791 HREF="node94.html#SECTION005601600000000000000"> PseudoInv</A>
+<LI> <A NAME=tex2html792 HREF="node95.html#SECTION005601700000000000000"> Randomize_Weights</A>
+<LI> <A NAME=tex2html793 HREF="node96.html#SECTION005601800000000000000"> Random_Weights_Perc</A>
+<LI> <A NAME=tex2html794 HREF="node97.html#SECTION005601900000000000000"> RBF_Weights</A>
+<LI> <A NAME=tex2html795 HREF="node98.html#SECTION005602000000000000000"> RBF_Weights_Kohonen</A>
+<LI> <A NAME=tex2html796 HREF="node99.html#SECTION005602100000000000000"> RBF_Weights_Redo</A>
+<LI> <A NAME=tex2html797 HREF="node100.html#SECTION005602200000000000000"> RCC_Weights</A>
+<LI> <A NAME=tex2html798 HREF="node101.html#SECTION005602300000000000000"> RM_Random_Weights</A>
+</UL> 
+<LI> <A NAME=tex2html799 HREF="node102.html#SECTION00570000000000000000"> Creating and Editing Unit Prototypes and Sites</A>
+</UL> 
+<LI> <A NAME=tex2html800 HREF="node103.html#SECTION00600000000000000000"> Handling Patterns with SNNS</A>
+<UL> 
+<LI> <A NAME=tex2html801 HREF="node104.html#SECTION00610000000000000000"> Handling Pattern Sets</A>
+<LI> <A NAME=tex2html802 HREF="node105.html#SECTION00620000000000000000"> Fixed Size Patterns</A>
+<LI> <A NAME=tex2html803 HREF="node106.html#SECTION00630000000000000000"> Variable Size Patterns</A>
+</UL> 
+<LI> <A NAME=tex2html804 HREF="node107.html#SECTION00700000000000000000"> Graphical Network Editor</A>
+<UL> 
+<LI> <A NAME=tex2html805 HREF="node108.html#SECTION00710000000000000000"> Editor Modes</A>
+<LI> <A NAME=tex2html806 HREF="node109.html#SECTION00720000000000000000"> Selection</A>
+<UL> 
+<LI> <A NAME=tex2html807 HREF="node110.html#SECTION00721000000000000000"> Selection of Units</A>
+<LI> <A NAME=tex2html808 HREF="node111.html#SECTION00722000000000000000"> Selection of Links</A>
+</UL> 
+<LI> <A NAME=tex2html809 HREF="node112.html#SECTION00730000000000000000"> Use of the Mouse</A>
+<LI> <A NAME=tex2html810 HREF="node113.html#SECTION00740000000000000000"> Short Command Reference</A>
+<LI> <A NAME=tex2html811 HREF="node114.html#SECTION00750000000000000000"> Editor Commands</A>
+<LI> <A NAME=tex2html812 HREF="node115.html#SECTION00760000000000000000"> Example Dialogue</A>
+</UL> 
+<LI> <A NAME=tex2html813 HREF="node116.html#SECTION00800000000000000000"> Network Creation Tools</A>
+<UL> 
+<LI> <A NAME=tex2html814 HREF="node117.html#SECTION00810000000000000000"> BigNet for Feed-Forward Networks</A>
+<UL> 
+<LI> <A NAME=tex2html815 HREF="node118.html#SECTION00811000000000000000"> Terminology of the Tool BigNet</A>
+<LI> <A NAME=tex2html816 HREF="node119.html#SECTION00812000000000000000"> Buttons of BigNet</A>
+<LI> <A NAME=tex2html817 HREF="node120.html#SECTION00813000000000000000"> Plane Editor</A>
+<LI> <A NAME=tex2html818 HREF="node121.html#SECTION00814000000000000000"> Link Editor</A>
+<UL> 
+<LI> <A NAME=tex2html819 HREF="node122.html#SECTION00814100000000000000"> Example 1: Receptive Fields in Two Dimensions</A>
+<LI> <A NAME=tex2html820 HREF="node123.html#SECTION00814200000000000000"> Example 2: Moving in Different Dimensions</A>
+</UL> 
+<LI> <A NAME=tex2html821 HREF="node124.html#SECTION00815000000000000000"> Create Net</A>
+</UL> 
+<LI> <A NAME=tex2html822 HREF="node125.html#SECTION00820000000000000000"> BigNet for Time-Delay Networks</A>
+<UL> 
+<LI> <A NAME=tex2html823 HREF="node126.html#SECTION00821000000000000000"> Terminology of Time-Delay BigNet</A>
+<LI> <A NAME=tex2html824 HREF="node127.html#SECTION00822000000000000000"> Plane Editor</A>
+<LI> <A NAME=tex2html825 HREF="node128.html#SECTION00823000000000000000"> Link Editor</A>
+</UL> 
+<LI> <A NAME=tex2html826 HREF="node129.html#SECTION00830000000000000000"> BigNet for ART-Networks</A>
+<LI> <A NAME=tex2html827 HREF="node130.html#SECTION00840000000000000000"> BigNet for Self-Organizing Maps</A>
+<LI> <A NAME=tex2html828 HREF="node131.html#SECTION00850000000000000000"> BigNet for Autoassociative Memory Networks</A>
+<LI> <A NAME=tex2html829 HREF="node132.html#SECTION00860000000000000000"> BigNet for Partial Recurrent Networks</A>
+<UL> 
+<LI> <A NAME=tex2html830 HREF="node133.html#SECTION00861000000000000000"> BigNet for Jordan Networks</A>
+<LI> <A NAME=tex2html831 HREF="node134.html#SECTION00862000000000000000"> BigNet for Elman Networks</A>
+</UL> 
+</UL> 
+<LI> <A NAME=tex2html832 HREF="node135.html#SECTION00900000000000000000"> Network Analyzing Tools</A>
+<UL> 
+<LI> <A NAME=tex2html833 HREF="node136.html#SECTION00910000000000000000"> Inversion</A>
+<UL> 
+<LI> <A NAME=tex2html834 HREF="node137.html#SECTION00911000000000000000"> The Algorithm</A>
+<LI> <A NAME=tex2html835 HREF="node138.html#SECTION00912000000000000000"> Inversion Display</A>
+<LI> <A NAME=tex2html836 HREF="node139.html#SECTION00913000000000000000"> Example Session</A>
+</UL> 
+<LI> <A NAME=tex2html837 HREF="node140.html#SECTION00920000000000000000"> Network Analyzer</A>
+<UL> 
+<LI> <A NAME=tex2html838 HREF="node141.html#SECTION00921000000000000000"> The Network Analyzer Setup</A>
+<LI> <A NAME=tex2html839 HREF="node142.html#SECTION00922000000000000000"> The Display Control Window of the Network Analyzer</A>
+</UL> 
+</UL> 
+<LI> <A NAME=tex2html840 HREF="node143.html#SECTION001000000000000000000"> Neural Network Models and Functions</A>
+<UL> 
+<LI> <A NAME=tex2html841 HREF="node144.html#SECTION001010000000000000000"> Backpropagation Networks</A>
+<UL> 
+<LI> <A NAME=tex2html842 HREF="node145.html#SECTION001011000000000000000"> Vanilla Backpropagation</A>
+<LI> <A NAME=tex2html843 HREF="node146.html#SECTION001012000000000000000"> Enhanced Backpropagation</A>
+<LI> <A NAME=tex2html844 HREF="node147.html#SECTION001013000000000000000"> Batch Backpropagation</A>
+<LI> <A NAME=tex2html845 HREF="node148.html#SECTION001014000000000000000"> Backpropagation with Weight Decay</A>
+</UL> 
+<LI> <A NAME=tex2html846 HREF="node149.html#SECTION001020000000000000000"> Quickprop</A>
+<LI> <A NAME=tex2html847 HREF="node150.html#SECTION001030000000000000000"> RPROP</A>
+<UL> 
+<LI> <A NAME=tex2html848 HREF="node151.html#SECTION001031000000000000000"> Changes in Release 3.3</A>
+<LI> <A NAME=tex2html849 HREF="node152.html#SECTION001032000000000000000"> General Description</A>
+<LI> <A NAME=tex2html850 HREF="node153.html#SECTION001033000000000000000"> Parameters</A>
+</UL> 
+<LI> <A NAME=tex2html851 HREF="node154.html#SECTION001040000000000000000"> Backpercolation</A>
+<LI> <A NAME=tex2html852 HREF="node155.html#SECTION001050000000000000000"> Counterpropagation</A>
+<UL> 
+<LI> <A NAME=tex2html853 HREF="node156.html#SECTION001051000000000000000"> Fundamentals</A>
+<LI> <A NAME=tex2html854 HREF="node157.html#SECTION001052000000000000000"> Initializing Counterpropagation</A>
+<LI> <A NAME=tex2html855 HREF="node158.html#SECTION001053000000000000000"> Counterpropagation Implementation in SNNS</A>
+</UL> 
+<LI> <A NAME=tex2html856 HREF="node159.html#SECTION001060000000000000000"> Dynamic Learning Vector Quantization (DLVQ)</A>
+<UL> 
+<LI> <A NAME=tex2html857 HREF="node160.html#SECTION001061000000000000000"> DLVQ Fundamentals</A>
+<LI> <A NAME=tex2html858 HREF="node161.html#SECTION001062000000000000000"> DLVQ in SNNS</A>
+<LI> <A NAME=tex2html859 HREF="node162.html#SECTION001063000000000000000"> Remarks</A>
+</UL> 
+<LI> <A NAME=tex2html860 HREF="node163.html#SECTION001070000000000000000"> Backpropagation Through Time (BPTT)</A>
+<LI> <A NAME=tex2html861 HREF="node164.html#SECTION001080000000000000000"> The Cascade Correlation Algorithms</A>
+<UL> 
+<LI> <A NAME=tex2html862 HREF="node165.html#SECTION001081000000000000000"> Cascade-Correlation (CC)</A>
+<UL> 
+<LI> <A NAME=tex2html863 HREF="node166.html#SECTION001081100000000000000"> The Algorithm</A>
+<LI> <A NAME=tex2html864 HREF="node167.html#SECTION001081200000000000000"> Mathematical Background</A>
+</UL> 
+<LI> <A NAME=tex2html865 HREF="node168.html#SECTION001082000000000000000"> Pruned-Cascade-Correlation (PCC)</A>
+<UL> 
+<LI> <A NAME=tex2html866 HREF="node169.html#SECTION001082100000000000000"> The Algorithm</A>
+<LI> <A NAME=tex2html867 HREF="node170.html#SECTION001082200000000000000"> Mathematical Background</A>
+</UL> 
+<LI> <A NAME=tex2html868 HREF="node171.html#SECTION001083000000000000000"> Recurrent Cascade-Correlation (RCC)</A>
+<UL> 
+<LI> <A NAME=tex2html869 HREF="node172.html#SECTION001083100000000000000"> The Algorithm</A>
+<LI> <A NAME=tex2html870 HREF="node173.html#SECTION001083200000000000000"> Mathematical Background</A>
+</UL> 
+<LI> <A NAME=tex2html871 HREF="node174.html#SECTION001084000000000000000"> Using the Cascade Algorithms in SNNS</A>
+</UL> 
+<LI> <A NAME=tex2html872 HREF="node175.html#SECTION001090000000000000000"> Time Delay Networks (TDNNs)</A>
+<UL> 
+<LI> <A NAME=tex2html873 HREF="node176.html#SECTION001091000000000000000"> TDNN Fundamentals</A>
+<LI> <A NAME=tex2html874 HREF="node177.html#SECTION001092000000000000000"> TDNN Implementation in SNNS</A>
+<UL> 
+<LI> <A NAME=tex2html875 HREF="node178.html#SECTION001092100000000000000"> Activation Function</A>
+<LI> <A NAME=tex2html876 HREF="node179.html#SECTION001092200000000000000"> Update Function</A>
+<LI> <A NAME=tex2html877 HREF="node180.html#SECTION001092300000000000000"> Learning Function</A>
+</UL> 
+<LI> <A NAME=tex2html878 HREF="node181.html#SECTION001093000000000000000"> Building and Using a Time Delay Network</A>
+</UL> 
+<LI> <A NAME=tex2html879 HREF="node182.html#SECTION0010100000000000000000"> Radial Basis Functions (RBFs)</A>
+<UL> 
+<LI> <A NAME=tex2html880 HREF="node183.html#SECTION0010101000000000000000"> RBF Fundamentals</A>
+<LI> <A NAME=tex2html881 HREF="node184.html#SECTION0010102000000000000000"> RBF Implementation in SNNS</A>
+<UL> 
+<LI> <A NAME=tex2html882 HREF="node185.html#SECTION0010102100000000000000"> Activation Functions</A>
+<LI> <A NAME=tex2html883 HREF="node186.html#SECTION0010102200000000000000"> Initialization Functions</A>
+<LI> <A NAME=tex2html884 HREF="node190.html#SECTION0010102300000000000000"> Learning Functions</A>
+</UL> 
+<LI> <A NAME=tex2html885 HREF="node191.html#SECTION0010103000000000000000"> Building a Radial Basis Function Application</A>
+</UL> 
+<LI> <A NAME=tex2html886 HREF="node192.html#SECTION0010110000000000000000"> Dynamic Decay Adjustment for RBFs (RBF--DDA)</A>
+<UL> 
+<LI> <A NAME=tex2html887 HREF="node193.html#SECTION0010111000000000000000"> The Dynamic Decay Adjustment Algorithm</A>
+<LI> <A NAME=tex2html888 HREF="node194.html#SECTION0010112000000000000000"> Using RBF--DDA in SNNS</A>
+</UL> 
+<LI> <A NAME=tex2html889 HREF="node195.html#SECTION0010120000000000000000"> ART Models in SNNS</A>
+<UL> 
+<LI> <A NAME=tex2html890 HREF="node196.html#SECTION0010121000000000000000"> ART1</A>
+<UL> 
+<LI> <A NAME=tex2html891 HREF="node197.html#SECTION0010121100000000000000"> Structure of an ART1 Network</A>
+<LI> <A NAME=tex2html892 HREF="node198.html#SECTION0010121200000000000000"> Using ART1 Networks in SNNS</A>
+</UL> 
+<LI> <A NAME=tex2html893 HREF="node202.html#SECTION0010122000000000000000"> ART2</A>
+<UL> 
+<LI> <A NAME=tex2html894 HREF="node203.html#SECTION0010122100000000000000"> Structure of an ART2 Network</A>
+<LI> <A NAME=tex2html895 HREF="node204.html#SECTION0010122200000000000000"> Using ART2 Networks in SNNS</A>
+</UL> 
+<LI> <A NAME=tex2html896 HREF="node208.html#SECTION0010123000000000000000"> ARTMAP</A>
+<UL> 
+<LI> <A NAME=tex2html897 HREF="node209.html#SECTION0010123100000000000000"> Structure of an ARTMAP Network</A>
+<LI> <A NAME=tex2html898 HREF="node210.html#SECTION0010123200000000000000"> Using ARTMAP Networks in SNNS</A>
+</UL> 
+<LI> <A NAME=tex2html899 HREF="node214.html#SECTION0010124000000000000000"> Topology of ART Networks in SNNS</A>
+</UL> 
+<LI> <A NAME=tex2html900 HREF="node215.html#SECTION0010130000000000000000"> Self-Organizing Maps (SOMs)</A>
+<UL> 
+<LI> <A NAME=tex2html901 HREF="node216.html#SECTION0010131000000000000000"> SOM Fundamentals</A>
+<LI> <A NAME=tex2html902 HREF="node217.html#SECTION0010132000000000000000"> SOM Implementation in SNNS</A>
+<UL> 
+<LI> <A NAME=tex2html903 HREF="node218.html#SECTION0010132100000000000000"> The KOHONEN Learning Function</A>
+<LI> <A NAME=tex2html904 HREF="node219.html#SECTION0010132200000000000000"> The Kohonen Update Function</A>
+<LI> <A NAME=tex2html905 HREF="node220.html#SECTION0010132300000000000000"> The Kohonen Init Function</A>
+<LI> <A NAME=tex2html906 HREF="node221.html#SECTION0010132400000000000000"> The Kohonen Activation Functions</A>
+<LI> <A NAME=tex2html907 HREF="node222.html#SECTION0010132500000000000000"> Building and Training Self-Organizing Maps</A>
+<LI> <A NAME=tex2html908 HREF="node223.html#SECTION0010132600000000000000"> Evaluation Tools for SOMs</A>
+</UL> 
+</UL> 
+<LI> <A NAME=tex2html909 HREF="node224.html#SECTION0010140000000000000000"> Autoassociative Networks</A>
+<UL> 
+<LI> <A NAME=tex2html910 HREF="node225.html#SECTION0010141000000000000000"> General Characteristics</A>
+<LI> <A NAME=tex2html911 HREF="node226.html#SECTION0010142000000000000000"> Layout of Autoassociative Networks</A>
+<LI> <A NAME=tex2html912 HREF="node227.html#SECTION0010143000000000000000"> Hebbian Learning</A>
+<LI> <A NAME=tex2html913 HREF="node228.html#SECTION0010144000000000000000"> McClelland &amp; Rumelhart's Delta Rule</A>
+</UL> 
+<LI> <A NAME=tex2html914 HREF="node229.html#SECTION0010150000000000000000"> Partial Recurrent Networks</A>
+<UL> 
+<LI> <A NAME=tex2html915 HREF="node230.html#SECTION0010151000000000000000"> Models of Partial Recurrent Networks</A>
+<UL> 
+<LI> <A NAME=tex2html916 HREF="node231.html#SECTION0010151100000000000000"> Jordan Networks</A>
+<LI> <A NAME=tex2html917 HREF="node232.html#SECTION0010151200000000000000"> Elman Networks</A>
+<LI> <A NAME=tex2html918 HREF="node233.html#SECTION0010151300000000000000"> Extended Hierarchical Elman Networks</A>
+</UL> 
+<LI> <A NAME=tex2html919 HREF="node234.html#SECTION0010152000000000000000"> Working with Partial Recurrent Networks</A>
+<UL> 
+<LI> <A NAME=tex2html920 HREF="node235.html#SECTION0010152100000000000000"> The Initialization Function JE_Weights</A>
+<LI> <A NAME=tex2html921 HREF="node236.html#SECTION0010152200000000000000"> Learning Functions</A>
+<LI> <A NAME=tex2html922 HREF="node237.html#SECTION0010152300000000000000"> Update Functions</A>
+</UL> 
+</UL> 
+<LI> <A NAME=tex2html923 HREF="node238.html#SECTION0010160000000000000000"> Stochastic Learning Functions</A>
+<UL> 
+<LI> <A NAME=tex2html924 HREF="node239.html#SECTION0010161000000000000000"> Monte-Carlo</A>
+<LI> <A NAME=tex2html925 HREF="node240.html#SECTION0010162000000000000000"> Simulated Annealing</A>
+</UL> 
+<LI> <A NAME=tex2html926 HREF="node241.html#SECTION0010170000000000000000"> Scaled Conjugate Gradient (SCG)</A>
+<UL> 
+<LI> <A NAME=tex2html927 HREF="node242.html#SECTION0010171000000000000000"> Conjugate Gradient Methods (CGMs)</A>
+<LI> <A NAME=tex2html928 HREF="node243.html#SECTION0010172000000000000000"> Main features of SCG</A>
+<LI> <A NAME=tex2html929 HREF="node244.html#SECTION0010173000000000000000"> Parameters of SCG</A>
+<LI> <A NAME=tex2html930 HREF="node245.html#SECTION0010174000000000000000"> Complexity of SCG</A>
+</UL> 
+</UL> 
+<LI> <A NAME=tex2html931 HREF="node246.html#SECTION001100000000000000000"> Pruning Algorithms</A>
+<UL> 
+<LI> <A NAME=tex2html932 HREF="node247.html#SECTION001110000000000000000"> Background of Pruning Algorithms</A>
+<LI> <A NAME=tex2html933 HREF="node248.html#SECTION001120000000000000000"> Theory of the implemented algorithms</A>
+<UL> 
+<LI> <A NAME=tex2html934 HREF="node249.html#SECTION001121000000000000000"> Magnitude Based Pruning</A>
+<LI> <A NAME=tex2html935 HREF="node250.html#SECTION001122000000000000000"> Optimal Brain Damage</A>
+<LI> <A NAME=tex2html936 HREF="node251.html#SECTION001123000000000000000"> Optimal Brain Surgeon</A>
+<LI> <A NAME=tex2html937 HREF="node252.html#SECTION001124000000000000000"> Skeletonization</A>
+<LI> <A NAME=tex2html938 HREF="node253.html#SECTION001125000000000000000"> Non-contributing Units</A>
+</UL> 
+<LI> <A NAME=tex2html939 HREF="node254.html#SECTION001130000000000000000"> Pruning Nets in SNNS</A>
+</UL> 
+<LI> <A NAME=tex2html940 HREF="node255.html#SECTION001200000000000000000"> 3D-Visualization of Neural Networks</A>
+<UL> 
+<LI> <A NAME=tex2html941 HREF="node256.html#SECTION001210000000000000000"> Overview of the 3D Network Visualization</A>
+<LI> <A NAME=tex2html942 HREF="node257.html#SECTION001220000000000000000"> Use of the 3D-Interface</A>
+<UL> 
+<LI> <A NAME=tex2html943 HREF="node258.html#SECTION001221000000000000000"> Structure of the 3D-Interface</A>
+<LI> <A NAME=tex2html944 HREF="node259.html#SECTION001222000000000000000"> Calling and Leaving the 3D Interface</A>
+<LI> <A NAME=tex2html945 HREF="node260.html#SECTION001223000000000000000"> Creating a 3D-Network</A>
+<UL> 
+<LI> <A NAME=tex2html946 HREF="node261.html#SECTION001223100000000000000"> Concepts</A>
+<LI> <A NAME=tex2html947 HREF="node262.html#SECTION001223200000000000000"> Assigning a new z-Coordinate</A>
+<LI> <A NAME=tex2html948 HREF="node263.html#SECTION001223300000000000000"> Moving a z-Plane</A>
+<LI> <A NAME=tex2html949 HREF="node264.html#SECTION001223400000000000000"> Displaying the z-Coordinates</A>
+<LI> <A NAME=tex2html950 HREF="node265.html#SECTION001223500000000000000"> Example Dialogue to Create a 3D-Network</A>
+</UL> 
+<LI> <A NAME=tex2html951 HREF="node266.html#SECTION001224000000000000000"> 3D-Control Panel</A>
+<UL> 
+<LI> <A NAME=tex2html952 HREF="node267.html#SECTION001224100000000000000"> Transformation Panels</A>
+<LI> <A NAME=tex2html953 HREF="node268.html#SECTION001224200000000000000"> Setup Panel</A>
+<LI> <A NAME=tex2html954 HREF="node269.html#SECTION001224300000000000000"> Model Panel</A>
+<LI> <A NAME=tex2html955 HREF="node270.html#SECTION001224400000000000000"> Project Panel</A>
+<LI> <A NAME=tex2html956 HREF="node271.html#SECTION001224500000000000000"> Light Panel</A>
+<LI> <A NAME=tex2html957 HREF="node272.html#SECTION001224600000000000000"> Unit Panel</A>
+<LI> <A NAME=tex2html958 HREF="node273.html#SECTION001224700000000000000"> Links Panel</A>
+<LI> <A NAME=tex2html959 HREF="node274.html#SECTION001224800000000000000"> Reset Button</A>
+<LI> <A NAME=tex2html960 HREF="node275.html#SECTION001224900000000000000"> Freeze Button</A>
+</UL> 
+<LI> <A NAME=tex2html961 HREF="node276.html#SECTION001225000000000000000"> 3D-Display Window</A>
+</UL> 
+</UL> 
+<LI> <A NAME=tex2html962 HREF="node277.html#SECTION001300000000000000000"> SNNS for Workstation Clusters</A>
+<UL> 
+<LI> <A NAME=tex2html963 HREF="node278.html#SECTION001310000000000000000"> SNNS RPC Programs</A>
+<UL> 
+<LI> <A NAME=tex2html964 HREF="node279.html#SECTION001311000000000000000"> Xguirpc</A>
+<LI> <A NAME=tex2html965 HREF="node280.html#SECTION001312000000000000000"> Kernelrpc</A>
+</UL> 
+<LI> <A NAME=tex2html966 HREF="node281.html#SECTION001320000000000000000"> Control Panels</A>
+<UL> 
+<LI> <A NAME=tex2html967 HREF="node282.html#SECTION001321000000000000000"> SNNS RPC Panel</A>
+<LI> <A NAME=tex2html968 HREF="node283.html#SECTION001322000000000000000"> RPC Setup Panel</A>
+<LI> <A NAME=tex2html969 HREF="node284.html#SECTION001323000000000000000"> New Panel</A>
+<LI> <A NAME=tex2html970 HREF="node285.html#SECTION001324000000000000000"> Transfer Panels</A>
+<LI> <A NAME=tex2html971 HREF="node286.html#SECTION001325000000000000000"> Show Info Panel</A>
+</UL> 
+<LI> <A NAME=tex2html972 HREF="node287.html#SECTION001330000000000000000"> RPC Errors</A>
+</UL> 
+<LI> <A NAME=tex2html973 HREF="node288.html#SECTION001400000000000000000"> Batchman</A>
+<UL> 
+<LI> <A NAME=tex2html974 HREF="node289.html#SECTION001410000000000000000"> Introduction</A>
+<UL> 
+<LI> <A NAME=tex2html975 HREF="node290.html#SECTION001411000000000000000"> Styling Conventions </A>
+<LI> <A NAME=tex2html976 HREF="node291.html#SECTION001412000000000000000">  Calling the Batch Interpreter</A>
+</UL> 
+<LI> <A NAME=tex2html977 HREF="node292.html#SECTION001420000000000000000"> Description of the Batch Language</A>
+<UL> 
+<LI> <A NAME=tex2html978 HREF="node293.html#SECTION001421000000000000000"> Structure of a Batch Program</A>
+<LI> <A NAME=tex2html979 HREF="node294.html#SECTION001422000000000000000"> Data Types and Variables</A>
+<LI> <A NAME=tex2html980 HREF="node295.html#SECTION001423000000000000000"> Variables</A>
+<LI> <A NAME=tex2html981 HREF="node296.html#SECTION001424000000000000000"> System Variables</A>
+<LI> <A NAME=tex2html982 HREF="node297.html#SECTION001425000000000000000"> Operators and Expressions</A>
+<LI> <A NAME=tex2html983 HREF="node298.html#SECTION001426000000000000000"> The Print Function</A>
+<LI> <A NAME=tex2html984 HREF="node299.html#SECTION001427000000000000000"> Control Structures</A>
+<UL> 
+<LI> <A NAME=tex2html985 HREF="node300.html#SECTION001427100000000000000"> The If Instruction</A>
+<LI> <A NAME=tex2html986 HREF="node301.html#SECTION001427200000000000000"> The For Instruction</A>
+<LI> <A NAME=tex2html987 HREF="node302.html#SECTION001427300000000000000"> While and Repeat Instructions</A>
+</UL> 
+</UL> 
+<LI> <A NAME=tex2html988 HREF="node303.html#SECTION001430000000000000000"> SNNS Function Calls</A>
+<UL> 
+<LI> <A NAME=tex2html989 HREF="node304.html#SECTION001431000000000000000"> Function Calls To Set SNNS Parameters</A>
+<UL> 
+<LI> <A NAME=tex2html990 HREF="node305.html#SECTION001431100000000000000"> setInitFunc</A>
+<LI> <A NAME=tex2html991 HREF="node306.html#SECTION001431200000000000000"> setLearnFunc</A>
+<LI> <A NAME=tex2html992 HREF="node307.html#SECTION001431300000000000000"> setUpdateFunc</A>
+<LI> <A NAME=tex2html993 HREF="node308.html#SECTION001431400000000000000"> setPruningFunc</A>
+<LI> <A NAME=tex2html994 HREF="node309.html#SECTION001431500000000000000"> setSubPattern</A>
+<LI> <A NAME=tex2html995 HREF="node310.html#SECTION001431600000000000000"> setShuffle, setSubShuffle</A>
+</UL> 
+<LI> <A NAME=tex2html996 HREF="node311.html#SECTION001432000000000000000"> Function Calls Related To Networks</A>
+<LI> <A NAME=tex2html997 HREF="node312.html#SECTION001433000000000000000"> Pattern Function Calls</A>
+<LI> <A NAME=tex2html998 HREF="node313.html#SECTION001434000000000000000"> Special Functions</A>
+</UL> 
+<LI> <A NAME=tex2html999 HREF="node314.html#SECTION001440000000000000000"> Batchman Example Programs</A>
+<UL> 
+<LI> <A NAME=tex2html1000 HREF="node315.html#SECTION001441000000000000000"> Example 1</A>
+<LI> <A NAME=tex2html1001 HREF="node316.html#SECTION001442000000000000000"> Example 2</A>
+<LI> <A NAME=tex2html1002 HREF="node317.html#SECTION001443000000000000000"> Example 3</A>
+</UL> 
+<LI> <A NAME=tex2html1003 HREF="node318.html#SECTION001450000000000000000"> Snnsbat -- The predessor</A>
+<UL> 
+<LI> <A NAME=tex2html1004 HREF="node319.html#SECTION001451000000000000000"> The Snnsbat Environment</A>
+<LI> <A NAME=tex2html1005 HREF="node320.html#SECTION001452000000000000000"> Using Snnsbat</A>
+<LI> <A NAME=tex2html1006 HREF="node321.html#SECTION001453000000000000000"> Calling Snnsbat</A>
+</UL> 
+</UL> 
+<LI> <A NAME=tex2html1007 HREF="node322.html#SECTION001500000000000000000"> Tools for SNNS</A>
+<UL> 
+<LI> <A NAME=tex2html1008 HREF="node323.html#SECTION001510000000000000000"> Overview</A>
+<LI> <A NAME=tex2html1009 HREF="node324.html#SECTION001520000000000000000"> Analyze</A>
+<UL> 
+<LI> <A NAME=tex2html1010 HREF="node325.html#SECTION001521000000000000000"> Analyzing Functions</A>
+</UL> 
+<LI> <A NAME=tex2html1011 HREF="node326.html#SECTION001530000000000000000"> Bignet</A>
+<LI> <A NAME=tex2html1012 HREF="node327.html#SECTION001540000000000000000"> Convert2snns</A>
+<UL> 
+<LI> <A NAME=tex2html1013 HREF="node328.html#SECTION001541000000000000000"> Setup and Structure of a Control, Weight, Pattern File</A>
+</UL> 
+<LI> <A NAME=tex2html1014 HREF="node329.html#SECTION001550000000000000000"> Feedback-gennet</A>
+<LI> <A NAME=tex2html1015 HREF="node330.html#SECTION001560000000000000000"> Mkhead</A>
+<LI> <A NAME=tex2html1016 HREF="node331.html#SECTION001570000000000000000"> Mkout</A>
+<LI> <A NAME=tex2html1017 HREF="node332.html#SECTION001580000000000000000"> Mkpat</A>
+<LI> <A NAME=tex2html1018 HREF="node333.html#SECTION001590000000000000000"> Netlearn</A>
+<LI> <A NAME=tex2html1019 HREF="node334.html#SECTION0015100000000000000000"> Netperf</A>
+<LI> <A NAME=tex2html1020 HREF="node335.html#SECTION0015110000000000000000"> Pat_sel</A>
+<LI> <A NAME=tex2html1021 HREF="node336.html#SECTION0015120000000000000000"> Snns2c</A>
+<UL> 
+<LI> <A NAME=tex2html1022 HREF="node337.html#SECTION0015121000000000000000"> Program Flow</A>
+<LI> <A NAME=tex2html1023 HREF="node338.html#SECTION0015122000000000000000"> Including the Compiled Network in the Own Application</A>
+<UL> 
+<LI> <A NAME=tex2html1024 HREF="node339.html#SECTION0015122010000000000000"> Interfaces:</A>
+<LI> <A NAME=tex2html1025 HREF="node340.html#SECTION0015122020000000000000"> Example:</A>
+</UL> 
+<LI> <A NAME=tex2html1026 HREF="node341.html#SECTION0015123000000000000000"> Special Network Architectures</A>
+<UL> 
+<LI> <A NAME=tex2html1027 HREF="node342.html#SECTION0015123010000000000000"> TDNN:</A>
+<LI> <A NAME=tex2html1028 HREF="node343.html#SECTION0015123020000000000000"> CPN:</A>
+<LI> <A NAME=tex2html1029 HREF="node344.html#SECTION0015123030000000000000"> DLVQ:</A>
+<LI> <A NAME=tex2html1030 HREF="node345.html#SECTION0015123040000000000000"> BPTT:</A>
+</UL> 
+<LI> <A NAME=tex2html1031 HREF="node346.html#SECTION0015124000000000000000"> Activation Functions</A>
+<UL> 
+<LI> <A NAME=tex2html1032 HREF="node347.html#SECTION0015124010000000000000"> Supported Activation Functions:</A>
+<LI> <A NAME=tex2html1033 HREF="node348.html#SECTION0015124020000000000000"> Including Own Activation Functions:</A>
+</UL> 
+<LI> <A NAME=tex2html1034 HREF="node349.html#SECTION0015125000000000000000"> Error Messages</A>
+</UL> 
+</UL> 
+<LI> <A NAME=tex2html1035 HREF="node350.html#SECTION001600000000000000000"> Kernel Function Interface</A>
+<UL> 
+<LI> <A NAME=tex2html1036 HREF="node351.html#SECTION001610000000000000000"> Overview</A>
+<LI> <A NAME=tex2html1037 HREF="node352.html#SECTION001620000000000000000"> Unit Functions</A>
+<UL> 
+<LI> <A NAME=tex2html1038 HREF="node353.html#SECTION001621000000000000000"> Unit Enquiry and Manipulation Functions</A>
+<LI> <A NAME=tex2html1039 HREF="node354.html#SECTION001622000000000000000"> Unit Definition Functions</A>
+</UL> 
+<LI> <A NAME=tex2html1040 HREF="node355.html#SECTION001630000000000000000"> Site Functions</A>
+<UL> 
+<LI> <A NAME=tex2html1041 HREF="node356.html#SECTION001631000000000000000"> Functions for the Definition of Sites</A>
+<LI> <A NAME=tex2html1042 HREF="node357.html#SECTION001632000000000000000"> Functions for the Manipulation of Sites</A>
+</UL> 
+<LI> <A NAME=tex2html1043 HREF="node358.html#SECTION001640000000000000000"> Link Functions</A>
+<LI> <A NAME=tex2html1044 HREF="node359.html#SECTION001650000000000000000"> Functions for the Manipulation of Prototypes</A>
+<LI> <A NAME=tex2html1045 HREF="node360.html#SECTION001660000000000000000"> Functions to Read the Function Table</A>
+<LI> <A NAME=tex2html1046 HREF="node361.html#SECTION001670000000000000000"> Network Initialization Functions</A>
+<LI> <A NAME=tex2html1047 HREF="node362.html#SECTION001680000000000000000"> Functions for Activation Propagation in the Network</A>
+<LI> <A NAME=tex2html1048 HREF="node363.html#SECTION001690000000000000000"> Learning and Pruning Functions</A>
+<LI> <A NAME=tex2html1049 HREF="node364.html#SECTION0016100000000000000000"> Functions for the Manipulation of Patterns</A>
+<LI> <A NAME=tex2html1050 HREF="node365.html#SECTION0016110000000000000000"> File I/O Functions</A>
+<LI> <A NAME=tex2html1051 HREF="node366.html#SECTION0016120000000000000000"> Functions to Search the Symbol Table</A>
+<LI> <A NAME=tex2html1052 HREF="node367.html#SECTION0016130000000000000000"> Miscelaneous other Interface Functions</A>
+<LI> <A NAME=tex2html1053 HREF="node368.html#SECTION0016140000000000000000"> Memory Management Functions</A>
+<LI> <A NAME=tex2html1054 HREF="node369.html#SECTION0016150000000000000000"> ART Interface Functions</A>
+<LI> <A NAME=tex2html1055 HREF="node370.html#SECTION0016160000000000000000"> Error Messages of the Simulator Kernel</A>
+</UL> 
+<LI> <A NAME=tex2html1056 HREF="node371.html#SECTION001700000000000000000"> Transfer Functions</A>
+<UL> 
+<LI> <A NAME=tex2html1057 HREF="node372.html#SECTION001710000000000000000"> Predefined Transfer Functions</A>
+<LI> <A NAME=tex2html1058 HREF="node373.html#SECTION001720000000000000000"> User Defined Transfer Functions</A>
+</UL> 
+<LI> <A NAME=tex2html1059 HREF="node374.html#SECTION001800000000000000000"> Kernel File Interface</A>
+<UL> 
+<LI> <A NAME=tex2html1060 HREF="node375.html#SECTION001810000000000000000"> The ASCII Network File Format</A>
+<LI> <A NAME=tex2html1061 HREF="node376.html#SECTION001820000000000000000"> Form of the Network File Entries</A>
+<LI> <A NAME=tex2html1062 HREF="node377.html#SECTION001830000000000000000"> Grammar of the Network Files</A>
+<UL> 
+<LI> <A NAME=tex2html1063 HREF="node378.html#SECTION001831000000000000000"> Conventions</A>
+<UL> 
+<LI> <A NAME=tex2html1064 HREF="node379.html#SECTION001831100000000000000"> Lexical Elements of the Grammar</A>
+<LI> <A NAME=tex2html1065 HREF="node380.html#SECTION001831200000000000000"> Definition of the Grammar</A>
+</UL> 
+<LI> <A NAME=tex2html1066 HREF="node381.html#SECTION001832000000000000000"> Terminal Symbols</A>
+<LI> <A NAME=tex2html1067 HREF="node382.html#SECTION001833000000000000000"> Grammar:</A>
+</UL> 
+<LI> <A NAME=tex2html1068 HREF="node383.html#SECTION001840000000000000000"> Grammar of the Pattern Files</A>
+<UL> 
+<LI> <A NAME=tex2html1069 HREF="node384.html#SECTION001841000000000000000"> Terminal Symbols</A>
+<LI> <A NAME=tex2html1070 HREF="node385.html#SECTION001842000000000000000"> Grammar</A>
+</UL> 
+</UL> 
+<LI> <A NAME=tex2html1071 HREF="node386.html#SECTION001900000000000000000"> Example Network Files</A>
+<UL> 
+<LI> <A NAME=tex2html1072 HREF="node387.html#SECTION001910000000000000000"> Example 1:</A>
+<LI> <A NAME=tex2html1073 HREF="node388.html#SECTION001920000000000000000"> Example 2:</A>
+</UL> 
+<LI> <A NAME=tex2html1074 HREF="node389.html#SECTION002000000000000000000">References</A>
+<LI> <A NAME=tex2html1075 HREF="node390.html#SECTION002100000000000000000">Index</A>
+<LI> <A NAME=tex2html1076 HREF="node391.html#SECTION002200000000000000000">   About this document ... </A>
+</UL>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

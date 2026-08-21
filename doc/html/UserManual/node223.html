@@ -1,0 +1,81 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Evaluation Tools for SOMs</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Evaluation Tools for SOMs">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html4506 HREF="node224.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html4504 HREF="node217.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html4500 HREF="node222.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html4508 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html4509 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html4507 HREF="node224.html"> Autoassociative Networks</A>
+<B>Up:</B> <A NAME=tex2html4505 HREF="node217.html"> SOM Implementation in </A>
+<B> Previous:</B> <A NAME=tex2html4501 HREF="node222.html"> Building and Training </A>
+<BR> <HR> <P>
+<H3><A NAME=SECTION0010132600000000000000> Evaluation Tools for SOMs</A></H3>
+<P>
+<A NAME=SOMEva>&#160;</A>
+<P>
+When the results of the learning process are to be analyzed, the tools
+described here can be used to evaluate the qualitative properties of
+the SOM.  In order to provide this functionality, a special panel was
+added. It can be called from the manager panel by clicking the <IMG  ALIGN=BOTTOM ALT="" SRC="img1180.gif"> button and is displayed in figure <A HREF="node223.html#Kopa"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A>. Yet, the panel can
+only be used in combination with the control panel.
+<P>
+<P><A NAME=5943>&#160;</A><A NAME=Kopa>&#160;</A><IMG  ALIGN=BOTTOM ALT="" SRC="img1181.gif">
+<BR><STRONG>Figure:</STRONG> The additional KOHONEN (control) panel<BR>
+<P>
+<P>
+<OL><LI> <b> Euclidian distance</b><BR> 
+The distance between an input vector and the weight vectors can be
+visualized using a distance map. This function allows using the SOM as
+a classifier for arbitrary input patterns: Choose <b> Act_Euclid</b> as
+activation function for the hidden units, then use the <IMG  ALIGN=BOTTOM ALT="" SRC="img1182.gif">
+button in the control panel to see the distance maps of consecutive
+patterns. As green squares (big filled squares on B/W terminals)
+indicate high activations, green squares here mean big distances,
+while blue squares represent small distances.  Note: The input vector
+is not normalized before calculating the distance to the competitive
+units. This doesn't affect the qualitative appearance of the distance
+maps, but offers the advantage of evaluating SOMs that were generated
+by different SOM-algorithms (learning without normalization).  If the
+dot product as similarity measure is to be used select <b>
+Act_Identity</b> as activation function for the hidden units.
+<P>
+<LI> <b> Component maps</b> <BR> 
+To determine the quality of the clustering for each component of the
+input vector use this function of the SOM analyzing tool. Due to the
+topology-preserving nature of the SOM algorithm, the component maps
+can be compared after printing, thereby detecting correlations between
+some components: Choose the activation function <b> Act_Component</b>
+for the hidden units. Just like displaying a pattern, component maps
+can be displayed using the <b> LAYER</b> buttons in the <b> KOHONEN</b>
+panel. Again, green squares represent large, positive weights.
+<P>
+<LI> <b> Winning Units</b> <BR> 
+The set of units that came out as winners in the learning process can
+also be displayed in SNNS. This shows the distribution of patterns on
+the SOM.  To proceed, turn on <b> units top</b> in the setup window of
+the display and select the <b> winner</b> item to be shown. New winning
+units will be displayed without deleting the existing, which enables
+tracing the temporal development of clusters while learning is in
+progress.  The display of the winning units is refreshed by pressing
+the <IMG  ALIGN=BOTTOM ALT="" SRC="img1183.gif"> button again.
+<P>
+<b> Note:</b> Since the winner algorithm is part of the KOHONEN
+learning function, the learning parameters must be set as if learning
+is to be performed.
+<P>
+</OL><BR> <HR><A NAME=tex2html4506 HREF="node224.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html4504 HREF="node217.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html4500 HREF="node222.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html4508 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html4509 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html4507 HREF="node224.html"> Autoassociative Networks</A>
+<B>Up:</B> <A NAME=tex2html4505 HREF="node217.html"> SOM Implementation in </A>
+<B> Previous:</B> <A NAME=tex2html4501 HREF="node222.html"> Building and Training </A>
+<BR> <HR> <P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

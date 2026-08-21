@@ -1,0 +1,128 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Inversion Display</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Inversion Display">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html3319 HREF="node139.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html3317 HREF="node136.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html3311 HREF="node137.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html3321 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html3322 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html3320 HREF="node139.html"> Example Session</A>
+<B>Up:</B> <A NAME=tex2html3318 HREF="node136.html"> Inversion</A>
+<B> Previous:</B> <A NAME=tex2html3312 HREF="node137.html"> The Algorithm</A>
+<BR> <HR> <P>
+<H2><A NAME=SECTION00912000000000000000> Inversion Display</A></H2>
+<P>
+<A NAME=3297>&#160;</A>
+<A NAME=3298>&#160;</A>
+<P>
+The inversion algorithm is called by clicking the <IMG  ALIGN=BOTTOM ALT="" SRC="img684.gif">
+button in the manager panel.
+<P>
+Picture <A HREF="node138.html#invdispl1"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A> shows an example of the generated display.
+<P>
+<P><A NAME=3667>&#160;</A><IMG  ALIGN=BOTTOM ALT="" SRC="img685.gif">
+<BR><STRONG>Figure:</STRONG> <A NAME=invdispl1>&#160;</A>The Inversion Display<BR>
+<P>
+<P>
+The display consists of two regions. The larger, lower part contains a
+sketch of the input and output units of the network, while the upper
+line holds a series of buttons. Their respective functions are:
+<P>
+
+<P>
+<OL><LI> <IMG  ALIGN=BOTTOM ALT="" SRC="img686.gif">: Quits the inversion algorithm and closes the
+display.
+<P>
+<LI> <IMG  ALIGN=BOTTOM ALT="" SRC="img687.gif">: Starts / Continues the algorithm. The program
+starts iterating by slowly changing the input pattern until either the
+STOP button is pressed, or the generated output pattern approximates
+the desired output pattern sufficiently well. Sufficiently well means
+that all output units have an activation which differs from the
+expected activation of that unit by at most a value of <IMG  ALIGN=MIDDLE ALT="" SRC="img688.gif">.
+This error limit can be set in the setup panel (see below). During the
+iteration run, the program prints status reports to stdout.
+<A NAME=3315>&#160;</A>
+<P>
+<tt>
+<PRE>    cycle 50 inversion error 0.499689 still 1 error unit(s)
+    cycle 100 inversion error 0.499682 still 1 error unit(s)
+    cycle 150 inversion error 0.499663 still 1 error unit(s)
+    cycle 200 inversion error 0.499592 still 1 error unit(s)
+    cycle 250 inversion error 0.499044 still 1 error unit(s)
+    cycle 269 inversion error 0.000000 0 error units left
+</PRE>
+</tt>
+<P>
+where cycle is the number of the current iteration, inversion error is
+the sum of the squared error of the output units for the current input
+pattern, and error units are all units that have an activation that
+differs more than the value of  <IMG  ALIGN=MIDDLE ALT="" SRC="img689.gif"> from the target activation.
+<P>
+<LI> <IMG  ALIGN=BOTTOM ALT="" SRC="img690.gif">: Interrupts the iteration. The status of the network
+remains unchanged. The interrupt causes the current activations of the
+units to be displayed on the screen. A click to the <IMG  ALIGN=BOTTOM ALT="" SRC="img691.gif"> button
+continues the algorithm from its last state.  Alternatively the
+algorithm can be reset before the restart by a click to the <IMG  ALIGN=BOTTOM ALT="" SRC="img692.gif">
+button, or continued with other parameters after a change in the
+setup. Since there is no automatic recognition of infinite loops in
+the implementation, the <IMG  ALIGN=BOTTOM ALT="" SRC="img693.gif"> button is also necessary when the
+algorithm obviously does not converge.
+<P>
+<LI> <IMG  ALIGN=BOTTOM ALT="" SRC="img694.gif"> Resets the network to a defined initial status.  All
+variables are assigned the values in the setup panel.  The iteration
+counter is set to zero.
+<P>
+
+<LI> <IMG  ALIGN=BOTTOM ALT="" SRC="img695.gif">: Opens a pop-up window to set all variables
+associated with the inversion. These variables are:
+<A NAME=3324>&#160;</A>
+<P>
+<P><IMG  ALIGN=BOTTOM ALT="" SRC="img696.gif"><P>
+<P>
+A short description of all these variables can be found in an
+associated help window, which pops up on pressing <IMG  ALIGN=BOTTOM ALT="" SRC="img697.gif"> in the
+setup window.
+<P>
+The variable <tt> second approximation</tt> can be understood as follows:
+Since the goal is to get a desired output, the first approximation is
+to get the network output as close as possible to the target output.
+There may be several input patterns generating the same output. To
+reduce the number of possible input patterns, the second approximation
+specifies a pattern the computed input pattern should approximate as
+well as possible. For a setting of 1.0 for the variable <tt> Input
+pattern</tt> the algorithm tries to keep as many input units as possible
+on a high activation, while a value of 0.0 increases the number
+of inactive input units. The variable <tt> 2nd approx ratio</tt> defines
+then the importance of this input approximation.
+<P>
+It should be mentioned, however, that the algorithm is very unstable.
+One inversion run may converge, while another with only slightly
+changed variable settings may run indefinitely. The user therefore may
+have to try several combinations of variable values before a
+satisfying result is achieved. In general, the better the net was
+previously trained, the more likely is a positive inversion result.
+<P>
+<LI> <IMG  ALIGN=BOTTOM ALT="" SRC="img698.gif">: Opens a window with a short help on handling the
+inversion display.
+<P>
+</OL>
+<P>
+The network is displayed in the lower part of the window according to
+the settings of the last opened 2D--display window. Size, color, and
+orientation of the units are read from that display pointer.
+<P>
+<BR> <HR><A NAME=tex2html3319 HREF="node139.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html3317 HREF="node136.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html3311 HREF="node137.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html3321 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html3322 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html3320 HREF="node139.html"> Example Session</A>
+<B>Up:</B> <A NAME=tex2html3318 HREF="node136.html"> Inversion</A>
+<B> Previous:</B> <A NAME=tex2html3312 HREF="node137.html"> The Algorithm</A>
+<BR> <HR> <P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Graphical Network Editor</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Graphical Network Editor">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html2909 HREF="node108.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html2907 HREF="UserManual.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html2901 HREF="node106.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html2911 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html2912 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html2910 HREF="node108.html"> Editor Modes</A>
+<B>Up:</B> <A NAME=tex2html2908 HREF="UserManual.html">No Title</A>
+<B> Previous:</B> <A NAME=tex2html2902 HREF="node106.html"> Variable Size Patterns</A>
+<BR> <HR> <P>
+<H1><A NAME=SECTION00700000000000000000> Graphical Network Editor</A></H1>
+<P>
+<A NAME=XGUIEditor>&#160;</A>
+<A NAME=2351>&#160;</A>
+<P>
+The graphical user interface of SNNS has a network editor built in.
+With the network editor it is possible to generate a new network or to
+modify an existing network in various ways. There also exist commands
+to change the display style of the network.
+<P>
+As an introduction, operations on networks without sites will be
+discussed first, since they are easier to learn and understand.
+Operations that have a restricted or slightly different meaning for
+networks with sites are displayed with the extension <em> (Sites!)</em> in
+the following overview. These changes are discussed in detail in section
+ <A HREF="node114.html#EditorCommands"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A>.
+<P>
+As usual with most applications of X-Windows, the mouse must be in the
+window in which an input is to appear. This means that the mouse must
+be in the display window for editor operations to occur. If the mouse
+is moved in a display, the status indicator of the manager panel
+changes each time a new raster position in the display is reached.
+<P>
+Different displays of a network can be seen as different views of the
+same object. This means that all commands in one display may affect
+objects (units, links) in the other displays. Objects are moved or
+copied in a second display window in the same way as they are moved or
+copied in the first display window.
+<P>
+<A NAME=2355>&#160;</A>
+The editor operations are usually invoked by a sequence of 2 to 4 keys
+on the keyboard. They only take place when the last key of the command
+(e.g. deletion of units) is pressed. We found that for some of
+us, the fastest way to work with the editor was to move the mouse with
+one hand and to type on the keyboard with the other hand. Keyboard
+actions and mouse movement may occur at the same time, the mouse position
+is only relevant when the last key of the sequence is pressed.
+<P>
+The keys that are sufficient to invoke a part of a command are written
+in capital letters in the commands. The message line in the manager
+panel indicates the completed parts of the command sequence. Invalid
+keys are ignored by the editor.
+<P>
+As an example, if one presses the keys <tt> U</tt> for <tt> Units</tt> and
+<tt> C</tt> for <tt> Copy</tt> the status line changes as follows:
+<P>
+<PRE><TT> 
+<b> status line</b> 		 <b> command</b> 		 <b> comment</b>
+<P>
+<tt> &gt;</tt> 		 <tt> Units</tt> 		 operation on units
+<P>
+<tt> Units&gt;</tt> 		 <tt> Copy</tt> 		 copying of units
+<P>
+<tt> Units Copy&gt;</tt> 		 		 (the sequence is not completed yet)
+<P>
+</TT></PRE>
+<P>
+To the left of the caret the fully expanded input sequence is
+displayed. At this place also a message is displayed when a command
+sequence is accepted and the corresponding operation is called. This
+serves as feedback, especially if the operation takes some time. If
+the operation completes quickly, only a short flicker of the text
+displayed can be seen. Some error messages appear in the confirmer,
+others in the message line.
+<P>
+<BR> <HR>
+<UL> 
+<LI> <A NAME=tex2html2913 HREF="node108.html#SECTION00710000000000000000"> Editor Modes</A>
+<LI> <A NAME=tex2html2914 HREF="node109.html#SECTION00720000000000000000"> Selection</A>
+<UL> 
+<LI> <A NAME=tex2html2915 HREF="node110.html#SECTION00721000000000000000"> Selection of Units</A>
+<LI> <A NAME=tex2html2916 HREF="node111.html#SECTION00722000000000000000"> Selection of Links</A>
+</UL> 
+<LI> <A NAME=tex2html2917 HREF="node112.html#SECTION00730000000000000000"> Use of the Mouse</A>
+<LI> <A NAME=tex2html2918 HREF="node113.html#SECTION00740000000000000000"> Short Command Reference</A>
+<LI> <A NAME=tex2html2919 HREF="node114.html#SECTION00750000000000000000"> Editor Commands</A>
+<LI> <A NAME=tex2html2920 HREF="node115.html#SECTION00760000000000000000"> Example Dialogue</A>
+</UL>
+<BR> <HR><A NAME=tex2html2909 HREF="node108.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html2907 HREF="UserManual.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html2901 HREF="node106.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html2911 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html2912 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html2910 HREF="node108.html"> Editor Modes</A>
+<B>Up:</B> <A NAME=tex2html2908 HREF="UserManual.html">No Title</A>
+<B> Previous:</B> <A NAME=tex2html2902 HREF="node106.html"> Variable Size Patterns</A>
+<BR> <HR> <P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

@@ -1,0 +1,40 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Changes in Release 3.3</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Changes in Release 3.3">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html3578 HREF="node152.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html3576 HREF="node150.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html3570 HREF="node150.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html3580 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html3581 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html3579 HREF="node152.html"> General Description</A>
+<B>Up:</B> <A NAME=tex2html3577 HREF="node150.html"> RPROP</A>
+<B> Previous:</B> <A NAME=tex2html3571 HREF="node150.html"> RPROP</A>
+<BR> <HR> <P>
+<H2><A NAME=SECTION001031000000000000000> Changes in Release 3.3</A></H2>
+<P>
+The implementation of Rprop has been changed in two ways: First, the
+implementation now follows a slightly modified adaptation
+scheme. Essentially, the backtracking step is no longer performed, if
+a jump over a minimum occurred.  Second, a weight-decay term is
+introduced. The weight-decay parameter <IMG  ALIGN=BOTTOM ALT="" SRC="img751.gif"> (the third learning
+parameter) determines the relationship of two goals, namely to reduce
+the output error (the standard goal) and to reduce the size of the
+weights (to improve generalization).  The composite error function is:
+<P><IMG  ALIGN=BOTTOM ALT="" SRC="img752.gif"><P>
+<P>
+<em> Important:</em> Please note that the weight decay parameter <IMG  ALIGN=BOTTOM ALT="" SRC="img753.gif">
+denotes the exponent, to allow comfortable input of very small
+weight-decay.  A choice of the third learning parameter <IMG  ALIGN=BOTTOM ALT="" SRC="img754.gif">
+corresponds to a ratio of weight decay term to output error of
+<IMG  ALIGN=MIDDLE ALT="" SRC="img755.gif">.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

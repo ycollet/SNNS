@@ -1,0 +1,86 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> DLVQ in SNNS</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" DLVQ in SNNS">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html3700 HREF="node162.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html3698 HREF="node159.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html3692 HREF="node160.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html3702 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html3703 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html3701 HREF="node162.html"> Remarks</A>
+<B>Up:</B> <A NAME=tex2html3699 HREF="node159.html"> Dynamic Learning Vector </A>
+<B> Previous:</B> <A NAME=tex2html3693 HREF="node160.html"> DLVQ Fundamentals</A>
+<BR> <HR> <P>
+<H2><A NAME=SECTION001062000000000000000> DLVQ in SNNS</A></H2>
+<P>
+To start DLVQ, the learning function <tt> DLVQ</tt>, the
+update function <tt> DLVQ_Update</tt>, and the init function <tt>
+DLVQ_Weights</tt> have to be selected in the corresponding menus. The
+init functions of <tt> DLVQ</tt> differ a little from the normal
+function: if a DLVQ net is initialized, all hidden units are deleted.
+<P>
+As with learning rules CC and RCC the text field <tt> CYCLE</tt> in
+the control panel does <b> not</b> specify the number of learning cycles.
+This field is used to specify the maximal number of class units to be
+generated for each class during learning. The number of learning
+cycles is entered as the third parameter in the control panel (see below).
+<P>
+<OL><LI> <IMG  ALIGN=MIDDLE ALT="" SRC="img830.gif">: learning rate, specifies the step width of the mean
+vector <IMG  ALIGN=MIDDLE ALT="" SRC="img831.gif">, which is nearest to a pattern <IMG  ALIGN=MIDDLE ALT="" SRC="img832.gif">,
+towards this pattern. Remember that <IMG  ALIGN=MIDDLE ALT="" SRC="img833.gif"> is moved only, if
+<IMG  ALIGN=MIDDLE ALT="" SRC="img834.gif"> is not assigned to the correct class <IMG  ALIGN=MIDDLE ALT="" SRC="img835.gif">. A typical
+value is 0.03.
+<P>
+<LI> <IMG  ALIGN=MIDDLE ALT="" SRC="img836.gif">: learning rate, specifies the step width of a mean
+vector <IMG  ALIGN=MIDDLE ALT="" SRC="img837.gif">, to which a pattern of class <IMG  ALIGN=MIDDLE ALT="" SRC="img838.gif"> is falsely
+assigned to, away from this pattern. A typical value is 0.03. Best
+results can be achieved, if the condition <IMG  ALIGN=MIDDLE ALT="" SRC="img839.gif"> is
+satisfied.
+<P>
+<LI> Number of cycles you want to train the net before additive mean
+vectors are calculated.
+</OL>
+<P>
+If the topology of a net fits to the DLVQ architecture SNNS will order
+the units and layers from left to right independent in the following way:
+input layer, hidden layer output layer.  The hidden layer itself is
+ordered by classes.
+<P>
+The output layer must consist of only one unit. At the start of the
+learning phase it does not matter whether the output layer and the
+input layer are connected.  If hidden units exist, they are fully
+connected with the input layer. The links between these layers contain
+the values of the the mean vectors.  The output layer and the hidden
+layer are fully connected. All these links have the value 1 assigned.
+<P>
+<P><A NAME=3989>&#160;</A><A NAME=dlvqnet>&#160;</A><IMG  ALIGN=BOTTOM ALT="" SRC="img840.gif">
+<BR><STRONG>Figure:</STRONG> Topology of a net which was trained with DLVQ.<BR>
+<P>
+<P>
+The output pattern contains information on which class the input
+pattern belongs to. The lowest class must have the name 0. If there are
+<b>n</b> classes, the n-th class has the name <b>n-1</b>. If these conditions are
+violated, an error occurs. Figure <A HREF="node161.html#dlvqnet"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A> shows the topology of a
+net. In the bias of every class unit its class name is stored. It can be
+retrieved by clicking on a class unit with right mouse button.
+<P>
+<b> Note:</b> In the first implementation of DLVQ the input patterns
+were automatically normalized by the algorithm. This step was
+eliminated, since is produced undesired behavior in some cases. Now
+the user has to take all necessary steps to normalize the input
+vectors correctly before loading them into SNNS.
+<P>
+<BR> <HR><A NAME=tex2html3700 HREF="node162.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html3698 HREF="node159.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html3692 HREF="node160.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html3702 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html3703 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html3701 HREF="node162.html"> Remarks</A>
+<B>Up:</B> <A NAME=tex2html3699 HREF="node159.html"> Dynamic Learning Vector </A>
+<B> Previous:</B> <A NAME=tex2html3693 HREF="node160.html"> DLVQ Fundamentals</A>
+<BR> <HR> <P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

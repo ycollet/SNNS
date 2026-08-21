@@ -1,0 +1,74 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> ART2 Initialization Function</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" ART2 Initialization Function">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html4280 HREF="node206.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html4278 HREF="node204.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html4272 HREF="node204.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html4282 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html4283 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html4281 HREF="node206.html"> ART2 Learning Function</A>
+<B>Up:</B> <A NAME=tex2html4279 HREF="node204.html"> Using ART2 Networks </A>
+<B> Previous:</B> <A NAME=tex2html4273 HREF="node204.html"> Using ART2 Networks </A>
+<BR> <HR> <P>
+<H4><A NAME=SECTION0010122210000000000000> ART2 Initialization Function</A></H4>
+<P>
+<A NAME=5184>&#160;</A>
+<P>
+For an ART2 network the weights of the top-down-links
+(F<IMG  ALIGN=MIDDLE ALT="" SRC="img1072.gif">  <IMG  ALIGN=BOTTOM ALT="" SRC="img1073.gif"> F<IMG  ALIGN=MIDDLE ALT="" SRC="img1074.gif">  links) are set to 0.0 according to the
+theory ([<A HREF="node389.html#CG87b">CG87b</A>]).
+<P>
+The choice of the initial bottom-up-weights is determined as follows:
+if a pattern has been trained, then the next
+presentation of the same pattern must not generate a new winning class.
+On the contrary, the same F<IMG  ALIGN=MIDDLE ALT="" SRC="img1075.gif">  unit should win, with a higher
+activation than all the other recognition units.
+<P>
+This implies that the norm of the initial weight-vector has to be
+smaller than the one it has after several training cycles.
+If <b>J</b> (<IMG  ALIGN=MIDDLE ALT="" SRC="img1076.gif">) is the actual winning unit in F<IMG  ALIGN=MIDDLE ALT="" SRC="img1077.gif"> , then
+equation <A HREF="node205.html#eqf1f2weights4"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A> is given by the theory:
+<P>
+<P><A NAME=eqf1f2weights4>&#160;</A><IMG  ALIGN=BOTTOM ALT="" SRC="img1078.gif"><P>
+<P>
+where <b> z</b><IMG  ALIGN=BOTTOM ALT="" SRC="img1079.gif"> is the the weight vector of the links from the
+F<IMG  ALIGN=MIDDLE ALT="" SRC="img1080.gif">  units to the <b>J</b>th F<IMG  ALIGN=MIDDLE ALT="" SRC="img1081.gif">  unit and where d is a parameter, described
+below.
+<P>
+If all initial values <IMG  ALIGN=MIDDLE ALT="" SRC="img1082.gif"> are presumed to be equal, this means:
+<P>
+<P><A NAME=eqf1f2weights5>&#160;</A><IMG  ALIGN=BOTTOM ALT="" SRC="img1083.gif"><P>
+<P>
+If equality is chosen in equation <A HREF="node205.html#eqf1f2weights5"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A>, then ART2 will
+be as sensitive as possible.
+<P>
+To transform the inequality <A HREF="node205.html#eqf1f2weights5"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A> to an equation,
+in order to compute values, we introduce another
+parameter <IMG  ALIGN=MIDDLE ALT="" SRC="img1084.gif"> and get:
+<P>
+<P><A NAME=eqf1f2weights6>&#160;</A><IMG  ALIGN=BOTTOM ALT="" SRC="img1085.gif"><P>
+<P>
+where <IMG  ALIGN=MIDDLE ALT="" SRC="img1086.gif">.
+<P>
+To initialize an ART2 network, the function <tt> ART2_Weights</tt> has to
+be selected.  Specify the parameters d and <IMG  ALIGN=MIDDLE ALT="" SRC="img1087.gif"> as the first and
+second initialization parameter. (A description of parameter d is given
+in the subsection on the ART2 learning function.)  Finally press the
+<IMG  ALIGN=BOTTOM ALT="" SRC="img1088.gif">-button to initialize the net.
+<P>
+<b> WARNING!</b> You should always use <tt> ART2_Weights</tt> to initialize
+ART2 networks. When using another SNNS initialization function the
+behavior of the simulator during learning is not predictable, because
+not only the trainable links will be initialized, but also the fixed
+weights of the network.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

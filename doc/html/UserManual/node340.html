@@ -1,0 +1,55 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Example:</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Example:">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html6076 HREF="node341.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html6074 HREF="node338.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html6070 HREF="node339.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html6078 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html6079 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html6077 HREF="node341.html"> Special Network Architectures</A>
+<B>Up:</B> <A NAME=tex2html6075 HREF="node338.html"> Including the Compiled </A>
+<B> Previous:</B> <A NAME=tex2html6071 HREF="node339.html"> Interfaces:</A>
+<BR> <HR> <P>
+<H4><A NAME=SECTION0015122020000000000000> Example:</A></H4>
+<P>
+If a trained network, was saved as ``myNetwork.net'' and compiled
+with 
+<tt> snns2c myNetwork.net</tt>
+<P>
+then the generated Network can be compiled with
+<tt> gcc -c myNetwork.c</tt>
+<P>
+To include the network in your own application the header file must be
+included. There should also two arrays being provided, one for the
+input and one for the output of the network. The number of inputs and
+outputs can be derived from a record in the header file. This struct
+is named like the function which contains the compiled network and has
+the suffix REC to mark the record. So the number of input units is
+determined with <tt> myNetworkREC.NoOfInput</tt> and the number of outputs
+with <tt> myNetworkREC.NoOfOutput</tt> in this example.  Hence, your own
+application should contain:
+<P>
+<IMG  ALIGN=BOTTOM ALT="" SRC="img1422.gif">
+<PRE>#include &quot;myNetwork.h&quot;
+</PRE>
+<IMG  ALIGN=BOTTOM ALT="" SRC="img1423.gif">
+<PRE>float *netInput, *netOutput; /* Input and Output arrays of the Network */
+netInput  = malloc(myNetworkREC.NoOfInput  * sizeof(float));
+netOutput = malloc(myNetworkREC.NoOfOutput * sizeof(float));
+</PRE>
+<IMG  ALIGN=BOTTOM ALT="" SRC="img1424.gif">
+<PRE>myNetwork(netInput, netOutput, 0)
+</PRE>
+<IMG  ALIGN=BOTTOM ALT="" SRC="img1425.gif"><BR> 
+Don't forget to link the object code of the network to your application
+<P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

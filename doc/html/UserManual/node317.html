@@ -1,0 +1,55 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Example 3</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Example 3">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html5765 HREF="node318.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html5763 HREF="node314.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html5759 HREF="node316.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html5767 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html5768 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html5766 HREF="node318.html"> Snnsbat -- The </A>
+<B>Up:</B> <A NAME=tex2html5764 HREF="node314.html"> Batchman Example Programs</A>
+<B> Previous:</B> <A NAME=tex2html5760 HREF="node316.html"> Example 2</A>
+<BR> <HR> <P>
+<H2><A NAME=SECTION001443000000000000000> Example 3</A></H2>
+<P>
+The last example program shows how the user can validate the training
+with a second pattern file. The net is trained with one training
+pattern file and the error, which is used to determine when training
+should be stopped, is measured on a second pattern file. Thereby it is
+possible to estimate if the net is able to classify unknown patterns
+correctly:
+<P>
+<blockquote> <PRE>loadNet (&quot;test.net&quot;)
+loadPattern (&quot;validate.pat&quot;)
+loadPattern (&quot;training.pat&quot;)
+initNet ()
+
+repeat
+  for i := 1 to 20 do
+    trainNet ()
+  endfor
+  saveNet (&quot;test.&quot; + CYCLES + &quot;cycles.net&quot;)
+  setPattern (&quot;validate.pat&quot;)
+  testNet ()
+  valid_error := SSE
+  setPattern (&quot;training.pat&quot;)
+until valid_error &lt; 2.5
+
+saveResult (&quot;test.res&quot;)
+</PRE></blockquote>
+<P>
+The program trains a net for 20 cycles and saves it under a new name  
+for every iteration of the repeat instruction. Each time the program tests 
+the net with the validation pattern set. This process is repeated until 
+the error of the validation set is smaller than 2.5
+<P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

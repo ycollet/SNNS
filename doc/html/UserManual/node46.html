@@ -1,0 +1,84 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Weight Display</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Weight Display">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html2137 HREF="node47.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html2135 HREF="node32.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html2129 HREF="node45.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html2139 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html2140 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html2138 HREF="node47.html"> Projection Panel</A>
+<B>Up:</B> <A NAME=tex2html2136 HREF="node32.html"> Windows of XGUI</A>
+<B> Previous:</B> <A NAME=tex2html2130 HREF="node45.html"> Graph Window</A>
+<BR> <HR> <P>
+<H2><A NAME=SECTION00537000000000000000> Weight Display</A></H2>
+<P>
+<A NAME=1422>&#160;</A>
+<A NAME=1423>&#160;</A>
+<P>
+<P><A NAME=2242>&#160;</A><IMG  ALIGN=BOTTOM ALT="" SRC="img214.gif">
+<BR><STRONG>Figure:</STRONG> <A NAME=Hinton>&#160;</A> A typical Hinton diagram<BR>
+<P>
+<P>
+The weight display window is a separate window specialized for
+displaying the weights of a network. It is called from the manager
+panel with the <IMG  ALIGN=BOTTOM ALT="" SRC="img215.gif"> button, or by typing Alt-w in any
+snns window. On black-and-white screens the weights are represented as
+squares with changing size in a Hinton diagram, while on color
+screens, fixed size squares with changing colors (WV-diagrams) are
+used. It can be used to analyze the weight distribution, or to observe
+the weight development during learning.
+<P>
+Initially the window has a size of 400x400 pixel.The weights are
+represented by <IMG  ALIGN=BOTTOM ALT="" SRC="img216.gif"> pixels on B/W and <IMG  ALIGN=BOTTOM ALT="" SRC="img217.gif"> pixels on color terminals.
+If the net is small, the square sizes are automatically enlarged to fill up
+the window. If the weights do not fit into the window, the scrollbars
+attached to the window allow scrolling over the display.
+<P>
+These settings may be changed by the user by pressing the
+<IMG  ALIGN=BOTTOM ALT="" SRC="img218.gif"> and <IMG  ALIGN=BOTTOM ALT="" SRC="img219.gif"> buttons in the upper part of the
+window. <IMG  ALIGN=BOTTOM ALT="" SRC="img220.gif"> enlarges the weight square by one pixel on each
+side, while <IMG  ALIGN=BOTTOM ALT="" SRC="img221.gif"> shrinks it.
+<P>
+The setup panel lets the user change the look of the display
+further. Here the width of the underlying grid can be changed. If the
+grid size is bigger than the number of connections in the network, no
+grid will be displayed. Also the color scale (resp. size scale for
+B/W) can be changed here. The initial settings correspond to the SNNS
+variables <tt> max_weight</tt> and <tt> min_weight</tt>.
+<P>
+<A NAME=1441>&#160;</A>
+In a Hinton diagram, the size of a square corresponds to the absolute
+size of the correlated link. A filled square represents positive, an
+square frame negative links. The maximum size of the squares is
+computed automatically, to allow an optimal use of the display.
+<A NAME=1442>&#160;</A>
+In a WV diagram color is used to code the value of a link. Here, a bright
+red is used for large negative values and a bright green is used for
+positive values. Intermediate numbers have a lighter color and the
+value zero is represented by white. A reference color scale is
+displayed in the top part of the window. The user also has the
+possibility to display the numerical value of the link by clicking
+any mouse button while the mouse pointer is on the square. A popup
+window then gives source and target unit of the current link as well
+as its weight.
+<P>
+For a better overall orientation the numbers of the units are printed
+all around the display and a grid with user definable size is used. In
+this numbering the units on top of the screen represent source units,
+while numbers to the left and right represent target units.
+<P>
+<BR> <HR><A NAME=tex2html2137 HREF="node47.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html2135 HREF="node32.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html2129 HREF="node45.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html2139 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html2140 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html2138 HREF="node47.html"> Projection Panel</A>
+<B>Up:</B> <A NAME=tex2html2136 HREF="node32.html"> Windows of XGUI</A>
+<B> Previous:</B> <A NAME=tex2html2130 HREF="node45.html"> Graph Window</A>
+<BR> <HR> <P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

@@ -1,0 +1,100 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> ART Models in SNNS</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" ART Models in SNNS">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html4131 HREF="node196.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html4129 HREF="node143.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html4123 HREF="node194.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html4133 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html4134 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html4132 HREF="node196.html"> ART1</A>
+<B>Up:</B> <A NAME=tex2html4130 HREF="node143.html"> Neural Network Models </A>
+<B> Previous:</B> <A NAME=tex2html4124 HREF="node194.html"> Using RBF--DDA in </A>
+<BR> <HR> <P>
+<H1><A NAME=SECTION0010120000000000000000> ART Models in SNNS</A></H1>
+<P>
+<A NAME=artmodelsinsnns>&#160;</A>
+<A NAME=4831>&#160;</A>
+<P>
+
+<P>
+
+<P>
+
+<P>
+
+<P>
+
+<P>
+This section will describe the use of the three ART models ART1, ART2
+and ARTMAP, as they are implemented in SNNS.  It will not give
+detailed information on the <A NAME=5061>&#160;</A> Adaptive
+Resonance Theory. You should already know the theory to be able to
+understand this chapter. For the theory the following literature is
+recommended:
+<P>
+<UL>
+<DT>[<A HREF="node389.html#CG87a">CG87a</A>]
+<DD>  Original paper, describing ART1 theory.
+<DT>[<A HREF="node389.html#CG87b">CG87b</A>]
+<DD>  Original paper, describing ART2 theory.
+<DT>[<A HREF="node389.html#CG91">CG91</A>]
+<DD>   Original paper, describing ARTMAP theory.
+<DT>[<A HREF="node389.html#Her92">Her92</A>]
+<DD>  Description of theory, implementation and application
+                     of the ART models in SNNS (in German).
+</UL>
+<P>
+There will be one subsection for each of the three models and one subsection
+describing the required topologies of the networks when using the ART
+learning-, update- or initialization-functions. These topologies are
+rather complex. For this reason the network creation tool <b> BigNet</b>
+has been extended.  It now offers an easy way to create ART1, ART2 and
+ARTMAP networks according to your requirements.  For a detailed
+explanation of the respective features of <b> BigNet</b> see
+chapter <A HREF="node116.html#Bignet"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A>.
+<P>
+
+<BR> <HR>
+<UL> 
+<LI> <A NAME=tex2html4135 HREF="node196.html#SECTION0010121000000000000000"> ART1</A>
+<UL> 
+<LI> <A NAME=tex2html4136 HREF="node197.html#SECTION0010121100000000000000"> Structure of an ART1 Network</A>
+<LI> <A NAME=tex2html4137 HREF="node198.html#SECTION0010121200000000000000"> Using ART1 Networks in SNNS</A>
+<UL> 
+<LI> <A NAME=tex2html4138 HREF="node199.html#SECTION0010121210000000000000"> ART1 Initialization Function</A>
+<LI> <A NAME=tex2html4139 HREF="node200.html#SECTION0010121220000000000000"> ART1 Learning Function</A>
+<LI> <A NAME=tex2html4140 HREF="node201.html#SECTION0010121230000000000000"> ART1 Update Functions</A>
+</UL> 
+</UL> 
+<LI> <A NAME=tex2html4141 HREF="node202.html#SECTION0010122000000000000000"> ART2</A>
+<UL> 
+<LI> <A NAME=tex2html4142 HREF="node203.html#SECTION0010122100000000000000"> Structure of an ART2 Network</A>
+<LI> <A NAME=tex2html4143 HREF="node204.html#SECTION0010122200000000000000"> Using ART2 Networks in SNNS</A>
+<UL> 
+<LI> <A NAME=tex2html4144 HREF="node205.html#SECTION0010122210000000000000"> ART2 Initialization Function</A>
+<LI> <A NAME=tex2html4145 HREF="node206.html#SECTION0010122220000000000000"> ART2 Learning Function</A>
+<LI> <A NAME=tex2html4146 HREF="node207.html#SECTION0010122230000000000000"> ART2 Update Functions</A>
+</UL> 
+</UL> 
+<LI> <A NAME=tex2html4147 HREF="node208.html#SECTION0010123000000000000000"> ARTMAP</A>
+<UL> 
+<LI> <A NAME=tex2html4148 HREF="node209.html#SECTION0010123100000000000000"> Structure of an ARTMAP Network</A>
+<LI> <A NAME=tex2html4149 HREF="node210.html#SECTION0010123200000000000000"> Using ARTMAP Networks in SNNS</A>
+<UL> 
+<LI> <A NAME=tex2html4150 HREF="node211.html#SECTION0010123210000000000000"> ARTMAP Initialization Function</A>
+<LI> <A NAME=tex2html4151 HREF="node212.html#SECTION0010123220000000000000"> ARTMAP Learning Function</A>
+<LI> <A NAME=tex2html4152 HREF="node213.html#SECTION0010123230000000000000"> ARTMAP Update Functions</A>
+</UL> 
+</UL> 
+<LI> <A NAME=tex2html4153 HREF="node214.html#SECTION0010124000000000000000"> Topology of ART Networks in SNNS</A>
+</UL>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

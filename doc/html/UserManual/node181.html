@@ -1,0 +1,51 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Building and Using a Time Delay Network</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Building and Using a Time Delay Network">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html3951 HREF="node182.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html3949 HREF="node175.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html3945 HREF="node180.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html3953 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html3954 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html3952 HREF="node182.html"> Radial Basis Functions </A>
+<B>Up:</B> <A NAME=tex2html3950 HREF="node175.html"> Time Delay Networks </A>
+<B> Previous:</B> <A NAME=tex2html3946 HREF="node180.html"> Learning Function</A>
+<BR> <HR> <P>
+<H2><A NAME=SECTION001093000000000000000> Building and Using a Time Delay Network</A></H2>
+<P>
+In SNNS, TDNNs should be generated only with the tool <tt> BIGNET
+(Time Delay)</tt>. This program automatically defines the necessary
+variables and link structures of TDNNs. The logical links are not
+depicted in the displays and can not be modified with the graphical
+editor. Any modifications of the units after the creation of the
+network may result in undesired behavior or even system failure!
+<P>
+After the creation of the net, the unit activation function <tt>
+Act_TD_Logistic</tt>, the update function <tt> TimeDelay_Order</tt>, and
+the learning function <tt> TimeDelayBackprop</tt> have to be assigned in
+the usual way.
+<P>
+<b> NOTE:</b> Only after the special time delay learning function has
+been assigned, will a save of the network also save the special logical
+links! A network saved beforehand will lack these links and be useless
+after a later load operation. Also using the <IMG  ALIGN=BOTTOM ALT="" SRC="img892.gif"> and
+<IMG  ALIGN=BOTTOM ALT="" SRC="img893.gif"> button will destroy the special time delay information
+unless the right update function (<tt> TimeDelay_Order</tt>) has been
+chosen.
+<P>
+Patterns must fit the input layer. If the application requires
+variable pattern length, a tool to segment these patterns into fitting
+pieces has to be applied. Patterns may also be generated with the
+graphical user interface. In this case, it is the responsibility of
+the user to supply enough patterns with time shifted features for the
+same teaching output to allow a successful training.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

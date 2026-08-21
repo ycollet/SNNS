@@ -1,0 +1,58 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Miscelaneous other Interface Functions</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Miscelaneous other Interface Functions">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html6420 HREF="node368.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html6418 HREF="node350.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html6412 HREF="node366.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html6422 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html6423 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html6421 HREF="node368.html"> Memory Management Functions</A>
+<B>Up:</B> <A NAME=tex2html6419 HREF="node350.html"> Kernel Function Interface</A>
+<B> Previous:</B> <A NAME=tex2html6413 HREF="node366.html"> Functions to Search </A>
+<BR> <HR> <P>
+<H1><A NAME=SECTION0016130000000000000000> Miscelaneous other Interface Functions</A></H1>
+<P>
+<A NAME=8358>&#160;</A>
+<P>
+<code>char  *krui_getVersion()</code><BR> 
+determines the version number of the SNNS kernel.
+<P>
+<code>void  krui_getNetInfo( int  *no_of_sites, int  *no_of_links,</code><BR> 
+<code>                       int  *no_of_STable_entries,</code><BR> 
+<code>                       int  *no_of_FTable_entries )</code><BR> 
+gathers various information about the network.
+<P>
+<code>void  krui_getUnitDefaults( FlintType  *act, FlintType  *bias,</code><BR> 
+<code>                           int *io_type, int *subnet_no, int *layer_no,</code><BR> 
+<code>                           char * *act_func, char * *out_func)</code><BR> 
+determines the default values for generating units. See also
+<code>krui_createDefaultUnit()</code> and <code>krui_createFTypeUnit(...)</code>.
+<P>
+<code>krui_err  krui_setUnitDefaults( FlintTypeParam act, FlintTypeParam bias,</code><BR> 
+<code>                               int io_type, int subnet_no, int layer_no,</code><BR> 
+<code>                               char *act_func, char *out_func)</code><BR> 
+changes the default values; returns an error code if the IO-type or
+the activation/output function is unknown.
+<code>void  krui_setSeedNo( long seed )</code><BR> 
+initializes the random number generator. If  <code>seed = 0</code>, the
+random number generator is re-initialized (this time really at
+random!).
+<code>int  krui_getNoOfInputUnits()</code><BR> 
+<code>int  krui_getNoOfOutputUnits()</code><BR> 
+return the number of input/output units
+<code>int  krui_getNoOfSpecialInputUnits()</code><BR> 
+<code>int  krui_getNoOfSpecialOutputUnits()</code><BR> 
+return the number of special input/output units
+<code>void  krui_resetNet()</code><BR> 
+sets the activation values of all units to their respective defaults.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

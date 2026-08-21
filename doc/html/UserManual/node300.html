@@ -1,0 +1,57 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> The If Instruction</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" The If Instruction">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html5550 HREF="node301.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html5548 HREF="node299.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html5542 HREF="node299.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html5552 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html5553 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html5551 HREF="node301.html"> The For Instruction</A>
+<B>Up:</B> <A NAME=tex2html5549 HREF="node299.html"> Control Structures</A>
+<B> Previous:</B> <A NAME=tex2html5543 HREF="node299.html"> Control Structures</A>
+<BR> <HR> <P>
+<H3><A NAME=SECTION001427100000000000000> The If Instruction</A></H3>
+<P>
+There are two variants to the <tt> if</tt> instruction. The <tt> first</tt> variant is:
+<blockquote> <tt> If EXPRESSION then BLOCK endif</tt>
+</blockquote>
+<P>
+The block is executed only if the expression has the  boolean value TRUE.
+<P>
+<tt> EXPRESSIONS</tt> can be replaced by any complex expression if it delivers a 
+boolean value:
+<P>
+<blockquote> <tt> if sqrt (9)-5&lt;0 and TRUE&lt;&gt;FALSE then print(&quot;hello world&quot;) endif</tt>
+</blockquote>
+<P>
+produces:
+<P>
+<blockquote> <tt> hello world</tt>
+</blockquote>
+<P>
+Please note that the logic operator `and' is the operator last
+executed due to its lowest priority. If there is confusion about the
+execution order, it is recommended to use brackets to make sure the
+desired result will be achieved.
+<P>
+The <tt> second</tt> variant of the <tt> if</tt> operator uses a second block which 
+will be executed as an alternative to the first one. The structure of the 
+second <tt> if</tt> variant looks like this:
+<P>
+<blockquote> <tt> if EXPRESSION then BLOCK1 else BLOCK2 endif</tt>
+</blockquote>
+<P>
+The first BLOCK, here described as BLOCK1, will be executed only if the 
+resulting value of EXPRESSION is `TRUE'. If EXPRESSION delivers `FALSE', 
+BLOCK2 will be executed.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

@@ -1,0 +1,81 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Link Editor</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Link Editor">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html3108 HREF="node122.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html3106 HREF="node117.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html3100 HREF="node120.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html3110 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html3111 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html3109 HREF="node122.html"> Example 1: Receptive </A>
+<B>Up:</B> <A NAME=tex2html3107 HREF="node117.html"> BigNet for Feed-Forward </A>
+<B> Previous:</B> <A NAME=tex2html3101 HREF="node120.html"> Plane Editor</A>
+<BR> <HR> <P>
+<H2><A NAME=SECTION00814000000000000000> Link Editor</A></H2>
+<P>
+<A NAME=2925>&#160;</A>
+<P>
+A link always leads from a source to a target. To generate a fully
+connected net (connections from each layer to its succeeding layer, no
+shortcut connections), it is only sufficient to press the button
+<IMG  ALIGN=BOTTOM ALT="" SRC="img607.gif"> after the planes of the net are defined.
+Scrolling through the link list, one can see that every plane <b>i</b> is
+connected with the plane <b>i+1</b>.  The plane number shown in the link editor
+is the same as the plane number given by the plane editor.
+<P>
+If one wants more complicated links between the planes one can edit them 
+directly. There are nine different combinations to specify link
+connectivity patterns:
+<P>
+<P><IMG  ALIGN=BOTTOM ALT="" SRC="img608.gif"><P>
+<P>
+Figure <A HREF="node121.html#possibleInput"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A> shows the display for the three possible input
+combinations with (all units of) a plane as source. The other
+combinations are similar. Note that both source plane and target plane
+must be specified in all cases, even if source or target consists of a
+cluster of units or a single unit.  If the input data is inconsistent
+with the above rules it is rejected with a warning and not entered
+into the link list after pressing <IMG  ALIGN=BOTTOM ALT="" SRC="img609.gif"> or <IMG  ALIGN=BOTTOM ALT="" SRC="img610.gif">.
+<P>
+<P><A NAME=2953>&#160;</A><A NAME=possibleInput>&#160;</A><IMG  ALIGN=BOTTOM ALT="" SRC="img611.gif">
+<BR><STRONG>Figure:</STRONG> possible input combinations with (all units of) a plane as
+source, between 1) a plane and a plane, 2) a plane and a cluster, 3) a
+plane and a unit. Note that the target plane is specified in all three
+cases since it is necessary to indicate the target cluster or target unit.<BR>
+<P>
+<P>
+With the Move parameters one can declare how many steps a cluster or a
+unit will be moved in x or y direction within a plane after the
+cluster or the unit is connected with a target or a source. This
+facilitates the construction of receptive fields where all units of a
+cluster feed into a single target unit and this connectivity pattern
+is repeated in both directions with a displacement of one unit.
+<P>
+The parameter dx (delta-x) defines the step width in the x direction
+and dy (delta-y) defines the step width in the y direction. If there is no
+entry in dx or dy there is no movement in this direction.
+Movements within the source plane and the target plane is independent
+from each other. Since this feature is very powerful and versatile it
+will be illustrated with some examples.
+<P>
+
+<P>
+<BR> <HR>
+<UL> 
+<LI> <A NAME=tex2html3112 HREF="node122.html#SECTION00814100000000000000"> Example 1: Receptive Fields in Two Dimensions</A>
+<LI> <A NAME=tex2html3113 HREF="node123.html#SECTION00814200000000000000"> Example 2: Moving in Different Dimensions</A>
+</UL>
+<BR> <HR><A NAME=tex2html3108 HREF="node122.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html3106 HREF="node117.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html3100 HREF="node120.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html3110 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html3111 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html3109 HREF="node122.html"> Example 1: Receptive </A>
+<B>Up:</B> <A NAME=tex2html3107 HREF="node117.html"> BigNet for Feed-Forward </A>
+<B> Previous:</B> <A NAME=tex2html3101 HREF="node120.html"> Plane Editor</A>
+<BR> <HR> <P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

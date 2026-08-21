@@ -1,0 +1,51 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Update Functions</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Update Functions">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html4684 HREF="node238.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html4682 HREF="node234.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html4678 HREF="node236.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html4686 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html4687 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html4685 HREF="node238.html"> Stochastic Learning Functions</A>
+<B>Up:</B> <A NAME=tex2html4683 HREF="node234.html"> Working with Partial </A>
+<B> Previous:</B> <A NAME=tex2html4679 HREF="node236.html"> Learning Functions</A>
+<BR> <HR> <P>
+<H3><A NAME=SECTION0010152300000000000000> Update Functions</A></H3>
+<P>
+Two new update functions have been implemented for partial recurrent
+networks:
+<P>
+<UL><LI> <tt> JE_Order</tt>:<BR> 
+This update function propagates a pattern from the input layer to the
+first hidden layer, then to the second hidden layer, etc. and finally
+to the output layer. After this follows a synchronous update of all
+context units.
+<P>
+<LI> <tt> JE_Special</tt>:<BR> 
+This update function can be used for iterated long-term predictions. If
+the actual prediction value <IMG  ALIGN=MIDDLE ALT="" SRC="img1201.gif"> is part of the next input pattern
+<IMG  ALIGN=MIDDLE ALT="" SRC="img1202.gif"> to predict the next value <IMG  ALIGN=MIDDLE ALT="" SRC="img1203.gif">, the input pattern
+<IMG  ALIGN=MIDDLE ALT="" SRC="img1204.gif"> can not be generated before the needed prediction value
+<IMG  ALIGN=MIDDLE ALT="" SRC="img1205.gif"> is available.  For long-term predictions many input patterns
+have to be generated in this manner. To generate these patterns
+manually means a lot of effort.
+<P>
+Using the update function <tt> JE_Special</tt> these input patterns will
+be generated dynamically. Let <b>n</b> be the number of input units and <b>m</b>
+the number of output units of the network.  <tt> JE_Special</tt>
+generates the new input vector with the output of the last <b>n-m</b> input
+units and the outputs of the <b>m</b> output units. The usage of this
+update function requires <b>n &gt; m</b>. The propagation of the new generated
+pattern is done like using <tt> JE_Update</tt>.  The number of the actual
+pattern in the control panel has no meaning for the input pattern when
+using <tt> JE_Special</tt>.
+</UL><BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

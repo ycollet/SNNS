@@ -1,0 +1,85 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Batchman</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Batchman">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html5362 HREF="node289.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html5360 HREF="UserManual.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html5354 HREF="node287.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html5364 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html5365 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html5363 HREF="node289.html"> Introduction</A>
+<B>Up:</B> <A NAME=tex2html5361 HREF="UserManual.html">No Title</A>
+<B> Previous:</B> <A NAME=tex2html5355 HREF="node287.html"> RPC Errors</A>
+<BR> <HR> <P>
+<H1><A NAME=SECTION001400000000000000000> Batchman</A></H1>
+<P>
+<A NAME=Batchversion>&#160;</A>
+<P>
+<A NAME=7355>&#160;</A>
+<A NAME=7356>&#160;</A>
+<P>
+Since training a neural network may require several hours of
+CPU time, it is advisable to perform this task as a batch job during
+low usage times. SNNS offers the program <tt> batchman</tt> for this
+purpose. It is basically an additional interface to the kernel that
+allows easy background execution.
+<P>
+<BR> <HR>
+<UL> 
+<LI> <A NAME=tex2html5366 HREF="node289.html#SECTION001410000000000000000"> Introduction</A>
+<UL> 
+<LI> <A NAME=tex2html5367 HREF="node290.html#SECTION001411000000000000000"> Styling Conventions </A>
+<LI> <A NAME=tex2html5368 HREF="node291.html#SECTION001412000000000000000">  Calling the Batch Interpreter</A>
+</UL> 
+<LI> <A NAME=tex2html5369 HREF="node292.html#SECTION001420000000000000000"> Description of the Batch Language</A>
+<UL> 
+<LI> <A NAME=tex2html5370 HREF="node293.html#SECTION001421000000000000000"> Structure of a Batch Program</A>
+<LI> <A NAME=tex2html5371 HREF="node294.html#SECTION001422000000000000000"> Data Types and Variables</A>
+<LI> <A NAME=tex2html5372 HREF="node295.html#SECTION001423000000000000000"> Variables</A>
+<LI> <A NAME=tex2html5373 HREF="node296.html#SECTION001424000000000000000"> System Variables</A>
+<LI> <A NAME=tex2html5374 HREF="node297.html#SECTION001425000000000000000"> Operators and Expressions</A>
+<LI> <A NAME=tex2html5375 HREF="node298.html#SECTION001426000000000000000"> The Print Function</A>
+<LI> <A NAME=tex2html5376 HREF="node299.html#SECTION001427000000000000000"> Control Structures</A>
+<UL> 
+<LI> <A NAME=tex2html5377 HREF="node300.html#SECTION001427100000000000000"> The If Instruction</A>
+<LI> <A NAME=tex2html5378 HREF="node301.html#SECTION001427200000000000000"> The For Instruction</A>
+<LI> <A NAME=tex2html5379 HREF="node302.html#SECTION001427300000000000000"> While and Repeat Instructions</A>
+</UL> 
+</UL> 
+<LI> <A NAME=tex2html5380 HREF="node303.html#SECTION001430000000000000000"> SNNS Function Calls</A>
+<UL> 
+<LI> <A NAME=tex2html5381 HREF="node304.html#SECTION001431000000000000000"> Function Calls To Set SNNS Parameters</A>
+<UL> 
+<LI> <A NAME=tex2html5382 HREF="node305.html#SECTION001431100000000000000"> setInitFunc</A>
+<LI> <A NAME=tex2html5383 HREF="node306.html#SECTION001431200000000000000"> setLearnFunc</A>
+<LI> <A NAME=tex2html5384 HREF="node307.html#SECTION001431300000000000000"> setUpdateFunc</A>
+<LI> <A NAME=tex2html5385 HREF="node308.html#SECTION001431400000000000000"> setPruningFunc</A>
+<LI> <A NAME=tex2html5386 HREF="node309.html#SECTION001431500000000000000"> setSubPattern</A>
+<LI> <A NAME=tex2html5387 HREF="node310.html#SECTION001431600000000000000"> setShuffle, setSubShuffle</A>
+</UL> 
+<LI> <A NAME=tex2html5388 HREF="node311.html#SECTION001432000000000000000"> Function Calls Related To Networks</A>
+<LI> <A NAME=tex2html5389 HREF="node312.html#SECTION001433000000000000000"> Pattern Function Calls</A>
+<LI> <A NAME=tex2html5390 HREF="node313.html#SECTION001434000000000000000"> Special Functions</A>
+</UL> 
+<LI> <A NAME=tex2html5391 HREF="node314.html#SECTION001440000000000000000"> Batchman Example Programs</A>
+<UL> 
+<LI> <A NAME=tex2html5392 HREF="node315.html#SECTION001441000000000000000"> Example 1</A>
+<LI> <A NAME=tex2html5393 HREF="node316.html#SECTION001442000000000000000"> Example 2</A>
+<LI> <A NAME=tex2html5394 HREF="node317.html#SECTION001443000000000000000"> Example 3</A>
+</UL> 
+<LI> <A NAME=tex2html5395 HREF="node318.html#SECTION001450000000000000000"> Snnsbat -- The predessor</A>
+<UL> 
+<LI> <A NAME=tex2html5396 HREF="node319.html#SECTION001451000000000000000"> The Snnsbat Environment</A>
+<LI> <A NAME=tex2html5397 HREF="node320.html#SECTION001452000000000000000"> Using Snnsbat</A>
+<LI> <A NAME=tex2html5398 HREF="node321.html#SECTION001453000000000000000"> Calling Snnsbat</A>
+</UL>
+</UL>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

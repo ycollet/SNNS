@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Learning Functions</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Learning Functions">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html4073 HREF="node191.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html4071 HREF="node184.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html4067 HREF="node189.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html4075 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html4076 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html4074 HREF="node191.html"> Building a Radial </A>
+<B>Up:</B> <A NAME=tex2html4072 HREF="node184.html"> RBF Implementation in </A>
+<B> Previous:</B> <A NAME=tex2html4068 HREF="node189.html"> RBF_Weights_Redo</A>
+<BR> <HR> <P>
+<H3><A NAME=SECTION0010102300000000000000> Learning Functions</A></H3>
+<P>
+<A NAME=4609>&#160;</A>
+<P>
+Because of the special activation functions used for radial basis
+functions, a special learning function is needed. It is impossible to
+train networks which use the activation functions <tt> Act_</tt><tt>
+RBF_<IMG  ALIGN=BOTTOM ALT="" SRC="img959.gif"></tt> with backpropagation. The learning function for radial
+basis functions implemented here can only be applied if the neurons
+which use the special activation functions are forming the hidden
+layer of a three layer feedforward network. Also the neurons of the
+output layer have to pay attention to their bias for activation.
+<P>
+The name of the special learning function is <tt>
+RadialBasisLearning</tt>. The required parameters are:
+<P>
+<OL><LI><i> <IMG  ALIGN=MIDDLE ALT="" SRC="img960.gif"> (centers)</i>: the learning rate used for the
+modification <IMG  ALIGN=MIDDLE ALT="" SRC="img961.gif"> of center vectors according to the
+formula <IMG  ALIGN=MIDDLE ALT="" SRC="img962.gif">.
+<P>
+<LI><i> <IMG  ALIGN=MIDDLE ALT="" SRC="img963.gif"> (bias p)</i>: learning rate used for the modification
+of the parameters <b>p</b> of the base function. <b>p</b> is stored as bias of
+the hidden units and is trained by the following formula <IMG  ALIGN=MIDDLE ALT="" SRC="img964.gif">.
+<P>
+<LI><i><IMG  ALIGN=MIDDLE ALT="" SRC="img965.gif"> (weights)</i>: learning rate which influences the
+training of all link weights that are leading to the output layer as
+well as the bias of all output neurons.
+<P>
+<P><IMG  ALIGN=BOTTOM ALT="" SRC="img966.gif"><P>
+<P>
+<LI><i> delta max.</i>: To prevent an overtraining of the network the
+maximally tolerated error in an output unit can be defined. If the
+actual error is smaller than <i> delta max.</i> the corresponding
+weights are not changed. Common values range from 0 to <IMG  ALIGN=BOTTOM ALT="" SRC="img967.gif">.
+<P>
+<LI><i> momentum</i>: momentum term during training, after the formula
+<IMG  ALIGN=MIDDLE ALT="" SRC="img968.gif">. The momentum--term is usually chosen between <IMG  ALIGN=BOTTOM ALT="" SRC="img969.gif"> and <IMG  ALIGN=BOTTOM ALT="" SRC="img970.gif">.
+<P>
+</OL>
+<P>
+The learning rates <IMG  ALIGN=MIDDLE ALT="" SRC="img971.gif"> to <IMG  ALIGN=MIDDLE ALT="" SRC="img972.gif"> have to be selected very
+carefully.  If the values are chosen too large (like the size of
+values for backpropagation) the modification of weights will be too
+extensive and the learning function will become unstable. Tests
+showed, that the learning procedure becomes more stable if only one of
+the three learning rates is set to a value bigger than 0. Most
+critical is the parameter <i> bias (p)</i>, because the base functions
+are fundamentally changed by this parameter.
+<P>
+<A NAME=4640>&#160;</A>
+Tests also showed that the learning function working in batch mode is
+much more stable than in online mode. Batch mode means that all
+changes become active not before all learning patterns have been
+presented once. This is also the training mode which is recommended in
+the literature about radial basis functions. The opposite of batch
+<A NAME=4641>&#160;</A>
+mode is known as online mode, where the weights are changed after the
+presentation of every single teaching pattern. Which mode is to be
+used can be defined during compilation of SNNS. The online mode is
+activated by defining the C macro <tt> RBF_INCR_LEARNING</tt> during
+compilation of the simulator kernel, while batch mode is the default.
+<P>
+<BR> <HR><A NAME=tex2html4073 HREF="node191.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html4071 HREF="node184.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html4067 HREF="node189.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html4075 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html4076 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html4074 HREF="node191.html"> Building a Radial </A>
+<B>Up:</B> <A NAME=tex2html4072 HREF="node184.html"> RBF Implementation in </A>
+<B> Previous:</B> <A NAME=tex2html4068 HREF="node189.html"> RBF_Weights_Redo</A>
+<BR> <HR> <P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

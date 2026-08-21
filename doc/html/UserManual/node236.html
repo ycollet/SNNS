@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Learning Functions</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Learning Functions">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html4674 HREF="node237.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html4672 HREF="node234.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html4666 HREF="node235.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html4676 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html4677 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html4675 HREF="node237.html"> Update Functions</A>
+<B>Up:</B> <A NAME=tex2html4673 HREF="node234.html"> Working with Partial </A>
+<B> Previous:</B> <A NAME=tex2html4667 HREF="node235.html"> The Initialization Function </A>
+<BR> <HR> <P>
+<H3><A NAME=SECTION0010152200000000000000> Learning Functions</A></H3>
+<P>
+By deleting all recurrent links in a partial recurrent network, a
+simple feedforward network remains. The context units have now the 
+function of input units, i.e. the total network input consists
+of two components. The first component is the pattern vector, which
+was the only input to the partial recurrent network. The second
+component is a state vector. This state vector is given through the
+next--state function in every step. By this way the behavior of a
+partial recurrent network can be simulated with a simple feedforward
+network, that receives the state not implicitly through recurrent
+links, but as an explicit part of the input vector. In this sense,
+backpropagation algorithms can easily be modified for the training of
+partial recurrent networks in the following way:
+<P>
+<OL><LI> Initialization of the context units. In the following steps, all
+       recurrent links are assumed to be not existent, except in step
+       2(f). 
+ <LI> Execute for each pattern of the training sequence the following
+       steps:
+       <UL><LI> input of the pattern and forward propagation through the
+              network  
+        <LI> calculation of the error signals of output units by comparing
+              the computed output and the teaching output
+        <LI> back propagation of the error signals 
+        <LI> calculation of the weight changes
+        <LI> only on--line training: weight adaption
+        <LI> calculation of the new state of the context units according
+              to the incoming links
+       </UL>
+ <LI> Only off--line training: weight adaption
+</OL>
+<P>
+In this manner, the following learning functions have been adapted for
+the training of partial recurrent networks like Jordan and Elman
+networks:
+<P>
+<UL><LI> <tt> JE_BP</tt>:  Standard Backpropagation for partial recurrent
+networks 
+<A NAME=6067>&#160;</A>
+<P>
+<LI> <tt> JE_BPMomentum</tt>:  Standard Backpropagation with
+Momentum--Term for partial recurrent networks 
+<A NAME=6069>&#160;</A>
+<P>
+<LI> <tt> JE_Quickprop</tt>: Quickprop for partial recurrent networks
+<A NAME=6071>&#160;</A>
+<P>
+<LI> <tt> JE_Rprop</tt>: Rprop for partial recurrent networks
+<A NAME=6073>&#160;</A>
+</UL>
+<P>
+The parameters for these learning functions are the same as for the
+regular feedforward versions of these algorithms (see section
+<A HREF="node52.html#LearningParameters"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A>) plus one special parameter.
+<P>
+For training a network with one of these functions a method called teacher
+forcing can be used. Teacher forcing means that during the training phase
+the output units propagate the teaching output instead of their produced output
+to successor units (if there are any). The new parameter is used
+to enable or disable teacher forcing. If the value is less or equal 0.0
+only the teaching output is used, if it is greater or equal 1.0 the real output
+is propagated. Values between 0.0 and 1.0 yield a weighted sum of the 
+teaching output and the real output.
+<P>
+<BR> <HR><A NAME=tex2html4674 HREF="node237.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html4672 HREF="node234.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html4666 HREF="node235.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html4676 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html4677 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html4675 HREF="node237.html"> Update Functions</A>
+<B>Up:</B> <A NAME=tex2html4673 HREF="node234.html"> Working with Partial </A>
+<B> Previous:</B> <A NAME=tex2html4667 HREF="node235.html"> The Initialization Function </A>
+<BR> <HR> <P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

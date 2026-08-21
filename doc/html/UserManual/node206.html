@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> ART2 Learning Function</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" ART2 Learning Function">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html4292 HREF="node207.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html4290 HREF="node204.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html4284 HREF="node205.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html4294 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html4295 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html4293 HREF="node207.html"> ART2 Update Functions</A>
+<B>Up:</B> <A NAME=tex2html4291 HREF="node204.html"> Using ART2 Networks </A>
+<B> Previous:</B> <A NAME=tex2html4285 HREF="node205.html"> ART2 Initialization Function</A>
+<BR> <HR> <P>
+<H4><A NAME=SECTION0010122220000000000000> ART2 Learning Function</A></H4>
+<P>
+<A NAME=5218>&#160;</A>
+<P>
+For the ART2 learning function <tt> ART2</tt> there are various parameters
+to specify. Here is a list of all parameters known from the theory:
+<P>
+<PRE><TT>
+<P>
+<IMG  ALIGN=MIDDLE ALT="" SRC="img1089.gif"> 		 Vigilance parameter.  (first
+parameter of the learning and update function).  <IMG  ALIGN=MIDDLE ALT="" SRC="img1090.gif"> is defined on
+the interval <IMG  ALIGN=MIDDLE ALT="" SRC="img1091.gif"> For some reason, described
+in [<A HREF="node389.html#Her92">Her92</A>] only the following interval makes sense: <IMG  ALIGN=MIDDLE ALT="" SRC="img1092.gif">
+<P>
+<b>a</b> 		 Strength of the influence of the lower
+level in F<IMG  ALIGN=MIDDLE ALT="" SRC="img1093.gif">  by the middle level.  (second parameter of the learning
+and update function).  Parameter <b>a</b> defines the importance of the
+expection of F<IMG  ALIGN=MIDDLE ALT="" SRC="img1094.gif"> , propagated to F<IMG  ALIGN=MIDDLE ALT="" SRC="img1095.gif"> : <IMG  ALIGN=MIDDLE ALT="" SRC="img1096.gif"> Normally a value of <IMG  ALIGN=MIDDLE ALT="" SRC="img1097.gif"> is chosen to assure quick stabilization in
+F<IMG  ALIGN=MIDDLE ALT="" SRC="img1098.gif"> .
+<P>
+<b>b</b> 		 Strength of the influence of the
+middle level in F<IMG  ALIGN=MIDDLE ALT="" SRC="img1099.gif">  by the upper level.  (third parameter of the
+learning and update function).  For parameter <b>b</b> things are similar
+to parameter <b>a</b>.  A high value for <b>b</b> is even more important,
+because otherwise the network could become instable ([<A HREF="node389.html#CG87b">CG87b</A>]).
+<IMG  ALIGN=MIDDLE ALT="" SRC="img1100.gif">
+<P>
+<b>c</b> 		 Part of the length of vector <b> p</b>
+(units <b> p</b><IMG  ALIGN=MIDDLE ALT="" SRC="img1101.gif"> ... <b> p</b><IMG  ALIGN=MIDDLE ALT="" SRC="img1102.gif">) used to compute the error.  (fourth
+parameter of the learning and update function).  Choose <b>c</b> within <b>0
+&lt; c &lt; 1</b>.
+<P>
+<b>d</b> 		 Output value of the F<IMG  ALIGN=MIDDLE ALT="" SRC="img1103.gif">  winner unit.
+You won't have to pass <b>d</b> to <tt> ART2</tt>, because this parameter is
+already needed for initialization. So you have to enter the value,
+when initializing the network (see subsection on the initialization
+function).  Choose <b>d</b> within <b>0 &lt; d &lt; 1</b>.  The parameters <b>c</b> and <b>d</b>
+are dependent on each other.  For reasons of quick stabilization <b>c</b>
+should be chosen as follows: <IMG  ALIGN=MIDDLE ALT="" SRC="img1104.gif">.  On the other hand <b>c</b>
+and <b>d</b> have to fit the following condition: <IMG  ALIGN=MIDDLE ALT="" SRC="img1105.gif">
+<P>
+<b>e</b> 		 Prevents from division by zero. Since
+this parameter does not help to solve essential problems, it is
+implemented as a fix value within the SNNS source code.
+<P>
+<IMG  ALIGN=BOTTOM ALT="" SRC="img1106.gif"> 		 Kind of threshold. For <IMG  ALIGN=MIDDLE ALT="" SRC="img1107.gif"> the activation values of the units <b> x</b><IMG  ALIGN=MIDDLE ALT="" SRC="img1108.gif"> and
+<b> q</b><IMG  ALIGN=MIDDLE ALT="" SRC="img1109.gif"> only have small influence (if any) on the middle level of F<IMG  ALIGN=MIDDLE ALT="" SRC="img1110.gif"> .
+The output function <b>f</b> of the units <b> x</b><IMG  ALIGN=MIDDLE ALT="" SRC="img1111.gif"> and <b> q</b><IMG  ALIGN=MIDDLE ALT="" SRC="img1112.gif"> takes <IMG  ALIGN=BOTTOM ALT="" SRC="img1113.gif">
+as its parameter. Since this noise function is continuously
+differentiable, it is called <tt> Out_ART2_Noise_ ContDiff</tt> in
+SNNS.  Alternatively a piecewise linear output function may be used.
+In SNNS the name of this function is <tt> Out_ART2_Noise_PLin</tt>.
+Choose <IMG  ALIGN=BOTTOM ALT="" SRC="img1114.gif"> within <IMG  ALIGN=MIDDLE ALT="" SRC="img1115.gif">
+<P>
+</TT></PRE>
+<P>
+To train an ART2 network, make sure, you have chosen the learning
+function <tt> ART2</tt>.  As a first step initialize the network with the
+initialization function <tt> ART2_Weights</tt> described above. Then set
+the five parameters <IMG  ALIGN=MIDDLE ALT="" SRC="img1116.gif">, <b>a</b>, <b>b</b>, <b>c</b> and <IMG  ALIGN=BOTTOM ALT="" SRC="img1117.gif">, in the
+parameter windows 1 to 5 in both the <tt> LEARN</tt> and <tt> UPDATE</tt>
+lines of the control panel. Example values are 0.9, 10.0, 10.0, 0.1, and
+0.0. Then select the number of learning cycles, and finally use the buttons
+<IMG  ALIGN=BOTTOM ALT="" SRC="img1118.gif"> and <IMG  ALIGN=BOTTOM ALT="" SRC="img1119.gif"> to train a single pattern or all patterns
+at a time, respectively.
+<P>
+<BR> <HR><A NAME=tex2html4292 HREF="node207.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html4290 HREF="node204.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html4284 HREF="node205.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html4294 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html4295 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html4293 HREF="node207.html"> ART2 Update Functions</A>
+<B>Up:</B> <A NAME=tex2html4291 HREF="node204.html"> Using ART2 Networks </A>
+<B> Previous:</B> <A NAME=tex2html4285 HREF="node205.html"> ART2 Initialization Function</A>
+<BR> <HR> <P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

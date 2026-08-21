@@ -1,0 +1,81 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Terminology of the Tool BigNet</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Terminology of the Tool BigNet">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html3072 HREF="node119.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html3070 HREF="node117.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html3064 HREF="node117.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html3074 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html3075 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html3073 HREF="node119.html"> Buttons of BigNet</A>
+<B>Up:</B> <A NAME=tex2html3071 HREF="node117.html"> BigNet for Feed-Forward </A>
+<B> Previous:</B> <A NAME=tex2html3065 HREF="node117.html"> BigNet for Feed-Forward </A>
+<BR> <HR> <P>
+<H2><A NAME=SECTION00811000000000000000> Terminology of the Tool BigNet</A></H2>
+<P>
+<A NAME=BigNetTerminology>&#160;</A>
+<P>
+BigNet subdivides a net into several planes.  The input layer, the
+output layer and every hidden layer are called a <b> plane</b> in the
+<A NAME=2849>&#160;</A>
+notation of BigNet. A plane is a two-dimensional array of units.
+Every single unit within a plane can be addressed by its coordinates.
+The unit in the upper left corner of every plane has the coordinates
+(1,1).  A group of units within a plane, ordered in the shape of a
+<A NAME=2850>&#160;</A>
+square, is called a <b> cluster</b>. The position of a cluster is
+determined by the coordinates of its upper left corner and its
+expansion in the x direction (width) and y direction (height)
+(fig. <A HREF="node119.html#ClustersUnits"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A>).
+<P>
+<A NAME=2853>&#160;</A>
+<A NAME=2854>&#160;</A>
+<P><A NAME=2862>&#160;</A><A NAME=BigNetWindow>&#160;</A><IMG  ALIGN=BOTTOM ALT="" SRC="img580.gif">
+<BR><STRONG>Figure:</STRONG> The BigNet window for Feed-Forward Networks<BR>
+<P>
+<P>
+BigNet creates a net in two steps:
+<OL><LI> Edit net: This generates internal data structures in BigNet
+         which describe the network but doesn't generate the network yet.
+        This allows for easy modification of the network parameters before
+        creation of the net. <BR> 
+         The net editor consists of two parts:
+         <OL><LI> The plane editing part for editing planes. The input data is
+                  stored in the <b> plane list</b>. 
+            <LI> The link editing part for editing links between planes. The 
+                  input data is stored in the <b> link list</b>. 
+         </OL>
+   <LI> Generate net in SNNS: This generates the network from the
+         internal data structures in BigNet.
+</OL>
+<P>
+Both editor parts are subdivided into an input part (Edit plane, Edit
+link) and into a display part for control purposes (Current plane,
+Current link). The input data of both editors is stored, as described
+above, in the plane list and in the link list. After pressing
+<IMG  ALIGN=BOTTOM ALT="" SRC="img581.gif">, <IMG  ALIGN=BOTTOM ALT="" SRC="img582.gif">, or <IMG  ALIGN=BOTTOM ALT="" SRC="img583.gif"> the input data is
+added to the corresponding editor list. In the control part one list
+element is always visible.  The buttons
+xgui_bignet/bn_button_first.ps,
+xgui_bignet/bn_button_prev.ps,
+xgui_bignet/bn_button_next.ps, and
+xgui_bignet/bn_button_last.ps  enable moving around in the
+list.  The operations DELETE, INSERT, OVERWRITE, CURRENT PLANE TO
+EDITOR and CURRENT LINK TO EDITOR refer to the current element.
+Input data is only entered in the editor list if it is correct,
+otherwise nothing happens.
+<P>
+<BR> <HR><A NAME=tex2html3072 HREF="node119.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html3070 HREF="node117.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html3064 HREF="node117.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html3074 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html3075 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html3073 HREF="node119.html"> Buttons of BigNet</A>
+<B>Up:</B> <A NAME=tex2html3071 HREF="node117.html"> BigNet for Feed-Forward </A>
+<B> Previous:</B> <A NAME=tex2html3065 HREF="node117.html"> BigNet for Feed-Forward </A>
+<BR> <HR> <P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

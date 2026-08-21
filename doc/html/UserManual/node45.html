@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Graph Window</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Graph Window">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html2125 HREF="node46.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html2123 HREF="node32.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html2117 HREF="node44.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html2127 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html2128 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html2126 HREF="node46.html"> Weight Display</A>
+<B>Up:</B> <A NAME=tex2html2124 HREF="node32.html"> Windows of XGUI</A>
+<B> Previous:</B> <A NAME=tex2html2118 HREF="node44.html"> Setup Panel of </A>
+<BR> <HR> <P>
+<H2><A NAME=SECTION00536000000000000000> Graph Window</A></H2>
+<P>
+<A NAME=1392>&#160;</A> 
+<A NAME=1393>&#160;</A> 
+<A NAME=1394>&#160;</A>
+Graph is a tool to visualize the error development of a net. The
+program is started by clicking the <IMG  ALIGN=BOTTOM ALT="" SRC="img205.gif"> button in the
+manager panel or by typing Alt-g in any SNNS window.
+Figure <A HREF="node45.html#errorGraph1"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A> shows the window of the graph tool.
+<P>
+<P><A NAME=1404>&#160;</A><A NAME=errorGraph1>&#160;</A><IMG  ALIGN=BOTTOM ALT="" SRC="img206.gif">
+<BR><STRONG>Figure:</STRONG> Graph window<BR>
+<P>
+<P>
+Graph is only active after calling it. This means, the development of
+the error is only drawn as long as the window is not closed. The
+advantage of this implementation is, that the simulator is not slowed
+down as long as graph is closed<A NAME=tex2html145 HREF="footnode.html#1408"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/foot_motif.gif"></A>. If the window is iconified, graph remains
+active.
+<P>
+The error curve of the net is plotted until the net is initialized or
+a new net is loaded, in which case the cycle counter is reset to
+zero. The window, however, is not cleared until the clear button is
+pressed. This opens the possibility to compare several error curves in
+a single display (see also figure <A HREF="node45.html#errorGraph1"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A>). The maximum number of
+curves, which can be displayed simultaneously is 25. If a <IMG  ALIGN=BOTTOM ALT="" SRC="img207.gif"> curve is
+tried to be drawn, the confirmer appears with an error message.
+<P>
+When the curve reaches the right end of the window, an automatic
+rescale of the x-axis is performed. This way, the whole curve always
+remains visible.
+<P>
+In the top region of the graph window, seven buttons for handling the
+display are located:
+<P>
+<IMG  ALIGN=BOTTOM ALT="" SRC="img208.gif">: Clears the screen of the graph window and sets the cycle
+counter to zero.
+<P>
+<IMG  ALIGN=BOTTOM ALT="" SRC="img209.gif">: Closes the graph window and resets the cycle counter.
+<P>
+For both the x-- and y--axis the following two buttons are available:
+<P>
+xgui_figs/xgui_button_prev.ps: Reduce scale in one
+direction.
+<P>
+xgui_figs/xgui_button_next.ps: Enlarge scale in one
+direction.
+<P>
+<IMG  ALIGN=BOTTOM ALT="" SRC="img210.gif">: Opens a popup menu to select the value to be
+plotted. Choices are <IMG  ALIGN=BOTTOM ALT="" SRC="img211.gif">, <IMG  ALIGN=BOTTOM ALT="" SRC="img212.gif">, and <IMG  ALIGN=BOTTOM ALT="" SRC="img213.gif">, the
+SSE divided by the number of output units.
+<P>
+While the simulator is working all buttons are blocked.
+<P>
+The graph window can be resized by the mouse like every X-window. Changing
+the size of the window does not change the size of the scale.
+<P>
+When validation is turned on in the control panel two curves will be
+drawn simultaneously in the graph window, one for the training set and
+one for the validation set. On color terminals the validation error will
+be plotted as solid red line, on B/W terminals as dashed black line.
+<P>
+<BR> <HR><A NAME=tex2html2125 HREF="node46.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html2123 HREF="node32.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html2117 HREF="node44.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html2127 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html2128 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html2126 HREF="node46.html"> Weight Display</A>
+<B>Up:</B> <A NAME=tex2html2124 HREF="node32.html"> Windows of XGUI</A>
+<B> Previous:</B> <A NAME=tex2html2118 HREF="node44.html"> Setup Panel of </A>
+<BR> <HR> <P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

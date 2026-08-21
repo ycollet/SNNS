@@ -1,0 +1,85 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> RPC Errors</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" RPC Errors">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html5350 HREF="node288.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html5348 HREF="node277.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html5344 HREF="node286.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html5352 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html5353 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html5351 HREF="node288.html"> Batchman</A>
+<B>Up:</B> <A NAME=tex2html5349 HREF="node277.html"> SNNS for Workstation </A>
+<B> Previous:</B> <A NAME=tex2html5345 HREF="node286.html"> Show Info Panel</A>
+<BR> <HR> <P>
+<H1><A NAME=SECTION001330000000000000000> RPC Errors</A></H1>
+<P>
+<A NAME=rpcerror>&#160;</A>
+<A NAME=7348>&#160;</A>
+<P>
+If an rpc function is called, there may be additional errors besides
+regular SNNS errors, such as the call of the <tt> DeletePattern</tt> function
+without a defined pattern in the network. Because <tt> rpcgen</tt> is not
+generating error code within the rpc routines the result of these
+functions has to be checked for errors. Since these routines return a
+NULL value in case of an error, the return value can be checked for
+NULL and the system can then call an error routine, which determines
+the exact cause of the error. The rpc library provides such an
+error routine. Because the rpc mechanism can not determine if there is
+a net-adapter malfunction or if one of the cables is defect, the
+rpc mechanism only determines that there is no response from anyone
+within a given time interval. The error cause, delivered by the
+error function is not that an adapter card is defect, but that the
+time  interval was exceeded (time-out error). This is the most common
+type of error and the communication module tries to detect the error
+with the help of the graphical user-interface.
+<P>
+To accomplish such a task, the communication module remembers if the
+last inquiry was performed synchronously or asynchronously. If the
+inquiry was asynchronous the probable cause is that the server is not
+ready for a new task, because it has to finish the current one.
+Therefore the simulator kernel reports to the graphical
+user-interface as soon as it has finished its task. This enables the
+communication module to update all status informations about the
+simulator kernel. The user will be informed about an error, and if
+available what kind of error, over a `pop up' window.
+<P>
+Due to the separation of the graphical user-interface and the
+simulator kernel, the error tolerance has increased. If there is for
+example an error in the graphical user-interface, only the interface
+will be terminated and after a new start of the graphical
+user-interface and its linking to the simulator kernel, the user is
+able to proceed exactly where the error occured.
+<P>
+If an error occurs in the kernel the situation is less
+complicated. In that case simply a new net has to be started, since
+the communication module intercepts all maskable signals and saves the
+current net before it ends its operation correctly.
+<P>
+This kind of independence can be used to train multiple nets in
+parallel.  All that has to be done is to load multiple nets with
+multiple simulator kernels and to start the training process
+asynchronously with the desired parameters. Now the graphical
+user-interface can be terminated, while the simulator kernel trains
+the nets. It is possible to interrupt the training and to evaluate the
+current state of the training process with the graphical
+user-interface. After that, the training can be resumed. In case the
+simulator kernel has already finished training the net it will wait a
+given period of time before it saves the net and ends its operations.
+In contrast to the batch version of SNNS, <tt> snnsbat</tt>, it is
+possible to select all actions of the kernel from a menu and to
+evaluate the current training, e.g. the current epochs and error rate.
+<P>
+<BR> <HR><A NAME=tex2html5350 HREF="node288.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html5348 HREF="node277.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html5344 HREF="node286.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html5352 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html5353 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html5351 HREF="node288.html"> Batchman</A>
+<B>Up:</B> <A NAME=tex2html5349 HREF="node277.html"> SNNS for Workstation </A>
+<B> Previous:</B> <A NAME=tex2html5345 HREF="node286.html"> Show Info Panel</A>
+<BR> <HR> <P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

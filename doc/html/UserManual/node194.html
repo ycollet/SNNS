@@ -1,0 +1,78 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Using RBF--DDA in SNNS</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Using RBF--DDA in SNNS">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html4119 HREF="node195.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html4117 HREF="node192.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html4113 HREF="node193.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html4121 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html4122 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html4120 HREF="node195.html"> ART Models in </A>
+<B>Up:</B> <A NAME=tex2html4118 HREF="node192.html"> Dynamic Decay Adjustment </A>
+<B> Previous:</B> <A NAME=tex2html4114 HREF="node193.html"> The Dynamic Decay </A>
+<BR> <HR> <P>
+<H2><A NAME=SECTION0010112000000000000000> Using RBF--DDA in SNNS</A></H2>
+<P>
+The implementation of the DDA-Algorithm always uses the Gaussian
+activation function <tt> Act_RBF_Gaussian</tt> in the hidden layer.  All
+other activation and output functions are set to <tt> Act_Identity</tt>
+and <tt> Out_Identity</tt>, respectively.
+<P>
+The <i> Learning function</i> has to be set to <tt> RBF-DDA</tt>. 
+No <i> Initialization</i> or <i> Update</i> functions are needed.
+<P>
+The algorithm takes three arguments that are set in the first three
+fields of the <tt> LEARN</tt> row in the <i> control panel</i>. These are
+<IMG  ALIGN=BOTTOM ALT="" SRC="img1012.gif">, <IMG  ALIGN=BOTTOM ALT="" SRC="img1013.gif"> (<IMG  ALIGN=MIDDLE ALT="" SRC="img1014.gif">) and
+the maximum number of RBF units to be diplayed in one row.  This last
+item allows the user to control the appearance of the network on the
+screen and has no influence on the performance.  Specifying 0.0 leads
+to the default values <IMG  ALIGN=BOTTOM ALT="" SRC="img1015.gif">, <IMG  ALIGN=BOTTOM ALT="" SRC="img1016.gif"> and to a
+maximum number of 20 RBF units displayed in a row.
+<P>
+Training of an RBF starts with either:
+<UL><LI>   an <b> empty</b> network, i.e. a network consisting only
+        of input and output units. No connections between input and
+        output units are required, hidden units will be added during
+        training. This can easily be 
+        generated with the tool <tt> BIGNET</tt> (choice <tt> FEED FORWARD</tt>)
+<LI>   a <b> pretrained</b> network already containing RBF units generated
+        in an earlier run of <tt> RBF-DDA</tt> (all networks not complying with 
+        the specification of an RBF-DDA will be rejected).
+</UL>
+<P>
+After having loaded a training pattern set, a <i> learning-epoch</i> can
+be started by pressing the <tt> ALL</tt> button in the <i> control panel</i>.
+At the beginning of each epoch, the weights between the hidden and the
+output layer are automatically set to zero.  Note that the resulting
+RBF and the number of required learning epochs can vary slightly
+depending on the order of the training patterns.  If you train using a
+single pattern (by pressing the <tt> SINGLE</tt> button) keep in mind that
+every training step increments the weight between the RBF unit of the
+correct class covering that pattern and its corresponding output unit.
+The end of the training is reached when the network structure does not
+change any more and the Mean Square Error (MSE) stays constant from
+one epoch to another.
+<P>
+The first desired value in an output pattern that is greater than 0.0
+will be assumed to represent the class this pattern belongs to; only
+one output may be greater than 0.0.  If there is no such output,
+training is still executed, but no new prototype for this pattern is
+commited. All existing prototypes are shrunk to avoid coverage of this
+pattern, however.  This can be an easy way to define an
+``error''--class without trying to model the class itself.
+<P>
+<BR> <HR><A NAME=tex2html4119 HREF="node195.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html4117 HREF="node192.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html4113 HREF="node193.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html4121 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html4122 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html4120 HREF="node195.html"> ART Models in </A>
+<B>Up:</B> <A NAME=tex2html4118 HREF="node192.html"> Dynamic Decay Adjustment </A>
+<B> Previous:</B> <A NAME=tex2html4114 HREF="node193.html"> The Dynamic Decay </A>
+<BR> <HR> <P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

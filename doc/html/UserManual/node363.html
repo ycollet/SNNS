@@ -1,0 +1,74 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Learning and Pruning Functions</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Learning and Pruning Functions">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html6372 HREF="node364.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html6370 HREF="node350.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html6364 HREF="node362.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html6374 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html6375 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html6373 HREF="node364.html"> Functions for the </A>
+<B>Up:</B> <A NAME=tex2html6371 HREF="node350.html"> Kernel Function Interface</A>
+<B> Previous:</B> <A NAME=tex2html6365 HREF="node362.html"> Functions for Activation </A>
+<BR> <HR> <P>
+<H1><A NAME=SECTION001690000000000000000> Learning and Pruning Functions</A></H1>
+<P>
+<A NAME=8320>&#160;</A>
+<A NAME=8321>&#160;</A>
+<P>
+<code>krui_err  krui_setLearnFunc( char *learning_function)</code><BR> 
+<code>krui_err  krui_setFFLearnFunc( char *FF_learning_function)</code><BR> 
+<code>krui_err  krui_setPrunnFunc( char *pruning_function)</code><BR> 
+selects the learning / subordinate learning / pruning function;
+returns an error code if the given function is unknown.
+<code>char  *krui_getLearnFunc( void )</code><BR> 
+<code>char  *krui_getFFLearnFunc( void )</code><BR> 
+<code>char  *krui_getPrunFunc( void )</code><BR> 
+returns the name of the current learning / subordinate learning /
+pruning function.  The default learning / subordinate learning
+function is <em> `Std_Backpropagation'</em>, the default pruning
+function is <em> `MagPruning'</em> (see also <code>kr_def.h</code>).
+<P>
+<code>krui_err  krui_learnAllPatterns( float *parameterInArray,</code><BR> 
+<code>                                 int  NoOfInParams,</code><BR> 
+<code>                                 float  * *parameterOutArray,</code><BR> 
+<code>                                 int *NoOfOutParams )</code><BR> 
+<code>krui_err  krui_learnAllPatternsFF( float *parameterInArray,</code><BR> 
+<code>                                   int  NoOfInParams,</code><BR> 
+<code>                                   float  * *parameterOutArray,</code><BR> 
+<code>                                   int *NoOfOutParams )</code><BR> 
+learns all patterns (each consisting of an input/output pair) using
+the current learning / subordinate learning function.
+<code>parameterInArray</code> contains the learning parameter(s).
+<code>NoOfInParams</code> stores the number of learning parameters.
+<code>parameterOutArray</code> returns the results of the learning function.
+This array is a static array defined in the learning function.
+<code>*NoOfOutParams</code> points to an integer value that contains the
+number of output parameters from the current learning function.  The
+function returns an error code if memory allocation has failed or if
+the learning has failed. Patterns must be loaded before calling this
+function.
+<P>
+<code>krui_err  krui_learnSinglePattern( int  pattern_no,</code><BR> 
+<code>                                   float   *parameterInArray,</code><BR> 
+<code>                                   int NoOfInParams,</code><BR> 
+<code>                                   float  * *parameterOutArray,</code><BR> 
+<code>                                   int *NoOfOutParams )</code><BR> 
+<code>krui_err  krui_learnSinglePatternFF( int  pattern_no,</code><BR> 
+<code>                                     float   *parameterInArray,</code><BR> 
+<code>                                     int NoOfInParams,</code><BR> 
+<code>                                     float  * *parameterOutArray,</code><BR> 
+<code>                                     int *NoOfOutParams )</code><BR> 
+same as <code>krui_learnAllPatterns( ... )</code> or
+<code>krui_learnAllPatternsFF( ... )</code> respectively, but teaches only
+the current pattern.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

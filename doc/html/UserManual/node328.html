@@ -1,0 +1,53 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Setup and Structure of a Control, Weight, Pattern File</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Setup and Structure of a Control, Weight, Pattern File">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html5921 HREF="node329.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html5919 HREF="node327.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html5915 HREF="node327.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html5923 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html5924 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html5922 HREF="node329.html"> Feedback-gennet</A>
+<B>Up:</B> <A NAME=tex2html5920 HREF="node327.html"> Convert2snns</A>
+<B> Previous:</B> <A NAME=tex2html5916 HREF="node327.html"> Convert2snns</A>
+<BR> <HR> <P>
+<H2><A NAME=SECTION001541000000000000000> Setup and Structure of a Control, Weight, Pattern File</A></H2>
+<P>
+Each line of the control file begins with a <tt> KEYWORD</tt> followed by the
+respective declaration. The order of the keywords is arbitrary. 
+Example of a control file:
+<PRE><TT> 
+		 <tt> PATTERNFILE</tt>  eddy.in 		  **
+<P>
+		 <tt> WEIGHTFILE</tt>   eddy.dat
+<P>
+		 <tt> XSIZE</tt> 18     		 <IMG  ALIGN=BOTTOM ALT="" SRC="img1410.gif">
+<P>
+		 <tt> YSIZE</tt> 18     		 <IMG  ALIGN=BOTTOM ALT="" SRC="img1411.gif">
+<P>
+		 <tt> COMPONENTS</tt> 8 		 <IMG  ALIGN=BOTTOM ALT="" SRC="img1412.gif">
+<P>
+		 <tt> PATTERNS</tt> 47  		 **
+<P>
+</TT></PRE>
+For creation of a network file you need at least the statements marked 
+<IMG  ALIGN=BOTTOM ALT="" SRC="img1413.gif"> and for the .pat file additionally the statements marked **.<BR> 
+ Omitting the <tt> WEIGHTFILE</tt> will initialize the weights of the network 
+with 0.
+<P>
+The <tt> WEIGHTFILE</tt> is a simple ASCII file, containing the weight vectors 
+row by row.
+<P>
+The <tt> PATTERNFILE</tt> contains in each line the components of a pattern.
+If convert2snns has finished  the conversion  it will ask for the name of the
+network and pattern files to be saved.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

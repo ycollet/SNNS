@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> SOM Fundamentals</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" SOM Fundamentals">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html4420 HREF="node217.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html4418 HREF="node215.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html4412 HREF="node215.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html4422 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html4423 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html4421 HREF="node217.html"> SOM Implementation in </A>
+<B>Up:</B> <A NAME=tex2html4419 HREF="node215.html"> Self-Organizing Maps (SOMs)</A>
+<B> Previous:</B> <A NAME=tex2html4413 HREF="node215.html"> Self-Organizing Maps (SOMs)</A>
+<BR> <HR> <P>
+<H2><A NAME=SECTION0010131000000000000000> SOM Fundamentals</A></H2>
+<P>
+The Self-Organizing Map (SOM) algorithm of Kohonen, also called
+Kohonen feature map, is one of the best known artificial neural
+network algorithms. In contrast to most other algorithms in SNNS, it
+is based on unsupervised learning. SOMs are a unique class of neural
+networks, since they construct topology-preserving mappings of the
+training data where the location of a unit carries semantic
+information. Therefore, the main application of this algorithm is
+clustering of data, obtaining a two-dimensional display of the input
+space that is easy to visualize.
+<P>
+Self-Organizing Maps consist of two layers of units: A one dimensional
+input layer and a two dimensional competitive layer, organized as a 2D
+grid of units. This layer can neither be called hidden nor output
+layer, although the units in this layer are listed as hidden units
+within SNNS. Each unit in the competitive layer holds a weight
+(reference) vector, <IMG  ALIGN=MIDDLE ALT="" SRC="img1160.gif">, that, after training, resembles a different
+input pattern.  The learning algorithm for the SOM accomplishes two
+important things:
+<P>
+<OL><LI> clustering the input data 
+<LI> spatial ordering of the map so that similar input patterns
+tend to produce a response in units that are close to each other in the grid.
+</OL>
+<P>
+Before starting the learning process, it is important to initialize the
+competitive layer with normalized vectors.  The input pattern vectors
+are presented to all competitive units in parallel and the best
+matching (nearest) unit is chosen as the winner.  Since the vectors
+are normalized, the
+similarity between the normalized input vector X = <IMG  ALIGN=MIDDLE ALT="" SRC="img1161.gif"> and the
+reference units <IMG  ALIGN=MIDDLE ALT="" SRC="img1162.gif"> = <IMG  ALIGN=MIDDLE ALT="" SRC="img1163.gif"> can be calculated using the dot
+product:
+<P>
+<P><IMG  ALIGN=BOTTOM ALT="" SRC="img1164.gif"><P>
+<P>
+The vector<A NAME=tex2html511 HREF="footnode.html#5883"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/foot_motif.gif"></A> <IMG  ALIGN=MIDDLE ALT="" SRC="img1165.gif"> most similar to
+<b>X</b> is the one with the largest dot product with <b>X</b>:
+<P>
+<P><IMG  ALIGN=BOTTOM ALT="" SRC="img1166.gif"><P>
+<P>
+The topological ordering is achieved by using a spatial neighborhood
+relation between the competitive units during learning. I.e. not only
+the best-matching vector, with weight <IMG  ALIGN=MIDDLE ALT="" SRC="img1167.gif">, but also its neighborhood
+<A NAME=tex2html512 HREF="footnode.html#5884"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/foot_motif.gif"></A> <IMG  ALIGN=MIDDLE ALT="" SRC="img1171.gif">, is adapted, in contrast to a basic competitive
+learning algorithm like LVQ:
+<P>
+<P><IMG  ALIGN=BOTTOM ALT="" SRC="img1172.gif"><P>
+where
+<P>
+ <IMG  ALIGN=MIDDLE ALT="" SRC="img1173.gif">  (Gaussian Function)<BR> 
+<P><IMG  ALIGN=BOTTOM ALT="" SRC="img1174.gif"><P>
+<P>
+The adaption height and radius are usually decreased over time to
+enforce the clustering process.
+<P>
+See [<A HREF="node389.html#Koh88">Koh88</A>] for a more detailed description of SOMs and their
+theory.
+<P>
+<BR> <HR><A NAME=tex2html4420 HREF="node217.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html4418 HREF="node215.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html4412 HREF="node215.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html4422 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html4423 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html4421 HREF="node217.html"> SOM Implementation in </A>
+<B>Up:</B> <A NAME=tex2html4419 HREF="node215.html"> Self-Organizing Maps (SOMs)</A>
+<B> Previous:</B> <A NAME=tex2html4413 HREF="node215.html"> Self-Organizing Maps (SOMs)</A>
+<BR> <HR> <P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

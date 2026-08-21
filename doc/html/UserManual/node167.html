@@ -1,0 +1,56 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Mathematical Background</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Mathematical Background">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html3780 HREF="node168.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html3778 HREF="node165.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html3774 HREF="node166.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html3782 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html3783 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html3781 HREF="node168.html"> Pruned-Cascade-Correlation (PCC)</A>
+<B>Up:</B> <A NAME=tex2html3779 HREF="node165.html"> Cascade-Correlation (CC)</A>
+<B> Previous:</B> <A NAME=tex2html3775 HREF="node166.html"> The Algorithm</A>
+<BR> <HR> <P>
+<H3><A NAME=SECTION001081200000000000000> Mathematical Background</A></H3>
+<P>
+The training of the output units tries to minimize the sum-squared
+error <b>E</b>:
+<P>
+<P><IMG  ALIGN=BOTTOM ALT="" SRC="img863.gif"><P>
+<P>
+where <IMG  ALIGN=MIDDLE ALT="" SRC="img864.gif"> is the desired and <IMG  ALIGN=MIDDLE ALT="" SRC="img865.gif"> is the observed output of the 
+output unit <b>o</b> for a pattern <b>p</b>. The error <b>E</b> is minimized by gradient
+decent using
+<P>
+<P><A NAME=formel>&#160;</A><IMG  ALIGN=BOTTOM ALT="" SRC="img866.gif"><P>
+<P>
+where <IMG  ALIGN=MIDDLE ALT="" SRC="img867.gif"> is the derivative of an activation function of a output unit 
+<b>o</b> and <IMG  ALIGN=MIDDLE ALT="" SRC="img868.gif"> is the value of an input unit or a hidden unit <b>i</b> 
+for a pattern <b>p</b>. <IMG  ALIGN=MIDDLE ALT="" SRC="img869.gif"> denominates the connection between an input or
+hidden unit <b>i</b> and an output unit <b>o</b>.
+<P>
+After the training phase the candidate units are adapted, so that the
+correlation <b>C</b> between the value <IMG  ALIGN=MIDDLE ALT="" SRC="img870.gif"> of a candidate unit and the
+residual error <IMG  ALIGN=MIDDLE ALT="" SRC="img871.gif"> of an output unit becomes maximal. The
+correlation is given by Fahlman with:
+<P>
+<P><IMG  ALIGN=BOTTOM ALT="" SRC="img872.gif"><P>
+<P>
+where <IMG  ALIGN=MIDDLE ALT="" SRC="img873.gif"> is the average activation of a candidate unit and
+<IMG  ALIGN=MIDDLE ALT="" SRC="img874.gif"> is the average error of an output unit over all patterns
+<b>p</b>. The maximization of C proceeds by gradient ascent using
+<P>
+<P><IMG  ALIGN=BOTTOM ALT="" SRC="img875.gif"><P>
+<P>
+where <IMG  ALIGN=MIDDLE ALT="" SRC="img876.gif"> is the sign of the correlation between the candidate unit's
+output and the residual error at output <b>o</b>.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

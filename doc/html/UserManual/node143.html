@@ -1,0 +1,194 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Neural Network Models and Functions</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Neural Network Models and Functions">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html3375 HREF="node144.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html3373 HREF="UserManual.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html3367 HREF="node142.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html3377 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html3378 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html3376 HREF="node144.html"> Backpropagation Networks</A>
+<B>Up:</B> <A NAME=tex2html3374 HREF="UserManual.html">No Title</A>
+<B> Previous:</B> <A NAME=tex2html3368 HREF="node142.html"> The Display Control </A>
+<BR> <HR> <P>
+<H1><A NAME=SECTION001000000000000000000> Neural Network Models and Functions</A></H1>
+<P>
+<A NAME=ImplemModels>&#160;</A>
+<P>
+The following chapter introduces the models and learning functions
+implemented in SNNS. A strong emphasis is placed on the models that
+are less well known. They can not, however, be explained
+exhaustively here. We refer interested users to the literature.
+<P>
+<BR> <HR>
+<UL> 
+<LI> <A NAME=tex2html3379 HREF="node144.html#SECTION001010000000000000000"> Backpropagation Networks</A>
+<UL> 
+<LI> <A NAME=tex2html3380 HREF="node145.html#SECTION001011000000000000000"> Vanilla Backpropagation</A>
+<LI> <A NAME=tex2html3381 HREF="node146.html#SECTION001012000000000000000"> Enhanced Backpropagation</A>
+<LI> <A NAME=tex2html3382 HREF="node147.html#SECTION001013000000000000000"> Batch Backpropagation</A>
+<LI> <A NAME=tex2html3383 HREF="node148.html#SECTION001014000000000000000"> Backpropagation with Weight Decay</A>
+</UL> 
+<LI> <A NAME=tex2html3384 HREF="node149.html#SECTION001020000000000000000"> Quickprop</A>
+<LI> <A NAME=tex2html3385 HREF="node150.html#SECTION001030000000000000000"> RPROP</A>
+<UL> 
+<LI> <A NAME=tex2html3386 HREF="node151.html#SECTION001031000000000000000"> Changes in Release 3.3</A>
+<LI> <A NAME=tex2html3387 HREF="node152.html#SECTION001032000000000000000"> General Description</A>
+<LI> <A NAME=tex2html3388 HREF="node153.html#SECTION001033000000000000000"> Parameters</A>
+</UL> 
+<LI> <A NAME=tex2html3389 HREF="node154.html#SECTION001040000000000000000"> Backpercolation</A>
+<LI> <A NAME=tex2html3390 HREF="node155.html#SECTION001050000000000000000"> Counterpropagation</A>
+<UL> 
+<LI> <A NAME=tex2html3391 HREF="node156.html#SECTION001051000000000000000"> Fundamentals</A>
+<LI> <A NAME=tex2html3392 HREF="node157.html#SECTION001052000000000000000"> Initializing Counterpropagation</A>
+<LI> <A NAME=tex2html3393 HREF="node158.html#SECTION001053000000000000000"> Counterpropagation Implementation in SNNS</A>
+</UL> 
+<LI> <A NAME=tex2html3394 HREF="node159.html#SECTION001060000000000000000"> Dynamic Learning Vector Quantization (DLVQ)</A>
+<UL> 
+<LI> <A NAME=tex2html3395 HREF="node160.html#SECTION001061000000000000000"> DLVQ Fundamentals</A>
+<LI> <A NAME=tex2html3396 HREF="node161.html#SECTION001062000000000000000"> DLVQ in SNNS</A>
+<LI> <A NAME=tex2html3397 HREF="node162.html#SECTION001063000000000000000"> Remarks</A>
+</UL> 
+<LI> <A NAME=tex2html3398 HREF="node163.html#SECTION001070000000000000000"> Backpropagation Through Time (BPTT)</A>
+<LI> <A NAME=tex2html3399 HREF="node164.html#SECTION001080000000000000000"> The Cascade Correlation Algorithms</A>
+<UL> 
+<LI> <A NAME=tex2html3400 HREF="node165.html#SECTION001081000000000000000"> Cascade-Correlation (CC)</A>
+<UL> 
+<LI> <A NAME=tex2html3401 HREF="node166.html#SECTION001081100000000000000"> The Algorithm</A>
+<LI> <A NAME=tex2html3402 HREF="node167.html#SECTION001081200000000000000"> Mathematical Background</A>
+</UL> 
+<LI> <A NAME=tex2html3403 HREF="node168.html#SECTION001082000000000000000"> Pruned-Cascade-Correlation (PCC)</A>
+<UL> 
+<LI> <A NAME=tex2html3404 HREF="node169.html#SECTION001082100000000000000"> The Algorithm</A>
+<LI> <A NAME=tex2html3405 HREF="node170.html#SECTION001082200000000000000"> Mathematical Background</A>
+</UL> 
+<LI> <A NAME=tex2html3406 HREF="node171.html#SECTION001083000000000000000"> Recurrent Cascade-Correlation (RCC)</A>
+<UL> 
+<LI> <A NAME=tex2html3407 HREF="node172.html#SECTION001083100000000000000"> The Algorithm</A>
+<LI> <A NAME=tex2html3408 HREF="node173.html#SECTION001083200000000000000"> Mathematical Background</A>
+</UL> 
+<LI> <A NAME=tex2html3409 HREF="node174.html#SECTION001084000000000000000"> Using the Cascade Algorithms in SNNS</A>
+</UL> 
+<LI> <A NAME=tex2html3410 HREF="node175.html#SECTION001090000000000000000"> Time Delay Networks (TDNNs)</A>
+<UL> 
+<LI> <A NAME=tex2html3411 HREF="node176.html#SECTION001091000000000000000"> TDNN Fundamentals</A>
+<LI> <A NAME=tex2html3412 HREF="node177.html#SECTION001092000000000000000"> TDNN Implementation in SNNS</A>
+<UL> 
+<LI> <A NAME=tex2html3413 HREF="node178.html#SECTION001092100000000000000"> Activation Function</A>
+<LI> <A NAME=tex2html3414 HREF="node179.html#SECTION001092200000000000000"> Update Function</A>
+<LI> <A NAME=tex2html3415 HREF="node180.html#SECTION001092300000000000000"> Learning Function</A>
+</UL> 
+<LI> <A NAME=tex2html3416 HREF="node181.html#SECTION001093000000000000000"> Building and Using a Time Delay Network</A>
+</UL> 
+<LI> <A NAME=tex2html3417 HREF="node182.html#SECTION0010100000000000000000"> Radial Basis Functions (RBFs)</A>
+<UL> 
+<LI> <A NAME=tex2html3418 HREF="node183.html#SECTION0010101000000000000000"> RBF Fundamentals</A>
+<LI> <A NAME=tex2html3419 HREF="node184.html#SECTION0010102000000000000000"> RBF Implementation in SNNS</A>
+<UL> 
+<LI> <A NAME=tex2html3420 HREF="node185.html#SECTION0010102100000000000000"> Activation Functions</A>
+<LI> <A NAME=tex2html3421 HREF="node186.html#SECTION0010102200000000000000"> Initialization Functions</A>
+<UL> 
+<LI> <A NAME=tex2html3422 HREF="node187.html#SECTION0010102210000000000000"> RBF_Weights</A>
+<LI> <A NAME=tex2html3423 HREF="node188.html#SECTION0010102220000000000000"> RBF_Weights_Kohonen</A>
+<LI> <A NAME=tex2html3424 HREF="node189.html#SECTION0010102230000000000000"> RBF_Weights_Redo</A>
+</UL> 
+<LI> <A NAME=tex2html3425 HREF="node190.html#SECTION0010102300000000000000"> Learning Functions</A>
+</UL> 
+<LI> <A NAME=tex2html3426 HREF="node191.html#SECTION0010103000000000000000"> Building a Radial Basis Function Application</A>
+</UL> 
+<LI> <A NAME=tex2html3427 HREF="node192.html#SECTION0010110000000000000000"> Dynamic Decay Adjustment for RBFs (RBF--DDA)</A>
+<UL> 
+<LI> <A NAME=tex2html3428 HREF="node193.html#SECTION0010111000000000000000"> The Dynamic Decay Adjustment Algorithm</A>
+<LI> <A NAME=tex2html3429 HREF="node194.html#SECTION0010112000000000000000"> Using RBF--DDA in SNNS</A>
+</UL> 
+<LI> <A NAME=tex2html3430 HREF="node195.html#SECTION0010120000000000000000"> ART Models in SNNS</A>
+<UL> 
+<LI> <A NAME=tex2html3431 HREF="node196.html#SECTION0010121000000000000000"> ART1</A>
+<UL> 
+<LI> <A NAME=tex2html3432 HREF="node197.html#SECTION0010121100000000000000"> Structure of an ART1 Network</A>
+<LI> <A NAME=tex2html3433 HREF="node198.html#SECTION0010121200000000000000"> Using ART1 Networks in SNNS</A>
+<UL> 
+<LI> <A NAME=tex2html3434 HREF="node199.html#SECTION0010121210000000000000"> ART1 Initialization Function</A>
+<LI> <A NAME=tex2html3435 HREF="node200.html#SECTION0010121220000000000000"> ART1 Learning Function</A>
+<LI> <A NAME=tex2html3436 HREF="node201.html#SECTION0010121230000000000000"> ART1 Update Functions</A>
+</UL> 
+</UL> 
+<LI> <A NAME=tex2html3437 HREF="node202.html#SECTION0010122000000000000000"> ART2</A>
+<UL> 
+<LI> <A NAME=tex2html3438 HREF="node203.html#SECTION0010122100000000000000"> Structure of an ART2 Network</A>
+<LI> <A NAME=tex2html3439 HREF="node204.html#SECTION0010122200000000000000"> Using ART2 Networks in SNNS</A>
+<UL> 
+<LI> <A NAME=tex2html3440 HREF="node205.html#SECTION0010122210000000000000"> ART2 Initialization Function</A>
+<LI> <A NAME=tex2html3441 HREF="node206.html#SECTION0010122220000000000000"> ART2 Learning Function</A>
+<LI> <A NAME=tex2html3442 HREF="node207.html#SECTION0010122230000000000000"> ART2 Update Functions</A>
+</UL> 
+</UL> 
+<LI> <A NAME=tex2html3443 HREF="node208.html#SECTION0010123000000000000000"> ARTMAP</A>
+<UL> 
+<LI> <A NAME=tex2html3444 HREF="node209.html#SECTION0010123100000000000000"> Structure of an ARTMAP Network</A>
+<LI> <A NAME=tex2html3445 HREF="node210.html#SECTION0010123200000000000000"> Using ARTMAP Networks in SNNS</A>
+<UL> 
+<LI> <A NAME=tex2html3446 HREF="node211.html#SECTION0010123210000000000000"> ARTMAP Initialization Function</A>
+<LI> <A NAME=tex2html3447 HREF="node212.html#SECTION0010123220000000000000"> ARTMAP Learning Function</A>
+<LI> <A NAME=tex2html3448 HREF="node213.html#SECTION0010123230000000000000"> ARTMAP Update Functions</A>
+</UL> 
+</UL> 
+<LI> <A NAME=tex2html3449 HREF="node214.html#SECTION0010124000000000000000"> Topology of ART Networks in SNNS</A>
+</UL> 
+<LI> <A NAME=tex2html3450 HREF="node215.html#SECTION0010130000000000000000"> Self-Organizing Maps (SOMs)</A>
+<UL> 
+<LI> <A NAME=tex2html3451 HREF="node216.html#SECTION0010131000000000000000"> SOM Fundamentals</A>
+<LI> <A NAME=tex2html3452 HREF="node217.html#SECTION0010132000000000000000"> SOM Implementation in SNNS</A>
+<UL> 
+<LI> <A NAME=tex2html3453 HREF="node218.html#SECTION0010132100000000000000"> The KOHONEN Learning Function</A>
+<LI> <A NAME=tex2html3454 HREF="node219.html#SECTION0010132200000000000000"> The Kohonen Update Function</A>
+<LI> <A NAME=tex2html3455 HREF="node220.html#SECTION0010132300000000000000"> The Kohonen Init Function</A>
+<LI> <A NAME=tex2html3456 HREF="node221.html#SECTION0010132400000000000000"> The Kohonen Activation Functions</A>
+<LI> <A NAME=tex2html3457 HREF="node222.html#SECTION0010132500000000000000"> Building and Training Self-Organizing Maps</A>
+<LI> <A NAME=tex2html3458 HREF="node223.html#SECTION0010132600000000000000"> Evaluation Tools for SOMs</A>
+</UL> 
+</UL> 
+<LI> <A NAME=tex2html3459 HREF="node224.html#SECTION0010140000000000000000"> Autoassociative Networks</A>
+<UL> 
+<LI> <A NAME=tex2html3460 HREF="node225.html#SECTION0010141000000000000000"> General Characteristics</A>
+<LI> <A NAME=tex2html3461 HREF="node226.html#SECTION0010142000000000000000"> Layout of Autoassociative Networks</A>
+<LI> <A NAME=tex2html3462 HREF="node227.html#SECTION0010143000000000000000"> Hebbian Learning</A>
+<LI> <A NAME=tex2html3463 HREF="node228.html#SECTION0010144000000000000000"> McClelland &amp; Rumelhart's Delta Rule</A>
+</UL> 
+<LI> <A NAME=tex2html3464 HREF="node229.html#SECTION0010150000000000000000"> Partial Recurrent Networks</A>
+<UL> 
+<LI> <A NAME=tex2html3465 HREF="node230.html#SECTION0010151000000000000000"> Models of Partial Recurrent Networks</A>
+<UL> 
+<LI> <A NAME=tex2html3466 HREF="node231.html#SECTION0010151100000000000000"> Jordan Networks</A>
+<LI> <A NAME=tex2html3467 HREF="node232.html#SECTION0010151200000000000000"> Elman Networks</A>
+<LI> <A NAME=tex2html3468 HREF="node233.html#SECTION0010151300000000000000"> Extended Hierarchical Elman Networks</A>
+</UL> 
+<LI> <A NAME=tex2html3469 HREF="node234.html#SECTION0010152000000000000000"> Working with Partial Recurrent Networks</A>
+<UL> 
+<LI> <A NAME=tex2html3470 HREF="node235.html#SECTION0010152100000000000000"> The Initialization Function JE_Weights</A>
+<LI> <A NAME=tex2html3471 HREF="node236.html#SECTION0010152200000000000000"> Learning Functions</A>
+<LI> <A NAME=tex2html3472 HREF="node237.html#SECTION0010152300000000000000"> Update Functions</A>
+</UL> 
+</UL> 
+<LI> <A NAME=tex2html3473 HREF="node238.html#SECTION0010160000000000000000"> Stochastic Learning Functions</A>
+<UL> 
+<LI> <A NAME=tex2html3474 HREF="node239.html#SECTION0010161000000000000000"> Monte-Carlo</A>
+<LI> <A NAME=tex2html3475 HREF="node240.html#SECTION0010162000000000000000"> Simulated Annealing</A>
+</UL> 
+<LI> <A NAME=tex2html3476 HREF="node241.html#SECTION0010170000000000000000"> Scaled Conjugate Gradient (SCG)</A>
+<UL> 
+<LI> <A NAME=tex2html3477 HREF="node242.html#SECTION0010171000000000000000"> Conjugate Gradient Methods (CGMs)</A>
+<LI> <A NAME=tex2html3478 HREF="node243.html#SECTION0010172000000000000000"> Main features of SCG</A>
+<LI> <A NAME=tex2html3479 HREF="node244.html#SECTION0010173000000000000000"> Parameters of SCG</A>
+<LI> <A NAME=tex2html3480 HREF="node245.html#SECTION0010174000000000000000"> Complexity of SCG</A>
+</UL>
+</UL>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

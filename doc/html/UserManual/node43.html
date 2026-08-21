@@ -1,0 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> 2D Displays</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" 2D Displays">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html2102 HREF="node44.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html2100 HREF="node32.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html2094 HREF="node42.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html2104 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html2105 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html2103 HREF="node44.html"> Setup Panel of </A>
+<B>Up:</B> <A NAME=tex2html2101 HREF="node32.html"> Windows of XGUI</A>
+<B> Previous:</B> <A NAME=tex2html2095 HREF="node42.html"> Unit Function Displays</A>
+<BR> <HR> <P>
+<H2><A NAME=SECTION00535000000000000000> 2D Displays</A></H2>
+<P>
+<A NAME=GraphicWindows>&#160;</A>
+<A NAME=1315>&#160;</A>
+<A NAME=1316>&#160;</A>
+<P>
+<A NAME=1317>&#160;</A> A 2D display or simply display is
+always part of the user interface. It serves to display the network
+topology, the units' activations and the weights of the links. Each
+unit is located on a grid position, which simplifies the positioning
+of the units. The distance between two grid points (<tt> grid width</tt>)
+can be changed from the default 37 pixels to other values in the setup
+panel.
+<P>
+The current position, i.e. the grid position of the mouse, is also
+numerically displayed at the bottom of the manager panel. The x-axis
+is the horizontal line and valid coordinates lie in the range <b>-32736</b>
+... <b>+32735</b> (short integer).
+<P>
+The current version displays units as boxes, where the size of the box
+is proportional to the value of the displayed attribute. Possible
+attributes are activation, initial activation, bias, and output. A
+black box represents a positive value, an empty box a negative value.
+The size of the unit varies between 16x16 and 0 pixels according to
+the value of <b>scaleFactor</b>. The parameter <em> scaleFactor</em> has a
+default value of <IMG  ALIGN=BOTTOM ALT="" SRC="img176.gif">, but may be set to values between <IMG  ALIGN=BOTTOM ALT="" SRC="img177.gif"> and
+<IMG  ALIGN=BOTTOM ALT="" SRC="img178.gif"> in the setup panel. Each unit can be displayed with two of
+several attributes. One above the unit and one below the unit. The
+attributes to be displayed can be selected in the setup panel.
+<P>
+Links are shown as solid lines, with optional numerical display of the
+weight in the center of the line and/or arrow head pointing to the
+target unit. These features are optional, because they heavily affect
+the drawing speed of the display window.
+<P>
+A display can also be frozen with the button <IMG  ALIGN=BOTTOM ALT="" SRC="img179.gif"> (button
+gets inverted). It is afterwards neither updated anymore<A NAME=tex2html127 HREF="footnode.html#1321"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/foot_motif.gif"></A>, nor does it accept
+further editor commands.
+<P>
+An iconified display is not updated and therefore consumes (almost) no
+CPU time. If a window is closed, its dimensions and setup parameters
+are saved in a stack (LIFO). This means that a newly requested display
+gets the values of the window assigned that was last closed. For
+better orientation, the window title contains the subnet number which
+was specified for this display in the setup panel.
+<P>
+<BR> <HR>
+<UL> 
+<LI> <A NAME=tex2html2106 HREF="node44.html#SECTION00535100000000000000"> Setup Panel of a 2D Display</A>
+</UL>
+<BR> <HR><A NAME=tex2html2102 HREF="node44.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html2100 HREF="node32.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html2094 HREF="node42.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html2104 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html2105 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html2103 HREF="node44.html"> Setup Panel of </A>
+<B>Up:</B> <A NAME=tex2html2101 HREF="node32.html"> Windows of XGUI</A>
+<B> Previous:</B> <A NAME=tex2html2095 HREF="node42.html"> Unit Function Displays</A>
+<BR> <HR> <P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

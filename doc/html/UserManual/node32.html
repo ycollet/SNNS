@@ -1,0 +1,165 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Windows of XGUI</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Windows of XGUI">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html1949 HREF="node33.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html1947 HREF="node18.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html1941 HREF="node31.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html1951 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html1952 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html1950 HREF="node33.html"> Manager Panel</A>
+<B>Up:</B> <A NAME=tex2html1948 HREF="node18.html"> Using the Graphical </A>
+<B> Previous:</B> <A NAME=tex2html1942 HREF="node31.html"> XGUI Files</A>
+<BR> <HR> <P>
+<H1><A NAME=SECTION00530000000000000000> Windows of XGUI</A></H1>
+<P>
+<A NAME=774>&#160;</A>
+<A NAME=775>&#160;</A>
+<P>
+The graphical user interface has the following windows, which can be
+positioned and handled independently (<em> toplevel shells</em>):
+<P>
+<UL><LI> <b> Manager</b> panel with buttons to open other windows, a
+  message line, and a line with status information at the bottom .
+<P>
+<LI> <b> File</b> browser for loading and saving networks and pattern
+files.
+<P>
+<LI> <b> Control</b> panel for simulator operations.
+<P>
+<LI> <b> Info</b> panel for setting and getting information about unit
+  and link attributes.
+<P>
+<LI> several <b> Displays</b>, to display the network graphically in
+two dimensions.
+<P>
+<LI> <b> 3D View</b> panel to control the three dimensional network
+visualization component.
+<P>
+<LI> <b> Graph</b> display, to explain the network error during
+teaching graphically.
+<P>
+<LI> <b> Bignet</b> panel to facilitate the creation of big regular
+networks.
+<P>
+<LI> <b> Pruning</b> panel for control of the pruning algorithm.
+<P>
+<LI> <b> Cascade</b> panel for control of the learning phase of cascade
+correlation learning.
+<P>
+<LI> <b> Kohonen</b> panel, an extension to the control panel for
+  Kohonen networks.
+<P>
+<LI> <b> Weight Display</b>, to show the weight matrix as a WV- or
+Hinton diagram.
+<P>
+<LI> <b> Projection</b> panel to clarify the influence of two units onto
+  a third one.
+<P>
+<LI> <b> Analyzer</b> for supervising recurrent (and other) networks.
+<P>
+<LI> <b> Inversion</b> display, to control the inversion method network
+  analyzing tool.
+<P>
+<LI> <b> Print</b> panel to generate a PostScript picture of one of the
+  2D displays.
+<P>
+<LI> <b> Help windows</b> to display the help text.
+<P>
+</UL>
+<P>
+Of these windows only the Manager panel and possibly one or more 2D
+displays are open from the start, the other windows are opened with
+the corresponding buttons in the manager panel or by giving the
+corresponding key code while the mouse pointer is in one of the SNNS
+windows.
+<P>
+Additionally, there are several popup windows (<em> transient
+  shells</em>) which only become visible when called and block all other
+XGUI windows. Among them are various <b> Setup</b> panels for
+adjustments of the graphical representation. (called with the button
+<IMG  ALIGN=BOTTOM ALT="" SRC="img94.gif"> in the various windows)
+<P>
+There are a number of other popup windows which are invoked by
+pressing a button in one of the main windows or choosing a menu.
+<P>
+<P><A NAME=806>&#160;</A><A NAME=ManagerControlDisplay>&#160;</A><IMG  ALIGN=BOTTOM ALT="" SRC="img95.gif">
+<BR><STRONG>Figure:</STRONG> Manager panel, info panel, control panel and a display.<BR>
+<P>
+<P>
+Figure <A HREF="node32.html#ManagerControlDisplay"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A> shows a typical screen setup. The
+<b> Manager</b> panel contains buttons to call all other windows of the
+interface and displays the status of SNNS. It should therefore always
+be kept visible.
+<P>
+The <b> Info</b> panel displays the attributes of two units and the data
+of the link between them. All attributes may also be changed here. The
+data displayed here is important for many editor commands.
+<P>
+In each of the  <b> Displays</b> a part of the network is displayed,
+while all settings can be changed using  <b> Setup</b>. These windows
+also allow access to the <b> network editor</b> using the keyboard (see
+also chapter <A HREF="node107.html#XGUIEditor"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A>).
+<P>
+The <b> Control</b> panel controls the simulator operations during
+learning and recall.
+<P>
+In the  <b> File</b> panel a log file can be specified, where all XGUI
+output to  <tt> stdout</tt> is copied to. A variety of data about the
+network can be displayed here. Also a record is kept on the load and
+save of files and on the teaching.
+<P>
+<A NAME=820>&#160;</A>
+The complete help text from the file <tt> help.hdoc</tt> is available in
+the text section of a <b> help window</b>. Information about a word can
+be retrieved by marking that word in the text and then clicking
+<IMG  ALIGN=BOTTOM ALT="" SRC="img96.gif"> or <IMG  ALIGN=BOTTOM ALT="" SRC="img97.gif">. A list of keywords can be obtained
+by a click to <IMG  ALIGN=BOTTOM ALT="" SRC="img98.gif">. This window also allows context
+sensitive help, when the editor is used with the keyboard.
+<P>
+<tt> QUIT</tt> is used to leave XGUI. XGUI can also be left by pressing
+ALT-q in any SNNS window. Pressing ALT-Q will exit SNNS without asking
+further questions.
+<P>
+<BR> <HR>
+<UL> 
+<LI> <A NAME=tex2html1953 HREF="node33.html#SECTION00531000000000000000"> Manager Panel</A>
+<LI> <A NAME=tex2html1954 HREF="node34.html#SECTION00532000000000000000"> File Browser</A>
+<UL> 
+<LI> <A NAME=tex2html1955 HREF="node35.html#SECTION00532100000000000000"> Loading and Saving Networks</A>
+<LI> <A NAME=tex2html1956 HREF="node36.html#SECTION00532200000000000000"> Loading and Saving Patterns</A>
+<LI> <A NAME=tex2html1957 HREF="node37.html#SECTION00532300000000000000"> Loading and Saving Configurations</A>
+<LI> <A NAME=tex2html1958 HREF="node38.html#SECTION00532400000000000000"> Saving a Result file</A>
+<LI> <A NAME=tex2html1959 HREF="node39.html#SECTION00532500000000000000"> Defining the Log File</A>
+</UL> 
+<LI> <A NAME=tex2html1960 HREF="node40.html#SECTION00533000000000000000"> Control Panel</A>
+<LI> <A NAME=tex2html1961 HREF="node41.html#SECTION00534000000000000000"> Info Panel</A>
+<UL> 
+<LI> <A NAME=tex2html1962 HREF="node42.html#SECTION00534100000000000000"> Unit Function Displays</A>
+</UL> 
+<LI> <A NAME=tex2html1963 HREF="node43.html#SECTION00535000000000000000"> 2D Displays</A>
+<UL> 
+<LI> <A NAME=tex2html1964 HREF="node44.html#SECTION00535100000000000000"> Setup Panel of a 2D Display</A>
+</UL> 
+<LI> <A NAME=tex2html1965 HREF="node45.html#SECTION00536000000000000000"> Graph Window</A>
+<LI> <A NAME=tex2html1966 HREF="node46.html#SECTION00537000000000000000"> Weight Display</A>
+<LI> <A NAME=tex2html1967 HREF="node47.html#SECTION00538000000000000000"> Projection Panel</A>
+<LI> <A NAME=tex2html1968 HREF="node48.html#SECTION00539000000000000000"> Print Panel</A>
+<LI> <A NAME=tex2html1969 HREF="node49.html#SECTION005310000000000000000"> Help Windows</A>
+<LI> <A NAME=tex2html1970 HREF="node50.html#SECTION005311000000000000000"> Shell window</A>
+<LI> <A NAME=tex2html1971 HREF="node51.html#SECTION005312000000000000000"> Confirmer</A>
+</UL>
+<BR> <HR><A NAME=tex2html1949 HREF="node33.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html1947 HREF="node18.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html1941 HREF="node31.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html1951 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html1952 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html1950 HREF="node33.html"> Manager Panel</A>
+<B>Up:</B> <A NAME=tex2html1948 HREF="node18.html"> Using the Graphical </A>
+<B> Previous:</B> <A NAME=tex2html1942 HREF="node31.html"> XGUI Files</A>
+<BR> <HR> <P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

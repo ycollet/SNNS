@@ -1,0 +1,101 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Snns2c</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Snns2c">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html6015 HREF="node337.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html6013 HREF="node322.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html6009 HREF="node335.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html6017 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html6018 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html6016 HREF="node337.html"> Program Flow</A>
+<B>Up:</B> <A NAME=tex2html6014 HREF="node322.html"> Tools for SNNS</A>
+<B> Previous:</B> <A NAME=tex2html6010 HREF="node335.html"> Pat_sel</A>
+<BR> <HR> <P>
+<H1><A NAME=SECTION0015120000000000000000> Snns2c</A></H1>
+<P>
+<A NAME=8099>&#160;</A>
+<P>
+Synopsis: <tt> snns2c</tt> <b>&lt;</b>network<b>&gt;</b> <IMG  ALIGN=MIDDLE ALT="" SRC="img1417.gif">C-filename<b>&gt;</b>
+<IMG  ALIGN=MIDDLE ALT="" SRC="img1418.gif">function-name<IMG  ALIGN=MIDDLE ALT="" SRC="img1419.gif"> <IMG  ALIGN=MIDDLE ALT="" SRC="img1420.gif">
+<P>
+where:
+<P>
+<P><IMG  ALIGN=BOTTOM ALT="" SRC="img1421.gif"><P>
+<P>
+This tool compiles an SNNS network file into an executable C source.
+It reads a network file <tt> <b>&lt;</b>network.net<b>&gt;</b></tt> and generates a C source
+named <tt> <b>&lt;</b>C-filename<b>&gt;</b></tt>. The network can be called now as a function
+named <tt> <b>&lt;</b>function-name<b>&gt;</b></tt>. If the parameter  <tt>
+<b>&lt;</b>function-name<b>&gt;</b></tt> is missing, the name of <tt> <b>&lt;</b>C-filename<b>&gt;</b></tt> is
+taken without the ending ``*.c''. If this parameter is also missing,
+the name of the network file is chosen and fitted with a new
+ending for the output file. This name without ending is also used for
+the function name.
+<P>
+It is not possible to train the generated net, SNNS has to be used for
+this purpose.  After completion of network training with SNNS, the
+tool SNNS2C is used to integrate the trained network as a C
+function into a separate application.
+<P>
+This program is also an example how to use the SNNS kernel interface
+for loading a net and changing the loaded net into another format.  All
+data and all SNNS functions -- except the activation functions -- are
+placed in a single C function.
+<P>
+<b> Note:<BR> </b> SNNS2C does not support sites. Any networks created
+with SNNS that make use of the site feature can not be converted to C
+source by this tool. Output functions are not supported, either.
+<P>
+The program can translate the following network-types:
+<UL><LI> Feedforward networks trained with Backpropagation and all 
+      variants of it like Quickprop, RPROP etc. 
+<LI> Radial Basis Functions
+<LI> Partially-recurrent Elman and Jordan networks
+<LI> Time Delay Neural Networks (TDNN)
+<LI> Dynamic Learning Vector Quantisation (DLVQ)
+<LI> Backpropagation Through Time (BPTT, QPTT, BBPTT)
+<LI> Counterpropagation Networks
+</UL>
+<P>
+While the use of SNNS or any parts of it in commercial applications
+requires a special agreement/licensing from the developers, the use
+of trained networks generated with SNNS2C is hereby granted without
+any fees for any purpose, provided proper academic credit to the SNNS 
+team is given in the documentation of the application.
+<P>
+<BR> <HR>
+<UL> 
+<LI> <A NAME=tex2html6019 HREF="node337.html#SECTION0015121000000000000000"> Program Flow</A>
+<LI> <A NAME=tex2html6020 HREF="node338.html#SECTION0015122000000000000000"> Including the Compiled Network in the Own Application</A>
+<UL> 
+<LI> <A NAME=tex2html6021 HREF="node339.html#SECTION0015122010000000000000"> Interfaces:</A>
+<LI> <A NAME=tex2html6022 HREF="node340.html#SECTION0015122020000000000000"> Example:</A>
+</UL> 
+<LI> <A NAME=tex2html6023 HREF="node341.html#SECTION0015123000000000000000"> Special Network Architectures</A>
+<UL> 
+<LI> <A NAME=tex2html6024 HREF="node342.html#SECTION0015123010000000000000"> TDNN:</A>
+<LI> <A NAME=tex2html6025 HREF="node343.html#SECTION0015123020000000000000"> CPN:</A>
+<LI> <A NAME=tex2html6026 HREF="node344.html#SECTION0015123030000000000000"> DLVQ:</A>
+<LI> <A NAME=tex2html6027 HREF="node345.html#SECTION0015123040000000000000"> BPTT:</A>
+</UL> 
+<LI> <A NAME=tex2html6028 HREF="node346.html#SECTION0015124000000000000000"> Activation Functions</A>
+<UL> 
+<LI> <A NAME=tex2html6029 HREF="node347.html#SECTION0015124010000000000000"> Supported Activation Functions:</A>
+<LI> <A NAME=tex2html6030 HREF="node348.html#SECTION0015124020000000000000"> Including Own Activation Functions:</A>
+</UL> 
+<LI> <A NAME=tex2html6031 HREF="node349.html#SECTION0015125000000000000000"> Error Messages</A>
+</UL>
+<BR> <HR><A NAME=tex2html6015 HREF="node337.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html6013 HREF="node322.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html6009 HREF="node335.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html6017 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html6018 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html6016 HREF="node337.html"> Program Flow</A>
+<B>Up:</B> <A NAME=tex2html6014 HREF="node322.html"> Tools for SNNS</A>
+<B> Previous:</B> <A NAME=tex2html6010 HREF="node335.html"> Pat_sel</A>
+<BR> <HR> <P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

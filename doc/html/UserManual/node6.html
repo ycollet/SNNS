@@ -1,0 +1,134 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Installation</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Installation">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html1539 HREF="node7.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html1537 HREF="node3.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html1531 HREF="node5.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html1541 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html1542 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html1540 HREF="node7.html"> Acknowledgments</A>
+<B>Up:</B> <A NAME=tex2html1538 HREF="node3.html"> LicensingCopying and </A>
+<B> Previous:</B> <A NAME=tex2html1532 HREF="node5.html"> How to obtain </A>
+<BR> <HR> <P>
+<H1><A NAME=SECTION00330000000000000000> Installation</A></H1>
+<P>
+<A NAME=Installation>&#160;</A>
+<P>
+Note that SNNS has not been tested extensively in different computer
+environments and is a research tool with frequent substantial changes.
+It should be obvious that we don't guarantee anything. We are also not
+staffed to answer problems with SNNS or to fix bugs quickly.
+<P>
+Since release 3.0, SNNS needs an ANSI-C compiler to run.
+The Kernighan &amp; Ritchie standard is no longer supported.
+<P>
+<A NAME=141>&#160;</A>
+To build SNNS in the directory in which you have moved it you first
+have to generate the correct makefiles for your machine architecture
+and window system used. To do this, simply call the shell script
+<PRE>        configure
+</PRE>
+This prompts you for information about the machine architecture and
+the window system and builds all necessary makefiles with this
+information. It uses templates found in the directory <tt>
+configuration</tt> for this task. Under certain conditions the shell
+script may not be able to traverse logical links. If you are sure
+about the location of your X11 libraries and include files, but
+configure can't locate them, respond by giving &quot;unknown&quot; as path. You
+can later set the correct path in the Makefiles with any text editor.
+At the end of this script, you will be told about the next step to
+build the simulator.
+<P>
+The next step to build the simulator is usually to build the kernel
+and the graphical user interface with the command
+<PRE>        build sim
+</PRE>
+or with the two commands
+<PRE>        build kernel
+        build xgui
+</PRE>
+This script descends into the appropriate subdirectories and calls the
+makefiles in these subdirectories to compile all necessary source
+files and link the object files into one executable file. The
+executable is located in
+<PRE>        &lt;SNNS-dir.&gt;/xgui/bin/&lt;architecture&gt;/xgui
+</PRE>
+where <tt> &lt;SNNS-dir.&gt;</tt> is the current SNNS directory and <tt>
+&lt;architecture&gt;</tt> is the machine architecture, e.g. <tt> dec_alpha</tt>,,
+<tt> hp_ux</tt>, <tt> sun_os4x</tt>, or <tt> others</tt>.
+<P>
+We usually build a symbolic link named <tt> snns</tt> to point to this
+executable if we often work on the same machine architecture.
+<PRE>        ln -s  xgui/bin/&lt;architecture&gt;/xgui  snns
+</PRE>
+This link may also be placed in the user home directory (with the
+proper path prefix to SNNS) or in a directory of binaries in the
+local users' search path.
+<P>
+The simulator is then called simply with
+<PRE>        snns
+</PRE>
+<P>
+If the tools accompanying the simulator and the RPC kernel files are
+also to be built, use the commands
+<PRE>        build all
+        build sim
+</PRE>
+which call the four commands 
+<PRE>        build kernel
+        build xgui
+        build rpc
+        build tools
+</PRE>
+Please note that the rpc modules need not be installed if SNNS is to
+run only on distinct workstations without parallel training. It is
+required only if you wish to train several networks on various
+workstations in parallel while holding centralized control from a
+single user interface. RPC is also not supported on several hardware
+platforms. Please read chapter <A HREF="node277.html#rpcversion"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A> for details.
+<P>
+<b> <H4> Important Note:</b></H4>
+<blockquote> Since version 3.2, the SNNS pattern files are read with the help of
+  a parser generator. However, the standard compiler-compiler for
+  unix, yacc, is not powerful enough for this task, and the GNU
+  utility program bison has to be used. For those sites that do not
+  have bison installed, we have a precompiled file included in the
+  distribution. These circumstances have two important consequences:
+<P>
+<UL><LI> The precompiled file kr_pat_parse.c was generated on a
+DECStation. We have found that some compilers on other machines refuse
+to process this file for various reasons. This is true for all
+combinations of bison-machine_A / gcc-machine_B pairs, but the file
+generated by the DEC bison seems to be the most widely accepted.
+<P>
+<LI> If you have a bison on your target machine, the first
+installation of SNNS will overwrite our precompiled file. This is fine
+as long as only this machine is used. If later on SNNS is to be
+compiled for another machine though, this new file will be used if the
+second machine does not have bison. In this case, the compatibility
+problems mentioned above might block a successful compilation.
+<P>
+<LI> If you do not have bison installed and your compiler does not
+like the precompiled file either, you have to install bison. Bison is
+a GNU product and is not distributed by us. Please refer to the
+various GNU ftp sites to obtain this program.
+</UL></blockquote>
+<P>
+For further details about calling the simulator and working with the
+graphical user interface see chapter <A HREF="node18.html#XGUIManual"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A>.
+<P>
+<BR> <HR><A NAME=tex2html1539 HREF="node7.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html1537 HREF="node3.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html1531 HREF="node5.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html1541 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html1542 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html1540 HREF="node7.html"> Acknowledgments</A>
+<B>Up:</B> <A NAME=tex2html1538 HREF="node3.html"> LicensingCopying and </A>
+<B> Previous:</B> <A NAME=tex2html1532 HREF="node5.html"> How to obtain </A>
+<BR> <HR> <P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

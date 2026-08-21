@@ -1,0 +1,67 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Feedback-gennet</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Feedback-gennet">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html5933 HREF="node330.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html5931 HREF="node322.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html5925 HREF="node328.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html5935 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html5936 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html5934 HREF="node330.html"> Mkhead</A>
+<B>Up:</B> <A NAME=tex2html5932 HREF="node322.html"> Tools for SNNS</A>
+<B> Previous:</B> <A NAME=tex2html5926 HREF="node328.html"> Setup and Structure </A>
+<BR> <HR> <P>
+<H1><A NAME=SECTION001550000000000000000> Feedback-gennet</A></H1>
+<P>
+<A NAME=8039>&#160;</A>
+<P>
+The program <tt> feedback-gennet</tt> generates network definition files for fully
+recurrent networks of any size. This is not possible by using bignet.
+The networks have the following structure:
+- input layer with no intra layer connections<BR> 
+- fully recurrent hidden layer<BR> 
+- output layer: connections from each hidden unit to each output unit <BR> 
+<code>AND</code><BR> 
+optionally fully recurrent intra layer connections in the output layer <BR> 
+<code>AND</code><BR> 
+optionally feedback connections from each output unit to each hidden unit.
+The activation function of the output units can be set to sigmoidal or linear.
+ All weights are initialized with 0.0. Other initializations should be
+performed by the init functions in SNNS.
+<P>
+Synopsis: <tt> feedback-gennet</tt>
+<P>
+example:
+<P>
+<PRE><TT> 
+		 <tt> unix&gt; </tt>feedback-gennet
+<P>
+produces
+<P>
+		 Enter <IMG  ALIGN=MIDDLE ALT="" SRC="img1414.gif"> input units: 		 3
+<P>
+		 Enter <IMG  ALIGN=MIDDLE ALT="" SRC="img1415.gif"> hidden units: 		 3
+<P>
+		 Enter <IMG  ALIGN=MIDDLE ALT="" SRC="img1416.gif"> output units: 		 1
+<P>
+		 INTRA layer connections in the output layer 		 		 (y/n) :n
+<P>
+		 feedback connections from output to hidden units 		 		 (y/n) :n
+<P>
+		 Linear output activation function 		 		 (y/n) :n
+<P>
+		 Enter name of the network file: xor-rec.net
+<P>
+		 working...
+<P>
+		 generated xor-rec.net
+<P>
+</TT></PRE><BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

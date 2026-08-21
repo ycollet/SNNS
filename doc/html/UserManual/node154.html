@@ -1,0 +1,71 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Backpercolation</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Backpercolation">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html3612 HREF="node155.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html3610 HREF="node143.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html3604 HREF="node153.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html3614 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html3615 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html3613 HREF="node155.html"> Counterpropagation</A>
+<B>Up:</B> <A NAME=tex2html3611 HREF="node143.html"> Neural Network Models </A>
+<B> Previous:</B> <A NAME=tex2html3605 HREF="node153.html"> Parameters</A>
+<BR> <HR> <P>
+<H1><A NAME=SECTION001040000000000000000> Backpercolation</A></H1>
+<P>
+<A NAME=3849>&#160;</A>
+<P>
+Backpercolation 1 (Perc1) is a learning algorithm for feedforward
+networks.  Here the weights are not changed according to the error of
+the output layer as in backpropagation, but according to a unit error
+that is computed separately for each unit. This effectively reduces
+the amount of training cycles needed.
+<P>
+The algorithm consists of five steps:
+<P>
+<OL><LI> A pattern is propagated through the network and the global error
+is computed.
+<P>
+<LI> The gradient <IMG  ALIGN=BOTTOM ALT="" SRC="img778.gif"> is computed and propagated back through
+the hidden layers as in backpropagation.
+<P>
+<LI> The error <IMG  ALIGN=BOTTOM ALT="" SRC="img779.gif"> in the activation of each hidden neuron is
+computed. This error specifies the value by which the output of this
+neuron has to change in order to minimize the global error <b>Err</b>.
+<P>
+<LI> All weight parameters are changed according to <IMG  ALIGN=BOTTOM ALT="" SRC="img780.gif">.
+<P>
+<LI> If necessary, an adaptation of the error magnifying parameter
+<IMG  ALIGN=BOTTOM ALT="" SRC="img781.gif"> is performed once every learning epoch.
+</OL>
+<P>
+The third step is divided into two phases: First each neuron receives
+a message <IMG  ALIGN=MIDDLE ALT="" SRC="img782.gif">, specifying the proposed change in the
+activation of the neuron (message creation - MCR). Then each neuron
+combines the incoming messages to an optimal compromise, the internal
+error <IMG  ALIGN=BOTTOM ALT="" SRC="img783.gif"> of the neuron (message optimization - MOP). The MCR
+phase is performed in forward direction (from input to output), the
+MOP phase backwards.
+<P>
+The internal error <IMG  ALIGN=MIDDLE ALT="" SRC="img784.gif"> of the output units is defined as
+<IMG  ALIGN=MIDDLE ALT="" SRC="img785.gif">, where <IMG  ALIGN=BOTTOM ALT="" SRC="img786.gif"> is the global
+error magnification parameter.
+<P>
+Unlike backpropagation Perc1 does not have a learning parameter.
+Instead it has an error magnification parameter <IMG  ALIGN=BOTTOM ALT="" SRC="img787.gif">. This
+parameter may be adapted after each epoch, if the total mean error
+of the network falls below the threshold value <IMG  ALIGN=BOTTOM ALT="" SRC="img788.gif">.
+<P>
+When using backpercolation with a network in SNNS the initialization
+function <tt> Random_Weights_Perc</tt> and the activation function <tt>
+Act_TanH_Xdiv2</tt> should be used.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

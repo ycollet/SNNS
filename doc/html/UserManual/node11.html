@@ -1,0 +1,212 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Units</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Units">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html1608 HREF="node12.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html1606 HREF="node10.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html1600 HREF="node10.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html1610 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html1611 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html1609 HREF="node12.html"> Connections (Links)</A>
+<B>Up:</B> <A NAME=tex2html1607 HREF="node10.html"> Building Blocks of </A>
+<B> Previous:</B> <A NAME=tex2html1601 HREF="node10.html"> Building Blocks of </A>
+<BR> <HR> <P>
+<H2><A NAME=SECTION00411000000000000000> Units</A></H2>
+<P>
+<A NAME=266>&#160;</A>
+Depending on their function in the net, one can distinguish three
+types of units: The units whose activations are the problem input for
+the net are called <em> input units</em>; the units whose output
+<A NAME=268>&#160;</A>
+<A NAME=269>&#160;</A>
+represent the output of the net <em> output units</em>. The remaining
+units are called <em> hidden units</em>, because they are not visible
+<A NAME=272>&#160;</A>
+from the outside (see e.g. figure <A HREF="node10.html#PicSimpleNet"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A>).
+<P>
+In most neural network models the type correlates with the topological
+position of the unit in the net: If a unit does not have input
+connections but only output connections, then it is an input unit. If
+it lacks output connections but has input units, it is an output unit.
+If it has both types of connections it is a hidden unit.
+<P>
+It can, however, be the case that the output of a topologically
+internal unit is regarded as part of the output of the network. The
+IO-type of a unit used in the SNNS simulator has to be understood in
+this manner. That is, units can receive input or generate output even
+if they are not at the fringe of the network.
+<P>
+Below, all <em> attributes</em> of a unit are listed:
+<A NAME=275>&#160;</A>
+<P>
+<UL><LI> <tt> no</tt>: For proper identification, every unit has a
+number<A NAME=tex2html28 HREF="footnode.html#562"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/foot_motif.gif"></A>
+attached to it. This number defines the order in which the units are
+stored in the simulator kernel.
+<P>
+<LI> <tt> name</tt>: The name can be selected arbitrarily by the user. It
+must not, however, contain blanks or special characters, and has to
+start with a letter. It is useful to select a short name that
+describes the task of the unit, since the name can be displayed with
+the network.
+<P>
+<LI> <tt> io-type</tt> or <tt> io</tt>: The IO-type defines the function of
+the unit within the net. The following alternatives are possible
+<P>
+<A NAME=282>&#160;</A>
+<P>
+<UL><LI> <em> input</em>: input unit
+<LI> <em> output</em>: output unit 
+<LI> <em> dual</em>: both input and output unit
+<LI> <em> hidden</em>: internal, i.e. hidden unit
+<LI> <em> special</em>: this type can be used in any way, depending upon
+the application. In the standard version of the SNNS simulator, the
+weights to such units are not adapted in the learning algorithm
+(see paragraph <A HREF="node15.html#learning"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A>).
+<A NAME=290>&#160;</A>
+<A NAME=291>&#160;</A>
+<LI> <em> special input, special hidden, special output</em>: sometimes
+it is necessary to to know where in the network a special unit is
+located. These three types enable the correlation of the units to the
+various layers of the network.
+</UL>
+<P>
+<LI> <tt> activation</tt>: The activation value.
+<P>
+<LI> <tt> initial activation</tt> or <tt> i_act</tt>: This variable contains
+the initial activation value, present after the initial loading of the
+net. This initial configuration can be reproduced by resetting
+(<em> reset</em>) the net, e.g. to get a defined starting state of the net.
+<P>
+<LI> <tt> output</tt>: the output value.
+<P>
+<A NAME=299>&#160;</A>
+<LI> <tt> bias</tt>: In contrast to other network simulators where the
+bias (threshold) of a unit is simulated by a link weight from a
+special 'on'-unit, SNNS represents it as a unit parameter. In the
+standard version of SNNS the bias determines where the activation
+function has its steepest ascent. (see e.g. the activation function
+<tt> Act_logistic</tt>). Learning procedures like backpropagation change
+the bias of a unit like a weight during training.
+<P>
+<A NAME=302>&#160;</A>
+<LI> <tt> activation function</tt> or <tt> actFunc</tt>: A new activation is
+computed from the output of preceding units, usually multiplied by
+the weights connecting these predecessor units with the current unit,
+the old activation of the unit and its bias. When sites are being
+used, the network input is computed from the site values. The general
+formula is:
+<P>
+<P><IMG  ALIGN=BOTTOM ALT="" SRC="img11.gif"><P>
+<P>
+where:
+<P>
+<P><IMG  ALIGN=BOTTOM ALT="" SRC="img12.gif"><P>
+<P>
+<A NAME=318>&#160;</A>
+The SNNS default activation function <em> Act_logistic</em>, for
+example, computes the network input simply by summing over all
+weighted activations and then squashing the result with the logistic
+function <IMG  ALIGN=MIDDLE ALT="" SRC="img13.gif">.
+The new activation at time <IMG  ALIGN=MIDDLE ALT="" SRC="img14.gif"> lies in the
+range <IMG  ALIGN=MIDDLE ALT="" SRC="img15.gif"><A NAME=tex2html35 HREF="footnode.html#322"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/foot_motif.gif"></A>. The variable
+<IMG  ALIGN=MIDDLE ALT="" SRC="img17.gif"> is the threshold of unit <b>j</b>.
+<P>
+<A NAME=324>&#160;</A>
+The net input <IMG  ALIGN=MIDDLE ALT="" SRC="img18.gif"> is computed with
+<P><IMG  ALIGN=BOTTOM ALT="" SRC="img19.gif"><P>
+This yields the well-known logistic activation function
+<P><IMG  ALIGN=BOTTOM ALT="" SRC="img20.gif"><P>
+<P>
+where:
+<P>
+<P><IMG  ALIGN=BOTTOM ALT="" SRC="img21.gif"><P>
+<P>
+Activation functions in SNNS are relatively simple C functions which
+are linked to the simulator kernel. The user may easily write his own
+activation functions in C and compile and link them to the simulator
+kernel. How this can be done is described later.
+<P>
+<A NAME=358>&#160;</A>
+<LI> <tt> output function</tt> or <tt> outFunc</tt>: The output function
+computes the output of every unit from the current activation of this
+unit. The output function is in most cases the identity function
+(SNNS: <tt> Out_identity</tt>). This is the default in SNNS. The output
+function makes it possible to process the activation before an
+output occurs.
+<P>
+<P><IMG  ALIGN=BOTTOM ALT="" SRC="img22.gif"><P>
+<P>
+where:
+<P>
+<P><IMG  ALIGN=BOTTOM ALT="" SRC="img23.gif"><P>
+<P>
+Another predefined SNNS-standard function, <em> Out_Clip01</em> clips the
+output to the range of <IMG  ALIGN=MIDDLE ALT="" SRC="img24.gif"> and is defined as follows:
+<P>
+<P><IMG  ALIGN=BOTTOM ALT="" SRC="img25.gif"><P>
+<P>
+Output functions are even simpler C functions than activation
+functions and can be user-defined in a similar way.
+<P>
+<A NAME=383>&#160;</A>
+<LI> <tt> f-type</tt>: The user can assign so called f-types
+(functionality types, prototypes) to a unit. The unusual name is for
+historical reasons. One may think of an f-type as a pointer to some
+prototype unit where a number of parameters has already been defined:
+<P>
+<UL><LI> activation function and output function
+<LI> whether sites are present and, if so, which ones
+</UL>
+<P>
+These types can be defined independently and are used for grouping
+units into sets of units with the same functionality. All changes in
+the definition of the f-type consequently affect also all units of that
+type. Therefore a variety of changes becomes possible with minimum
+effort.
+<P>
+<LI> <tt> position</tt>: Every unit has a specific position
+(coordinates in space) assigned to it. These positions consist of 3
+integer coordinates in a 3D grid. For editing and 2D visualization
+only the first two (x and y) coordinates are needed, for 3D
+visualization of the networks the z coordinate is necessary.
+<P>
+<LI> <tt> subnet no</tt>: Every unit is assigned to a subnet.
+With the use of this variable, structured nets can be displayed more
+clearly than would otherwise be possible in a 2D presentation.
+<P>
+<LI> <tt> layers</tt>: Units can be visualized in 2D in up to 8
+layers<A NAME=tex2html39 HREF="footnode.html#390"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/foot_motif.gif"></A>. Layers can be displayed selectively.
+This technique is similar to a presentation with several
+transparencies, where each transparency contains one aspect or part of
+the picture, and some or all transparencies can be selected to be
+stacked on top of each other in a random order. Only those units which
+are in layers (transparencies) that are 'on' are displayed. This way
+portions of the network can be selected to be displayed alone. It is also
+possible to assign one unit to multiple layers.  Thereby it is
+feasible to assign any combination of units to a layer that represents
+an aspect of the network.
+<P>
+<LI> <tt> frozen</tt>: This attribute flag specifies that activation
+and output are frozen. This means that these values don't change
+during the simulation.
+</UL>
+<P>
+All `important' unit parameters like activation, initial activation,
+output etc. and all function results are computed as floats with nine
+decimals accuracy.
+<P>
+<BR> <HR><A NAME=tex2html1608 HREF="node12.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html1606 HREF="node10.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html1600 HREF="node10.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html1610 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html1611 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html1609 HREF="node12.html"> Connections (Links)</A>
+<B>Up:</B> <A NAME=tex2html1607 HREF="node10.html"> Building Blocks of </A>
+<B> Previous:</B> <A NAME=tex2html1601 HREF="node10.html"> Building Blocks of </A>
+<BR> <HR> <P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

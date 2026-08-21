@@ -1,0 +1,130 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Info Panel</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Info Panel">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html2079 HREF="node42.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html2077 HREF="node32.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html2071 HREF="node40.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html2081 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html2082 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html2080 HREF="node42.html"> Unit Function Displays</A>
+<B>Up:</B> <A NAME=tex2html2078 HREF="node32.html"> Windows of XGUI</A>
+<B> Previous:</B> <A NAME=tex2html2072 HREF="node40.html"> Control Panel</A>
+<BR> <HR> <P>
+<H2><A NAME=SECTION00534000000000000000> Info Panel</A></H2>
+<P>
+<A NAME=UnitInfoPanel>&#160;</A>
+<A NAME=1192>&#160;</A>
+<A NAME=1193>&#160;</A>
+<P>
+<P><A NAME=1201>&#160;</A><A NAME=FigUnitInfoPanel>&#160;</A><IMG  ALIGN=BOTTOM ALT="" SRC="img163.gif">
+<BR><STRONG>Figure:</STRONG> Info panel<BR>
+<P>
+<P>
+<A NAME=1205>&#160;</A>
+<A NAME=1206>&#160;</A>
+The info panel displays all data of two units and the link between
+them. The unit at the beginning of the link is called <tt> SOURCE</tt>,
+the other <tt> TARGET</tt>. One may run sequentially through all
+connections or sites of the <tt> TARGET</tt> unit with the arrow buttons
+and look at the corresponding source units and vice versa.
+<P>
+This panel is also very important for editing, since some operations
+refer to the displayed <tt> TARGET</tt> unit or (<tt>
+SOURCE</tt><IMG  ALIGN=BOTTOM ALT="" SRC="img164.gif"><tt> TARGET</tt>) link. A default unit can also be
+created here, whose values (activation, bias, IO-type, subnet number,
+layer numbers, activation function, and output function) are
+copied into all selected units of the net.
+<P>
+The source unit of a link can also be specified in a 2D display by
+pressing the middle mouse button, the target unit by releasing it. To
+select a link between two units the user presses the middle mouse
+button on the source unit in a 2D display, moves the mouse to the
+target unit while holding down the mouse button and releases it at the
+target unit. Now the selected units and their link are displayed in
+the info panel. If no link exists between two units selected in a 2D
+display, the <tt> TARGET</tt> is displayed with its first link, thereby
+changing <tt> SOURCE</tt>.
+<P>
+In table <A HREF="node41.html#InfoItems"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A> the various fields are listed. The fields in
+the second line of the SOURCE or TARGET unit display the name of the
+activation function, name of the output function, name of the f-type
+(if available). The fields in the line <tt> LINK</tt> have the following
+meaning: weight, site value, site function, name of the site. Most
+often only a link weight is available. In this case no information
+about sites is displayed.
+<P>
+<P><A NAME=1243>&#160;</A><A NAME=InfoItems>&#160;</A><IMG  ALIGN=BOTTOM ALT="" SRC="img165.gif">
+<BR><STRONG>Table:</STRONG> Table of the unit, link and site fields in the Info panel<BR>
+<P>
+<P>
+Unit number, unit subnet number, site value, and site function cannot
+be modified. To change attributes of type text, the cursor has to be
+exactly in the corresponding field.
+<P>
+
+<P>
+There are the following buttons for the units (from left to right):
+<P>
+<OL><LI> Arrow button xgui_figs/xgui_button_first.ps: The
+  button below TARGET selects the first target unit (of the given
+  source unit); the button below SOURCE selects the first source unit
+  (of the given target unit);
+<P>
+<LI> Arrow button xgui_figs/xgui_button_next.ps: The
+  button below TARGET selects the next target unit (of the given
+  source unit); the button below SOURCE selects the next source unit
+  (of the given target unit);
+<P>
+<LI> <IMG  ALIGN=BOTTOM ALT="" SRC="img166.gif">: Unit is frozen, if this button is inverted.
+  Changes become active only after <IMG  ALIGN=BOTTOM ALT="" SRC="img167.gif"> is clicked.
+<P>
+<LI> <IMG  ALIGN=BOTTOM ALT="" SRC="img168.gif">: The default unit is assigned the displayed
+  values of <tt> TARGET</tt> and <tt> SOURCE</tt> (only activation, bias,
+  IO-type, subnet number, layer numbers, activation function and
+  output function).
+<P>
+<LI> <IMG  ALIGN=BOTTOM ALT="" SRC="img169.gif">: Calls the following menu:
+
+<P>
+<P><IMG  ALIGN=BOTTOM ALT="" SRC="img170.gif"><P>
+<P>
+<LI> <IMG  ALIGN=BOTTOM ALT="" SRC="img171.gif">: Only after clicking this button the attributes
+of the corresponding unit are set to the specified value. The unit is
+also redrawn. Therefore the values can be changed without immediate
+effect on the unit.
+</OL>
+<P>
+<P>
+There exist the following buttons for links (from left to right):
+<P>
+<OL><LI> xgui_figs/xgui_button_first.ps: Select
+first link of the <tt> TARGET</tt> unit.
+<P>
+<LI> xgui_figs/xgui_button_next.ps: Select
+next link of the <tt> TARGET</tt> unit.
+<P>
+<LI> <IMG  ALIGN=BOTTOM ALT="" SRC="img172.gif">: Calls the following menu:
+<P>
+<P><IMG  ALIGN=BOTTOM ALT="" SRC="img173.gif"><P>
+<P>
+<LI> <IMG  ALIGN=BOTTOM ALT="" SRC="img174.gif">: Only after clicking this button the link weight
+is set.
+</OL><BR> <HR>
+<UL> 
+<LI> <A NAME=tex2html2083 HREF="node42.html#SECTION00534100000000000000"> Unit Function Displays</A>
+</UL>
+<BR> <HR><A NAME=tex2html2079 HREF="node42.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html2077 HREF="node32.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html2071 HREF="node40.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html2081 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html2082 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html2080 HREF="node42.html"> Unit Function Displays</A>
+<B>Up:</B> <A NAME=tex2html2078 HREF="node32.html"> Windows of XGUI</A>
+<B> Previous:</B> <A NAME=tex2html2072 HREF="node40.html"> Control Panel</A>
+<BR> <HR> <P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

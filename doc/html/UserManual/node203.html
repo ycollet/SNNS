@@ -1,0 +1,54 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Structure of an ART2 Network</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Structure of an ART2 Network">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html4255 HREF="node204.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html4253 HREF="node202.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html4247 HREF="node202.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html4257 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html4258 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html4256 HREF="node204.html"> Using ART2 Networks </A>
+<B>Up:</B> <A NAME=tex2html4254 HREF="node202.html"> ART2</A>
+<B> Previous:</B> <A NAME=tex2html4248 HREF="node202.html"> ART2</A>
+<BR> <HR> <P>
+<H3><A NAME=SECTION0010122100000000000000> Structure of an ART2 Network</A></H3>
+<P>
+<A NAME=5159>&#160;</A>
+<A NAME=5160>&#160;</A>
+<P>
+The realization of ART2 differs from the one of ART1 in its basic idea.
+In this case the network structure would have been too complex,
+if mathematics had been implemented within the network to the same
+degree as it has been done for ART1. So here more of the functionality
+is in the control program.
+In figure <A HREF="node203.html#art2structure"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A> you can see the topology of an ART2
+network as it is implemented in SNNS.
+<P>
+<P><A NAME=5171>&#160;</A><A NAME=art2structure>&#160;</A><IMG  ALIGN=BOTTOM ALT="" SRC="img1070.gif">
+<BR><STRONG>Figure:</STRONG> <BR> Structure of an ART2 network in SNNS. Thin
+      arrows represent a connection from one unit to another.  The two
+      big arrows in the middle represent the full connectivity between
+      comparison and recognition layer and the one between recognition
+      and comparison layer, respectively. <BR>
+<P>
+<P>
+All the units are known from the ART2 theory, except the <b> rst</b> units. They
+have to do the same job for ART2 as for ART1 networks. They block the
+actual winner in the recognition layer in case of reset.
+Another difference between the ART2 model described in [<A HREF="node389.html#CG87b">CG87b</A>] and
+the realization in SNNS is, that originally the
+units <b> u</b><IMG  ALIGN=MIDDLE ALT="" SRC="img1071.gif"> have been used to compute the error vector <b> r</b>, while
+this implementation takes the input units instead.
+<P>
+For an exact definition of the required topology for ART2 networks in
+SNNS see section <A HREF="node214.html#topologyofartnetworksinsnns"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A>
+<P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

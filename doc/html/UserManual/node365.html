@@ -1,0 +1,45 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> File I/O Functions</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" File I/O Functions">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html6396 HREF="node366.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html6394 HREF="node350.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html6388 HREF="node364.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html6398 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html6399 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html6397 HREF="node366.html"> Functions to Search </A>
+<B>Up:</B> <A NAME=tex2html6395 HREF="node350.html"> Kernel Function Interface</A>
+<B> Previous:</B> <A NAME=tex2html6389 HREF="node364.html"> Functions for the </A>
+<BR> <HR> <P>
+<H1><A NAME=SECTION0016110000000000000000> File I/O Functions</A></H1>
+<P>
+<A NAME=8351>&#160;</A>
+<P>
+<code>krui_err  krui_loadNet( char  *filename, char  * *netname )</code><BR> 
+<code>krui_err  krui_saveNet( char  *filename, char  *netname)</code><BR> 
+loads/saves a network from/to disk and generates an internal network
+structure.
+<code>krui_err krui_loadNewPatterns(char *filename,int *set_no)</code><BR> 
+<code>krui_err  krui_saveNewPatterns(char *filename,int set_no)</code><BR> 
+saves and loads a pattern file with new style conventions.<BR> 
+The pattern set with the given number will be saved and loaded.
+<code>krui_err krui_saveResultParam(char *filename,bool create,int startpattern,</code><BR> 
+<code>                      int endpattern,bool includeinput,bool includeoutput,</code><BR> 
+<code>                      float *Update_param_array, int NoOfUpdateParam)</code><BR> 
+Saves the network result which depends on the loaded patterns.
+If create is false,the new file will be appended to an existing file.
+Startpattern and endpattern determines the range of patterns to use.
+The input patterns and the teaching output patterns can be included.
+<P>
+An error code is returned if an error occurred during the execution of
+the I/O functions.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

@@ -1,0 +1,51 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Loading and Saving Networks</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Loading and Saving Networks">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html2009 HREF="node36.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html2007 HREF="node34.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html2001 HREF="node34.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html2011 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html2012 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html2010 HREF="node36.html"> Loading and Saving </A>
+<B>Up:</B> <A NAME=tex2html2008 HREF="node34.html"> File Browser</A>
+<B> Previous:</B> <A NAME=tex2html2002 HREF="node34.html"> File Browser</A>
+<BR> <HR> <P>
+<H3><A NAME=SECTION00532100000000000000> Loading and Saving Networks</A></H3>
+<P>
+<A NAME=NetworkSaving>&#160;</A>
+<A NAME=922>&#160;</A>
+<A NAME=923>&#160;</A>
+<P>
+If the user wants to load a network which is to replace the net in
+main memory, the confirmer appears with the remark that the current
+network would be erased upon loading. If the question <tt> 'Load?'</tt> is
+answered with <IMG  ALIGN=BOTTOM ALT="" SRC="img105.gif">, the new network is
+loaded. The file name of the network loaded last appears in the window
+title of the manager panel.
+<P>
+Note 1: Upon saving the net the kernel compacts its internal data
+structures if the units are not numbered consecutively. This
+happens if units are deleted during the creation of the network. All
+earlier listings with unit numbers then become invalid. The user is
+therefore advised to save and reload the network after creation, before
+continuing the work.
+<P>
+Note 2: The assignment of patterns to input or output units may be
+changed after a network save, if an input or output unit is deleted
+and is inserted again. This is caused because the activation values in
+the pattern file are assigned to units in ascending order of the unit
+number. However, this order is no longer the same because
+the new input or output units may have been assigned higher unit
+numbers than the existing input or output units. So some components of
+the patterns may be assigned incorrectly.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

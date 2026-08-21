@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Activation Functions</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Activation Functions">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html4014 HREF="node186.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html4012 HREF="node184.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html4006 HREF="node184.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html4016 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html4017 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html4015 HREF="node186.html"> Initialization Functions</A>
+<B>Up:</B> <A NAME=tex2html4013 HREF="node184.html"> RBF Implementation in </A>
+<B> Previous:</B> <A NAME=tex2html4007 HREF="node184.html"> RBF Implementation in </A>
+<BR> <HR> <P>
+<H3><A NAME=SECTION0010102100000000000000> Activation Functions</A></H3>
+<P>
+<A NAME=RBF_actFuncs>&#160;</A>
+<P>
+For the use of radial basis functions, three different activation
+functions <b>h</b> have been implemented. For computational efficiency the
+square of the distance <IMG  ALIGN=MIDDLE ALT="" SRC="img941.gif"> is uniformly 
+used as argument for <b>h</b>. Also, an additional argument <b>p</b> has been
+defined which represents the bias of the hidden units. The vectors
+<IMG  ALIGN=BOTTOM ALT="" SRC="img942.gif"> and <IMG  ALIGN=BOTTOM ALT="" SRC="img943.gif"> result from the activation and weights of
+links leading to the corresponding unit. The following radial basis
+functions have been implemented:
+<P>
+<OL><LI><tt> Act_RBF_Gaussian</tt> --- the Gaussian function
+<A NAME=4500>&#160;</A>
+<P><IMG  ALIGN=BOTTOM ALT="" SRC="img944.gif"><P>
+<P>
+<LI><tt> Act_RBF_MultiQuadratic</tt> --- the multiquadratic function
+<A NAME=4508>&#160;</A>
+<P><IMG  ALIGN=BOTTOM ALT="" SRC="img945.gif"><P>
+<P>
+<LI><tt> Act_RBF_ThinPlateSpline</tt> -- the <i> thin plate splines</i> function
+<A NAME=4517>&#160;</A>
+<P><IMG  ALIGN=BOTTOM ALT="" SRC="img946.gif"><P></OL>
+<P>
+During the construction of three layered neural networks based on
+radial basis functions, it is important to use the three
+activation functions mentioned above only for neurons inside the
+hidden layer. There is also only one hidden layer allowed.
+<P>
+
+<P>
+For the output layer two other activation functions are to be used:
+<P>
+<OL><LI><tt> Act_IdentityPlusBias</tt>
+<P>
+<LI><tt> Act_Logistic</tt>
+</OL>
+<P>
+<A NAME=4532>&#160;</A>
+<tt> Act_IdentityPlusBias</tt> activates the corresponding unit with the
+weighted sum of all incoming activations and adds the
+bias of the unit. <tt> Act_Logistic</tt> applies the sigmoid logistic
+<A NAME=4535>&#160;</A>
+function to the weighted sum which is computed like in <tt>
+Act_IdentityPlusBias</tt>. In general, it is necessary to use an
+activation function which pays attention to the bias of the unit.
+<P>
+The last two activation functions converge towards infinity, the first
+converges towards zero.  However, all three functions are useful as
+base functions. The mathematical preconditions for their use are
+fulfilled by all three functions and their use is backed by practical
+experience.  All three functions have been implemented as base
+functions into SNNS.
+<P>
+The most frequently used base function is the Gaussian function. For
+large distances <b>r</b>, the Gaussian function becomes almost <b>0</b>.
+Therefore, the behavior of the net is easy to predict if the input
+patterns differ strongly from all teaching patterns. Another advantage
+of the Gaussian function is, that the network is able to produce
+useful results without the use of shortcut connections between input
+and output layer.
+<P>
+<BR> <HR><A NAME=tex2html4014 HREF="node186.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html4012 HREF="node184.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html4006 HREF="node184.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html4016 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html4017 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html4015 HREF="node186.html"> Initialization Functions</A>
+<B>Up:</B> <A NAME=tex2html4013 HREF="node184.html"> RBF Implementation in </A>
+<B> Previous:</B> <A NAME=tex2html4007 HREF="node184.html"> RBF Implementation in </A>
+<BR> <HR> <P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

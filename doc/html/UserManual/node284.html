@@ -1,0 +1,61 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> New Panel</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" New Panel">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html5318 HREF="node285.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html5316 HREF="node281.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html5310 HREF="node283.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html5320 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html5321 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html5319 HREF="node285.html"> Transfer Panels</A>
+<B>Up:</B> <A NAME=tex2html5317 HREF="node281.html"> Control Panels</A>
+<B> Previous:</B> <A NAME=tex2html5311 HREF="node283.html"> RPC Setup Panel</A>
+<BR> <HR> <P>
+<H2><A NAME=SECTION001323000000000000000> New Panel</A></H2>
+<P>
+<A NAME=newpanel>&#160;</A>
+<A NAME=7268>&#160;</A>
+<P>
+The <b> New panel</b> is used to start new simulator kernels on different
+computers.  A computer host name is required in the first line (it is also
+possible to select one from the list by clicking on it with the left
+mouse button). The second line specifies the path to the desired rpc
+kernel. Remember to seltect an rpc kernel of the correct computer
+architecture, if you are working with a heterogeneous workstation
+cluster.  Different calling parameters can be added in the
+third line.
+<P>
+<P><A NAME=7278>&#160;</A><A NAME=newpanel>&#160;</A><IMG  ALIGN=BOTTOM ALT="" SRC="img1371.gif">
+<BR><STRONG>Figure:</STRONG> The RPC New Panel<BR>
+<P>
+<P>
+The <IMG  ALIGN=BOTTOM ALT="" SRC="img1372.gif"> button starts a new rpc kernel.  To start the
+program, <tt> xguirpc</tt> uses the `rsh'-instruction to execute a command
+on a remote computer system. The newly started simulator kernel
+receives the computer name, portmap number and version of the computer
+on which the graphical user-interface is running.  After a successful
+start of the simulator kernel, the kernel registers with the graphical
+user-interface. The kernel is then included in the `host-list' of the
+<b> rpc panel</b>.
+<P>
+If the new kernel is not listed in the `host-list' of the <b> rpc
+panel</b> within a couple of seconds, it might be due to the fact that
+the given path is invalid on the specified machine (e.g. wrong mount
+prefix). In this case try to determine the correct path and try again.
+<P>
+With the <IMG  ALIGN=BOTTOM ALT="" SRC="img1373.gif"> and the <IMG  ALIGN=BOTTOM ALT="" SRC="img1374.gif"> buttons, different
+already existing simulator kernels can be connected with the graphical
+user-interface. The difference between those two buttons is that
+<IMG  ALIGN=BOTTOM ALT="" SRC="img1375.gif"> selects a specific computer and <IMG  ALIGN=BOTTOM ALT="" SRC="img1376.gif">
+sends a signal to all computers in the LAN. It is not guaranteed that
+all computers will actually receive the signal.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

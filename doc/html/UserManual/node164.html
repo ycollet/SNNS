@@ -1,0 +1,64 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> The Cascade Correlation Algorithms</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" The Cascade Correlation Algorithms">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html3734 HREF="node165.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html3732 HREF="node143.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html3726 HREF="node163.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html3736 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html3737 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html3735 HREF="node165.html"> Cascade-Correlation (CC)</A>
+<B>Up:</B> <A NAME=tex2html3733 HREF="node143.html"> Neural Network Models </A>
+<B> Previous:</B> <A NAME=tex2html3727 HREF="node163.html"> Backpropagation Through Time </A>
+<BR> <HR> <P>
+<H1><A NAME=SECTION001080000000000000000> The Cascade Correlation Algorithms</A></H1>
+<P>
+<A NAME=4046>&#160;</A>
+<A NAME=4047>&#160;</A>
+<A NAME=4048>&#160;</A>
+<P>
+Two cascade correlation algorithms have been implemented in SNNS,
+Cascade-Correlation and recurrent Cascade-Correlation. Both learning
+algorithms have been developed by Scott Fahlman ([<A HREF="node389.html#FahLeb91">FL91</A>],
+[<A HREF="node389.html#HoeFahl91">HF91</A>], [<A HREF="node389.html#Fahl91">Fah91</A>]). Strictly speaking the cascade
+architecture represents a kind of meta algorithm, in which usual
+learning algorithms like Backprop, Quickprop or Rprop are embedded.
+Cascade-Correlation is characterized as a constructive learning rule.
+It starts with a minimal network, consisting only of an input and an
+output layer. Minimizing the overall error of a net, it adds step by
+step new hidden units to the hidden layer.
+<P>
+Cascade-Correlation is a supervised learning architecture which builds
+a near minimal multi-layer network topology.  The two advantages of
+this architecture are that there is no need for a user to worry about
+the topology of the network, and that Cascade-Correlation learns much
+faster than the usual learning algorithms.
+<P>
+<BR> <HR>
+<UL> 
+<LI> <A NAME=tex2html3738 HREF="node165.html#SECTION001081000000000000000"> Cascade-Correlation (CC)</A>
+<UL> 
+<LI> <A NAME=tex2html3739 HREF="node166.html#SECTION001081100000000000000"> The Algorithm</A>
+<LI> <A NAME=tex2html3740 HREF="node167.html#SECTION001081200000000000000"> Mathematical Background</A>
+</UL> 
+<LI> <A NAME=tex2html3741 HREF="node168.html#SECTION001082000000000000000"> Pruned-Cascade-Correlation (PCC)</A>
+<UL> 
+<LI> <A NAME=tex2html3742 HREF="node169.html#SECTION001082100000000000000"> The Algorithm</A>
+<LI> <A NAME=tex2html3743 HREF="node170.html#SECTION001082200000000000000"> Mathematical Background</A>
+</UL> 
+<LI> <A NAME=tex2html3744 HREF="node171.html#SECTION001083000000000000000"> Recurrent Cascade-Correlation (RCC)</A>
+<UL> 
+<LI> <A NAME=tex2html3745 HREF="node172.html#SECTION001083100000000000000"> The Algorithm</A>
+<LI> <A NAME=tex2html3746 HREF="node173.html#SECTION001083200000000000000"> Mathematical Background</A>
+</UL> 
+<LI> <A NAME=tex2html3747 HREF="node174.html#SECTION001084000000000000000"> Using the Cascade Algorithms in SNNS</A>
+</UL>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

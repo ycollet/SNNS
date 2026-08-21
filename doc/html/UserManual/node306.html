@@ -1,0 +1,66 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> setLearnFunc</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" setLearnFunc">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html5636 HREF="node307.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html5634 HREF="node304.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html5628 HREF="node305.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html5638 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html5639 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html5637 HREF="node307.html"> setUpdateFunc</A>
+<B>Up:</B> <A NAME=tex2html5635 HREF="node304.html"> Function Calls To </A>
+<B> Previous:</B> <A NAME=tex2html5629 HREF="node305.html"> setInitFunc</A>
+<BR> <HR> <P>
+<H3><A NAME=SECTION001431200000000000000> setLearnFunc</A></H3>
+<P>
+<A NAME=7614>&#160;</A>
+<P>
+The function call <tt> setLearnFunc</tt> is very similar to the <tt>
+  setinitFunc</tt> call. <tt> setLearnFunc</tt> selects the learning function
+which will be used in the training process of the neural net. The
+format is:
+<P>
+<blockquote> <tt> setLearnFunc (function name, parameters....)</tt>
+</blockquote>
+<P>
+where function name is the name of the desired learning algorithm.
+This name is mandatory and has to match one of the following strings:
+<P>
+<blockquote> <PRE>ART1                   Dynamic_LVQ           RadialBasisLearning 
+ART2                   Hebbian               RBF-DDA             
+ARTMAP                 JE_BP                 RCC                 
+BackPercolation        JE_BP_Momentum        RM_delta            
+BackpropBatch          JE_Quickprop          Rprop               
+BackpropMomentum       JE_Rprop              Sim_Ann_SS          
+BackpropWeightDecay    Kohonen               Sim_Ann_WTA         
+BPTT                   Monte-Carlo           Sim_Ann_WWTA        
+BBPTT                  PruningFeedForward    Std_Backpropagation 
+CC                     QPTT                  TimeDelayBackprop   
+Counterpropagation     Quickprop
+</PRE></blockquote>
+<P>
+After the name of the learning algorithm is provided, the user can specify
+some parameters. The interpreter is using default values if no parameters are 
+selected. The values have to be of the type float. A detailed description 
+can be found in the chapter ``Parameter of the learning function''.
+Function calls could look like this:
+<P>
+<blockquote> <tt> setLearn(&quot;Std_Backpropagation&quot;)<BR> 
+setLearn( &quot;Std_Backpropagation&quot;, 0.1)</tt>
+</blockquote>
+<P>
+The first function call selects the learning algorithm and the second
+one additionally provides the first learning parameter. The batch
+interpreter displays:
+<P>
+<blockquote> <tt> Learning function is now: Std_backpropagation<BR> 
+Parameters are: 0.1</tt>
+</blockquote><BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

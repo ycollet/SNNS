@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Analyzing Functions</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Analyzing Functions">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html5886 HREF="node326.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html5884 HREF="node324.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html5880 HREF="node324.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html5888 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html5889 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html5887 HREF="node326.html"> Bignet</A>
+<B>Up:</B> <A NAME=tex2html5885 HREF="node324.html"> Analyze</A>
+<B> Previous:</B> <A NAME=tex2html5881 HREF="node324.html"> Analyze</A>
+<BR> <HR> <P>
+<H2><A NAME=SECTION001521000000000000000> Analyzing Functions</A></H2>
+<P>
+The classification of the patterns depends on the analyzing function.
+<tt> 402040</tt> stands for the '402040' rule. That means on a range from
+0 to 1 h will be 0.6 (upper 40%) and l will be 0.4 (lower 40%). The
+middle 20% is represented by h-l. The classification of the patterns
+will depend on h, l and other constrains (see <tt> 402040</tt> below).<BR> 
+<tt> WTA</tt> stands for winner takes all. That means the classification
+depends on the unit with the highest output and other constrains (see
+<tt> WTA</tt> below). <tt> Band</tt> is an analyzing function that checks a
+band of values around the teaching output. This is the only analyzing
+function that treats teaching outputs of value zero correctly.
+<P>
+<b> 402040:</b><BR> 
+  A pattern is classified correctly if:
+  <UL><LI> the output of exactly one output unit is <IMG  ALIGN=MIDDLE ALT="" SRC="img1406.gif"> h.
+  <LI> the 'teaching output' of this unit is the maximum teaching output
+    of the pattern. 
+  <LI> the output of all other output units is <IMG  ALIGN=MIDDLE ALT="" SRC="img1407.gif"> 1.
+  </UL>
+<P>
+  A pattern is classified incorrectly if:
+  <UL><LI> the output of exactly one output unit is <IMG  ALIGN=MIDDLE ALT="" SRC="img1408.gif"> h.
+  <LI> the 'teaching output' of this unit is <tt> NOT</tt> the maximum 
+    'teaching output' of the pattern.
+  <LI> the output of all other units is <IMG  ALIGN=MIDDLE ALT="" SRC="img1409.gif"> 1.
+  </UL>
+<P>
+  A pattern is unclassified in all other cases.
+<P>
+<b> WTA:</b><BR> 
+  A pattern is classified correctly if:
+  <UL><LI> there is an output unit with the value greater than the output
+    value of all other output units (this output value is supposed to be 0).
+  <LI> 0 <b>&gt;</b> h.
+  <LI> the 'teaching output of this unit is the maximum 'teaching output'
+    of the pattern.
+  <LI> the output of all other units is <b>&lt;</b> a-1.
+  </UL>
+<P>
+  A pattern is classified incorrectly if:
+  <UL><LI> there is an output unit with the value greater than the output
+    value of all other output units  (this output value is supposed to be
+    0). 
+  <LI> 0 <b>&gt;</b> h.
+  <LI> the 'teaching output ' of this unit is <tt> NOT</tt> the maximum
+    'teaching output' of the pattern. 
+  <LI> the output of all other output units is <b>&lt;</b> a-1.
+  </UL>
+<P>
+  A pattern is unclassified in all other cases.<BR>
+<P>
+<b> Band:</b><BR> 
+  A pattern is classified correctly if for all output units:
+  <UL><LI> the output is <b>&gt;=</b> the teaching output - low.
+  <LI> the output is <b>&lt;=</b> the teaching output + high.
+  </UL>
+<P>
+  A pattern is classified incorrectly if for all output units:
+  <UL><LI> the output is <b>&lt;=</b> the teaching output - low.<BR> 
+  or
+  <LI> the output is <b>&gt;=</b> the teaching output + high.
+  </UL>
+Default values used for l and h are: l=0.0 h=0.0
+<P>
+<BR> <HR><A NAME=tex2html5886 HREF="node326.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html5884 HREF="node324.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html5880 HREF="node324.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html5888 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html5889 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html5887 HREF="node326.html"> Bignet</A>
+<B>Up:</B> <A NAME=tex2html5885 HREF="node324.html"> Analyze</A>
+<B> Previous:</B> <A NAME=tex2html5881 HREF="node324.html"> Analyze</A>
+<BR> <HR> <P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

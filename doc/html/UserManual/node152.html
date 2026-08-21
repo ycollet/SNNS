@@ -1,0 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> General Description</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" General Description">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html3590 HREF="node153.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html3588 HREF="node150.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html3582 HREF="node151.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html3592 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html3593 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html3591 HREF="node153.html"> Parameters</A>
+<B>Up:</B> <A NAME=tex2html3589 HREF="node150.html"> RPROP</A>
+<B> Previous:</B> <A NAME=tex2html3583 HREF="node151.html"> Changes in Release </A>
+<BR> <HR> <P>
+<H2><A NAME=SECTION001032000000000000000> General Description</A></H2>
+<P>
+Rprop stands for '<b> R</b>esilient back<b> prop</b>agation' and is a
+local adaptive learning scheme, performing supervised batch learning
+in multi-layer perceptrons. For a detailed discussion see also
+[<A HREF="node389.html#Riedmi93c">Rie93</A>], [<A HREF="node389.html#RieBra93a">RB93</A>]. 
+The basic principle of Rprop is to eliminate the harmful influence of
+the size of the partial derivative on the weight step. As a
+consequence, only the sign of the derivative is considered to indicate
+the <em> direction</em> of the weight update.  The <em> size</em> of the
+weight change is exclusively determined by a weight-specific,
+so-called 'update-value' <IMG  ALIGN=MIDDLE ALT="" SRC="img756.gif">:
+<P>
+<P><A NAME=man>&#160;</A><IMG  ALIGN=BOTTOM ALT="" SRC="img757.gif"><P>
+where <IMG  ALIGN=MIDDLE ALT="" SRC="img758.gif"> denotes the summed gradient information
+over all patterns of the pattern set ('batch learning').
+<P>
+It should be noted, that by replacing the <IMG  ALIGN=MIDDLE ALT="" SRC="img759.gif"> 
+by a constant update-value <IMG  ALIGN=MIDDLE ALT="" SRC="img760.gif">, 
+equation (<A HREF="node152.html#man"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A>) yields the 
+so-called 'Manhattan'-update rule.
+<P>
+The second step of Rprop learning is to determine the new
+update-values <IMG  ALIGN=MIDDLE ALT="" SRC="img761.gif">. This is based on a sign-dependent adaptation
+process.
+<P>
+<P><IMG  ALIGN=BOTTOM ALT="" SRC="img762.gif"><P>
+<P><IMG  ALIGN=BOTTOM ALT="" SRC="img763.gif"><P>
+<P>
+In words, the adaptation-rule works as follows: Every time the partial
+derivative of the corresponding weight <IMG  ALIGN=MIDDLE ALT="" SRC="img764.gif"> changes its sign,
+which indicates that the last update was too big and the algorithm has
+jumped over a local minimum, the update-value <IMG  ALIGN=MIDDLE ALT="" SRC="img765.gif">
+is decreased by the factor <IMG  ALIGN=MIDDLE ALT="" SRC="img766.gif">.  If the derivative retains its
+sign, the update-value is slightly increased in order to accelerate
+convergence in shallow regions.  Additionally, in case of a change in
+sign, there should be no adaptation in the succeeding learning
+step. In practice, this can be achieved by setting <IMG  ALIGN=MIDDLE ALT="" SRC="img767.gif"> in the above adaptation rule (see
+also the description of the algorithm in the following section).
+<P>
+In order to reduce the number of freely adjustable parameters, 
+often leading to a tedious search in parameter space, the increase and
+decrease factor are set to fixed values (<IMG  ALIGN=MIDDLE ALT="" SRC="img768.gif">).
+<P>
+For Rprop tries to adapt its learning process to the topology of the
+error function, it follows the principle of 'batch learning' or
+'learning by epoch'.  That means, that weight-update and adaptation
+are performed after the gradient information of the whole pattern set
+is computed.
+<P>
+<BR> <HR><A NAME=tex2html3590 HREF="node153.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html3588 HREF="node150.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html3582 HREF="node151.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html3592 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html3593 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html3591 HREF="node153.html"> Parameters</A>
+<B>Up:</B> <A NAME=tex2html3589 HREF="node150.html"> RPROP</A>
+<B> Previous:</B> <A NAME=tex2html3583 HREF="node151.html"> Changes in Release </A>
+<BR> <HR> <P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

@@ -1,0 +1,66 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> An Example of a simple Network</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" An Example of a simple Network">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html1676 HREF="node18.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html1674 HREF="node9.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html1670 HREF="node16.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html1678 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html1679 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html1677 HREF="node18.html"> Using the Graphical </A>
+<B>Up:</B> <A NAME=tex2html1675 HREF="node9.html"> Neural Network Terminology</A>
+<B> Previous:</B> <A NAME=tex2html1671 HREF="node16.html"> Generalization of Neural </A>
+<BR> <HR> <P>
+<H1><A NAME=SECTION00450000000000000000> An Example of a simple Network</A></H1>
+<P>
+<A NAME=PatternMatcher>&#160;</A>
+<A NAME=538>&#160;</A>
+<A NAME=539>&#160;</A>
+<P>
+<P><A NAME=547>&#160;</A><A NAME=picPatternMatcher>&#160;</A><IMG  ALIGN=BOTTOM ALT="" SRC="img39.gif">
+<BR><STRONG>Figure:</STRONG> Example network of the letter classifier<BR>
+<P>
+<P>
+This paragraph describes a simple example network, a neural network
+classifier for capital letters in a 5x7 matrix, which is ready for use
+with the SNNS simulator. Note that this is a toy example which is not
+suitable for real character recognition.
+<P>
+<UL><LI> Network-Files: <tt> letters0.net</tt> (untrained), 
+<tt> letters.net</tt> (trained)
+<LI> Pattern-File: <tt> letters.pat</tt>
+</UL>
+<P>
+The network in figure <A HREF="node17.html#picPatternMatcher"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A> is a feed-forward net
+with three layers of units (two layers of weights) which can recognize
+capital letters. The input is a 5x7 matrix, where one unit
+is assigned to each pixel of the matrix. An activation of <IMG  ALIGN=MIDDLE ALT="" SRC="img40.gif">
+corresponds to ``pixel set'', while an activation value of <IMG  ALIGN=BOTTOM ALT="" SRC="img41.gif">
+corresponds to ``pixel not set''. The output of the network consists of
+exactly one unit for each capital letter of the alphabet.
+<P>
+The following activation function and output function are used by
+default:
+<P>
+<UL><LI> Activation function: <tt> Act_logistic</tt>
+<LI> Output function: <tt> Out_identity</tt>
+</UL>
+<P>
+The net has one input layer (5x7 units), one hidden layer (10 units)
+and one output layer (26 units named 'A' ... 'Z'). The total of
+<IMG  ALIGN=MIDDLE ALT="" SRC="img42.gif"> connections form the distributed
+memory of the classifier.
+<P>
+On presentation of a pattern that resembles the uppercase letter
+``A'', the net produces as output a rating of which letters are
+probable.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

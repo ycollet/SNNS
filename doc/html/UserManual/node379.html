@@ -1,0 +1,59 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Lexical Elements of the Grammar</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Lexical Elements of the Grammar">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html6580 HREF="node380.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html6578 HREF="node378.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html6572 HREF="node378.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html6582 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html6583 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html6581 HREF="node380.html"> Definition of the </A>
+<B>Up:</B> <A NAME=tex2html6579 HREF="node378.html"> Conventions</A>
+<B> Previous:</B> <A NAME=tex2html6573 HREF="node378.html"> Conventions</A>
+<BR> <HR> <P>
+<H3><A NAME=SECTION001831100000000000000> Lexical Elements of the Grammar</A></H3>
+<P>
+<A NAME=8618>&#160;</A>
+<A NAME=grammarConventions>&#160;</A>
+<P>
+The lexical elements of the grammar which defines network files are
+listed as regular expresions. The first column lists the name of the
+symbol, the second the regular expresion defining it. The third
+column may contain comments.
+<P>
+<UL><LI> All terminals (characters) are put between
+<code>SPM_amp</code>&quot;&amp;...<code>SPM_amp</code>&quot;&amp;.
+<P>
+<LI> Elements of sets are put between square brackets. Within the
+brackets, the characters represent themselves (even without <code>SPM_amp</code>&quot;&amp;),
+and - defines a range of values. The class of digits is defined, e.g.
+as <code>SPM_amp</code>[&quot;0&quot;-&quot;9&quot;]&amp;.
+<P>
+<LI> Characters can be combined into groups with parenteses <code>SPM_amp</code>()&amp;.
+<P>
+<LI> <code>SPM_amp</code>x*&amp; means, that the character or group x can
+occur zero or more times.
+<P>
+<LI> <code>SPM_amp</code>x+&amp;  means, that the character or group x must
+occur at least once, but may occur several times.
+<P>
+<LI> <code>SPM_amp</code>x?&amp; means, that x can be omitted.
+<P>
+<LI> <code>SPM_amp</code>xn&amp; means, that x has to occur exactly n times.
+<P>
+<LI> <code>SPM_amp</code>x|y&amp; means, that either x or y has to occur.
+<P>
+<LI> <code>SPM_amp</code>*&amp;, <code>SPM_amp</code>+&amp; and <code>SPM_amp</code>&amp; bind
+strongest, <code>SPM_amp</code>?&amp; is second, <code>SPM_amp</code>|&amp; binds weakest.
+<P>
+<LI> Groups or classes of characters are treated like a single
+character with respect to priority.
+</UL><BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

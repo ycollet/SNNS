@@ -1,0 +1,81 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Structure of an ART1 Network</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Structure of an ART1 Network">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html4179 HREF="node198.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html4177 HREF="node196.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html4171 HREF="node196.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html4181 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html4182 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html4180 HREF="node198.html"> Using ART1 Networks </A>
+<B>Up:</B> <A NAME=tex2html4178 HREF="node196.html"> ART1</A>
+<B> Previous:</B> <A NAME=tex2html4172 HREF="node196.html"> ART1</A>
+<BR> <HR> <P>
+<H3><A NAME=SECTION0010121100000000000000> Structure of an ART1 Network</A></H3>
+<P>
+<A NAME=structureofanart1network>&#160;</A>
+<A NAME=5078>&#160;</A>
+<A NAME=5079>&#160;</A>
+<P>
+<P><A NAME=5089>&#160;</A><A NAME=art1structure>&#160;</A><IMG  ALIGN=BOTTOM ALT="" SRC="img1019.gif">
+<BR><STRONG>Figure:</STRONG> <BR> Structure of an ART1 network in SNNS. Thin
+      arrows represent a connection from one unit to another. Fat
+      arrows which go from a layer to a unit indicate that each unit
+      of the layer is connected to the target unit. Similarly a fat
+      arrow from a unit to a layer means that the source unit is
+      connected to each of the units in the target layer. The two big
+      arrows in the middle represent the full connection between
+      comparison and recognition layer and the one between delay and
+      comparison layer, respectively.<BR>
+<P>
+<P>
+The topology of ART1 networks in SNNS has been chosen to to perform
+most of the ART1 algorithm within the network itself. This means that
+the mathematics is realized in the activation and output functions of
+the units.  The idea was to keep the propagation and training
+algorithm as simple as possible and to avoid procedural control
+components.
+<P>
+In figure <A HREF="node197.html#art1structure"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A> the units and links
+of ART1 networks in SNNS are displayed.
+<P>
+The F<IMG  ALIGN=MIDDLE ALT="" SRC="img1020.gif">  or input layer (labeled <b> inp</b> in figure <A HREF="node197.html#art1structure"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A>)
+is a set of <b>N</b> input units. Each of them
+has a corresponding unit in the F<IMG  ALIGN=MIDDLE ALT="" SRC="img1021.gif">  or comparison layer
+(labeled <b> cmp</b>). The <b>M</b> elements in the F<IMG  ALIGN=MIDDLE ALT="" SRC="img1022.gif">  layer are split into
+three levels. So each F<IMG  ALIGN=MIDDLE ALT="" SRC="img1023.gif">  element consists of three units. One
+recognition (<b> rec</b>) unit, one delay (<b> del</b>) unit and
+one local reset (<b> rst</b>) unit.
+These three parts are necessary for different reasons. The recognition
+units are known from the theory. The delay units are needed
+to synchronize the network correctly<A NAME=tex2html481 HREF="footnode.html#5099"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/foot_motif.gif"></A>.
+Besides, the activated unit in the delay layer shows the winner of
+F<IMG  ALIGN=MIDDLE ALT="" SRC="img1024.gif"> .
+The job of the local reset units
+is to block the actual winner of the recognition layer in case of a reset.
+<P>
+Finally, there are several special units. The <b> cl</b>  unit gets
+positive activation when the input pattern has been successfully
+classified. The <b> nc</b>  unit indicates an unclassifiable pattern,
+when active. The gain units <b> g</b><IMG  ALIGN=MIDDLE ALT="" SRC="img1025.gif">  and <b> g</b><IMG  ALIGN=MIDDLE ALT="" SRC="img1026.gif">  with their known functions and
+at last the units <b> ri</b> (reset input), <b> rc</b> (reset comparison),
+<b> rg</b> (reset general) and <IMG  ALIGN=MIDDLE ALT="" SRC="img1027.gif">  (vigilance), which
+realize the reset function.
+<P>
+For an exact definition of the required topology for ART1 networks in
+SNNS see section <A HREF="node214.html#topologyofartnetworksinsnns"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A>
+<P>
+<BR> <HR><A NAME=tex2html4179 HREF="node198.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html4177 HREF="node196.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html4171 HREF="node196.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html4181 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html4182 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html4180 HREF="node198.html"> Using ART1 Networks </A>
+<B>Up:</B> <A NAME=tex2html4178 HREF="node196.html"> ART1</A>
+<B> Previous:</B> <A NAME=tex2html4172 HREF="node196.html"> ART1</A>
+<BR> <HR> <P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

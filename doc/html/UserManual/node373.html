@@ -1,0 +1,86 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> User Defined Transfer Functions</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" User Defined Transfer Functions">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html6490 HREF="node374.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html6488 HREF="node371.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html6484 HREF="node372.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html6492 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html6493 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html6491 HREF="node374.html"> Kernel File Interface</A>
+<B>Up:</B> <A NAME=tex2html6489 HREF="node371.html"> Transfer Functions</A>
+<B> Previous:</B> <A NAME=tex2html6485 HREF="node372.html"> Predefined Transfer Functions</A>
+<BR> <HR> <P>
+<H1><A NAME=SECTION001720000000000000000> User Defined Transfer Functions</A></H1>
+<P>
+<A NAME=8547>&#160;</A>
+<A NAME=8548>&#160;</A>
+The group of transfer functions can be exented arbitrarily by the
+user. In order to make them available inside SNNS the following steps
+have to be performed:
+<P>
+<OL><LI> In file ``<tt> .../SNNSv4.0/kernel/func_tbl.c</tt> the name of the
+function has to be inserted in the function table. An example entry
+for an activation function would be
+<P>
+&quot;Act_MyFunction&quot;,ACT_FUNC, 0, 0, (FunctionPtr) MyFancyFunction,
+<P>
+Notice that the second entry defines the type (activation,
+initialization, etc.) of the new function!
+<P>
+If the new function is an activation function, the corresponding
+derivation function has also to be inserted in the function table.
+E.g.:<BR> 
+&quot;Act_MyFunction&quot;,ACT_DERIV_FUNC, 0, 0, (FunctionPtr)ACT_DERIV_MFF,
+<P>
+This entry has to be given, even if no such derivation function exists
+in the mathematical sense. In that case <tt> ``ACT_DERIV_Dummy''</tt> has
+to be specified as name of the derivation function.
+<P>
+If the function exists, it has to be declared and implemented just as
+the activation function.
+<P>
+Please note, that activation and derivation function have to have the
+same name suffix (here: ``MyFunction'')!
+<P>
+<LI> The functions must be implemented as C programs in following files:
+<P>
+<blockquote> activation functions in ``<tt> .../SNNSv4.0/kernel/trans_f.c</tt>'' <BR> 
+output functions in ``<tt> .../SNNSv4.0/kernel/trans_f.c</tt>'' <BR> 
+site functions in ``<tt> .../SNNSv4.0/kernel/trans_f.c</tt>'' <BR> 
+initialization functions in ``<tt> .../SNNSv4.0/kernel/init_f.c</tt>'' <BR> 
+learning functions in ``<tt> .../SNNSv4.0/kernel/learn_f.c</tt>'' <BR> 
+update functions in ``<tt> .../SNNSv4.0/kernel/update_f.c</tt>'' 
+</blockquote>
+<P>
+The name of the implemented function has to match the name specified
+in the function table!
+<P>
+<LI> Function prototypes have to be defined in the corresponding
+header (.h) and private header files (.ph).
+<P>
+<LI> Go to the  SNNSv4.0 root directory and build (using the command
+'build') new executables. Remember that if you don't recompile, the
+modification to the kernel won't take any effect.
+<P>
+</OL>
+<P>
+The new function should be available now in the user interface together
+with all predefined functions.
+<P>
+
+<P>
+<BR> <HR><A NAME=tex2html6490 HREF="node374.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html6488 HREF="node371.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html6484 HREF="node372.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html6492 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html6493 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html6491 HREF="node374.html"> Kernel File Interface</A>
+<B>Up:</B> <A NAME=tex2html6489 HREF="node371.html"> Transfer Functions</A>
+<B> Previous:</B> <A NAME=tex2html6485 HREF="node372.html"> Predefined Transfer Functions</A>
+<BR> <HR> <P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

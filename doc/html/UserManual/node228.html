@@ -1,0 +1,56 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> McClelland &amp; Rumelhart's Delta Rule</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" McClelland &amp; Rumelhart's Delta Rule">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html4568 HREF="node229.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html4566 HREF="node224.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html4562 HREF="node227.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html4570 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html4571 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html4569 HREF="node229.html"> Partial Recurrent Networks</A>
+<B>Up:</B> <A NAME=tex2html4567 HREF="node224.html"> Autoassociative Networks</A>
+<B> Previous:</B> <A NAME=tex2html4563 HREF="node227.html"> Hebbian Learning</A>
+<BR> <HR> <P>
+<H2><A NAME=SECTION0010144000000000000000> McClelland &amp; Rumelhart's Delta Rule</A></H2>
+<P>
+<A NAME=5994>&#160;</A>
+<P>
+This rule is presented in detail in chapter 17 of [<A HREF="node389.html#rum861">RM86</A>].  In
+general the delta rule outperforms the Hebbian learning rule.  The
+delta rule is also less likely so produce explosive growth in the
+network.  For each learning cycle the pattern is propagated through
+the network ncycles (a learning parameter) times after which learning
+occurs. Weights are updated according to the following rule:
+<P>
+<P><IMG  ALIGN=BOTTOM ALT="" SRC="img1187.gif"><P>
+<P>
+where:
+<P>
+<P><IMG  ALIGN=BOTTOM ALT="" SRC="img1188.gif"><P>
+<P>
+In their original work McClelland and Rumelhart used an unusual activation
+function:
+<P>
+<PRE>         for unit i, 
+             if neti &gt; 0
+                delta ai = E * neti * (1 - ai) - D * ai
+             else 
+                delta ai = E * neti * (ai + 1) - D * ai
+</PRE>
+<P>
+where:
+<P>
+<P><IMG  ALIGN=BOTTOM ALT="" SRC="img1189.gif"><P>
+<P>
+This function is included in SNNS as <tt> ACT_RM</tt>.  Other activation
+functions may be used in its place.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

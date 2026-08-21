@@ -1,0 +1,155 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Unit Enquiry and Manipulation Functions</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Unit Enquiry and Manipulation Functions">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html6254 HREF="node354.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html6252 HREF="node352.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html6246 HREF="node352.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html6256 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html6257 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html6255 HREF="node354.html"> Unit Definition Functions</A>
+<B>Up:</B> <A NAME=tex2html6253 HREF="node352.html"> Unit Functions</A>
+<B> Previous:</B> <A NAME=tex2html6247 HREF="node352.html"> Unit Functions</A>
+<BR> <HR> <P>
+<H2><A NAME=SECTION001621000000000000000> Unit Enquiry and Manipulation Functions</A></H2>
+<P>
+<A NAME=8210>&#160;</A>
+<code>int  krui_getNoOfUnits()</code><BR> 
+determines the number of units in the neural net.
+<code>int  krui_getNoOfSpecialUnits()</code><BR> 
+determines the number of special units in the neural net.
+<code>int  krui_getFirstUnit()</code><BR> 
+Many interface functions refer to a current unit or site. 
+<code>krui_getFirstUnit()</code> selects the (chronological) first unit of
+the network and makes it current. If this unit has sites, the
+chronological first site becomes current. The function returns 0 if no
+units are defined.
+<code>int  krui_getNextUnit()</code><BR> 
+selects the next unit in the net, as well as its first site (if
+present); returns 0 if no more units exist.
+<code>krui_err  krui_setCurrentUnit( int  UnitNo )</code><BR> 
+makes the unit with number <em> UnitNo</em> current unit; returns an
+error code if no unit with the specified number exists.
+<code>int  krui_getCurrentUnit()</code><BR> 
+determines the number of the current unit (0 if not defined)
+<code>char     *krui_getUnitName( int  UnitNo )</code><BR> 
+<code>krui_err  krui_setUnitName( int  UnitNo, char *unit_name )</code><BR> 
+determines/sets the name of the unit. <tt> krui_setUnitName</tt> returns
+NULL if no unit with the specified number exists.
+<code>int  krui_searchUnitName( char  *unit_name )</code><BR> 
+searches for a unit with the given name.  Returns the first unit
+number if a unit with the given name was found, 0 otherwise.
+<code>int  krui_searchNextUnitName( void )</code><BR> 
+searches for the next unit with the given name.
+Returns the next unit number if a unit with the given name was found,
+0 otherwise. <code>krui_searchUnitName( unit_name )</code> has to be called
+before at least once, to confirm the unit name.
+Returns error code if no units are defined.
+<code>char  *krui_getUnitOutFuncName( int  UnitNo )</code><BR> 
+<code>char  *krui_getUnitActFuncName( int  UnitNo )</code><BR> 
+determines the output function resp. activation function of the unit.
+<P>
+<code>krui_err  krui_setUnitOutFunc( int  UnitNo, char *unitOutFuncName )</code><BR> 
+<code>krui_err  krui_setUnitActFunc( int  UnitNo, char *unitActFuncName )</code><BR> 
+sets the output function resp. activation function of the unit.
+Returns an error code if the function name is unknown, i.e. if the
+name does not appear in the function table as output or activation
+function. The f-type of the unit is deleted.
+<code>char  *krui_getUnitFTypeName( int UnitNo )</code><BR> 
+yields the f-type of the unit; returns NULL if the unit
+has no prototype.
+<P>
+<code>FlintType  krui_getUnitActivation( int UnitNo )</code><BR> 
+<code>krui_err   krui_setUnitActivation( int UnitNo,</code><BR> 
+<code>                                   FlintTypeParam unit_activation )</code><BR> 
+returns/sets the activation of the unit.
+<P>
+<code>FlintType krui_getUnitInitialActivation( int  UnitNo )</code><BR> 
+<code>void      krui_setUnitInitialActivation( int  UnitNo,</code><BR> 
+<code>                                         FlintType unit_i_activation )</code><BR> 
+returns/sets the initial activation of the unit, i.e. the activation
+after loading the net. See also <code>krui_resetNet()</code>.
+<code>FlintType  krui_getUnitOutput( int  UnitNo )</code><BR> 
+<code>krui_err   krui_setUnitOutput( int  unit_no, FlintTypeParam  unit_output )</code><BR> 
+returns/sets the output value of the unit.
+<code>FlintType  krui_getUnitBias( int  UnitNo )</code><BR> 
+<code>void  krui_setUnitBias( int  UnitNo, FlintType  unit_bias )</code><BR> 
+returns/sets the bias (threshold) of the unit.
+<code>int   krui_getUnitSubnetNo( int UnitNo )</code><BR> 
+<code>void  krui_setUnitSubnetNo( int UnitNo, int  subnet_no)</code><BR> 
+returns/sets the subnet number of the unit (the range of subnet
+numbers is -32736 to +32735).
+<P>
+<code>unsigned short  krui_getUnitLayerNo( int UnitNo )</code><BR> 
+<code>void            krui_setUnitLayerNo( int UnitNo,int layer_no)</code><BR> 
+returns/sets the layer number (16 Bit integer).
+<P>
+<code>void  krui_getUnitPosition( int  UnitNo, struct PosType  *position )</code><BR> 
+<code>void  krui_setUnitPosition( int  UnitNo, struct PosType  *position )</code><BR> 
+determines/sets the (graphical) position of the unit. See also
+include file <code>glob_typ.h</code> for the definition of PosType.
+<P>
+<code>int  krui_getUnitNoAtPosition( struct PosType  *position, int subnet_no )</code><BR> 
+yields the unit number of a unit with the given position and subnet
+number; returns 0 if no such unit exists.
+<P>
+<code>int  krui_getUnitNoNearPosition( struct PosType  *position,</code><BR> 
+<code>                                 int subnet_no, int range,</code><BR> 
+<code>                                 int gridWidth )</code><BR> 
+yields a unit in the surrounding (defined by <em> range</em>) of the
+given position with the given graphic resolution <em> gridWidth</em>;
+otherwise like <code>krui_getUnitNoAtPosition(...)</code>.
+<P>
+<code>krui_err krui_getUnitCenters( int unit_no, int center_no,</code><BR> 
+<code>                              struct PositionVector  * *unit_center )</code><BR> 
+returns the 3D-transformation center of the specified unit and center number.
+Function has no effect on the current unit.
+Returns error number if unit or center number is invalid or if the SNNS-kernel
+isn't a 3D-kernel.
+<P>
+<code>krui_err krui_setUnitCenters( int unit_no, int center_no,</code><BR> 
+<code>                              struct PositionVector  *unit_center )</code><BR> 
+sets the 3D-transformation center and center number of the specified unit.
+Function has no effect on the current unit.
+Returns error number if unit or center number is invalid or if the SNNS-kernel
+isn't a 3D-kernel.
+<P>
+<code>krui_err krui_getXYTransTable( dummy )</code><BR> 
+returns the base address of the XY-translation table.
+Returns error code if the SNNS-kernel isn't a 3D-kernel.
+<code>int       krui_getUnitTType( int  UnitNo )</code><BR> 
+<code>krui_err  krui_setUnitTType( int  UnitNo, int  UnitTType )</code><BR> 
+gets/sets the IO-type<A NAME=tex2html635 HREF="footnode.html#8229"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/foot_motif.gif"></A> (i.e. input, output,
+hidden) of the unit. See include file <code>glob_typ.h</code> for IO-type
+constants. <tt> Set</tt> yields an error code if the IO-type is invalid.
+<code>krui_err  krui_freezeUnit( int  unit_no )</code><BR> 
+freezes the output and the activation value of the unit, i.e. these
+values are not updated anymore.
+<code>krui_err  krui_unfreezeUnit( int  unit_no )</code><BR> 
+switches the computation of output and activation values on again.
+<code>bool  krui_isUnitFrozen( int  unit_no )</code><BR> 
+yields TRUE if the unit is frozen, else FALSE.
+<code>int  krui_getUnitInputType( UnitNo )</code><BR> 
+yields the input type. There are three kinds of input types:<BR> 
+<code>      NO_INPUTS</code>: the unit doesn't have inputs (yet).<BR> 
+<code>      SITES</code>: the unit has one or more sites (and therefore no
+direct inputs).<BR> 
+<code>      DIRECT_LINKS</code>: the unit has direct inputs (and no sites).<BR> 
+See also file <code>glob_typ.h</code>.
+<code>FlintType krui_getUnitValueA(int UnitNo)</code><BR> 
+<code>void      krui_setUnitValueA(int UnitNo, FlintTypeParam unit_valueA)</code><BR> 
+returns and sets the Value A field of the unit structure.
+<BR> <HR><A NAME=tex2html6254 HREF="node354.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html6252 HREF="node352.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html6246 HREF="node352.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html6256 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html6257 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html6255 HREF="node354.html"> Unit Definition Functions</A>
+<B>Up:</B> <A NAME=tex2html6253 HREF="node352.html"> Unit Functions</A>
+<B> Previous:</B> <A NAME=tex2html6247 HREF="node352.html"> Unit Functions</A>
+<BR> <HR> <P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

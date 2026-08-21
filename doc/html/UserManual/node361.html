@@ -1,0 +1,36 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Network Initialization Functions</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Network Initialization Functions">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html6348 HREF="node362.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html6346 HREF="node350.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html6340 HREF="node360.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html6350 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html6351 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html6349 HREF="node362.html"> Functions for Activation </A>
+<B>Up:</B> <A NAME=tex2html6347 HREF="node350.html"> Kernel Function Interface</A>
+<B> Previous:</B> <A NAME=tex2html6341 HREF="node360.html"> Functions to Read </A>
+<BR> <HR> <P>
+<H1><A NAME=SECTION001670000000000000000> Network Initialization Functions</A></H1>
+<P>
+<A NAME=8307>&#160;</A>
+<P>
+<code>krui_err  krui_setInitialisationFunc( char  *init_func )</code><BR> 
+changes the initialization function; returns an error code if the 
+initialization function is unknown.
+<code>char  *krui_getInitialisationFunc( void )</code><BR> 
+returns the current initialization function. The default initialization
+function is <em> `Randomize_Weights'</em> (see also <code>kr_def.h</code>).
+<P>
+<code>krui_err  krui_initializeNet( float *parameterArray, int  NoOfParams )</code><BR> 
+initializes the network with the current initialization function.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

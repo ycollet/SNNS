@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Unit Definition Functions</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Unit Definition Functions">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html6264 HREF="node355.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html6262 HREF="node352.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html6258 HREF="node353.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html6266 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html6267 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html6265 HREF="node355.html"> Site Functions</A>
+<B>Up:</B> <A NAME=tex2html6263 HREF="node352.html"> Unit Functions</A>
+<B> Previous:</B> <A NAME=tex2html6259 HREF="node353.html"> Unit Enquiry and </A>
+<BR> <HR> <P>
+<H2><A NAME=SECTION001622000000000000000> Unit Definition Functions</A></H2>
+<P>
+<A NAME=8238>&#160;</A>
+<P>
+<code>int  krui_createDefaultUnit()</code><BR> 
+creates a unit with the properties of the (definable) default values of the
+kernel. The default unit has the following properties:
+<P>
+<IMG  ALIGN=BOTTOM ALT="" SRC="img1429.gif"> standard activation and output function<BR> 
+<IMG  ALIGN=BOTTOM ALT="" SRC="img1430.gif"> standard activation and bias<BR> 
+<IMG  ALIGN=BOTTOM ALT="" SRC="img1431.gif"> standard position-, subnet-, and layer number<BR> 
+<IMG  ALIGN=BOTTOM ALT="" SRC="img1432.gif"> default IO type<BR> 
+<IMG  ALIGN=BOTTOM ALT="" SRC="img1433.gif"> no unit prototype<BR> 
+<IMG  ALIGN=BOTTOM ALT="" SRC="img1434.gif"> no sites<BR> 
+<IMG  ALIGN=BOTTOM ALT="" SRC="img1435.gif"> no inputs or outputs<BR> 
+<IMG  ALIGN=BOTTOM ALT="" SRC="img1436.gif"> no unit name
+<P>
+Returns the number of the new unit or a (negative) error code. See also
+include file  <code>kr_def.h</code>.
+<P>
+<code>int  krui_createUnit( char  *unit_name, char  *out_func_name,</code><BR> 
+<code>                      char  *act_func_name, FlintTypeParam i_act,</code><BR> 
+<code>                      FlintTypeParam  bias)</code><BR> 
+creates a unit with selectable properties; otherwise like 
+<code>krui_createDefaultUnit()</code>. There are the following defaults:
+<P>
+<IMG  ALIGN=BOTTOM ALT="" SRC="img1437.gif"> standard position-, subnet-, and layer number<BR> 
+<IMG  ALIGN=BOTTOM ALT="" SRC="img1438.gif"> default IO type<BR> 
+<IMG  ALIGN=BOTTOM ALT="" SRC="img1439.gif"> no unit prototype<BR> 
+<IMG  ALIGN=BOTTOM ALT="" SRC="img1440.gif"> no sites<BR> 
+<IMG  ALIGN=BOTTOM ALT="" SRC="img1441.gif"> no inputs or outputs
+<P>
+Returns the number of the new unit or a (negative) error code. See also
+include file  <code>kr_def.h</code>.
+<code>int  krui_createFTypeUnit( char  *FType_name)</code><BR> 
+creates a unit with the properties of the (previously defined)
+prototype. It has the following default properties:
+<P>
+<IMG  ALIGN=BOTTOM ALT="" SRC="img1442.gif"> standard position number, subnet number and
+layer number<BR> 
+<IMG  ALIGN=BOTTOM ALT="" SRC="img1443.gif"> no inputs or outputs
+<P>
+The function returns the number of the new unit or a (negative) error
+code.
+<code>krui_err  krui_setUnitFType( int  UnitNo, char *FTypeName )</code><BR> 
+changes the structure of the unit to the intersection of the current
+type of the unit with the prototype; returns an error code if this
+operation has been failed.
+<code>int  krui_copyUnit( int  UnitNo, int  copy_mode)</code><BR> 
+copies a unit according to the copy mode. Four different copy modes
+are available:
+<P>
+<IMG  ALIGN=BOTTOM ALT="" SRC="img1444.gif"> copy unit with all input and output connections<BR> 
+<IMG  ALIGN=BOTTOM ALT="" SRC="img1445.gif"> copy only input connections<BR> 
+<IMG  ALIGN=BOTTOM ALT="" SRC="img1446.gif"> copy only output connections<BR> 
+<IMG  ALIGN=BOTTOM ALT="" SRC="img1447.gif"> copy only the unit, no connections
+<P>
+Returns the number of the new unit or a (negative) error code. See 
+<code>glob_typ.h</code> for reference of the definition of constants for
+the copy modes.
+<code>krui_err krui_deleteUnitList( int no_of_units, int unit_list[] )</code><BR> 
+deletes 'no_of_units' from the network. The numbers of the units that
+have to be deleted are listed up in an array of integers beginning
+with index 0.  This array is passed to parameter 'unit_list'.  Removes
+all links to and from these units.
+<P>
+
+<P>
+<BR> <HR><A NAME=tex2html6264 HREF="node355.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html6262 HREF="node352.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html6258 HREF="node353.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html6266 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html6267 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html6265 HREF="node355.html"> Site Functions</A>
+<B>Up:</B> <A NAME=tex2html6263 HREF="node352.html"> Unit Functions</A>
+<B> Previous:</B> <A NAME=tex2html6259 HREF="node353.html"> Unit Enquiry and </A>
+<BR> <HR> <P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Example Dialogue</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Example Dialogue">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html3011 HREF="node116.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html3009 HREF="node107.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html3005 HREF="node114.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html3013 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html3014 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html3012 HREF="node116.html"> Network Creation Tools</A>
+<B>Up:</B> <A NAME=tex2html3010 HREF="node107.html"> Graphical Network Editor</A>
+<B> Previous:</B> <A NAME=tex2html3006 HREF="node114.html"> Editor Commands</A>
+<BR> <HR> <P>
+<H1><A NAME=SECTION00760000000000000000> Example Dialogue</A></H1>
+<P>
+<A NAME=ExampleDialogue>&#160;</A>
+<A NAME=2780>&#160;</A>
+<A NAME=2781>&#160;</A>
+<P>
+A short example dialogue for the construction of an XOR network might
+clarify the use of the editor. First the four units are created. In
+the info panel the target name ``input'' and the <tt> Target bias</tt>
+``<b>0</b>'' is entered.
+<P>
+<PRE><TT> 
+<b> Status Display</b> 		 <b> Command</b> 		 <b> Remark</b>
+<P>
+<tt> &gt;</tt> 		 <tt> Mode Units</tt> 		 switch on mode units
+<P>
+<tt> Units&gt;</tt> 		 		 set mouse to position (3,5)
+<P>
+<tt> Units&gt;</tt> 		 <tt> Insert Target</tt> 		 insert unit 1 with the attributes
+<P>
+		 		 of the <tt> Target</tt> unit here.
+<P>
+		  		 repeat for position (5,5).
+<P>
+<tt> Units&gt;</tt> 		 		 name = ``hidden'', bias = <IMG  ALIGN=MIDDLE ALT="" SRC="img573.gif">
+<P>
+<tt> Units&gt;</tt> 		 <tt> Insert Target</tt> 		  position (3,3); insert unit 3
+<P>
+<tt> Units&gt;</tt> 		 		 name = ``output'', bias = <IMG  ALIGN=MIDDLE ALT="" SRC="img574.gif">
+<P>
+<tt> Units&gt;</tt> 		 <tt> Insert Target</tt> 		 position (3,1); insert unit 4
+<P>
+<tt> Units&gt;</tt> 		 <tt> Return</tt> 		 return to normal mode
+<P>
+<tt> &gt;</tt>      		 <tt> Mode Links</tt> 		 switch on mode links
+<P>
+<tt> Links&gt;</tt> 		 		 select both input units
+<P>
+            		 		  and set mouse to third unit
+<P>
+		 		 (``hidden'')
+<P>
+<tt> Links&gt;</tt> 		 		 specify weight ``<IMG  ALIGN=BOTTOM ALT="" SRC="img575.gif">''
+<P>
+<tt> Links&gt;</tt> 		 <tt> Make to Target</tt> 		 create links
+<P>
+<tt> Links&gt;</tt> 		 		 set mouse to unit 4 (``output'');
+<P>
+		 		  specify weight ``<IMG  ALIGN=MIDDLE ALT="" SRC="img576.gif">''
+<P>
+<tt> Links&gt;</tt> 		 <tt> Make to Target</tt> 		 create links
+<P>
+<tt> Links&gt;</tt> 		 		 deselect all units and
+<P>
+		 		  select unit 3
+<P>
+<tt> Links&gt;</tt> 		 		 set mouse to unit 4 and
+<P>
+		 		 specify ``<IMG  ALIGN=BOTTOM ALT="" SRC="img577.gif">'' as weight.
+<P>
+<tt> Links&gt;</tt> 		 <tt> Make to Target</tt> 		 create links
+<P>
+</TT></PRE>
+<P>
+Now the topology is defined. The only actions remaining are to set the IO
+types and the four patterns. To set the IO types, one can either use
+the command <tt> Units Set Default io-type</tt>, which sets the types
+according to the topological position of the units, or repeatedly use
+the command <tt> Units Set io-Type</tt>. The second option can be aborted
+by pressing the <tt> Done</tt> button in the popup window before making a
+selection.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

@@ -1,0 +1,80 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Functions for Activation Propagation in the Network</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Functions for Activation Propagation in the Network">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html6360 HREF="node363.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html6358 HREF="node350.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html6352 HREF="node361.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html6362 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html6363 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html6361 HREF="node363.html"> Learning and Pruning </A>
+<B>Up:</B> <A NAME=tex2html6359 HREF="node350.html"> Kernel Function Interface</A>
+<B> Previous:</B> <A NAME=tex2html6353 HREF="node361.html"> Network Initialization Functions</A>
+<BR> <HR> <P>
+<H1><A NAME=SECTION001680000000000000000> Functions for Activation Propagation in the Network</A></H1>
+<P>
+<A NAME=8311>&#160;</A>
+<P>
+<code>krui_err  krui_updateSingleUnit( int  UnitNo )</code><BR> 
+evaluates the net input, the activation and the output value of the
+specified unit; returns an error code if the unit doesn't exist. 
+ <code>krui_updateSingleUnit(...)</code> also evaluates 'frozen' units.
+<code>char  *krui_getUpdateFunc( void )</code><BR> 
+returns the current update function. The default update function is
+_Order' (see also <code>kr_def.h</code>).
+<code>krui_err  krui_setUpdateFunc( char  *update_func )</code><BR> 
+Changes the current update function; returns an error code if the update
+function is invalid.
+<code>krui_err  krui_updateNet( float *parameterArray, int  NoOfParams )</code><BR> 
+updates the network according to the update function.  The network
+should be a feed-forward type if one wants to update the network with
+the topological update function, otherwise the function returns a
+warning message.  To propagate a pattern through the network the use of
+the following function calls is recommended:
+<PRE>   krui_setPatternNo( pat_no );
+   krui_showPattern( OUTPUT_NOTHING );
+   krui_updateNet( parameterArray, NoOfParams );
+</PRE>
+See also <code>krui_setSeedNo</code> for initializing the pseudo random
+number generator. The function returns an error code if an error
+occurred. The following update functions are available:
+<A NAME=8316>&#160;</A>
+<P>
+<UL><LI> synchronous firing: the units of the network all change their
+activation at the same time.
+<P>
+<LI> chronological order: the user defines the order in which the
+units change their activations.
+<P>
+<LI> random order: the activations are computed in random order. It
+may happen that some units are updated several times while others are
+not updated at all.
+<P>
+<LI> random permutation: the activations of all units are computed
+exactly once, but in a random order.
+<P>
+<LI> topological order: the units change their activations according
+to their topological order. This mode should be selected only with
+nets that are free of cycles (feed-forward nets).
+</UL>
+<P>
+The topological order propagation method computes the stable activation
+pattern of the net in just one cycle. It is therefore the method of
+choice in cycle free nets. In other modes, depending upon the number
+of layers in the network, several cycles are required to reach a stable
+activation pattern (if this is possible at all).
+<P>
+<BR> <HR><A NAME=tex2html6360 HREF="node363.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html6358 HREF="node350.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html6352 HREF="node361.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html6362 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html6363 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html6361 HREF="node363.html"> Learning and Pruning </A>
+<B>Up:</B> <A NAME=tex2html6359 HREF="node350.html"> Kernel Function Interface</A>
+<B> Previous:</B> <A NAME=tex2html6353 HREF="node361.html"> Network Initialization Functions</A>
+<BR> <HR> <P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

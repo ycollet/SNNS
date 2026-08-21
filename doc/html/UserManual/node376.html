@@ -1,0 +1,82 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Form of the Network File Entries</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Form of the Network File Entries">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html6537 HREF="node377.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html6535 HREF="node374.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html6529 HREF="node375.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html6539 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html6540 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html6538 HREF="node377.html"> Grammar of the </A>
+<B>Up:</B> <A NAME=tex2html6536 HREF="node374.html"> Kernel File Interface</A>
+<B> Previous:</B> <A NAME=tex2html6530 HREF="node375.html"> The ASCII Network </A>
+<BR> <HR> <P>
+<H1><A NAME=SECTION001820000000000000000> Form of the Network File Entries</A></H1>
+<P>
+<A NAME=8595>&#160;</A>
+<P>
+Columns are separated by the string  <code>SPM_amp</code> | &amp;. A row never
+exceeds 250 characters.
+<P>
+Strings may have arbitrary length. The compiler determines the length
+of each row containing strings (maximum string length + 2). Within the
+columns, the strings are stored left adjusted. Strings may not contain
+blanks, but all special characters except  <code>SPM_amp</code>|&amp;. The first
+character of a string has to be a letter.
+<P>
+Integers may have an arbitrary number of digits. Cell numbers are
+always positive and not zero. Position coordinates may be positive or
+negative. The compiler determines the length of each row containing
+integers (maximum digit number + 2). Within the columns, the numbers
+are stored right adjusted.
+<P>
+Floats are always stored in fixed length with the format <tt>
+<code>SPM_amp</code>Vx.yyyyy&amp;</tt>, where <b> V</b> is the sign (<b>+</b>, - or blank), <b> x</b>
+is 0 or 1 and <b> y</b> is the rational part (5 digits behind the
+decimal point).
+<P>
+Rows containing floats are therefore always 10 characters long (8 +
+1 blank on each side).
+<P>
+If a row contains several sites in the <i> type</i> or <i> unit definition
+section</i>, they are written below each other. They are separated in
+the following way: Directly after the first site follows a comma and a
+newline (<code>SPM_amp</code>&amp;). The next line starts with an arbitrary number of
+blanks or tabs in front of the next site.
+<P>
+The source of a connection is described by a pair, the cell number and
+the strength of the connection. It always has the format <tt>
+<code>SPM_amp</code>nnn:Vx.yyyyy&amp;</tt> with the following meaning:
+<P>
+<UL><LI> <code>SPM_amp</code>nnn&amp; Number of the source
+<LI> <code>SPM_amp</code>Vx.yyyyy&amp; Strength of the connection as a float
+value (format as described above)
+</UL>
+<P>
+The compiler determines the width of the column <b> nnn</b> by the
+highest cell number present. The cell numbers are written into the
+column right adjusted (according to the rules for integers). The
+column <code>SPM_amp</code>Vx.yyyyy&amp; has fixed width. Several source pairs in
+an entry to the <i> connection definition section</i> are separated by
+a comma and a blank. If the list of source pairs exceeds the length
+of one line, the line has to be parted after the following rule:
+<P>
+<UL><LI> Separation is always between pairs, never within them.
+<LI> The comma between pairs is always directly behind the last pair,
+i.e. remains in the old line.
+<LI> After a newline (<code>SPM_amp</code>&amp;) an arbitrary number of blanks or
+tabs may precede the next pair.
+</UL><BR> <HR><A NAME=tex2html6537 HREF="node377.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html6535 HREF="node374.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html6529 HREF="node375.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html6539 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html6540 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html6538 HREF="node377.html"> Grammar of the </A>
+<B>Up:</B> <A NAME=tex2html6536 HREF="node374.html"> Kernel File Interface</A>
+<B> Previous:</B> <A NAME=tex2html6530 HREF="node375.html"> The ASCII Network </A>
+<BR> <HR> <P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

@@ -1,0 +1,73 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> The Algorithm</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" The Algorithm">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html3770 HREF="node167.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html3768 HREF="node165.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html3762 HREF="node165.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html3772 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html3773 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html3771 HREF="node167.html"> Mathematical Background</A>
+<B>Up:</B> <A NAME=tex2html3769 HREF="node165.html"> Cascade-Correlation (CC)</A>
+<B> Previous:</B> <A NAME=tex2html3763 HREF="node165.html"> Cascade-Correlation (CC)</A>
+<BR> <HR> <P>
+<H3><A NAME=SECTION001081100000000000000> The Algorithm</A></H3>
+<P>
+Cascade-Correlation (CC) combines two ideas: The first is the cascade
+architecture, in which hidden units are added only one at a time and
+do not change after they have been added. The second is the learning
+algorithm, which creates and installs the new hidden units. For each
+new hidden unit, the algorithm tries to maximize the magnitude of the
+correlation between the new unit's output and the residual error
+signal of the net.
+<P>
+The algorithm is realized in the following way:
+<P>
+<OL><LI> CC starts with a minimal network consisting only of an input
+and an output layer. Both layers are fully connected.
+<P>
+  <LI> Train all the connections ending at an output unit with a usual
+learning algorithm until the error of the net no longer decreases.
+<P>
+  <LI> Generate the so-called candidate units. Every candidate
+unit is connected with all input units and with all existing hidden
+units.  Between the pool of candidate units and the output units there
+are no weights.
+<P>
+  <LI> Try to maximize the correlation between the activation of
+the candidate units and the residual error of the net by training all
+the links leading to a candidate unit.  Learning takes place with an
+ordinary learning algorithm. The training is stopped when the
+correlation scores no longer improves.
+<P>
+  <LI> Choose the candidate unit with the maximum correlation,
+freeze its incoming weights and add it to the net. To change the
+candidate unit into a hidden unit, generate links between the selected
+unit and all the output units. Since the weights leading to the new
+hidden unit are frozen, a new permanent feature detector is obtained.
+Loop back to step 2.
+</OL>
+<P>
+This algorithm is repeated until the overall error of the net falls below
+a given value.  Figure <A HREF="node166.html#cascadenet"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A> shows a net after 3 hidden units
+have been added.
+<P>
+<P><A NAME=4064>&#160;</A><A NAME=cascadenet>&#160;</A><IMG  ALIGN=BOTTOM ALT="" SRC="img862.gif">
+<BR><STRONG>Figure:</STRONG> A neural net trained with cascade-correlation after 3 hidden units
+have been added. The vertical lines add all incoming activations. Connections
+with white boxes are frozen. The black connections are trained
+repeatedly.<BR>
+<P><BR> <HR><A NAME=tex2html3770 HREF="node167.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html3768 HREF="node165.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html3762 HREF="node165.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html3772 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html3773 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html3771 HREF="node167.html"> Mathematical Background</A>
+<B>Up:</B> <A NAME=tex2html3769 HREF="node165.html"> Cascade-Correlation (CC)</A>
+<B> Previous:</B> <A NAME=tex2html3763 HREF="node165.html"> Cascade-Correlation (CC)</A>
+<BR> <HR> <P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

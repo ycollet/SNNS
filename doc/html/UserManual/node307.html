@@ -1,0 +1,58 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> setUpdateFunc</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" setUpdateFunc">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html5648 HREF="node308.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html5646 HREF="node304.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html5640 HREF="node306.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html5650 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html5651 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html5649 HREF="node308.html"> setPruningFunc</A>
+<B>Up:</B> <A NAME=tex2html5647 HREF="node304.html"> Function Calls To </A>
+<B> Previous:</B> <A NAME=tex2html5641 HREF="node306.html"> setLearnFunc</A>
+<BR> <HR> <P>
+<H3><A NAME=SECTION001431300000000000000> setUpdateFunc</A></H3>
+<P>
+<A NAME=7632>&#160;</A>
+<P>
+This function is selecting the order in which the neurons are visited. The 
+format is:
+<P>
+<blockquote> <tt> setUpdateFunc (function name, parameters...)</tt>
+</blockquote>
+<P>
+where function name is the name of the update function. The name of the 
+update algorithm has to be selected as shown below.
+<P>
+<blockquote> <PRE>Topological_Order     BAM_Order              JE_Special         
+ART1_Stable           BPTT_Order             Kohonen_Order     
+ART1_Synchronous      CC_Order               Random_Order      
+ART2_Stable           CounterPropagation     Random_Permutation
+ART2_Synchronous      Dynamic_LVQ            RCC_Order         
+ARTMAP_Stable         Hopfield_Fixed_Act     Serial_Order      
+ARTMAP_Synchronous    Hopfield_Synchronous   Synchonous_Order  
+Auto_Synchronous      JE_Order               TimeDelay_Order
+</PRE>
+</blockquote>
+<P>
+After the name is provided several parameters can follow. If no
+parameters are selected, default values are chosen by the interpreter.
+The parameters have to be of the type float. The update functions are
+described in the chapter <tt> Update functions</tt>. A function call could
+look like this:
+<P>
+<blockquote> <tt> setUpdateFunc (&quot;Topological_Order&quot;)</tt>
+</blockquote>
+<P>
+The batch interpreter displays:
+<P>
+<blockquote> <tt> Update function is now Topological_Order</tt>
+</blockquote><BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

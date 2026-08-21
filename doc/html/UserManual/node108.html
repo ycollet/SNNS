@@ -1,0 +1,66 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Editor Modes</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Editor Modes">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html2929 HREF="node109.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html2927 HREF="node107.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html2921 HREF="node107.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html2931 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html2932 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html2930 HREF="node109.html"> Selection</A>
+<B>Up:</B> <A NAME=tex2html2928 HREF="node107.html"> Graphical Network Editor</A>
+<B> Previous:</B> <A NAME=tex2html2922 HREF="node107.html"> Graphical Network Editor</A>
+<BR> <HR> <P>
+<H1><A NAME=SECTION00710000000000000000> Editor Modes</A></H1>
+<P>
+<A NAME=EditorModes>&#160;</A>
+<A NAME=2372>&#160;</A>
+<A NAME=2373>&#160;</A>
+<A NAME=2374>&#160;</A>
+<P>
+To work faster, three editor modes have been introduced which render
+the first key unnecessary. In normal mode all sequences are possible,
+in unit mode all sequences that deal with units (that start
+with <tt> U</tt>), and in link mode all command sequences that refer to
+links (i.e. start with <tt> L</tt>).
+<P>
+Example (continued from above):
+<P>
+<PRE><TT> 
+<b> status line</b> 		 <b> command</b> 		 <b> comment</b>
+<P>
+<tt> Units Copy&gt;</tt> 		 <tt> Quit</tt> 		 the input command may be cancelled
+<P>
+		 		 any time
+<P>
+<tt> &gt;</tt> 		 <tt> Mode</tt>
+<P>
+<tt> Mode&gt;</tt> 		 <tt> Units</tt> 		 enter unit mode
+<P>
+<tt> Units&gt;</tt> 		 <tt> Copy</tt> 		 copying ...
+<P>
+<tt> Units Copy&gt;</tt> 		 <tt> Quit</tt> 		 cancel again
+<P>
+<tt> Units&gt;</tt> 		 		 <tt> Quit</tt> leaves the current mode unchanged
+<P>
+<tt> Units&gt;</tt> 		 <tt> Copy</tt> 		 copying ...
+<P>
+<tt> Units Copy&gt;</tt> 		 <tt> Return</tt> 		 return to normal mode
+<P>
+<tt> &gt;</tt>
+<P>
+</TT></PRE>
+<P>
+The mode command is useful, if several unit or link commands are given
+in sequence. <tt> Return</tt> cancels a command, like <tt> Quit</tt> does, but
+also returns to normal mode.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

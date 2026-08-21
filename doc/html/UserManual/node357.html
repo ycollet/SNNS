@@ -1,0 +1,72 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Functions for the Manipulation of Sites</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Functions for the Manipulation of Sites">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html6300 HREF="node358.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html6298 HREF="node355.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html6294 HREF="node356.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html6302 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html6303 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html6301 HREF="node358.html"> Link Functions</A>
+<B>Up:</B> <A NAME=tex2html6299 HREF="node355.html"> Site Functions</A>
+<B> Previous:</B> <A NAME=tex2html6295 HREF="node356.html"> Functions for the </A>
+<BR> <HR> <P>
+<H2><A NAME=SECTION001632000000000000000> Functions for the Manipulation of Sites</A></H2>
+<P>
+<A NAME=8268>&#160;</A>
+<P>
+<code>bool  krui_setFirstSite( void )</code><BR> 
+initializes the first site of the current unit, i.e. the first site of
+the current unit becomes current site. If the current unit doesn't
+have sites, FALSE is returned, else TRUE.
+<code>bool  krui_setNextSite( void )</code><BR> 
+initializes the next site of the current unit. If the  unit doesn't
+have more sites, FALSE is returned.
+<code>krui_err  krui_setSite( char  *site_name )</code><BR> 
+initializes the given site of the current unit. An error code is
+generated if the unit doesn't have sites, the site name is invalid, or
+the unit doesn't have a site with that name.
+<code>FlintType  krui_getSiteValue()</code><BR> 
+<code>char      *krui_getSiteFuncName()</code><BR> 
+returns the name/value of the site function of the current site.
+<code>char  *krui_getSiteName()</code><BR> 
+returns the name of the current site.
+<code>krui_err  krui_setSiteName( char  *site_name )</code><BR> 
+changes the name (and thereby also the site function) of the current
+site. An error code is returned if the site name is unknown.
+The f-type of the unit is erased.
+<code>krui_err krui_addSite( char *site_name )</code><BR> 
+adds a new site to the current unit. The new site is inserted in
+front, i.e. it becomes the first site of the unit. Therefore it is
+possible to make the new site current by a call to
+<code>krui_setFirstSite()</code>.  <code>krui_addSite(...)</code> has no effect on
+the current site! Error codes are generated if the unit has direct
+input connections, the site name is invalid, or problems with the
+memory allocation occurred. The functionality type of the unit will
+be cleared.
+<code>bool  krui_deleteSite()</code><BR> 
+deletes the current site of the current unit and all input connections
+to that site. The functionality type of the unit is also erased.
+ <code>krui_setFirstSite()</code> or <code>krui_setNextSite()</code> has to be
+called before at least once, to confirm the current site/unit.
+After the deletion the next available site becomes current. The return
+code is TRUE if further sites exist, else FALSE. The following
+program is sufficient to delete all sites of a unit:
+<PRE>if ( krui_setFirstSite() )
+  while ( krui_deleteSite() ) { }
+</PRE>
+<P>
+<BR> <HR><A NAME=tex2html6300 HREF="node358.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html6298 HREF="node355.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html6294 HREF="node356.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html6302 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html6303 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html6301 HREF="node358.html"> Link Functions</A>
+<B>Up:</B> <A NAME=tex2html6299 HREF="node355.html"> Site Functions</A>
+<B> Previous:</B> <A NAME=tex2html6295 HREF="node356.html"> Functions for the </A>
+<BR> <HR> <P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

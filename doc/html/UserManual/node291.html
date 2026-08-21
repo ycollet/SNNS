@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE>  Calling the Batch Interpreter</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value="  Calling the Batch Interpreter">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html5431 HREF="node292.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html5429 HREF="node289.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html5425 HREF="node290.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html5433 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html5434 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html5432 HREF="node292.html"> Description of the </A>
+<B>Up:</B> <A NAME=tex2html5430 HREF="node289.html"> Introduction</A>
+<B> Previous:</B> <A NAME=tex2html5426 HREF="node290.html"> Styling Conventions </A>
+<BR> <HR> <P>
+<H2><A NAME=SECTION001412000000000000000>  Calling the Batch Interpreter</A></H2>
+<P>
+The Interpreter can be used in an interactive mode or with the help of a file, 
+containing the batch program. When using a file no input from the 
+keyboard is necessary. The interactive mode can be activated by just calling 
+the interpreter:
+<P>
+<blockquote> <tt>  /Unix&gt; batchman</tt>
+</blockquote>
+<P>
+which produces:
+<blockquote> <tt> SNNS Batch Interpreter V1.0. Type batchman -h for help.<BR> 
+     No input file specified, reading input from stdin.<BR> 
+     batchman&gt; </tt> 
+</blockquote>
+<P>
+Now the interpreter is ready to accept the user's instructions, which can be 
+entered with the help of the keyboard. Once the input is completed the 
+interpreter can be put to work with <tt> Ctrl-D</tt>. The interpreter can be 
+aborted with <tt> Ctrl-C</tt>. The instructions entered are only invoked after 
+<tt> Ctrl-D</tt> is pressed.
+<P>
+If the user decides to use a file for input the command line option <tt> -f</tt>
+has to be given together with the name of the interpreter:
+<P>
+<blockquote> <tt>  /Unix&gt; batchman -f myprog.bat</tt>
+</blockquote>
+<P>
+Once this is completed, the interpreter starts the program contained in the 
+file myprog.bat and executes its commands.
+<P>
+The standard output is usually the screen but with the command line
+option <tt> -l </tt> the output can be redirected in a protocol file. The
+name of the file has to follow the command line option:
+<P>
+<blockquote> <tt>  /Unix&gt; batchman -l logfile</tt>
+</blockquote>
+<P>
+Usually the output is redirected in combination with the reading of
+the program out of a file:
+<P>
+<blockquote> <tt>  /Unix&gt; batchman -f myprog.bat -l logfile</tt>
+</blockquote>
+<P>
+The order of the command line options is arbitrary.
+<P>
+
+<P>
+More command line options are:
+<P>
+<UL>
+<P>
+<LI> <tt> -p:</tt> Programs should only be parsed but not
+  executed.  This option tells the interpreter to check the
+  correctness of the program without executing the instructions
+  contained in the program. Run time errors can not be detected. Such
+  a run time error could be an invalid SNNS function call.
+<P>
+<LI> <tt> -q:</tt> No messages should be displayed except
+  those caused by the <tt> print()</tt>-function.
+<P>
+<LI> <tt> -s:</tt> No warnings should be displayed.
+<P>
+<LI> <tt> -h:</tt> A help message should be displayed which
+  describes the available command line options.
+<P>
+</UL>
+<P>
+All following input will be printed without the shell-text.
+<P>
+<BR> <HR><A NAME=tex2html5431 HREF="node292.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html5429 HREF="node289.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html5425 HREF="node290.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html5433 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html5434 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html5432 HREF="node292.html"> Description of the </A>
+<B>Up:</B> <A NAME=tex2html5430 HREF="node289.html"> Introduction</A>
+<B> Previous:</B> <A NAME=tex2html5426 HREF="node290.html"> Styling Conventions </A>
+<BR> <HR> <P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

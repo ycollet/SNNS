@@ -1,0 +1,50 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Handling Pattern Sets</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Handling Pattern Sets">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html2875 HREF="node105.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html2873 HREF="node103.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html2867 HREF="node103.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html2877 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html2878 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html2876 HREF="node105.html"> Fixed Size Patterns</A>
+<B>Up:</B> <A NAME=tex2html2874 HREF="node103.html"> Handling Patterns with </A>
+<B> Previous:</B> <A NAME=tex2html2868 HREF="node103.html"> Handling Patterns with </A>
+<BR> <HR> <P>
+<H1><A NAME=SECTION00610000000000000000> Handling Pattern Sets</A></H1>
+<P>
+Although activations can be propagated through the network without
+patterns defined, learning can be performed only with patterns
+present. A set of patterns belonging to the same task is called a
+pattern set. Normally there are two dedicated pattern sets when
+dealing with a neural network. One for training the network (training
+pattern set), and one for testing purposes to see what the network has
+learned (test pattern set). In SNNS both of these (and more) can be
+kept in the simulator at the same time. They are loaded with the file
+browser (see chapter <A HREF="node34.html#FilePanel"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A>). The pattern set loaded last is
+made the current pattern set. All actions performed with the simulator
+refer only to, and affect only the current pattern set. To switch
+between pattern sets press the button <IMG  ALIGN=BOTTOM ALT="" SRC="img525.gif"> in the control panel
+(see figure <A HREF="node40.html#ControlPanel"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A> on page <A HREF="node40.html#ControlPanel"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A>). It
+opens up a list of loaded pattern sets from which a new one can be
+selected. The name of the current pattern set is displayed to the
+right of the button. The name equals the name body of the loaded
+pattern file. If no pattern set is loaded,  ``Patternfile ?'' is given
+as indication that no associated pattern file is defined.
+<P>
+Loaded pattern sets can be removed from main memory with the <IMG  ALIGN=BOTTOM ALT="" SRC="img526.gif">
+button in the control panel. Just like the <IMG  ALIGN=BOTTOM ALT="" SRC="img527.gif"> button it opens a
+list of loaded pattern sets, from which any set can be deleted. When a
+pattern set is deleted, the corresponding memory is freed, and again
+available for other uses. This is especially important with larger
+pattern sets, where memory might get scarce.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

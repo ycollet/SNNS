@@ -1,0 +1,78 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> ART1 Initialization Function</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" ART1 Initialization Function">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html4204 HREF="node200.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html4202 HREF="node198.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html4196 HREF="node198.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html4206 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html4207 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html4205 HREF="node200.html"> ART1 Learning Function</A>
+<B>Up:</B> <A NAME=tex2html4203 HREF="node198.html"> Using ART1 Networks </A>
+<B> Previous:</B> <A NAME=tex2html4197 HREF="node198.html"> Using ART1 Networks </A>
+<BR> <HR> <P>
+<H4><A NAME=SECTION0010121210000000000000> ART1 Initialization Function</A></H4>
+<P>
+<A NAME=5109>&#160;</A>
+<P>
+First the ART1 initialization function <tt> ART1_Weights</tt> has to be
+selected from the list of initialization functions.
+<P>
+<tt> ART1_Weights</tt> is responsible to set the initial values of the trainable
+links in an ART1 network. These links are the ones
+from F<IMG  ALIGN=MIDDLE ALT="" SRC="img1028.gif">  to F<IMG  ALIGN=MIDDLE ALT="" SRC="img1029.gif">  and the ones from F<IMG  ALIGN=MIDDLE ALT="" SRC="img1030.gif">  to F<IMG  ALIGN=MIDDLE ALT="" SRC="img1031.gif">  respectively.
+<P>
+The F<IMG  ALIGN=MIDDLE ALT="" SRC="img1032.gif">  <IMG  ALIGN=BOTTOM ALT="" SRC="img1033.gif"> F<IMG  ALIGN=MIDDLE ALT="" SRC="img1034.gif">  links are all set to 1.0 as described
+in [<A HREF="node389.html#CG87a">CG87a</A>]. The weights of the links from F<IMG  ALIGN=MIDDLE ALT="" SRC="img1035.gif">  to F<IMG  ALIGN=MIDDLE ALT="" SRC="img1036.gif">  are
+a little more difficult to explain. To assure that in an initialized
+network the F<IMG  ALIGN=MIDDLE ALT="" SRC="img1037.gif">  units will be used in their index order,
+the weights from F<IMG  ALIGN=MIDDLE ALT="" SRC="img1038.gif">  to F<IMG  ALIGN=MIDDLE ALT="" SRC="img1039.gif">  must decrease with increasing index. Another
+restriction is, that each link-weight has to be greater than <b>0</b> and
+smaller than <IMG  ALIGN=MIDDLE ALT="" SRC="img1040.gif">. Defining <IMG  ALIGN=MIDDLE ALT="" SRC="img1041.gif"> as a link-weight from a
+F<IMG  ALIGN=MIDDLE ALT="" SRC="img1042.gif">  unit to the <b>j</b>th F<IMG  ALIGN=MIDDLE ALT="" SRC="img1043.gif">  unitthis yields
+<P>
+<P><A NAME=eqf1f2weights1>&#160;</A><IMG  ALIGN=BOTTOM ALT="" SRC="img1044.gif"><P>
+<P>
+To get concrete values, we have to decrease the
+fraction on the right side with increasing index <b>j</b> and assign this
+value to <IMG  ALIGN=MIDDLE ALT="" SRC="img1045.gif">. For this reason we introduce the value
+<IMG  ALIGN=MIDDLE ALT="" SRC="img1046.gif"> and we obtain
+<P>
+<P><A NAME=eqf1f2weights2>&#160;</A><IMG  ALIGN=BOTTOM ALT="" SRC="img1047.gif"><P>
+<P>
+<IMG  ALIGN=MIDDLE ALT="" SRC="img1048.gif"> is calculated out of a new parameter <IMG  ALIGN=MIDDLE ALT="" SRC="img1049.gif"> and the
+number of F<IMG  ALIGN=MIDDLE ALT="" SRC="img1050.gif">  units <b>M</b>:
+<P>
+<P><A NAME=eqf1f2weights3>&#160;</A><IMG  ALIGN=BOTTOM ALT="" SRC="img1051.gif"><P>
+<P>
+So we have two parameters for <tt> ART1_Weights</tt>: <IMG  ALIGN=MIDDLE ALT="" SRC="img1052.gif"> and
+<IMG  ALIGN=MIDDLE ALT="" SRC="img1053.gif">.  For both of them a value of 1.0 is useful for the
+initialization.  The first parameter of the initialization function is
+<IMG  ALIGN=MIDDLE ALT="" SRC="img1054.gif">, the second one is <IMG  ALIGN=MIDDLE ALT="" SRC="img1055.gif">.  Having chosen <IMG  ALIGN=MIDDLE ALT="" SRC="img1056.gif"> and
+<IMG  ALIGN=MIDDLE ALT="" SRC="img1057.gif"> one must press the <IMG  ALIGN=BOTTOM ALT="" SRC="img1058.gif">-button to perform
+initialization.
+<P>
+The parameter <IMG  ALIGN=MIDDLE ALT="" SRC="img1059.gif"> is stored in the bias field of the unit
+structure to be accessible to the learning function when 
+adjusting the weights.
+<P>
+One should always use <tt> ART1_Weights</tt> to initialize
+ART1 networks. When using another SNNS initialization function the
+behavior of the simulator during learning is not predictable, because not only
+the trainable links will be initialized, but also the fixed weights
+of the network.
+<P>
+<BR> <HR><A NAME=tex2html4204 HREF="node200.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html4202 HREF="node198.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html4196 HREF="node198.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html4206 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html4207 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html4205 HREF="node200.html"> ART1 Learning Function</A>
+<B>Up:</B> <A NAME=tex2html4203 HREF="node198.html"> Using ART1 Networks </A>
+<B> Previous:</B> <A NAME=tex2html4197 HREF="node198.html"> Using ART1 Networks </A>
+<BR> <HR> <P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

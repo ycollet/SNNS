@@ -1,0 +1,46 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Hebb_FixAct</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Hebb_FixAct">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html2696 HREF="node90.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html2694 HREF="node78.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html2688 HREF="node88.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html2698 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html2699 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html2697 HREF="node90.html"> JE_Weights</A>
+<B>Up:</B> <A NAME=tex2html2695 HREF="node78.html"> Initialization Functions</A>
+<B> Previous:</B> <A NAME=tex2html2689 HREF="node88.html"> Hebb</A>
+<BR> <HR> <P>
+<H3><A NAME=SECTION005601100000000000000> Hebb_FixAct</A></H3>
+<P>
+<A NAME=2136>&#160;</A>
+This rule is necessary in order to do 'one-step-recall' simulations.
+For more informations see [<A HREF="node389.html#Amari89">Ama89</A>]. 
+For the calculation the bias following facts are assumed:
+<P>
+<UL><LI> The implemented net is an autoassociative net<BR> 
+      The neurons of an autoassociative net have to be input and output 
+      neurons at the same time. A Hopfield network would be an example for 
+      such a net.
+<P>
+<LI> Fixed number of 1s<BR> 
+      The patterns which are to be saved have a fixed 
+      number of 1s.
+</UL>
+<P>
+The parameter h1 and h2 are required. Where h1 is the number of ones per 
+pattern and h2 is the probable degree of distortion in percent. The parameters 
+have to be inserted in field1 and field2.
+This initialization function should be used only in connection with the 
+<tt> Hopfield_Fixed_Act</tt> update function. As mentioned in section <A HREF="node88.html#Hebb"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/cross_ref_motif.gif"></A> 
+the <tt> Hebb_FixAct</tt> algorithm is a learning algorithm.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

@@ -1,0 +1,54 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> JE_Weights</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" JE_Weights">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html2708 HREF="node91.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html2706 HREF="node78.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html2700 HREF="node89.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html2710 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html2711 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html2709 HREF="node91.html"> Kohonen_Weights_v3.2</A>
+<B>Up:</B> <A NAME=tex2html2707 HREF="node78.html"> Initialization Functions</A>
+<B> Previous:</B> <A NAME=tex2html2701 HREF="node89.html"> Hebb_FixAct</A>
+<BR> <HR> <P>
+<H3><A NAME=SECTION005601200000000000000> JE_Weights</A></H3>
+<P>
+<A NAME=2146>&#160;</A>
+This network consists of two types of neurons. The regular neurons and 
+the so called context neurons. In such networks all links leading to 
+context units are considered recurrent links.
+The initialization function <tt> JE_Weights</tt> requires the
+specification of five parameters:
+<P>
+<UL><LI> <IMG  ALIGN=BOTTOM ALT="" SRC="img478.gif">, <IMG  ALIGN=MIDDLE ALT="" SRC="img479.gif"> : 
+       The weights of the forward connections are randomly chosen
+       from the interval <IMG  ALIGN=MIDDLE ALT="" SRC="img480.gif">. <IMG  ALIGN=MIDDLE ALT="" SRC="img481.gif"> have to be 
+       provided in field1 and field2 of the init panel.  
+ <LI> <IMG  ALIGN=BOTTOM ALT="" SRC="img482.gif"> : 
+       Weights of self recurrent links from context units to themselves.
+       Simple Elman networks use <IMG  ALIGN=BOTTOM ALT="" SRC="img483.gif">. <IMG  ALIGN=BOTTOM ALT="" SRC="img484.gif"> has to be 
+       provided in field3 of the init panel. 
+ <LI> <IMG  ALIGN=MIDDLE ALT="" SRC="img485.gif"> :
+       Weights of other recurrent links to context units. This value
+       is often set to <IMG  ALIGN=BOTTOM ALT="" SRC="img486.gif">. <IMG  ALIGN=MIDDLE ALT="" SRC="img487.gif"> has to be provided in field4 
+       of the init panel.
+ <LI> <IMG  ALIGN=MIDDLE ALT="" SRC="img488.gif">  : 
+       Initial activation of all context units. <IMG  ALIGN=MIDDLE ALT="" SRC="img489.gif"> has to be provided
+       in field5 of the init panel.
+</UL>
+<P>
+Note that it is required that <IMG  ALIGN=MIDDLE ALT="" SRC="img490.gif">. If this is not the
+case, an error message will appear on the screen.  The context units
+will be initialized as described above. For all other neurons the bias
+and all weights will be randomly chosen from the interval
+<IMG  ALIGN=MIDDLE ALT="" SRC="img491.gif">.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

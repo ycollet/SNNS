@@ -1,0 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Analyze</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Analyze">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html5875 HREF="node325.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html5873 HREF="node322.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html5867 HREF="node323.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html5877 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html5878 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html5876 HREF="node325.html"> Analyzing Functions</A>
+<B>Up:</B> <A NAME=tex2html5874 HREF="node322.html"> Tools for SNNS</A>
+<B> Previous:</B> <A NAME=tex2html5868 HREF="node323.html"> Overview</A>
+<BR> <HR> <P>
+<H1><A NAME=SECTION001520000000000000000> Analyze</A></H1>
+<P>
+<A NAME=7963>&#160;</A>
+<P>
+The purpose of this tool is to analyze the result files that have been
+created by SNNS. The result file which you want to analyze has to
+contain the <tt> teaching output</tt> and the <tt> output of the network</tt>.
+<P>
+Synopsis: <tt> analyze</tt> [-options]
+<P>
+It is possible to choose between the following options in any order:
+<PRE><TT> 
+<tt> -w</tt> 		 		 numbers of patterns which were classified wrong are printed
+<P>
+<tt> -r</tt> 		 		 numbers of patterns which were classified right are printed
+<P>
+<tt> -u</tt> 		 		 numbers of patterns which were not classified are printed
+<P>
+<tt> -a</tt> 		 		 same as -w -r -u
+<P>
+<tt> -v</tt> 		 		 verbose output. Each printed number is preceded by one of the
+<P>
+		 		 words 'wrong', 'right' or 'unknown' depending on the result of the
+<P>
+		 		 classification.
+<P>
+<tt> -s</tt> 		 		 statistic information containing wrong, right and not classified
+<P>
+		 		 patterns.
+<P>
+		 		 The network error is printed also.
+<P>
+<tt> -c</tt> 		 		 same as -s, but statistics for each output unit (class) is displayed.
+<P>
+<tt> -i &lt;file name&gt;</tt> 		 		 name of the 'result file' which is going to be analyzed.
+<P>
+<tt> -o &lt;file name&gt;</tt> 		 		 name of the file which is going to be produced by <tt> analyze</tt>.
+<P>
+<tt> -e &lt;function&gt;</tt> 		 		 defines the name of the 'analyzing function'.
+<P>
+		 		 Possible names are: 402040, WTA, band (description see below)
+<P>
+<tt> -l &lt;real value&gt;</tt> 		 		 first parameter of the analyzing function.
+<P>
+<tt> -h &lt;real value&gt;</tt> 		 		 second parameter of the analyzing function.
+<P>
+</TT></PRE>
+<P>
+Starting <tt> analyze</tt> without any options is equivalent to:<BR> 
+<tt> analyze -w -e 402040 -l 0.4 -h 0.6</tt>
+<P>
+<BR> <HR>
+<UL> 
+<LI> <A NAME=tex2html5879 HREF="node325.html#SECTION001521000000000000000"> Analyzing Functions</A>
+</UL>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

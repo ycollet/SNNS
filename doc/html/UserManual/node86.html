@@ -1,0 +1,56 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> CPN_Weights_v3.3</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" CPN_Weights_v3.3">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html2660 HREF="node87.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html2658 HREF="node78.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html2652 HREF="node85.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html2662 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html2663 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html2661 HREF="node87.html"> DLVQ_Weights</A>
+<B>Up:</B> <A NAME=tex2html2659 HREF="node78.html"> Initialization Functions</A>
+<B> Previous:</B> <A NAME=tex2html2653 HREF="node85.html"> CPN_Weights_v3.2</A>
+<BR> <HR> <P>
+<H3><A NAME=SECTION00560800000000000000> CPN_Weights_v3.3</A></H3>
+<P>
+<A NAME=2118>&#160;</A> This function generates random points in an
+n-dimensional cube, throws out all vectors with length <b>&gt;1</b> and
+projects the remaining onto the surface of an n-dimensional unit
+hypersphere or onto one of its main diagonal sectors (main diagonal
+quadrant for <b>n=2</b>, octant for <b>n=3</b>, ...).
+<P>
+First the interval, from which the Kohonen weights for the
+initialization tasks are selected, is determined. Depending upon the
+initialization parameters, which have to be provided in field1
+and field2, the interval may be <IMG  ALIGN=MIDDLE ALT="" SRC="img471.gif">, <IMG  ALIGN=MIDDLE ALT="" SRC="img472.gif">, or
+<IMG  ALIGN=MIDDLE ALT="" SRC="img473.gif">.
+<P>
+Every component <IMG  ALIGN=MIDDLE ALT="" SRC="img474.gif"> of every Kohonen layer neuron j is then
+assigned a random value from the above interval, yielding weight
+vectors <IMG  ALIGN=MIDDLE ALT="" SRC="img475.gif">, which are random points within an
+n-dimensional hypercube. If the weight vector <IMG  ALIGN=MIDDLE ALT="" SRC="img476.gif"> thus
+generated is outside the unit hypersphere or hypersphere sector, a new
+random vector is generated until eventually one is inside the
+hypersphere or hypersphere sector.
+Finally, the length of each vector <IMG  ALIGN=MIDDLE ALT="" SRC="img477.gif"> is normalized to 1.
+<P>
+The Grossberg layer weight vector components are all set to 1.
+<P>
+Note that this initialization function DOES produce weight vectors
+with equal point density on the hypersphere. However, the fraction of
+points from the hypercube which are inside the enscribed hypersphere
+decreases exponentially with increasing vector dimension, thus
+exponentially increasing the time to perform the initialization. This
+method is thus only suitable for input dimensions up to 12 - 15.
+(read Hecht-Nielsen: Neurocomputing, chapter 2.4, pp. 41 ff. for an 
+interesting discussion on n-dim. geometry).
+<P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

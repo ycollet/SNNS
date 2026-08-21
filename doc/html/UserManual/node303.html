@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> SNNS Function Calls</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" SNNS Function Calls">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html5584 HREF="node304.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html5582 HREF="node288.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html5576 HREF="node302.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html5586 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html5587 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html5585 HREF="node304.html"> Function Calls To </A>
+<B>Up:</B> <A NAME=tex2html5583 HREF="node288.html"> Batchman</A>
+<B> Previous:</B> <A NAME=tex2html5577 HREF="node302.html"> While and Repeat </A>
+<BR> <HR> <P>
+<H1><A NAME=SECTION001430000000000000000> SNNS Function Calls</A></H1>
+<P>
+<A NAME=7580>&#160;</A>
+<P>
+The SNNS function calls control the SNNS kernel. They are available as
+function calls in <tt> batchman</tt>. The function calls can be 
+divided into four groups:
+<P>
+<UL><LI> Functions which are setting SNNS parameters :<BR> 
+  -- setInitFunc()<BR>
+  -- setLearnFunc()<BR> 
+  -- setUpdateFunc()<BR> 
+  -- setPruningFunc()<BR> 
+  -- setSubPattern()<BR> 
+  -- setShuffle()<BR> 
+  -- setSubShuffle()
+<P>
+<LI> Functions which refer to neural nets :<BR>
+  -- loadNet()<BR>
+  -- saveNet()<BR>
+  -- saveResult()<BR>
+  -- initNet()<BR>
+  -- trainNet()<BR>
+  -- testNet()
+<P>
+<LI> Functions which refer to patterns :<BR>
+  -- loadPattern()<BR>
+  -- setPattern()<BR>
+  -- delPattern()
+<P>
+<LI> Special functions :<BR>
+  -- pruneNet()<BR>
+  -- execute()<BR>
+  -- print()<BR>
+  -- exit()<BR>
+  -- setseed()
+<P>
+</UL>
+<P>
+The format of such calls is:
+<P>
+<blockquote> function_name (parameter1, parameter2...)
+</blockquote>
+<P>
+No parameters, one parameter, or multiple parameters can be placed
+after the function name. Unspecified values take on a default value.
+Note, however, that if the third value is to be modified, the first two
+values have to be provided with the function call as well. The
+parameters have the same order as in the graphical user interface.
+<P>
+Now a description of the function calls of the first group follows.
+<P>
+<BR> <HR>
+<UL> 
+<LI> <A NAME=tex2html5588 HREF="node304.html#SECTION001431000000000000000"> Function Calls To Set SNNS Parameters</A>
+<UL> 
+<LI> <A NAME=tex2html5589 HREF="node305.html#SECTION001431100000000000000"> setInitFunc</A>
+<LI> <A NAME=tex2html5590 HREF="node306.html#SECTION001431200000000000000"> setLearnFunc</A>
+<LI> <A NAME=tex2html5591 HREF="node307.html#SECTION001431300000000000000"> setUpdateFunc</A>
+<LI> <A NAME=tex2html5592 HREF="node308.html#SECTION001431400000000000000"> setPruningFunc</A>
+<LI> <A NAME=tex2html5593 HREF="node309.html#SECTION001431500000000000000"> setSubPattern</A>
+<LI> <A NAME=tex2html5594 HREF="node310.html#SECTION001431600000000000000"> setShuffle, setSubShuffle</A>
+</UL> 
+<LI> <A NAME=tex2html5595 HREF="node311.html#SECTION001432000000000000000"> Function Calls Related To Networks</A>
+<LI> <A NAME=tex2html5596 HREF="node312.html#SECTION001433000000000000000"> Pattern Function Calls</A>
+<LI> <A NAME=tex2html5597 HREF="node313.html#SECTION001434000000000000000"> Special Functions</A>
+</UL>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

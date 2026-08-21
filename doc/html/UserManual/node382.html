@@ -1,0 +1,158 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Grammar:</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Grammar:">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html6612 HREF="node383.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html6610 HREF="node377.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html6606 HREF="node381.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html6614 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html6615 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html6613 HREF="node383.html"> Grammar of the </A>
+<B>Up:</B> <A NAME=tex2html6611 HREF="node377.html"> Grammar of the </A>
+<B> Previous:</B> <A NAME=tex2html6607 HREF="node381.html"> Terminal Symbols</A>
+<BR> <HR> <P>
+<H2><A NAME=SECTION001833000000000000000> Grammar:</A></H2>
+<P>
+<A NAME=8645>&#160;</A>
+<P>
+
+<PRE>out_file                ::= file_header sections
+
+file_header             ::= WHITESPACE  COMMENT h_snns EOL COMMENT h_generated_at EOL
+                            COMMENT h_network_name EOL COMMENT h_source_files EOL
+                            COMMENT h_no.of_unites EOL COMMENT h_no.of_connections EOL
+                            COMMENT h_no.of_unit_types EOL COMMENT h_no.of_site_types EOL
+                            COMMENT h_learning_function EOL COMMENT h_update_function EOL
+                            COMMENT h_pruning_function EOL 
+                            COMMENT ff_learning_function EOL
+
+
+/* parts of the file-header */
+
+h_snns                  ::= SNNS BLANKS_TABS VERSION 
+h_generated_at          ::= GENERATED_AT BLANKS_TABS CSTRING
+h_network_name          ::= NETWORK_NAME BLANKS_TABS STRING
+h_source_files          ::= SOURCE_FILES [BLANKS_TABS COLON BLANKS_TABS CSTRING]
+h_no.of_unites          ::= NO.OF_UNITES BLANKS_TABS INTEGER
+h_no.of_connections     ::= NO.OF_CONNECTIONS BLANKS_TABS INTEGER
+h_no.of_unit_types      ::= NO.OF_UNIT_TYPES BLANKS_TABS INTEGER
+h_no.of_site_types      ::= NO.OF_SITE_TYPES BLANKS_TABS INTEGER
+h_learning_function     ::= LEARNING_FUNCTION BLANKS_TABS STRING
+h_pruning_function      ::= PRUNING_FUNCTION BLANKS_TABS STRING
+h_ff_learning_function  ::= FF_LEARNING_FUNCTION BLANKS_TABS STRING
+h_update_function       ::= UPDATE_FUNCTION BLANKS_TABS STRING
+
+sections                ::= COMMENT unit_section [COMMENT default_section]
+                            [COMMENT site_section] [COMMENT type_section]
+                            [COMMENT subnet_section] [COMMENT conn_section]
+                            [COMMENT layer_section] [COMMENT trans_section]
+                            [COMMENT time_delay_section] COMMENT
+
+
+/* unit default section */
+
+default_section         ::= DEFAULT_SECTION_TITLE CUT COMMENT WHITESPACE  default_block
+default_block           ::= default_header SEVEN_COLUMN_LINE EOL
+                            {COMMENT default_def} SEVEN_COLUMN_LINE EOL
+default_header          ::= ACT COL_SEP BIAS COL_SEP ST COL_SEP SUBNET COL_SEP
+                            LAYER COL_SEP ACT_FUNC COL_SEP OUT_FUNC CUT
+default_def             ::= SFLOAT W_COL_SEP SFLOAT W_COL_SEP STRING W_COL_SEP
+                            INTEGER W_COL_SEP INTEGER W_COL_SEP STRING W_COL_SEP
+                            STRING CUT
+
+
+/* site definition section */
+
+site_section            ::= SITE_SECTION_TITLE CUT COMMENT WHITESPACE  site_block
+site_block              ::= site_header TWO_COLUMN_LINE EOL {COMMENT site_def}
+                            TWO_COLUMN_LINE EOL
+site_header             ::= SITE_NAME SITE_FUNCTION CUT
+site_def                ::= STRING W_COL_SEP STRING CUT
+
+
+/* type definition section */
+
+type_section            ::= TYPE_SECTION_TITLE CUT COMMENT WHITESPACE  type_block
+type_block              ::= type_header FOUR_COLUMN_LINE EOL {COMMENT type_def}
+                            FOUR_COLUMN_LINE EOL
+type_header             ::= NAME COL_SEP ACT_FUNC COL_SEP OUT_FUNC COL_SEP SITES CUT
+type_def                ::= STRING W_COL_SEP STRING W_COL_SEP STRING W_COL_SEP
+                            [{STRING COMMA} STRING] CUT
+
+
+/* subnet definition section */
+
+subnet_section          ::= SUBNET_SECTION_TITLE CUT COMMENT WHITESPACE  subnet_block
+subnet_block            ::= subnet_header TWO_COLUMN_LINE EOL {COMMENT subnet_def}
+                            TWO_COLUMN_LINE EOL
+subnet_header           ::= SUBNET COL_SEP UNIT_NO CUT
+subnet_def              ::= INTEGER W_COL_SEP {INTEGER COMMA} INTEGER CUT
+</PRE>
+<P>
+<PRE>/* unit definition section /*
+
+unit_section            ::= UNIT_SECTION_TITLE CUT COMMENT WHITESPACE  unit_block
+unit_block              ::= unit_header TEN_COLUMN_LINE EOL {COMMENT unit_def}
+                            TEN_COLUMN_LINE EOL
+
+unit_header             ::= NO COL_SEP TYPE_NAME COL_SEP UNIT_NAME COL_SEP
+                            ACT COL_SEP BIAS COL_SEP ST COL_SEP POSITION COL_SEP
+                            ACT_FUNC COL_SEP OUT_FUNC COL_SEP SITES CUT
+unit_def                ::= INTEGER W_COL_SEP ((STRING W_COL_SEP) | COL_SEP)
+                            ((STRING W_COL_SEP) | COL_SEP) ((SFLOAT W_COL_SEP) | COL_SEP)
+                            ((SFLOAT W_COL_SEP) | COL_SEP) ((STRING W_COL_SEP) | COL_SEP)
+                            INTEGER COMMENT INTEGER COMMENT INTEGER W_COL_SEP
+                            ((STRING W_COL_SEP) | COL_SEP) ((STRING W_COL_SEP) | COL_SEP) 
+                            [{STRING COMMA} STRING]
+
+/* connection definition section */
+                     
+connection_section      ::= CONNECTION_SECTION_TITLE CUT 
+                            COMMENT WHITESPACE connection_block
+connection_block        ::= connection_header THREE_COLUMN_LINE EOL
+                            {COMMENT connection_def} THREE_COLUMN_LINE EOL
+connection_header       ::= TARGET COL_SEP SITE COL_SEP SOURCE:WEIGHT CUT
+connection_def          ::= ((INTEGER W_COL_SEP) | COL_SEP) STRING W_COL_SEP
+                            {INTEGER WHITESPACE  COLON WHITESPACE  SFLOAT COMMA}
+                            INTEGER WHITESPACE  COLON WHITESPACE  SFLOAT CUT
+
+
+/* layer definition section */
+
+layer_section           ::= LAYER_SECTION_TITLE CUT COMMENT WHITESPACE  layer_block
+layer_block             ::= layer_header TWO_COLUMN_LINE EOL {COMMENT layer_def}
+                            TWO_COLUMN_LINE EOL
+layer_header            ::= LAYER COL_SEP UNIT_NO CUT
+layer_def               ::= INTEGER W_COL_SEP {INTEGER COMMENT} INTEGER CUT
+
+
+/* 3D translation section */
+
+translation_section     ::= TRANSLATION_SECTION_TITLE CUT 
+                            COMMENT WHITESPACE  translation_block
+translation_block       ::= translation_header THREE_COLUMN_LINE EOL
+                            {COMMENT translation_def} THREE_COLUMN_LINE EOL
+translation_header      ::= DELTA_X COL_SEP DELTA_Y COL_SEP Z CUT
+translation_def         ::= INTEGER W_COL_SEP INTEGER W_COL_SEP INTEGER     
+
+
+/* time delay section */
+
+td_section              ::= TIME_DELAY_SECTION_TITLE CUT COMMENT WHITESPACE  td_block
+td_block                ::= td_header SIX_COLUMN_LINE EOL {COMMENT td_def}
+                            SIX_COLUMN_LINE EOL
+td_header               ::= NO COL_SEP LLN COL_SEP LUN COL_SEP
+                            TROFF COL_SEP SOFF COL_SEP CTYPE CUT
+td_def                  ::= INTEGER W_COL_SEP INTEGER W_COL_SEP INTEGER W_COL_SEP 
+                            INTEGER W_COL_SEP INTEGER W_COL_SEP INTEGER W_COL_SEP
+</PRE>
+<P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

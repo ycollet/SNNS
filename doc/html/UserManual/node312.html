@@ -1,0 +1,62 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Pattern Function Calls</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Pattern Function Calls">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html5706 HREF="node313.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html5704 HREF="node303.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html5698 HREF="node311.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html5708 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html5709 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html5707 HREF="node313.html"> Special Functions</A>
+<B>Up:</B> <A NAME=tex2html5705 HREF="node303.html"> SNNS Function Calls</A>
+<B> Previous:</B> <A NAME=tex2html5699 HREF="node311.html"> Function Calls Related </A>
+<BR> <HR> <P>
+<H2><A NAME=SECTION001433000000000000000> Pattern Function Calls</A></H2>
+<P>
+<A NAME=7772>&#160;</A>
+<P>
+The following function calls relate to patterns:
+<P>
+<P><IMG  ALIGN=BOTTOM ALT="" SRC="img1391.gif"><P>
+<P>
+The simulator kernel is able to store several pattern files (currently 5).
+The user can switch between those pattern files with the help of the 
+<tt> setPattern()</tt> call. The function call <tt> delPattern</tt> deletes a  
+pattern file from the simulator kernel. All three mentioned calls have
+<tt> file_name</tt> as an argument:
+<blockquote> <tt> loadPattern (file_name)<BR> 
+setPattern (file_name)<BR> 
+delPattern (file_name)</tt>
+</blockquote>
+<P>
+All three function calls set the value of the system variable <tt>
+  Pat</tt> to the number of patterns of the pattern file used last. The
+handling of the pattern files is similar to the handling of such files
+in the graphical user interface. The last loaded pattern file is the
+current one. The function call <tt> setPattern</tt> (similar to the
+<IMG  ALIGN=BOTTOM ALT="" SRC="img1392.gif"> button of the graphical user interface of the SNNS.)
+selects one of the loaded pattern files as the one currently in use.
+The call <tt> delPattern</tt> deletes the pattern file currently in use
+from the kernel. The function calls:
+<blockquote> <tt> loadPattern (&quot;encoder.pat&quot;)<BR> 
+loadPattern (&quot;encoder1.pat&quot;)<BR> 
+setPattern(&quot;encoder.pat&quot;)<BR> 
+delPattern(&quot;encoder.pat&quot;)</tt>
+</blockquote>
+<P>
+produce:
+<P>
+<blockquote> <tt> Patternset encoder.pat loaded; 1 patternset(s) in memory<BR> 
+Patternset encoder1.pat loaded; 2 patternset(s) in memory<BR> 
+Patternset is now encoder.pat<BR> 
+Patternset encoder.pat deleted; 1 patternset(s) in memory<BR> 
+Patternset is now encoder1.pat</tt>
+</blockquote><BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

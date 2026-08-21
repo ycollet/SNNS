@@ -1,0 +1,52 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> General Characteristics</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" General Characteristics">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html4534 HREF="node226.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html4532 HREF="node224.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html4526 HREF="node224.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html4536 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html4537 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html4535 HREF="node226.html"> Layout of Autoassociative </A>
+<B>Up:</B> <A NAME=tex2html4533 HREF="node224.html"> Autoassociative Networks</A>
+<B> Previous:</B> <A NAME=tex2html4527 HREF="node224.html"> Autoassociative Networks</A>
+<BR> <HR> <P>
+<H2><A NAME=SECTION0010141000000000000000> General Characteristics</A></H2>
+<P>
+Autoassociative networks store single instances of items, and can be
+thought of in a way similar to human memory. In an autoassociative
+network each pattern presented to the network serves as both the input
+and the output pattern.  Autoassociative networks are typically used
+for tasks involving pattern completion.  During retrieval, a probe
+pattern is presented to the network causing the network to display a
+composite of its learned patterns most consistent with the new
+information.
+<P>
+Autoassociative networks typically consist of a single layer of nodes
+with each node representing some feature of the environment. However
+in SNNS they are represented by two layers to make it easier to
+compare the input to the output.  The following section explains the
+layout in more detail<A NAME=tex2html515 HREF="footnode.html#5966"><IMG ALIGN=BOTTOM ALT="gif" SRC="icons/foot_motif.gif"></A>.
+<P>
+Autoassociative networks must use the update function <tt>
+RM_Synchronous</tt> and the initialization function <tt>
+RM_Random_Weights</tt>. The use of others may destroy essential
+characteristics of the autoassociative network. Please note, that the
+update function <tt> RM_Synchronous</tt> needs as a parameter the number
+of iterations performed before the network output is computed. 50 has
+shown to be very suitable here.
+<P>
+All the implementations of autoassociative networks in SNNS report
+error as the sum of squared error between the input pattern on the
+world layer and the resultant pattern on the learning layer after the
+pattern has been propagated a user defined number of times.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>

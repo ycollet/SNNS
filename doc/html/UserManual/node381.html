@@ -1,0 +1,120 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!Converted with LaTeX2HTML 95.1 (Fri Jan 20 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds >
+<HEAD>
+<TITLE> Terminal Symbols</TITLE>
+</HEAD>
+<BODY>
+<meta name="description" value=" Terminal Symbols">
+<meta name="keywords" value="UserManual">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<P>
+ <BR> <HR><A NAME=tex2html6602 HREF="node382.html"><IMG ALIGN=BOTTOM ALT="next" SRC="icons/next_motif.gif"></A>   <A NAME=tex2html6600 HREF="node377.html"><IMG ALIGN=BOTTOM ALT="up" SRC="icons/up_motif.gif"></A>   <A NAME=tex2html6594 HREF="node380.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="icons/previous_motif.gif"></A>   <A NAME=tex2html6604 HREF="node1.html"><IMG ALIGN=BOTTOM ALT="contents" SRC="icons/contents_motif.gif"></A>   <A NAME=tex2html6605 HREF="node390.html"><IMG ALIGN=BOTTOM ALT="index" SRC="icons/index_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html6603 HREF="node382.html"> Grammar:</A>
+<B>Up:</B> <A NAME=tex2html6601 HREF="node377.html"> Grammar of the </A>
+<B> Previous:</B> <A NAME=tex2html6595 HREF="node380.html"> Definition of the </A>
+<BR> <HR> <P>
+<H2><A NAME=SECTION001832000000000000000> Terminal Symbols</A></H2>
+<P>
+<A NAME=8642>&#160;</A>
+<P>
+
+<P>
+<PRE>WHITESPACE                {&quot; &quot;|&quot;\n&quot;|&quot;\t&quot;}                     /* whitespaces */                       
+BLANKS_TABS               {&quot; &quot;|&quot;\t&quot;}                          /* only blanks or tabs */
+W_COL_SEP                 (&quot; &quot;|&quot;\n&quot;|&quot;\t&quot;) {&quot; &quot;|&quot;\n&quot;|&quot;\t&quot;} &quot;|&quot; {&quot; &quot;|&quot;\n&quot;|&quot;\t&quot;} 
+                          /* at least one blank and the column separation */ 
+COL_SEP                   {&quot; &quot;|&quot;\n&quot;|&quot;\t&quot;} &quot;|&quot; {&quot; &quot;|&quot;\n&quot;|&quot;\t&quot;}  /* column separation */ 
+COMMA                     {&quot; &quot;|&quot;\n&quot;|&quot;\t&quot;} &quot;,&quot; {&quot; &quot;|&quot;\n&quot;|&quot;\t&quot;}  /* at least the comma */
+EOL                       {&quot; &quot;|&quot;\n&quot;|&quot;\t&quot;} &quot;\n&quot; {&quot; &quot;|&quot;\n&quot;|&quot;\t&quot;} /* at least &quot;\n&quot; */
+CUT                       {&quot; &quot;|&quot;\n&quot;|&quot;\t&quot;} (&quot; &quot;|&quot;\n&quot;|&quot;\t&quot;) {&quot; &quot;|&quot;\n&quot;|&quot;\t&quot;} 
+                          /* at least a blank, &quot;\t&quot;, or &quot;\n&quot; */
+COLON                     &quot;:&quot;
+
+
+/* separation lines for different tables */
+
+TWO_COLUMN_LINE           &quot;-&quot;+&quot;|&quot;&quot;-&quot;+
+THREE_COLUMN_LINE         &quot;-&quot;+&quot;|&quot;&quot;-&quot;+&quot;|&quot;&quot;-&quot;+
+FOUR_COLUMN_LINE          &quot;-&quot;+&quot;|&quot;&quot;-&quot;+&quot;|&quot;&quot;-&quot;+&quot;|&quot;&quot;-&quot;+
+SIX_COLUMN_LINE           &quot;-&quot;+&quot;|&quot;&quot;-&quot;+&quot;|&quot;&quot;-&quot;+&quot;|&quot;&quot;-&quot;+&quot;|&quot;&quot;-&quot;+&quot;|&quot;&quot;-&quot;+
+SEVEN_COLUMN_LINE         &quot;-&quot;+&quot;|&quot;&quot;-&quot;+&quot;|&quot;&quot;-&quot;+&quot;|&quot;&quot;-&quot;+&quot;|&quot;&quot;-&quot;+&quot;|&quot;&quot;-&quot;+&quot;|&quot;&quot;-&quot;+
+TEN_COLUMN_LINE           &quot;-&quot;+&quot;|&quot;&quot;-&quot;+&quot;|&quot;&quot;-&quot;+&quot;|&quot;&quot;-&quot;+&quot;|&quot;&quot;-&quot;+&quot;|&quot;&quot;-&quot;+&quot;|&quot;&quot;-&quot;+
+                          &quot;|&quot;&quot;-&quot;+&quot;|&quot;&quot;-&quot;+&quot;|&quot;&quot;-&quot;+
+
+COMMENT                   {{&quot; &quot;|&quot;\n&quot;|&quot;\t&quot;} &quot;#&quot; CSTRING &quot;\n&quot; {&quot; &quot;|&quot;\n&quot;|&quot;\t&quot;}} 
+
+VERSION                   &quot;V1.4-3D&quot; | &quot;V2.1&quot; | &quot;V3.0&quot; /* version of SNNS */
+  
+SNNS                      &quot;SNNS network definition file&quot;  /* output file header */
+
+
+/* eleven different headers */
+
+GENERATED_AT              &quot;generated at&quot;
+NETWORK_NAME              &quot;network name :&quot;
+SOURCE_FILES              &quot;source files&quot;
+NO.OF_UNITES              &quot;no. of unites :&quot;
+NO.OF_CONNECTIONS         &quot;no. of connections :&quot;
+NO.OF_UNIT_TYPES          &quot;no. of unit types :&quot;
+NO.OF_SITE_TYPES          &quot;no. of site types :&quot;
+LEARNING_FUNCTION         &quot;learning function :&quot;
+PRUNING_FUNCTION          &quot;pruning function :&quot;
+FF_LEARNING_FUNCTION      &quot;subordinate learning function :&quot;
+UPDATE_FUNCTION           &quot;update function :&quot;
+
+
+/* titles of the different sections */
+
+UNIT_SECTION_TITLE        &quot;unit definition section&quot;
+DEFAULT_SECTION_TITLE     &quot;unit default section&quot;
+SITE_SECTION_TITLE        &quot;site definition section&quot;
+TYPE_SECTION_TITLE        &quot;type definition section&quot;
+CONNECTION_SECTION_TITLE  &quot;connection definition section&quot;
+LAYER_SECTION_TITLE       &quot;layer definition section&quot;
+SUBNET_SECTION_TITLE      &quot;subnet definition section&quot;
+TRANSLATION_SECTION_TITLE &quot;3D translation section&quot;
+TIME_DELAY_SECTION_TITLE  &quot;time delay section&quot;
+</PRE>
+<P>
+<PRE>/* column-titles of the different tables */ 
+
+NO                        &quot;no.&quot;
+TYPE_NAME                 &quot;type name&quot;
+UNIT_NAME                 &quot;unit name&quot;
+ACT                       &quot;act&quot;
+BIAS                      &quot;bias&quot;
+ST                        &quot;st&quot;
+POSITION                  &quot;position&quot;
+SUBNET                    &quot;subnet&quot;
+LAYER                     &quot;layer&quot;
+ACT_FUNC                  &quot;act func&quot;
+OUT_FUNC                  &quot;out func&quot;
+SITES                     &quot;sites&quot;
+SITE_NAME                 &quot;site name&quot;
+SITE_FUNCTION             &quot;site function&quot;
+NAME                      &quot;name&quot;
+TARGET                    &quot;target&quot;
+SITE                      &quot;site&quot;
+SOURCE:WEIGHT             &quot;source:weight&quot;
+UNIT_NO                   &quot;unitNo.&quot;
+DELTA_X                   &quot;delta x&quot;
+DELTA_Y                   &quot;delta y&quot;
+Z                         &quot;z&quot;
+LLN                       &quot;LLN&quot;
+LUN                       &quot;LUN&quot;
+TROFF                     &quot;Troff&quot;
+SOFF                      &quot;Soff&quot;
+CTYPE                     &quot;Ctype&quot;
+
+INTEGER                   [&quot;0&quot;-&quot;9&quot;]+                                     /*integer */
+SFLOAT                    [&quot;+&quot; | &quot; &quot; | &quot;-&quot;] [&quot;1&quot; | &quot;0&quot;] &quot;.&quot; [&quot;0&quot;-&quot;9&quot;]{5} /*signed float*/ 
+STRING                    (&quot;A&quot;-&quot;Z&quot; | &quot;a&quot;-&quot;z&quot; | &quot;|&quot;)+                     /*string */
+</PRE>
+<P>
+<BR> <HR>
+<P><ADDRESS>
+Niels.Mache@informatik.uni-stuttgart.de <BR>
+Tue Nov 28 10:30:44 MET 1995</I>
+</ADDRESS>
+</BODY>
