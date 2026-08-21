@@ -207,8 +207,15 @@ int Length;     /* try to guess file length: if file is used in "get .. from" fi
         /* of integers read + old InNo */
         InNo = FI_ReadIntegerBuffer(ActIn, NextIn, &Inputs, ActInt, &Length, InNo);
         ActInt = Inputs + InNo-1;
-        if(NextIn < EOB-1)              /* there is an overlapping integer at end of buffer */
+        if(NextIn < EOB-1) {            /* there is an overlapping integer at end of buffer */
+            if(EOB - NextIn - 1 >= BackBufSize) {   /* single integer longer than backgr. buffer */
+                ER_StackError("input file '%s': integer token too long for background buffer\n",
+                              Serious, STR_Save(FileEntry->FileName), nst, nst);
+                (void) M_free(BackInput);
+                return NULL;
+            }
             BackInput = memcpy(BackInput, NextIn + 1,  EOB - NextIn -1);
+        }
     } while(SymbRead == BUFSIZ);    /* if SymbRead < BUFSIZ: buffer came to end of file */
     /* if BackInput has been set, there is a last integer to be read in InputStream */
     InNo = FI_ReadIntegerBuffer(NextIn, EOB, &Inputs, ActInt, &Length, InNo);
@@ -309,10 +316,12 @@ int *LenPtr;                                /* actual pointer to array of intege
 
     for(ActBack = Back; ActBack < Back + BackBufSize && *ActBack; ActBack++)
         ;                                           /* look for first free character in Back */
-    for(ActFront = Front; ISINTCOMP(*ActFront); *ActBack++ = *ActFront++)
+    for(ActFront = Front; ISINTCOMP(*ActFront) && ActBack < Back + BackBufSize - 1;
+            *ActBack++ = *ActFront++)
         ;                  /* copy leading symbols of Front to Back (continuation of string) */
-    if(ActBack >= Back + BackBufSize) {          /* overlapping string > background buffer */
-        (void) printf("******FATAL: background input buffer too small, input ignored\n");
+    if(ISINTCOMP(*ActFront)) {   /* loop stopped on the bound: integer > background buffer */
+        ER_StackError("input file: integer token too long for background buffer\n",
+                      Serious, nst, nst, nst);
         return ActFront;
     }
     if( ! (Entries <= *LenPtr)) {          /* must expand array, geometric growth */
@@ -427,8 +436,15 @@ int Length;     /* try to guess file length: if file is used in "get .. from" fi
         /* of integers read + old InNo */
         InNo = FI_ReadFloatBuffer(ActIn, NextIn, &Inputs, ActFloat, &Length, InNo);
         ActFloat = Inputs + InNo - 1;
-        if(NextIn < EOB-1)              /* there is an overlapping integer at end of buffer */
+        if(NextIn < EOB-1) {            /* there is an overlapping float at end of buffer */
+            if(EOB - NextIn - 1 >= BackBufSize) {   /* single float longer than backgr. buffer */
+                ER_StackError("input file '%s': float token too long for background buffer\n",
+                              Serious, STR_Save(FileEntry->FileName), nst, nst);
+                (void) M_free(BackInput);
+                return NULL;
+            }
             BackInput = memcpy(BackInput, NextIn + 1, EOB - NextIn - 1);
+        }
     } while(SymbRead == BUFSIZ);    /* if SymbRead < BUFSIZ: buffer came to end of file */
     /* if BackInput has been set, there is a last integer to be read in InputStream */
     InNo = FI_ReadFloatBuffer(NextIn, EOB, &Inputs, ActFloat, &Length, InNo);
@@ -529,10 +545,12 @@ int *LenPtr;                                  /* actual pointer to array of floa
 
     for(ActBack = Back; ActBack < Back + BackBufSize && *ActBack; ActBack++)
         ;                                          /* look for first free character in Back */
-    for(ActFront = Front; ISFLOATCOMP(*ActFront); *ActBack++ = *ActFront++)
+    for(ActFront = Front; ISFLOATCOMP(*ActFront) && ActBack < Back + BackBufSize - 1;
+            *ActBack++ = *ActFront++)
         ;                 /* copy leading symbols of Front to Back (continuation of string) */
-    if(ActBack >= Back + BackBufSize) {          /* overlapping float > background buffer */
-        (void) printf("******FATAL: background input buffer too small, input ignored\n");
+    if(ISFLOATCOMP(*ActFront)) {   /* loop stopped on the bound: float > background buffer */
+        ER_StackError("input file: float token too long for background buffer\n",
+                      Serious, nst, nst, nst);
         return ActFront;
     }
     if( ! (Entries <= *LenPtr)) {        /* must expand array, geometric growth */
@@ -544,7 +562,8 @@ int *LenPtr;                                  /* actual pointer to array of floa
     }
     for(ActBack = Back; *ActBack; ActBack++)
         ;                                          /* look for first free character in Back */
-    for(ActFront = Front; ISFLOATCOMP(*ActFront); *ActBack++ = *ActFront++)
+    for(ActFront = Front; ISFLOATCOMP(*ActFront) && ActBack < Back + BackBufSize - 1;
+            *ActBack++ = *ActFront++)
         ;  /* copy leading DIGITS (cannot be sign) of Front to Back (continuation of float) */
     /* read float - check if there's been an i/o-error */
     if(sscanf(Back, "%f", FloatPos) < 0) {
@@ -649,8 +668,15 @@ int Length;    /* try to guess file length: if file is used in "get .. from" fil
         /* of integers read + old InNo */
         InNo = FI_ReadStringBuffer(ActIn, NextIn, &Inputs, ActString, &Length, InNo);
         ActString = Inputs + InNo - 1;
-        if(NextIn < EOB-1)              /* there is an overlapping integer at end of buffer */
+        if(NextIn < EOB-1) {            /* there is an overlapping string at end of buffer */
+            if(EOB - NextIn - 1 >= BackBufSize) {   /* single string longer than backgr. buffer */
+                ER_StackError("input file '%s': string token too long for background buffer\n",
+                              Serious, STR_Save(FileEntry->FileName), nst, nst);
+                (void) M_free(BackInput);
+                return NULL;
+            }
             (void) strcpy(BackInput, NextIn+1);                 /* nextIn+1 = first symb. */
+        }
     } while(SymbRead == BUFSIZ);    /* if SymbRead < BUFSIZ: buffer came to end of file */
     /* if BackInput has been set, there is a last integer to be read in InputStream */
     InNo = FI_ReadStringBuffer(NextIn, EOB, &Inputs, ActString, &Length, InNo);
@@ -759,10 +785,12 @@ int *LenPtr;                                  /* actual pointer to array of stri
 
     for(ActBack = Back; ActBack < Back + BackBufSize && *ActBack; ActBack++)
         ;                                           /* look for first free character in Back */
-    for(ActFront = Front; ISSTRINGCOMP(*ActFront); *ActBack++ = *ActFront++)
+    for(ActFront = Front; ISSTRINGCOMP(*ActFront) && ActBack < Back + BackBufSize - 1;
+            *ActBack++ = *ActFront++)
         ;                  /* copy leading symbols of Front to Back (continuation of string) */
-    if(ActBack >= Back + BackBufSize) {          /* overlapping string > background buffer */
-        (void) printf("******FATAL: background input buffer too small, input ignored\n");
+    if(ISSTRINGCOMP(*ActFront)) {   /* loop stopped on the bound: string > background buffer */
+        ER_StackError("input file: string token too long for background buffer\n",
+                      Serious, nst, nst, nst);
         return ActFront;
     }
     /* read string - check if there's been an i/o-error */
@@ -883,8 +911,14 @@ ParserStackType *LineSep;          /*  string which separates map lines (optiona
                             return FI_MakeError(InBuf, BackBuf, MapSep, LineSep); /* separator error */
 
                     }
-                if(ActEnd < EOB)          /* there may be an input string overlapping buffers */
+                if(ActEnd < EOB) {        /* there may be an input string overlapping buffers */
+                    if(EOB - ActEnd >= BackBufSize) {  /* overlapping token > background buffer */
+                        ER_StackError("map: input token too long for background buffer in '%s'\n",
+                                      Serious, STR_Save(FilePtr->yvalue->fileval->FileName), nst, nst);
+                        return FI_MakeError(InBuf, BackBuf, MapSep, LineSep);
+                    }
                     BackBuf = memcpy(BackBuf, ActEnd, EOB-ActEnd);       /* ActEnd is copied, too */
+                }
             }
         } while(SRead == BUFSIZ);          /* end of file read, last buffer scanned already */
         if(State == XDOMAIN  && VNo == 1) {          /* extra line separator at end of file */
@@ -1304,16 +1338,24 @@ ParserStackType *MSep, *LSep;                                 /* separator strin
         switch(Type) {
         case XINT:                                             /* copy rest of value string */
             for(Pos = Main, BPos = Back+strlen(Back);
-                    Pos < Up && ISINTCOMP(*Pos); *BPos++ = *Pos++)  ;
+                    Pos < Up && ISINTCOMP(*Pos) && BPos < Back + BackBufSize - 1;
+                    *BPos++ = *Pos++)  ;
             break;
         case XFLOAT:                                           /* copy rest of value string */
             for(Pos = Main, BPos = Back+strlen(Back);
-                    Pos < Up && ISFLOATCOMP(*Pos); *BPos++ = *Pos++)  ;
+                    Pos < Up && ISFLOATCOMP(*Pos) && BPos < Back + BackBufSize - 1;
+                    *BPos++ = *Pos++)  ;
             break;
         case STRING:                                           /* copy rest of value string */
             for(Pos = Main, BPos = Back+strlen(Back);
-                    Pos < Up && ISSTRINGCOMP(*Pos); *BPos++ = *Pos++)  ;
+                    Pos < Up && ISSTRINGCOMP(*Pos) && BPos < Back + BackBufSize - 1;
+                    *BPos++ = *Pos++)  ;
             break;
+        }
+        if(BPos >= Back + BackBufSize - 1) {   /* loop stopped on the bound: token too long */
+            ER_StackError("map: input token too long for background buffer\n",
+                          Serious, nst, nst, nst);
+            return NULL;
         }
         *VNo = FI_ReadMapBuffer(Back, BPos, LMax, *VNo, Head, *StPtr);
         Back = memset(Back, '\0', BackBufSize);

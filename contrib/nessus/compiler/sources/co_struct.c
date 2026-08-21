@@ -39,6 +39,8 @@
 ******************************************************************************/
 
 #include "co_struct.h"
+#include <limits.h>
+#include <stdint.h>
 
 
 /**** static variable definitions ****/
@@ -1785,7 +1787,13 @@ short Copy;                              /* TRUE <==> all array elements are cop
         if(Length->ytype != Undef)    /* check size - size must be > 0, is int >=0, already */
             if( ! Length->yvalue->intval)
                 ER_StackError("struct: illegal null sized structure\n", Serious, nst, nst, nst);
+            else if(Length->yvalue->intval < 0 ||
+                    (size_t) Length->yvalue->intval > SIZE_MAX / sizeof(UnitValueType*) ||
+                    (size_t) Length->yvalue->intval * sizeof(UnitValueType*) > (size_t) UINT_MAX)
+                /* replication count would overflow / truncate the allocation size - reject it */
+                ER_StackError("struct: structure array size too large\n", Serious, nst, nst, nst);
             else  {
+                size_t aElemBytes = (size_t) Length->yvalue->intval * sizeof(UnitValueType*);
                 Result = PA_GetParserStack();
                 Result->ytype = ArrStruct;
                 Result->yvalue->array = (ArrayValueType *) M_alloc(sizeof(ArrayValueType));
@@ -1793,7 +1801,7 @@ short Copy;                              /* TRUE <==> all array elements are cop
                 Result->yvalue->array->Named = FALSE;
                 Result->yvalue->array->aSize = Length->yvalue->intval;           /* insert size */
                 Result->yvalue->array->aValue.astruct = (UnitValueType **)    /* alloc elements */
-                                                        M_alloc((unsigned) (Length->yvalue->intval * sizeof(UnitValueType*)));
+                                                        M_alloc((unsigned) aElemBytes);
                 /* save structure positions - they are modified by ST_CopyUnitValue */
                 XPos = Structure->yvalue->structure->Topology.XCenter;
                 YPos = Structure->yvalue->structure->Topology.YCenter;
