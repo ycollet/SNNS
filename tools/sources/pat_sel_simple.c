@@ -28,6 +28,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <limits.h>
 
 
 /******************************************************************************/
@@ -215,14 +216,43 @@ void main (int argc, char *argv[]) {
     while (fscanf(in_no_file, "%d", &pat_no) == 1) no_of_sel_pat++ ;
     fseek (in_no_file, 0, 0) ;
 
+    input_pattern  = (float *) NULL ;
+    output_pattern = (float *) NULL ;
+
     if (read_file_header  (&no_of_patterns, &no_of_input_units,
                            &no_of_output_units, version) != 0) error = BAD_PAT_FILE ;
 
-    if (write_file_header (no_of_sel_pat, no_of_input_units,
+    /* validate the unit counts read from the (untrusted) pattern file header  */
+    /* before using them to size allocations and loop bounds. Reject non-      */
+    /* positive counts and counts large enough to overflow the malloc size     */
+    /* computation (count * sizeof(float)).                                    */
+    if (error == NO_ERROR) {
+        if (no_of_input_units  <= 0 ||
+            no_of_output_units <= 0 ||
+            no_of_input_units  > (int)(INT_MAX / sizeof(float)) ||
+            no_of_output_units > (int)(INT_MAX / sizeof(float))) {
+            error = BAD_PAT_FILE ;
+        }
+    }
+
+    if (error == NO_ERROR &&
+        write_file_header (no_of_sel_pat, no_of_input_units,
                            no_of_output_units, version) != 0)  error = WRITE_ERR ;
 
-    input_pattern  = (float *) malloc(no_of_input_units  * sizeof(float)) ;
-    output_pattern = (float *) malloc(no_of_output_units * sizeof(float)) ;
+    if (error == NO_ERROR) {
+        input_pattern  = (float *) malloc(no_of_input_units  * sizeof(float)) ;
+        output_pattern = (float *) malloc(no_of_output_units * sizeof(float)) ;
+
+        if (input_pattern == (float *) NULL || output_pattern == (float *) NULL) {
+            fprintf (stderr, "error: out of memory\n") ;
+            free (input_pattern)  ;
+            free (output_pattern) ;
+            fclose (in_no_file)   ;
+            fclose (in_pat_file)  ;
+            fclose (out_pat_file) ;
+            return ;
+        }
+    }
 
     /* select patterns */
     for (i = 1 ; (i <= no_of_sel_pat) && (error == NO_ERROR) ; i++) {

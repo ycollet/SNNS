@@ -393,7 +393,7 @@ static int  getYesNoSwitch(FILE  *file_in) {
 
 
     skipComments(file_in);
-    ret = fscanf(file_in,"%s",do_shuffleing);
+    ret = fscanf(file_in,"%79s",do_shuffleing);
     if(ret != 1)return(-2);
 
     if(IsOld(do_shuffleing))
@@ -703,12 +703,12 @@ static int parseFile(int op_code) {
     skipComments(file_in);
 
     if(exec_loop == 0) {
-        ret = fscanf(file_in,"%s",key);
+        ret = fscanf(file_in,"%79s",key);
         if(ret != 1 || !IsKey(key,"Type:")) {
             /* no file type given */
             configError(1,"");
         }
-        ret = fscanf(file_in,"%s",type);
+        ret = fscanf(file_in,"%79s",type);
         if((strcmp(type,"SNNSBATCH_1") && strcmp(type,"SNNSBATCH_2"))) {
             /* wrong file type given */
             configError(2,type);
@@ -716,11 +716,11 @@ static int parseFile(int op_code) {
         skipComments(file_in);
     }
 
-    while((ret = fscanf(file_in,"%s",key)) != EOF) {
+    while((ret = fscanf(file_in,"%79s",key)) != EOF) {
 
         if(IsKey(key,"NoOfLearnParam:")) {
             NoOfLearnParamFlag = 1;
-            ret = fscanf(file_in,"%s",arg_string);
+            ret = fscanf(file_in,"%79s",arg_string);
             if(ret != 1)
                 configError(7,"NoOfLearnParam:");
             if(IsOld(arg_string)) {
@@ -742,7 +742,7 @@ static int parseFile(int op_code) {
         } else if(IsKey(key,"LearnParam:")) {
             LearnParamFlag = 1;
             if(!no_of_learn_param) { /* value not read yet */
-                ret = fscanf(file_in,"%[^\n]",arg_string);
+                ret = fscanf(file_in,"%79[^\n]",arg_string);
                 if(IsOld(arg_string)) {
                     if(exec_loop == 0)configError(8,"LearnParam:");
                 } else
@@ -750,7 +750,7 @@ static int parseFile(int op_code) {
                 if(ret != 1)
                     configError(7,"LearnParam:");
             } else {
-                ret = fscanf(file_in,"%[^\n]",arg_string);
+                ret = fscanf(file_in,"%79[^\n]",arg_string);
                 if(IsOld(arg_string)) {
                     if(exec_loop == 0)configError(8,"LearnParam:");
                 } else {
@@ -763,7 +763,7 @@ static int parseFile(int op_code) {
 
         } else if(IsKey(key,"NoOfInitParam:")) {
             NoOfInitParamFlag = 1;
-            ret = fscanf(file_in,"%s",arg_string);
+            ret = fscanf(file_in,"%79s",arg_string);
             if(ret != 1)
                 configError(7,"NoOfInitParam:");
             if(IsOld(arg_string)) {
@@ -785,7 +785,7 @@ static int parseFile(int op_code) {
         } else if(IsKey(key,"InitParam:")) {
             InitParamFlag = 1;
             if(!no_of_init_param) { /* value not read yet */
-                ret = fscanf(file_in,"%[^\n]",arg_string);
+                ret = fscanf(file_in,"%79[^\n]",arg_string);
                 if(IsOld(arg_string)) {
                     if(exec_loop == 0)configError(8,"InitParam:");
                 } else
@@ -793,7 +793,7 @@ static int parseFile(int op_code) {
                 if(ret != 1)
                     configError(7,"InitParam:");
             } else {
-                ret = fscanf(file_in,"%[^\n]",arg_string);
+                ret = fscanf(file_in,"%79[^\n]",arg_string);
                 if(IsOld(arg_string)) {
                     if(exec_loop == 0)configError(8,"InitParam:");
                 } else {
@@ -806,7 +806,7 @@ static int parseFile(int op_code) {
 
         } else if(IsKey(key,"NoOfUpdateParam:")) {
             NoOfUpdateParamFlag = 1;
-            ret = fscanf(file_in,"%s",arg_string);
+            ret = fscanf(file_in,"%79s",arg_string);
             if(ret != 1)
                 configError(7,"NoOfUpdateParam:");
             if(IsOld(arg_string)) {
@@ -828,7 +828,7 @@ static int parseFile(int op_code) {
         } else if(IsKey(key,"UpdateParam:")) {
             UpdateParamFlag = 1;
             if(!no_of_update_param) { /* value not read yet */
-                ret = fscanf(file_in,"%[^\n]",arg_string);
+                ret = fscanf(file_in,"%79[^\n]",arg_string);
                 if(IsOld(arg_string)) {
                     if(exec_loop == 0)configError(8,"UpdateParam:");
                 } else
@@ -836,7 +836,7 @@ static int parseFile(int op_code) {
                 if(ret != 1)
                     configError(7,"UpdateParam:");
             } else {
-                ret = fscanf(file_in,"%[^\n]",arg_string);
+                ret = fscanf(file_in,"%79[^\n]",arg_string);
                 if(IsOld(arg_string)) {
                     if(exec_loop == 0)configError(8,"UpdateParam:");
                 } else {
@@ -850,7 +850,7 @@ static int parseFile(int op_code) {
         } else if(IsKey(key,"SubPatternISize:")) {
             SubPatternISizeFlag = 1;
             if(NoOfVarDimFlag == 0) { /* value not read yet */
-                ret = fscanf(file_in,"%[^\n]",arg_string);
+                ret = fscanf(file_in,"%79[^\n]",arg_string);
                 if(IsOld(arg_string)) {
                     if(exec_loop == 0)configError(8,"SubPatternISize:");
                 } else
@@ -858,7 +858,7 @@ static int parseFile(int op_code) {
                 if(ret != 1)
                     configError(7,"SubPatternISize:");
             } else {
-                ret = fscanf(file_in,"%[^\n]",arg_string);
+                ret = fscanf(file_in,"%79[^\n]",arg_string);
                 if(IsOld(arg_string)) {
                     if(exec_loop == 0)configError(8,"SubPatternISize:");
                 } else {
@@ -872,7 +872,7 @@ static int parseFile(int op_code) {
         } else if(IsKey(key,"SubPatternOSize:")) {
             SubPatternOSizeFlag = 1;
             if(NoOfVarDimFlag == 0) { /* value not read yet */
-                ret = fscanf(file_in,"%[^\n]",arg_string);
+                ret = fscanf(file_in,"%79[^\n]",arg_string);
                 if(IsOld(arg_string)) {
                     if(exec_loop == 0)configError(8,"SubPatternOSize:");
                 } else
@@ -880,7 +880,7 @@ static int parseFile(int op_code) {
                 if(ret != 1)
                     configError(7,"SubPatternOSize:");
             } else {
-                ret = fscanf(file_in,"%[^\n]",arg_string);
+                ret = fscanf(file_in,"%79[^\n]",arg_string);
                 if(IsOld(arg_string)) {
                     if(exec_loop == 0)configError(8,"SubPatternOSize:");
                 } else {
@@ -894,7 +894,7 @@ static int parseFile(int op_code) {
         } else if(IsKey(key,"SubPatternIStep:")) {
             SubPatternIStepFlag = 1;
             if(NoOfVarDimFlag == 0) { /* value not read yet */
-                ret = fscanf(file_in,"%[^\n]",arg_string);
+                ret = fscanf(file_in,"%79[^\n]",arg_string);
                 if(IsOld(arg_string)) {
                     if(exec_loop == 0)configError(8,"SubPatternIStep:");
                 } else
@@ -902,7 +902,7 @@ static int parseFile(int op_code) {
                 if(ret != 1)
                     configError(7,"SubPatternIStep:");
             } else {
-                ret = fscanf(file_in,"%[^\n]",arg_string);
+                ret = fscanf(file_in,"%79[^\n]",arg_string);
                 if(IsOld(arg_string)) {
                     if(exec_loop == 0)configError(8,"SubPatternIStep:");
                 } else {
@@ -916,7 +916,7 @@ static int parseFile(int op_code) {
         } else if(IsKey(key,"SubPatternOStep:")) {
             SubPatternOStepFlag = 1;
             if(NoOfVarDimFlag == 0) { /* value not read yet */
-                ret = fscanf(file_in,"%[^\n]",arg_string);
+                ret = fscanf(file_in,"%79[^\n]",arg_string);
                 if(IsOld(arg_string)) {
                     if(exec_loop == 0)configError(8,"SubPatternOStep:");
                 } else
@@ -924,7 +924,7 @@ static int parseFile(int op_code) {
                 if(ret != 1)
                     configError(7,"SubPatternOStep:");
             } else {
-                ret = fscanf(file_in,"%[^\n]",arg_string);
+                ret = fscanf(file_in,"%79[^\n]",arg_string);
                 if(IsOld(arg_string)) {
                     if(exec_loop == 0)configError(8,"SubPatternOStep:");
                 } else {
@@ -937,7 +937,7 @@ static int parseFile(int op_code) {
 
         } else if(IsKey(key,"NoOfVarDim:")) {
             NoOfVarDimFlag = 1;
-            ret = fscanf(file_in,"%[^\n]",arg_string);
+            ret = fscanf(file_in,"%79[^\n]",arg_string);
             if(ret != 1)
                 configError(7,"NoOfVarDim:");
             if(IsOld(arg_string)) {
@@ -974,7 +974,7 @@ static int parseFile(int op_code) {
 
         } else if(IsKey(key,"NetworkFile:")) {
             NetworkFileFlag = 1;
-            ret = fscanf(file_in,"%s",arg_string);
+            ret = fscanf(file_in,"%79s",arg_string);
             if(IsOld(arg_string)) {
                 NetworkFileFlag = -1;
                 if(exec_loop == 0)configError(8,"NetworkFile:");
@@ -983,7 +983,7 @@ static int parseFile(int op_code) {
 
         } else if(IsKey(key,"TrainedNetworkFile:")) {
             TrainedNetworkFileFlag = 1;
-            ret = fscanf(file_in,"%s",arg_string);
+            ret = fscanf(file_in,"%79s",arg_string);
             if(IsOld(arg_string)) {
                 TrainedNetworkFileFlag = -1;
                 if(exec_loop == 0)configError(8,"TrainedNetworkFile:");
@@ -992,7 +992,7 @@ static int parseFile(int op_code) {
 
         } else if(IsKey(key,"LearnPatternFile:")) {
             LearnPatternFileFlag = 1;
-            ret = fscanf(file_in,"%s",arg_string);
+            ret = fscanf(file_in,"%79s",arg_string);
             if(IsOld(arg_string)) {
                 LearnPatternFileFlag = -1;
                 if(exec_loop == 0)configError(8,"LearnPatternFile:");
@@ -1002,7 +1002,7 @@ static int parseFile(int op_code) {
 
         } else if(IsKey(key,"TestPatternFile:")) {
             TestPatternFileFlag = 1;
-            ret = fscanf(file_in,"%s",arg_string);
+            ret = fscanf(file_in,"%79s",arg_string);
             if(IsOld(arg_string)) {
                 if(exec_loop == 0)configError(8,"TestPatternFile:");
             } else
@@ -1010,7 +1010,7 @@ static int parseFile(int op_code) {
 
         } else if(IsKey(key,"ResultFile:")) {
             ResultFileFlag = 1;
-            ret = fscanf(file_in,"%s",arg_string);
+            ret = fscanf(file_in,"%79s",arg_string);
             if(IsOld(arg_string)) {
                 if(exec_loop == 0)configError(8,"ResultFile:");
             } else
@@ -1018,7 +1018,7 @@ static int parseFile(int op_code) {
 
         } else if(IsKey(key,"InitFunction:")) {
             InitFunctionFlag = 1;
-            ret = fscanf(file_in,"%s",arg_string);
+            ret = fscanf(file_in,"%79s",arg_string);
             if(IsOld(arg_string)) {
                 if(exec_loop == 0)configError(8,"InitFunction:");
             } else
@@ -1026,7 +1026,7 @@ static int parseFile(int op_code) {
 
         } else if(IsKey(key,"MaxLearnCycles:")) {
             MaxLearnCyclesFlag = 1;
-            ret = fscanf(file_in,"%s",arg_string);
+            ret = fscanf(file_in,"%79s",arg_string);
             if(IsOld(arg_string)) {
                 if(exec_loop == 0)configError(8,"MaxLearnCycles:");
             } else
@@ -1035,7 +1035,7 @@ static int parseFile(int op_code) {
                 configError(7,"MaxLearnCycles:");
 
         } else if(IsKey(key,"PruningMaxRetrainCycles:")) {
-            ret = fscanf(file_in,"%s",arg_string);
+            ret = fscanf(file_in,"%79s",arg_string);
             if(IsOld(arg_string)) {
                 if(exec_loop == 0)configError(8,"PruningMaxRetrainCycles:");
             } else
@@ -1045,7 +1045,7 @@ static int parseFile(int op_code) {
 
         } else if(IsKey(key,"MaxErrorToStop:")) {
             MaxErrorToStopFlag = 1;
-            ret = fscanf(file_in,"%s",arg_string);
+            ret = fscanf(file_in,"%79s",arg_string);
             if(IsOld(arg_string)) {
                 if(exec_loop == 0)configError(8,"MaxErrorToStop:");
             } else
@@ -1054,7 +1054,7 @@ static int parseFile(int op_code) {
                 configError(7,"MaxErrorToStop:");
 
         } else if(IsKey(key,"PruningMaxErrorIncrease:")) {
-            ret = fscanf(file_in,"%s",arg_string);
+            ret = fscanf(file_in,"%79s",arg_string);
             if(IsOld(arg_string)) {
                 if(exec_loop == 0)configError(8,"PruningMaxErrorIncrease:");
             } else
@@ -1063,7 +1063,7 @@ static int parseFile(int op_code) {
                 configError(7,"PruningMaxErrorIncrease:");
 
         } else if(IsKey(key,"PruningAcceptedError:")) {
-            ret = fscanf(file_in,"%s",arg_string);
+            ret = fscanf(file_in,"%79s",arg_string);
             if(IsOld(arg_string)) {
                 if(exec_loop == 0)configError(8,"PruningAcceptedError:");
             } else
@@ -1081,7 +1081,7 @@ static int parseFile(int op_code) {
                 configError(7,"PruningRecreate:");
 
         } else if(IsKey(key,"PruningOBSInitParam:")) {
-            ret = fscanf(file_in,"%s",arg_string);
+            ret = fscanf(file_in,"%79s",arg_string);
             if(IsOld(arg_string)) {
                 if(exec_loop == 0)configError(8,"PruningOBSInitParam:");
             } else {
@@ -1127,7 +1127,7 @@ static int parseFile(int op_code) {
 
         } else if(IsKey(key,"ResultMinMaxPattern:")) {
             ResultMinMaxPatternFlag = 1;
-            ret = fscanf(file_in,"%[^\n]",arg_string);
+            ret = fscanf(file_in,"%79[^\n]",arg_string);
             if(IsOld(arg_string)) {
                 if(exec_loop == 0)configError(8,"ResultMinMaxPattern:");
             } else {

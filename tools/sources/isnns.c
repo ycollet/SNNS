@@ -327,14 +327,14 @@ int main(int argc, char  *argv[] ) {
         fflush(outfile);
         error = 0;
 
-        if (fscanf(infile, "%s", command) != 1)
+        if (fscanf(infile, "%79s", command) != 1)
             isnnscmd = C_QUIT;
         else
             isnnscmd = lookup_command(command);
 
         switch(isnnscmd) {
         case C_LOAD:
-            fscanf(infile, "%s", netfilename);
+            fscanf(infile, "%199s", netfilename);
             ret = krui_loadNet(netfilename, &netname);
             errChk(ret);
             if (verb) {
@@ -401,7 +401,7 @@ int main(int argc, char  *argv[] ) {
             break;
 
         case C_SAVE:
-            fscanf(infile, "%s", netfilename);
+            fscanf(infile, "%199s", netfilename);
             ret = krui_saveNet(netfilename, netname);
             errChk(ret);
             break;

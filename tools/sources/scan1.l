@@ -137,8 +137,8 @@ or|"||"     return OR;
 <string_is_ok>\"     BEGIN(INITIAL);
 
 <string,string_is_ok>.  {
-              static char s[50] = "invalid character in string: ";
-	      strcat (s, yytext);
+              char s[50];
+	      snprintf (s, sizeof(s), "invalid character in string: %.15s", yytext);
 	      yyzerror(s);
 	    }
 
@@ -169,7 +169,7 @@ or|"||"     return OR;
 
 [\t ]+      /* eat up whitespace */
 
-.           { static char s[50] = "don't know what to do with the ";
-	      strcat (s, yytext);
+.           { char s[50];
+	      snprintf (s, sizeof(s), "don't know what to do with the %.15s", yytext);
 	      yyzerror(s);
 	    }

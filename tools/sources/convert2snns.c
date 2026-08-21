@@ -116,7 +116,7 @@ void control(FILE *fp) {
     short point;
 
     while (!feof(fp)) {
-        fscanf(fp,"%s",key);
+        fscanf(fp,"%254s",key);
         for(point=0; key[point]; point++) key[point]=tolower(key[point]);
         for(point=NKEYW; point>=0; point--) if (!strcmp(keywords[point],key)) break;
 
@@ -136,17 +136,17 @@ void control(FILE *fp) {
             fscanf(fp,"%d",&no_of_exemplars);
             break;
         case WEIGHTFILE :
-            fscanf(fp,"%s",weight_file);
+            fscanf(fp,"%79s",weight_file);
             break;
         case PATTERNFILE:
-            fscanf(fp,"%s",pattern_file);
+            fscanf(fp,"%79s",pattern_file);
             break;
         case HEIGHT     :
         case DECREASE   :
         case RADIUS     :
             break;
         }
-        fscanf(fp,"%[^\n]s",key);       /* ignores comments at end of line */
+        fscanf(fp,"%254[^\n]s",key);       /* ignores comments at end of line */
     }
 
     printf("\nThe File %s contains the following Datas:\n",control_file);
@@ -270,7 +270,7 @@ void create_network(char *weight_file)
 
             for (j = 1; j <= IUnits; j++) {
                 /*  (backward) connect current (hidden) unit with input unit  */
-                fscanf(fp,"%s",string);
+                fscanf(fp,"%79s",string);
                 val = atof(string);
                 ret = krui_createLink( j,val);
                 errChk( ret );
@@ -346,7 +346,7 @@ void create_patterns(char *pattern_file,int no_of_exemplars) {
             for (i = 1; i <= IUnits; i++) {
                 ret = krui_setCurrentUnit(i);
                 errChk( ret );
-                fscanf(fp,"%s",string);
+                fscanf(fp,"%79s",string);
                 val=atof(string);
                 krui_setUnitActivation(i,val);
             }

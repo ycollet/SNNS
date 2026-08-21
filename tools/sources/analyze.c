@@ -410,7 +410,7 @@ int get_options (int argc, char *argv[], int *function, int *sel_cond,
 int read_file_header (FileHeaderInfo  *file_header_info) {
     char  str1[80], str2[80], str3[80] ;
 
-    fscanf (in_file, "%s %s %s", str1, str2, str3) ;
+    fscanf (in_file, "%79s %79s %79s", str1, str2, str3) ;
     if((strcmp(str1, "SNNS") != 0) || (strcmp(str2, "result") != 0) ||
             (strcmp(str3, "file") != 0)) {
         fprintf(stderr, "error:  no SNNS result file\n") ;
@@ -432,10 +432,10 @@ int read_file_header (FileHeaderInfo  *file_header_info) {
         (file_header_info->endpattern) - (file_header_info->startpattern) + 1
         != (file_header_info -> no_of_patterns);
 
-    fscanf (in_file, "%s", str1) ;
+    fscanf (in_file, "%79s", str1) ;
 
     if (strcmp (str1, "input") == 0) {
-        fscanf (in_file, "%s %s %s", str2, str3, str1) ;
+        fscanf (in_file, "%79s %79s %79s", str2, str3, str1) ;
         if((strcmp(str2, "patterns") == 0) && (strcmp(str3, "included") == 0))
             file_header_info->input_pattern_included = 1 ;
         else
@@ -444,7 +444,7 @@ int read_file_header (FileHeaderInfo  *file_header_info) {
         file_header_info->input_pattern_included = 0 ;
 
     if(strcmp(str1, "teaching") == 0) {
-        fscanf(in_file, "%s %s %s", str2, str3, str1) ;
+        fscanf(in_file, "%79s %79s %79s", str2, str3, str1) ;
         if((strcmp(str2, "output") == 0) && (strcmp(str3, "included") == 0))
             file_header_info->teaching_output_included = 1 ;
         else {

@@ -1709,12 +1709,12 @@ int writeTdnnNet(pLayer globalLayers, pUnit globalUnits,
         layer = (globalLayers + layerNo);
 
         /* one variable for the current read Position */
-        layer->readCounter = malloc( (strlen(layer->name) + 11) * sizeof (char) );
+        layer->readCounter = malloc( (strlen(layer->name) + strlen("ReadCounter") + 1) * sizeof (char) );
         if (NULL == layer->readCounter) return(MEM_ERR);
         sprintf(layer->readCounter, "%sReadCounter", layer->name);
 
         /* and one for the current write position */
-        layer->writeCounter = malloc( (strlen(layer->name) + 12) * sizeof (char) );
+        layer->writeCounter = malloc( (strlen(layer->name) + strlen("WriteCounter") + 1) * sizeof (char) );
         if (NULL == layer->writeCounter) return(MEM_ERR);
         sprintf(layer->writeCounter, "%sWriteCounter", layer->name);
 
@@ -2104,19 +2104,54 @@ int main(int argc, char **argv) {
                 argv[0]);
         return(WRONG_PARAM);
     }
+    if (strlen(argv[1]) >= sizeof(NetFileName)) {
+        fprintf(stderr, "error: network file name too long (max %d characters)\n",
+                (int)sizeof(NetFileName) - 1);
+        return(WRONG_PARAM);
+    }
     strcpy(NetFileName, argv[1]);
     if (argc >= 3) {               /* C-File-Name mentioned in the command-line */
+        if (strlen(argv[2]) >= sizeof(CFileName)) {
+            fprintf(stderr, "error: output file name too long (max %d characters)\n",
+                    (int)sizeof(CFileName) - 1);
+            return(WRONG_PARAM);
+        }
         strcpy(CFileName, argv[2]);
     } else {
+        /* Deriving the C file name from the net file name by replacing the
+           last 3 characters of a ".net"-style suffix with "c". This needs at
+           least 3 characters to operate on, otherwise the pointer arithmetic
+           below (CFileName + strlen(CFileName) - 3) underflows the buffer. */
+        if (strlen(argv[1]) < 3) {
+            fprintf(stderr,
+                    "error: network file name '%s' is too short to derive an "
+                    "output file name; please specify one explicitly\n",
+                    argv[1]);
+            return(WRONG_PARAM);
+        }
         strcpy(CFileName, argv[1]);  /* taking Netfile Name */
         /* if the ending is not ".net" surprising Names may occur */
         strcpy(CFileName + strlen(CFileName) - 3, "c\0");
     }
     if (argc ==4) {               /* Function-Name mentioned in the command-line */
+        if (strlen(argv[3]) >= sizeof(ProcName)) {
+            fprintf(stderr, "error: function name too long (max %d characters)\n",
+                    (int)sizeof(ProcName) - 1);
+            return(WRONG_PARAM);
+        }
         strcpy(ProcName, argv[3]);
         toAlphaNum(ProcName);       /* Function Name must not contain special chars */
     } else {
-        /* define procedure-name for propagate-function */
+        /* define procedure-name for propagate-function; derived from CFileName
+           by dropping its last 2 characters. Guard against underflow (name too
+           short) and against overflowing ProcName. */
+        if (strlen(CFileName) < 2 ||
+            strlen(CFileName) - 2 >= sizeof(ProcName)) {
+            fprintf(stderr,
+                    "error: cannot derive a function name from '%s'; please "
+                    "specify one explicitly\n", CFileName);
+            return(WRONG_PARAM);
+        }
         strncpy(ProcName, CFileName, strlen(CFileName) - 2);
         ProcName[strlen(CFileName) -2] = '\0';
         toAlphaNum(ProcName);       /* Function Name must not contain special chars */
