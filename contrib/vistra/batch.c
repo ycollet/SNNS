@@ -207,10 +207,16 @@ static void execLine() {
     case 4: { /* PCA */
         FILE *pipe, *pcaIn, *pcaOut;
         char *tempIn, *tempOut, buf[512];
+        char tempInBuf[] = "@PCA_INXXXXXXXX", tempOutBuf[] = "@PCA_OUTXXXXXXXX";
+        int tempInFd, tempOutFd;
 
         /* Write patterns to a temporary LVQ file */
-        if(! (tempIn = mktemp("@PCA_INXXXXXXXX"))) error(39);
-        if(! (tempOut = mktemp("@PCA_OUTXXXXXXXX"))) error(39);
+        if((tempInFd = mkstemp(tempInBuf)) == -1) error(39);
+        close(tempInFd);
+        tempIn = tempInBuf;
+        if((tempOutFd = mkstemp(tempOutBuf)) == -1) error(39);
+        close(tempOutFd);
+        tempOut = tempOutBuf;
         if(! (pcaIn = fopen(tempIn, "w"))) {
             sprintf(errorInfo, "Temporary file: %s", tempIn);
             error(34);
@@ -230,7 +236,6 @@ static void execLine() {
         }
         pclose(pipe);
         unlink(tempIn);
-        free(tempIn);
         if(! (pcaOut = fopen(tempOut, "r"))) {
             unlink(tempOut);
             error(38);
@@ -238,7 +243,6 @@ static void execLine() {
         lvqRead(pats, pcaOut, operateOnInputs);
         fclose(pcaOut);
         unlink(tempOut);
-        free(tempOut);
         if(error) error(37);
     }
     break;

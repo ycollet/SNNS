@@ -355,7 +355,7 @@ static void ui_displMapBW(void) {
             } else {
                 krui_setUnitActivation(MAP_xUnit, this_x);
                 krui_setUnitActivation(MAP_yUnit, this_y);
-                krui_updateNet(NULL,(int)NULL);
+                krui_updateNet(NULL, 0);
                 strength = krui_getUnitOutput(MAP_outputUnit);
                 if (needCompute AND (MAP_strengthCache != NULL) AND
                         (cacheIdx < MAP_cacheCells))
@@ -443,7 +443,7 @@ static void ui_displMapCOL(void) {
             } else {
                 krui_setUnitActivation(MAP_xUnit, this_x);
                 krui_setUnitActivation(MAP_yUnit, this_y);
-                krui_updateNet(NULL,(int)NULL);
+                krui_updateNet(NULL, 0);
                 strength = krui_getUnitOutput(MAP_outputUnit);
                 if (needCompute AND (MAP_strengthCache != NULL) AND
                         (cacheIdx < MAP_cacheCells))

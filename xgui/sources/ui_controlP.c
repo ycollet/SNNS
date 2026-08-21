@@ -1167,9 +1167,17 @@ static Boolean ui_rem_performPrunInit (int learnType)
 {
 
     float net_error;
+    int tmp_fd;
 
     /* create temporary file */
-    tmp_file = mktemp("SNNS_XXXXXXXX");
+    strcpy(tmp_file_template, "SNNS_XXXXXXXX");
+    tmp_fd = mkstemp(tmp_file_template);
+    if (tmp_fd != -1) {
+        close(tmp_fd);
+        tmp_file = tmp_file_template;
+    } else {
+        tmp_file = NULL;
+    }
 
     /* display message */
     ui_tw_printMessage

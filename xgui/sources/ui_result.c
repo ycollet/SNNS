@@ -442,10 +442,10 @@ void ui_popupResult (Widget button)
         XtPopup(ui_popResult, XtGrabExclusive);
         ui_xDontResizeWidget(ui_popResult);
         if (first_call) {
-            ui_result_default(NULL, (int) NULL, NULL);
+            ui_result_default(NULL, 0, NULL);
             first_call = FALSE;
         } else {
-            ui_result_lastcall(NULL, (int) NULL, NULL);
+            ui_result_lastcall(NULL, 0, NULL);
         }
     }
 }

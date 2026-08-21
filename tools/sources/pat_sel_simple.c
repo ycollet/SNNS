@@ -103,13 +103,8 @@ void skip_comment (void)
 /* function read_file_header                                                  */
 /******************************************************************************/
 
-int read_file_header (no_of_patterns, no_of_input_units, no_of_output_units,
-                      version)
-
-int  *no_of_patterns     ;
-int  *no_of_input_units  ;
-int  *no_of_output_units ;
-char *version            ;
+int read_file_header (int *no_of_patterns, int *no_of_input_units,
+                      int *no_of_output_units, char *version)
 
 {
     char  dstring [255] ;
@@ -142,14 +137,8 @@ char *version            ;
 /* function write_file_header                                                 */
 /******************************************************************************/
 
-int write_file_header (no_of_patterns, no_of_input_units, no_of_output_units,
-                       version)
-
-int  no_of_patterns     ;
-int  no_of_input_units  ;
-int  no_of_output_units ;
-char *version           ;
-
+int write_file_header (int no_of_patterns, int no_of_input_units,
+                       int no_of_output_units, char *version)
 
 {
     time_t  clock ;

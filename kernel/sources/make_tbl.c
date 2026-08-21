@@ -48,16 +48,13 @@ VERSION : $Revision: 2.5 $  $Date: 1998/03/03 14:08:50 $
 
 /*  Sigmoid Function
 */
-double	f( x )
-double	x;
+double	f( double x )
 {
     return( 1.0 / (1.0 + exp( -x )));
 }
 
 
-void  calc_m_and_b( x1, x2, m, b )
-double	x1, x2;
-double	*m, *b;
+void  calc_m_and_b( double x1, double x2, double *m, double *b )
 {
     double  y1, y2;
 

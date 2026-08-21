@@ -1670,7 +1670,8 @@ void testNet(arglist_type *arglist) {
 ******************************************************************************/
 void pruneNet(arglist_type *arglist) {
     krui_err kr_err;
-    char *tmp_file1;
+    char *tmp_file1 = NULL;
+    char tmp_file1_template[] = "batchXXXXXXXX";
     float first_error,
           max_error,
           net_error;
@@ -1679,9 +1680,15 @@ void pruneNet(arglist_type *arglist) {
     max_error = first_error * (1 + max_error_incr / 100);
     if (max_error < accepted_error) max_error = accepted_error;
 
-    if (recreate)
-        if ((tmp_file1 = mktemp("batchXXXXXXXX")) == NULL)
+    if (recreate) {
+        int tmp_fd1 = mkstemp(tmp_file1_template);
+        if (tmp_fd1 == -1)
             err_prt("Cannot create temporary file");
+        else {
+            close(tmp_fd1);
+            tmp_file1 = tmp_file1_template;
+        }
+    }
 
     do {
         if (recreate) {

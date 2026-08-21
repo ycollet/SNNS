@@ -20,6 +20,7 @@
 #include <config.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 #include <math.h>
 #include <time.h>
 
@@ -758,12 +759,15 @@ static void ui_printProc (void)
         return;
     }
     if (ui_prVal.dest == UI_DEST_PRINTER) {
+        int tmp_fd;
         ui_xStringFromAsciiWidget(cmdLine, ui_prVal.cmdLineStr, UI_STR_LEN);
-        fileName = tempnam(ui_tmpDir, ui_praefix);
-        if (fileName == NULL) {
+        sprintf(fileName, "%s/%sXXXXXX", ui_tmpDir, ui_praefix);
+        tmp_fd = mkstemp(fileName);
+        if (tmp_fd == -1) {
             ui_confirmOk("Error! Can't print\n");
             return;
         }
+        close(tmp_fd);
         if ((commandLine = malloc (UI_STR_LEN)) == NULL) {
             ui_confirmOk("Error! Can't allocate Memory\n");
             return;

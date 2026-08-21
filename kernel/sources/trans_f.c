@@ -189,8 +189,7 @@ FlintType   ACT_TanHFunction(struct Unit *unit_ptr) {
 
 /*  Hyperbolic Tangent Function of (unit_ptr/2)
 */
-FlintType   ACT_TanHFunction_Xdiv2( unit_ptr )
-UNIT_PTR    unit_ptr;
+FlintType   ACT_TanHFunction_Xdiv2( UNIT_PTR unit_ptr )
 {
     ACT_FUNC_DEFS
     register FlintType  sum;

@@ -33,8 +33,7 @@
 
 
 
-static void  errChk( err_code )
-int  err_code;
+static void  errChk( int err_code )
 {
     if (err_code != KRERR_NO_ERROR)  {
         fprintf( stderr, "%s\n", krui_error( err_code ));

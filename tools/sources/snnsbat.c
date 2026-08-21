@@ -1487,6 +1487,7 @@ static void pruneNet ()
 
     float first_error, max_error, net_error;
     krui_err err;
+    char pr_tmp_template[] = "SNNS_XXXXXXXX";
 
 
     /* return if no training/pruning should take place */
@@ -1508,9 +1509,16 @@ static void pruneNet ()
     if (max_error < pr_accepted_error)
         max_error = pr_accepted_error;
 
-    if (pr_recreate)
+    if (pr_recreate) {
         /* create temporary file */
-        pr_tmp_file = mktemp("SNNS_XXXXXXXX");
+        int pr_tmp_fd = mkstemp(pr_tmp_template);
+        if (pr_tmp_fd != -1) {
+            close(pr_tmp_fd);
+            pr_tmp_file = pr_tmp_template;
+        } else {
+            pr_tmp_file = NULL;
+        }
+    }
 
     do
         /* prune links until error is beyond maximum error */
@@ -1631,6 +1639,8 @@ int main(int argc, char  *argv[] ) {
                 pError,
                 notLast=1;
     time_t	clock;
+    char        tmp_file1_template[] = "./SNNS_XXXXXX";
+    char        tmp_file2_template[] = "./SNNS_XXXXXX";
 
 
 
@@ -1712,8 +1722,18 @@ int main(int argc, char  *argv[] ) {
 
     /*  create names for temporary files */
 
-    tmp_file1 = tempnam("./","SNNS_");
-    tmp_file2 = tempnam("./","SNNS_");
+    {
+        int tmp_fd1 = mkstemp(tmp_file1_template);
+        int tmp_fd2 = mkstemp(tmp_file2_template);
+        if (tmp_fd1 != -1) {
+            close(tmp_fd1);
+            tmp_file1 = tmp_file1_template;
+        }
+        if (tmp_fd2 != -1) {
+            close(tmp_fd2);
+            tmp_file2 = tmp_file2_template;
+        }
+    }
 
 
     /* perform the batch program */

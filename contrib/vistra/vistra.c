@@ -1027,20 +1027,23 @@ XtPointer garbage;
     case 2: { /* PCA */
         FILE *pipe, *pcaIn, *pcaOut;
         char *tempIn, *tempOut, buf[512];
+        char tempInBuf[] = "@PCA_INXXXXXXXX", tempOutBuf[] = "@PCA_OUTXXXXXXXX";
+        int tempInFd, tempOutFd;
 
         /* write patterns to a temporary LVQ file */
-        if(! (tempIn = mktemp("@PCA_INXXXXXXXX"))) {
+        if((tempInFd = mkstemp(tempInBuf)) == -1) {
             xhandleErr(39);
             return;
         }
-        if(! (tempOut = mktemp("@PCA_OUTXXXXXXXX"))) {
-            free(tempIn);
+        close(tempInFd);
+        tempIn = tempInBuf;
+        if((tempOutFd = mkstemp(tempOutBuf)) == -1) {
             xhandleErr(39);
             return;
         }
+        close(tempOutFd);
+        tempOut = tempOutBuf;
         if(! (pcaIn = fopen(tempIn, "w"))) {
-            free(tempIn);
-            free(tempOut);
             sprintf(errorInfo, "Temporary file: %s", tempIn);
             xhandleErr(34);
             return;
@@ -1051,8 +1054,6 @@ XtPointer garbage;
         clearInfo();
         if(error) {
             unlink(tempIn);
-            free(tempIn);
-            free(tempOut);
             xhandleErr(35);
             return;
         }
@@ -1062,15 +1063,12 @@ XtPointer garbage;
         clearInfo();
         if(! pipe) {
             unlink(tempIn);
-            free(tempIn);
             unlink(tempOut);
-            free(tempOut);
             xhandleErr(36);
             return;
         }
         pclose(pipe);
         unlink(tempIn);
-        free(tempIn);
         if(! (pcaOut = fopen(tempOut, "r"))) {
             unlink(tempOut);
             xhandleErr(38);
@@ -1080,7 +1078,6 @@ XtPointer garbage;
         lvqRead(pats, pcaOut, inOutSwitch==EDIT_INPUT);
         fclose(pcaOut);
         unlink(tempOut);
-        free(tempOut);
         clearInfo();
         if(error) {
             xhandleErr(37);

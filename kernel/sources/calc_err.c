@@ -30,8 +30,7 @@
 
 /*  Sigmoid Function
 */
-double	f( x )
-double	x;
+double	f( double x )
 {
     return( 1.0 / (1.0 + exp( -x )));
 }
@@ -39,8 +38,7 @@ double	x;
 /*  Sigmoid Function
     using table lookup and linear approximation method
 */
-double	 LogisticTbl( x )
-double	x;
+double	 LogisticTbl( double x )
 {
 #include "sigmoid.tbl"
 

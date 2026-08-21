@@ -30,8 +30,7 @@
 #include "kr_ui.h"
 
 
-static void  errChk( err_code )
-int  err_code;
+static void  errChk( int err_code )
 {
     if (err_code != KRERR_NO_ERROR)  {
         printf( "%s\n", krui_error( err_code ));

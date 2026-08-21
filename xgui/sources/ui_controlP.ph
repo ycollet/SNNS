@@ -106,6 +106,7 @@ static int           INIT_KOHONEN_PRINT;
 float                ui_testError = 0; 
 
 static char *tmp_file;
+static char tmp_file_template[] = "SNNS_XXXXXXXX";
 
 #define SP_FIRST 1
 #define SP_PREVIOUS 2
