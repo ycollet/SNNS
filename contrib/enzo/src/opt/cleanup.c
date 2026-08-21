@@ -90,7 +90,13 @@ int cleanup_work( PopID *parents, PopID *offsprings, PopID *ref ) {
                     && ksh_getUnitTType( u_no ) != INPUT ) {
                 if(    ksh_getUnitInputType( u_no ) == NO_INPUTS
                         || ksh_getFirstSuccUnit( u_no, &dummy ) == 0  ) {
-                    delList[cnt++] = u_no;
+                    if( cnt < MAX_DEL_UNITS ) {
+                        delList[cnt++] = u_no;
+                    } else {
+                        fprintf( stderr,
+                                 "cleanup: warning - more than %d dead units, "
+                                 "deletion list truncated\n", MAX_DEL_UNITS );
+                    }
                 }
                 /* getFirstSuccUnit makes the succUnit current */
                 /* after setting the unit u_no current, getNextUnit will work */

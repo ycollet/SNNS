@@ -85,7 +85,7 @@ int histWeights_init( ModuleTableEntry *self, int msgc, char *msgv[] ) {
     }
 
     MSG_CASE( EVOLUTION_INIT ) {
-        sprintf(fileName,"%s.%s",histFileName,EXTENSION);
+        snprintf(fileName,sizeof(fileName),"%s.%s",histFileName,EXTENSION);
         if( (hfpWeight = fopen( fileName, "w" )) == NULL )
             return( ERROR_FILEOPEN );
         setlinebuf( hfpWeight );

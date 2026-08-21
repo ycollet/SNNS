@@ -89,7 +89,7 @@ int histSimple_init( ModuleTableEntry *self, int msgc, char *msgv[] ) {
     }
 
     MSG_CASE( EVOLUTION_INIT ) {
-        sprintf( filename, "%s.%s", histfile, FILE_EXTENSION);
+        snprintf( filename, sizeof(filename), "%s.%s", histfile, FILE_EXTENSION);
         if( (hfp = fopen( filename, "w" )) == NULL )
             return( HISTFILE_OPEN_ERR );
         setlinebuf( hfp );

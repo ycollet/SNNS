@@ -92,13 +92,13 @@ int histCross_init( ModuleTableEntry *self, int msgc, char *msgv[] ) {
     }
 
     MSG_CASE( EVOLUTION_INIT ) {
-        sprintf(fileName,"%s.cross",histFileName);
+        snprintf(fileName,sizeof(fileName),"%s.cross",histFileName);
         if( (hfpCross = fopen( fileName, "w" )) == NULL )
             return( ERROR_FILEOPEN );
         setlinebuf( hfpCross );
         fprintf( hfpCross, OUTELEM_TEXT );
 
-        sprintf(fileName,"%s.popcross",histFileName);
+        snprintf(fileName,sizeof(fileName),"%s.popcross",histFileName);
         if( (hfpPopcross = fopen( fileName, "w" )) == NULL )
             return( ERROR_FILEOPEN );
         setlinebuf( hfpPopcross );

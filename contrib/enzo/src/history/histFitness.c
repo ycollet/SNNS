@@ -86,13 +86,13 @@ int histFitness_init( ModuleTableEntry *self, int msgc, char *msgv[] ) {
         /* nothing to do */
     }
     MSG_CASE( EVOLUTION_INIT ) {
-        sprintf(fileName,"%s.fit",histFileName);
+        snprintf(fileName,sizeof(fileName),"%s.fit",histFileName);
         if( (hfpFit = fopen( fileName, "w" )) == NULL )
             return( ERROR_FILEOPEN );
         setlinebuf( hfpFit );
         fprintf( hfpFit, OUTELEM_TEXT );
 
-        sprintf(fileName,"%s.popfit",histFileName);
+        snprintf(fileName,sizeof(fileName),"%s.popfit",histFileName);
         if( (hfpPopfit = fopen( fileName, "w" )) == NULL )
             return( ERROR_FILEOPEN );
         setlinebuf( hfpPopfit );

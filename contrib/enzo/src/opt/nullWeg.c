@@ -84,7 +84,13 @@ int nullWeg_work( PopID *parents, PopID *offsprings, PopID *ref ) {
     FOR_ALL_OFFSPRINGS( net ) {
         GET_NO_OF_LINKS( no_of_links );
         if( no_of_links < 1 ) {
-            delList[delCnt++] = net;
+            if( delCnt < MAX_DEL_NETS ) {
+                delList[delCnt++] = net;
+            } else {
+                fprintf( stderr,
+                         "nullWeg: warning - more than %d nets without links, "
+                         "deletion list truncated\n", MAX_DEL_NETS );
+            }
         }
     }
 
