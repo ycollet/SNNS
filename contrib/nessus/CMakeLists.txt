@@ -35,17 +35,11 @@ add_executable(nessus ${COMPOBJECTS}
                       ${CMAKE_BINARY_DIR}/co_scanner.c)
 target_link_libraries(nessus m)
 
-#file(STRINGS ${CMAKE_BINARY_DIR}/co_parser.c TEMP1 REGEX "# define YYMAXDEPTH")
-#file(STRINGS ${CMAKE_BINARY_DIR}/co_parser.c TEMP2 REGEX "# define YLMAX")
 file(COPY compiler/sources/co_pfBody.h
      DESTINATION ${CMAKE_BINARY_DIR})
 file(RENAME ${CMAKE_BINARY_DIR}/co_pfBody.h ${CMAKE_BINARY_DIR}/co_pFuncs.h)
-#file(APPEND ${CMAKE_BINARY_DIR}/co_pFuncs.h "${TEMP1}\n")
 file(APPEND ${CMAKE_BINARY_DIR}/co_pFuncs.h "#define YYMAXDEPTH 256\n")
 file(APPEND ${CMAKE_BINARY_DIR}/co_pFuncs.h "#define YYLMAX 2048\n")
-
-message(STATUS "TEMP1 = ${TEMP1}")
-message(STATUS "TEMP2 = ${TEMP2}")
 
 #co_scanner.c: Tokens.l co_scanner.h
 #               lex Tokens.l 
