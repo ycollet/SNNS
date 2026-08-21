@@ -450,24 +450,24 @@ int ui_cfg_load (FILE *filePtr)
         err = fscanf(filePtr,"filenames:\n");
         chkretline01;
         lines++;
-        err = fscanf(filePtr,"%[^#]#\n",ui_pathname );
+        err = fscanf(filePtr,"%511[^#]#\n",ui_pathname );
         chkretline01;
         lines++;
-        err = fscanf(filePtr,"%[^#]#\n",ui_filenameNET);
+        err = fscanf(filePtr,"%4095[^#]#\n",ui_filenameNET);
         chkretline01;
         lines++;
-        err = fscanf(filePtr,"%[^#]#\n",ui_filenamePAT);
+        err = fscanf(filePtr,"%4095[^#]#\n",ui_filenamePAT);
         chkretline01;
         lines++;
         if (format >= 6) {
-            err = fscanf(filePtr,"%[^#]#\n",ui_filenameRES);
+            err = fscanf(filePtr,"%4095[^#]#\n",ui_filenameRES);
             chkretline01;
             lines++;
         }
-        err = fscanf(filePtr,"%[^#]#\n",ui_filenameCFG);
+        err = fscanf(filePtr,"%4095[^#]#\n",ui_filenameCFG);
         chkretline01;
         lines++;
-        err = fscanf(filePtr,"%[^#]#\n",ui_filenameTXT);
+        err = fscanf(filePtr,"%4095[^#]#\n",ui_filenameTXT);
         chkretline01;
         lines++;
 
@@ -479,8 +479,15 @@ int ui_cfg_load (FILE *filePtr)
     err = fscanf(filePtr,"%*[^:]: %d\n", &count);
     chkretline(1);
     lines++;
+    if ((count < 0) OR (count > MAX_NO_LAYERS)) {
+        fprintf(stderr,
+                "ui_cfg_load: invalid layer count %d in config file "
+                "(must be between 0 and %d); aborting load\n",
+                count, MAX_NO_LAYERS);
+        return(-lines); /* fail cleanly, do not overflow ui_layerNames */
+    }
     for (i=1; i <= count; i++) {
-        err = fscanf(filePtr,"%[^#]#\n",&ui_layerNames[i-1][0]);
+        err = fscanf(filePtr,"%4095[^#]#\n",&ui_layerNames[i-1][0]);
         chkretline01;
         lines++;
     }
@@ -682,10 +689,10 @@ int ui_cfg_load (FILE *filePtr)
             chkfreeretline(1);
             lines++;
             listPtr->setup.linkScaleFactor= dummyf;
-            err = fscanf(filePtr,"%*[^:]: %[^#]#\n",listPtr->setup.siteName);
+            err = fscanf(filePtr,"%*[^:]: %4095[^#]#\n",listPtr->setup.siteName);
             chkretline01;
             lines++;
-            err = fscanf(filePtr,"%*[^:]: %s\n", colorString);
+            err = fscanf(filePtr,"%*[^:]: %6s\n", colorString);
             chkfreeretline(1);
             lines++;
             ui_convertColorString(colorString, &(listPtr->setup.textColorIndex),
@@ -704,7 +711,7 @@ int ui_cfg_load (FILE *filePtr)
     if (format < 5)
         return(TRUE);
 
-    err = fscanf(filePtr,"%s\n", header);
+    err = fscanf(filePtr,"%199s\n", header);
     if (strcmp (header, d3_configStr) == 0) {
         ui_configHas3dSection = TRUE;
         chkretline(1);
@@ -814,7 +821,7 @@ int ui_cfg_load (FILE *filePtr)
         return(TRUE);
 
     if (ui_configHas3dSection)
-        err = fscanf(filePtr,"%s\n", header);
+        err = fscanf(filePtr,"%199s\n", header);
     if (strcmp (header, ui_printerConfigStr) == 0) {
         chkretline(1);
         lines++;
@@ -879,16 +886,28 @@ int ui_cfg_load (FILE *filePtr)
         err = fscanf(filePtr, "%*[^:]: %f\n", &ui_prVal.unitGray);
         chkretline(1);
         lines++;
-        err = fscanf(filePtr, "%*[^:]: %s\n", ui_prVal.fileNameStr);
+        err = fscanf(filePtr, "%*[^:]: %4095s\n", ui_prVal.fileNameStr);
         chkretline(1);
         lines++;
 
         err = fscanf(filePtr, "%*[^:]: ");
-        ui_prVal.cmdLineStr[0] = '\0';
-        while ((*ch = getc(filePtr)) != '\n')
-            strncat (ui_prVal.cmdLineStr, ch, 1);
+        {
+            int c;
+            size_t len = 0;
+            ui_prVal.cmdLineStr[0] = '\0';
+            /* Read the rest of the line into cmdLineStr, stopping at newline
+               or EOF, and never writing past the fixed-size buffer. Any
+               characters beyond the buffer are discarded so the file position
+               stays consistent (up to the terminating newline). */
+            while ((c = getc(filePtr)) != EOF AND c != '\n') {
+                if (len < MAX_NAME_LENGTH - 1) {
+                    ui_prVal.cmdLineStr[len++] = (char) c;
+                }
+            }
+            ui_prVal.cmdLineStr[len] = '\0';
+        }
         lines++;
-        err = fscanf(filePtr,"%s\n", header);
+        err = fscanf(filePtr,"%199s\n", header);
     }
 
     if (strcmp (header, ui_classConfigStr) == 0) {
@@ -914,7 +933,7 @@ int ui_cfg_load (FILE *filePtr)
             krui_setClassDistribution(dist);
         }
         lines++;
-        err = fscanf(filePtr,"\n%s\n", header);
+        err = fscanf(filePtr,"\n%199s\n", header);
     }
 
     if (strcmp (header, ui_windowConfigStr) == 0) {

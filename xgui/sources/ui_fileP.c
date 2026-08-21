@@ -468,7 +468,8 @@ void ui_file_loadPatterns (Widget w, XtPointer button, caddr_t call_data)
 {
     char string  [80+MAX_NAME_LENGTH+MAX_NAME_LENGTH];
     char filename[4+MAX_NAME_LENGTH+MAX_NAME_LENGTH];
-    char filestring[30];
+    char filestring[4+MAX_NAME_LENGTH+MAX_NAME_LENGTH];
+    size_t filestringLen;
 
     /* check now for errors and react ! */
     if (strlen(ui_filenamePAT) == 0) {
@@ -502,13 +503,21 @@ void ui_file_loadPatterns (Widget w, XtPointer button, caddr_t call_data)
         NO_OF_PATTERN_SETS++;
         PATTERN_SET_FILE[CURR_PATTERN_SET] =
             (char *)malloc(strlen(filename)+1);
-        if(strrchr(filename,'/') == NULL)
-            strcpy(filestring,filename);
-        else
-            strcpy(filestring,strrchr(filename,'/')+1);
+        if(strrchr(filename,'/') == NULL) {
+            strncpy(filestring,filename,sizeof(filestring)-1);
+            filestring[sizeof(filestring)-1] = '\0';
+        } else {
+            strncpy(filestring,strrchr(filename,'/')+1,sizeof(filestring)-1);
+            filestring[sizeof(filestring)-1] = '\0';
+        }
+        filestringLen = strlen(filestring);
+        /* strip the file extension (e.g. ".pat"); guard against
+           basenames shorter than the 4-char extension to avoid underflow. */
+        if (filestringLen >= 4)
+            filestringLen -= 4;
         strncpy(PATTERN_SET_FILE[CURR_PATTERN_SET],filestring,
-                strlen(filestring)-4);
-        PATTERN_SET_FILE[CURR_PATTERN_SET][strlen(filestring)-4] = '\0';
+                filestringLen);
+        PATTERN_SET_FILE[CURR_PATTERN_SET][filestringLen] = '\0';
         ui_rem_displayPatternNumber();
         if(ui_controlIsCreated)ui_rem_updatePattList();
         ui_rem_defSubPat((Widget) button,1,(caddr_t)1);

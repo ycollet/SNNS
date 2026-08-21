@@ -803,7 +803,7 @@ void ui_listPopup (struct SimpleListType *listDescriptorPtr, Position x,
 
     /* Now create Popup */
 
-    sprintf (title, listDescriptorPtr->msg);
+    snprintf (title, sizeof(title), "%s", listDescriptorPtr->msg);
     title[0] = tolower(title[0]);
     ui_popList =
         XtCreatePopupShell(title, transientShellWidgetClass, ui_toplevel,
@@ -822,7 +822,7 @@ void ui_listPopup (struct SimpleListType *listDescriptorPtr, Position x,
         label =
             ui_xCreateLabelItem("msg", form, 80*ui_labelFontWidth, NULL, label);
         ui_xSetResize(label, TRUE);
-        sprintf(buf,"unit #%d - %s",
+        snprintf(buf, sizeof(buf), "unit #%d - %s",
                 listDescriptorPtr->unitPtr->no,
                 listDescriptorPtr->unitPtr->name);
         ui_xSetLabel(label, buf);

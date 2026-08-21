@@ -21,6 +21,7 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <limits.h>
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
 #include <X11/Intrinsic.h>
@@ -959,58 +960,58 @@ static int read_link_elements(void)
 static void write_current_link(void) {
     char buf[10];
 
-    sprintf(buf,"%d",(*LINK_current_element).SOURCE.plane);
+    snprintf(buf,sizeof(buf),"%d",(*LINK_current_element).SOURCE.plane);
     ui_xSetLabel(z10s2,bn_widget_output(buf));
 
-    sprintf(buf,"%d",(*LINK_current_element).SOURCE.CLUSTER.x);
+    snprintf(buf,sizeof(buf),"%d",(*LINK_current_element).SOURCE.CLUSTER.x);
     ui_xSetLabel(z13s2,bn_widget_output(buf));
 
-    sprintf(buf,"%d",(*LINK_current_element).SOURCE.CLUSTER.y);
+    snprintf(buf,sizeof(buf),"%d",(*LINK_current_element).SOURCE.CLUSTER.y);
     ui_xSetLabel(z14s2,bn_widget_output(buf));
 
-    sprintf(buf,"%d",(*LINK_current_element).SOURCE.CLUSTER.width);
+    snprintf(buf,sizeof(buf),"%d",(*LINK_current_element).SOURCE.CLUSTER.width);
     ui_xSetLabel(z15s2,bn_widget_output(buf));
 
-    sprintf(buf,"%d",(*LINK_current_element).SOURCE.CLUSTER.height);
+    snprintf(buf,sizeof(buf),"%d",(*LINK_current_element).SOURCE.CLUSTER.height);
     ui_xSetLabel(z16s2,bn_widget_output(buf));
 
-    sprintf(buf,"%d",(*LINK_current_element).SOURCE.UNIT.x);
+    snprintf(buf,sizeof(buf),"%d",(*LINK_current_element).SOURCE.UNIT.x);
     ui_xSetLabel(z19s2,bn_widget_output(buf));
 
-    sprintf(buf,"%d",(*LINK_current_element).SOURCE.UNIT.y);
+    snprintf(buf,sizeof(buf),"%d",(*LINK_current_element).SOURCE.UNIT.y);
     ui_xSetLabel(z20s2,bn_widget_output(buf));
 
-    sprintf(buf,"%d",(*LINK_current_element).SOURCE.MOVE.delta_x);
+    snprintf(buf,sizeof(buf),"%d",(*LINK_current_element).SOURCE.MOVE.delta_x);
     ui_xSetLabel(z22s2,bn_widget_output(buf));
 
-    sprintf(buf,"%d",(*LINK_current_element).SOURCE.MOVE.delta_y);
+    snprintf(buf,sizeof(buf),"%d",(*LINK_current_element).SOURCE.MOVE.delta_y);
     ui_xSetLabel(z23s2,bn_widget_output(buf));
 
-    sprintf(buf,"%d",(*LINK_current_element).TARGET.plane);
+    snprintf(buf,sizeof(buf),"%d",(*LINK_current_element).TARGET.plane);
     ui_xSetLabel(z10s3,bn_widget_output(buf));
 
-    sprintf(buf,"%d",(*LINK_current_element).TARGET.CLUSTER.x);
+    snprintf(buf,sizeof(buf),"%d",(*LINK_current_element).TARGET.CLUSTER.x);
     ui_xSetLabel(z13s3,bn_widget_output(buf));
 
-    sprintf(buf,"%d",(*LINK_current_element).TARGET.CLUSTER.y);
+    snprintf(buf,sizeof(buf),"%d",(*LINK_current_element).TARGET.CLUSTER.y);
     ui_xSetLabel(z14s3,bn_widget_output(buf));
 
-    sprintf(buf,"%d",(*LINK_current_element).TARGET.CLUSTER.width);
+    snprintf(buf,sizeof(buf),"%d",(*LINK_current_element).TARGET.CLUSTER.width);
     ui_xSetLabel(z15s3,bn_widget_output(buf));
 
-    sprintf(buf,"%d",(*LINK_current_element).TARGET.CLUSTER.height);
+    snprintf(buf,sizeof(buf),"%d",(*LINK_current_element).TARGET.CLUSTER.height);
     ui_xSetLabel(z16s3,bn_widget_output(buf));
 
-    sprintf(buf,"%d",(*LINK_current_element).TARGET.UNIT.x);
+    snprintf(buf,sizeof(buf),"%d",(*LINK_current_element).TARGET.UNIT.x);
     ui_xSetLabel(z19s3,bn_widget_output(buf));
 
-    sprintf(buf,"%d",(*LINK_current_element).TARGET.UNIT.y);
+    snprintf(buf,sizeof(buf),"%d",(*LINK_current_element).TARGET.UNIT.y);
     ui_xSetLabel(z20s3,bn_widget_output(buf));
 
-    sprintf(buf,"%d",(*LINK_current_element).TARGET.MOVE.delta_x);
+    snprintf(buf,sizeof(buf),"%d",(*LINK_current_element).TARGET.MOVE.delta_x);
     ui_xSetLabel(z22s3,bn_widget_output(buf));
 
-    sprintf(buf,"%d",(*LINK_current_element).TARGET.MOVE.delta_y);
+    snprintf(buf,sizeof(buf),"%d",(*LINK_current_element).TARGET.MOVE.delta_y);
     ui_xSetLabel(z23s3,bn_widget_output(buf));
 }
 
@@ -1062,42 +1063,42 @@ static void write_current_link_to_editor(void) {
 
     char buf[10];
 
-    sprintf(buf,"%d",(*LINK_current_element).SOURCE.plane);
+    snprintf(buf,sizeof(buf),"%d",(*LINK_current_element).SOURCE.plane);
     ui_xSetString(z10s4,bn_widget_output(buf));
-    sprintf(buf,"%d",(*LINK_current_element).SOURCE.CLUSTER.x);
+    snprintf(buf,sizeof(buf),"%d",(*LINK_current_element).SOURCE.CLUSTER.x);
     ui_xSetString(z13s4,bn_widget_output(buf));
-    sprintf(buf,"%d",(*LINK_current_element).SOURCE.CLUSTER.y);
+    snprintf(buf,sizeof(buf),"%d",(*LINK_current_element).SOURCE.CLUSTER.y);
     ui_xSetString(z14s4,bn_widget_output(buf));
-    sprintf(buf,"%d",(*LINK_current_element).SOURCE.CLUSTER.width);
+    snprintf(buf,sizeof(buf),"%d",(*LINK_current_element).SOURCE.CLUSTER.width);
     ui_xSetString(z15s4,bn_widget_output(buf));
-    sprintf(buf,"%d",(*LINK_current_element).SOURCE.CLUSTER.height);
+    snprintf(buf,sizeof(buf),"%d",(*LINK_current_element).SOURCE.CLUSTER.height);
     ui_xSetString(z16s4,bn_widget_output(buf));
-    sprintf(buf,"%d",(*LINK_current_element).SOURCE.UNIT.x);
+    snprintf(buf,sizeof(buf),"%d",(*LINK_current_element).SOURCE.UNIT.x);
     ui_xSetString(z19s4,bn_widget_output(buf));
-    sprintf(buf,"%d",(*LINK_current_element).SOURCE.UNIT.y);
+    snprintf(buf,sizeof(buf),"%d",(*LINK_current_element).SOURCE.UNIT.y);
     ui_xSetString(z20s4,bn_widget_output(buf));
-    sprintf(buf,"%d",(*LINK_current_element).SOURCE.MOVE.delta_x);
+    snprintf(buf,sizeof(buf),"%d",(*LINK_current_element).SOURCE.MOVE.delta_x);
     ui_xSetString(z22s4,bn_widget_output(buf));
-    sprintf(buf,"%d",(*LINK_current_element).SOURCE.MOVE.delta_y);
+    snprintf(buf,sizeof(buf),"%d",(*LINK_current_element).SOURCE.MOVE.delta_y);
     ui_xSetString(z23s4,bn_widget_output(buf));
 
-    sprintf(buf,"%d",(*LINK_current_element).TARGET.plane);
+    snprintf(buf,sizeof(buf),"%d",(*LINK_current_element).TARGET.plane);
     ui_xSetString(z10s5,bn_widget_output(buf));
-    sprintf(buf,"%d",(*LINK_current_element).TARGET.CLUSTER.x);
+    snprintf(buf,sizeof(buf),"%d",(*LINK_current_element).TARGET.CLUSTER.x);
     ui_xSetString(z13s5,bn_widget_output(buf));
-    sprintf(buf,"%d",(*LINK_current_element).TARGET.CLUSTER.y);
+    snprintf(buf,sizeof(buf),"%d",(*LINK_current_element).TARGET.CLUSTER.y);
     ui_xSetString(z14s5,bn_widget_output(buf));
-    sprintf(buf,"%d",(*LINK_current_element).TARGET.CLUSTER.width);
+    snprintf(buf,sizeof(buf),"%d",(*LINK_current_element).TARGET.CLUSTER.width);
     ui_xSetString(z15s5,bn_widget_output(buf));
-    sprintf(buf,"%d",(*LINK_current_element).TARGET.CLUSTER.height);
+    snprintf(buf,sizeof(buf),"%d",(*LINK_current_element).TARGET.CLUSTER.height);
     ui_xSetString(z16s5,bn_widget_output(buf));
-    sprintf(buf,"%d",(*LINK_current_element).TARGET.UNIT.x);
+    snprintf(buf,sizeof(buf),"%d",(*LINK_current_element).TARGET.UNIT.x);
     ui_xSetString(z19s5,bn_widget_output(buf));
-    sprintf(buf,"%d",(*LINK_current_element).TARGET.UNIT.y);
+    snprintf(buf,sizeof(buf),"%d",(*LINK_current_element).TARGET.UNIT.y);
     ui_xSetString(z20s5,bn_widget_output(buf));
-    sprintf(buf,"%d",(*LINK_current_element).TARGET.MOVE.delta_x);
+    snprintf(buf,sizeof(buf),"%d",(*LINK_current_element).TARGET.MOVE.delta_x);
     ui_xSetString(z22s5,bn_widget_output(buf));
-    sprintf(buf,"%d",(*LINK_current_element).TARGET.MOVE.delta_y);
+    snprintf(buf,sizeof(buf),"%d",(*LINK_current_element).TARGET.MOVE.delta_y);
     ui_xSetString(z23s5,bn_widget_output(buf));
 
 }
@@ -1796,6 +1797,11 @@ static int read_plane_elements(void) {
     PLANE_height = ui_xIntFromAsciiWidget(z5s3);
 
     if((PLANE_width > 0) && (PLANE_height > 0)) {
+        if((PLANE_width > 100000) || (PLANE_height > 100000) ||
+           ((long)PLANE_width * (long)PLANE_height > INT_MAX / 2)) {
+            ui_confirmOk("Plane width/height too large");
+            return 0;
+        }
         return 1;
     } else {
         return 0;
@@ -1816,14 +1822,14 @@ static int read_plane_elements(void) {
 static void write_current_plane(void) {
     char buf[10];
 
-    sprintf(buf,"%d",PLANE_no);
+    snprintf(buf,sizeof(buf),"%d",PLANE_no);
     ui_xSetLabel(z2s2,bn_widget_output(buf));
     ui_xSetLabel(z3s2,plane_type[(*PLANE_current_element).type]);
-    sprintf(buf,"%d",(*PLANE_current_element).width);
+    snprintf(buf,sizeof(buf),"%d",(*PLANE_current_element).width);
     ui_xSetLabel(z4s2,bn_widget_output(buf));
-    sprintf(buf,"%d",(*PLANE_current_element).height);
+    snprintf(buf,sizeof(buf),"%d",(*PLANE_current_element).height);
     ui_xSetLabel(z5s2,bn_widget_output(buf));
-    sprintf(buf,"%d",0);
+    snprintf(buf,sizeof(buf),"%d",0);
     ui_xSetLabel(z6s2,bn_widget_output(buf));
     ui_xSetLabel(z7s2,plane_pos[(*PLANE_current_element).pos]);
 }
@@ -1862,11 +1868,11 @@ static void write_current_plane_to_editor(void) {
 
     PLANE_type = (*PLANE_current_element).type;
     ui_xSetLabel(z3s3,plane_type[PLANE_type]);
-    sprintf(buf,"%d",(*PLANE_current_element).width);
+    snprintf(buf,sizeof(buf),"%d",(*PLANE_current_element).width);
     ui_xSetString(z4s3,bn_widget_output(buf));
-    sprintf(buf,"%d",(*PLANE_current_element).height);
+    snprintf(buf,sizeof(buf),"%d",(*PLANE_current_element).height);
     ui_xSetString(z5s3,bn_widget_output(buf));
-    sprintf(buf,"%d",0);
+    snprintf(buf,sizeof(buf),"%d",0);
     ui_xSetString(z6s3,bn_widget_output(buf));
     PLANE_pos = (*PLANE_current_element).pos;
     ui_xSetLabel(z7s3,plane_pos[PLANE_pos]);

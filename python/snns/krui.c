@@ -669,8 +669,23 @@ snns_setClassDistribution(PyObject *self, PyObject *args)
 			args = tmp;
 		}
 	}	
+	if(!PySequence_Check(args)) {
+		PyErr_SetString(PyExc_RuntimeError,
+		 "expecting a sequence of class distribution entries");
+		return NULL;
+	}
 	err = krui_GetPatInfo(&setinf, &patdes);
 	if(err) return make_exception(err);
+	/* fill_int_array writes PySequence_Size(args) ints into 'entries',
+	   which is sized for exactly setinf.classes entries. Reject any
+	   mismatch up front to avoid a heap buffer overflow. */
+	if(PySequence_Size(args) != setinf.classes) {
+		PyErr_Format(PyExc_ValueError,
+		 "class distribution must have exactly %d entries "
+		 "(one per class), got %ld",
+		 setinf.classes, (long)PySequence_Size(args));
+		return NULL;
+	}
 	entries = PyMem_New(int,setinf.classes);
 	if(!entries) {
 		return PyErr_NoMemory();

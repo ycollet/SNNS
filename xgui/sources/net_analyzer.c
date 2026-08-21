@@ -493,11 +493,10 @@ static void NA_OpenRecordFile (void)
     char buf[80] ;
 
 
-    sprintf (buf, "%s.rec", na.rec_filename) ;
+    snprintf (buf, sizeof(buf), "%s.rec", na.rec_filename) ;
 
     if ((na.rec_file = fopen (buf, "a")) == (FILE *) NULL) {
         ui_confirmOk ("can't open file") ;
-        fclose (na.rec_file) ;
         ui_xSetToggleState (t_Record, FALSE) ;
         na.toggles.record = FALSE ;
     } else {

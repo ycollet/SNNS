@@ -19,6 +19,7 @@
 ******************************************************************************/
 #include <config.h>
 #include <stdlib.h>
+#include <limits.h>
 
 #include <X11/Intrinsic.h>
 #include <X11/Shell.h>
@@ -415,6 +416,11 @@ static int read_plane_elements(void)
     PLANE_width = ui_xIntFromAsciiWidget(z4s3);
     PLANE_height = ui_xIntFromAsciiWidget(z5s3);
     if((PLANE_width > 0) && (PLANE_height > 0)) {
+        if((PLANE_width > 100000) || (PLANE_height > 100000) ||
+           ((long)PLANE_width * (long)PLANE_height > INT_MAX / 2)) {
+            ui_confirmOk("Plane width/height too large");
+            return 0;
+        }
         return 1;
     } else {
         return 0;
@@ -438,14 +444,14 @@ static void write_current_plane(void)
 {
     char buf[10];
 
-    sprintf(buf,"%d",PLANE_no);
+    snprintf(buf,sizeof(buf),"%d",PLANE_no);
     ui_xSetLabel(z2s2,bn_widget_output(buf));
     ui_xSetLabel(z3s2,plane_type[(*PLANE_current_element).type]);
-    sprintf(buf,"%d",(*PLANE_current_element).width);
+    snprintf(buf,sizeof(buf),"%d",(*PLANE_current_element).width);
     ui_xSetLabel(z4s2,bn_widget_output(buf));
-    sprintf(buf,"%d",(*PLANE_current_element).height);
+    snprintf(buf,sizeof(buf),"%d",(*PLANE_current_element).height);
     ui_xSetLabel(z5s2,bn_widget_output(buf));
-    sprintf(buf,"%d",0);
+    snprintf(buf,sizeof(buf),"%d",0);
     ui_xSetLabel(z6s2,bn_widget_output(buf));
     ui_xSetLabel(z7s2,plane_pos[(*PLANE_current_element).pos]);
 }
@@ -490,11 +496,11 @@ static void write_current_plane_to_editor(void)
 
     PLANE_type = (*PLANE_current_element).type;
     ui_xSetLabel(z3s3,plane_type[PLANE_type]);
-    sprintf(buf,"%d",(*PLANE_current_element).width);
+    snprintf(buf,sizeof(buf),"%d",(*PLANE_current_element).width);
     ui_xSetString(z4s3,bn_widget_output(buf));
-    sprintf(buf,"%d",(*PLANE_current_element).height);
+    snprintf(buf,sizeof(buf),"%d",(*PLANE_current_element).height);
     ui_xSetString(z5s3,bn_widget_output(buf));
-    sprintf(buf,"%d",0);
+    snprintf(buf,sizeof(buf),"%d",0);
     ui_xSetString(z6s3,bn_widget_output(buf));
     PLANE_pos = (*PLANE_current_element).pos;
     ui_xSetLabel(z7s3,plane_pos[PLANE_pos]);

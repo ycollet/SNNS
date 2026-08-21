@@ -222,7 +222,7 @@ void ui_newClass(Widget parent, char *oldclass) {
     } else {
         sprintf(buf1,"Please enter alphanumerical");
         sprintf(buf2,"class information below: ");
-        sprintf(buf3,"%s",oldclass);
+        snprintf(buf3, sizeof(buf3), "%s",oldclass);
     }
     label = ui_xCreateLabelItem(buf1, class_setupPanel, 45*ui_labelFontWidth,
                                 NULL, NULL);
@@ -264,7 +264,7 @@ void ui_classUpdatePanel(bool force) {
     }
 
     if(patt_info.classes && ui_controlIsCreated) {
-        sprintf(buf,"current class: %s",patt_info.class_names[descrip.my_class]);
+        snprintf(buf, sizeof(buf), "current class: %s",patt_info.class_names[descrip.my_class]);
         ui_xSetLabel(ui_controlMessageWidget, buf);
     }
 
@@ -405,7 +405,7 @@ static void create_classBody(pattern_set_info patt_info) {
 
     w_top = NULL;
     for(row=0; row<ui_classes; row++) {
-        sprintf(buf,"No. of patterns from class %s", *patt_info.class_names++);
+        snprintf(buf, sizeof(buf), "No. of patterns from class %s", *patt_info.class_names++);
         class_LabelW[row] = ui_xCreateLabelItem(buf, class_box,
                                                 33*ui_labelFontWidth,
                                                 NULL, w_top);

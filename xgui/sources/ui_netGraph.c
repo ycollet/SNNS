@@ -236,7 +236,7 @@ void ui_drawUnit (struct Ui_DisplayType *displayPtr, int unitNo,
                         (strlen(krui_getUnitName(unitNo)) == 0))
                     sprintf(buf,"%d",unitNo);
                 else
-                    sprintf(buf,"%s", krui_getUnitName(unitNo));
+                    snprintf(buf, sizeof(buf), "%s", krui_getUnitName(unitNo));
                 break;
             case UI_WINNER :
                 if (krui_getUnitValueA(unitNo)!=0)
@@ -263,7 +263,7 @@ void ui_drawUnit (struct Ui_DisplayType *displayPtr, int unitNo,
                     	    XDrawImageString(ui_display, displayPtr->drawable, ui_gc,
             				     xUpperLeft, yUpperLeft-1, buf, strlen(buf));
             		} else {
-            	            sprintf(buf,"%s", krui_getUnitName(unitNo));
+            	            snprintf(buf, sizeof(buf), "%s", krui_getUnitName(unitNo));
             		    XDrawImageString(ui_display, displayPtr->drawable, ui_gc,
             			             xUpperLeft, yUpperLeft-1, buf, strlen(buf));
             	        }

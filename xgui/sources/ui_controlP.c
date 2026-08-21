@@ -453,7 +453,7 @@ void ui_rem_moveInPatternsProc (Widget w, int moveType, caddr_t call_data) {
         ui_net_updateWhole(NULL, UI_GLOBAL, UI_DRAW_UNITS, UI_DRAW);
         if(patt_info.classes) {
             krui_GetPatInfo(&patt_info, &descrip);
-            sprintf(buf,"current class: %s",
+            snprintf(buf, sizeof(buf), "current class: %s",
                     patt_info.class_names[descrip.my_class]);
             ui_xSetLabel(ui_controlMessageWidget, buf);
         }
@@ -654,7 +654,7 @@ void ui_rem_testProc (Widget w, XtPointer button, caddr_t call_data) {
 
     if(patt_info.classes) {
         krui_GetPatInfo(&patt_info, &descrip);
-        sprintf(buf,"current class: %s",patt_info.class_names[descrip.my_class]);
+        snprintf(buf, sizeof(buf), "current class: %s",patt_info.class_names[descrip.my_class]);
         ui_xSetLabel(ui_controlMessageWidget, buf);
     }
 }

@@ -263,9 +263,13 @@ static void get_label_string (int label, int unitNo, char *str)
         sprintf (str, "%d", pos.z);
         break;
     case name_on       :
-        sprintf (str, "%s", krui_getUnitName(unitNo));
-        if (str == NULL)
-            sprintf (str, " ");
+        {
+            char *name = krui_getUnitName(unitNo);
+            if (name == NULL)
+                snprintf (str, 255, "%s", " ");
+            else
+                snprintf (str, 255, "%s", name);
+        }
         break;
     default            :
         sprintf (str, "%s", "nothing");

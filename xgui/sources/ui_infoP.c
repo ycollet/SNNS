@@ -604,7 +604,7 @@ void ui_info_unitUpdateProc(Widget w, FlagType flag, caddr_t call_data)
         /* output messages and graphic */
 
         ui_tw_printMessage("SET unit: ");
-        sprintf(buf,"%d %s [st: %s, ft: %s]\n  act: %8.5f   iact: %8.5f\n  out: %8.5f   bias: %8.5f\n",
+        snprintf(buf, sizeof(buf), "%d %s [st: %s, ft: %s]\n  act: %8.5f   iact: %8.5f\n  out: %8.5f   bias: %8.5f\n",
                 unit.no, unit.name, ui_utilGetIOTypeName(unit.iotype),
                 unit.ftype, unit.act, unit.i_act, unit.out, unit.bias);
         ui_tw_printMessage(buf);
@@ -1194,14 +1194,14 @@ void ui_info_listAllTargetUnits(Widget w, int unitType, caddr_t call_data)
 
     ui_printMessage("Listing all successors ...");
     /* ui_displayText_proc(); */
-    sprintf(buf,"\n\nListing of all successors of unit %d - %s\n\n", sourceNo,name);
+    snprintf(buf, sizeof(buf), "\n\nListing of all successors of unit %d - %s\n\n", sourceNo,name);
     ui_tw_printMessage(buf);
     ui_tw_printMessage("  weight    -> number - name                 output    activat.  bias\n");
     ui_tw_printMessage("---------------------------------------------------------------------------\n");
     while (successful) {
         ui_info_getAllUnitData(tarNo, &targetUnit);
 
-        sprintf(buf,"  %9.5f -> %6d - %-20s %8.5f  %8.5f  %9.5f\n",
+        snprintf(buf, sizeof(buf), "  %9.5f -> %6d - %-20s %8.5f  %8.5f  %9.5f\n",
                 weight, targetUnit.no, targetUnit.name, targetUnit.out,
                 targetUnit.act, targetUnit.bias);
         ui_tw_printMessage(buf);
@@ -1251,7 +1251,7 @@ void ui_info_listAllSourceUnits(Widget w, int unitType, caddr_t call_data)
 
     ui_printMessage("Listing of all predecessors ...");
     /* ui_displayText_proc(); */
-    sprintf(buf,"\n\nListing of all predecessors of unit %d - %s\n\n", targetNo, name);
+    snprintf(buf, sizeof(buf), "\n\nListing of all predecessors of unit %d - %s\n\n", targetNo, name);
     ui_tw_printMessage(buf);
     ui_tw_printMessage("  weight    <- number - name                 output    activat.  bias\n");
     ui_tw_printMessage("---------------------------------------------------------------------------\n");
@@ -1271,7 +1271,7 @@ void ui_info_listAllSourceUnits(Widget w, int unitType, caddr_t call_data)
         while (successful) {
             ui_info_getAllUnitData(srcNo, &sourceUnit);
 
-            sprintf(buf,"  %9.5f <- %6d - %-20s %8.5f  %8.5f  %9.5f\n",
+            snprintf(buf, sizeof(buf), "  %9.5f <- %6d - %-20s %8.5f  %8.5f  %9.5f\n",
                     weight, srcNo, sourceUnit.name, sourceUnit.out,
                     sourceUnit.act, sourceUnit.bias);
             ui_tw_printMessage(buf);
@@ -1319,7 +1319,7 @@ void ui_info_listAllSites(Widget w, int unitType, caddr_t call_data)
 
     ui_printMessage("Listing of all sites ...");
     /* ui_displayText_proc(); */
-    sprintf(buf,"\n\nListing of all sites of unit %d - %s\n\n", targetNo, name);
+    snprintf(buf, sizeof(buf), "\n\nListing of all sites of unit %d - %s\n\n", targetNo, name);
     ui_tw_printMessage(buf);
     ui_tw_printMessage("  site name                   site function                   value\n");
     ui_tw_printMessage("---------------------------------------------------------------------------\n");
@@ -1372,7 +1372,7 @@ void ui_info_listAllLinksToCurrentSite(Widget w, int unitType,
 
     ui_printMessage("Listing of all links to current site ...");
     /* ui_displayText_proc(); */
-    sprintf(buf,"\n\nListing of all links to site %s of unit %d - %s\n\n",
+    snprintf(buf, sizeof(buf), "\n\nListing of all links to site %s of unit %d - %s\n\n",
             ui_link.siteName, ui_targetUnit.no, ui_targetUnit.name);
     ui_tw_printMessage(buf);
     sprintf(buf,"\nsite: %-20s  (func: %-20s)  value: %9.5f\n\n",
@@ -1389,7 +1389,7 @@ void ui_info_listAllLinksToCurrentSite(Widget w, int unitType,
     while (successful) {
         ui_info_getAllUnitData(srcNo, &sourceUnit);
 
-        sprintf(buf,"  %9.5f <- %6d - %-20s %8.5f  %8.5f  %9.5f\n",
+        snprintf(buf, sizeof(buf), "  %9.5f <- %6d - %-20s %8.5f  %8.5f  %9.5f\n",
                 weight, srcNo, sourceUnit.name, sourceUnit.out,
                 sourceUnit.act, sourceUnit.bias);
         ui_tw_printMessage(buf);

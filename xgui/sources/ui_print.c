@@ -210,7 +210,7 @@ static void ui_printUnit (struct Ui_DisplayType *displayPtr, int unitNo)
                     (strlen(krui_getUnitName(unitNo)) == 0))
                 sprintf(topString,"%d",unitNo);
             else
-                sprintf(topString,"%s", krui_getUnitName(unitNo));
+                snprintf(topString, sizeof(topString), "%s", krui_getUnitName(unitNo));
             break;
         default        :
             sprintf(topString,"%d",unitNo);

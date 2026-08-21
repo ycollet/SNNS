@@ -82,7 +82,7 @@ void d3_clearZbuffer (void)
 {
     float  *zbuf_ptr, *limit;
 
-    limit = zbuffer + zbuffer_ysize * zbuffer_ysize;
+    limit = zbuffer + zbuffer_xsize * zbuffer_ysize;
     for (zbuf_ptr = zbuffer; zbuf_ptr < limit; zbuf_ptr++)
         *zbuf_ptr = MAXFLOAT;
 }
@@ -102,7 +102,7 @@ void d3_readZbuffer (int x, int y, float *z)
 
 {
     if ((x >= 0) && (x < zbuffer_xsize) && (y >= 0) && (y < zbuffer_ysize))
-        *z = *(zbuffer + y*zbuffer_ysize + x);
+        *z = *(zbuffer + y*zbuffer_xsize + x);
     else {
         *z = 0.0;
     }
@@ -123,7 +123,7 @@ void d3_writeZbuffer (int x, int y, float z)
 
 {
     if ((x >= 0) && (x < zbuffer_xsize) && (y >= 0) && (y < zbuffer_ysize))
-        *(zbuffer + y*zbuffer_ysize + x) = z;
+        *(zbuffer + y*zbuffer_xsize + x) = z;
 }
 
 
