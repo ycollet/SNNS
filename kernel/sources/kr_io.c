@@ -1770,9 +1770,10 @@ static bool  get_alpha(void) {
   UPDATE   :
 ******************************************************************************/
 
-static bool  getSymbol(char *symbol) {
+static bool  getSymbol(char *symbol, int max_len) {
     register int  c;
     register char  *s_ptr;
+    register char  *s_end;
 
     do  {
         c = getc( file_in );
@@ -1784,8 +1785,21 @@ static bool  getSymbol(char *symbol) {
         return( FALSE );
     } else  {
         s_ptr = symbol;
+        /* Leave room for the terminating EOS: at most max_len-1 chars. */
+        s_end = symbol + (max_len - 1);
         while (isgraph( c ))  {
             if ((c == ',') || (c == '|'))  break;
+            if (s_ptr >= s_end)  {
+                /* Token would overflow the caller's buffer.  Discard the
+                   rest of the token so the file position stays sane, then
+                   fail cleanly instead of overrunning the buffer. */
+                while (isgraph( c ) && (c != ',') && (c != '|'))
+                    c = getc( file_in );
+                ungetc( c, file_in );
+                *s_ptr = EOS;
+                KernelErrorCode = KRERR_FILE_SYNTAX;
+                return( FALSE );
+            }
             *s_ptr++ = c;
             c = getc( file_in );
         }
@@ -1979,7 +1993,7 @@ static void  krio_readHeader(char *netfile_version, char *net_name,
         KernelErrorCode = KRERR_FILE_FORMAT;
         return;
     }
-    if (sscanf( cursor, "%s", netfile_version ) != 1)  {
+    if (sscanf( cursor, "%80s", netfile_version ) != 1)  {
         /*  version string not found */
         KernelErrorCode = KRERR_FILE_FORMAT;
         return;
@@ -2014,7 +2028,7 @@ static void  krio_readHeader(char *netfile_version, char *net_name,
         case  1:  /*  "generated at"  */
             break;
         case  2:  /*  network name"  */
-            ret_code = sscanf( cursor, " :%s", net_name );
+            ret_code = sscanf( cursor, " :%80s", net_name );
             if ((ret_code != 1) && (ret_code != 0))  {
                 KernelErrorCode = KRERR_FILE_SYNTAX;
                 return;
@@ -2037,7 +2051,7 @@ static void  krio_readHeader(char *netfile_version, char *net_name,
             ret_code = sscanf( cursor, " :%d", no_of_siteTypes );
             break;
         case  7:  /*  "learning function"  */
-            ret_code = sscanf( cursor, " :%s\n", learn_func );
+            ret_code = sscanf( cursor, " :%80s\n", learn_func );
             if ((ret_code != 1) && (ret_code != 0))  {
                 KernelErrorCode = KRERR_FILE_SYNTAX;
                 return;
@@ -2053,7 +2067,7 @@ static void  krio_readHeader(char *netfile_version, char *net_name,
         case 14:  /*  "source files"  */
             break;
         case  16:  /*  "update function"  */
-            ret_code = sscanf( cursor, " :%s\n", update_func );
+            ret_code = sscanf( cursor, " :%80s\n", update_func );
             if ((ret_code != 1) && (ret_code != 0))  {
                 KernelErrorCode = KRERR_FILE_SYNTAX;
                 return;
@@ -2065,7 +2079,7 @@ static void  krio_readHeader(char *netfile_version, char *net_name,
             }
             break;
         case 19:  /* pruning function */
-            ret_code = sscanf( cursor, " :%s\n", pruning_func );
+            ret_code = sscanf( cursor, " :%80s\n", pruning_func );
             if ((ret_code != 1) && (ret_code != 0))  {
                 KernelErrorCode = KRERR_FILE_SYNTAX;
                 return;
@@ -2077,7 +2091,7 @@ static void  krio_readHeader(char *netfile_version, char *net_name,
             }
             break;
         case 20:  /* feed forward learning function */
-            ret_code = sscanf( cursor, " :%s\n", ff_learn_func );
+            ret_code = sscanf( cursor, " :%80s\n", ff_learn_func );
             if ((ret_code != 1) && (ret_code != 0))  {
                 KernelErrorCode = KRERR_FILE_SYNTAX;
                 return;
@@ -2155,12 +2169,12 @@ static void  krio_readSiteDefinitions(void) {
         if (matchHead2( 1 )) return;
         if (!skipComments())  return;
 
-        if (!getSymbol( fmt_shape1 ))  return;
+        if (!getSymbol( fmt_shape1, LIN_MAX ))  return;
 
         /*  skip "|" character  */
         if (!skip_pipe())  return;
 
-        if (!getSymbol( fmt_shape2 ))  return;
+        if (!getSymbol( fmt_shape2, LIN_MAX ))  return;
 
         if (krui_createSiteTableEntry( fmt_shape1, fmt_shape2 ) != KRERR_NO_ERROR)
             return;
@@ -2210,7 +2224,7 @@ static void  krio_readTypeDefinitions(void) {
         if ( !skipComments() )  break;
 
         /*  read unit type name, activation and output function  */
-        if (fscanf( file_in, "%s | %s | %s",
+        if (fscanf( file_in, "%250s | %250s | %250s",
                     fmt_shape1, fmt_shape2,  fmt_shape3 ) != 3)  {
             KernelErrorCode = KRERR_FILE_SYNTAX;
             return;
@@ -2231,15 +2245,20 @@ static void  krio_readTypeDefinitions(void) {
 
         no_of_sites = 0;
         while (TRUE)  {
-            if (!getSymbol( site_names[ no_of_sites ] ))  return;
+            /*  Bounds check BEFORE writing site_names[no_of_sites].  This
+                also covers the NoOfSiteTypes == 0 case, in which site_names
+                and site_name_ptrs were never allocated (still NULL): the
+                check fires immediately and we fail cleanly instead of
+                writing through a NULL pointer or past the array end.  */
+            if (no_of_sites >= NoOfSiteTypes)  {
+                KernelErrorCode = KRERR_FILE_SYNTAX;
+                return;
+            }
+            if (!getSymbol( site_names[ no_of_sites ], LIN_MAX ))  return;
 
             site_name_ptrs[ no_of_sites ] = site_names[ no_of_sites ];
             no_of_sites++;
             if ( !comma() )  break;
-            if (no_of_sites > NoOfSiteTypes)  {
-                KernelErrorCode = KRERR_FILE_SYNTAX;
-                return;
-            }
         }
 
         if (krui_createFTypeEntry( fmt_shape1, fmt_shape2,  fmt_shape3,
@@ -2276,7 +2295,7 @@ static void  krio_readDefaultDefinitions(void) {
         return;
     }
 
-    if (fscanf( file_in, "%f | %f | %s | %d | %d | %s | %s",
+    if (fscanf( file_in, "%f | %f | %250s | %d | %d | %250s | %250s",
                 &act, &bias, fmt_shape1, &subnet_no, &layer_no,
                 fmt_shape2, fmt_shape3 ) != 7)  {
         KernelErrorCode = KRERR_FILE_SYNTAX;
@@ -2341,7 +2360,7 @@ static void  krio_readUnitDefinitions(void) {
         if (!get_pipe())  {
             if (KernelErrorCode != KRERR_NO_ERROR)  return;
             /*  read unit type name  */
-            if (fscanf( file_in, "%s", fmt_shape1 ) != 1)  {
+            if (fscanf( file_in, "%250s", fmt_shape1 ) != 1)  {
                 KernelErrorCode = KRERR_FILE_SYNTAX;
                 return;
             }
@@ -2364,7 +2383,7 @@ static void  krio_readUnitDefinitions(void) {
         if (!get_pipe())  {
             if (KernelErrorCode != KRERR_NO_ERROR)  return;
             /*  read unit name  */
-            if (fscanf( file_in, "%s", fmt_shape1 ) != 1)  {
+            if (fscanf( file_in, "%250s", fmt_shape1 ) != 1)  {
                 KernelErrorCode = KRERR_FILE_SYNTAX;
                 return;
             }
@@ -2405,7 +2424,7 @@ static void  krio_readUnitDefinitions(void) {
         if (!get_pipe())  {
             if (KernelErrorCode != KRERR_NO_ERROR)  return;
             /*  read unit's topologic type  */
-            if (fscanf( file_in, "%s", fmt_shape1 ) != 1)  {
+            if (fscanf( file_in, "%250s", fmt_shape1 ) != 1)  {
                 KernelErrorCode = KRERR_FILE_SYNTAX;
                 return;
             }
@@ -2462,7 +2481,7 @@ static void  krio_readUnitDefinitions(void) {
             if (!get_pipe())  {
                 if (KernelErrorCode != KRERR_NO_ERROR)  return;
                 /*  read unit's activation function  */
-                if (fscanf( file_in, "%s", fmt_shape1 ) != 1)  {
+                if (fscanf( file_in, "%250s", fmt_shape1 ) != 1)  {
                     KernelErrorCode = KRERR_FILE_SYNTAX;
                     return;
                 }
@@ -2476,7 +2495,7 @@ static void  krio_readUnitDefinitions(void) {
             if (!get_pipe())  {
                 if (KernelErrorCode != KRERR_NO_ERROR)  return;
                 /*  read unit's output function  */
-                if (fscanf( file_in, "%s", fmt_shape1 ) != 1)  {
+                if (fscanf( file_in, "%250s", fmt_shape1 ) != 1)  {
                     KernelErrorCode = KRERR_FILE_SYNTAX;
                     return;
                 }
@@ -2493,7 +2512,7 @@ static void  krio_readUnitDefinitions(void) {
 
             /*  get site names  */
             while (TRUE)  {
-                if (!getSymbol( fmt_shape1 ))  {
+                if (!getSymbol( fmt_shape1, LIN_MAX ))  {
                     KernelErrorCode = KRERR_FILE_SYNTAX;
                     return;
                 }
@@ -2554,7 +2573,7 @@ static void  krio_readConnectionDefs(void) {
         if (unit_has_sites || !get_pipe())  {
             if (KernelErrorCode != KRERR_NO_ERROR)  return;
             /*  read site name  */
-            if (fscanf( file_in, "%s", fmt_shape1 ) != 1)  {
+            if (fscanf( file_in, "%250s", fmt_shape1 ) != 1)  {
                 KernelErrorCode = KRERR_FILE_SYNTAX;
                 return;
             }
@@ -2785,6 +2804,10 @@ void krio_readTimeDelayDefs(void) {
         }
 
         unit_ptr = kr_getUnitPtr (u_no);
+        if (unit_ptr == NULL)  {
+            KernelErrorCode = KRERR_FILE_SYNTAX;
+            return;
+        }
 
         unit_ptr->lln = lln;
         unit_ptr->lun = lun;

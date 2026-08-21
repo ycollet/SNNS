@@ -25,6 +25,7 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <stdint.h>
 #include <math.h>
 #include "matrix.ph"
 #include "glob_typ.h"
@@ -43,9 +44,28 @@
 int	RbfAllocMatrix(int r, int c, RbfFloatMatrix *m) {
     int	rc;			/* return code			*/
     int	i;			/* index variable		*/
+    size_t	sr, sc;		/* dimensions promoted to size_t	*/
 
-    m -> field = (float *) malloc(r * c * sizeof(float));
-    m -> r_pt = (float **) malloc(r * sizeof(float *));
+    /* Reject non-positive dimensions and guard against integer	*/
+    /* overflow in the byte-count computation below.  The element	*/
+    /* counts come from file-derived pattern/unit numbers, so a	*/
+    /* wrapped multiply could make malloc return a tiny buffer	*/
+    /* that later fill loops (RbfClearMatrix etc.) overrun.  Fail	*/
+    /* the same way as a NULL malloc: return 0.			*/
+    if (r <= 0 || c <= 0) {
+        return 0;
+    }
+    sr = (size_t) r;
+    sc = (size_t) c;
+    if (sr > SIZE_MAX / sc ||
+            sr * sc > SIZE_MAX / sizeof(float) ||
+            sr > SIZE_MAX / sizeof(float *)) {
+        /* multiplication would overflow: report error		*/
+        return 0;
+    }
+
+    m -> field = (float *) malloc(sr * sc * sizeof(float));
+    m -> r_pt = (float **) malloc(sr * sizeof(float *));
     if (m -> field == (float *) NULL ||
             m -> r_pt == (float **) NULL) {
         /* malloc was impossible, return 0 (reports error)	*/

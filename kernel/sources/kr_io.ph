@@ -210,7 +210,7 @@ static bool  get_nl(void);
 static bool  get_pipe(void);
 static bool  skip_pipe(void);
 static bool  get_alpha(void);
-static bool  getSymbol(char *symbol);
+static bool  getSymbol(char *symbol, int max_len);
 static char  *getSection(char *line, int *title_no);
 static bool  matchHead2(int N);
 static char  *my_strstr(char *s, char *find);

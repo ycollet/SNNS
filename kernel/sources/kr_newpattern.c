@@ -31,6 +31,7 @@
 #endif
 
 #include <string.h>
+#include <limits.h>
 #include <time.h>
 #include <sys/types.h>
 
@@ -540,6 +541,47 @@ krui_err kr_npui_allocNewPatternSet(int *set_no) {
 }
 
 /*****************************************************************************
+  FUNCTION : np_shell_quote
+
+  PURPOSE  : Return a newly malloc'd, single-quote-escaped version of <str>
+             that is safe to embed verbatim into a /bin/sh command line.
+             Every embedded single quote is replaced by the sequence '\''
+             and the whole string is wrapped in single quotes. This prevents
+             shell command injection when a (potentially attacker controlled)
+             file name is passed to popen().
+
+  RETURNS  : malloc'd quoted string, or NULL on allocation failure.
+******************************************************************************/
+static char *np_shell_quote(const char *str) {
+    const char *p;
+    char *out, *q;
+    size_t worst;
+
+    /* Worst case: every character becomes 4 chars ('\'') plus the two
+       surrounding quotes and the terminating NUL. */
+    worst = 4 * strlen(str) + 3;
+    out = (char *) malloc(worst);
+    if (out == (char *) NULL)
+        return (char *) NULL;
+
+    q = out;
+    *q++ = '\'';
+    for (p = str; *p != '\0'; p++) {
+        if (*p == '\'') {
+            *q++ = '\'';
+            *q++ = '\\';
+            *q++ = '\'';
+            *q++ = '\'';
+        } else {
+            *q++ = *p;
+        }
+    }
+    *q++ = '\'';
+    *q = '\0';
+    return out;
+}
+
+/*****************************************************************************
   FUNCTION : kr_npui_loadNewPatterns
 
   PURPOSE  : Load an (additional) pattern file:
@@ -563,6 +605,7 @@ krui_err kr_npui_loadNewPatterns(char *filename, int *set_no) {
     int pat_set;
     int read_from_pipe = 0;
     char *buf;
+    size_t fn_len;
     krui_err err_code;
 
     TRACE_IN();
@@ -574,20 +617,33 @@ krui_err kr_npui_loadNewPatterns(char *filename, int *set_no) {
     if (access(filename, F_OK) != 0) {
         TRACE_RETURN(KRERR_FILE_OPEN);
     }
-    if (strcmp(&filename[strlen(filename)-2], ".Z") == 0) {
-        buf = (char *) malloc(strlen(filename)+strlen("zcat ")+1);
-        if (buf == (char *) NULL) {
+    fn_len = strlen(filename);
+    if (fn_len >= 2 && strcmp(&filename[fn_len-2], ".Z") == 0) {
+        char *qname = np_shell_quote(filename);
+        if (qname == (char *) NULL) {
             TRACE_RETURN(KRERR_INSUFFICIENT_MEM);
         }
-        sprintf(buf, "zcat %s", filename);
+        buf = (char *) malloc(strlen(qname)+strlen("zcat ")+1);
+        if (buf == (char *) NULL) {
+            free(qname);
+            TRACE_RETURN(KRERR_INSUFFICIENT_MEM);
+        }
+        sprintf(buf, "zcat %s", qname);
+        free(qname);
         infile = popen(buf,"r");
         read_from_pipe = 1;
-    } else if (strcmp(&filename[strlen(filename)-3], ".gz") == 0) {
-        buf = (char *) malloc(strlen(filename)+strlen("gunzip -c ")+1);
-        if (buf == (char *) NULL) {
+    } else if (fn_len >= 3 && strcmp(&filename[fn_len-3], ".gz") == 0) {
+        char *qname = np_shell_quote(filename);
+        if (qname == (char *) NULL) {
             TRACE_RETURN(KRERR_INSUFFICIENT_MEM);
         }
-        sprintf(buf, "gunzip -c %s", filename);
+        buf = (char *) malloc(strlen(qname)+strlen("gunzip -c ")+1);
+        if (buf == (char *) NULL) {
+            free(qname);
+            TRACE_RETURN(KRERR_INSUFFICIENT_MEM);
+        }
+        sprintf(buf, "gunzip -c %s", qname);
+        free(qname);
         infile = popen(buf,"r");
         read_from_pipe = 1;
     } else
@@ -789,6 +845,11 @@ krui_err kr_npui_setRemapFunction(char *name, float *params) {
         if (err_code != KRERR_NO_ERROR ||
                 strcmp(func_descr.func_name, name) == 0)
             use_default = 1;
+        else if (strlen(name) >= FUNCTION_NAME_MAX_LEN) {
+            /* Function name too long to fit into func_descr.func_name;
+               reject cleanly instead of overflowing the stack struct. */
+            TRACE_RETURN(KRERR_PARAMETERS);
+        }
         else {
             func_descr.func_type = REMAP_FUNC;
             strcpy(func_descr.func_name, name);
@@ -2042,8 +2103,25 @@ krui_err kr_np_AllocatePattern(np_pattern_descriptor *pattern,
 
     if (input) {
         size = pattern -> pub.input_fixsize;
-        for (i=0; i<pattern -> pub.input_dim; i++)
-            size *= (pattern -> pub.input_dim_sizes)[i];
+        if (size < 0) {
+            TRACE_RETURN(KRERR_PARAMETERS);
+        }
+        for (i=0; i<pattern -> pub.input_dim; i++) {
+            int d = (pattern -> pub.input_dim_sizes)[i];
+            /* Reject non-positive or overflowing dimension sizes from the
+               pattern file instead of allocating a corrupted size. */
+            if (d <= 0) {
+                TRACE_RETURN(KRERR_PARAMETERS);
+            }
+            if (size != 0 && size > INT_MAX / d) {
+                TRACE_RETURN(KRERR_PARAMETERS);
+            }
+            size *= d;
+        }
+        /* Guard the final size * sizeof(float) multiplication. */
+        if (size < 0 || (size_t) size > INT_MAX / sizeof(float)) {
+            TRACE_RETURN(KRERR_PARAMETERS);
+        }
 
         if (pattern -> pub.input_dim > 0)
             pattern -> input_pattern = (float *) malloc(size * sizeof(float));
@@ -2057,8 +2135,25 @@ krui_err kr_np_AllocatePattern(np_pattern_descriptor *pattern,
         }
     } else {
         size = pattern -> pub.output_fixsize;
-        for (i=0; i<pattern -> pub.output_dim; i++)
-            size *= (pattern -> pub.output_dim_sizes)[i];
+        if (size < 0) {
+            TRACE_RETURN(KRERR_PARAMETERS);
+        }
+        for (i=0; i<pattern -> pub.output_dim; i++) {
+            int d = (pattern -> pub.output_dim_sizes)[i];
+            /* Reject non-positive or overflowing dimension sizes from the
+               pattern file instead of allocating a corrupted size. */
+            if (d <= 0) {
+                TRACE_RETURN(KRERR_PARAMETERS);
+            }
+            if (size != 0 && size > INT_MAX / d) {
+                TRACE_RETURN(KRERR_PARAMETERS);
+            }
+            size *= d;
+        }
+        /* Guard the final size * sizeof(float) multiplication. */
+        if (size < 0 || (size_t) size > INT_MAX / sizeof(float)) {
+            TRACE_RETURN(KRERR_PARAMETERS);
+        }
 
         if (pattern -> pub.output_dim > 0)
             pattern -> output_pattern = (float *) malloc(size * sizeof(float));
@@ -2796,6 +2891,17 @@ static krui_err kr_np_LoadPatternFile(FILE *pat_file, int *pat_set) {
             struct FuncInfoDescriptor func_descr;
 
             func_descr.func_type = REMAP_FUNC;
+            if (strlen(np_info[pattern_set].pub.remap_function)
+                    >= FUNCTION_NAME_MAX_LEN) {
+                /* Remap function name from the pattern file is too long to
+                   fit into func_descr.func_name; reject cleanly instead of
+                   overflowing the stack struct. */
+                np_info[pattern_set].rmf_ptr = NULL;
+                np_info[pattern_set].pub.remap_function = NULL;
+                np_info[pattern_set].pub.no_of_remap_params = 0;
+                err_code = KRERR_PARAMETERS;
+                TRACE_RETURN(err_code);
+            }
             strcpy(func_descr.func_name, np_info[pattern_set].pub.remap_function);
             err_code = krf_getFuncInfo(SEARCH_FUNC, &func_descr);
 
