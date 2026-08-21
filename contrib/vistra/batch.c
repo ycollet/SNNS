@@ -152,7 +152,8 @@ static void execLine() {
     /* Check the second parameter */
     second = (char *) at(toks, 2L);
     if((nr = commandNr(second, commands)) == -1) {
-        sprintf(buf, "unknown keyword '%s' as second parameter!", second);
+        snprintf(buf, sizeof(buf),
+                 "unknown keyword '%.470s' as second parameter!", second);
         batchWarn(buf);
         return;
     }
@@ -338,8 +339,9 @@ static void execLine() {
         }
         third = (char *) at(toks, 3);
         if((loadNr = commandNr(third, loadCommands)) == -1) {
-            sprintf(buf, "unknown keyword '%s' as third parameter!",
-                    third);
+            snprintf(buf, sizeof(buf),
+                     "unknown keyword '%.470s' as third parameter!",
+                     third);
             batchWarn(buf);
             return;
         }

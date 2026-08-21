@@ -677,6 +677,11 @@ static long readLong(long min) {
         sprintf(errorInfo, "Number must be %ld at minimum!", min);
         return 0L;
     }
+    if(value > MAX_VECTOR_DIM) {
+        error = 5;
+        sprintf(errorInfo, "Number must be %ld at maximum!", MAX_VECTOR_DIM);
+        return 0L;
+    }
 
     error = 0;
     return value;

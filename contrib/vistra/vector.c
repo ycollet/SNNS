@@ -11,6 +11,15 @@ Vector newVector(long dim) {
     Vector vec;
     Number *array;
 
+    /* Reject non-positive or absurdly large dimensions. This is the single */
+    /* choke point through which every pattern/format reader allocates a    */
+    /* vector, so guarding here prevents `dim * sizeof(Number)` from wrapping */
+    /* to a tiny allocation that the subsequent write loops would overflow.  */
+    /* MAX_VECTOR_DIM is far below SIZE_MAX / sizeof(Number), so the         */
+    /* multiplication below cannot overflow once dim is in range. Callers    */
+    /* already handle a NULL return (they report error 1).                   */
+    if(dim <= 0L || dim > MAX_VECTOR_DIM) return NULL;
+
     if(! (vec = (Vector) malloc(sizeof(*vec)))) return NULL;
     if(! (array = (Number *) malloc(dim * sizeof(Number)))) {
         free(vec);

@@ -32,6 +32,10 @@
 /* max. length of the global variable tokenval */
 #define CLASS_MAXLEN               80
 /* max. length of a class name */
+#define MAX_VECTOR_DIM             100000000L
+/* max. accepted vector dimensionality. Guards against integer  */
+/* overflow in allocation sizes and the resulting heap overflow */
+/* when reading attacker-controlled pattern/format file headers.*/
 #define CLASS_SCANF_FORMAT         "%80s"
 /* scanf() format for reading classes */
 #define NO_BUCKETS                 100

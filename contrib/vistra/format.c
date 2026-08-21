@@ -36,7 +36,10 @@ Format newFormat(FILE *ff) {
     if(error) return NULL;
     if(fileLength > MAX_VAL(unsigned)) errorR(3,NULL);   /* format file too long */
 
-    str = (char *) malloc((unsigned) fileLength);
+    /* +1 for the terminating '\0' that diskToStr() writes after the */
+    /* fileLength bytes copied from the file (misc.c). Allocating only */
+    /* fileLength bytes would overflow the buffer by one byte.         */
+    str = (char *) malloc((unsigned) fileLength + 1);
     if(str == NULL) errorR(1,NULL);                 /* not enough memory */
 
     /* copy the contents of the format file to String str */
@@ -251,7 +254,15 @@ enum Token nextToken(Format f) {
             break;
         }      /* switch */
     }        /* while(found == nil) */
-    if(whitespace || found == aString) return found;
+    if(found == aString) {
+        /* aString reached by hitting the length limit (truncation). The */
+        /* last character was already stored, so terminate tokenval here  */
+        /* rather than leaving it non-NUL-terminated. Do not rewind        */
+        /* f->pos: the character was consumed into the token.              */
+        *p2 = '\0';
+        return found;
+    }
+    if(whitespace) return found;
     else {
         *p2 = '\0';
         f->pos = cp1;
